@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		18839B1D19D9FA8C00760157 /* FrostKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 18839B1C19D9FA8C00760157 /* FrostKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		18839B2719D9FA8C00760157 /* FrostKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B2619D9FA8C00760157 /* FrostKitTests.swift */; };
+		18839B3119D9FABA00760157 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B3019D9FABA00760157 /* WebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +19,7 @@
 		18839B2219D9FA8C00760157 /* FrostKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FrostKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18839B2519D9FA8C00760157 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18839B2619D9FA8C00760157 /* FrostKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostKitTests.swift; sourceTree = "<group>"; };
+		18839B3019D9FABA00760157 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				18839B1C19D9FA8C00760157 /* FrostKit.h */,
+				18839B3019D9FABA00760157 /* WebViewController.swift */,
 				18839B1A19D9FA8C00760157 /* Supporting Files */,
 			);
 			path = FrostKit;
@@ -196,6 +199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18839B3119D9FABA00760157 /* WebViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +302,7 @@
 		18839B2B19D9FA8C00760157 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -307,12 +312,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		18839B2C19D9FA8C00760157 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
