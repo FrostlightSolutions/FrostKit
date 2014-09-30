@@ -16,8 +16,8 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     
     // For use with delegate methods only, hence private NOT public
     private class var shared: SocialHelper {
-    struct Singleton {
-        static let instance : SocialHelper = SocialHelper()
+        struct Singleton {
+            static let instance : SocialHelper = SocialHelper()
         }
         return Singleton.instance
     }
