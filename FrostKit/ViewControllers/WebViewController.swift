@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 import Social
 
-public class WebViewController: UIViewController {
+public class WebViewController: UIViewController, WKNavigationDelegate {
     
     var webView: AnyObject?
     let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
@@ -172,6 +172,9 @@ public class WebViewController: UIViewController {
             
             let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
             
+            backButton.enabled = false
+            forwardButton.enabled = false
+            
             setToolbarItems([backButton, flexibleSpace, forwardButton, flexibleSpace, actionButton, flexibleSpace, refreshButton], animated: false)
             navController.toolbarHidden = false
             
@@ -221,6 +224,13 @@ public class WebViewController: UIViewController {
                 webView.loadRequest(request)
             }
         }
+    }
+    
+    // MARK: - WKNavigationDelegate Methods
+    
+    public func webView(webView: WKWebView!, decidePolicyForNavigationAction navigationAction: WKNavigationAction!, decisionHandler: ((WKNavigationActionPolicy) -> Void)!) {
+        
+        decisionHandler(.Allow)
     }
     
 }
