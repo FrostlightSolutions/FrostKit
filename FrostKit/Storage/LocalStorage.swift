@@ -24,6 +24,12 @@ import UIKit
 //          so make sure only data that can be re-downloaded get stored here.
 //
 
+public enum Location: UInt {
+    case UserData
+    static let DocumentDirectory = NSSearchPathDirectory.DocumentDirectory
+    static let CachesDirectory = NSSearchPathDirectory.CachesDirectory
+}
+
 public class LocalStorage: NSObject {
     
     // MARK: - Paths and URL Methods
@@ -48,7 +54,19 @@ public class LocalStorage: NSObject {
         return NSFileManager.defaultManager().URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask)[0] as NSURL
     }
     
-    private class func absoluteURL(#baseURL: NSURL, reletivePath: String, fileName: String? = nil) -> NSURL {
+    internal class func baseURL(#directory: NSSearchPathDirectory) -> NSURL? {
+        switch directory {
+        case .DocumentDirectory:
+            return documentsURL()
+        case .CachesDirectory:
+            return cachesURL()
+        default:
+            println("Error: Directory \"\(directory)\" requested is not supported!")
+            return nil
+        }
+    }
+    
+    internal class func absoluteURL(#baseURL: NSURL, reletivePath: String, fileName: String? = nil) -> NSURL {
         
         var url = baseURL.URLByAppendingPathComponent(reletivePath)
         if let name = fileName {
