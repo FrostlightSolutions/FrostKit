@@ -1,5 +1,5 @@
 //
-//  LocalStorageHelper.swift
+//  LocalStorage.swift
 //  FrostKit
 //
 //  Created by James Barrow on 30/09/2014.
@@ -24,7 +24,7 @@ import UIKit
 //          so make sure only data that can be re-downloaded get stored here.
 //
 
-public class LocalStorageHelper: NSObject {
+public class LocalStorage: NSObject {
     
     // MARK: - Paths and URL Methods
     
