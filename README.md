@@ -20,6 +20,8 @@ FrostKit
 #### General
 - [ ] Extensions
 - [ ] FontAwesome
+- [ ] Tests
+- [ ] Wiki/Documentation
 
 ## Requirements
 
