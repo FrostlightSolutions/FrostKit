@@ -12,13 +12,17 @@ import UIKit
 //  --------------
 //
 //  Documents
-//  - Data
-//  - Images
-//  - User.data
+//  - Images        Perminant Images
+//  - Data          Perminant Documents and Data
+//  - User.data     User object (NSObject conforming to NSCoding)
 //  Library
 //  - Caches
-//  - - Images
-//  - - Data
+//  - - Images      Store Temporary Images
+//  - - Data        Store Temporary Documents and Data
+//
+//  NOTE:   Anything stored in Caches has the ability to be deleted when the app is not active (never during),
+//          so make sure only data that can be re-downloaded get stored here.
+//
 
 public class LocalStorageHelper: NSObject {
     
@@ -44,6 +48,15 @@ public class LocalStorageHelper: NSObject {
         return NSFileManager.defaultManager().URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask)[0] as NSURL
     }
     
+    private class func absoluteURL(#baseURL: NSURL, reletivePath: String, fileName: String? = nil) -> NSURL {
+        
+        var url = baseURL.URLByAppendingPathComponent(reletivePath)
+        if let name = fileName {
+            url = url.URLByAppendingPathComponent(name)
+        }
+        return url
+    }
+    
     // MARK: - Directory Creation Methods
     
     private class func createDirectory(#url: NSURL) -> Bool {
@@ -53,7 +66,7 @@ public class LocalStorageHelper: NSObject {
         if let anError = error {
             println(anError.localizedDescription)
         } else {
-            println("Error: Folder not able to be creaed at URL \(url)")
+            println("Error: Directory not able to be created at URL \(url)")
         }
         
         return success
@@ -97,8 +110,8 @@ public class LocalStorageHelper: NSObject {
     
     private class func move(#fromBaseURL: NSURL, toBaseURL: NSURL, reletivePath: String, fileName: String) -> Bool {
         
-        let fromURL = fromBaseURL.URLByAppendingPathComponent(reletivePath).URLByAppendingPathComponent(fileName)
-        let toURL = toBaseURL.URLByAppendingPathComponent(reletivePath).URLByAppendingPathComponent(fileName)
+        let fromURL = absoluteURL(baseURL: fromBaseURL, reletivePath: reletivePath, fileName: fileName)
+        let toURL = absoluteURL(baseURL: toBaseURL, reletivePath: reletivePath, fileName: fileName)
         
         var error: NSError?
         let success = NSFileManager.defaultManager().moveItemAtURL(fromURL, toURL: toURL, error: &error)
@@ -121,9 +134,9 @@ public class LocalStorageHelper: NSObject {
     
     // MARK: - Load Methods
     
-    private class func load(baseURL: NSURL, reletivePath: String, fileName: String) -> AnyObject? {
+    private class func load(#baseURL: NSURL, reletivePath: String, fileName: String) -> AnyObject? {
         
-        let url = baseURL.URLByAppendingPathComponent(reletivePath).URLByAppendingPathComponent(fileName)
+        let url = absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName)
         
         if let path = url.path {
             return NSKeyedUnarchiver.unarchiveObjectWithFile(path)
@@ -133,15 +146,56 @@ public class LocalStorageHelper: NSObject {
     }
     
     public class func loadFromDocuments(#reletivePath: String, fileName: String) -> AnyObject? {
-        return load(documentsURL(), reletivePath: reletivePath, fileName: fileName)
+        return load(baseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName)
     }
     
     public class func loadFromCaches(#reletivePath: String, fileName: String) -> AnyObject? {
-        return load(cachesURL(), reletivePath: reletivePath, fileName: fileName)
+        return load(baseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName)
     }
     
     public class func loadUserData() -> AnyObject? {
-        return load(documentsURL(), reletivePath: "", fileName: userDataFilename())
+        return load(baseURL: documentsURL(), reletivePath: "", fileName: userDataFilename())
+    }
+    
+    // MARK: - Delete Methods
+    
+    private class func remove(#baseURL: NSURL, reletivePath: String, fileName: String? = nil) -> Bool {
+        
+        let url = absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName)
+        
+        var error: NSError?
+        let success = NSFileManager.defaultManager().removeItemAtURL(url, error: &error)
+        if let anError = error {
+            println(anError.localizedDescription)
+        } else {
+            println("Error: Directory or data not able to be deleted at URL \(url)")
+        }
+        
+        return success
+    }
+    
+    public class func removeDocumentsImagesDirectory() -> Bool {
+        return remove(baseURL: documentsURL(), reletivePath: imagesReletivePath())
+    }
+    
+    public class func removeDocumentsDataDirectory() -> Bool {
+        return remove(baseURL: documentsURL(), reletivePath: dataReletivePath())
+    }
+    
+    public class func removeCachesImagesDirectory() -> Bool {
+        return remove(baseURL: cachesURL(), reletivePath: imagesReletivePath())
+    }
+    
+    public class func removeCachesDataDirectory() -> Bool {
+        return remove(baseURL: cachesURL(), reletivePath: dataReletivePath())
+    }
+    
+    public class func removeDocumentsObject(#reletivePath: String, fileName: String) -> Bool {
+        return remove(baseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName)
+    }
+    
+    public class func removeCachesObject(#reletivePath: String, fileName: String) -> Bool {
+        return remove(baseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName)
     }
     
 }
