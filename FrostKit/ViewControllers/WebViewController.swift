@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import Social
 
 public class WebViewController: UIViewController {
     
@@ -133,10 +134,22 @@ public class WebViewController: UIViewController {
         alertController.addAction(safariAlertAction)
         let twitterAlertAction = UIAlertAction(title: NSLocalizedString("SHARE_ON_TWITTER", comment: "Share on Twitter"), style: .Default) { (action) -> Void in
             
+            var urlsArray: NSMutableArray?
+            if let webView = self.webView as? WKWebView {
+                urlsArray = NSMutableArray()
+                urlsArray?.addObject(webView.URL)
+            }
+            SocialHelper.presentComposeViewController(Social.SLServiceTypeTwitter, initialText: "", urls: urlsArray, inViewController: self)
         }
         alertController.addAction(twitterAlertAction)
         let facebookAlertAction = UIAlertAction(title: NSLocalizedString("SHARE_ON_FACEBOOK", comment: "Share on Facebook"), style: .Default) { (action) -> Void in
             
+            var urlsArray: NSMutableArray?
+            if let webView = self.webView as? WKWebView {
+                urlsArray = NSMutableArray()
+                urlsArray?.addObject(webView.URL)
+            }
+            SocialHelper.presentComposeViewController(Social.SLServiceTypeFacebook, initialText: "", urls: urlsArray, inViewController: self)
         }
         alertController.addAction(facebookAlertAction)
         let cancelAlertAction = UIAlertAction(title: NSLocalizedString("CANCEL", comment: "Cancel"), style: .Cancel) { (action) -> Void in
