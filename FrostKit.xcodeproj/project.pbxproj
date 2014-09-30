@@ -11,7 +11,7 @@
 		18839B2719D9FA8C00760157 /* FrostKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B2619D9FA8C00760157 /* FrostKitTests.swift */; };
 		18839B4319DA27A800760157 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B4219DA27A800760157 /* WebViewController.swift */; };
 		18839B4719DA27AE00760157 /* SocialHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B4519DA27AE00760157 /* SocialHelper.swift */; };
-		18BD451519DAF800008274F8 /* LocalStorageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BD451419DAF800008274F8 /* LocalStorageHelper.swift */; };
+		18C0066119DB5BF000811755 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066019DB5BF000811755 /* LocalStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +23,7 @@
 		18839B2619D9FA8C00760157 /* FrostKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostKitTests.swift; sourceTree = "<group>"; };
 		18839B4219DA27A800760157 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		18839B4519DA27AE00760157 /* SocialHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialHelper.swift; sourceTree = "<group>"; };
-		18BD451419DAF800008274F8 /* LocalStorageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorageHelper.swift; sourceTree = "<group>"; };
+		18C0066019DB5BF000811755 /* LocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				18839B1C19D9FA8C00760157 /* FrostKit.h */,
+				18C0065F19DB5BDD00811755 /* Storage */,
 				18839B4119DA27A800760157 /* ViewControllers */,
 				18839B4419DA27AE00760157 /* Helpers */,
 				18839B1A19D9FA8C00760157 /* Supporting Files */,
@@ -110,9 +111,16 @@
 			isa = PBXGroup;
 			children = (
 				18839B4519DA27AE00760157 /* SocialHelper.swift */,
-				18BD451419DAF800008274F8 /* LocalStorageHelper.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		18C0065F19DB5BDD00811755 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				18C0066019DB5BF000811755 /* LocalStorage.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,7 +231,7 @@
 			files = (
 				18839B4319DA27A800760157 /* WebViewController.swift in Sources */,
 				18839B4719DA27AE00760157 /* SocialHelper.swift in Sources */,
-				18BD451519DAF800008274F8 /* LocalStorageHelper.swift in Sources */,
+				18C0066119DB5BF000811755 /* LocalStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
