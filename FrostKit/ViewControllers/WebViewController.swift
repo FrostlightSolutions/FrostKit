@@ -134,20 +134,20 @@ public class WebViewController: UIViewController, WKNavigationDelegate {
         alertController.addAction(safariAlertAction)
         let twitterAlertAction = UIAlertAction(title: NSLocalizedString("SHARE_ON_TWITTER", comment: "Share on Twitter"), style: .Default) { (action) -> Void in
             
-            var urlsArray: NSMutableArray?
+            var urlsArray: [NSURL]?
             if let webView = self.webView as? WKWebView {
-                urlsArray = NSMutableArray()
-                urlsArray?.addObject(webView.URL)
+                urlsArray = []
+                urlsArray?.append(webView.URL)
             }
             SocialHelper.presentComposeViewController(Social.SLServiceTypeTwitter, initialText: "", urls: urlsArray, inViewController: self)
         }
         alertController.addAction(twitterAlertAction)
         let facebookAlertAction = UIAlertAction(title: NSLocalizedString("SHARE_ON_FACEBOOK", comment: "Share on Facebook"), style: .Default) { (action) -> Void in
             
-            var urlsArray: NSMutableArray?
+            var urlsArray: [NSURL]?
             if let webView = self.webView as? WKWebView {
-                urlsArray = NSMutableArray()
-                urlsArray?.addObject(webView.URL)
+                urlsArray = []
+                urlsArray?.append(webView.URL)
             }
             SocialHelper.presentComposeViewController(Social.SLServiceTypeFacebook, initialText: "", urls: urlsArray, inViewController: self)
         }
@@ -230,6 +230,7 @@ public class WebViewController: UIViewController, WKNavigationDelegate {
     
     public func webView(webView: WKWebView!, decidePolicyForNavigationAction navigationAction: WKNavigationAction!, decisionHandler: ((WKNavigationActionPolicy) -> Void)!) {
         
+        // Alows links in the WKWebView to be tappable
         decisionHandler(.Allow)
     }
     
