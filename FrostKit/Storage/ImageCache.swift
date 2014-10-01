@@ -14,7 +14,6 @@ public class ImageCache: NSObject {
     
     // MARK: - Singleton
     
-    // For use with delegate methods only, hence private NOT public
     public class var shared: ImageCache {
         struct Singleton {
             static let instance : ImageCache = ImageCache()
