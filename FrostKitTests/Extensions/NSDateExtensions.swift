@@ -22,10 +22,20 @@ class NSDateExtensions: XCTestCase {
         super.tearDown()
     }
     
+    func testIsYesterday() {
+        let date = NSDate(timeIntervalSinceNow: -24*60*60)
+        XCTAssert(date.isYesterday, "Pass")
+    }
+    
     func testIsToday() {
         
         let date = NSDate.date()
         XCTAssert(date.isToday, "Pass")
+    }
+    
+    func testIsTomorrow() {
+        let date = NSDate(timeIntervalSinceNow: 24*60*60)
+        XCTAssert(date.isTomorrow, "Pass")
     }
     
 }
