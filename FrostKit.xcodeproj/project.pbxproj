@@ -24,6 +24,7 @@
 		18C0067819DC23A100811755 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0067719DC23A100811755 /* UIColorExtensions.swift */; };
 		18CFF9FE19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFF9FD19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift */; };
 		18EA123F19DC79F100FD858D /* NSDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA123E19DC79F100FD858D /* NSDataExtensions.swift */; };
+		18EA124119DC7D9000FD858D /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124019DC7D9000FD858D /* UIViewExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		18C0067719DC23A100811755 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		18CFF9FD19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimeZoneExtensions.swift; sourceTree = "<group>"; };
 		18EA123E19DC79F100FD858D /* NSDataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataExtensions.swift; sourceTree = "<group>"; };
+		18EA124019DC7D9000FD858D /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,12 +159,13 @@
 			isa = PBXGroup;
 			children = (
 				18C0066719DB762600811755 /* NSErrorExtensions.swift */,
-				18C0066919DB767A00811755 /* UIColorExtensions.swift */,
 				18C0066B19DB769B00811755 /* NSDateExtensions.swift */,
 				18BB7C7419DC383900F21A64 /* NSCalendarExtensions.swift */,
 				18CFF9FD19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift */,
-				18C0066D19DB76C900811755 /* UIImageExtensiosns.swift */,
 				18EA123E19DC79F100FD858D /* NSDataExtensions.swift */,
+				18C0066919DB767A00811755 /* UIColorExtensions.swift */,
+				18C0066D19DB76C900811755 /* UIImageExtensiosns.swift */,
+				18EA124019DC7D9000FD858D /* UIViewExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				18839B4319DA27A800760157 /* WebViewController.swift in Sources */,
 				18C0066C19DB769B00811755 /* NSDateExtensions.swift in Sources */,
 				18CFF9FE19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift in Sources */,
+				18EA124119DC7D9000FD858D /* UIViewExtensions.swift in Sources */,
 				18EA123F19DC79F100FD858D /* NSDataExtensions.swift in Sources */,
 				18839B4719DA27AE00760157 /* SocialHelper.swift in Sources */,
 				18C0066819DB762600811755 /* NSErrorExtensions.swift in Sources */,
