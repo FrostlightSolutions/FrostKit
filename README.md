@@ -6,7 +6,7 @@ FrostKit
 ####Storage and Service
 - [x] LocalStorage
 - [x] ImageCache
-- [ ] ContentManager
+- [x] ContentManager
 - [ ] UserObject
 - [ ] ServiceClient
 
