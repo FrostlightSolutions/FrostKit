@@ -29,12 +29,11 @@ public class ImageCache: NSObject {
         
         if image == nil {
             
-            // TODO: Change to loadImageFrom... and remove `as? UIImage`
             switch directory {
             case .DocumentDirectory:
-                image = LocalStorage.loadFromDocuments(reletivePath: reletivePath, fileName: fileName) as? UIImage
+                image = LocalStorage.loadImageFromDocuments(reletivePath: reletivePath, fileName: fileName)
             case .CachesDirectory:
-                image = LocalStorage.loadFromCaches(reletivePath: reletivePath, fileName: fileName) as? UIImage
+                image = LocalStorage.loadImageFromCaches(reletivePath: reletivePath, fileName: fileName)
             default:
                 println("Error: Directory \"\(directory)\" requested for loading \(fileName) is not supported!")
             }
@@ -68,9 +67,7 @@ public class ImageCache: NSObject {
                 
                 if CGSizeEqualToSize(size, CGSizeZero) == false {
                     
-                    // TODO: Requires UIImage extension to scale down the image to a CGSize
-                    thumbnailImage = anImage
-//                    thumbnailImage = UIImage.imageWith(anImage, size)
+                    thumbnailImage = anImage.imageWithMaxSize(size)
                     if let aThumbnailImage = thumbnailImage {
                         cache.setObject(aThumbnailImage, forKey: path)
                     }
