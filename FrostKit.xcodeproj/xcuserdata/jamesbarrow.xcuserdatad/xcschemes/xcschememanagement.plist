@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>FontAwesomeBuilder.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>FrostKit.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -17,6 +22,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>1855F0D119DCC4CD0032CBBF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>18839B1619D9FA8C00760157</key>
 		<dict>
 			<key>primary</key>
