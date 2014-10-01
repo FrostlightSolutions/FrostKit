@@ -22,12 +22,12 @@ class UIColorExtensions: XCTestCase {
         super.tearDown()
     }
     
-    func testSimpleColors() {
+    func testSimpleHexColors() {
         XCTAssert(UIColor.colorWithHex("#ffffff") == UIColor(red: 1, green: 1, blue: 1, alpha: 1), "Pass")
         XCTAssert(UIColor.colorWithHex("#123456") == UIColor(red: 18.0/255, green: 52.0/255, blue: 86.0/255, alpha: 1), "Pass")
     }
     
-    func testHashtag() {
+    func testHexHashtag() {
         // With or without #
         XCTAssert(UIColor.colorWithHex("#479123") == UIColor.colorWithHex("479123"), "Pass")
     }
@@ -37,6 +37,13 @@ class UIColorExtensions: XCTestCase {
         XCTAssert(UIColor.colorWithHex("#123") == UIColor.colorWithHex("#112233"), "Pass")
         // Regardless of #
         XCTAssert(UIColor.colorWithHex("123") == UIColor.colorWithHex("#112233"), "Pass")
+    }
+    
+    func testUnsuposedHexFormat() {
+        // 4 char hex should not parse and return default clearColor()
+        XCTAssert(UIColor.colorWithHex("#1234") == UIColor.clearColor(), "Pass")
+        // Regardless of #
+        XCTAssert(UIColor.colorWithHex("1234") == UIColor.clearColor(), "Pass")
     }
     
 }
