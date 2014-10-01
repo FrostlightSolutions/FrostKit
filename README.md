@@ -12,14 +12,14 @@ FrostKit
 
 #### Helpers
 - [x] SocialHelper
-- [ ] KeychainHelper
+- [x] KeychainHelper
 
 #### View Controllers
 - [x] WebViewController (WKWebView only at the moment)
 
 #### General
-- [x] Extensions (NSError, UIColor, NSDate, UIImage)
-- [ ] FontAwesome
+- [x] Extensions
+- [x] FontAwesome
 - [ ] Unit Tests
 - [ ] Wiki/Documentation
 
