@@ -28,8 +28,12 @@ extension UIColor {
             rgbValue = (rgbValue << 8) & 0x0F0000 | (rgbValue << 4) & 0x000F00 | rgbValue & 0x00000F
             // Copy every element and move it 4 bits left
             rgbValue = rgbValue | (rgbValue << 4)
+        case 6:
+            // Default parsed value
+            break
         default:
             println("Error: Can't parse color with hex: \(hexString)")
+            return UIColor.clearColor()
         }
         
         return UIColor(red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0, green: CGFloat((rgbValue & 0x00FF00) >> 8)  / 255.0, blue: CGFloat(rgbValue & 0x0000FF) / 255.0, alpha: 1.0)
