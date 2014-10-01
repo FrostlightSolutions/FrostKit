@@ -171,6 +171,14 @@ public class LocalStorage: NSObject {
         return load(baseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName)
     }
     
+    public class func loadImageFromDocuments(#reletivePath: String, fileName: String) -> UIImage? {
+        return loadFromDocuments(reletivePath: reletivePath, fileName: fileName) as? UIImage
+    }
+    
+    public class func loadImageFromCaches(#reletivePath: String, fileName: String) -> UIImage? {
+        return loadFromCaches(reletivePath: reletivePath, fileName: fileName) as? UIImage
+    }
+    
     public class func loadUserData() -> AnyObject? {
         return load(baseURL: documentsURL(), reletivePath: "", fileName: userDataFilename())
     }
