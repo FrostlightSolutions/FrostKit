@@ -234,9 +234,15 @@ extension NSDate {
     
     // MARK: - Date Comparison
     
-    public func compareTo(#date: NSDate, option: DateCompareType = .EqualTo) -> Bool {
+    public func compareTo(#date: NSDate, option: DateCompareType = .EqualTo, stripTime: Bool = true) -> Bool {
         
-        let compare = self.compare(date)
+        var compare: NSComparisonResult = .OrderedSame
+        if stripTime == true {
+            compare = self.stripTime().compare(date.stripTime())
+        } else {
+            compare = self.compare(date)
+        }
+        
         if compare == NSComparisonResult.OrderedAscending {
             
             if option == .Before || option == .After {
