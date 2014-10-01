@@ -6,7 +6,7 @@ FrostKit
 ####Storage and Service
 - [x] LocalStorage
 - [x] ImageCache
-- [ ] StorageManager
+- [ ] ContentManager
 - [ ] UserObject
 - [ ] ServiceClient
 
@@ -20,7 +20,7 @@ FrostKit
 #### General
 - [x] Extensions (NSError, UIColor, NSDate, UIImage)
 - [ ] FontAwesome
-- [ ] Tests
+- [ ] Unit Tests
 - [ ] Wiki/Documentation
 
 ## Requirements
