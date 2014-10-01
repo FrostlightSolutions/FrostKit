@@ -5,7 +5,7 @@ FrostKit
 
 ####Storage and Service
 - [x] LocalStorage
-- [ ] ImageCache
+- [x] ImageCache
 - [ ] StorageManager
 - [ ] UserObject
 - [ ] ServiceClient
@@ -18,7 +18,7 @@ FrostKit
 - [x] WebViewController (WKWebView only at the moment)
 
 #### General
-- [ ] Extensions
+- [x] Extensions (NSError, UIColor, NSDate, UIImage)
 - [ ] FontAwesome
 - [ ] Tests
 - [ ] Wiki/Documentation
