@@ -17,6 +17,8 @@
 		18C0066A19DB767A00811755 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066919DB767A00811755 /* UIColorExtensions.swift */; };
 		18C0066C19DB769B00811755 /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066B19DB769B00811755 /* NSDateExtensions.swift */; };
 		18C0066E19DB76C900811755 /* UIImageExtensiosns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066D19DB76C900811755 /* UIImageExtensiosns.swift */; };
+		18C0067519DC001000811755 /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0067419DC001000811755 /* NSDateExtensions.swift */; };
+		18C0067619DC00C000811755 /* FrostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18839B1719D9FA8C00760157 /* FrostKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,7 @@
 		18C0066919DB767A00811755 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		18C0066B19DB769B00811755 /* NSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtensions.swift; sourceTree = "<group>"; };
 		18C0066D19DB76C900811755 /* UIImageExtensiosns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtensiosns.swift; sourceTree = "<group>"; };
+		18C0067419DC001000811755 /* NSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18C0067619DC00C000811755 /* FrostKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +101,9 @@
 			isa = PBXGroup;
 			children = (
 				18839B2619D9FA8C00760157 /* FrostKitTests.swift */,
+				18C0067319DBFFE900811755 /* Storage */,
+				18C0067219DBFFE900811755 /* Helpers */,
+				18C0067119DBFFE900811755 /* Extensions */,
 				18839B2419D9FA8C00760157 /* Supporting Files */,
 			);
 			path = FrostKitTests;
@@ -144,6 +151,28 @@
 				18C0066D19DB76C900811755 /* UIImageExtensiosns.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		18C0067119DBFFE900811755 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				18C0067419DC001000811755 /* NSDateExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		18C0067219DBFFE900811755 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		18C0067319DBFFE900811755 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,6 +296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18C0067519DC001000811755 /* NSDateExtensions.swift in Sources */,
 				18839B2719D9FA8C00760157 /* FrostKitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
