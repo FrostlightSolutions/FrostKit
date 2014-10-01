@@ -10,6 +10,22 @@ import Foundation
 
 extension NSDate {
     
+    public class func minuteInSeconds() -> NSTimeInterval {
+        return 60.0
+    }
+    
+    public class func hourInSeconds() -> NSTimeInterval {
+        return minuteInSeconds() * 60.0
+    }
+    
+    public class func dayInSeconds() -> NSTimeInterval {
+        return hourInSeconds() * 24.0
+    }
+    
+    public class func weekInSeconds() -> NSTimeInterval {
+        return dayInSeconds() * 7.0
+    }
+    
     public var isToday: Bool {
         
         let calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)
