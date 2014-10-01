@@ -81,10 +81,12 @@ public class LocalStorage: NSObject {
         
         var error: NSError?
         let success = NSFileManager.defaultManager().createDirectoryAtURL(url, withIntermediateDirectories: true, attributes: nil, error: &error)
-        if let anError = error {
-            println(anError.localizedDescription)
-        } else {
-            println("Error: Directory not able to be created at URL \(url)")
+        if success == false {
+            if let anError = error {
+                println(anError.localizedDescription)
+            } else {
+                println("Error: Directory not able to be created at URL \(url)")
+            }
         }
         
         return success
@@ -133,10 +135,12 @@ public class LocalStorage: NSObject {
         
         var error: NSError?
         let success = NSFileManager.defaultManager().moveItemAtURL(fromURL, toURL: toURL, error: &error)
-        if let anError = error {
-            println(anError.localizedDescription)
-        } else {
-            println("Error: Can't move item from \(fromURL) to \(toURL)")
+        if success == false {
+            if let anError = error {
+                println(anError.localizedDescription)
+            } else {
+                println("Error: Can't move item from \(fromURL) to \(toURL)")
+            }
         }
         
         return success
@@ -191,8 +195,12 @@ public class LocalStorage: NSObject {
         
         var error: NSError?
         let success = NSFileManager.defaultManager().removeItemAtURL(url, error: &error)
-        if let anError = error {
-            println(anError.localizedDescription)
+        if success == false {
+            if let anError = error {
+                println(anError.localizedDescription)
+            } else {
+                println("Error: Directory or data not able to be deleted at URL \(url)")
+            }
         } else {
             println("Error: Directory or data not able to be deleted at URL \(url)")
         }
