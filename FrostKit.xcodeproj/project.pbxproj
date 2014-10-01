@@ -17,6 +17,7 @@
 		18C0066A19DB767A00811755 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066919DB767A00811755 /* UIColorExtensions.swift */; };
 		18C0066C19DB769B00811755 /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066B19DB769B00811755 /* NSDateExtensions.swift */; };
 		18C0066E19DB76C900811755 /* UIImageExtensiosns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066D19DB76C900811755 /* UIImageExtensiosns.swift */; };
+		18C0067019DB7EDB00811755 /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066F19DB7EDB00811755 /* ContentManager.swift */; };
 		18C0067519DC001000811755 /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0067419DC001000811755 /* NSDateExtensions.swift */; };
 		18C0067619DC00C000811755 /* FrostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18839B1719D9FA8C00760157 /* FrostKit.framework */; };
 		18C0067819DC23A100811755 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0067719DC23A100811755 /* UIColorExtensions.swift */; };
@@ -37,6 +38,7 @@
 		18C0066919DB767A00811755 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		18C0066B19DB769B00811755 /* NSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtensions.swift; sourceTree = "<group>"; };
 		18C0066D19DB76C900811755 /* UIImageExtensiosns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtensiosns.swift; sourceTree = "<group>"; };
+		18C0066F19DB7EDB00811755 /* ContentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentManager.swift; sourceTree = "<group>"; };
 		18C0067419DC001000811755 /* NSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtensions.swift; sourceTree = "<group>"; };
 		18C0067719DC23A100811755 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -140,6 +142,7 @@
 			children = (
 				18C0066019DB5BF000811755 /* LocalStorage.swift */,
 				18C0066219DB5C7200811755 /* ImageCache.swift */,
+				18C0066F19DB7EDB00811755 /* ContentManager.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				18C0066A19DB767A00811755 /* UIColorExtensions.swift in Sources */,
 				18C0066319DB5C7200811755 /* ImageCache.swift in Sources */,
 				18C0066119DB5BF000811755 /* LocalStorage.swift in Sources */,
+				18C0067019DB7EDB00811755 /* ContentManager.swift in Sources */,
 				18C0066E19DB76C900811755 /* UIImageExtensiosns.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

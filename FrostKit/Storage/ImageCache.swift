@@ -23,31 +23,37 @@ public class ImageCache: NSObject {
     
     private func loadImage(#directory: NSSearchPathDirectory, reletivePath: String, fileName: String) -> UIImage? {
         
-        let path = reletivePath.stringByAppendingPathComponent(fileName)
-        var image = cache.objectForKey(path) as? UIImage
-        
-        if image == nil {
+        let absoluteURL = LocalStorage.absoluteURL(directory: directory, reletivePath: reletivePath, fileName: fileName)
+        if let absolutePath = absoluteURL?.path {
             
-            switch directory {
-            case .DocumentDirectory:
-                image = LocalStorage.loadImageFromDocuments(reletivePath: reletivePath, fileName: fileName)
-            case .CachesDirectory:
-                image = LocalStorage.loadImageFromCaches(reletivePath: reletivePath, fileName: fileName)
-            default:
-                println("Error: Directory \"\(directory)\" requested for loading \(fileName) is not supported!")
+            var image = cache.objectForKey(absolutePath) as? UIImage
+            
+            if image == nil {
+                
+                switch directory {
+                case .DocumentDirectory:
+                    image = LocalStorage.loadImageFromDocuments(reletivePath: reletivePath, fileName: fileName)
+                case .CachesDirectory:
+                    image = LocalStorage.loadImageFromCaches(reletivePath: reletivePath, fileName: fileName)
+                default:
+                    println("Error: Directory \"\(directory)\" requested for loading \(fileName) is not supported!")
+                }
+                
+                if let anImage = image {
+                    cache.setObject(anImage, forKey: absolutePath)
+                }
             }
             
             if let anImage = image {
-                cache.setObject(anImage, forKey: path)
+                ContentManager.saveContentMetadata(absolutePath: absolutePath)
             }
+            
+            return image
+        } else {
+            println("Error: Could not get path from absolute URL \(absoluteURL) when loading image!")
         }
         
-        // TODO: Save content metadata
-//        if let anImage = image {
-//            
-//        }
-        
-        return image
+        return nil
     }
     
     public func loadImage(#directory: NSSearchPathDirectory, reletivePath: String, fileName: String, complete: (UIImage?) -> ()) {
@@ -56,33 +62,35 @@ public class ImageCache: NSObject {
     
     private func loadTumbnailImage(#directory: NSSearchPathDirectory, reletivePath: String, fileName: String, size: CGSize) -> UIImage? {
         
-        let path = reletivePath.stringByAppendingPathComponent(NSStringFromCGSize(size)).stringByAppendingPathComponent(fileName)
-        var thumbnailImage = cache.objectForKey(path) as? UIImage
-        
-        if thumbnailImage == nil {
+        let absoluteURL = LocalStorage.absoluteURL(directory: directory, reletivePath: reletivePath, fileName: fileName)
+        if let absolutePath = absoluteURL?.path {
             
-            var image = loadImage(directory: directory, reletivePath: reletivePath, fileName: fileName)
-            if let anImage = image {
+            var thumbnailImage = cache.objectForKey(absolutePath) as? UIImage
+            
+            if thumbnailImage == nil {
                 
-                if CGSizeEqualToSize(size, CGSizeZero) == false {
+                var image = loadImage(directory: directory, reletivePath: reletivePath, fileName: fileName)
+                if let anImage = image {
                     
-                    thumbnailImage = anImage.imageWithMaxSize(size)
-                    if let aThumbnailImage = thumbnailImage {
-                        cache.setObject(aThumbnailImage, forKey: path)
+                    if CGSizeEqualToSize(size, CGSizeZero) == false {
+                        
+                        thumbnailImage = anImage.imageWithMaxSize(size)
+                        if let aThumbnailImage = thumbnailImage {
+                            cache.setObject(aThumbnailImage, forKey: absolutePath)
+                        }
+                        
+                    } else {
+                        thumbnailImage = anImage
                     }
-                    
-                } else {
-                    thumbnailImage = anImage
                 }
             }
+            
+            return thumbnailImage
+        } else {
+            println("Error: Could not get path from absolute URL \(absoluteURL) when loading thumbnail!")
         }
         
-        // TODO: Save content metadata
-//        if let aThumbnailImage = thumbnailImage {
-//            
-//        }
-        
-        return thumbnailImage
+        return nil
     }
     
     public func loadTumbnailImage(#directory: NSSearchPathDirectory, reletivePath: String, fileName: String, size: CGSize, complete: (UIImage?) -> ()) {

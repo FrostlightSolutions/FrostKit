@@ -55,18 +55,27 @@ public class LocalStorage: NSObject {
     }
     
     internal class func baseURL(#directory: NSSearchPathDirectory) -> NSURL? {
+        
         switch directory {
         case .DocumentDirectory:
             return documentsURL()
         case .CachesDirectory:
             return cachesURL()
         default:
-            println("Error: Directory \"\(directory)\" requested is not supported!")
+            println("Error: Base URL for directory \"\(directory)\" requested is not supported!")
             return nil
         }
     }
     
-    internal class func absoluteURL(#baseURL: NSURL, reletivePath: String, fileName: String? = nil) -> NSURL {
+    internal class func absoluteURL(#directory: NSSearchPathDirectory, reletivePath: String, fileName: String? = nil) -> NSURL? {
+        
+        if let baseURL = baseURL(directory: directory) {
+            return absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName)
+        }
+        return nil
+    }
+    
+    private class func absoluteURL(#baseURL: NSURL, reletivePath: String, fileName: String? = nil) -> NSURL {
         
         var url = baseURL.URLByAppendingPathComponent(reletivePath)
         if let name = fileName {
@@ -189,23 +198,25 @@ public class LocalStorage: NSObject {
     
     // MARK: - Delete Methods
     
-    private class func remove(#baseURL: NSURL, reletivePath: String, fileName: String? = nil) -> Bool {
-        
-        let url = absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName)
-        
+    internal class func remove(#absoluteURL: NSURL) -> Bool {
         var error: NSError?
-        let success = NSFileManager.defaultManager().removeItemAtURL(url, error: &error)
+        let success = NSFileManager.defaultManager().removeItemAtURL(absoluteURL, error: &error)
         if success == false {
             if let anError = error {
                 println(anError.localizedDescription)
             } else {
-                println("Error: Directory or data not able to be deleted at URL \(url)")
+                println("Error: Directory or data not able to be deleted at URL \(absoluteURL)")
             }
         } else {
-            println("Error: Directory or data not able to be deleted at URL \(url)")
+            ContentManager.removeContentMetadata(absoluteURL: absoluteURL)
         }
         
         return success
+    }
+    
+    private class func remove(#baseURL: NSURL, reletivePath: String, fileName: String? = nil) -> Bool {
+        return remove(absoluteURL: absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName))
+        
     }
     
     public class func removeDocumentsImagesDirectory() -> Bool {
