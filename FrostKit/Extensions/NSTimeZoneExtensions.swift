@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Frostlight Solutions. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 extension NSTimeZone {
     
