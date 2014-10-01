@@ -293,7 +293,7 @@ extension NSDate {
         components.day = days
         
         let calendar = NSCalendar.gregorianCalendar()
-        if let date = calendar.dateByAddingComponents(components, toDate: self, options: NSCalendarOptions.WrapComponents) {
+        if let date = calendar.dateByAddingComponents(components, toDate: self, options: NSCalendarOptions.SearchBackwards) {
             return date
         } else {
             println("Error: Failed to add \(days) days to date \(self)")
