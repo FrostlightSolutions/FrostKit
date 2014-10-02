@@ -29,14 +29,14 @@ public class BaseWebViewController: UIViewController {
         }
     }
     
-    public var URL: NSURL? {
+    var URL: NSURL? {
         get {
             // Functionality overriden in subclasses
             return nil
         }
     }
     
-    internal var loading: Bool {
+    var loading: Bool {
         get {
             // Functionality overriden in subclasses
             return false

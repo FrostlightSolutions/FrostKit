@@ -29,11 +29,11 @@ class WebViewControllerVC: UITableViewController {
             webVC.urlString = "frostlight.se"
             presentViewController(UINavigationController(rootViewController: webVC), animated: true, completion: nil)
         case NSIndexPath(forRow: 1, inSection: 0):
-            let webVC = UIWebViewController()
+            let webVC = WebViewController(viewType: .UIWebView)
             webVC.urlString = "frostlight.se"
             presentViewController(UINavigationController(rootViewController: webVC), animated: true, completion: nil)
         case NSIndexPath(forRow: 2, inSection: 0):
-            let webVC = WKWebViewController()
+            let webVC = WebViewController(viewType: .WKWebView)
             webVC.urlString = "frostlight.se"
             presentViewController(UINavigationController(rootViewController: webVC), animated: true, completion: nil)
         default:

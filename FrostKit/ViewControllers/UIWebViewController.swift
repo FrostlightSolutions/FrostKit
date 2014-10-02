@@ -8,9 +8,9 @@
 
 import UIKit
 
-public class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
+class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     
-    override public var URL: NSURL? {
+    override var URL: NSURL? {
         get {
             if let urlString = self.urlString {
                 return  NSURL(string: urlString)
@@ -19,7 +19,7 @@ public class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
         }
     }
     
-    override internal var loading: Bool {
+    override var loading: Bool {
         get {
             if let webView = self.webView as? UIWebView {
                 return webView.loading
@@ -28,7 +28,7 @@ public class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
         }
     }
     
-    override public func viewDidLoad() {
+    override func viewDidLoad() {
         
         webView = UIWebView(frame: view.bounds)
         
@@ -79,19 +79,19 @@ public class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     
     // MARK: - UIWebViewDelegate Methods
     
-    public func webViewDidStartLoad(webView: UIWebView) {
+    func webViewDidStartLoad(webView: UIWebView) {
         
         updateActivityViewVisability()
         updateBackForwardButtons()
     }
     
-    public func webViewDidFinishLoad(webView: UIWebView) {
+    func webViewDidFinishLoad(webView: UIWebView) {
         
         updateActivityViewVisability()
         updateBackForwardButtons()
     }
     
-    public func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
+    func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
         
         updateActivityViewVisability()
         updateBackForwardButtons()

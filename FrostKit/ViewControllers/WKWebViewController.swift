@@ -11,9 +11,9 @@ import WebKit
 
 // TODO: Enable swipe gestures
 
-public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
+class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
-    override public var URL: NSURL? {
+    override var URL: NSURL? {
         get {
             if let webView = self.webView as? WKWebView {
                 return webView.URL
@@ -22,7 +22,7 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
         }
     }
     
-    override internal var loading: Bool {
+    override var loading: Bool {
         get {
             if let webView = self.webView as? WKWebView {
                 return webView.loading
@@ -31,7 +31,7 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
         }
     }
     
-    override public func viewDidLoad() {
+    override func viewDidLoad() {
         
         webView = WKWebView(frame: view.bounds)
         
@@ -55,7 +55,7 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     // MARK: - KVO Methods
     
-    override public func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
         
         switch keyPath {
         case "estimatedProgress":
@@ -115,7 +115,7 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     // MARK: - WKNavigationDelegate Methods
     
-    public func webView(webView: WKWebView!, decidePolicyForNavigationAction navigationAction: WKNavigationAction!, decisionHandler: ((WKNavigationActionPolicy) -> Void)!) {
+    func webView(webView: WKWebView!, decidePolicyForNavigationAction navigationAction: WKNavigationAction!, decisionHandler: ((WKNavigationActionPolicy) -> Void)!) {
         
         // Alows links in the WKWebView to be tappable
         decisionHandler(.Allow)

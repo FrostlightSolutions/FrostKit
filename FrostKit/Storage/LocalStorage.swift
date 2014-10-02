@@ -54,7 +54,7 @@ public class LocalStorage: NSObject {
         return NSFileManager.defaultManager().URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask)[0] as NSURL
     }
     
-    internal class func baseURL(#directory: NSSearchPathDirectory) -> NSURL? {
+    class func baseURL(#directory: NSSearchPathDirectory) -> NSURL? {
         
         switch directory {
         case .DocumentDirectory:
@@ -67,7 +67,7 @@ public class LocalStorage: NSObject {
         }
     }
     
-    internal class func absoluteURL(#directory: NSSearchPathDirectory, reletivePath: String, fileName: String? = nil) -> NSURL? {
+    class func absoluteURL(#directory: NSSearchPathDirectory, reletivePath: String, fileName: String? = nil) -> NSURL? {
         
         if let baseURL = baseURL(directory: directory) {
             return absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName)
@@ -198,7 +198,7 @@ public class LocalStorage: NSObject {
     
     // MARK: - Delete Methods
     
-    internal class func remove(#absoluteURL: NSURL) -> Bool {
+    class func remove(#absoluteURL: NSURL) -> Bool {
         var error: NSError?
         let success = NSFileManager.defaultManager().removeItemAtURL(absoluteURL, error: &error)
         if success == false {
