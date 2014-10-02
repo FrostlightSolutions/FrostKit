@@ -40,6 +40,12 @@
 		18E3F21419DDA6160032ABB7 /* MainMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F21219DDA6160032ABB7 /* MainMenuVC.swift */; };
 		18E3F21519DDA6160032ABB7 /* SocialHelperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F21319DDA6160032ABB7 /* SocialHelperVC.swift */; };
 		18E3F21F19DDDBD00032ABB7 /* WebViewControllerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F21E19DDDBD00032ABB7 /* WebViewControllerVC.swift */; };
+		18E3F22419DDE2A00032ABB7 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F22019DDE2A00032ABB7 /* BaseWebViewController.swift */; };
+		18E3F22519DDE2A00032ABB7 /* UIWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F22119DDE2A00032ABB7 /* UIWebViewController.swift */; };
+		18E3F22619DDE2A00032ABB7 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F22219DDE2A00032ABB7 /* WebViewController.swift */; };
+		18E3F22919DDE3E20032ABB7 /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F22819DDE3E20032ABB7 /* WKWebViewController.swift */; };
+		18E3F22B19DDE6F10032ABB7 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E3F22A19DDE6F10032ABB7 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		18E3F22D19DDE75D0032ABB7 /* WebViewControllerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F22C19DDE75D0032ABB7 /* WebViewControllerVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +123,12 @@
 		18E3F21219DDA6160032ABB7 /* MainMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuVC.swift; sourceTree = "<group>"; };
 		18E3F21319DDA6160032ABB7 /* SocialHelperVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialHelperVC.swift; sourceTree = "<group>"; };
 		18E3F21E19DDDBD00032ABB7 /* WebViewControllerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewControllerVC.swift; sourceTree = "<group>"; };
+		18E3F22019DDE2A00032ABB7 /* BaseWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
+		18E3F22119DDE2A00032ABB7 /* UIWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIWebViewController.swift; sourceTree = "<group>"; };
+		18E3F22219DDE2A00032ABB7 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		18E3F22819DDE3E20032ABB7 /* WKWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
+		18E3F22A19DDE6F10032ABB7 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		18E3F22C19DDE75D0032ABB7 /* WebViewControllerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewControllerVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E3F22B19DDE6F10032ABB7 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,6 +154,7 @@
 		18772BE019DD61E200F67CE7 = {
 			isa = PBXGroup;
 			children = (
+				18E3F22A19DDE6F10032ABB7 /* WebKit.framework */,
 				18772BEB19DD61E200F67CE7 /* iOS Example */,
 				18A258E219DD936200D145A3 /* iOS 7 Example */,
 				18772BEA19DD61E200F67CE7 /* Products */,
@@ -284,6 +298,10 @@
 		18A2592919DD94D300D145A3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				18E3F22219DDE2A00032ABB7 /* WebViewController.swift */,
+				18E3F22019DDE2A00032ABB7 /* BaseWebViewController.swift */,
+				18E3F22119DDE2A00032ABB7 /* UIWebViewController.swift */,
+				18E3F22819DDE3E20032ABB7 /* WKWebViewController.swift */,
 			);
 			name = ViewControllers;
 			path = FrostKit/ViewControllers;
@@ -294,6 +312,7 @@
 			children = (
 				18E3F21219DDA6160032ABB7 /* MainMenuVC.swift */,
 				18E3F21319DDA6160032ABB7 /* SocialHelperVC.swift */,
+				18E3F22C19DDE75D0032ABB7 /* WebViewControllerVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -438,6 +457,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				18A2592E19DD94D300D145A3 /* NSDateExtensions.swift in Sources */,
+				18E3F22619DDE2A00032ABB7 /* WebViewController.swift in Sources */,
+				18E3F22519DDE2A00032ABB7 /* UIWebViewController.swift in Sources */,
 				18A2593219DD94D400D145A3 /* UIFontExtensiosns.swift in Sources */,
 				18A2593419DD94D400D145A3 /* UIViewExtensions.swift in Sources */,
 				18A2593319DD94D400D145A3 /* UIImageExtensiosns.swift in Sources */,
@@ -445,8 +466,11 @@
 				18A2592B19DD94D300D145A3 /* NSBundleExtensiosns.swift in Sources */,
 				18A2593919DD94D400D145A3 /* SocialHelper.swift in Sources */,
 				18A2592F19DD94D300D145A3 /* NSErrorExtensions.swift in Sources */,
+				18E3F22D19DDE75D0032ABB7 /* WebViewControllerVC.swift in Sources */,
 				18E3F21419DDA6160032ABB7 /* MainMenuVC.swift in Sources */,
+				18E3F22919DDE3E20032ABB7 /* WKWebViewController.swift in Sources */,
 				18A2592C19DD94D300D145A3 /* NSCalendarExtensions.swift in Sources */,
+				18E3F22419DDE2A00032ABB7 /* BaseWebViewController.swift in Sources */,
 				18A258E619DD936200D145A3 /* AppDelegate.swift in Sources */,
 				18A2593B19DD94D400D145A3 /* ImageCache.swift in Sources */,
 				18A2593019DD94D400D145A3 /* NSTimeZoneExtensions.swift in Sources */,
@@ -607,10 +631,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					IOS7_EXAMPLES,
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "iOS 7 Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -623,7 +644,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PREPROCESSOR_DEFINITIONS = IOS7_EXAMPLES;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				INFOPLIST_FILE = "iOS 7 Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
