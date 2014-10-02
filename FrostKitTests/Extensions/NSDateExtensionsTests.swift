@@ -1,5 +1,5 @@
 //
-//  NSDateExtensions.swift
+//  NSDateExtensionsTests.swift
 //  FrostKit
 //
 //  Created by James Barrow on 01/10/2014.
@@ -10,7 +10,7 @@ import UIKit
 import XCTest
 import FrostKit
 
-class NSDateExtensions: XCTestCase {
+class NSDateExtensionsTests: XCTestCase {
    
     override func setUp() {
         super.setUp()

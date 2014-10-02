@@ -19,9 +19,9 @@
 		18C0066C19DB769B00811755 /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066B19DB769B00811755 /* NSDateExtensions.swift */; };
 		18C0066E19DB76C900811755 /* UIImageExtensiosns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066D19DB76C900811755 /* UIImageExtensiosns.swift */; };
 		18C0067019DB7EDB00811755 /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066F19DB7EDB00811755 /* ContentManager.swift */; };
-		18C0067519DC001000811755 /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0067419DC001000811755 /* NSDateExtensions.swift */; };
+		18C0067519DC001000811755 /* NSDateExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0067419DC001000811755 /* NSDateExtensionsTests.swift */; };
 		18C0067619DC00C000811755 /* FrostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18839B1719D9FA8C00760157 /* FrostKit.framework */; };
-		18C0067819DC23A100811755 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0067719DC23A100811755 /* UIColorExtensions.swift */; };
+		18C0067819DC23A100811755 /* UIColorExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0067719DC23A100811755 /* UIColorExtensionsTest.swift */; };
 		18CFF9FE19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFF9FD19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift */; };
 		18DE01ED19DCBB5B008A1506 /* UIFontExtensiosns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EC19DCBB5B008A1506 /* UIFontExtensiosns.swift */; };
 		18DE01EF19DCBC28008A1506 /* FontAwesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EE19DCBC28008A1506 /* FontAwesome.swift */; };
@@ -50,8 +50,8 @@
 		18C0066B19DB769B00811755 /* NSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtensions.swift; sourceTree = "<group>"; };
 		18C0066D19DB76C900811755 /* UIImageExtensiosns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtensiosns.swift; sourceTree = "<group>"; };
 		18C0066F19DB7EDB00811755 /* ContentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentManager.swift; sourceTree = "<group>"; };
-		18C0067419DC001000811755 /* NSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtensions.swift; sourceTree = "<group>"; };
-		18C0067719DC23A100811755 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		18C0067419DC001000811755 /* NSDateExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtensionsTests.swift; sourceTree = "<group>"; };
+		18C0067719DC23A100811755 /* UIColorExtensionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensionsTest.swift; sourceTree = "<group>"; };
 		18CFF9FD19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimeZoneExtensions.swift; sourceTree = "<group>"; };
 		18DE01EC19DCBB5B008A1506 /* UIFontExtensiosns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFontExtensiosns.swift; sourceTree = "<group>"; };
 		18DE01EE19DCBC28008A1506 /* FontAwesome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontAwesome.swift; sourceTree = "<group>"; };
@@ -191,8 +191,8 @@
 		18C0067119DBFFE900811755 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				18C0067719DC23A100811755 /* UIColorExtensions.swift */,
-				18C0067419DC001000811755 /* NSDateExtensions.swift */,
+				18C0067719DC23A100811755 /* UIColorExtensionsTest.swift */,
+				18C0067419DC001000811755 /* NSDateExtensionsTests.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -361,8 +361,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				18DE01F619DCBE45008A1506 /* FontTests.swift in Sources */,
-				18C0067819DC23A100811755 /* UIColorExtensions.swift in Sources */,
-				18C0067519DC001000811755 /* NSDateExtensions.swift in Sources */,
+				18C0067819DC23A100811755 /* UIColorExtensionsTest.swift in Sources */,
+				18C0067519DC001000811755 /* NSDateExtensionsTests.swift in Sources */,
 				18839B2719D9FA8C00760157 /* FrostKitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

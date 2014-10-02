@@ -1,5 +1,5 @@
 //
-//  NSDateExtensions.swift
+//  UIColorExtensionsTest.swift
 //  FrostKit
 //
 //  Created by Niels Lemmens on 01/10/2014.
@@ -10,7 +10,7 @@ import UIKit
 import XCTest
 import FrostKit
 
-class UIColorExtensions: XCTestCase {
+class UIColorExtensionsTest: XCTestCase {
     
     override func setUp() {
         super.setUp()
