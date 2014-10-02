@@ -15,6 +15,30 @@
 		18772C1919DD637600F67CE7 /* FrostKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 18772C1519DD636900F67CE7 /* FrostKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18772C2519DD67A900F67CE7 /* MainMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772C2319DD67A900F67CE7 /* MainMenuVC.swift */; };
 		18772C2619DD67A900F67CE7 /* SocialHelperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772C2419DD67A900F67CE7 /* SocialHelperVC.swift */; };
+		18A258E619DD936200D145A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A258E519DD936200D145A3 /* AppDelegate.swift */; };
+		18A2590A19DD940200D145A3 /* MainMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2590819DD940200D145A3 /* MainMenuVC.swift */; };
+		18A2590B19DD940200D145A3 /* SocialHelperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2590919DD940200D145A3 /* SocialHelperVC.swift */; };
+		18A2592B19DD94D300D145A3 /* NSBundleExtensiosns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2591419DD94D300D145A3 /* NSBundleExtensiosns.swift */; };
+		18A2592C19DD94D300D145A3 /* NSCalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2591519DD94D300D145A3 /* NSCalendarExtensions.swift */; };
+		18A2592D19DD94D300D145A3 /* NSDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2591619DD94D300D145A3 /* NSDataExtensions.swift */; };
+		18A2592E19DD94D300D145A3 /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2591719DD94D300D145A3 /* NSDateExtensions.swift */; };
+		18A2592F19DD94D300D145A3 /* NSErrorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2591819DD94D300D145A3 /* NSErrorExtensions.swift */; };
+		18A2593019DD94D400D145A3 /* NSTimeZoneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2591919DD94D300D145A3 /* NSTimeZoneExtensions.swift */; };
+		18A2593119DD94D400D145A3 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2591A19DD94D300D145A3 /* UIColorExtensions.swift */; };
+		18A2593219DD94D400D145A3 /* UIFontExtensiosns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2591B19DD94D300D145A3 /* UIFontExtensiosns.swift */; };
+		18A2593319DD94D400D145A3 /* UIImageExtensiosns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2591C19DD94D300D145A3 /* UIImageExtensiosns.swift */; };
+		18A2593419DD94D400D145A3 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2591D19DD94D300D145A3 /* UIViewExtensions.swift */; };
+		18A2593519DD94D400D145A3 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18A2591F19DD94D300D145A3 /* fontawesome-webfont.ttf */; };
+		18A2593619DD94D400D145A3 /* FontAwesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2592019DD94D300D145A3 /* FontAwesome.swift */; };
+		18A2593719DD94D400D145A3 /* variables.less in Resources */ = {isa = PBXBuildFile; fileRef = 18A2592119DD94D300D145A3 /* variables.less */; };
+		18A2593819DD94D400D145A3 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2592319DD94D300D145A3 /* KeychainHelper.swift */; };
+		18A2593919DD94D400D145A3 /* SocialHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2592419DD94D300D145A3 /* SocialHelper.swift */; };
+		18A2593A19DD94D400D145A3 /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2592619DD94D300D145A3 /* ContentManager.swift */; };
+		18A2593B19DD94D400D145A3 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2592719DD94D300D145A3 /* ImageCache.swift */; };
+		18A2593C19DD94D400D145A3 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2592819DD94D300D145A3 /* LocalStorage.swift */; };
+		18A2593F19DD959300D145A3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18A2593E19DD959300D145A3 /* Images.xcassets */; };
+		18A2594419DD95E000D145A3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A2594019DD95E000D145A3 /* LaunchScreen.xib */; };
+		18A2594519DD95E000D145A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18A2594219DD95E000D145A3 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +89,32 @@
 		18772C0F19DD636800F67CE7 /* FrostKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = FrostKit.xcodeproj; sourceTree = "<group>"; };
 		18772C2319DD67A900F67CE7 /* MainMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuVC.swift; sourceTree = "<group>"; };
 		18772C2419DD67A900F67CE7 /* SocialHelperVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialHelperVC.swift; sourceTree = "<group>"; };
+		18A258E119DD936200D145A3 /* iOS 7 Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS 7 Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		18A258E419DD936200D145A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18A258E519DD936200D145A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		18A2590819DD940200D145A3 /* MainMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuVC.swift; sourceTree = "<group>"; };
+		18A2590919DD940200D145A3 /* SocialHelperVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialHelperVC.swift; sourceTree = "<group>"; };
+		18A2591419DD94D300D145A3 /* NSBundleExtensiosns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSBundleExtensiosns.swift; sourceTree = "<group>"; };
+		18A2591519DD94D300D145A3 /* NSCalendarExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSCalendarExtensions.swift; sourceTree = "<group>"; };
+		18A2591619DD94D300D145A3 /* NSDataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataExtensions.swift; sourceTree = "<group>"; };
+		18A2591719DD94D300D145A3 /* NSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtensions.swift; sourceTree = "<group>"; };
+		18A2591819DD94D300D145A3 /* NSErrorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSErrorExtensions.swift; sourceTree = "<group>"; };
+		18A2591919DD94D300D145A3 /* NSTimeZoneExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimeZoneExtensions.swift; sourceTree = "<group>"; };
+		18A2591A19DD94D300D145A3 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		18A2591B19DD94D300D145A3 /* UIFontExtensiosns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFontExtensiosns.swift; sourceTree = "<group>"; };
+		18A2591C19DD94D300D145A3 /* UIImageExtensiosns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtensiosns.swift; sourceTree = "<group>"; };
+		18A2591D19DD94D300D145A3 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		18A2591F19DD94D300D145A3 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
+		18A2592019DD94D300D145A3 /* FontAwesome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontAwesome.swift; sourceTree = "<group>"; };
+		18A2592119DD94D300D145A3 /* variables.less */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = variables.less; sourceTree = "<group>"; };
+		18A2592319DD94D300D145A3 /* KeychainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		18A2592419DD94D300D145A3 /* SocialHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialHelper.swift; sourceTree = "<group>"; };
+		18A2592619DD94D300D145A3 /* ContentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentManager.swift; sourceTree = "<group>"; };
+		18A2592719DD94D300D145A3 /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		18A2592819DD94D300D145A3 /* LocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
+		18A2593E19DD959300D145A3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "iOS Example/Images.xcassets"; sourceTree = SOURCE_ROOT; };
+		18A2594119DD95E000D145A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "iOS Example/Base.lproj/LaunchScreen.xib"; sourceTree = SOURCE_ROOT; };
+		18A2594319DD95E000D145A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "iOS Example/Base.lproj/Main.storyboard"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +126,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		18A258DE19DD936200D145A3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -83,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				18772BEB19DD61E200F67CE7 /* iOS Example */,
+				18A258E219DD936200D145A3 /* iOS 7 Example */,
 				18772BEA19DD61E200F67CE7 /* Products */,
 				18772C0F19DD636800F67CE7 /* FrostKit.xcodeproj */,
 			);
@@ -92,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				18772BE919DD61E200F67CE7 /* iOS Example.app */,
+				18A258E119DD936200D145A3 /* iOS 7 Example.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -135,6 +194,107 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		18A258E219DD936200D145A3 /* iOS 7 Example */ = {
+			isa = PBXGroup;
+			children = (
+				18A258E519DD936200D145A3 /* AppDelegate.swift */,
+				18A2594219DD95E000D145A3 /* Main.storyboard */,
+				18A2590719DD940200D145A3 /* ViewControllers */,
+				18A2594019DD95E000D145A3 /* LaunchScreen.xib */,
+				18A2593E19DD959300D145A3 /* Images.xcassets */,
+				18A258E319DD936200D145A3 /* Supporting Files */,
+				18A2591219DD94B800D145A3 /* FrostKit iOS 7 References */,
+			);
+			path = "iOS 7 Example";
+			sourceTree = "<group>";
+		};
+		18A258E319DD936200D145A3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				18A258E419DD936200D145A3 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		18A2590719DD940200D145A3 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				18A2590819DD940200D145A3 /* MainMenuVC.swift */,
+				18A2590919DD940200D145A3 /* SocialHelperVC.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		18A2591219DD94B800D145A3 /* FrostKit iOS 7 References */ = {
+			isa = PBXGroup;
+			children = (
+				18A2592519DD94D300D145A3 /* Storage */,
+				18A2592919DD94D300D145A3 /* ViewControllers */,
+				18A2592219DD94D300D145A3 /* Helpers */,
+				18A2591319DD94D300D145A3 /* Extensions */,
+				18A2591E19DD94D300D145A3 /* Fonts */,
+			);
+			name = "FrostKit iOS 7 References";
+			sourceTree = "<group>";
+		};
+		18A2591319DD94D300D145A3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				18A2591419DD94D300D145A3 /* NSBundleExtensiosns.swift */,
+				18A2591519DD94D300D145A3 /* NSCalendarExtensions.swift */,
+				18A2591619DD94D300D145A3 /* NSDataExtensions.swift */,
+				18A2591719DD94D300D145A3 /* NSDateExtensions.swift */,
+				18A2591819DD94D300D145A3 /* NSErrorExtensions.swift */,
+				18A2591919DD94D300D145A3 /* NSTimeZoneExtensions.swift */,
+				18A2591A19DD94D300D145A3 /* UIColorExtensions.swift */,
+				18A2591B19DD94D300D145A3 /* UIFontExtensiosns.swift */,
+				18A2591C19DD94D300D145A3 /* UIImageExtensiosns.swift */,
+				18A2591D19DD94D300D145A3 /* UIViewExtensions.swift */,
+			);
+			name = Extensions;
+			path = FrostKit/Extensions;
+			sourceTree = SOURCE_ROOT;
+		};
+		18A2591E19DD94D300D145A3 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				18A2591F19DD94D300D145A3 /* fontawesome-webfont.ttf */,
+				18A2592019DD94D300D145A3 /* FontAwesome.swift */,
+				18A2592119DD94D300D145A3 /* variables.less */,
+			);
+			name = Fonts;
+			path = FrostKit/Fonts;
+			sourceTree = SOURCE_ROOT;
+		};
+		18A2592219DD94D300D145A3 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				18A2592319DD94D300D145A3 /* KeychainHelper.swift */,
+				18A2592419DD94D300D145A3 /* SocialHelper.swift */,
+			);
+			name = Helpers;
+			path = FrostKit/Helpers;
+			sourceTree = SOURCE_ROOT;
+		};
+		18A2592519DD94D300D145A3 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				18A2592619DD94D300D145A3 /* ContentManager.swift */,
+				18A2592719DD94D300D145A3 /* ImageCache.swift */,
+				18A2592819DD94D300D145A3 /* LocalStorage.swift */,
+			);
+			name = Storage;
+			path = FrostKit/Storage;
+			sourceTree = SOURCE_ROOT;
+		};
+		18A2592919DD94D300D145A3 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewControllers;
+			path = FrostKit/ViewControllers;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -157,6 +317,23 @@
 			productReference = 18772BE919DD61E200F67CE7 /* iOS Example.app */;
 			productType = "com.apple.product-type.application";
 		};
+		18A258E019DD936200D145A3 /* iOS 7 Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18A2590219DD936200D145A3 /* Build configuration list for PBXNativeTarget "iOS 7 Example" */;
+			buildPhases = (
+				18A258DD19DD936200D145A3 /* Sources */,
+				18A258DE19DD936200D145A3 /* Frameworks */,
+				18A258DF19DD936200D145A3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "iOS 7 Example";
+			productName = "iOS 7 Example";
+			productReference = 18A258E119DD936200D145A3 /* iOS 7 Example.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -167,6 +344,9 @@
 				ORGANIZATIONNAME = "Frostlight Solutions";
 				TargetAttributes = {
 					18772BE819DD61E200F67CE7 = {
+						CreatedOnToolsVersion = 6.0.1;
+					};
+					18A258E019DD936200D145A3 = {
 						CreatedOnToolsVersion = 6.0.1;
 					};
 				};
@@ -191,6 +371,7 @@
 			projectRoot = "";
 			targets = (
 				18772BE819DD61E200F67CE7 /* iOS Example */,
+				18A258E019DD936200D145A3 /* iOS 7 Example */,
 			);
 		};
 /* End PBXProject section */
@@ -223,6 +404,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		18A258DF19DD936200D145A3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18A2594419DD95E000D145A3 /* LaunchScreen.xib in Resources */,
+				18A2594519DD95E000D145A3 /* Main.storyboard in Resources */,
+				18A2593F19DD959300D145A3 /* Images.xcassets in Resources */,
+				18A2593719DD94D400D145A3 /* variables.less in Resources */,
+				18A2593519DD94D400D145A3 /* fontawesome-webfont.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -233,6 +426,32 @@
 				18772BEF19DD61E200F67CE7 /* AppDelegate.swift in Sources */,
 				18772C2619DD67A900F67CE7 /* SocialHelperVC.swift in Sources */,
 				18772C2519DD67A900F67CE7 /* MainMenuVC.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18A258DD19DD936200D145A3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18A2590A19DD940200D145A3 /* MainMenuVC.swift in Sources */,
+				18A2592E19DD94D300D145A3 /* NSDateExtensions.swift in Sources */,
+				18A2593219DD94D400D145A3 /* UIFontExtensiosns.swift in Sources */,
+				18A2593419DD94D400D145A3 /* UIViewExtensions.swift in Sources */,
+				18A2593319DD94D400D145A3 /* UIImageExtensiosns.swift in Sources */,
+				18A2590B19DD940200D145A3 /* SocialHelperVC.swift in Sources */,
+				18A2592D19DD94D300D145A3 /* NSDataExtensions.swift in Sources */,
+				18A2592B19DD94D300D145A3 /* NSBundleExtensiosns.swift in Sources */,
+				18A2593919DD94D400D145A3 /* SocialHelper.swift in Sources */,
+				18A2592F19DD94D300D145A3 /* NSErrorExtensions.swift in Sources */,
+				18A2592C19DD94D300D145A3 /* NSCalendarExtensions.swift in Sources */,
+				18A258E619DD936200D145A3 /* AppDelegate.swift in Sources */,
+				18A2593B19DD94D400D145A3 /* ImageCache.swift in Sources */,
+				18A2593019DD94D400D145A3 /* NSTimeZoneExtensions.swift in Sources */,
+				18A2593619DD94D400D145A3 /* FontAwesome.swift in Sources */,
+				18A2593819DD94D400D145A3 /* KeychainHelper.swift in Sources */,
+				18A2593A19DD94D400D145A3 /* ContentManager.swift in Sources */,
+				18A2593119DD94D400D145A3 /* UIColorExtensions.swift in Sources */,
+				18A2593C19DD94D400D145A3 /* LocalStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +480,22 @@
 				18772BF819DD61E200F67CE7 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		18A2594019DD95E000D145A3 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18A2594119DD95E000D145A3 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		18A2594219DD95E000D145A3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18A2594319DD95E000D145A3 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -363,6 +598,34 @@
 			};
 			name = Release;
 		};
+		18A258FD19DD936200D145A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "iOS 7 Example/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		18A258FE19DD936200D145A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = "iOS 7 Example/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -380,6 +643,15 @@
 			buildConfigurations = (
 				18772C0919DD61E200F67CE7 /* Debug */,
 				18772C0A19DD61E200F67CE7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18A2590219DD936200D145A3 /* Build configuration list for PBXNativeTarget "iOS 7 Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18A258FD19DD936200D145A3 /* Debug */,
+				18A258FE19DD936200D145A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
