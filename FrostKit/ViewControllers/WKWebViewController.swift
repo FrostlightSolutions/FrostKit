@@ -9,8 +9,6 @@
 import UIKit
 import WebKit
 
-// TODO: Enable swipe gestures
-
 class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     override var URL: NSURL? {
@@ -36,6 +34,8 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
         webView = WKWebView(frame: view.bounds)
         
         if let webView = self.webView as? WKWebView {
+            
+            webView.allowsBackForwardNavigationGestures = true
             
             webView.addObserver(self, forKeyPath: "estimatedProgress", options: nil, context: nil)
             webView.addObserver(self, forKeyPath: "title", options: nil, context: nil)
