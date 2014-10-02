@@ -27,6 +27,9 @@
 		18DE01EF19DCBC28008A1506 /* FontAwesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EE19DCBC28008A1506 /* FontAwesome.swift */; };
 		18DE01F319DCBCC4008A1506 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18DE01F219DCBCC4008A1506 /* fontawesome-webfont.ttf */; };
 		18DE01F619DCBE45008A1506 /* FontTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01F519DCBE45008A1506 /* FontTests.swift */; };
+		18E3F21719DDA7470032ABB7 /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F21619DDA7470032ABB7 /* WKWebViewController.swift */; };
+		18E3F21919DDA7520032ABB7 /* UIWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F21819DDA7520032ABB7 /* UIWebViewController.swift */; };
+		18E3F21B19DDA7B50032ABB7 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F21A19DDA7B50032ABB7 /* BaseWebViewController.swift */; };
 		18EA123F19DC79F100FD858D /* NSDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA123E19DC79F100FD858D /* NSDataExtensions.swift */; };
 		18EA124119DC7D9000FD858D /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124019DC7D9000FD858D /* UIViewExtensions.swift */; };
 		18EA124319DC8A8C00FD858D /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124219DC8A8C00FD858D /* KeychainHelper.swift */; };
@@ -58,6 +61,9 @@
 		18DE01F019DCBC48008A1506 /* variables.less */ = {isa = PBXFileReference; lastKnownFileType = text; path = variables.less; sourceTree = "<group>"; };
 		18DE01F219DCBCC4008A1506 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		18DE01F519DCBE45008A1506 /* FontTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontTests.swift; sourceTree = "<group>"; };
+		18E3F21619DDA7470032ABB7 /* WKWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
+		18E3F21819DDA7520032ABB7 /* UIWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIWebViewController.swift; sourceTree = "<group>"; };
+		18E3F21A19DDA7B50032ABB7 /* BaseWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
 		18EA123E19DC79F100FD858D /* NSDataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataExtensions.swift; sourceTree = "<group>"; };
 		18EA124019DC7D9000FD858D /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		18EA124219DC8A8C00FD858D /* KeychainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
@@ -148,6 +154,9 @@
 			isa = PBXGroup;
 			children = (
 				18839B4219DA27A800760157 /* WebViewController.swift */,
+				18E3F21A19DDA7B50032ABB7 /* BaseWebViewController.swift */,
+				18E3F21819DDA7520032ABB7 /* UIWebViewController.swift */,
+				18E3F21619DDA7470032ABB7 /* WKWebViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -339,12 +348,15 @@
 				18839B4319DA27A800760157 /* WebViewController.swift in Sources */,
 				18C0066C19DB769B00811755 /* NSDateExtensions.swift in Sources */,
 				18CFF9FE19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift in Sources */,
+				18E3F21719DDA7470032ABB7 /* WKWebViewController.swift in Sources */,
 				18DE01EF19DCBC28008A1506 /* FontAwesome.swift in Sources */,
 				18EA124119DC7D9000FD858D /* UIViewExtensions.swift in Sources */,
 				18EA123F19DC79F100FD858D /* NSDataExtensions.swift in Sources */,
 				18839B4719DA27AE00760157 /* SocialHelper.swift in Sources */,
 				18C0066819DB762600811755 /* NSErrorExtensions.swift in Sources */,
 				18EA124519DC8B5E00FD858D /* NSBundleExtensiosns.swift in Sources */,
+				18E3F21B19DDA7B50032ABB7 /* BaseWebViewController.swift in Sources */,
+				18E3F21919DDA7520032ABB7 /* UIWebViewController.swift in Sources */,
 				18C0066A19DB767A00811755 /* UIColorExtensions.swift in Sources */,
 				18C0066319DB5C7200811755 /* ImageCache.swift in Sources */,
 				18DE01ED19DCBB5B008A1506 /* UIFontExtensiosns.swift in Sources */,
