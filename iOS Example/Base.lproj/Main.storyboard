@@ -7,7 +7,7 @@
         <!--FrostKit-->
         <scene sceneID="sYt-9K-qO6">
             <objects>
-                <tableViewController id="Zkj-xT-axX" customClass="MainMenuVC" customModule="iOS_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Zkj-xT-axX" customClass="MainMenuVC" customModule="iOS_7_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9vi-BF-eGL">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -49,7 +49,7 @@
         <!--SocialHelper-->
         <scene sceneID="gjm-sZ-zRi">
             <objects>
-                <tableViewController id="akX-da-Xii" customClass="SocialHelperVC" customModule="iOS_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="akX-da-Xii" customClass="SocialHelperVC" customModule="iOS_7_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="gGa-5E-t6O">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -1,0 +1,425 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		18772CA319DD912300F67CE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772CA219DD912300F67CE7 /* AppDelegate.swift */; };
+		18772CC719DD918000F67CE7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18772CC419DD918000F67CE7 /* Main.storyboard */; };
+		18772CC919DD918700F67CE7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18772CC819DD918700F67CE7 /* Images.xcassets */; };
+		18772CCD19DD91A000F67CE7 /* MainMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772CCB19DD91A000F67CE7 /* MainMenuVC.swift */; };
+		18772CCE19DD91A000F67CE7 /* SocialHelperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772CCC19DD91A000F67CE7 /* SocialHelperVC.swift */; };
+		18772CEA19DD91DA00F67CE7 /* NSBundleExtensiosns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772CD119DD91DA00F67CE7 /* NSBundleExtensiosns.swift */; };
+		18772CEB19DD91DA00F67CE7 /* NSCalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772CD219DD91DA00F67CE7 /* NSCalendarExtensions.swift */; };
+		18772CEC19DD91DA00F67CE7 /* NSDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772CD319DD91DA00F67CE7 /* NSDataExtensions.swift */; };
+		18772CED19DD91DA00F67CE7 /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772CD419DD91DA00F67CE7 /* NSDateExtensions.swift */; };
+		18772CEE19DD91DA00F67CE7 /* NSErrorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772CD519DD91DA00F67CE7 /* NSErrorExtensions.swift */; };
+		18772CEF19DD91DA00F67CE7 /* NSTimeZoneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772CD619DD91DA00F67CE7 /* NSTimeZoneExtensions.swift */; };
+		18772CF019DD91DA00F67CE7 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772CD719DD91DA00F67CE7 /* UIColorExtensions.swift */; };
+		18772CF119DD91DA00F67CE7 /* UIFontExtensiosns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772CD819DD91DA00F67CE7 /* UIFontExtensiosns.swift */; };
+		18772CF219DD91DA00F67CE7 /* UIImageExtensiosns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772CD919DD91DA00F67CE7 /* UIImageExtensiosns.swift */; };
+		18772CF319DD91DA00F67CE7 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772CDA19DD91DA00F67CE7 /* UIViewExtensions.swift */; };
+		18772CF419DD91DA00F67CE7 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18772CDC19DD91DA00F67CE7 /* fontawesome-webfont.ttf */; };
+		18772CF519DD91DA00F67CE7 /* FontAwesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772CDD19DD91DA00F67CE7 /* FontAwesome.swift */; };
+		18772CF619DD91DA00F67CE7 /* variables.less in Resources */ = {isa = PBXBuildFile; fileRef = 18772CDE19DD91DA00F67CE7 /* variables.less */; };
+		18772CF719DD91DA00F67CE7 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772CE119DD91DA00F67CE7 /* KeychainHelper.swift */; };
+		18772CF819DD91DA00F67CE7 /* SocialHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772CE219DD91DA00F67CE7 /* SocialHelper.swift */; };
+		18772CFA19DD91DA00F67CE7 /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772CE519DD91DA00F67CE7 /* ContentManager.swift */; };
+		18772CFB19DD91DA00F67CE7 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772CE619DD91DA00F67CE7 /* ImageCache.swift */; };
+		18772CFC19DD91DA00F67CE7 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772CE719DD91DA00F67CE7 /* LocalStorage.swift */; };
+		18772D0019DD929400F67CE7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18772CFE19DD929400F67CE7 /* LaunchScreen.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		18772C9D19DD912300F67CE7 /* iOS 7 Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS 7 Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		18772CA119DD912300F67CE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18772CA219DD912300F67CE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		18772CC519DD918000F67CE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "iOS Example/Base.lproj/Main.storyboard"; sourceTree = SOURCE_ROOT; };
+		18772CC819DD918700F67CE7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "iOS Example/Images.xcassets"; sourceTree = SOURCE_ROOT; };
+		18772CCB19DD91A000F67CE7 /* MainMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuVC.swift; sourceTree = "<group>"; };
+		18772CCC19DD91A000F67CE7 /* SocialHelperVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialHelperVC.swift; sourceTree = "<group>"; };
+		18772CD119DD91DA00F67CE7 /* NSBundleExtensiosns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSBundleExtensiosns.swift; sourceTree = "<group>"; };
+		18772CD219DD91DA00F67CE7 /* NSCalendarExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSCalendarExtensions.swift; sourceTree = "<group>"; };
+		18772CD319DD91DA00F67CE7 /* NSDataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataExtensions.swift; sourceTree = "<group>"; };
+		18772CD419DD91DA00F67CE7 /* NSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtensions.swift; sourceTree = "<group>"; };
+		18772CD519DD91DA00F67CE7 /* NSErrorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSErrorExtensions.swift; sourceTree = "<group>"; };
+		18772CD619DD91DA00F67CE7 /* NSTimeZoneExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimeZoneExtensions.swift; sourceTree = "<group>"; };
+		18772CD719DD91DA00F67CE7 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		18772CD819DD91DA00F67CE7 /* UIFontExtensiosns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFontExtensiosns.swift; sourceTree = "<group>"; };
+		18772CD919DD91DA00F67CE7 /* UIImageExtensiosns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtensiosns.swift; sourceTree = "<group>"; };
+		18772CDA19DD91DA00F67CE7 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		18772CDC19DD91DA00F67CE7 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
+		18772CDD19DD91DA00F67CE7 /* FontAwesome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontAwesome.swift; sourceTree = "<group>"; };
+		18772CDE19DD91DA00F67CE7 /* variables.less */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = variables.less; sourceTree = "<group>"; };
+		18772CE119DD91DA00F67CE7 /* KeychainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		18772CE219DD91DA00F67CE7 /* SocialHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialHelper.swift; sourceTree = "<group>"; };
+		18772CE519DD91DA00F67CE7 /* ContentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentManager.swift; sourceTree = "<group>"; };
+		18772CE619DD91DA00F67CE7 /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		18772CE719DD91DA00F67CE7 /* LocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
+		18772CFF19DD929400F67CE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		18772C9A19DD912300F67CE7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		18772C9419DD912300F67CE7 = {
+			isa = PBXGroup;
+			children = (
+				18772C9F19DD912300F67CE7 /* iOS 7 Example */,
+				18772C9E19DD912300F67CE7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		18772C9E19DD912300F67CE7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18772C9D19DD912300F67CE7 /* iOS 7 Example.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		18772C9F19DD912300F67CE7 /* iOS 7 Example */ = {
+			isa = PBXGroup;
+			children = (
+				18772CA219DD912300F67CE7 /* AppDelegate.swift */,
+				18772CC419DD918000F67CE7 /* Main.storyboard */,
+				18772CCA19DD91A000F67CE7 /* ViewControllers */,
+				18772CFE19DD929400F67CE7 /* LaunchScreen.xib */,
+				18772CC819DD918700F67CE7 /* Images.xcassets */,
+				18772CCF19DD91DA00F67CE7 /* FrostKit */,
+				18772CA019DD912300F67CE7 /* Supporting Files */,
+			);
+			path = "iOS 7 Example";
+			sourceTree = "<group>";
+		};
+		18772CA019DD912300F67CE7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				18772CA119DD912300F67CE7 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		18772CCA19DD91A000F67CE7 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				18772CCB19DD91A000F67CE7 /* MainMenuVC.swift */,
+				18772CCC19DD91A000F67CE7 /* SocialHelperVC.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		18772CCF19DD91DA00F67CE7 /* FrostKit */ = {
+			isa = PBXGroup;
+			children = (
+				18772CE419DD91DA00F67CE7 /* Storage */,
+				18772CE819DD91DA00F67CE7 /* ViewControllers */,
+				18772CE019DD91DA00F67CE7 /* Helpers */,
+				18772CD019DD91DA00F67CE7 /* Extensions */,
+				18772CDB19DD91DA00F67CE7 /* Fonts */,
+			);
+			path = FrostKit;
+			sourceTree = SOURCE_ROOT;
+		};
+		18772CD019DD91DA00F67CE7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				18772CD119DD91DA00F67CE7 /* NSBundleExtensiosns.swift */,
+				18772CD219DD91DA00F67CE7 /* NSCalendarExtensions.swift */,
+				18772CD319DD91DA00F67CE7 /* NSDataExtensions.swift */,
+				18772CD419DD91DA00F67CE7 /* NSDateExtensions.swift */,
+				18772CD519DD91DA00F67CE7 /* NSErrorExtensions.swift */,
+				18772CD619DD91DA00F67CE7 /* NSTimeZoneExtensions.swift */,
+				18772CD719DD91DA00F67CE7 /* UIColorExtensions.swift */,
+				18772CD819DD91DA00F67CE7 /* UIFontExtensiosns.swift */,
+				18772CD919DD91DA00F67CE7 /* UIImageExtensiosns.swift */,
+				18772CDA19DD91DA00F67CE7 /* UIViewExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		18772CDB19DD91DA00F67CE7 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				18772CDC19DD91DA00F67CE7 /* fontawesome-webfont.ttf */,
+				18772CDD19DD91DA00F67CE7 /* FontAwesome.swift */,
+				18772CDE19DD91DA00F67CE7 /* variables.less */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		18772CE019DD91DA00F67CE7 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				18772CE119DD91DA00F67CE7 /* KeychainHelper.swift */,
+				18772CE219DD91DA00F67CE7 /* SocialHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		18772CE419DD91DA00F67CE7 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				18772CE519DD91DA00F67CE7 /* ContentManager.swift */,
+				18772CE619DD91DA00F67CE7 /* ImageCache.swift */,
+				18772CE719DD91DA00F67CE7 /* LocalStorage.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		18772CE819DD91DA00F67CE7 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		18772C9C19DD912300F67CE7 /* iOS 7 Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18772CBC19DD912300F67CE7 /* Build configuration list for PBXNativeTarget "iOS 7 Example" */;
+			buildPhases = (
+				18772C9919DD912300F67CE7 /* Sources */,
+				18772C9A19DD912300F67CE7 /* Frameworks */,
+				18772C9B19DD912300F67CE7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "iOS 7 Example";
+			productName = "iOS 7 Example";
+			productReference = 18772C9D19DD912300F67CE7 /* iOS 7 Example.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		18772C9519DD912300F67CE7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Frostlight Solutions";
+				TargetAttributes = {
+					18772C9C19DD912300F67CE7 = {
+						CreatedOnToolsVersion = 6.0.1;
+					};
+				};
+			};
+			buildConfigurationList = 18772C9819DD912300F67CE7 /* Build configuration list for PBXProject "iOS 7 Example" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 18772C9419DD912300F67CE7;
+			productRefGroup = 18772C9E19DD912300F67CE7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				18772C9C19DD912300F67CE7 /* iOS 7 Example */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		18772C9B19DD912300F67CE7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18772D0019DD929400F67CE7 /* LaunchScreen.xib in Resources */,
+				18772CC919DD918700F67CE7 /* Images.xcassets in Resources */,
+				18772CF419DD91DA00F67CE7 /* fontawesome-webfont.ttf in Resources */,
+				18772CC719DD918000F67CE7 /* Main.storyboard in Resources */,
+				18772CF619DD91DA00F67CE7 /* variables.less in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		18772C9919DD912300F67CE7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18772CCD19DD91A000F67CE7 /* MainMenuVC.swift in Sources */,
+				18772CED19DD91DA00F67CE7 /* NSDateExtensions.swift in Sources */,
+				18772CF119DD91DA00F67CE7 /* UIFontExtensiosns.swift in Sources */,
+				18772CF319DD91DA00F67CE7 /* UIViewExtensions.swift in Sources */,
+				18772CF219DD91DA00F67CE7 /* UIImageExtensiosns.swift in Sources */,
+				18772CCE19DD91A000F67CE7 /* SocialHelperVC.swift in Sources */,
+				18772CEC19DD91DA00F67CE7 /* NSDataExtensions.swift in Sources */,
+				18772CEA19DD91DA00F67CE7 /* NSBundleExtensiosns.swift in Sources */,
+				18772CF819DD91DA00F67CE7 /* SocialHelper.swift in Sources */,
+				18772CEE19DD91DA00F67CE7 /* NSErrorExtensions.swift in Sources */,
+				18772CEB19DD91DA00F67CE7 /* NSCalendarExtensions.swift in Sources */,
+				18772CA319DD912300F67CE7 /* AppDelegate.swift in Sources */,
+				18772CFB19DD91DA00F67CE7 /* ImageCache.swift in Sources */,
+				18772CEF19DD91DA00F67CE7 /* NSTimeZoneExtensions.swift in Sources */,
+				18772CF519DD91DA00F67CE7 /* FontAwesome.swift in Sources */,
+				18772CF719DD91DA00F67CE7 /* KeychainHelper.swift in Sources */,
+				18772CFA19DD91DA00F67CE7 /* ContentManager.swift in Sources */,
+				18772CF019DD91DA00F67CE7 /* UIColorExtensions.swift in Sources */,
+				18772CFC19DD91DA00F67CE7 /* LocalStorage.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		18772CC419DD918000F67CE7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18772CC519DD918000F67CE7 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		18772CFE19DD929400F67CE7 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18772CFF19DD929400F67CE7 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		18772CBA19DD912300F67CE7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		18772CBB19DD912300F67CE7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		18772CBD19DD912300F67CE7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "iOS 7 Example/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		18772CBE19DD912300F67CE7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "iOS 7 Example/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		18772C9819DD912300F67CE7 /* Build configuration list for PBXProject "iOS 7 Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18772CBA19DD912300F67CE7 /* Debug */,
+				18772CBB19DD912300F67CE7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18772CBC19DD912300F67CE7 /* Build configuration list for PBXNativeTarget "iOS 7 Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18772CBD19DD912300F67CE7 /* Debug */,
+				18772CBE19DD912300F67CE7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 18772C9519DD912300F67CE7 /* Project object */;
+}

@@ -102,8 +102,8 @@
 				18772BEE19DD61E200F67CE7 /* AppDelegate.swift */,
 				18772BF219DD61E200F67CE7 /* Main.storyboard */,
 				18772C2219DD67A900F67CE7 /* ViewControllers */,
-				18772BF519DD61E200F67CE7 /* Images.xcassets */,
 				18772BF719DD61E200F67CE7 /* LaunchScreen.xib */,
+				18772BF519DD61E200F67CE7 /* Images.xcassets */,
 				18772BEC19DD61E200F67CE7 /* Supporting Files */,
 			);
 			path = "iOS Example";
