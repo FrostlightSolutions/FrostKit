@@ -12,6 +12,10 @@ import MessageUI
 
 public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate {
     
+    private enum AlertViewTags: Int {
+        case EmailPrompt
+    }
+    
     private var toRecipients: [String] = []
     private var ccRecipients: [String] = []
     private var bccRecipients: [String] = []
@@ -129,7 +133,9 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
                 shared.animated = animated
                 
                 let alertView = UIAlertView(title: emailsString, message: "", delegate: SocialHelper.shared, cancelButtonTitle: NSLocalizedString("CANCEL", comment: "Cancel"), otherButtonTitles: NSLocalizedString("EMAIL", comment: "Email"))
+                alertView.tag = AlertViewTags.EmailPrompt.toRaw()
                 alertView.show()
+                
             }
             
         } else {
@@ -182,9 +188,8 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     
     public func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         
-        println("\(__FUNCTION__) \(buttonIndex)")
-        switch buttonIndex {
-        case 1:
+        switch (alertView.tag, buttonIndex) {
+        case (AlertViewTags.EmailPrompt.toRaw(), 1):
             SocialHelper.presentMailComposeViewController(toRecipients: toRecipients, ccRecipients: ccRecipients, bccRecipients: bccRecipients, subject: subject, messageBody: messageBody, isBodyHTML: isBodyHTML, attachments: attachments, viewController: viewController!, animated: animated)
         default:
             break
