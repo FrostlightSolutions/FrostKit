@@ -39,6 +39,7 @@
 		18A2594519DD95E000D145A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18A2594219DD95E000D145A3 /* Main.storyboard */; };
 		18E3F21419DDA6160032ABB7 /* MainMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F21219DDA6160032ABB7 /* MainMenuVC.swift */; };
 		18E3F21519DDA6160032ABB7 /* SocialHelperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F21319DDA6160032ABB7 /* SocialHelperVC.swift */; };
+		18E3F21F19DDDBD00032ABB7 /* WebViewControllerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F21E19DDDBD00032ABB7 /* WebViewControllerVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,7 @@
 		18A2594319DD95E000D145A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "iOS Example/Base.lproj/Main.storyboard"; sourceTree = SOURCE_ROOT; };
 		18E3F21219DDA6160032ABB7 /* MainMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuVC.swift; sourceTree = "<group>"; };
 		18E3F21319DDA6160032ABB7 /* SocialHelperVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialHelperVC.swift; sourceTree = "<group>"; };
+		18E3F21E19DDDBD00032ABB7 /* WebViewControllerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewControllerVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +192,7 @@
 			children = (
 				18772C2319DD67A900F67CE7 /* MainMenuVC.swift */,
 				18772C2419DD67A900F67CE7 /* SocialHelperVC.swift */,
+				18E3F21E19DDDBD00032ABB7 /* WebViewControllerVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E3F21F19DDDBD00032ABB7 /* WebViewControllerVC.swift in Sources */,
 				18772BEF19DD61E200F67CE7 /* AppDelegate.swift in Sources */,
 				18772C2619DD67A900F67CE7 /* SocialHelperVC.swift in Sources */,
 				18772C2519DD67A900F67CE7 /* MainMenuVC.swift in Sources */,
