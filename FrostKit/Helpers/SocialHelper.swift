@@ -55,14 +55,14 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     
     public class func phonePrompt(#number: String) {
         
-        let hasPlusPrefix = number.hasPrefix("+")
+        let hasPlusPrefix = number.rangeOfString("+")
         
-        let characterSet = NSCharacterSet.alphanumericCharacterSet().invertedSet
+        let characterSet = NSCharacterSet.decimalDigitCharacterSet().invertedSet
         let componentsArray = number.componentsSeparatedByCharactersInSet(characterSet)
         var parsedNumber = join("", componentsArray)
         
-        if hasPlusPrefix == true {
-            parsedNumber = parsedNumber.stringByAppendingString("+")
+        if hasPlusPrefix != nil {
+            parsedNumber = "+".stringByAppendingString(parsedNumber)
         }
         
         let urlString = NSString(format: "telprompt://%@", parsedNumber)
