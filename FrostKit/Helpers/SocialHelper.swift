@@ -10,7 +10,17 @@ import UIKit
 import Social
 import MessageUI
 
-public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate {
+public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate {
+    
+    private var toRecipients: [String] = []
+    private var ccRecipients: [String] = []
+    private var bccRecipients: [String] = []
+    private var subject: String = ""
+    private var messageBody: String = ""
+    private var isBodyHTML: Bool = false
+    private var attachments: [(data: NSData, mimeType: String, fileName: String)] = []
+    private var viewController: UIViewController?
+    private var animated: Bool = true
     
     // MARK: - Singleton
     
@@ -20,6 +30,21 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             static let instance : SocialHelper = SocialHelper()
         }
         return Singleton.instance
+    }
+    
+    override init() { }
+    
+    private func clear() {
+        
+        toRecipients = []
+        ccRecipients = []
+        bccRecipients = []
+        subject = ""
+        messageBody = ""
+        isBodyHTML = false
+        attachments = []
+        viewController = nil
+        animated = true
     }
     
     // MARK: - Scocial Methods
@@ -70,13 +95,14 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         UIApplication.sharedApplication().openURL(url)
     }
     
-    public class func emailPrompt(#toRecipients: [String], ccRecipients: [String]? = nil, bccRecipients: [String]? = nil, subject: String? = nil, messageBody: String? = nil, isBodyHTML: Bool = false, attachments: [(data: NSData, mimeType: String, fileName: String)]? = nil, animated: Bool = true) {
+    public class func emailPrompt(#toRecipients: [String], ccRecipients: [String] = [], bccRecipients: [String] = [], subject: String = "", messageBody: String = "", isBodyHTML: Bool = false, attachments: [(data: NSData, mimeType: String, fileName: String)] = [], viewController: UIViewController, animated: Bool = true) {
         
         if MFMailComposeViewController.canSendMail() {
             
-            if let viewController = UIApplication.sharedApplication().keyWindow.rootViewController {
+            let emailsString = join(", ", toRecipients)
+            
+            if NSClassFromString("UIAlertController") != nil {
                 
-                let emailsString = join(", ", toRecipients)
                 let alertController = UIAlertController(title: emailsString, message: nil, preferredStyle: .Alert)
                 let cancelAlertAction = UIAlertAction(title: NSLocalizedString("CANCEL", comment: "Cancel"), style: .Cancel) { (action) -> Void in
                     alertController.dismissViewControllerAnimated(true, completion: nil)
@@ -84,30 +110,51 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
                 alertController.addAction(cancelAlertAction)
                 let openAlertAction = UIAlertAction(title: NSLocalizedString("EMAIL", comment: "Email"), style: .Default) { (action) -> Void in
                     
-                    let mailVC = MFMailComposeViewController()
-                    mailVC.delegate = SocialHelper.shared
-                    mailVC.setSubject(subject)
-                    mailVC.setToRecipients(toRecipients)
-                    mailVC.setCcRecipients(ccRecipients)
-                    mailVC.setBccRecipients(bccRecipients)
-                    mailVC.setMessageBody(messageBody, isHTML: isBodyHTML)
-                    
-                    if let attachmentsArray = attachments {
-                        for (data, mimeType, fileName) in attachmentsArray {
-                            mailVC.addAttachmentData(data, mimeType: mimeType, fileName: fileName)
-                        }
-                    }
-                    
-                    viewController.presentViewController(mailVC, animated: animated, completion: nil)
+                    SocialHelper.presentMailComposeViewController(toRecipients: toRecipients, ccRecipients: ccRecipients, bccRecipients: bccRecipients, subject: subject, messageBody: messageBody, isBodyHTML: isBodyHTML, attachments: attachments, viewController: viewController, animated: animated)
                 }
                 
                 alertController.addAction(openAlertAction)
                 viewController.presentViewController(alertController, animated: true, completion: nil)
+
+            } else {
+            
+                shared.toRecipients = toRecipients
+                shared.ccRecipients = ccRecipients
+                shared.bccRecipients = bccRecipients
+                shared.subject = subject
+                shared.messageBody = messageBody
+                shared.isBodyHTML = isBodyHTML
+                shared.attachments = attachments
+                shared.viewController = viewController
+                shared.animated = animated
+                
+                let alertView = UIAlertView(title: emailsString, message: "", delegate: SocialHelper.shared, cancelButtonTitle: NSLocalizedString("CANCEL", comment: "Cancel"), otherButtonTitles: NSLocalizedString("EMAIL", comment: "Email"))
+                alertView.show()
             }
+            
         } else {
             // TODO: Handle eamil service unavailability
             println("Error: Email Service Unavailable!")
         }
+    }
+    
+    private class func presentMailComposeViewController(#toRecipients: [String], ccRecipients: [String]? = nil, bccRecipients: [String]? = nil, subject: String? = nil, messageBody: String? = nil, isBodyHTML: Bool = false, attachments: [(data: NSData, mimeType: String, fileName: String)]? = nil, viewController: UIViewController, animated: Bool = true) {
+        
+        let mailVC = MFMailComposeViewController()
+        mailVC.mailComposeDelegate = SocialHelper.shared
+        mailVC.setSubject(subject)
+        mailVC.setToRecipients(toRecipients)
+        mailVC.setCcRecipients(ccRecipients)
+        mailVC.setBccRecipients(bccRecipients)
+        mailVC.setMessageBody(messageBody, isHTML: isBodyHTML)
+        
+        if let attachmentsArray = attachments {
+            for (data, mimeType, fileName) in attachmentsArray {
+                mailVC.addAttachmentData(data, mimeType: mimeType, fileName: fileName)
+            }
+        }
+        
+        viewController.presentViewController(mailVC, animated: animated, completion: nil)
     }
     
     // MARK: - MFMailComposeViewControllerDelegate Methods
@@ -127,7 +174,21 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             break
         }
         
+        clear()
         controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // MARK: - UIAlerViewDelegate Methods
+    
+    public func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        
+        println("\(__FUNCTION__) \(buttonIndex)")
+        switch buttonIndex {
+        case 1:
+            SocialHelper.presentMailComposeViewController(toRecipients: toRecipients, ccRecipients: ccRecipients, bccRecipients: bccRecipients, subject: subject, messageBody: messageBody, isBodyHTML: isBodyHTML, attachments: attachments, viewController: viewController!, animated: animated)
+        default:
+            break
+        }
     }
     
 }
