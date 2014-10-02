@@ -35,13 +35,13 @@ class SocialHelperVC: UITableViewController {
         
         switch indexPath {
         case NSIndexPath(forRow: 0, inSection: 0):
-            FrostKit.SocialHelper.presentComposeViewController(SLServiceTypeTwitter, inViewController: self)
+            SocialHelper.presentComposeViewController(SLServiceTypeTwitter, inViewController: self)
         case NSIndexPath(forRow: 1, inSection: 0):
-            FrostKit.SocialHelper.presentComposeViewController(SLServiceTypeFacebook, inViewController: self)
+            SocialHelper.presentComposeViewController(SLServiceTypeFacebook, inViewController: self)
         case NSIndexPath(forRow: 0, inSection: 1):
-            FrostKit.SocialHelper.phonePrompt(number: "(+46) 70 857 01 80")
+            SocialHelper.phonePrompt(number: "(+46) 70 857 01 80")
         case NSIndexPath(forRow: 1, inSection: 1):
-            FrostKit.SocialHelper.emailPrompt(toRecipients: ["info@frostlight.se"], viewController: self)
+            SocialHelper.emailPrompt(toRecipients: ["info@frostlight.se"], viewController: self)
         default:
             break
         }

@@ -16,8 +16,6 @@
 		18772C2519DD67A900F67CE7 /* MainMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772C2319DD67A900F67CE7 /* MainMenuVC.swift */; };
 		18772C2619DD67A900F67CE7 /* SocialHelperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772C2419DD67A900F67CE7 /* SocialHelperVC.swift */; };
 		18A258E619DD936200D145A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A258E519DD936200D145A3 /* AppDelegate.swift */; };
-		18A2590A19DD940200D145A3 /* MainMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2590819DD940200D145A3 /* MainMenuVC.swift */; };
-		18A2590B19DD940200D145A3 /* SocialHelperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2590919DD940200D145A3 /* SocialHelperVC.swift */; };
 		18A2592B19DD94D300D145A3 /* NSBundleExtensiosns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2591419DD94D300D145A3 /* NSBundleExtensiosns.swift */; };
 		18A2592C19DD94D300D145A3 /* NSCalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2591519DD94D300D145A3 /* NSCalendarExtensions.swift */; };
 		18A2592D19DD94D300D145A3 /* NSDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2591619DD94D300D145A3 /* NSDataExtensions.swift */; };
@@ -39,6 +37,8 @@
 		18A2593F19DD959300D145A3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18A2593E19DD959300D145A3 /* Images.xcassets */; };
 		18A2594419DD95E000D145A3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A2594019DD95E000D145A3 /* LaunchScreen.xib */; };
 		18A2594519DD95E000D145A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18A2594219DD95E000D145A3 /* Main.storyboard */; };
+		18E3F21419DDA6160032ABB7 /* MainMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F21219DDA6160032ABB7 /* MainMenuVC.swift */; };
+		18E3F21519DDA6160032ABB7 /* SocialHelperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F21319DDA6160032ABB7 /* SocialHelperVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,8 +92,6 @@
 		18A258E119DD936200D145A3 /* iOS 7 Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS 7 Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18A258E419DD936200D145A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18A258E519DD936200D145A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		18A2590819DD940200D145A3 /* MainMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuVC.swift; sourceTree = "<group>"; };
-		18A2590919DD940200D145A3 /* SocialHelperVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialHelperVC.swift; sourceTree = "<group>"; };
 		18A2591419DD94D300D145A3 /* NSBundleExtensiosns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSBundleExtensiosns.swift; sourceTree = "<group>"; };
 		18A2591519DD94D300D145A3 /* NSCalendarExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSCalendarExtensions.swift; sourceTree = "<group>"; };
 		18A2591619DD94D300D145A3 /* NSDataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataExtensions.swift; sourceTree = "<group>"; };
@@ -115,6 +113,8 @@
 		18A2593E19DD959300D145A3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "iOS Example/Images.xcassets"; sourceTree = SOURCE_ROOT; };
 		18A2594119DD95E000D145A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "iOS Example/Base.lproj/LaunchScreen.xib"; sourceTree = SOURCE_ROOT; };
 		18A2594319DD95E000D145A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "iOS Example/Base.lproj/Main.storyboard"; sourceTree = SOURCE_ROOT; };
+		18E3F21219DDA6160032ABB7 /* MainMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuVC.swift; sourceTree = "<group>"; };
+		18E3F21319DDA6160032ABB7 /* SocialHelperVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialHelperVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,7 +199,7 @@
 			children = (
 				18A258E519DD936200D145A3 /* AppDelegate.swift */,
 				18A2594219DD95E000D145A3 /* Main.storyboard */,
-				18A2590719DD940200D145A3 /* ViewControllers */,
+				18E3F21119DDA6160032ABB7 /* ViewControllers */,
 				18A2594019DD95E000D145A3 /* LaunchScreen.xib */,
 				18A2593E19DD959300D145A3 /* Images.xcassets */,
 				18A258E319DD936200D145A3 /* Supporting Files */,
@@ -214,15 +214,6 @@
 				18A258E419DD936200D145A3 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		18A2590719DD940200D145A3 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				18A2590819DD940200D145A3 /* MainMenuVC.swift */,
-				18A2590919DD940200D145A3 /* SocialHelperVC.swift */,
-			);
-			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		18A2591219DD94B800D145A3 /* FrostKit iOS 7 References */ = {
@@ -294,6 +285,15 @@
 			name = ViewControllers;
 			path = FrostKit/ViewControllers;
 			sourceTree = SOURCE_ROOT;
+		};
+		18E3F21119DDA6160032ABB7 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				18E3F21219DDA6160032ABB7 /* MainMenuVC.swift */,
+				18E3F21319DDA6160032ABB7 /* SocialHelperVC.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -433,16 +433,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18A2590A19DD940200D145A3 /* MainMenuVC.swift in Sources */,
 				18A2592E19DD94D300D145A3 /* NSDateExtensions.swift in Sources */,
 				18A2593219DD94D400D145A3 /* UIFontExtensiosns.swift in Sources */,
 				18A2593419DD94D400D145A3 /* UIViewExtensions.swift in Sources */,
 				18A2593319DD94D400D145A3 /* UIImageExtensiosns.swift in Sources */,
-				18A2590B19DD940200D145A3 /* SocialHelperVC.swift in Sources */,
 				18A2592D19DD94D300D145A3 /* NSDataExtensions.swift in Sources */,
 				18A2592B19DD94D300D145A3 /* NSBundleExtensiosns.swift in Sources */,
 				18A2593919DD94D400D145A3 /* SocialHelper.swift in Sources */,
 				18A2592F19DD94D300D145A3 /* NSErrorExtensions.swift in Sources */,
+				18E3F21419DDA6160032ABB7 /* MainMenuVC.swift in Sources */,
 				18A2592C19DD94D300D145A3 /* NSCalendarExtensions.swift in Sources */,
 				18A258E619DD936200D145A3 /* AppDelegate.swift in Sources */,
 				18A2593B19DD94D400D145A3 /* ImageCache.swift in Sources */,
@@ -450,6 +449,7 @@
 				18A2593619DD94D400D145A3 /* FontAwesome.swift in Sources */,
 				18A2593819DD94D400D145A3 /* KeychainHelper.swift in Sources */,
 				18A2593A19DD94D400D145A3 /* ContentManager.swift in Sources */,
+				18E3F21519DDA6160032ABB7 /* SocialHelperVC.swift in Sources */,
 				18A2593119DD94D400D145A3 /* UIColorExtensions.swift in Sources */,
 				18A2593C19DD94D400D145A3 /* LocalStorage.swift in Sources */,
 			);
@@ -604,8 +604,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
 					"$(inherited)",
+					IOS7_EXAMPLES,
 				);
 				INFOPLIST_FILE = "iOS 7 Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -619,6 +619,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PREPROCESSOR_DEFINITIONS = IOS7_EXAMPLES;
 				INFOPLIST_FILE = "iOS 7 Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

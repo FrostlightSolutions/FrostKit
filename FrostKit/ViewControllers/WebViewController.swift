@@ -21,7 +21,9 @@ public class WebViewController: UIViewController, WKNavigationDelegate {
     
     public var urlString: String? {
         didSet {
-            self.loadBaseURL()
+            if webView != nil {
+                self.loadBaseURL()
+            }
         }
     }
     
@@ -218,7 +220,12 @@ public class WebViewController: UIViewController, WKNavigationDelegate {
     // MARK: - Load Methods
     
     func loadBaseURL() {
-        if let urlString = self.urlString {
+        if var urlString = self.urlString {
+            
+            if urlString.hasPrefix("http://") == false {
+                urlString = "http://".stringByAppendingString(urlString)
+            }
+            
             if let webView = self.webView as? WKWebView {
                 let request = NSURLRequest(URL: NSURL(string: urlString), cachePolicy: .ReloadIgnoringLocalCacheData, timeoutInterval: 60.0)
                 webView.loadRequest(request)
