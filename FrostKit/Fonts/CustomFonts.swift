@@ -1,5 +1,5 @@
 //
-//  FontAwesome.swift
+//  CustomFonts.swift
 //  FrostKit
 //
 //  Created by James Barrow on 02/10/2014.
@@ -23,11 +23,43 @@
 
 import UIKit
 
-public class FontAwesome: NSObject {
+public class CustomFonts: NSObject {
+    
+    public class func loadCustomFonts() {
+        loadFont("fontawesome-webfont", withExtension: "ttf")
+    }
+    
+    private class func loadFont(name: String, withExtension ext: String) {
+        
+        let bundle = NSBundle(forClass: CustomFonts.self)
+        if let url = bundle.URLForResource(name, withExtension: ext) {
+            
+            let fontData = NSData(contentsOfURL: url)
+            var error: Unmanaged<CFErrorRef>?
+            let provider = CGDataProviderCreateWithCFData(fontData)
+            let font = CGFontCreateWithDataProvider(provider)
+            if CTFontManagerRegisterGraphicsFont(font, &error) == false {
+                println("ERROR: Failed to load \"\(name)\" font!")
+            } else {
+                println("Loaded \"\(name)\" successfully")
+            }
+        } else {
+            println("ERROR: Failed to get URL for \"\(name)\" font!")
+        }
+    }
+    
+    public class func printAllFontFamilies() {
+        
+        for fontFamily in UIFont.familyNames() {
+            
+            let name = fontFamily as String
+            println("\(name): \(UIFont.fontNamesForFamilyName(name))")
+        }
+    }
     
     public class func buildFontAwesomeConstants() -> Bool {
         
-        let bundle = NSBundle(forClass: FontAwesome.self)
+        let bundle = NSBundle(forClass: CustomFonts.self)
         if let url = bundle.URLForResource("variables", withExtension: "less") {
             
             if let path = url.path {
