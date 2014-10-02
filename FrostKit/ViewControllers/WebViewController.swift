@@ -20,7 +20,14 @@ public func WebViewController(viewType: WebViewType = .Automatic) -> BaseWebView
     case .UIWebView:
         return UIWebViewController()
     case .WKWebView:
-        return WKWebViewController()
+        if NSClassFromString("WKWebView") != nil {
+            return WKWebViewController()
+        } else {
+            // TODO: - Update with localised warning!
+//            println(String(format: "%@: %@", arguments: [NSLocalizedString("WARNING", comment: "Warning"), String(format: NSLocalizedString("CLASS_X_NOT_AVAILABLE_USING_X", comment: "Class XYZ Not Available. Using ABC."), arguments: ["WKWebViewController", "UIWebViewController"])]))
+            println("WARNING: WKWebViewController is not available on the running version of iOS. Using UIWebViewController instead.")
+            return UIWebViewController()
+        }
     default:
         break
     }
