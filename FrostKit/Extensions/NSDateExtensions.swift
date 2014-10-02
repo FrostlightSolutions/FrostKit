@@ -23,17 +23,17 @@ extension NSDate {
     public var isYesterday: Bool {
         
         let date = NSDate.date().dateWithDays(-1)
-        return self.compareTo(date: date)
+        return self.compareToDate(date: date)
     }
     
     public var isToday: Bool {
-        return self.compareTo(date: NSDate.date())
+        return self.compareToDate(date: NSDate.date())
     }
     
     public var isTomorrow: Bool {
         
         let date = NSDate.date().dateWithDays(1)
-        return self.compareTo(date: date)
+        return self.compareToDate(date: date)
     }
     
     public var isWeekday: Bool {
@@ -179,7 +179,7 @@ extension NSDate {
     
     // MARK: - Date Comparison
     
-    public func compareTo(#date: NSDate, option: DateCompareType = .EqualTo, stripTime: Bool = true) -> Bool {
+    public func compareToDate(#date: NSDate, option: DateCompareType = .EqualTo, stripTime: Bool = true) -> Bool {
         
         var compare: NSComparisonResult = .OrderedSame
         if stripTime == true {
@@ -209,11 +209,11 @@ extension NSDate {
     }
     
     public func isBefore(#date: NSDate) -> Bool {
-        return compareTo(date: date, option: .Before)
+        return compareToDate(date: date, option: .Before)
     }
     
     public func isAfter(#date: NSDate) -> Bool {
-        return compareTo(date: date, option: .After)
+        return compareToDate(date: date, option: .After)
     }
     
     // MARK: -
