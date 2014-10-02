@@ -30,7 +30,7 @@
 		18E3F21719DDA7470032ABB7 /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F21619DDA7470032ABB7 /* WKWebViewController.swift */; };
 		18E3F21919DDA7520032ABB7 /* UIWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F21819DDA7520032ABB7 /* UIWebViewController.swift */; };
 		18E3F21B19DDA7B50032ABB7 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F21A19DDA7B50032ABB7 /* BaseWebViewController.swift */; };
-		18E3F23219DE07670032ABB7 /* FrostKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23119DE07670032ABB7 /* FrostKit.swift */; };
+		18E3F23219DE07670032ABB7 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23119DE07670032ABB7 /* General.swift */; };
 		18EA123F19DC79F100FD858D /* NSDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA123E19DC79F100FD858D /* NSDataExtensions.swift */; };
 		18EA124119DC7D9000FD858D /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124019DC7D9000FD858D /* UIViewExtensions.swift */; };
 		18EA124319DC8A8C00FD858D /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124219DC8A8C00FD858D /* KeychainHelper.swift */; };
@@ -65,7 +65,7 @@
 		18E3F21619DDA7470032ABB7 /* WKWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
 		18E3F21819DDA7520032ABB7 /* UIWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIWebViewController.swift; sourceTree = "<group>"; };
 		18E3F21A19DDA7B50032ABB7 /* BaseWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
-		18E3F23119DE07670032ABB7 /* FrostKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrostKit.swift; sourceTree = "<group>"; };
+		18E3F23119DE07670032ABB7 /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		18EA123E19DC79F100FD858D /* NSDataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataExtensions.swift; sourceTree = "<group>"; };
 		18EA124019DC7D9000FD858D /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		18EA124219DC8A8C00FD858D /* KeychainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				18839B1C19D9FA8C00760157 /* FrostKit.h */,
-				18E3F23119DE07670032ABB7 /* FrostKit.swift */,
+				18E3F23119DE07670032ABB7 /* General.swift */,
 				18C0065F19DB5BDD00811755 /* Storage */,
 				18839B4119DA27A800760157 /* ViewControllers */,
 				18839B4419DA27AE00760157 /* Helpers */,
@@ -361,7 +361,7 @@
 				18E3F21B19DDA7B50032ABB7 /* BaseWebViewController.swift in Sources */,
 				18E3F21919DDA7520032ABB7 /* UIWebViewController.swift in Sources */,
 				18C0066A19DB767A00811755 /* UIColorExtensions.swift in Sources */,
-				18E3F23219DE07670032ABB7 /* FrostKit.swift in Sources */,
+				18E3F23219DE07670032ABB7 /* General.swift in Sources */,
 				18C0066319DB5C7200811755 /* ImageCache.swift in Sources */,
 				18DE01ED19DCBB5B008A1506 /* UIFontExtensiosns.swift in Sources */,
 				18C0066119DB5BF000811755 /* LocalStorage.swift in Sources */,

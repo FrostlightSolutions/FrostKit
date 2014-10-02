@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         // Runs all setup for FrostKit (loading custom fonts, etc)
-        FrostKit.setup()
+        setupFrostKit()
         
         return true
     }
