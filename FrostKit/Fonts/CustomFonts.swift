@@ -20,6 +20,8 @@
 //  8.  Remove 'variables.txt' from the FrostKit target
 //  9.  Update the .ttf font from https://github.com/FortAwesome/Font-Awesome/blob/master/fonts/fontawesome-webfont.ttf
 //
+//  Note: Replace links for building other custom fonts and .less files.
+//
 
 import UIKit
 

@@ -89,6 +89,10 @@ public class BaseWebViewController: UIViewController {
     
     public override func viewWillDisappear(animated: Bool) {
         stopLoading()
+        
+        if let navController = navigationController {
+            navController.setToolbarHidden(true, animated: true)
+        }
     }
     
     public override func viewDidDisappear(animated: Bool) {
