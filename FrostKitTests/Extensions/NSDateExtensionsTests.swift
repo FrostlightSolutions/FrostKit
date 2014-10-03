@@ -29,7 +29,7 @@ class NSDateExtensionsTests: XCTestCase {
     
     func testIsToday() {
         
-        let date = NSDate.date()
+        let date = NSDate()
         XCTAssert(date.isToday, "Pass")
     }
     
