@@ -67,11 +67,11 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     // MARK: - KVO Methods
     
-    override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
         
         switch keyPath {
         case "estimatedProgress":
-            progrssView.progress = Float(webView!.estimatedProgress)
+            progrssView.setProgress(Float(webView!.estimatedProgress), animated: true)
             updateProgrssViewVisability()
             updateActivityViewVisability()
         case "title":

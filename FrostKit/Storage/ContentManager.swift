@@ -34,7 +34,7 @@ public class ContentManager: NSObject {
     }
     
     public class func saveContentMetadata(#absolutePath: String) {
-        shared.contentMetadata.setObject(NSDate.date().copy(), forKey: absolutePath)
+        shared.contentMetadata.setObject(NSDate().copy(), forKey: absolutePath)
     }
     
     public class func removeContentMetadata(#absoluteURL: NSURL) {
@@ -61,7 +61,7 @@ public class ContentManager: NSObject {
                 
                 let refDate = object as NSDate
                 let refTimeInterval = refDate.timeIntervalSinceReferenceDate
-                let timeInterval = NSDate.date().timeIntervalSinceReferenceDate
+                let timeInterval = NSDate().timeIntervalSinceReferenceDate
                 
                 if (timeInterval - refTimeInterval) > maxSavedTimeInSeconds() {
                     metadataToRemove.addObject(key)

@@ -133,7 +133,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
                 shared.animated = animated
                 
                 let alertView = UIAlertView(title: emailsString, message: "", delegate: SocialHelper.shared, cancelButtonTitle: NSLocalizedString("CANCEL", comment: "Cancel"), otherButtonTitles: NSLocalizedString("EMAIL", comment: "Email"))
-                alertView.tag = AlertViewTags.EmailPrompt.toRaw()
+                alertView.tag = AlertViewTags.EmailPrompt.rawValue
                 alertView.show()
                 
             }
@@ -189,7 +189,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     public func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         
         switch (alertView.tag, buttonIndex) {
-        case (AlertViewTags.EmailPrompt.toRaw(), 1):
+        case (AlertViewTags.EmailPrompt.rawValue, 1):
             SocialHelper.presentMailComposeViewController(toRecipients: toRecipients, ccRecipients: ccRecipients, bccRecipients: bccRecipients, subject: subject, messageBody: messageBody, isBodyHTML: isBodyHTML, attachments: attachments, viewController: viewController!, animated: animated)
         default:
             break

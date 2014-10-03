@@ -65,7 +65,7 @@ public class CustomFonts: NSObject {
             
             if let path = url.path {
                 
-                if let contents = String.stringWithContentsOfFile(path, encoding: NSUTF8StringEncoding, error: nil) {
+                if let contents = String(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil) {
                     
                     var parts = contents.componentsSeparatedByString("\n\n")
                     let constantsString = parts[2]
