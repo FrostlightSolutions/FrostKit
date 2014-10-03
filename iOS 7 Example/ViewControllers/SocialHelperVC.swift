@@ -41,6 +41,8 @@ class SocialHelperVC: UITableViewController {
             SocialHelper.phonePrompt(number: "(+46) 70 857 01 80")
         case NSIndexPath(forRow: 1, inSection: 1):
             SocialHelper.emailPrompt(toRecipients: ["info@frostlight.se"], viewController: self)
+        case NSIndexPath(forRow: 2, inSection: 1):
+            SocialHelper.messagePrompt(recipients: ["(+46) 70 857 01 80"], viewController: self)
         default:
             break
         }
