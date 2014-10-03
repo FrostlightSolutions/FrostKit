@@ -95,8 +95,11 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         }
         
         let urlString = NSString(format: "telprompt://%@", parsedNumber)
-        let url = NSURL(string: urlString)
-        UIApplication.sharedApplication().openURL(url)
+        if let url = NSURL(string: urlString) {
+            UIApplication.sharedApplication().openURL(url)
+        } else {
+            println("ERROR: Could not create URL to prompt phone.")
+        }
     }
     
     public class func emailPrompt(#toRecipients: [String], ccRecipients: [String] = [], bccRecipients: [String] = [], subject: String = "", messageBody: String = "", isBodyHTML: Bool = false, attachments: [(data: NSData, mimeType: String, fileName: String)] = [], viewController: UIViewController, animated: Bool = true) {
