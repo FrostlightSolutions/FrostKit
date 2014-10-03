@@ -14,9 +14,9 @@ public class KeychainHelper: NSObject {
         
         let secDict = NSMutableDictionary()
         secDict.setObject(String(kSecClassGenericPassword), forKey: String(kSecClass))
-        secDict.setObject(NSBundle.appName(), forKey: String(kSecAttrService))
+        secDict.setObject(NSBundle.appName(bundle: NSBundle(forClass: KeychainHelper.self)), forKey: String(kSecAttrService))
         
-        if let encodedIdentifier = NSBundle.appName().dataUsingEncoding(NSUTF8StringEncoding) {
+        if let encodedIdentifier = NSBundle.appName(bundle: NSBundle(forClass: KeychainHelper.self)).dataUsingEncoding(NSUTF8StringEncoding) {
             secDict.setObject(encodedIdentifier, forKey: String(kSecAttrGeneric))
             secDict.setObject(encodedIdentifier, forKey: String(kSecAttrAccount))
         }

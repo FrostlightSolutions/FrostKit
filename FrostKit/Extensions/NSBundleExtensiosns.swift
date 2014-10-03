@@ -10,12 +10,12 @@ import Foundation
 
 extension NSBundle {
     
-    public class func appVersion() -> String {
-        return NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleVersion") as String
+    public class func appVersion(bundle: NSBundle = NSBundle.mainBundle()) -> String {
+        return bundle.objectForInfoDictionaryKey("CFBundleVersion") as String
     }
     
-    public class func appName() -> String {
-        return NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName") as String
+    public class func appName(bundle: NSBundle = NSBundle.mainBundle()) -> String {
+        return bundle.objectForInfoDictionaryKey("CFBundleName") as String
     }
     
 }

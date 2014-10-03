@@ -8,6 +8,7 @@
 
 import UIKit
 import XCTest
+import FrostKit
 
 class FrostKitTests: XCTestCase {
     
