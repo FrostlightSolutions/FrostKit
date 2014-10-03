@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18748B2219DF5661003942A3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18748B2019DF5661003942A3 /* Localizable.strings */; };
 		18839B1D19D9FA8C00760157 /* FrostKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 18839B1C19D9FA8C00760157 /* FrostKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		18839B2719D9FA8C00760157 /* FrostKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B2619D9FA8C00760157 /* FrostKitTests.swift */; };
 		18839B4319DA27A800760157 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B4219DA27A800760157 /* WebViewController.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18748B2119DF5661003942A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		18839B1719D9FA8C00760157 /* FrostKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FrostKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18839B1B19D9FA8C00760157 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18839B1C19D9FA8C00760157 /* FrostKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FrostKit.h; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 		18839B1919D9FA8C00760157 /* FrostKit */ = {
 			isa = PBXGroup;
 			children = (
+				18748B2019DF5661003942A3 /* Localizable.strings */,
 				18839B1C19D9FA8C00760157 /* FrostKit.h */,
 				18E3F23119DE07670032ABB7 /* General.swift */,
 				18C0065F19DB5BDD00811755 /* Storage */,
@@ -343,6 +346,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18DC212919DE970200FEB57E /* ionicons.ttf in Resources */,
+				18748B2219DF5661003942A3 /* Localizable.strings in Resources */,
 				18DC212819DE970200FEB57E /* ionicons-variables.less in Resources */,
 				18DE01F319DCBCC4008A1506 /* fontawesome-webfont.ttf in Resources */,
 			);
@@ -400,6 +404,18 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		18748B2019DF5661003942A3 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18748B2119DF5661003942A3 /* en */,
+			);
+			name = Localizable.strings;
+			path = Localizable;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		18839B2819D9FA8C00760157 /* Debug */ = {
