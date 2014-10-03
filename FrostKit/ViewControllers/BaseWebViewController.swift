@@ -9,21 +9,6 @@
 import UIKit
 import Social
 
-extension UIBarButtonItem {
-    
-    public convenience init(title: String?, font: UIFont, verticalOffset: CGFloat = 0, target: AnyObject?, action: Selector) {
-        
-        let button = UIButton.buttonWithType(.System) as UIButton
-        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        button.titleLabel?.font = font
-        button.setTitle(title, forState: .Normal)
-        button.titleEdgeInsets.top = verticalOffset
-        button.addTarget(target, action: action, forControlEvents: .TouchUpInside)
-        self.init(customView: button)
-    }
-    
-}
-
 public class BaseWebViewController: UIViewController {
     
     public var webView: AnyObject?
@@ -73,8 +58,10 @@ public class BaseWebViewController: UIViewController {
             updateProgrssViewVisability()
             updateActivityViewVisability()
             
-            let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "doneButtonPressed:")
-            navigationItem.setLeftBarButtonItem(doneButton, animated: false)
+            if self.isRoot == true {
+                let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "doneButtonPressed:")
+                navigationItem.setLeftBarButtonItem(doneButton, animated: false)
+            }
         }
         
         setupToolbar()
