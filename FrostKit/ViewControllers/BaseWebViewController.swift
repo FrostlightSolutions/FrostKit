@@ -28,7 +28,7 @@ public class BaseWebViewController: UIViewController {
     
     public var webView: AnyObject?
     let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-    let progrssView = UIProgressView(progressViewStyle: .Bar)
+    let progrssView = UIProgressView(progressViewStyle: .Bar)!
     
     var backButton: UIBarButtonItem?
     var forwardButton: UIBarButtonItem?
@@ -257,7 +257,7 @@ public class BaseWebViewController: UIViewController {
             }
             
             if let webView: AnyObject = self.webView {
-                let request = NSURLRequest(URL: NSURL(string: urlString), cachePolicy: .ReloadIgnoringLocalCacheData, timeoutInterval: 60.0)
+                let request = NSURLRequest(URL: NSURL(string: urlString)!, cachePolicy: .ReloadIgnoringLocalCacheData, timeoutInterval: 60.0)
                 webView.loadRequest(request)
             }
         }
