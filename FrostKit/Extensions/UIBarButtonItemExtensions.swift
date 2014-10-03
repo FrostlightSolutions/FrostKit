@@ -8,17 +8,19 @@
 
 import UIKit
 
-extension UIBarButtonItem {
-    
-    public convenience init(title: String?, font: UIFont = UIFont.fontAwesome(size: 40), verticalOffset: CGFloat = -2, target: AnyObject?, action: Selector) {
+// TODO: This is not accessable in other classes for some reason. Currect fix is having it within BaseWebViewController.
 
-        let button = UIButton.buttonWithType(.System) as UIButton
-        button.frame = CGRect(x: 0, y: 0, width: 30, height: 20)
-        button.titleLabel?.font = UIFont.fontAwesome(size: 40)
-        button.setTitle(title, forState: .Normal)
-        button.titleEdgeInsets.top = verticalOffset
-        button.addTarget(target, action: action, forControlEvents: .TouchUpInside)
-        self.init(customView: button)
-    }
-    
-}
+//extension UIBarButtonItem {
+//    
+//    public convenience init(title: String?, font: UIFont = UIFont.fontAwesome(size: 40), verticalOffset: CGFloat = -2, target: AnyObject?, action: Selector) {
+//
+//        let button = UIButton.buttonWithType(.System) as UIButton
+//        button.frame = CGRect(x: 0, y: 0, width: 30, height: 20)
+//        button.titleLabel?.font = UIFont.fontAwesome(size: 40)
+//        button.setTitle(title, forState: .Normal)
+//        button.titleEdgeInsets.top = verticalOffset
+//        button.addTarget(target, action: action, forControlEvents: .TouchUpInside)
+//        self.init(customView: button)
+//    }
+//    
+//}

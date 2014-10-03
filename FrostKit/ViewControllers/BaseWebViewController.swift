@@ -12,6 +12,21 @@ import Social
 // TODO: Add proper icons for back and forward page buttons
 // TODO: Add title String var that will override any currently set UINavigationItem title
 
+extension UIBarButtonItem {
+    
+    public convenience init(title: String?, font: UIFont, verticalOffset: CGFloat = 0, target: AnyObject?, action: Selector) {
+        
+        let button = UIButton.buttonWithType(.System) as UIButton
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.titleLabel?.font = font
+        button.setTitle(title, forState: .Normal)
+        button.titleEdgeInsets.top = verticalOffset
+        button.addTarget(target, action: action, forControlEvents: .TouchUpInside)
+        self.init(customView: button)
+    }
+    
+}
+
 public class BaseWebViewController: UIViewController {
     
     public var webView: AnyObject?
@@ -142,11 +157,10 @@ public class BaseWebViewController: UIViewController {
         
         if let navController = navigationController {
             
-            let backButton = UIBarButtonItem(barButtonSystemItem: .Undo, target: self, action: "backButtonPressed:")
-            let forwardButton = UIBarButtonItem(barButtonSystemItem: .Redo, target: self, action: "forwardButtonPressed:")
-            let refreshButton = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: "refreshButtonPressed:")
+            let backButton = UIBarButtonItem(title: ionicon_ios7_arrow_left, font: UIFont.ionicons(size: 29), target: self, action: "backButtonPressed:")
+            let forwardButton = UIBarButtonItem(title: ionicon_ios7_arrow_right, font: UIFont.ionicons(size: 29), target: self, action: "forwardButtonPressed:")
+            let refreshButton = UIBarButtonItem(title: ionicon_ios7_refresh_empty, font: UIFont.ionicons(size: 34), target: self, action: "refreshButtonPressed:")
             let actionButton = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: "actionButtonPressed:")
-            
             let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
             
             backButton.enabled = false
