@@ -10,7 +10,7 @@ import UIKit
 
 extension UIImage {
     
-    func imageWithMaxSize(size: CGSize) -> UIImage {
+    public func imageWithMaxSize(size: CGSize) -> UIImage {
         
         let size = CGSizeApplyAffineTransform(self.size, CGAffineTransformMakeScale(0.5, 0.5))
         let hasAlpha = false
