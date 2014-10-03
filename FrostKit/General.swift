@@ -8,7 +8,15 @@
 
 import UIKit
 
+internal class FrostKit {
+    
+}
+
 public func setupFrostKit() {
     
     CustomFonts.loadCustomFonts()
+}
+
+internal func FKLocalizedString(key: String, comment: String = "") -> String {
+    return NSLocalizedString(key, bundle: NSBundle(forClass: FrostKit.self), comment: comment)
 }
