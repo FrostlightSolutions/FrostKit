@@ -20,6 +20,18 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
         }
     }
     
+    override var titleOverride: String? {
+        didSet {
+            if titleOverride != nil {
+                navigationItem.title = titleOverride
+            } else {
+                if let webView = self.webView as? WKWebView {
+                    navigationItem.title = webView.title
+                }
+            }
+        }
+    }
+    
     override var loading: Bool {
         get {
             if let webView = self.webView as? WKWebView {
@@ -63,8 +75,10 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
             updateProgrssViewVisability()
             updateActivityViewVisability()
         case "title":
-            if let webView = self.webView as? WKWebView {
-                navigationItem.title = webView.title
+            if titleOverride == nil {
+                if let webView = self.webView as? WKWebView {
+                    navigationItem.title = webView.title
+                }
             }
         case "canGoBack":
             updateBackButton()

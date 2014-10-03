@@ -16,4 +16,11 @@ class MainMenuVC: UITableViewController {
         self.clearsSelectionOnViewWillAppear = true
     }
     
+    // MARK: - Table view data source
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
 }

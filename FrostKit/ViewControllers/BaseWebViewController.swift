@@ -9,9 +9,6 @@
 import UIKit
 import Social
 
-// TODO: Add proper icons for back and forward page buttons
-// TODO: Add title String var that will override any currently set UINavigationItem title
-
 extension UIBarButtonItem {
     
     public convenience init(title: String?, font: UIFont, verticalOffset: CGFloat = 0, target: AnyObject?, action: Selector) {
@@ -48,6 +45,12 @@ public class BaseWebViewController: UIViewController {
         get {
             // Functionality overriden in subclasses
             return nil
+        }
+    }
+    
+    public var titleOverride: String? {
+        didSet {
+            navigationItem.title = titleOverride
         }
     }
     
