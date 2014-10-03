@@ -13,12 +13,12 @@ public class KeychainHelper: NSObject {
     private class func setupSearchDirectory() -> NSMutableDictionary {
         
         let secDict = NSMutableDictionary()
-        secDict.setObject(kSecClassGenericPassword, forKey: kSecClass)
-        secDict.setObject(NSBundle.appName(), forKey: kSecAttrService)
+        secDict.setObject(String(kSecClassGenericPassword), forKey: String(kSecClass))
+        secDict.setObject(NSBundle.appName(), forKey: String(kSecAttrService))
         
         if let encodedIdentifier = NSBundle.appName().dataUsingEncoding(NSUTF8StringEncoding) {
-            secDict.setObject(encodedIdentifier, forKey: kSecAttrGeneric)
-            secDict.setObject(encodedIdentifier, forKey: kSecAttrAccount)
+            secDict.setObject(encodedIdentifier, forKey: String(kSecAttrGeneric))
+            secDict.setObject(encodedIdentifier, forKey: String(kSecAttrAccount))
         }
         
         return secDict
@@ -27,8 +27,9 @@ public class KeychainHelper: NSObject {
     private class func searchKeychainForMatchingData() -> NSData? {
         
         let secDict = setupSearchDirectory()
-        secDict.setObject(kSecMatchLimitOne, forKey: kSecMatchLimit)
-        secDict.setObject(kCFBooleanTrue, forKey: kSecReturnData)
+        secDict.setObject(String(kSecMatchLimitOne), forKey: String(kSecMatchLimit))
+        secDict.setObject(NSNumber(bool: true), forKey: String(kSecReturnData))
+        // kCFBooleanTrue
         
         var foundDict: Unmanaged<AnyObject>?
         let status = SecItemCopyMatching(secDict, &foundDict);
@@ -48,8 +49,8 @@ public class KeychainHelper: NSObject {
         let valueDict = [username: password]
         let secDict = setupSearchDirectory()
         let valueData = NSKeyedArchiver.archivedDataWithRootObject(valueDict)
-        secDict.setObject(valueData, forKey: kSecValueData)
-        secDict.setObject(kSecAttrAccessibleWhenUnlocked, forKey: kSecAttrAccessible)
+        secDict.setObject(valueData, forKey: String(kSecValueData))
+        secDict.setObject(String(kSecAttrAccessibleWhenUnlocked), forKey: String(kSecAttrAccessible))
         
         let status = SecItemAdd(secDict, nil)
         if status == noErr {
@@ -66,7 +67,7 @@ public class KeychainHelper: NSObject {
         let secDict = setupSearchDirectory()
         let updateDict = NSMutableDictionary()
         let valueData = NSKeyedArchiver.archivedDataWithRootObject(valueDict)
-        updateDict.setObject(valueData, forKey: kSecValueData)
+        updateDict.setObject(valueData, forKey: String(kSecValueData))
         
         let status = SecItemUpdate(secDict, updateDict)
         if status == OSStatus(errSecSuccess) {
