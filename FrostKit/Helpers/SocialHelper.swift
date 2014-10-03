@@ -108,11 +108,11 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             if NSClassFromString("UIAlertController") != nil {
                 
                 let alertController = UIAlertController(title: emailsString, message: nil, preferredStyle: .Alert)
-                let cancelAlertAction = UIAlertAction(title: NSLocalizedString("CANCEL", comment: "Cancel"), style: .Cancel) { (action) -> Void in
+                let cancelAlertAction = UIAlertAction(title: NSLocalizedString("CANCEL", value: "Cancel", comment: ""), style: .Cancel) { (action) -> Void in
                     alertController.dismissViewControllerAnimated(true, completion: nil)
                 }
                 alertController.addAction(cancelAlertAction)
-                let openAlertAction = UIAlertAction(title: NSLocalizedString("EMAIL", comment: "Email"), style: .Default) { (action) -> Void in
+                let openAlertAction = UIAlertAction(title: NSLocalizedString("EMAIL", value: "Email", comment: ""), style: .Default) { (action) -> Void in
                     
                     SocialHelper.presentMailComposeViewController(toRecipients: toRecipients, ccRecipients: ccRecipients, bccRecipients: bccRecipients, subject: subject, messageBody: messageBody, isBodyHTML: isBodyHTML, attachments: attachments, viewController: viewController, animated: animated)
                 }
@@ -132,7 +132,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
                 shared.viewController = viewController
                 shared.animated = animated
                 
-                let alertView = UIAlertView(title: emailsString, message: "", delegate: SocialHelper.shared, cancelButtonTitle: NSLocalizedString("CANCEL", comment: "Cancel"), otherButtonTitles: NSLocalizedString("EMAIL", comment: "Email"))
+                let alertView = UIAlertView(title: emailsString, message: "", delegate: SocialHelper.shared, cancelButtonTitle: NSLocalizedString("CANCEL", value: "Cancel", comment: ""), otherButtonTitles: NSLocalizedString("EMAIL", value: "Email", comment: ""))
                 alertView.tag = AlertViewTags.EmailPrompt.toRaw()
                 alertView.show()
                 

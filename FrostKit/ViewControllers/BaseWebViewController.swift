@@ -120,7 +120,7 @@ public class BaseWebViewController: UIViewController {
     
     func actionButtonPressed(sender: AnyObject?) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-        let safariAlertAction = UIAlertAction(title: NSLocalizedString("OPEN_IN_SAFARI", comment: "Open in Safari"), style: .Default) { (action) -> Void in
+        let safariAlertAction = UIAlertAction(title: NSLocalizedString("OPEN_IN_SAFARI", value: "Open in Safari", comment: ""), style: .Default) { (action) -> Void in
             
             if let webView: AnyObject = self.webView {
                 if let url = self.URL {
@@ -129,7 +129,7 @@ public class BaseWebViewController: UIViewController {
             }
         }
         alertController.addAction(safariAlertAction)
-        let twitterAlertAction = UIAlertAction(title: NSLocalizedString("SHARE_ON_TWITTER", comment: "Share on Twitter"), style: .Default) { (action) -> Void in
+        let twitterAlertAction = UIAlertAction(title: NSLocalizedString("SHARE_ON_TWITTER", value: "Share on Twitter", comment: ""), style: .Default) { (action) -> Void in
             
             var urlsArray: [NSURL]?
             if let url = self.URL {
@@ -138,7 +138,7 @@ public class BaseWebViewController: UIViewController {
             SocialHelper.presentComposeViewController(Social.SLServiceTypeTwitter, initialText: "", urls: urlsArray, inViewController: self)
         }
         alertController.addAction(twitterAlertAction)
-        let facebookAlertAction = UIAlertAction(title: NSLocalizedString("SHARE_ON_FACEBOOK", comment: "Share on Facebook"), style: .Default) { (action) -> Void in
+        let facebookAlertAction = UIAlertAction(title: NSLocalizedString("SHARE_ON_FACEBOOK", value: "Share on Facebook", comment: ""), style: .Default) { (action) -> Void in
             
             var urlsArray: [NSURL]?
             if let url = self.URL {
@@ -147,7 +147,7 @@ public class BaseWebViewController: UIViewController {
             SocialHelper.presentComposeViewController(Social.SLServiceTypeFacebook, initialText: "", urls: urlsArray, inViewController: self)
         }
         alertController.addAction(facebookAlertAction)
-        let cancelAlertAction = UIAlertAction(title: NSLocalizedString("CANCEL", comment: "Cancel"), style: .Cancel) { (action) -> Void in
+        let cancelAlertAction = UIAlertAction(title: NSLocalizedString("CANCEL", value: "Cancel", comment: ""), style: .Cancel) { (action) -> Void in
             alertController.dismissViewControllerAnimated(true, completion: nil)
         }
         alertController.addAction(cancelAlertAction)
