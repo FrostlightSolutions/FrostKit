@@ -31,6 +31,7 @@
 		18E3F21919DDA7520032ABB7 /* UIWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F21819DDA7520032ABB7 /* UIWebViewController.swift */; };
 		18E3F21B19DDA7B50032ABB7 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F21A19DDA7B50032ABB7 /* BaseWebViewController.swift */; };
 		18E3F23219DE07670032ABB7 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23119DE07670032ABB7 /* General.swift */; };
+		18E3F23A19DE15600032ABB7 /* UIBarButtonItemExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23919DE15600032ABB7 /* UIBarButtonItemExtensions.swift */; };
 		18EA123F19DC79F100FD858D /* NSDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA123E19DC79F100FD858D /* NSDataExtensions.swift */; };
 		18EA124119DC7D9000FD858D /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124019DC7D9000FD858D /* UIViewExtensions.swift */; };
 		18EA124319DC8A8C00FD858D /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124219DC8A8C00FD858D /* KeychainHelper.swift */; };
@@ -66,6 +67,7 @@
 		18E3F21819DDA7520032ABB7 /* UIWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIWebViewController.swift; sourceTree = "<group>"; };
 		18E3F21A19DDA7B50032ABB7 /* BaseWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
 		18E3F23119DE07670032ABB7 /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
+		18E3F23919DE15600032ABB7 /* UIBarButtonItemExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBarButtonItemExtensions.swift; sourceTree = "<group>"; };
 		18EA123E19DC79F100FD858D /* NSDataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataExtensions.swift; sourceTree = "<group>"; };
 		18EA124019DC7D9000FD858D /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		18EA124219DC8A8C00FD858D /* KeychainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				18C0066919DB767A00811755 /* UIColorExtensions.swift */,
 				18C0066D19DB76C900811755 /* UIImageExtensiosns.swift */,
 				18EA124019DC7D9000FD858D /* UIViewExtensions.swift */,
+				18E3F23919DE15600032ABB7 /* UIBarButtonItemExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				18DE01ED19DCBB5B008A1506 /* UIFontExtensiosns.swift in Sources */,
 				18C0066119DB5BF000811755 /* LocalStorage.swift in Sources */,
 				18C0067019DB7EDB00811755 /* ContentManager.swift in Sources */,
+				18E3F23A19DE15600032ABB7 /* UIBarButtonItemExtensions.swift in Sources */,
 				18EA124319DC8A8C00FD858D /* KeychainHelper.swift in Sources */,
 				18BB7C7519DC383900F21A64 /* NSCalendarExtensions.swift in Sources */,
 				18C0066E19DB76C900811755 /* UIImageExtensiosns.swift in Sources */,
