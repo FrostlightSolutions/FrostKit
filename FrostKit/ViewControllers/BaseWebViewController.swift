@@ -46,7 +46,11 @@ public class BaseWebViewController: UIViewController {
         }
     }
     
-    override public func viewDidLoad() {
+    public func stopLoading() {
+        // Functionality overriden in subclasses
+    }
+    
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         if let navController = navigationController {
@@ -83,7 +87,23 @@ public class BaseWebViewController: UIViewController {
         }
     }
     
-    override public func didReceiveMemoryWarning() {
+    public override func viewWillDisappear(animated: Bool) {
+        stopLoading()
+    }
+    
+    public override func viewDidDisappear(animated: Bool) {
+        
+        UIView.animateWithDuration(0.25, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
+            
+            self.progrssView.alpha = 0.5
+            
+            }, completion: { (completed) -> Void in
+                
+                self.progrssView.removeFromSuperview()
+        })
+    }
+    
+    public override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     

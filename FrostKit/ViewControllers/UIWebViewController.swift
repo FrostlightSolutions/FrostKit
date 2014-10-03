@@ -28,6 +28,12 @@ class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
         }
     }
     
+    override func stopLoading() {
+        if let webView = self.webView as? UIWebView {
+            return webView.stopLoading()
+        }
+    }
+    
     override func viewDidLoad() {
         
         webView = UIWebView(frame: view.bounds)
