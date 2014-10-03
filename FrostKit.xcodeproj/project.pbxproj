@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		181BCC3619DF60810056C8F8 /* KeychainHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181BCC3519DF60810056C8F8 /* KeychainHelperTests.swift */; };
 		18748B2219DF5661003942A3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18748B2019DF5661003942A3 /* Localizable.strings */; };
 		18839B1D19D9FA8C00760157 /* FrostKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 18839B1C19D9FA8C00760157 /* FrostKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		18839B2719D9FA8C00760157 /* FrostKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B2619D9FA8C00760157 /* FrostKitTests.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		181BCC3519DF60810056C8F8 /* KeychainHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainHelperTests.swift; sourceTree = "<group>"; };
 		18748B2119DF5661003942A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		18839B1719D9FA8C00760157 /* FrostKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FrostKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18839B1B19D9FA8C00760157 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -101,6 +103,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		181BCC3419DF605F0056C8F8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				181BCC3519DF60810056C8F8 /* KeychainHelperTests.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		18839B0D19D9FA8C00760157 = {
 			isa = PBXGroup;
 			children = (
@@ -148,7 +158,7 @@
 			children = (
 				18839B2619D9FA8C00760157 /* FrostKitTests.swift */,
 				18C0067319DBFFE900811755 /* Storage */,
-				18C0067219DBFFE900811755 /* Helpers */,
+				181BCC3419DF605F0056C8F8 /* Helpers */,
 				18C0067119DBFFE900811755 /* Extensions */,
 				18DE01F419DCBE35008A1506 /* Fonts */,
 				18839B2419D9FA8C00760157 /* Supporting Files */,
@@ -220,13 +230,6 @@
 				18C0067419DC001000811755 /* NSDateExtensionsTests.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		18C0067219DBFFE900811755 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		18C0067319DBFFE900811755 /* Storage */ = {
@@ -396,6 +399,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				181BCC3619DF60810056C8F8 /* KeychainHelperTests.swift in Sources */,
 				18DE01F619DCBE45008A1506 /* FontTests.swift in Sources */,
 				18C0067819DC23A100811755 /* UIColorExtensionsTest.swift in Sources */,
 				18C0067519DC001000811755 /* NSDateExtensionsTests.swift in Sources */,
