@@ -23,7 +23,8 @@ class FontTests: XCTestCase {
     }
     
 //    func testBuildFontAwesomeConstants() {
-//        XCTAssert(FontAwesome.buildFontAwesomeConstants(), "Pass")
+//        XCTAssert(CustomFonts.buildFontConstantsFromLess(name: "font-awesome-variables"), "Pass")
+//        XCTAssert(CustomFonts.buildFontConstantsFromLess(name: "ionicons-variables"), "Pass")
 //    }
     
 }

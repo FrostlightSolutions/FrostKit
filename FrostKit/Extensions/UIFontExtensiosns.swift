@@ -14,4 +14,8 @@ extension UIFont {
         return UIFont(name: "FontAwesome", size: size)
     }
     
+    public class func ionicons(#size: CGFloat) -> UIFont {
+        return UIFont(name: "Ionicons", size: size)
+    }
+    
 }

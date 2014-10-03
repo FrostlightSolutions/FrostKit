@@ -23,6 +23,8 @@
 		18C0067619DC00C000811755 /* FrostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18839B1719D9FA8C00760157 /* FrostKit.framework */; };
 		18C0067819DC23A100811755 /* UIColorExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0067719DC23A100811755 /* UIColorExtensionsTest.swift */; };
 		18CFF9FE19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFF9FD19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift */; };
+		18DC212819DE970200FEB57E /* ionicons-variables.less in Resources */ = {isa = PBXBuildFile; fileRef = 18DC212619DE970200FEB57E /* ionicons-variables.less */; };
+		18DC212919DE970200FEB57E /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18DC212719DE970200FEB57E /* ionicons.ttf */; };
 		18DE01ED19DCBB5B008A1506 /* UIFontExtensiosns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EC19DCBB5B008A1506 /* UIFontExtensiosns.swift */; };
 		18DE01EF19DCBC28008A1506 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EE19DCBC28008A1506 /* CustomFonts.swift */; };
 		18DE01F319DCBCC4008A1506 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18DE01F219DCBCC4008A1506 /* fontawesome-webfont.ttf */; };
@@ -58,6 +60,8 @@
 		18C0067419DC001000811755 /* NSDateExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtensionsTests.swift; sourceTree = "<group>"; };
 		18C0067719DC23A100811755 /* UIColorExtensionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensionsTest.swift; sourceTree = "<group>"; };
 		18CFF9FD19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimeZoneExtensions.swift; sourceTree = "<group>"; };
+		18DC212619DE970200FEB57E /* ionicons-variables.less */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ionicons-variables.less"; sourceTree = "<group>"; };
+		18DC212719DE970200FEB57E /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
 		18DE01EC19DCBB5B008A1506 /* UIFontExtensiosns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFontExtensiosns.swift; sourceTree = "<group>"; };
 		18DE01EE19DCBC28008A1506 /* CustomFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFonts.swift; sourceTree = "<group>"; };
 		18DE01F019DCBC48008A1506 /* variables.less */ = {isa = PBXFileReference; lastKnownFileType = text; path = variables.less; sourceTree = "<group>"; };
@@ -232,6 +236,8 @@
 				18DE01EE19DCBC28008A1506 /* CustomFonts.swift */,
 				18DE01F219DCBCC4008A1506 /* fontawesome-webfont.ttf */,
 				18DE01F019DCBC48008A1506 /* variables.less */,
+				18DC212719DE970200FEB57E /* ionicons.ttf */,
+				18DC212619DE970200FEB57E /* ionicons-variables.less */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -333,6 +339,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18DC212919DE970200FEB57E /* ionicons.ttf in Resources */,
+				18DC212819DE970200FEB57E /* ionicons-variables.less in Resources */,
 				18DE01F319DCBCC4008A1506 /* fontawesome-webfont.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
