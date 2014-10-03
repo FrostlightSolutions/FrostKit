@@ -25,6 +25,7 @@
 		18CFF9FE19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFF9FD19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift */; };
 		18DC212819DE970200FEB57E /* ionicons-variables.less in Resources */ = {isa = PBXBuildFile; fileRef = 18DC212619DE970200FEB57E /* ionicons-variables.less */; };
 		18DC212919DE970200FEB57E /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18DC212719DE970200FEB57E /* ionicons.ttf */; };
+		18DC212B19DEA21000FEB57E /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC212A19DEA21000FEB57E /* UIViewControllerExtensions.swift */; };
 		18DE01ED19DCBB5B008A1506 /* UIFontExtensiosns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EC19DCBB5B008A1506 /* UIFontExtensiosns.swift */; };
 		18DE01EF19DCBC28008A1506 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EE19DCBC28008A1506 /* CustomFonts.swift */; };
 		18DE01F319DCBCC4008A1506 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18DE01F219DCBCC4008A1506 /* fontawesome-webfont.ttf */; };
@@ -62,6 +63,7 @@
 		18CFF9FD19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimeZoneExtensions.swift; sourceTree = "<group>"; };
 		18DC212619DE970200FEB57E /* ionicons-variables.less */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ionicons-variables.less"; sourceTree = "<group>"; };
 		18DC212719DE970200FEB57E /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
+		18DC212A19DEA21000FEB57E /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		18DE01EC19DCBB5B008A1506 /* UIFontExtensiosns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFontExtensiosns.swift; sourceTree = "<group>"; };
 		18DE01EE19DCBC28008A1506 /* CustomFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFonts.swift; sourceTree = "<group>"; };
 		18DE01F019DCBC48008A1506 /* variables.less */ = {isa = PBXFileReference; lastKnownFileType = text; path = variables.less; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				18C0066D19DB76C900811755 /* UIImageExtensiosns.swift */,
 				18EA124019DC7D9000FD858D /* UIViewExtensions.swift */,
 				18E3F23919DE15600032ABB7 /* UIBarButtonItemExtensions.swift */,
+				18DC212A19DEA21000FEB57E /* UIViewControllerExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 				18E3F21719DDA7470032ABB7 /* WKWebViewController.swift in Sources */,
 				18DE01EF19DCBC28008A1506 /* CustomFonts.swift in Sources */,
 				18EA124119DC7D9000FD858D /* UIViewExtensions.swift in Sources */,
+				18DC212B19DEA21000FEB57E /* UIViewControllerExtensions.swift in Sources */,
 				18EA123F19DC79F100FD858D /* NSDataExtensions.swift in Sources */,
 				18839B4719DA27AE00760157 /* SocialHelper.swift in Sources */,
 				18C0066819DB762600811755 /* NSErrorExtensions.swift in Sources */,
