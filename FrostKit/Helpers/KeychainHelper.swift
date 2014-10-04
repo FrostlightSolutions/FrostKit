@@ -12,11 +12,13 @@ public class KeychainHelper: NSObject {
     
     private class func setupSearchDirectory() -> NSMutableDictionary {
         
+        let appName = NSBundle.appName(bundle: NSBundle(forClass: KeychainHelper.self))
+        
         let secDict = NSMutableDictionary()
         secDict.setObject(kSecClassGenericPassword, forKey: kSecClass)
-        secDict.setObject(NSBundle.appName(bundle: NSBundle(forClass: KeychainHelper.self)), forKey: kSecAttrService)
+        secDict.setObject(appName, forKey: kSecAttrService)
         
-        if let encodedIdentifier = NSBundle.appName(bundle: NSBundle(forClass: KeychainHelper.self)).dataUsingEncoding(NSUTF8StringEncoding) {
+        if let encodedIdentifier = appName.dataUsingEncoding(NSUTF8StringEncoding) {
             secDict.setObject(encodedIdentifier, forKey: kSecAttrGeneric)
             secDict.setObject(encodedIdentifier, forKey: kSecAttrAccount)
         }
@@ -38,6 +40,23 @@ public class KeychainHelper: NSObject {
             if let op = opaque? {
                 return Unmanaged<NSData>.fromOpaque(op).takeUnretainedValue()
             }
+        } else {
+            let error = NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
+            println("ERROR: Search Keychain for Data: \(error.localizedDescription)")
+        }
+        
+        return nil
+    }
+    
+    public class func details(#username: String) -> String? {
+        
+        let valueData = searchKeychainForMatchingData()
+        if let data = valueData {
+            
+            let valueDict = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSDictionary
+            if let dict = valueDict {
+                return dict.objectForKey(username) as? String
+            }
         }
         
         return nil
@@ -54,8 +73,13 @@ public class KeychainHelper: NSObject {
         let status = SecItemAdd(secDict, nil)
         if status == noErr {
             return true
-        } else if status == OSStatus(errSecDuplicateItem) {
-            return updateKeychainValue(valueDict)
+        } else {
+            if status == OSStatus(errSecDuplicateItem) {
+                return updateKeychainValue(valueDict)
+            } else {
+                let error = NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
+                println("ERROR: Set Keychain Details: \(error.localizedDescription)")
+            }
         }
         
         return false
@@ -71,6 +95,9 @@ public class KeychainHelper: NSObject {
         let status = SecItemUpdate(secDict, updateDict)
         if status == OSStatus(errSecSuccess) {
             return true
+        } else {
+            let error = NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
+            println("ERROR: Update Keychain Details: \(error.localizedDescription)")
         }
         
         return false
@@ -83,6 +110,9 @@ public class KeychainHelper: NSObject {
         let status = SecItemDelete(secDict)
         if status == noErr {
             return true
+        } else {
+            let error = NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
+            println("ERROR: Delete Keychain Details: \(error.localizedDescription)")
         }
         
         return false
