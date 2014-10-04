@@ -11,9 +11,6 @@ import FrostKit
 
 class KeychainHelperTests: XCTestCase {
     
-    let username = "myName"
-    let password = "qwerty1234567890!_<>,.!@#$%^&*()_+-=/?"
-    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -24,16 +21,20 @@ class KeychainHelperTests: XCTestCase {
         super.tearDown()
     }
     
-    func testSetKeychain() {
-        XCTAssert(KeychainHelper.setDetails(password: password, username: username), "Pass")
-    }
-    
-    func testSetUpdateKeychain() {
-        XCTAssert(KeychainHelper.setDetails(password: password, username: username), "Pass")
-    }
-    
-    func testDeleteKeychain() {
-        XCTAssert(KeychainHelper.deleteKeychain(), "Pass")
+    func testKeychainWorkflow() {
+        
+        let username = "myName"
+        let password = "qwerty1234567890!_<>,.!@#$%^&*()_+-=/?"
+        
+        let setDetailsComplete = KeychainHelper.setDetails(password: password, username: username)
+        let updateDetailsComplete = KeychainHelper.setDetails(password: password, username: username)
+        let getDetailsComplete = (password == KeychainHelper.details(username: username))
+        let deleteDetailsComplete = KeychainHelper.deleteKeychain()
+        
+        XCTAssert(setDetailsComplete, "Pass")
+        XCTAssert(updateDetailsComplete, "Pass")
+        XCTAssert(getDetailsComplete, "Pass")
+        XCTAssert(deleteDetailsComplete, "Pass")
     }
     
 }
