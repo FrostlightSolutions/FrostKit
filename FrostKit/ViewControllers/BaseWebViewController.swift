@@ -120,6 +120,7 @@ public class BaseWebViewController: UIViewController {
     
     func actionButtonPressed(sender: AnyObject?) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        alertController.view.tintColor = FrostKit.shared.tintColor
         let safariAlertAction = UIAlertAction(title: FKLocalizedString("OPEN_IN_SAFARI"), style: .Default) { (action) -> Void in
             
             if let webView: AnyObject = self.webView {

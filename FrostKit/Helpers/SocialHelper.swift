@@ -111,6 +111,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             if NSClassFromString("UIAlertController") != nil {
                 
                 let alertController = UIAlertController(title: emailsString, message: nil, preferredStyle: .Alert)
+                alertController.view.tintColor = FrostKit.shared.tintColor
                 let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL"), style: .Cancel) { (action) -> Void in
                     alertController.dismissViewControllerAnimated(true, completion: nil)
                 }
@@ -136,6 +137,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
                 shared.animated = animated
                 
                 let alertView = UIAlertView(title: emailsString, message: "", delegate: SocialHelper.shared, cancelButtonTitle: FKLocalizedString("CANCEL"), otherButtonTitles: FKLocalizedString("EMAIL"))
+                alertView.tintColor = FrostKit.shared.tintColor
                 alertView.tag = AlertViewTags.EmailPrompt.toRaw()
                 alertView.show()
                 
@@ -173,6 +175,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             if NSClassFromString("UIAlertController") != nil {
                 
                 let alertController = UIAlertController(title: recipientsString, message: nil, preferredStyle: .Alert)
+                alertController.view.tintColor = FrostKit.shared.tintColor
                 let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL"), style: .Cancel) { (action) -> Void in
                     alertController.dismissViewControllerAnimated(true, completion: nil)
                 }
@@ -195,6 +198,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
                 shared.animated = animated
                 
                 let alertView = UIAlertView(title: recipientsString, message: "", delegate: SocialHelper.shared, cancelButtonTitle: FKLocalizedString("CANCEL"), otherButtonTitles: FKLocalizedString("MESSAGE"))
+                alertView.tintColor = FrostKit.shared.tintColor
                 alertView.tag = AlertViewTags.EmailPrompt.toRaw()
                 alertView.show()
                 
