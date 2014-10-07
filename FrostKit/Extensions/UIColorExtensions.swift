@@ -10,6 +10,11 @@ import UIKit
 
 extension UIColor {
     
+    convenience init(hexString: String) {
+        let color = UIColor.colorWithHex(hexString)
+        self.init(CGColor: color.CGColor)
+    }
+    
     public class func colorWithHex(hexString: String) -> UIColor {
         
         var scanLocation = 0
