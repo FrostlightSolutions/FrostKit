@@ -10,7 +10,7 @@ import UIKit
 
 extension UIColor {
     
-    convenience init(hexString: String) {
+    public convenience init(hexString: String) {
         let color = UIColor.colorWithHex(hexString)
         self.init(CGColor: color.CGColor)
     }
