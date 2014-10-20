@@ -103,4 +103,18 @@ class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
         updateBackForwardButtons()
     }
     
+    // MARK: - Load Methods
+    
+    override func loadBaseURL() -> String {
+        
+        var urlString = super.loadBaseURL()
+        
+        if let webView = self.webView as? UIWebView {
+            let request = NSURLRequest(URL: NSURL(string: urlString)!, cachePolicy: .ReloadIgnoringLocalCacheData, timeoutInterval: 60.0)
+            webView.loadRequest(request)
+        }
+        
+        return urlString
+    }
+    
 }

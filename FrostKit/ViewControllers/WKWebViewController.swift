@@ -79,7 +79,7 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
         
         switch keyPath {
         case "estimatedProgress":
-            progrssView.setProgress(Float(webView!.estimatedProgress), animated: true)
+            self.progrssView.setProgress(Float(webView!.estimatedProgress), animated: true)
             updateProgrssViewVisability()
             updateActivityViewVisability()
         case "title":
@@ -141,6 +141,20 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
         
         // Alows links in the WKWebView to be tappable
         decisionHandler(.Allow)
+    }
+    
+    // MARK: - Load Methods
+    
+    override func loadBaseURL() -> String {
+        
+        var urlString = super.loadBaseURL()
+        
+        if let webView = self.webView as? WKWebView {
+            let request = NSURLRequest(URL: NSURL(string: urlString)!, cachePolicy: .ReloadIgnoringLocalCacheData, timeoutInterval: 60.0)
+            webView.loadRequest(request)
+        }
+        
+        return urlString
     }
     
 }
