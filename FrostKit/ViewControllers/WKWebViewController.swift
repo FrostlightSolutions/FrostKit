@@ -41,6 +41,12 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
         }
     }
     
+    override func stopLoading() {
+        if let webView = self.webView as? WKWebView {
+            return webView.stopLoading()
+        }
+    }
+    
     override func viewDidLoad() {
         
         webView = WKWebView(frame: view.bounds)
@@ -59,19 +65,21 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     }
     
     deinit {
-        webView?.removeObserver(self, forKeyPath: "estimatedProgress")
-        webView?.removeObserver(self, forKeyPath: "title")
-        webView?.removeObserver(self, forKeyPath: "canGoBack")
-        webView?.removeObserver(self, forKeyPath: "canGoForward")
+        if let webView = self.webView as? WKWebView {
+            webView.removeObserver(self, forKeyPath: "estimatedProgress")
+            webView.removeObserver(self, forKeyPath: "title")
+            webView.removeObserver(self, forKeyPath: "canGoBack")
+            webView.removeObserver(self, forKeyPath: "canGoForward")
+        }
     }
     
     // MARK: - KVO Methods
     
-    override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
         
         switch keyPath {
         case "estimatedProgress":
-            progrssView.progress = Float(webView!.estimatedProgress)
+            progrssView.setProgress(Float(webView!.estimatedProgress), animated: true)
             updateProgrssViewVisability()
             updateActivityViewVisability()
         case "title":

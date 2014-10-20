@@ -26,17 +26,17 @@ class WebViewControllerVC: UITableViewController {
         case NSIndexPath(forRow: 0, inSection: 0):
             let webVC = WebViewController()
             webVC.urlString = "frostlight.se"
-            presentViewController(UINavigationController(rootViewController: webVC), animated: true, completion: nil)
+            presentViewController(UINavigationController(rootViewController: webVC)!, animated: true, completion: nil)
         case NSIndexPath(forRow: 1, inSection: 0):
             let webVC = WebViewController(viewType: .UIWebView)
             webVC.urlString = "frostlight.se"
             webVC.titleOverride = "WKWebViewController"
-            presentViewController(UINavigationController(rootViewController: webVC), animated: true, completion: nil)
+            presentViewController(UINavigationController(rootViewController: webVC)!, animated: true, completion: nil)
         case NSIndexPath(forRow: 2, inSection: 0):
             let webVC = WebViewController(viewType: .WKWebView)
             webVC.urlString = "frostlight.se"
             webVC.titleOverride = "UIWebViewController"
-            presentViewController(UINavigationController(rootViewController: webVC), animated: true, completion: nil)
+            presentViewController(UINavigationController(rootViewController: webVC)!, animated: true, completion: nil)
         case NSIndexPath(forRow: 0, inSection: 1):
             let webVC = WebViewController()
             webVC.urlString = "frostlight.se"

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18748B1819DF3745003942A3 /* UIBarButtonItemExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18748B1619DF3745003942A3 /* UIBarButtonItemExtensions.swift */; };
+		18748B1919DF3745003942A3 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18748B1719DF3745003942A3 /* UIViewControllerExtensions.swift */; };
+		18748B1C19DF378F003942A3 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18748B1B19DF378F003942A3 /* ionicons.ttf */; };
 		18772BEF19DD61E200F67CE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772BEE19DD61E200F67CE7 /* AppDelegate.swift */; };
 		18772BF419DD61E200F67CE7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18772BF219DD61E200F67CE7 /* Main.storyboard */; };
 		18772BF619DD61E200F67CE7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18772BF519DD61E200F67CE7 /* Images.xcassets */; };
@@ -87,6 +90,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		18748B1619DF3745003942A3 /* UIBarButtonItemExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBarButtonItemExtensions.swift; sourceTree = "<group>"; };
+		18748B1719DF3745003942A3 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
+		18748B1B19DF378F003942A3 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
 		18772BE919DD61E200F67CE7 /* iOS Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18772BED19DD61E200F67CE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18772BEE19DD61E200F67CE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -259,6 +265,8 @@
 				18A2591B19DD94D300D145A3 /* UIFontExtensiosns.swift */,
 				18A2591C19DD94D300D145A3 /* UIImageExtensiosns.swift */,
 				18A2591D19DD94D300D145A3 /* UIViewExtensions.swift */,
+				18748B1619DF3745003942A3 /* UIBarButtonItemExtensions.swift */,
+				18748B1719DF3745003942A3 /* UIViewControllerExtensions.swift */,
 			);
 			name = Extensions;
 			path = FrostKit/Extensions;
@@ -269,6 +277,7 @@
 			children = (
 				18E3F22F19DE05B30032ABB7 /* CustomFonts.swift */,
 				18A2591F19DD94D300D145A3 /* fontawesome-webfont.ttf */,
+				18748B1B19DF378F003942A3 /* ionicons.ttf */,
 			);
 			name = Fonts;
 			path = FrostKit/Fonts;
@@ -440,6 +449,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18A2594419DD95E000D145A3 /* LaunchScreen.xib in Resources */,
+				18748B1C19DF378F003942A3 /* ionicons.ttf in Resources */,
 				18A2594519DD95E000D145A3 /* Main.storyboard in Resources */,
 				18A2593F19DD959300D145A3 /* Images.xcassets in Resources */,
 				18A2593519DD94D400D145A3 /* fontawesome-webfont.ttf in Resources */,
@@ -480,11 +490,13 @@
 				18E3F21419DDA6160032ABB7 /* MainMenuVC.swift in Sources */,
 				18E3F22919DDE3E20032ABB7 /* WKWebViewController.swift in Sources */,
 				18A2592C19DD94D300D145A3 /* NSCalendarExtensions.swift in Sources */,
+				18748B1819DF3745003942A3 /* UIBarButtonItemExtensions.swift in Sources */,
 				18E3F22419DDE2A00032ABB7 /* BaseWebViewController.swift in Sources */,
 				18A258E619DD936200D145A3 /* AppDelegate.swift in Sources */,
 				18A2593B19DD94D400D145A3 /* ImageCache.swift in Sources */,
 				18A2593019DD94D400D145A3 /* NSTimeZoneExtensions.swift in Sources */,
 				18A2593819DD94D400D145A3 /* KeychainHelper.swift in Sources */,
+				18748B1919DF3745003942A3 /* UIViewControllerExtensions.swift in Sources */,
 				18A2593A19DD94D400D145A3 /* ContentManager.swift in Sources */,
 				18E3F21519DDA6160032ABB7 /* SocialHelperVC.swift in Sources */,
 				18A2593119DD94D400D145A3 /* UIColorExtensions.swift in Sources */,

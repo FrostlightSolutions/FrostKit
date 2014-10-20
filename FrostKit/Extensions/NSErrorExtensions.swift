@@ -11,6 +11,6 @@ import Foundation
 extension NSError {
     
     public class func errorWithMessage(message: String) -> NSError {
-        return NSError.errorWithDomain(NSBundle.mainBundle().bundleIdentifier!, code: -1, userInfo: [NSLocalizedDescriptionKey: message])
+        return NSError(domain: NSBundle.mainBundle().bundleIdentifier!, code: -1, userInfo: [NSLocalizedDescriptionKey: message])
     }
 }

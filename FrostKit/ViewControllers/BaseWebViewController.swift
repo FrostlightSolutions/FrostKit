@@ -9,26 +9,11 @@
 import UIKit
 import Social
 
-extension UIBarButtonItem {
-    
-    public convenience init(title: String?, font: UIFont, verticalOffset: CGFloat = 0, target: AnyObject?, action: Selector) {
-        
-        let button = UIButton.buttonWithType(.System) as UIButton
-        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        button.titleLabel?.font = font
-        button.setTitle(title, forState: .Normal)
-        button.titleEdgeInsets.top = verticalOffset
-        button.addTarget(target, action: action, forControlEvents: .TouchUpInside)
-        self.init(customView: button)
-    }
-    
-}
-
 public class BaseWebViewController: UIViewController {
     
     public var webView: AnyObject?
     let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-    let progrssView = UIProgressView(progressViewStyle: .Bar)
+    let progrssView = UIProgressView(progressViewStyle: .Bar)!
     
     var backButton: UIBarButtonItem?
     var forwardButton: UIBarButtonItem?
@@ -61,7 +46,11 @@ public class BaseWebViewController: UIViewController {
         }
     }
     
-    override public func viewDidLoad() {
+    public func stopLoading() {
+        // Functionality overriden in subclasses
+    }
+    
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         if let navController = navigationController {
@@ -73,8 +62,10 @@ public class BaseWebViewController: UIViewController {
             updateProgrssViewVisability()
             updateActivityViewVisability()
             
-            let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "doneButtonPressed:")
-            navigationItem.setLeftBarButtonItem(doneButton, animated: false)
+            if self.isRoot == true {
+                let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "doneButtonPressed:")
+                navigationItem.setLeftBarButtonItem(doneButton, animated: false)
+            }
         }
         
         setupToolbar()
@@ -96,7 +87,27 @@ public class BaseWebViewController: UIViewController {
         }
     }
     
-    override public func didReceiveMemoryWarning() {
+    public override func viewWillDisappear(animated: Bool) {
+        stopLoading()
+        
+        if let navController = navigationController {
+            navController.setToolbarHidden(true, animated: true)
+        }
+    }
+    
+    public override func viewDidDisappear(animated: Bool) {
+        
+        UIView.animateWithDuration(0.25, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
+            
+            self.progrssView.alpha = 0.5
+            
+            }, completion: { (completed) -> Void in
+                
+                self.progrssView.removeFromSuperview()
+        })
+    }
+    
+    public override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
@@ -258,7 +269,7 @@ public class BaseWebViewController: UIViewController {
             }
             
             if let webView: AnyObject = self.webView {
-                let request = NSURLRequest(URL: NSURL(string: urlString), cachePolicy: .ReloadIgnoringLocalCacheData, timeoutInterval: 60.0)
+                let request = NSURLRequest(URL: NSURL(string: urlString)!, cachePolicy: .ReloadIgnoringLocalCacheData, timeoutInterval: 60.0)
                 webView.loadRequest(request)
             }
         }

@@ -11,7 +11,7 @@ import Foundation
 extension NSTimeZone {
     
     public class func utc() -> NSTimeZone {
-        return NSTimeZone(name: "UTC")
+        return NSTimeZone(name: "UTC")!
     }
     
 }

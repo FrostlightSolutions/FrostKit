@@ -98,8 +98,11 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         }
         
         let urlString = NSString(format: "telprompt://%@", parsedNumber)
-        let url = NSURL(string: urlString)
-        UIApplication.sharedApplication().openURL(url)
+        if let url = NSURL(string: urlString) {
+            UIApplication.sharedApplication().openURL(url)
+        } else {
+            println("ERROR: Could not create URL to prompt phone.")
+        }
     }
     
     public class func emailPrompt(#toRecipients: [String], ccRecipients: [String] = [], bccRecipients: [String] = [], subject: String = "", messageBody: String = "", isBodyHTML: Bool = false, attachments: [(data: NSData, mimeType: String, fileName: String)] = [], viewController: UIViewController, animated: Bool = true) {
@@ -138,7 +141,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
                 
                 let alertView = UIAlertView(title: emailsString, message: "", delegate: SocialHelper.shared, cancelButtonTitle: FKLocalizedString("CANCEL"), otherButtonTitles: FKLocalizedString("EMAIL"))
                 alertView.tintColor = FrostKit.shared.tintColor
-                alertView.tag = AlertViewTags.EmailPrompt.toRaw()
+                alertView.tag = AlertViewTags.EmailPrompt.rawValue
                 alertView.show()
                 
             }
@@ -199,7 +202,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
                 
                 let alertView = UIAlertView(title: recipientsString, message: "", delegate: SocialHelper.shared, cancelButtonTitle: FKLocalizedString("CANCEL"), otherButtonTitles: FKLocalizedString("MESSAGE"))
                 alertView.tintColor = FrostKit.shared.tintColor
-                alertView.tag = AlertViewTags.EmailPrompt.toRaw()
+                alertView.tag = AlertViewTags.EmailPrompt.rawValue
                 alertView.show()
                 
             }
@@ -276,9 +279,9 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     public func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         
         switch (alertView.tag, buttonIndex) {
-        case (AlertViewTags.EmailPrompt.toRaw(), 1):
+        case (AlertViewTags.EmailPrompt.rawValue, 1):
             SocialHelper.presentMailComposeViewController(toRecipients: toRecipients, ccRecipients: ccRecipients, bccRecipients: bccRecipients, subject: subject, messageBody: messageBody, isBodyHTML: isBodyHTML, attachments: emailAttachments, viewController: viewController!, animated: animated)
-        case (AlertViewTags.MessagePrompt.toRaw(), 1):
+        case (AlertViewTags.MessagePrompt.rawValue, 1):
             SocialHelper.presentMessageComposeViewController(recipients: toRecipients, subject: subject, body: messageBody, attachments: messgaeAttachments, viewController: viewController!, animated: animated)
         default:
             break
