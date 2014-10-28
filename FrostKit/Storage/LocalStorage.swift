@@ -107,7 +107,7 @@ public class LocalStorage: NSObject {
         
         var url = baseURL.URLByAppendingPathComponent(reletivePath)
         createDirectory(url: url)
-        url = baseURL.URLByAppendingPathComponent(fileName)
+        url = url.URLByAppendingPathComponent(fileName)
         
         if let path = url.path {
             
