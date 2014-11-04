@@ -22,7 +22,7 @@ extension NSDate {
     
     public var isYesterday: Bool {
         
-        let date = NSDate().dateWithDays(-1)
+        let date = NSDate().dateByAddingDays(-1)
         return self.compareToDate(date: date)
     }
     
@@ -32,7 +32,7 @@ extension NSDate {
     
     public var isTomorrow: Bool {
         
-        let date = NSDate().dateWithDays(1)
+        let date = NSDate().dateByAddingDays(1)
         return self.compareToDate(date: date)
     }
     
@@ -232,7 +232,7 @@ extension NSDate {
         }
     }
     
-    public func dateWithDays(days: Int) -> NSDate {
+    public func dateByAddingDays(days: Int) -> NSDate {
         
         let components = NSDateComponents()
         components.day = days
