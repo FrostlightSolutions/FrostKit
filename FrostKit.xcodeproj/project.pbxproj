@@ -123,12 +123,20 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		18839B0D19D9FA8C00760157 = {
+		186CFCE81A29F7BE002739A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				1811D76A1A0ACAED00E8B873 /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		18839B0D19D9FA8C00760157 = {
+			isa = PBXGroup;
+			children = (
 				18839B1919D9FA8C00760157 /* FrostKit */,
 				18839B2319D9FA8C00760157 /* FrostKitTests */,
+				186CFCE81A29F7BE002739A5 /* Frameworks */,
 				18839B1819D9FA8C00760157 /* Products */,
 			);
 			sourceTree = "<group>";
