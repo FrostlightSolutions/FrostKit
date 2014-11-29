@@ -246,4 +246,22 @@ extension NSDate {
         }
     }
     
+    // MARK: - Date Strings
+    
+    public func dateTimeShortString() -> String {
+        return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
+    }
+    
+    public func dateShortString() -> String {
+        return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .ShortStyle, timeStyle: .NoStyle)
+    }
+    
+    public func dateFullString() -> String {
+        return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .FullStyle, timeStyle: .NoStyle)
+    }
+    
+    public func timeShortString() -> String {
+        return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .NoStyle, timeStyle: .ShortStyle)
+    }
+    
 }
