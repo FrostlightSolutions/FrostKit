@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		1845E6F61A66DA03005B377D /* FrostKitDocs */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 1845E6F71A66DA03005B377D /* Build configuration list for PBXAggregateTarget "FrostKitDocs" */;
+			buildPhases = (
+				1845E6FA1A66DA0F005B377D /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = FrostKitDocs;
+			productName = FrostKitDocs;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		1811D7B81A0AD1CA00E8B873 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B41A0AD1CA00E8B873 /* BaseWebViewController.swift */; };
 		1811D7B91A0AD1CA00E8B873 /* UIWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B51A0AD1CA00E8B873 /* UIWebViewController.swift */; };
@@ -335,6 +349,9 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Frostlight Solutions";
 				TargetAttributes = {
+					1845E6F61A66DA03005B377D = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
 					18839B1619D9FA8C00760157 = {
 						CreatedOnToolsVersion = 6.0.1;
 					};
@@ -357,6 +374,7 @@
 			targets = (
 				18839B1619D9FA8C00760157 /* FrostKit */,
 				18839B2119D9FA8C00760157 /* FrostKitTests */,
+				1845E6F61A66DA03005B377D /* FrostKitDocs */,
 			);
 		};
 /* End PBXProject section */
@@ -381,6 +399,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1845E6FA1A66DA0F005B377D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd /Users/jamesbarrow/Dropbox/Pig\\ on\\ a\\ Hill/Projects/Frameworks/FrostKit/\n/Users/jamesbarrow/Dropbox/Pig\\ on\\ a\\ Hill/API\\:SDK/Forks/jazzy/bin/jazzy -x -project,\"${SRCROOT}/FrostKit.xcodeproj\",-scheme,FrostKit -c -m FrostKit -a James\\ Barrow -g https:\\/\\/github.com/FrostlightSolutions/FrostKit -o FrostKitDocs";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		18839B1219D9FA8C00760157 /* Sources */ = {
@@ -440,6 +474,20 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1845E6F81A66DA03005B377D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		1845E6F91A66DA03005B377D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		18839B2819D9FA8C00760157 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -591,6 +639,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1845E6F71A66DA03005B377D /* Build configuration list for PBXAggregateTarget "FrostKitDocs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1845E6F81A66DA03005B377D /* Debug */,
+				1845E6F91A66DA03005B377D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		18839B1119D9FA8C00760157 /* Build configuration list for PBXProject "FrostKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
