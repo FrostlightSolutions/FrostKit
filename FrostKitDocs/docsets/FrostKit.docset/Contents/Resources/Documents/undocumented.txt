@@ -1,0 +1,183 @@
+UIWebViewController.swift
+	class UIWebViewController: BaseWebViewController, UIWebViewDelegate
+	override var URL: NSURL?
+	override var loading: Bool
+	override func stopLoading()
+	override func viewDidLoad()
+	override func refreshButtonPressed(sender: AnyObject?)
+	override func backButtonPressed(sender: AnyObject?)
+	override func forwardButtonPressed(sender: AnyObject?)
+	func webViewDidStartLoad(webView: UIWebView)
+	func webViewDidFinishLoad(webView: UIWebView)
+	func webView(webView: UIWebView, didFailLoadWithError error: NSError)
+	override func loadBaseURL() -> String
+NSDateExtensions.swift
+	public enum DateCompareType
+	public var isYesterday: Bool
+	public var isToday: Bool
+	public var isTomorrow: Bool
+	public var isWeekday: Bool
+	public var isBeginingOfWeek: Bool
+	public var isEndOfWeek: Bool
+	public var isBeginingOfMonth: Bool
+	public var isEndOfMonth: Bool
+	public var day: Int
+	public var hour: Int
+	public var minute: Int
+	public var timeInHours: NSTimeInterval
+	public class func minuteInSeconds() -> NSTimeInterval
+	public class func hourInSeconds() -> NSTimeInterval
+	public class func dayInSeconds() -> NSTimeInterval
+	public class func weekInSeconds() -> NSTimeInterval
+	public class func daysBetweenDates(#fromDate: NSDate, toDate: NSDate) -> Int
+	public func daysRemainingInWeek() -> Int
+	public func daysInMonth() -> Int
+	public func daysRemainingInMonth() -> Int
+	public func compareToDate(#date: NSDate, option: DateCompareType = .EqualTo, stripTime: Bool = true) -> Bool
+	public func isBefore(#date: NSDate) -> Bool
+	public func isAfter(#date: NSDate) -> Bool
+	public func stripTime() -> NSDate
+	public func dateByAddingDays(days: Int) -> NSDate
+	public func dateTimeShortString() -> String
+	public func dateShortString() -> String
+	public func dateFullString() -> String
+	public func timeShortString() -> String
+NSDate.h
+	class NSDate : NSObject, NSCopying, NSSecureCoding, NSCoding
+WKWebViewController.swift
+	class WKWebViewController: BaseWebViewController, WKNavigationDelegate
+	override var URL: NSURL?
+	override var titleOverride: String?
+	override var loading: Bool
+	override func stopLoading()
+	override func viewDidLoad()
+	deinit
+	override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>)
+	override func refreshButtonPressed(sender: AnyObject?)
+	override func backButtonPressed(sender: AnyObject?)
+	override func forwardButtonPressed(sender: AnyObject?)
+	func webView(webView: WKWebView!, decidePolicyForNavigationAction navigationAction: WKNavigationAction!, decisionHandler: ((WKNavigationActionPolicy) -> Void)!)
+	override func loadBaseURL() -> String
+NSTimeZone.h
+	class NSTimeZone : NSObject, NSCopying, NSSecureCoding, NSCoding
+NSTimeZoneExtensions.swift
+	public class func utc() -> NSTimeZone
+CustomFonts.swift
+	public class CustomFonts: NSObject
+	public class func loadCustomFonts()
+	public class func printAllFontFamilies()
+	public class func buildFontConstantsFromLess(#name: String) -> Bool
+UIViewExtensions.swift
+	public func screenshot() -> UIImage
+BaseWebViewController.swift
+	public class BaseWebViewController: UIViewController
+	public var webView: AnyObject?
+	let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+	let progrssView = UIProgressView(progressViewStyle: .Bar)
+	var backButton: UIBarButtonItem?
+	var forwardButton: UIBarButtonItem?
+	public var urlString: String?
+	var URL: NSURL?
+	public var titleOverride: String?
+	var loading: Bool
+	public func stopLoading()
+	public override func viewDidLoad()
+	public override func viewWillDisappear(animated: Bool)
+	public override func viewDidDisappear(animated: Bool)
+	public override func didReceiveMemoryWarning()
+	func doneButtonPressed(sender: AnyObject?)
+	func backButtonPressed(sender: AnyObject?)
+	func forwardButtonPressed(sender: AnyObject?)
+	func refreshButtonPressed(sender: AnyObject?)
+	func actionButtonPressed(sender: AnyObject?)
+	func setupToolbar()
+	func updateProgrssViewVisability()
+	func updateActivityViewVisability()
+	func updateBackButton()
+	func updateForwardButton()
+	func updateBackForwardButtons()
+	func loadBaseURL() -> String
+UIViewController.h
+	class UIViewController : UIResponder, NSCoding, UIAppearanceContainer, NSObjectProtocol, UITraitEnvironment, UIContentContainer
+UIViewControllerExtensions.swift
+	public var isRoot: Bool
+NSDataExtensions.swift
+	public func hexString() -> NSString
+SocialHelper.swift
+	public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate
+	struct Singleton
+	static let instance : SocialHelper = SocialHelper()
+	override init()
+	public class func presentComposeViewController(serviceType: String, initialText: String? = nil, urls: [NSURL]? = nil, images: [UIImage]? = nil, inViewController viewController: UIViewController, animated: Bool = true)
+	public class func phonePrompt(#number: String)
+	public class func emailPrompt(#toRecipients: [String], ccRecipients: [String] = [], bccRecipients: [String] = [], subject: String = "", messageBody: String = "", isBodyHTML: Bool = false, attachments: [(data: NSData, mimeType: String, fileName: String)] = [], viewController: UIViewController, animated: Bool = true)
+	public class func messagePrompt(#recipients: [String], subject: String = "", body: String = "", attachments: [(attachmentURL: NSURL, alternateFilename: String)] = [], viewController: UIViewController, animated: Bool = true)
+	public func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!)
+	public func messageComposeViewController(controller: MFMessageComposeViewController!, didFinishWithResult result: MessageComposeResult)
+	public func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int)
+WebViewController.swift
+	public enum WebViewType
+	public func WebViewController(viewType: WebViewType = .Automatic) -> BaseWebViewController
+NSError.h
+	class NSError : NSObject, NSCopying, NSSecureCoding, NSCoding
+NSErrorExtensions.swift
+	public class func errorWithMessage(message: String) -> NSError
+NSBundle.h
+	class NSBundle : NSObject
+NSBundleExtensiosns.swift
+	public class func appVersion(bundle: NSBundle = NSBundle.mainBundle()) -> String
+	public class func appName(bundle: NSBundle = NSBundle.mainBundle()) -> String
+UIColor.h
+	class UIColor : NSObject, NSSecureCoding, NSCoding, NSCopying
+UIColorExtensions.swift
+	public convenience init(hexString: String)
+	public class func colorWithHex(hexString: String) -> UIColor
+FrostKit.swift
+	internal func FKLocalizedString(key: String, comment: String = "") -> String
+	public class FrostKit
+	public var tintColor: UIColor?
+	public class var shared: FrostKit
+	struct Singleton
+	static let instance : FrostKit = FrostKit()
+	init()
+ImageCache.swift
+	public class ImageCache: NSObject
+	public class var shared: ImageCache
+	struct Singleton
+	static let instance : ImageCache = ImageCache()
+	public func loadImage(#directory: NSSearchPathDirectory, reletivePath: String, fileName: String, complete: (UIImage?) -> ())
+	public func loadTumbnailImage(#directory: NSSearchPathDirectory, reletivePath: String, fileName: String, size: CGSize, complete: (UIImage?) -> ())
+	public func clearCache()
+UIFont.h
+	class UIFont : NSObject, NSCopying
+UIFontExtensiosns.swift
+	public class func fontAwesome(#size: CGFloat) -> UIFont
+	public class func ionicons(#size: CGFloat) -> UIFont
+LocalStorage.swift
+	static let DocumentDirectory = NSSearchPathDirectory.DocumentDirectory
+	static let CachesDirectory = NSSearchPathDirectory.CachesDirectory
+ContentManager.swift
+	public class ContentManager: NSObject
+	public class var shared: ContentManager
+	struct Singleton
+	static let instance : ContentManager = ContentManager()
+	public class func saveContentMetadata(#absoluteURL: NSURL)
+	public class func saveContentMetadata(#absolutePath: String)
+	public class func removeContentMetadata(#absoluteURL: NSURL)
+	public class func removeContentMetadata(#absolutePath: String)
+	public class func checkContentMetadata()
+UIBarButtonItem.h
+	class UIBarButtonItem : UIBarItem, NSCoding
+UIBarButtonItemExtensions.swift
+	public convenience init(title: String?, font: UIFont, verticalOffset: CGFloat = 0, target: AnyObject?, action: Selector)
+KeychainHelper.swift
+	public class KeychainHelper: NSObject
+	public class func details(#username: String) -> String?
+	public class func setDetails(#password: String, username: String) -> Bool
+	public class func deleteKeychain() -> Bool
+NSCalendar.h
+	class NSCalendar : NSObject, NSCopying, NSSecureCoding, NSCoding
+NSCalendarExtensions.swift
+	public class func gregorianCalendar() -> NSCalendar
+UIImageExtensiosns.swift
+	public func imageWithMaxSize(size: CGSize) -> UIImage
