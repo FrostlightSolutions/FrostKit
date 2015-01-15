@@ -152,15 +152,8 @@ LocalStorage.swift
 	static let DocumentDirectory = NSSearchPathDirectory.DocumentDirectory
 	static let CachesDirectory = NSSearchPathDirectory.CachesDirectory
 ContentManager.swift
-	public class ContentManager: NSObject
-	public class var shared: ContentManager
 	struct Singleton
 	static let instance : ContentManager = ContentManager()
-	public class func saveContentMetadata(#absoluteURL: NSURL)
-	public class func saveContentMetadata(#absolutePath: String)
-	public class func removeContentMetadata(#absoluteURL: NSURL)
-	public class func removeContentMetadata(#absolutePath: String)
-	public class func checkContentMetadata()
 UIBarButtonItem.h
 	class UIBarButtonItem : UIBarItem, NSCoding
 UIBarButtonItemExtensions.swift
