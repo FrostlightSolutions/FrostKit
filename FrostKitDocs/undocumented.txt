@@ -141,13 +141,8 @@ FrostKit.swift
 	static let instance : FrostKit = FrostKit()
 	init()
 ImageCache.swift
-	public class ImageCache: NSObject
-	public class var shared: ImageCache
 	struct Singleton
 	static let instance : ImageCache = ImageCache()
-	public func loadImage(#directory: NSSearchPathDirectory, reletivePath: String, fileName: String, complete: (UIImage?) -> ())
-	public func loadTumbnailImage(#directory: NSSearchPathDirectory, reletivePath: String, fileName: String, size: CGSize, complete: (UIImage?) -> ())
-	public func clearCache()
 UIFont.h
 	class UIFont : NSObject, NSCopying
 UIFontExtensiosns.swift
