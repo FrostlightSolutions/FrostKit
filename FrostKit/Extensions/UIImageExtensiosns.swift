@@ -8,8 +8,18 @@
 
 import UIKit
 
+///
+/// Extention functions for UIImage
+///
 extension UIImage {
     
+    /**
+        Scales down an image and returns a new image scaled to that max size.
+    
+        :param: size    The maximum size of the scaled image.
+    
+        :returns: A scaled image.
+    */
     public func imageWithMaxSize(size: CGSize) -> UIImage {
         
         let size = CGSizeApplyAffineTransform(self.size, CGAffineTransformMakeScale(0.5, 0.5))

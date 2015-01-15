@@ -8,13 +8,30 @@
 
 import UIKit
 
+///
+/// Extention functions for UIColor
+///
 extension UIColor {
     
+    /**
+        A convenience init for creating a color object from a hex string.
+    
+        :param: hexString   A hex string to turn into a color object.
+    
+        :returns: A color object from the hex string.
+    */
     public convenience init(hexString: String) {
         let color = UIColor.colorWithHex(hexString)
         self.init(CGColor: color.CGColor)
     }
     
+    /**
+        Creates a color object from a hex string.
+        
+        :param: hexString   A hex string to turn into a color object.
+        
+        :returns: A color object from the hex string.
+    */
     public class func colorWithHex(hexString: String) -> UIColor {
         
         var scanLocation = 0

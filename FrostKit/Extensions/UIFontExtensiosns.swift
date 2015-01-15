@@ -8,8 +8,18 @@
 
 import UIKit
 
+///
+/// Extention functions for UIFont
+///
 extension UIFont {
     
+    /**
+        Helper method for getting font awesome font of a size.
+    
+        :param: size    The size of the font to return.
+    
+        :returns: The font object for font awesome.
+    */
     public class func fontAwesome(#size: CGFloat) -> UIFont {
         if let font = UIFont(name: "FontAwesome", size: size) {
             return font
@@ -19,6 +29,13 @@ extension UIFont {
         }
     }
     
+    /**
+        Helper method for getting font ionicons of a size.
+        
+        :param: size    The size of the font to return.
+        
+        :returns: The font object for ionicons.
+    */
     public class func ionicons(#size: CGFloat) -> UIFont {
         if let font = UIFont(name: "Ionicons", size: size) {
             return font

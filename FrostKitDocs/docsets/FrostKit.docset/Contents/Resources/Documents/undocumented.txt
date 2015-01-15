@@ -60,15 +60,11 @@ WKWebViewController.swift
 	override func loadBaseURL() -> String
 NSTimeZone.h
 	class NSTimeZone : NSObject, NSCopying, NSSecureCoding, NSCoding
-NSTimeZoneExtensions.swift
-	public class func utc() -> NSTimeZone
 CustomFonts.swift
 	public class CustomFonts: NSObject
 	public class func loadCustomFonts()
 	public class func printAllFontFamilies()
 	public class func buildFontConstantsFromLess(#name: String) -> Bool
-UIViewExtensions.swift
-	public func screenshot() -> UIImage
 BaseWebViewController.swift
 	public class BaseWebViewController: UIViewController
 	public var webView: AnyObject?
@@ -99,10 +95,6 @@ BaseWebViewController.swift
 	func loadBaseURL() -> String
 UIViewController.h
 	class UIViewController : UIResponder, NSCoding, UIAppearanceContainer, NSObjectProtocol, UITraitEnvironment, UIContentContainer
-UIViewControllerExtensions.swift
-	public var isRoot: Bool
-NSDataExtensions.swift
-	public func hexString() -> NSString
 SocialHelper.swift
 	public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate
 	struct Singleton
@@ -122,14 +114,10 @@ NSError.h
 	class NSError : NSObject, NSCopying, NSSecureCoding, NSCoding
 NSBundle.h
 	class NSBundle : NSObject
-NSBundleExtensiosns.swift
-	public class func appVersion(bundle: NSBundle = NSBundle.mainBundle()) -> String
-	public class func appName(bundle: NSBundle = NSBundle.mainBundle()) -> String
 UIColor.h
 	class UIColor : NSObject, NSSecureCoding, NSCoding, NSCopying
 UIColorExtensions.swift
 	public convenience init(hexString: String)
-	public class func colorWithHex(hexString: String) -> UIColor
 FrostKit.swift
 	internal func FKLocalizedString(key: String, comment: String = "") -> String
 	public class FrostKit
@@ -143,9 +131,6 @@ ImageCache.swift
 	static let instance : ImageCache = ImageCache()
 UIFont.h
 	class UIFont : NSObject, NSCopying
-UIFontExtensiosns.swift
-	public class func fontAwesome(#size: CGFloat) -> UIFont
-	public class func ionicons(#size: CGFloat) -> UIFont
 LocalStorage.swift
 	static let DocumentDirectory = NSSearchPathDirectory.DocumentDirectory
 	static let CachesDirectory = NSSearchPathDirectory.CachesDirectory
@@ -163,7 +148,3 @@ KeychainHelper.swift
 	public class func deleteKeychain() -> Bool
 NSCalendar.h
 	class NSCalendar : NSObject, NSCopying, NSSecureCoding, NSCoding
-NSCalendarExtensions.swift
-	public class func gregorianCalendar() -> NSCalendar
-UIImageExtensiosns.swift
-	public func imageWithMaxSize(size: CGSize) -> UIImage

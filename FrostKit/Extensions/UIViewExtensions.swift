@@ -8,8 +8,16 @@
 
 import UIKit
 
+///
+/// Extention functions for UIView
+///
 extension UIView {
     
+    /**
+        Returns a screen shot of the view.
+    
+        :returns: A screen shot of the view.
+    */
     public func screenshot() -> UIImage {
         
         var scale: CGFloat = 2.0
