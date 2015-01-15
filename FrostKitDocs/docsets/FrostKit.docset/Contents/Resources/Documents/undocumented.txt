@@ -120,8 +120,6 @@ WebViewController.swift
 	public func WebViewController(viewType: WebViewType = .Automatic) -> BaseWebViewController
 NSError.h
 	class NSError : NSObject, NSCopying, NSSecureCoding, NSCoding
-NSErrorExtensions.swift
-	public class func errorWithMessage(message: String) -> NSError
 NSBundle.h
 	class NSBundle : NSObject
 NSBundleExtensiosns.swift
