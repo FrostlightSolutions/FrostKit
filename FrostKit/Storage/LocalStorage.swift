@@ -21,8 +21,9 @@ public enum Location: UInt {
 }
 
 ///
-/// File Structure
-/// ===============
+/// Local Storage provides the moethds for dealing with local files and direcotries. This includes creation, moving , saving, loading and removing of these items.
+///
+/// :File Structure:
 ///
 /// :Documents:
 /// : : ― Images        Perminant Images
@@ -386,7 +387,7 @@ public class LocalStorage: NSObject {
     }
     
     /**
-        Removes the file or folder from the base url in relation to the reletive path and file name. On success this method will remove the item from the Content Manager.
+        Removes the file or directory from the base url in relation to the reletive path and file name. On success this method will remove the item from the Content Manager.
     
         :param: baseURL         The search path directory to use.
         :param: reletivePath    The reletive path to of the file or directory.
@@ -435,7 +436,7 @@ public class LocalStorage: NSObject {
     }
     
     /**
-        Removes a file or folder in the documents root directory in relation to the reletive path and file name.
+        Removes a file or directory in the documents root directory in relation to the reletive path and file name.
     
         :param: reletivePath    The reletive path to of the file or directory.
         :param: fileName        The name of the file (including the extension).
@@ -447,7 +448,7 @@ public class LocalStorage: NSObject {
     }
     
     /**
-        Removes a file or folder in the caches root directory in relation to the reletive path and file name.
+        Removes a file or directory in the caches root directory in relation to the reletive path and file name.
         
         :param: reletivePath    The reletive path to of the file or directory.
         :param: fileName        The name of the file (including the extension).

@@ -150,7 +150,7 @@
         <h1 class="chapter-name">LocalStorage</h1>
         <section>
           <section class="section">
-            <p class="para">File Structure ===============<dl><dt>Documents</dt><dd></dd></dl><dl><dt> </dt><dd>― Images        Perminant Images</dd></dl><dl><dt> </dt><dd>― Data          Perminant Documents and Data:</dd></dl><dl><dt> </dt><dd>― User.data     User object (NSObject conforming to NSCoding)</dd></dl><dl><dt>Library</dt><dd></dd></dl><dl><dt> </dt><dd>― Caches</dd></dl><dl><dt> </dt><dd>― ― Images      Store Temporary Images</dd></dl><dl><dt> </dt><dd>― ― Data        Store Temporary Documents and Data</dd></dl>NOTE: Anything stored in Caches has the ability to be deleted when the app is not active (never during), so make sure only data that can be re-downloaded get stored here.</p>
+            <p class="para">Local Storage provides the moethds for dealing with local files and direcotries. This includes creation, moving , saving, loading and removing of these items.<dl><dt>File Structure</dt><dd></dd></dl><dl><dt>Documents</dt><dd></dd></dl><dl><dt> </dt><dd>― Images        Perminant Images</dd></dl><dl><dt> </dt><dd>― Data          Perminant Documents and Data:</dd></dl><dl><dt> </dt><dd>― User.data     User object (NSObject conforming to NSCoding)</dd></dl><dl><dt>Library</dt><dd></dd></dl><dl><dt> </dt><dd>― Caches</dd></dl><dl><dt> </dt><dd>― ― Images      Store Temporary Images</dd></dl><dl><dt> </dt><dd>― ― Data        Store Temporary Documents and Data</dd></dl>NOTE: Anything stored in Caches has the ability to be deleted when the app is not active (never during), so make sure only data that can be re-downloaded get stored here.</p>
           </section>
           <section class="section task-group-section">
             <div class="task-group">
@@ -1207,7 +1207,7 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Removes a file or folder in the documents root directory in relation to the reletive path and file name.</p>
+                        <p class="para">Removes a file or directory in the documents root directory in relation to the reletive path and file name.</p>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -1270,7 +1270,7 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Removes a file or folder in the caches root directory in relation to the reletive path and file name.</p>
+                        <p class="para">Removes a file or directory in the caches root directory in relation to the reletive path and file name.</p>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
