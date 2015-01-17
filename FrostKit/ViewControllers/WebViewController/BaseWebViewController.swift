@@ -130,40 +130,15 @@ public class BaseWebViewController: UIViewController {
     }
     
     func actionButtonPressed(sender: AnyObject?) {
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-        alertController.view.tintColor = FrostKit.shared.tintColor
-        let safariAlertAction = UIAlertAction(title: FKLocalizedString("OPEN_IN_SAFARI"), style: .Default) { (action) -> Void in
-            
-            if let webView: AnyObject = self.webView {
-                if let url = self.URL {
-                    UIApplication.sharedApplication().openURL(url)
-                }
-            }
+        
+        var urlString = ""
+        if let url = URL?.absoluteString {
+            urlString = url
         }
-        alertController.addAction(safariAlertAction)
-        let twitterAlertAction = UIAlertAction(title: FKLocalizedString("SHARE_ON_TWITTER"), style: .Default) { (action) -> Void in
-            
-            var urlsArray: [NSURL]?
-            if let url = self.URL {
-                urlsArray = [url]
-            }
-            SocialHelper.presentComposeViewController(Social.SLServiceTypeTwitter, initialText: "", urls: urlsArray, inViewController: self)
-        }
-        alertController.addAction(twitterAlertAction)
-        let facebookAlertAction = UIAlertAction(title: FKLocalizedString("SHARE_ON_FACEBOOK"), style: .Default) { (action) -> Void in
-            
-            var urlsArray: [NSURL]?
-            if let url = self.URL {
-                urlsArray = [url]
-            }
-            SocialHelper.presentComposeViewController(Social.SLServiceTypeFacebook, initialText: "", urls: urlsArray, inViewController: self)
-        }
-        alertController.addAction(facebookAlertAction)
-        let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL"), style: .Cancel) { (action) -> Void in
-            alertController.dismissViewControllerAnimated(true, completion: nil)
-        }
-        alertController.addAction(cancelAlertAction)
-        presentViewController(alertController, animated: true, completion: nil)
+        
+        let activityViewController = UIActivityViewController(activityItems: [urlString], applicationActivities: nil)
+        activityViewController.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeAirDrop]
+        presentViewController(activityViewController, animated: true, completion: nil)
     }
     
     // MARK: - UI Update Methods
