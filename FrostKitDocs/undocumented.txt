@@ -11,37 +11,6 @@ UIWebViewController.swift
 	func webViewDidFinishLoad(webView: UIWebView)
 	func webView(webView: UIWebView, didFailLoadWithError error: NSError)
 	override func loadBaseURL() -> String
-NSDateExtensions.swift
-	public enum DateCompareType
-	public var isYesterday: Bool
-	public var isToday: Bool
-	public var isTomorrow: Bool
-	public var isWeekday: Bool
-	public var isBeginingOfWeek: Bool
-	public var isEndOfWeek: Bool
-	public var isBeginingOfMonth: Bool
-	public var isEndOfMonth: Bool
-	public var day: Int
-	public var hour: Int
-	public var minute: Int
-	public var timeInHours: NSTimeInterval
-	public class func minuteInSeconds() -> NSTimeInterval
-	public class func hourInSeconds() -> NSTimeInterval
-	public class func dayInSeconds() -> NSTimeInterval
-	public class func weekInSeconds() -> NSTimeInterval
-	public class func daysBetweenDates(#fromDate: NSDate, toDate: NSDate) -> Int
-	public func daysRemainingInWeek() -> Int
-	public func daysInMonth() -> Int
-	public func daysRemainingInMonth() -> Int
-	public func compareToDate(#date: NSDate, option: DateCompareType = .EqualTo, stripTime: Bool = true) -> Bool
-	public func isBefore(#date: NSDate) -> Bool
-	public func isAfter(#date: NSDate) -> Bool
-	public func stripTime() -> NSDate
-	public func dateByAddingDays(days: Int) -> NSDate
-	public func dateTimeShortString() -> String
-	public func dateShortString() -> String
-	public func dateFullString() -> String
-	public func timeShortString() -> String
 NSDate.h
 	class NSDate : NSObject, NSCopying, NSSecureCoding, NSCoding
 WKWebViewController.swift

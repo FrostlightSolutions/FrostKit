@@ -648,6 +648,7 @@
 				1845E6F91A66DA03005B377D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		18839B1119D9FA8C00760157 /* Build configuration list for PBXProject "FrostKit" */ = {
 			isa = XCConfigurationList;
