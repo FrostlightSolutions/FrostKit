@@ -6,32 +6,45 @@
 //  Copyright (c) 2014 Frostlight Solutions. All rights reserved.
 //
 
-//
-//  How to update the FontAwesome unicode constants
-//  -----------------------------------------------
-//
-//  1.  Copy the values from https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/less/variables.less
-//  2.  Paste them in the 'variables.txt' file
-//  3.  When in the 'variables.txt' file, press alt + cmd + 0 and add it to the FrostKit target
-//  4.  Uncomment the testBuildFontAwesomeConstants() in FontTest and run the test
-//  5.  Copy the constants printed in the debug console (they're wrapped in ----------)
-//  6.  Paste the constants at the bottom of this file, replacing the ones alredy present
-//  7.  Comment out testBuildFontAwesomeConstants() again
-//  8.  Remove 'variables.txt' from the FrostKit target
-//  9.  Update the .ttf font from https://github.com/FortAwesome/Font-Awesome/blob/master/fonts/fontawesome-webfont.ttf
-//
-//  Note: Replace links for building other custom fonts and .less files.
-//
-
 import UIKit
 
+///
+/// How to update the font constants from less files
+///
+/// 1.  Copy the values from the respective `.less` file
+/// 2.  Paste them in the `variables.less` file in the FrostKit project
+/// 3.  When in the `variables.less` file, press alt + cmd + 0 and add it to the FrostKit target
+/// 4.  Uncomment the testBuildFontAwesomeConstants() in FontTest and run the test
+/// 5.  Copy the constants printed in the debug console (they're wrapped in `----------`)
+/// 6.  Paste the constants at the bottom of this file, replacing the ones alredy present
+/// 7.  Comment out testBuildFontAwesomeConstants() again
+/// 8.  Remove `variables.less` from the FrostKit target
+/// 9.  Update the .ttf font from the respective link
+///
+/// Note: Replace links for building other custom fonts and .less files.
+///
+/// :FontAwesome Links:
+/// - https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/less/variables.less
+/// - https://github.com/FortAwesome/Font-Awesome/blob/master/fonts/fontawesome-webfont.ttf
+///
+/// :IonIcons Links:
+/// - https://raw.githubusercontent.com/driftyco/ionicons/master/less/_ionicons-variables.less
+/// - https://github.com/driftyco/ionicons/blob/master/fonts/ionicons.ttf
+///
 public class CustomFonts: NSObject {
     
+    /// Loads custom fonts imbedded in the Framework.
     public class func loadCustomFonts() {
         loadFont("fontawesome-webfont", withExtension: "ttf")
         loadFont("ionicons", withExtension: "ttf")
     }
     
+    /**
+        Load a custom font from it's name and extention from within the bundle without having to declare it in the `Info.plist`.
+    
+        :param: name    The name of the font file name.
+        :param: ext     The extention of the file.
+    */
     private class func loadFont(name: String, withExtension ext: String) {
         
         let bundle = NSBundle(forClass: CustomFonts.self)
@@ -51,6 +64,7 @@ public class CustomFonts: NSObject {
         }
     }
     
+    /// Loops though all the fonts families loaded onto the device and prints them to the console.
     public class func printAllFontFamilies() {
         
         for fontFamily in UIFont.familyNames() {
@@ -60,6 +74,13 @@ public class CustomFonts: NSObject {
         }
     }
     
+    /**
+        This is a helper method not to be called in code. It allows parsing of a `.less` file in the project and printing out the Swift stype constants to copy into this call below.
+    
+        :param: name    Name of the less file to parse.
+    
+        :returns:   `true` if the file has been parsed correctly, `false` if there's an error.
+    */
     public class func buildFontConstantsFromLess(#name: String) -> Bool {
         
         let bundle = NSBundle(forClass: CustomFonts.self)

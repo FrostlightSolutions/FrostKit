@@ -29,11 +29,6 @@ WKWebViewController.swift
 	override func loadBaseURL() -> String
 NSTimeZone.h
 	class NSTimeZone : NSObject, NSCopying, NSSecureCoding, NSCoding
-CustomFonts.swift
-	public class CustomFonts: NSObject
-	public class func loadCustomFonts()
-	public class func printAllFontFamilies()
-	public class func buildFontConstantsFromLess(#name: String) -> Bool
 BaseWebViewController.swift
 	public class BaseWebViewController: UIViewController
 	public var webView: AnyObject?

@@ -23,7 +23,7 @@
     <a title="Classes  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p class="header-text"><a href="index.html">FrostKit Docs</a> (47% documented)</p>
+        <p class="header-text"><a href="index.html">FrostKit Docs</a> (49% documented)</p>
         <p id="header-links"><a href="https://github.com/FrostlightSolutions/FrostKit"><img id="header-icon" src="img/gh.png" height="16px" width="16px" />View on GitHub</a></p>
       </div>
     </header>
@@ -228,8 +228,17 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">How to update the font constants from less files<ol><li>Copy the values from the respective <code>.less</code> file</li><li>Paste them in the <code>variables.less</code> file in the FrostKit project</li><li>When in the <code>variables.less</code> file, press alt + cmd + 0 and add it to the FrostKit target</li><li>Uncomment the testBuildFontAwesomeConstants() in FontTest and run the test</li><li>Copy the constants printed in the debug console (they&rsquo;re wrapped in <code>----------</code>)</li><li>Paste the constants at the bottom of this file, replacing the ones alredy present</li><li>Comment out testBuildFontAwesomeConstants() again</li><li>Remove <code>variables.less</code> from the FrostKit target</li><li>Update the .ttf font from the respective link</li></ol>Note: Replace links for building other custom fonts and .less files.<dl><dt>FontAwesome Links</dt><dd></dd></dl><ul><li><a href="https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/less/variables.less">https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/less/variables.less</a></li><li><a href="https://github.com/FortAwesome/Font-Awesome/blob/master/fonts/fontawesome-webfont.ttf">https://github.com/FortAwesome/Font-Awesome/blob/master/fonts/fontawesome-webfont.ttf</a></li></ul><dl><dt>IonIcons Links</dt><dd></dd></dl><ul><li><a href="https://raw.githubusercontent.com/driftyco/ionicons/master/less/_ionicons-variables.less">https://raw.githubusercontent.com/driftyco/ionicons/master/less/_ionicons-variables.less</a></li><li><a href="https://github.com/driftyco/ionicons/blob/master/fonts/ionicons.ttf">https://github.com/driftyco/ionicons/blob/master/fonts/ionicons.ttf</a></li></ul></p>
                         <a href="Classes/CustomFonts.html" class="see-more">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">CustomFonts</span><span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
