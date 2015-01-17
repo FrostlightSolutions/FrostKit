@@ -30,17 +30,13 @@ WKWebViewController.swift
 NSTimeZone.h
 	class NSTimeZone : NSObject, NSCopying, NSSecureCoding, NSCoding
 BaseWebViewController.swift
-	public class BaseWebViewController: UIViewController
-	public var webView: AnyObject?
-	let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-	let progrssView = UIProgressView(progressViewStyle: .Bar)
-	var backButton: UIBarButtonItem?
-	var forwardButton: UIBarButtonItem?
-	public var urlString: String?
+	internal var webView: AnyObject?
+	internal let progrssView = UIProgressView(progressViewStyle: .Bar)
+	var urlString: String?
 	var URL: NSURL?
-	public var titleOverride: String?
+	var titleOverride: String?
 	var loading: Bool
-	public func stopLoading()
+	func stopLoading()
 	public override func viewDidLoad()
 	public override func viewWillDisappear(animated: Bool)
 	public override func viewDidDisappear(animated: Bool)
@@ -71,9 +67,6 @@ SocialHelper.swift
 	public func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!)
 	public func messageComposeViewController(controller: MFMessageComposeViewController!, didFinishWithResult result: MessageComposeResult)
 	public func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int)
-WebViewController.swift
-	public enum WebViewType
-	public func WebViewController(viewType: WebViewType = .Automatic) -> BaseWebViewController
 NSError.h
 	class NSError : NSObject, NSCopying, NSSecureCoding, NSCoding
 NSBundle.h
@@ -95,9 +88,6 @@ ImageCache.swift
 	static let instance : ImageCache = ImageCache()
 UIFont.h
 	class UIFont : NSObject, NSCopying
-LocalStorage.swift
-	static let DocumentDirectory = NSSearchPathDirectory.DocumentDirectory
-	static let CachesDirectory = NSSearchPathDirectory.CachesDirectory
 ContentManager.swift
 	struct Singleton
 	static let instance : ContentManager = ContentManager()

@@ -8,15 +8,13 @@
 
 import UIKit
 
-/**
-    Describes the location of the directory for saving files.
-
-    - DocumentDirectory: Document directory.
-    - CachesDirectory: Caches Directory.
-*/
+/// Describes the location of the directory for saving files.
 public enum Location: UInt {
+    /// User Data directory.
     case UserData
+    /// Document directory.
     static let DocumentDirectory = NSSearchPathDirectory.DocumentDirectory
+    /// Caches Directory.
     static let CachesDirectory = NSSearchPathDirectory.CachesDirectory
 }
 

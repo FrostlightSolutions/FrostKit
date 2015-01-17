@@ -8,12 +8,23 @@
 
 import UIKit
 
+/// Descrbes the type of web view.
 public enum WebViewType {
+    /// Automatically selects the relevent web view.
     case Automatic
+    /// UIWebView.
     case UIWebView
+    /// WKWebView.
     case WKWebView
 }
 
+/**
+    Returns a WebViewController dependant on the variable or automatically
+
+    :param: viewType    The type of view to use in the controller. By default this is done automatically.
+
+    :returns: A base web view controller with the designated web view.
+*/
 public func WebViewController(viewType: WebViewType = .Automatic) -> BaseWebViewController {
     
     switch viewType {
