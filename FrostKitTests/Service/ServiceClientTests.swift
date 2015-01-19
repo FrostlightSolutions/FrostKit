@@ -16,15 +16,17 @@ class ServiceClientTests: XCTestCase {
     
     let username = "odin"
     let password = "odin"
-    var authToken: AuthorizationToken?
     
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        UserStore.shared
     }
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        UserStore.saveUser()
+        
         super.tearDown()
     }
     
@@ -53,11 +55,10 @@ class ServiceClientTests: XCTestCase {
     }
     
     func login(complete: () -> ()) {
-        ServiceClient.loginUser(username: username, password: password) { (authorizationToken, error) -> () in
+        ServiceClient.loginUser(username: username, password: password) { (error) -> () in
             if let anError = error {
                 XCTAssert(false, "Login Error: \(anError.localizedDescription)")
             } else {
-                self.authToken = authorizationToken
                 XCTAssert(true, "Logged In")
             }
             complete()
@@ -65,19 +66,12 @@ class ServiceClientTests: XCTestCase {
     }
     
     func refresh(complete: () -> ()) {
-        if let authToken = self.authToken {
-            
-            ServiceClient.refreshAuthorizationToken(authToken) { (authorizationToken, error) -> () in
-                if let anError = error {
-                    XCTAssert(false, "Login Error: \(anError.localizedDescription)")
-                } else {
-                    self.authToken = authorizationToken
-                    XCTAssert(true, "Logged In")
-                }
-                complete()
+        ServiceClient.refreshOAuthToken() { (error) -> () in
+            if let anError = error {
+                XCTAssert(false, "Login Error: \(anError.localizedDescription)")
+            } else {
+                XCTAssert(true, "Logged In")
             }
-        } else {
-            XCTAssert(false, "No authorization token to refresh.")
             complete()
         }
     }

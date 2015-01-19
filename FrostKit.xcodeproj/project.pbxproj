@@ -26,9 +26,31 @@
 		1811D7BA1A0AD1CA00E8B873 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B61A0AD1CA00E8B873 /* WebViewController.swift */; };
 		1811D7BB1A0AD1CA00E8B873 /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B71A0AD1CA00E8B873 /* WKWebViewController.swift */; };
 		181BCC3619DF60810056C8F8 /* KeychainHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181BCC3519DF60810056C8F8 /* KeychainHelperTests.swift */; };
-		186B07EE1A6D592900CAF920 /* AuthorizationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CBAA041A6D315F009CBCA0 /* AuthorizationToken.swift */; };
+		186B07EE1A6D592900CAF920 /* OAuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CBAA041A6D315F009CBCA0 /* OAuthToken.swift */; };
 		186B07F31A6D5C4700CAF920 /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B07F21A6D5C4700CAF920 /* UserStore.swift */; };
 		186B07F41A6D5C4700CAF920 /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B07F21A6D5C4700CAF920 /* UserStore.swift */; };
+		186B07F51A6D5F0400CAF920 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066019DB5BF000811755 /* LocalStorage.swift */; };
+		186B07F61A6D5F2700CAF920 /* NSErrorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066719DB762600811755 /* NSErrorExtensions.swift */; };
+		186B07F81A6D5F2700CAF920 /* NSCalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BB7C7419DC383900F21A64 /* NSCalendarExtensions.swift */; };
+		186B07F91A6D5F2700CAF920 /* NSTimeZoneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFF9FD19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift */; };
+		186B07FA1A6D5F2700CAF920 /* NSDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA123E19DC79F100FD858D /* NSDataExtensions.swift */; };
+		186B07FB1A6D5F2700CAF920 /* NSBundleExtensiosns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124419DC8B5E00FD858D /* NSBundleExtensiosns.swift */; };
+		186B07FC1A6D5F2700CAF920 /* UIFontExtensiosns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EC19DCBB5B008A1506 /* UIFontExtensiosns.swift */; };
+		186B07FD1A6D5F2700CAF920 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066919DB767A00811755 /* UIColorExtensions.swift */; };
+		186B07FE1A6D5F2700CAF920 /* UIImageExtensiosns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066D19DB76C900811755 /* UIImageExtensiosns.swift */; };
+		186B07FF1A6D5F2700CAF920 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124019DC7D9000FD858D /* UIViewExtensions.swift */; };
+		186B08001A6D5F2700CAF920 /* UIBarButtonItemExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23919DE15600032ABB7 /* UIBarButtonItemExtensions.swift */; };
+		186B08011A6D5F2700CAF920 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC212A19DEA21000FEB57E /* UIViewControllerExtensions.swift */; };
+		186B08021A6D5F2900CAF920 /* SocialHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B4519DA27AE00760157 /* SocialHelper.swift */; };
+		186B08031A6D5F2900CAF920 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124219DC8A8C00FD858D /* KeychainHelper.swift */; };
+		186B08041A6D5F2E00CAF920 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B61A0AD1CA00E8B873 /* WebViewController.swift */; };
+		186B08051A6D5F2E00CAF920 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B41A0AD1CA00E8B873 /* BaseWebViewController.swift */; };
+		186B08061A6D5F2E00CAF920 /* UIWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B51A0AD1CA00E8B873 /* UIWebViewController.swift */; };
+		186B08071A6D5F2E00CAF920 /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B71A0AD1CA00E8B873 /* WKWebViewController.swift */; };
+		186B08081A6D5F3400CAF920 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066219DB5C7200811755 /* ImageCache.swift */; };
+		186B08091A6D5F3400CAF920 /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066F19DB7EDB00811755 /* ContentManager.swift */; };
+		186B080A1A6D5F6200CAF920 /* FrostKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23119DE07670032ABB7 /* FrostKit.swift */; };
+		186B080B1A6D5F6F00CAF920 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EE19DCBC28008A1506 /* CustomFonts.swift */; };
 		18748B2219DF5661003942A3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18748B2019DF5661003942A3 /* Localizable.strings */; };
 		18839B1D19D9FA8C00760157 /* FrostKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 18839B1C19D9FA8C00760157 /* FrostKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		18839B2719D9FA8C00760157 /* FrostKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B2619D9FA8C00760157 /* FrostKitTests.swift */; };
@@ -48,7 +70,7 @@
 		18C0067819DC23A100811755 /* UIColorExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0067719DC23A100811755 /* UIColorExtensionsTest.swift */; };
 		18C0DBAF1A6D182400307EAA /* Alamofire.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 18C0DBA71A6D174E00307EAA /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18C0DBB11A6D18AB00307EAA /* ServiceClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0DBB01A6D18AB00307EAA /* ServiceClientTests.swift */; };
-		18CBAA051A6D315F009CBCA0 /* AuthorizationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CBAA041A6D315F009CBCA0 /* AuthorizationToken.swift */; };
+		18CBAA051A6D315F009CBCA0 /* OAuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CBAA041A6D315F009CBCA0 /* OAuthToken.swift */; };
 		18CFF9FE19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFF9FD19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift */; };
 		18DC212919DE970200FEB57E /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18DC212719DE970200FEB57E /* ionicons.ttf */; };
 		18DC212B19DEA21000FEB57E /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC212A19DEA21000FEB57E /* UIViewControllerExtensions.swift */; };
@@ -138,7 +160,7 @@
 		18C0067719DC23A100811755 /* UIColorExtensionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensionsTest.swift; sourceTree = "<group>"; };
 		18C0DBA01A6D174E00307EAA /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		18C0DBB01A6D18AB00307EAA /* ServiceClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceClientTests.swift; sourceTree = "<group>"; };
-		18CBAA041A6D315F009CBCA0 /* AuthorizationToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationToken.swift; sourceTree = "<group>"; };
+		18CBAA041A6D315F009CBCA0 /* OAuthToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthToken.swift; sourceTree = "<group>"; };
 		18CFF9FD19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimeZoneExtensions.swift; sourceTree = "<group>"; };
 		18DC212619DE970200FEB57E /* ionicons-variables.less */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ionicons-variables.less"; sourceTree = "<group>"; };
 		18DC212719DE970200FEB57E /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
@@ -370,7 +392,7 @@
 		18CBAA011A6D2F3F009CBCA0 /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
-				18CBAA041A6D315F009CBCA0 /* AuthorizationToken.swift */,
+				18CBAA041A6D315F009CBCA0 /* OAuthToken.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -581,7 +603,7 @@
 				18BB7C7519DC383900F21A64 /* NSCalendarExtensions.swift in Sources */,
 				1899C4FB1A6D152C001638CF /* ServiceClient.swift in Sources */,
 				18C0066E19DB76C900811755 /* UIImageExtensiosns.swift in Sources */,
-				18CBAA051A6D315F009CBCA0 /* AuthorizationToken.swift in Sources */,
+				18CBAA051A6D315F009CBCA0 /* OAuthToken.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -589,15 +611,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				186B07EE1A6D592900CAF920 /* AuthorizationToken.swift in Sources */,
+				186B08081A6D5F3400CAF920 /* ImageCache.swift in Sources */,
+				186B08021A6D5F2900CAF920 /* SocialHelper.swift in Sources */,
+				186B07F51A6D5F0400CAF920 /* LocalStorage.swift in Sources */,
+				186B07FF1A6D5F2700CAF920 /* UIViewExtensions.swift in Sources */,
+				186B08031A6D5F2900CAF920 /* KeychainHelper.swift in Sources */,
+				186B07F61A6D5F2700CAF920 /* NSErrorExtensions.swift in Sources */,
+				186B07F81A6D5F2700CAF920 /* NSCalendarExtensions.swift in Sources */,
+				186B07EE1A6D592900CAF920 /* OAuthToken.swift in Sources */,
+				186B07FB1A6D5F2700CAF920 /* NSBundleExtensiosns.swift in Sources */,
 				181BCC3619DF60810056C8F8 /* KeychainHelperTests.swift in Sources */,
+				186B08051A6D5F2E00CAF920 /* BaseWebViewController.swift in Sources */,
+				186B07FD1A6D5F2700CAF920 /* UIColorExtensions.swift in Sources */,
+				186B08041A6D5F2E00CAF920 /* WebViewController.swift in Sources */,
 				18DE01F619DCBE45008A1506 /* FontTests.swift in Sources */,
+				186B08091A6D5F3400CAF920 /* ContentManager.swift in Sources */,
+				186B08061A6D5F2E00CAF920 /* UIWebViewController.swift in Sources */,
+				186B07F91A6D5F2700CAF920 /* NSTimeZoneExtensions.swift in Sources */,
 				18C0067819DC23A100811755 /* UIColorExtensionsTest.swift in Sources */,
 				18C0067519DC001000811755 /* NSDateExtensionsTests.swift in Sources */,
 				186B07F41A6D5C4700CAF920 /* UserStore.swift in Sources */,
+				186B07FA1A6D5F2700CAF920 /* NSDataExtensions.swift in Sources */,
 				1899C4FD1A6D154A001638CF /* ServiceClient.swift in Sources */,
+				186B08071A6D5F2E00CAF920 /* WKWebViewController.swift in Sources */,
 				18C0DBB11A6D18AB00307EAA /* ServiceClientTests.swift in Sources */,
+				186B08001A6D5F2700CAF920 /* UIBarButtonItemExtensions.swift in Sources */,
+				186B08011A6D5F2700CAF920 /* UIViewControllerExtensions.swift in Sources */,
+				186B07FC1A6D5F2700CAF920 /* UIFontExtensiosns.swift in Sources */,
 				18839B2719D9FA8C00760157 /* FrostKitTests.swift in Sources */,
+				186B080B1A6D5F6F00CAF920 /* CustomFonts.swift in Sources */,
+				186B07FE1A6D5F2700CAF920 /* UIImageExtensiosns.swift in Sources */,
+				186B080A1A6D5F6200CAF920 /* FrostKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

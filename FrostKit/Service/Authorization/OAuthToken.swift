@@ -1,5 +1,5 @@
 //
-//  AuthorizationToken.swift
+//  OAuthToken.swift
 //  FrostKit
 //
 //  Created by James Barrow on 19/01/2015.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class AuthorizationToken: NSObject, NSCoding, NSCopying {
+public class OAuthToken: NSObject, NSCoding, NSCopying {
     
     lazy var accessToken = ""
     lazy var refreshToken = ""
@@ -26,16 +26,27 @@ public class AuthorizationToken: NSObject, NSCoding, NSCopying {
         super.init()
     }
     
-    convenience init(accessToken: String, refreshToken: String, expiresAt: NSTimeInterval, tokenType: String, scope: String) {
+    /**
+    Convenience init to allow creating a `OAuthToken` from anouther `OAuthToken`.
+    
+    :param: oAuthToken The `OAuthToken` to take values from.
+    */
+    convenience init(oAuthToken: OAuthToken) {
         self.init()
         
-        self.accessToken = accessToken
-        self.refreshToken = refreshToken
-        self.expiresAt = expiresAt
-        self.tokenType = tokenType
-        self.scope = scope
+        self.accessToken = oAuthToken.accessToken
+        self.refreshToken = oAuthToken.refreshToken
+        self.expiresAt = oAuthToken.expiresAt
+        self.tokenType = oAuthToken.tokenType
+        self.scope = oAuthToken.scope
     }
     
+    /**
+    Convenience init to allow creating a `OAuthToken` from an `NSDictionary` JSON.
+    
+    :param: json        `NSDictionary` of the JSON to parse into the `OAuthToken`.
+    :param: requestDate The date the token was requested.
+    */
     convenience init(json: NSDictionary, requestDate: NSDate = NSDate()) {
         self.init()
         
@@ -62,8 +73,8 @@ public class AuthorizationToken: NSObject, NSCoding, NSCopying {
     
     // MARK: - NSCoding Methods
     
-    public required init(coder aDecoder: NSCoder) {
-        super.init()
+    public required convenience init(coder aDecoder: NSCoder) {
+        self.init()
         
         accessToken = aDecoder.decodeObjectForKey("access_token") as String
         refreshToken = aDecoder.decodeObjectForKey("refresh_token") as String
@@ -84,7 +95,7 @@ public class AuthorizationToken: NSObject, NSCoding, NSCopying {
     // MARK: - NSCopying Methods
     
     public func copyWithZone(zone: NSZone) -> AnyObject {
-        return AuthorizationToken(accessToken: self.accessToken, refreshToken: self.refreshToken, expiresAt: self.expiresAt, tokenType: self.tokenType, scope: self.scope)
+        return OAuthToken(oAuthToken: self)
     }
     
 }
