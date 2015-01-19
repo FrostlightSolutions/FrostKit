@@ -45,6 +45,8 @@
 		18C0067819DC23A100811755 /* UIColorExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0067719DC23A100811755 /* UIColorExtensionsTest.swift */; };
 		18C0DBAF1A6D182400307EAA /* Alamofire.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 18C0DBA71A6D174E00307EAA /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18C0DBB11A6D18AB00307EAA /* ServiceClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0DBB01A6D18AB00307EAA /* ServiceClientTests.swift */; };
+		18CBAA031A6D2F59009CBCA0 /* AuthorizationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CBAA021A6D2F59009CBCA0 /* AuthorizationStore.swift */; };
+		18CBAA051A6D315F009CBCA0 /* AuthorizationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CBAA041A6D315F009CBCA0 /* AuthorizationToken.swift */; };
 		18CFF9FE19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFF9FD19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift */; };
 		18DC212919DE970200FEB57E /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18DC212719DE970200FEB57E /* ionicons.ttf */; };
 		18DC212B19DEA21000FEB57E /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC212A19DEA21000FEB57E /* UIViewControllerExtensions.swift */; };
@@ -133,6 +135,8 @@
 		18C0067719DC23A100811755 /* UIColorExtensionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensionsTest.swift; sourceTree = "<group>"; };
 		18C0DBA01A6D174E00307EAA /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		18C0DBB01A6D18AB00307EAA /* ServiceClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceClientTests.swift; sourceTree = "<group>"; };
+		18CBAA021A6D2F59009CBCA0 /* AuthorizationStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationStore.swift; sourceTree = "<group>"; };
+		18CBAA041A6D315F009CBCA0 /* AuthorizationToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationToken.swift; sourceTree = "<group>"; };
 		18CFF9FD19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimeZoneExtensions.swift; sourceTree = "<group>"; };
 		18DC212619DE970200FEB57E /* ionicons-variables.less */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ionicons-variables.less"; sourceTree = "<group>"; };
 		18DC212719DE970200FEB57E /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
@@ -284,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				1899C4FA1A6D152C001638CF /* ServiceClient.swift */,
+				18CBAA011A6D2F3F009CBCA0 /* Authorization */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -349,6 +354,15 @@
 				18C0DBAB1A6D174E00307EAA /* AlamofireTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		18CBAA011A6D2F3F009CBCA0 /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				18CBAA021A6D2F59009CBCA0 /* AuthorizationStore.swift */,
+				18CBAA041A6D315F009CBCA0 /* AuthorizationToken.swift */,
+			);
+			path = Authorization;
 			sourceTree = "<group>";
 		};
 		18DE01EB19DCBB18008A1506 /* Fonts */ = {
@@ -537,6 +551,7 @@
 				1811D7BB1A0AD1CA00E8B873 /* WKWebViewController.swift in Sources */,
 				18CFF9FE19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift in Sources */,
 				18DE01EF19DCBC28008A1506 /* CustomFonts.swift in Sources */,
+				18CBAA031A6D2F59009CBCA0 /* AuthorizationStore.swift in Sources */,
 				18EA124119DC7D9000FD858D /* UIViewExtensions.swift in Sources */,
 				1811D7B81A0AD1CA00E8B873 /* BaseWebViewController.swift in Sources */,
 				18DC212B19DEA21000FEB57E /* UIViewControllerExtensions.swift in Sources */,
@@ -556,6 +571,7 @@
 				18BB7C7519DC383900F21A64 /* NSCalendarExtensions.swift in Sources */,
 				1899C4FB1A6D152C001638CF /* ServiceClient.swift in Sources */,
 				18C0066E19DB76C900811755 /* UIImageExtensiosns.swift in Sources */,
+				18CBAA051A6D315F009CBCA0 /* AuthorizationToken.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
