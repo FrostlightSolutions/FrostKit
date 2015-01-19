@@ -16,6 +16,7 @@ class ServiceClientTests: XCTestCase {
     
     let username = "odin"
     let password = "odin"
+    var authToken: AuthorizationToken?
     
     override func setUp() {
         super.setUp()
@@ -31,16 +32,54 @@ class ServiceClientTests: XCTestCase {
         
         let expectation = expectationWithDescription("Test Login")
         
-        ServiceClient.login(username, password: password) { (error) -> () in
-            if let anError = error {
-                XCTAssert(false, "Login Error: \(anError.localizedDescription)")
-            } else {
-                XCTAssert(true, "Logged In")
-            }
+        login { () -> () in
             expectation.fulfill()
         }
         
         self.waitForExpectationsWithTimeout(expectationTimeout, handler: { (completionHandler) -> Void in })
+    }
+    
+    func testLoginAndThenRefresh() {
+        
+        let expectation = expectationWithDescription("Test Login")
+        
+        login { () -> () in
+            self.refresh({ () -> () in
+                expectation.fulfill()
+            })
+        }
+        
+        self.waitForExpectationsWithTimeout(expectationTimeout, handler: { (completionHandler) -> Void in })
+    }
+    
+    func login(complete: () -> ()) {
+        ServiceClient.loginUser(username: username, password: password) { (authorizationToken, error) -> () in
+            if let anError = error {
+                XCTAssert(false, "Login Error: \(anError.localizedDescription)")
+            } else {
+                self.authToken = authorizationToken
+                XCTAssert(true, "Logged In")
+            }
+            complete()
+        }
+    }
+    
+    func refresh(complete: () -> ()) {
+        if let authToken = self.authToken {
+            
+            ServiceClient.refreshAuthorizationToken(authToken) { (authorizationToken, error) -> () in
+                if let anError = error {
+                    XCTAssert(false, "Login Error: \(anError.localizedDescription)")
+                } else {
+                    self.authToken = authorizationToken
+                    XCTAssert(true, "Logged In")
+                }
+                complete()
+            }
+        } else {
+            XCTAssert(false, "No authorization token to refresh.")
+            complete()
+        }
     }
     
 }

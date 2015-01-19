@@ -36,29 +36,27 @@ public class AuthorizationToken: NSObject, NSCoding, NSCopying {
         self.scope = scope
     }
     
-    convenience init(json: AnyObject?, requestDate: NSDate = NSDate()) {
+    convenience init(json: NSDictionary, requestDate: NSDate = NSDate()) {
         self.init()
         
-        if let jsonDict = json as? NSDictionary {
-            if let accessToken = jsonDict["access_token"] as? String {
-                self.accessToken = accessToken
-            }
-            
-            if let refreshToken = jsonDict["refresh_token"] as? String {
-                self.refreshToken = refreshToken
-            }
-            
-            if let expiresIn = jsonDict["expires_in"] as? Int {
-                self.expiresAt = requestDate.timeIntervalSinceReferenceDate + NSTimeInterval(expiresIn)
-            }
-            
-            if let tokenType = jsonDict["token_type"] as? String {
-                self.tokenType = tokenType
-            }
-            
-            if let scope = jsonDict["scope"] as? String {
-                self.scope = scope
-            }
+        if let accessToken = json["access_token"] as? String {
+            self.accessToken = accessToken
+        }
+        
+        if let refreshToken = json["refresh_token"] as? String {
+            self.refreshToken = refreshToken
+        }
+        
+        if let expiresIn = json["expires_in"] as? Int {
+            self.expiresAt = requestDate.timeIntervalSinceReferenceDate + NSTimeInterval(expiresIn)
+        }
+        
+        if let tokenType = json["token_type"] as? String {
+            self.tokenType = tokenType
+        }
+        
+        if let scope = json["scope"] as? String {
+            self.scope = scope
         }
     }
     

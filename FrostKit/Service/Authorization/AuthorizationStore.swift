@@ -8,6 +8,7 @@
 
 import UIKit
 
+// TODO: Remove this class and only store 1 authorization token in the user object (when created).
 public class AuthorizationStore: NSMutableDictionary {
     
     // MARK: - Singleton
@@ -24,26 +25,27 @@ public class AuthorizationStore: NSMutableDictionary {
         return Singleton.instance
     }
     
-    // MARK: - Adding Objects
+    // MARK: - Adding  Authorization Tokens
     
-    func createAndAddAuthorizationToken(#json: AnyObject?, requestDate: NSDate) {
+    func createAndAddAuthorizationToken(#json: NSDictionary, requestDate: NSDate) {
         let authToken = AuthorizationToken(json: json, requestDate: requestDate)
         setObject(authToken, forKey: authToken.accessToken)
     }
     
-    // MARK: - Remove Object
+    // MARK: - Remove  Authorization Tokens
     
     func removeAuthorizationToken(#authToken: AuthorizationToken) {
         removeObjectForKey(authToken.accessToken)
     }
     
-    // MARK: - Cleanup Methods
+    // MARK: - Cleanup  Authorization Tokens
     
     /**
     Remove all expired keys in the store.
     */
     func cleanup() {
         
+        // TODO: Don't delete, refresh
         let keysToDelete = NSMutableArray()
         let selfCopy = self.mutableCopy() as NSMutableDictionary
         let timestamp = NSDate.timeIntervalSinceReferenceDate()

@@ -26,6 +26,8 @@
 		1811D7BA1A0AD1CA00E8B873 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B61A0AD1CA00E8B873 /* WebViewController.swift */; };
 		1811D7BB1A0AD1CA00E8B873 /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B71A0AD1CA00E8B873 /* WKWebViewController.swift */; };
 		181BCC3619DF60810056C8F8 /* KeychainHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181BCC3519DF60810056C8F8 /* KeychainHelperTests.swift */; };
+		186B07ED1A6D592900CAF920 /* AuthorizationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CBAA021A6D2F59009CBCA0 /* AuthorizationStore.swift */; };
+		186B07EE1A6D592900CAF920 /* AuthorizationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CBAA041A6D315F009CBCA0 /* AuthorizationToken.swift */; };
 		18748B2219DF5661003942A3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18748B2019DF5661003942A3 /* Localizable.strings */; };
 		18839B1D19D9FA8C00760157 /* FrostKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 18839B1C19D9FA8C00760157 /* FrostKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		18839B2719D9FA8C00760157 /* FrostKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B2619D9FA8C00760157 /* FrostKitTests.swift */; };
@@ -579,7 +581,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				186B07EE1A6D592900CAF920 /* AuthorizationToken.swift in Sources */,
 				181BCC3619DF60810056C8F8 /* KeychainHelperTests.swift in Sources */,
+				186B07ED1A6D592900CAF920 /* AuthorizationStore.swift in Sources */,
 				18DE01F619DCBE45008A1506 /* FontTests.swift in Sources */,
 				18C0067819DC23A100811755 /* UIColorExtensionsTest.swift in Sources */,
 				18C0067519DC001000811755 /* NSDateExtensionsTests.swift in Sources */,
