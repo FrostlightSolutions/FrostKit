@@ -1,0 +1,104 @@
+UIWebViewController.swift
+	class UIWebViewController: BaseWebViewController, UIWebViewDelegate
+	override var URL: NSURL?
+	override var loading: Bool
+	override func stopLoading()
+	override func viewDidLoad()
+	override func refreshButtonPressed(sender: AnyObject?)
+	override func backButtonPressed(sender: AnyObject?)
+	override func forwardButtonPressed(sender: AnyObject?)
+	func webViewDidStartLoad(webView: UIWebView)
+	func webViewDidFinishLoad(webView: UIWebView)
+	func webView(webView: UIWebView, didFailLoadWithError error: NSError)
+	override func loadBaseURL() -> String
+NSDate.h
+	class NSDate : NSObject, NSCopying, NSSecureCoding, NSCoding
+WKWebViewController.swift
+	class WKWebViewController: BaseWebViewController, WKNavigationDelegate
+	override var URL: NSURL?
+	override var titleOverride: String?
+	override var loading: Bool
+	override func stopLoading()
+	override func viewDidLoad()
+	deinit
+	override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>)
+	override func refreshButtonPressed(sender: AnyObject?)
+	override func backButtonPressed(sender: AnyObject?)
+	override func forwardButtonPressed(sender: AnyObject?)
+	func webView(webView: WKWebView!, decidePolicyForNavigationAction navigationAction: WKNavigationAction!, decisionHandler: ((WKNavigationActionPolicy) -> Void)!)
+	override func loadBaseURL() -> String
+NSTimeZone.h
+	class NSTimeZone : NSObject, NSCopying, NSSecureCoding, NSCoding
+BaseWebViewController.swift
+	internal var webView: AnyObject?
+	internal let progrssView = UIProgressView(progressViewStyle: .Bar)
+	var urlString: String?
+	var URL: NSURL?
+	var titleOverride: String?
+	var loading: Bool
+	func stopLoading()
+	public override func viewDidLoad()
+	public override func viewWillDisappear(animated: Bool)
+	public override func viewDidDisappear(animated: Bool)
+	public override func didReceiveMemoryWarning()
+	func doneButtonPressed(sender: AnyObject?)
+	func backButtonPressed(sender: AnyObject?)
+	func forwardButtonPressed(sender: AnyObject?)
+	func refreshButtonPressed(sender: AnyObject?)
+	func actionButtonPressed(sender: AnyObject?)
+	func setupToolbar()
+	func updateProgrssViewVisability()
+	func updateActivityViewVisability()
+	func updateBackButton()
+	func updateForwardButton()
+	func updateBackForwardButtons()
+	func loadBaseURL() -> String
+UIViewController.h
+	class UIViewController : UIResponder, NSCoding, UIAppearanceContainer, NSObjectProtocol, UITraitEnvironment, UIContentContainer
+SocialHelper.swift
+	public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate
+	struct Singleton
+	static let instance : SocialHelper = SocialHelper()
+	override init()
+	public class func presentComposeViewController(serviceType: String, initialText: String? = nil, urls: [NSURL]? = nil, images: [UIImage]? = nil, inViewController viewController: UIViewController, animated: Bool = true)
+	public class func phonePrompt(#number: String)
+	public class func emailPrompt(#toRecipients: [String], ccRecipients: [String] = [], bccRecipients: [String] = [], subject: String = "", messageBody: String = "", isBodyHTML: Bool = false, attachments: [(data: NSData, mimeType: String, fileName: String)] = [], viewController: UIViewController, animated: Bool = true)
+	public class func messagePrompt(#recipients: [String], subject: String = "", body: String = "", attachments: [(attachmentURL: NSURL, alternateFilename: String)] = [], viewController: UIViewController, animated: Bool = true)
+	public func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!)
+	public func messageComposeViewController(controller: MFMessageComposeViewController!, didFinishWithResult result: MessageComposeResult)
+	public func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int)
+NSError.h
+	class NSError : NSObject, NSCopying, NSSecureCoding, NSCoding
+NSBundle.h
+	class NSBundle : NSObject
+UIColor.h
+	class UIColor : NSObject, NSSecureCoding, NSCoding, NSCopying
+UIColorExtensions.swift
+	public convenience init(hexString: String)
+FrostKit.swift
+	internal func FKLocalizedString(key: String, comment: String = "") -> String
+	public class FrostKit
+	public var tintColor: UIColor?
+	public class var shared: FrostKit
+	struct Singleton
+	static let instance : FrostKit = FrostKit()
+	init()
+ImageCache.swift
+	struct Singleton
+	static let instance : ImageCache = ImageCache()
+UIFont.h
+	class UIFont : NSObject, NSCopying
+ContentManager.swift
+	struct Singleton
+	static let instance : ContentManager = ContentManager()
+UIBarButtonItem.h
+	class UIBarButtonItem : UIBarItem, NSCoding
+UIBarButtonItemExtensions.swift
+	public convenience init(title: String?, font: UIFont, verticalOffset: CGFloat = 0, target: AnyObject?, action: Selector)
+KeychainHelper.swift
+	public class KeychainHelper: NSObject
+	public class func details(#username: String) -> String?
+	public class func setDetails(#password: String, username: String) -> Bool
+	public class func deleteKeychain() -> Bool
+NSCalendar.h
+	class NSCalendar : NSObject, NSCopying, NSSecureCoding, NSCoding

@@ -8,8 +8,16 @@
 
 import Foundation
 
+///
+/// Extention functions for NSData
+///
 extension NSData {
     
+    /**
+        Returns a string of the hex data object.
+        
+        :returns: Hex string of the data.
+    */
     public func hexString() -> NSString {
         var string = NSMutableString(capacity: self.length)
         let bytes = UnsafeBufferPointer<UInt8>(start: UnsafePointer(self.bytes), count:self.length)

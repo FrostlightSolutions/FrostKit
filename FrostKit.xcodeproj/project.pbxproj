@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		1845E6F61A66DA03005B377D /* FrostKitDocs */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 1845E6F71A66DA03005B377D /* Build configuration list for PBXAggregateTarget "FrostKitDocs" */;
+			buildPhases = (
+				1845E6FA1A66DA0F005B377D /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = FrostKitDocs;
+			productName = FrostKitDocs;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		1811D7B81A0AD1CA00E8B873 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B41A0AD1CA00E8B873 /* BaseWebViewController.swift */; };
 		1811D7B91A0AD1CA00E8B873 /* UIWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B51A0AD1CA00E8B873 /* UIWebViewController.swift */; };
@@ -28,7 +42,6 @@
 		18C0067619DC00C000811755 /* FrostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18839B1719D9FA8C00760157 /* FrostKit.framework */; };
 		18C0067819DC23A100811755 /* UIColorExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0067719DC23A100811755 /* UIColorExtensionsTest.swift */; };
 		18CFF9FE19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFF9FD19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift */; };
-		18DC212819DE970200FEB57E /* ionicons-variables.less in Resources */ = {isa = PBXBuildFile; fileRef = 18DC212619DE970200FEB57E /* ionicons-variables.less */; };
 		18DC212919DE970200FEB57E /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18DC212719DE970200FEB57E /* ionicons.ttf */; };
 		18DC212B19DEA21000FEB57E /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC212A19DEA21000FEB57E /* UIViewControllerExtensions.swift */; };
 		18DE01ED19DCBB5B008A1506 /* UIFontExtensiosns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EC19DCBB5B008A1506 /* UIFontExtensiosns.swift */; };
@@ -335,6 +348,9 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Frostlight Solutions";
 				TargetAttributes = {
+					1845E6F61A66DA03005B377D = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
 					18839B1619D9FA8C00760157 = {
 						CreatedOnToolsVersion = 6.0.1;
 					};
@@ -357,6 +373,7 @@
 			targets = (
 				18839B1619D9FA8C00760157 /* FrostKit */,
 				18839B2119D9FA8C00760157 /* FrostKitTests */,
+				1845E6F61A66DA03005B377D /* FrostKitDocs */,
 			);
 		};
 /* End PBXProject section */
@@ -368,7 +385,6 @@
 			files = (
 				18DC212919DE970200FEB57E /* ionicons.ttf in Resources */,
 				18748B2219DF5661003942A3 /* Localizable.strings in Resources */,
-				18DC212819DE970200FEB57E /* ionicons-variables.less in Resources */,
 				18DE01F319DCBCC4008A1506 /* fontawesome-webfont.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,6 +397,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1845E6FA1A66DA0F005B377D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd /Users/jamesbarrow/Dropbox/Pig\\ on\\ a\\ Hill/Projects/Frameworks/FrostKit/\n/Users/jamesbarrow/Dropbox/Pig\\ on\\ a\\ Hill/API\\:SDK/Forks/jazzy/bin/jazzy -x -project,\"${SRCROOT}/FrostKit.xcodeproj\",-scheme,FrostKit -c -m FrostKit -a James\\ Barrow -g https:\\/\\/github.com/FrostlightSolutions/FrostKit -o FrostKitDocs";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		18839B1219D9FA8C00760157 /* Sources */ = {
@@ -440,6 +472,20 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1845E6F81A66DA03005B377D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		1845E6F91A66DA03005B377D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		18839B2819D9FA8C00760157 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -595,6 +641,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1845E6F71A66DA03005B377D /* Build configuration list for PBXAggregateTarget "FrostKitDocs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1845E6F81A66DA03005B377D /* Debug */,
+				1845E6F91A66DA03005B377D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		18839B1119D9FA8C00760157 /* Build configuration list for PBXProject "FrostKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

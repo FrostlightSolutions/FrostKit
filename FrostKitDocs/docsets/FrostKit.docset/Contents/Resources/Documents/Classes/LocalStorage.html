@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>LocalStorage Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script type="text/javascript">
+    window.jazzy = {'docset': false}
+    if (typeof window.dash != 'undefined') {
+      document.documentElement.className += ' dash'
+      window.jazzy.docset = true
+    }
+    if (navigator.userAgent.match(/xcode/i)) {
+      document.documentElement.className += ' xcode'
+      window.jazzy.docset = true
+    }
+    </script>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+  </head>
+  <body id="reference" class="Swift">
+    <a name="//apple_ref/swift/Class/LocalStorage" class="dashAnchor"></a>
+    <a title="LocalStorage Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p class="header-text"><a href="../index.html">FrostKit Docs</a> (54% documented)</p>
+        <p id="header-links"><a href="https://github.com/FrostlightSolutions/FrostKit"><img id="header-icon" src="../img/gh.png" height="16px" width="16px" />View on GitHub</a></p>
+      </div>
+    </header>
+    <section id="valence">
+      <div class="content-wrapper">
+        <p id="hierarchial_navigation">
+        <a href="../index.html" id="design_resources_link">FrostKit Reference</a>
+        <img id="carat" src="../img/carat.png" height="10px" width="6px" />
+        LocalStorage Class Reference
+        </p>
+      </div>
+    </section>
+    <div class="content-wrapper">
+      <nav class="book-parts">
+        <ul class="nav-parts">
+          <li class="part-name tasks">
+          <a href="../Classes.html">Classes</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Classes/BaseWebViewController.html">BaseWebViewController</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/ContentManager.html">ContentManager</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/CustomFonts.html">CustomFonts</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/FrostKit.html">FrostKit</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/ImageCache.html">ImageCache</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/KeychainHelper.html">KeychainHelper</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/LocalStorage.html">LocalStorage</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/SocialHelper.html">SocialHelper</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/UIWebViewController.html">UIWebViewController</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/WKWebViewController.html">WKWebViewController</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
+          <a href="../Enums.html">Enums</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Enums/DateCompareType.html">DateCompareType</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Enums/Location.html">Location</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Enums/WebViewType.html">WebViewType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
+          <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Extensions/NSBundle.html">NSBundle</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/NSCalendar.html">NSCalendar</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/NSData.html">NSData</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/NSDate.html">NSDate</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/NSError.html">NSError</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/NSTimeZone.html">NSTimeZone</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/UIBarButtonItem.html">UIBarButtonItem</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/UIColor.html">UIColor</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/UIFont.html">UIFont</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/UIImage.html">UIImage</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/UIView.html">UIView</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/UIViewController.html">UIViewController</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
+          <a href="../Functions.html">Functions</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Functions.html#/s:F8FrostKit17FKLocalizedStringFTSS7commentSS_SS">FKLocalizedString(_:comment:)</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Functions.html#/s:F8FrostKit17WebViewControllerFT8viewTypeOS_11WebViewType_CS_21BaseWebViewController">WebViewController(viewType:)</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <div class="pixel-line"></div>
+      <div class="rubber-band-gap"></div>
+      <article class="chapter">
+      <a name="/"></a>
+        <h1 class="chapter-name">LocalStorage</h1>
+        <section>
+          <section class="section">
+            <p class="para">Local Storage provides the moethds for dealing with local files and direcotries. This includes creation, moving , saving, loading and removing of these items.<dl><dt>File Structure</dt><dd></dd></dl><dl><dt>Documents</dt><dd></dd></dl><dl><dt> </dt><dd>― Images        Perminant Images</dd></dl><dl><dt> </dt><dd>― Data          Perminant Documents and Data:</dd></dl><dl><dt> </dt><dd>― User.data     User object (NSObject conforming to NSCoding)</dd></dl><dl><dt>Library</dt><dd></dd></dl><dl><dt> </dt><dd>― Caches</dd></dl><dl><dt> </dt><dd>― ― Images      Store Temporary Images</dd></dl><dl><dt> </dt><dd>― ― Data        Store Temporary Documents and Data</dd></dl>NOTE: Anything stored in Caches has the ability to be deleted when the app is not active (never during), so make sure only data that can be re-downloaded get stored here.</p>
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <hr/>
+                <a name="/Paths%20and%20URL%20Methods"></a>
+                <a name="//apple_ref/swift/Section/Paths and URL Methods" class="dashAnchor"></a>
+                <a href="#/Paths%20and%20URL%20Methods">
+                  <h3 class="section-name">Paths and URL Methods</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit12LocalStorage18imagesReletivePathFMS0_FT_SS">
+                    <a name="//apple_ref/swift/Method/imagesReletivePath()" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12LocalStorage18imagesReletivePathFMS0_FT_SS">imagesReletivePath()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Reletive path for images.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">imagesReletivePath</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
+        <span class="k">return</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para"><q>Images/</q> string.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit12LocalStorage16dataReletivePathFMS0_FT_SS">
+                    <a name="//apple_ref/swift/Method/dataReletivePath()" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12LocalStorage16dataReletivePathFMS0_FT_SS">dataReletivePath()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Reletive path for data.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">dataReletivePath</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
+        <span class="k">return</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para"><q>Data/</q> string.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit12LocalStorage7baseURLFMS0_FT9directoryOSC21NSSearchPathDirectory_GSqCSo5NSURL_">
+                    <a name="//apple_ref/swift/Method/baseURL(directory:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12LocalStorage7baseURLFMS0_FT9directoryOSC21NSSearchPathDirectory_GSqCSo5NSURL_">baseURL(directory:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Returns the URL the correct directory passed in. Only the Document and Caches directorys are parsed. Any other value will return <code>nil</code> and print an error warning to the console.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">baseURL</span><span class="p">(</span><span class="nv">#directory</span><span class="p">:</span> <span class="kt">NSSearchPathDirectory</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">NSURL</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">directory</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The search path directory to use.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para">The correct URL for the seatch path directory.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit12LocalStorage11absoluteURLFMS0_FT9directoryOSC21NSSearchPathDirectory12reletivePathSS8fileNameGSqSS__GSqCSo5NSURL_">
+                    <a name="//apple_ref/swift/Method/absoluteURL(directory:reletivePath:fileName:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12LocalStorage11absoluteURLFMS0_FT9directoryOSC21NSSearchPathDirectory12reletivePathSS8fileNameGSqSS__GSqCSo5NSURL_">absoluteURL(directory:reletivePath:fileName:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Returns the absolute URL for a specific seatch path directory, reletive path and file name.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">absoluteURL</span><span class="p">(</span><span class="nv">#directory</span><span class="p">:</span> <span class="kt">NSSearchPathDirectory</span><span class="p">,</span> <span class="nv">reletivePath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fileName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">NSURL</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">directory</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The search path directory to use.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">reletivePath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The reletive path to of the file or directory.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">fileName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The name of the file (including the extension) with a default of <code>nil</code> if a directory is being requested.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para">A URL comprised of the passed in parameters</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <hr/>
+                <a name="/Save%20Methods"></a>
+                <a name="//apple_ref/swift/Section/Save Methods" class="dashAnchor"></a>
+                <a href="#/Save%20Methods">
+                  <h3 class="section-name">Save Methods</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit12LocalStorage15saveToDocumentsFMS0_FT4dataPSs9AnyObject_12reletivePathSS8fileNameSS_Sb">
+                    <a name="//apple_ref/swift/Method/saveToDocuments(data:reletivePath:fileName:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12LocalStorage15saveToDocumentsFMS0_FT4dataPSs9AnyObject_12reletivePathSS8fileNameSS_Sb">saveToDocuments(data:reletivePath:fileName:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Saves data to the documents directory.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">saveToDocuments</span><span class="p">(</span><span class="nv">#data</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">,</span> <span class="nv">reletivePath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fileName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+        <span class="k">return</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">data</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The data to be saved.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">reletivePath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The reletive path to of the file or directory.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">fileName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The name of the file (including the extension).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para"><code>true</code> if the data saves correctly. <code>false</code> if it fails and an error will be printed regarding the nature of the nature of the error.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit12LocalStorage12saveToCachesFMS0_FT4dataPSs9AnyObject_12reletivePathSS8fileNameSS_Sb">
+                    <a name="//apple_ref/swift/Method/saveToCaches(data:reletivePath:fileName:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12LocalStorage12saveToCachesFMS0_FT4dataPSs9AnyObject_12reletivePathSS8fileNameSS_Sb">saveToCaches(data:reletivePath:fileName:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Saves data to the caches directory.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">saveToCaches</span><span class="p">(</span><span class="nv">#data</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">,</span> <span class="nv">reletivePath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fileName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+        <span class="k">return</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">data</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The data to be saved.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">reletivePath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The reletive path to of the file or directory.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">fileName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The name of the file (including the extension).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para"><code>true</code> if the data saves correctly. <code>false</code> if it fails and an error will be printed regarding the nature of the nature of the error.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit12LocalStorage12saveUserDataFMS0_FPSs9AnyObject_Sb">
+                    <a name="//apple_ref/swift/Method/saveUserData(_:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12LocalStorage12saveUserDataFMS0_FPSs9AnyObject_Sb">saveUserData(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Saves user data.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">saveUserData</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+        <span class="k">return</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">data</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The data to be saved.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para"><code>true</code> if the data saves correctly. <code>false</code> if it fails and an error will be printed regarding the nature of the nature of the error.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <hr/>
+                <a name="/Move%20Methods"></a>
+                <a name="//apple_ref/swift/Section/Move Methods" class="dashAnchor"></a>
+                <a href="#/Move%20Methods">
+                  <h3 class="section-name">Move Methods</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit12LocalStorage25moveFromCachesToDocumentsFMS0_FT12reletivePathSS8fileNameSS_Sb">
+                    <a name="//apple_ref/swift/Method/moveFromCachesToDocuments(reletivePath:fileName:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12LocalStorage25moveFromCachesToDocumentsFMS0_FT12reletivePathSS8fileNameSS_Sb">moveFromCachesToDocuments(reletivePath:fileName:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Moves files from cache to the documents directory in relation to the reletive path and file name.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">moveFromCachesToDocuments</span><span class="p">(</span><span class="nv">#reletivePath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fileName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+        <span class="k">return</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">reletivePath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The reletive path to of the file or directory.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">fileName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The name of the file (including the extension).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para"><code>true</code> if the data is moved correctly. <code>false</code> if it fails and an error will be printed regarding the nature of the nature of the error.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit12LocalStorage25moveFromDocumentsToCachesFMS0_FT12reletivePathSS8fileNameSS_Sb">
+                    <a name="//apple_ref/swift/Method/moveFromDocumentsToCaches(reletivePath:fileName:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12LocalStorage25moveFromDocumentsToCachesFMS0_FT12reletivePathSS8fileNameSS_Sb">moveFromDocumentsToCaches(reletivePath:fileName:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Moves files from documents to the caches directory in relation to the reletive path and file name.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">moveFromDocumentsToCaches</span><span class="p">(</span><span class="nv">#reletivePath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fileName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+        <span class="k">return</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">reletivePath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The reletive path to of the file or directory.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">fileName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The name of the file (including the extension).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para"><code>true</code> if the data is moved correctly. <code>false</code> if it fails and an error will be printed regarding the nature of the nature of the error.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <hr/>
+                <a name="/Load%20Methods"></a>
+                <a name="//apple_ref/swift/Section/Load Methods" class="dashAnchor"></a>
+                <a href="#/Load%20Methods">
+                  <h3 class="section-name">Load Methods</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit12LocalStorage17loadFromDocumentsFMS0_FT12reletivePathSS8fileNameSS_GSqPSs9AnyObject__">
+                    <a name="//apple_ref/swift/Method/loadFromDocuments(reletivePath:fileName:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12LocalStorage17loadFromDocumentsFMS0_FT12reletivePathSS8fileNameSS_GSqPSs9AnyObject__">loadFromDocuments(reletivePath:fileName:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Loads files based in the documents directory.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">loadFromDocuments</span><span class="p">(</span><span class="nv">#reletivePath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fileName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyObject</span><span class="p">?</span> <span class="p">{</span>
+        <span class="k">return</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">reletivePath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The reletive path to of the file or directory.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">fileName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The name of the file (including the extension).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para">The file requested to be loaded or <code>nil</code> if it isn&rsquo;t found.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit12LocalStorage14loadFromCachesFMS0_FT12reletivePathSS8fileNameSS_GSqPSs9AnyObject__">
+                    <a name="//apple_ref/swift/Method/loadFromCaches(reletivePath:fileName:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12LocalStorage14loadFromCachesFMS0_FT12reletivePathSS8fileNameSS_GSqPSs9AnyObject__">loadFromCaches(reletivePath:fileName:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Loads files based in the caches directory.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">loadFromCaches</span><span class="p">(</span><span class="nv">#reletivePath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fileName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyObject</span><span class="p">?</span> <span class="p">{</span>
+        <span class="k">return</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">reletivePath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The reletive path to of the file or directory.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">fileName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The name of the file (including the extension).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para">The file requested to be loaded or <code>nil</code> if it isn&rsquo;t found.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit12LocalStorage22loadImageFromDocumentsFMS0_FT12reletivePathSS8fileNameSS_GSqCSo7UIImage_">
+                    <a name="//apple_ref/swift/Method/loadImageFromDocuments(reletivePath:fileName:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12LocalStorage22loadImageFromDocumentsFMS0_FT12reletivePathSS8fileNameSS_GSqCSo7UIImage_">loadImageFromDocuments(reletivePath:fileName:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Loads images based in the documents directory.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">loadImageFromDocuments</span><span class="p">(</span><span class="nv">#reletivePath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fileName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIImage</span><span class="p">?</span> <span class="p">{</span>
+        <span class="k">return</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">reletivePath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The reletive path to of the file or directory.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">fileName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The name of the file (including the extension).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para">The image requested to be loaded or <code>nil</code> if it isn&rsquo;t found.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit12LocalStorage19loadImageFromCachesFMS0_FT12reletivePathSS8fileNameSS_GSqCSo7UIImage_">
+                    <a name="//apple_ref/swift/Method/loadImageFromCaches(reletivePath:fileName:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12LocalStorage19loadImageFromCachesFMS0_FT12reletivePathSS8fileNameSS_GSqCSo7UIImage_">loadImageFromCaches(reletivePath:fileName:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Loads images based in the caches directory.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">loadImageFromCaches</span><span class="p">(</span><span class="nv">#reletivePath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fileName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIImage</span><span class="p">?</span> <span class="p">{</span>
+        <span class="k">return</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">reletivePath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The reletive path to of the file or directory.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">fileName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The name of the file (including the extension).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para">The image requested to be loaded or <code>nil</code> if it isn&rsquo;t found.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit12LocalStorage12loadUserDataFMS0_FT_GSqPSs9AnyObject__">
+                    <a name="//apple_ref/swift/Method/loadUserData()" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12LocalStorage12loadUserDataFMS0_FT_GSqPSs9AnyObject__">loadUserData()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Loads the user data object.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">loadUserData</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">AnyObject</span><span class="p">?</span> <span class="p">{</span>
+        <span class="k">return</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para">The user data object requested to be loaded or <code>nil</code> if it isn&rsquo;t found.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <hr/>
+                <a name="/Delete%20Methods"></a>
+                <a name="//apple_ref/swift/Section/Delete Methods" class="dashAnchor"></a>
+                <a href="#/Delete%20Methods">
+                  <h3 class="section-name">Delete Methods</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit12LocalStorage6removeFMS0_FT11absoluteURLCSo5NSURL_Sb">
+                    <a name="//apple_ref/swift/Method/remove(absoluteURL:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12LocalStorage6removeFMS0_FT11absoluteURLCSo5NSURL_Sb">remove(absoluteURL:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Removes an object at an absolute path. On success this method will remove the item from the Content Manager.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">remove</span><span class="p">(</span><span class="nv">#absoluteURL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+        <span class="k">var</span> <span class="nv">er</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">absoluteURL</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">Absolute path of the item to remove.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para"><code>true</code> if the data is removed correctly. <code>false</code> if it fails and an error will be printed regarding the nature of the nature of the error.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit12LocalStorage30removeDocumentsImagesDirectoryFMS0_FT_Sb">
+                    <a name="//apple_ref/swift/Method/removeDocumentsImagesDirectory()" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12LocalStorage30removeDocumentsImagesDirectoryFMS0_FT_Sb">removeDocumentsImagesDirectory()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Removes the images directory in the documents root directory.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">removeDocumentsImagesDirectory</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+        <span class="k">return</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para"><code>true</code> if the data is removed correctly. <code>false</code> if it fails and an error will be printed regarding the nature of the nature of the error.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit12LocalStorage28removeDocumentsDataDirectoryFMS0_FT_Sb">
+                    <a name="//apple_ref/swift/Method/removeDocumentsDataDirectory()" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12LocalStorage28removeDocumentsDataDirectoryFMS0_FT_Sb">removeDocumentsDataDirectory()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Removes the data directory in the documents root directory.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">removeDocumentsDataDirectory</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+        <span class="k">return</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para"><code>true</code> if the data is removed correctly. <code>false</code> if it fails and an error will be printed regarding the nature of the nature of the error.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit12LocalStorage27removeCachesImagesDirectoryFMS0_FT_Sb">
+                    <a name="//apple_ref/swift/Method/removeCachesImagesDirectory()" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12LocalStorage27removeCachesImagesDirectoryFMS0_FT_Sb">removeCachesImagesDirectory()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Removes the images directory in the caches root directory.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">removeCachesImagesDirectory</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+        <span class="k">return</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para"><code>true</code> if the data is removed correctly. <code>false</code> if it fails and an error will be printed regarding the nature of the nature of the error.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit12LocalStorage25removeCachesDataDirectoryFMS0_FT_Sb">
+                    <a name="//apple_ref/swift/Method/removeCachesDataDirectory()" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12LocalStorage25removeCachesDataDirectoryFMS0_FT_Sb">removeCachesDataDirectory()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Removes the data directory in the caches root directory.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">removeCachesDataDirectory</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+        <span class="k">return</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para"><code>true</code> if the data is removed correctly. <code>false</code> if it fails and an error will be printed regarding the nature of the nature of the error.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit12LocalStorage21removeDocumentsObjectFMS0_FT12reletivePathSS8fileNameSS_Sb">
+                    <a name="//apple_ref/swift/Method/removeDocumentsObject(reletivePath:fileName:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12LocalStorage21removeDocumentsObjectFMS0_FT12reletivePathSS8fileNameSS_Sb">removeDocumentsObject(reletivePath:fileName:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Removes a file or directory in the documents root directory in relation to the reletive path and file name.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">removeDocumentsObject</span><span class="p">(</span><span class="nv">#reletivePath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fileName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+        <span class="k">return</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">reletivePath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The reletive path to of the file or directory.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">fileName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The name of the file (including the extension).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para"><code>true</code> if the data is removed correctly. <code>false</code> if it fails and an error will be printed regarding the nature of the nature of the error.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit12LocalStorage18removeCachesObjectFMS0_FT12reletivePathSS8fileNameSS_Sb">
+                    <a name="//apple_ref/swift/Method/removeCachesObject(reletivePath:fileName:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12LocalStorage18removeCachesObjectFMS0_FT12reletivePathSS8fileNameSS_Sb">removeCachesObject(reletivePath:fileName:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Removes a file or directory in the caches root directory in relation to the reletive path and file name.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">removeCachesObject</span><span class="p">(</span><span class="nv">#reletivePath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fileName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+        <span class="k">return</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">reletivePath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The reletive path to of the file or directory.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">fileName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The name of the file (including the extension).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para"><code>true</code> if the data is removed correctly. <code>false</code> if it fails and an error will be printed regarding the nature of the nature of the error.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p class="copyright">&copy; 2015 <a class="link" href="" target="_blank" rel="external">James Barrow</a>. All rights reserved. (Last updated: 2015-01-18)</p>
+          <p class="copyright">Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.0.20</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

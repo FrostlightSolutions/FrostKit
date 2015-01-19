@@ -9,16 +9,19 @@
 import UIKit
 import Social
 
+///
+/// This class acts as a base view controller class for `UIWebViewController` and `WKWebViewController`. It defines the base values and functions used in subclesses of it. This class should not be used on it's own, always use it as a subclass such as though `UIWebViewController` or `WKWebViewController`.
+///
 public class BaseWebViewController: UIViewController {
     
-    public var webView: AnyObject?
-    let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-    let progrssView = UIProgressView(progressViewStyle: .Bar)
+    internal var webView: AnyObject?
+    private let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+    internal let progrssView = UIProgressView(progressViewStyle: .Bar)
     
-    var backButton: UIBarButtonItem?
-    var forwardButton: UIBarButtonItem?
+    private var backButton: UIBarButtonItem?
+    private var forwardButton: UIBarButtonItem?
     
-    public var urlString: String? {
+    var urlString: String? {
         didSet {
             if webView != nil {
                 self.loadBaseURL()
@@ -33,7 +36,7 @@ public class BaseWebViewController: UIViewController {
         }
     }
     
-    public var titleOverride: String? {
+    var titleOverride: String? {
         didSet {
             navigationItem.title = titleOverride
         }
@@ -46,7 +49,7 @@ public class BaseWebViewController: UIViewController {
         }
     }
     
-    public func stopLoading() {
+    func stopLoading() {
         // Functionality overriden in subclasses
     }
     

@@ -8,8 +8,12 @@
 
 import UIKit
 
+///
+/// Extention functions for UIBarButtonItem
+///
 extension UIViewController {
     
+    /// Retuns if the view controller is the root view controller in a navigation stack.
     public var isRoot: Bool {
         
         if let navigationController = self.navigationController {
