@@ -33,11 +33,9 @@ class ServiceClientTests: XCTestCase {
         
         ServiceClient.login(username, password: password) { (error) -> () in
             if let anError = error {
-                println("Login Error: \(anError.localizedDescription)")
-                XCTAssert(false, "Fail")
+                XCTAssert(false, "Login Error: \(anError.localizedDescription)")
             } else {
-                println("Logged In")
-                XCTAssert(true, "Pass")
+                XCTAssert(true, "Logged In")
             }
             expectation.fulfill()
         }

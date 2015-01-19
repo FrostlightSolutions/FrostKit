@@ -24,12 +24,25 @@ public class AuthorizationStore: NSMutableDictionary {
         return Singleton.instance
     }
     
+    // MARK: - Adding Objects
+    
+    func createAndAddAuthorizationToken(#json: AnyObject?, requestDate: NSDate) {
+        let authToken = AuthorizationToken(json: json, requestDate: requestDate)
+        setObject(authToken, forKey: authToken.accessToken)
+    }
+    
+    // MARK: - Remove Object
+    
+    func removeAuthorizationToken(#authToken: AuthorizationToken) {
+        removeObjectForKey(authToken.accessToken)
+    }
+    
     // MARK: - Cleanup Methods
     
     /**
     Remove all expired keys in the store.
     */
-    public func cleanup() {
+    func cleanup() {
         
         let keysToDelete = NSMutableArray()
         let selfCopy = self.mutableCopy() as NSMutableDictionary
