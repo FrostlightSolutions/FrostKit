@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PagedArrayDelegate {
-    func pagedArray(pagedArray: NSMutableArray, willAccessIndex: Int, returnObject: AnyObject)
+    func pagedArray(pagedArray: PagedStore, willAccessIndex: Int, returnObject: AnyObject)
 }
 
 class PagedStore: NSObject {
@@ -90,8 +90,16 @@ class PagedStore: NSObject {
         self.objects = objects
     }
     
+    func objectAtIndex(index: Int) -> AnyObject {
+        let object: AnyObject = objects[index]
+        if let delegate = self.delegate {
+            delegate.pagedArray(self, willAccessIndex: index, returnObject: object)
+        }
+        return object
+    }
+    
     subscript (idx: Int) -> AnyObject {
-        return objects[idx]
+        return objectAtIndex(idx)
     }
     
     func pageForIndex(index: Int) -> Int {
