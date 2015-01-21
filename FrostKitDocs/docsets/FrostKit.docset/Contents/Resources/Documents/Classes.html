@@ -23,7 +23,7 @@
     <a title="Classes  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p class="header-text"><a href="index.html">FrostKit Docs</a> (54% documented)</p>
+        <p class="header-text"><a href="index.html">FrostKit Docs</a> (55% documented)</p>
         <p id="header-links"><a href="https://github.com/FrostlightSolutions/FrostKit"><img id="header-icon" src="img/gh.png" height="16px" width="16px" />View on GitHub</a></p>
       </div>
     </header>
@@ -64,10 +64,22 @@
                 <a href="Classes/LocalStorage.html">LocalStorage</a>
               </li>
               <li class="nav-chapter">
+                <a href="Classes/OAuthToken.html">OAuthToken</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="Classes/PagedStore.html">PagedStore</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="Classes/ServiceClient.html">ServiceClient</a>
+              </li>
+              <li class="nav-chapter">
                 <a href="Classes/SocialHelper.html">SocialHelper</a>
               </li>
               <li class="nav-chapter">
                 <a href="Classes/UIWebViewController.html">UIWebViewController</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="Classes/UserStore.html">UserStore</a>
               </li>
               <li class="nav-chapter">
                 <a href="Classes/WKWebViewController.html">WKWebViewController</a>
@@ -137,6 +149,14 @@
               </li>
               <li class="nav-chapter">
                 <a href="Functions.html#/s:F8FrostKit17WebViewControllerFT8viewTypeOS_11WebViewType_CS_21BaseWebViewController">WebViewController(viewType:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
+          <a href="Protocols.html">Protocols</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="Protocols/PagedArrayDelegate.html">PagedArrayDelegate</a>
               </li>
             </ul>
           </li>
@@ -292,6 +312,43 @@
                 <li class="item symbol">
                   <div class="task-group-term">
                     <code>
+                    <a name="/s:C8FrostKit10PagedStore">
+                    <a name="//apple_ref/swift/Class/PagedStore" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:C8FrostKit10PagedStore">PagedStore</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Paged store allows storing of data in a paged form. It allows pre populating an array (with NSNull objects) in the store with the total number of object until they are called upon to be updated with the real data.This class allows for a correct representation of how large a table or collection view is when used like an array in a data source for these UI items. It also allows the ability to only load items when they are needed and with the delegate method cancel or lower priority fast scroll past pages.For more information on how FUS passes paginated data to clients, check out the Wiki page at: <a href="https://github.com/FrostlightSolutions/fus-server/wiki/Pagination-API">https://github.com/FrostlightSolutions/fus-server/wiki/Pagination-API</a></p>
+                        <a href="Classes/PagedStore.html" class="see-more">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">PagedStore</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">NSCoding</span><span class="p">,</span> <span class="kt">NSCopying</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Unnamed6"></a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
                     <a name="/s:C8FrostKit12SocialHelper">
                     <a name="//apple_ref/swift/Class/SocialHelper" class="dashAnchor"></a>
                     <a class="x-instance-method Swift" href="#/s:C8FrostKit12SocialHelper">SocialHelper</a>
@@ -313,7 +370,44 @@
             <div class="task-group">
               <div class="task-name-container">
                 
-                <a name="/Unnamed6"></a>
+                <a name="/Unnamed7"></a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:C8FrostKit9UserStore">
+                    <a name="//apple_ref/swift/Class/UserStore" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:C8FrostKit9UserStore">UserStore</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">This object contains all to shared data corisponding to the currently logged in user.This object should be deleted or cleared on a user logging out.</p>
+                        <a href="Classes/UserStore.html" class="see-more">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">UserStore</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">NSCoding</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Unnamed8"></a>
                 
               </div>
               <ul class="task-group-list">
@@ -341,7 +435,7 @@
             <div class="task-group">
               <div class="task-name-container">
                 
-                <a name="/Unnamed7"></a>
+                <a name="/Unnamed9"></a>
                 
               </div>
               <ul class="task-group-list">
@@ -378,7 +472,7 @@
             <div class="task-group">
               <div class="task-name-container">
                 
-                <a name="/Unnamed8"></a>
+                <a name="/Unnamed10"></a>
                 
               </div>
               <ul class="task-group-list">
@@ -417,7 +511,7 @@
             <div class="task-group">
               <div class="task-name-container">
                 
-                <a name="/Unnamed9"></a>
+                <a name="/Unnamed11"></a>
                 
               </div>
               <ul class="task-group-list">
@@ -454,7 +548,7 @@
             <div class="task-group">
               <div class="task-name-container">
                 
-                <a name="/Unnamed10"></a>
+                <a name="/Unnamed12"></a>
                 
               </div>
               <ul class="task-group-list">
@@ -479,10 +573,75 @@
                 </li>
               </ul>
             </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Unnamed13"></a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:C8FrostKit13ServiceClient">
+                    <a name="//apple_ref/swift/Class/ServiceClient" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:C8FrostKit13ServiceClient">ServiceClient</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Undocumented</p>
+                        <a href="Classes/ServiceClient.html" class="see-more">See more</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Unnamed14"></a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:C8FrostKit10OAuthToken">
+                    <a name="//apple_ref/swift/Class/OAuthToken" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:C8FrostKit10OAuthToken">OAuthToken</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">An object containing the data and helper methods for a NSDictionary representing an OAuth token from FUS.For more information on how FUS deals with OAuth2, check out the Wiki page at: <a href="https://github.com/FrostlightSolutions/fus-server/wiki/OAuth2">https://github.com/FrostlightSolutions/fus-server/wiki/OAuth2</a></p>
+                        <a href="Classes/OAuthToken.html" class="see-more">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">OAuthToken</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">NSCoding</span><span class="p">,</span> <span class="kt">NSCopying</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </section>
         </section>
         <section id="footer">
-          <p class="copyright">&copy; 2015 <a class="link" href="" target="_blank" rel="external">James Barrow</a>. All rights reserved. (Last updated: 2015-01-18)</p>
+          <p class="copyright">&copy; 2015 <a class="link" href="" target="_blank" rel="external">James Barrow</a>. All rights reserved. (Last updated: 2015-01-21)</p>
           <p class="copyright">Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.0.20</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

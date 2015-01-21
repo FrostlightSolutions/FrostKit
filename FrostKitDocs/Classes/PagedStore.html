@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PagedStore Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script type="text/javascript">
+    window.jazzy = {'docset': false}
+    if (typeof window.dash != 'undefined') {
+      document.documentElement.className += ' dash'
+      window.jazzy.docset = true
+    }
+    if (navigator.userAgent.match(/xcode/i)) {
+      document.documentElement.className += ' xcode'
+      window.jazzy.docset = true
+    }
+    </script>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+  </head>
+  <body id="reference" class="Swift">
+    <a name="//apple_ref/swift/Class/PagedStore" class="dashAnchor"></a>
+    <a title="PagedStore Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p class="header-text"><a href="../index.html">FrostKit Docs</a> (55% documented)</p>
+        <p id="header-links"><a href="https://github.com/FrostlightSolutions/FrostKit"><img id="header-icon" src="../img/gh.png" height="16px" width="16px" />View on GitHub</a></p>
+      </div>
+    </header>
+    <section id="valence">
+      <div class="content-wrapper">
+        <p id="hierarchial_navigation">
+        <a href="../index.html" id="design_resources_link">FrostKit Reference</a>
+        <img id="carat" src="../img/carat.png" height="10px" width="6px" />
+        PagedStore Class Reference
+        </p>
+      </div>
+    </section>
+    <div class="content-wrapper">
+      <nav class="book-parts">
+        <ul class="nav-parts">
+          <li class="part-name tasks">
+          <a href="../Classes.html">Classes</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Classes/BaseWebViewController.html">BaseWebViewController</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/ContentManager.html">ContentManager</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/CustomFonts.html">CustomFonts</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/FrostKit.html">FrostKit</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/ImageCache.html">ImageCache</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/KeychainHelper.html">KeychainHelper</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/LocalStorage.html">LocalStorage</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/OAuthToken.html">OAuthToken</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/PagedStore.html">PagedStore</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/ServiceClient.html">ServiceClient</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/SocialHelper.html">SocialHelper</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/UIWebViewController.html">UIWebViewController</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/UserStore.html">UserStore</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/WKWebViewController.html">WKWebViewController</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
+          <a href="../Enums.html">Enums</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Enums/DateCompareType.html">DateCompareType</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Enums/Location.html">Location</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Enums/WebViewType.html">WebViewType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
+          <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Extensions/NSBundle.html">NSBundle</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/NSCalendar.html">NSCalendar</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/NSData.html">NSData</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/NSDate.html">NSDate</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/NSError.html">NSError</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/NSTimeZone.html">NSTimeZone</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/UIBarButtonItem.html">UIBarButtonItem</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/UIColor.html">UIColor</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/UIFont.html">UIFont</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/UIImage.html">UIImage</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/UIView.html">UIView</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/UIViewController.html">UIViewController</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
+          <a href="../Functions.html">Functions</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Functions.html#/s:F8FrostKit17FKLocalizedStringFTSS7commentSS_SS">FKLocalizedString(_:comment:)</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Functions.html#/s:F8FrostKit17WebViewControllerFT8viewTypeOS_11WebViewType_CS_21BaseWebViewController">WebViewController(viewType:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
+          <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Protocols/PagedArrayDelegate.html">PagedArrayDelegate</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <div class="pixel-line"></div>
+      <div class="rubber-band-gap"></div>
+      <article class="chapter">
+      <a name="/"></a>
+        <h1 class="chapter-name">PagedStore</h1>
+        <section>
+          <section class="section">
+            <p class="para">Paged store allows storing of data in a paged form. It allows pre populating an array (with NSNull objects) in the store with the total number of object until they are called upon to be updated with the real data.This class allows for a correct representation of how large a table or collection view is when used like an array in a data source for these UI items. It also allows the ability to only load items when they are needed and with the delegate method cancel or lower priority fast scroll past pages.For more information on how FUS passes paginated data to clients, check out the Wiki page at: <a href="https://github.com/FrostlightSolutions/fus-server/wiki/Pagination-API">https://github.com/FrostlightSolutions/fus-server/wiki/Pagination-API</a></p>
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Unnamed"></a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC8FrostKit10PagedStore5countSi">
+                    <a name="//apple_ref/swift/Property/count" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC8FrostKit10PagedStore5countSi">count</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Returns the total count of object stored.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC8FrostKit10PagedStore14objectsPerPageSi">
+                    <a name="//apple_ref/swift/Property/objectsPerPage" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC8FrostKit10PagedStore14objectsPerPageSi">objectsPerPage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Returns the total number of objects per page. All pages will have the same number of objects, apart from the last which might have less.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">objectsPerPage</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC8FrostKit10PagedStore13numberOfPagesSi">
+                    <a name="//apple_ref/swift/Property/numberOfPages" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC8FrostKit10PagedStore13numberOfPagesSi">numberOfPages</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">THe number of pages in the store (not loaded, in total).</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">numberOfPages</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC8FrostKit10PagedStore8delegateGSqPS_18PagedArrayDelegate__">
+                    <a name="//apple_ref/swift/Property/delegate" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC8FrostKit10PagedStore8delegateGSqPS_18PagedArrayDelegate__">delegate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">The delegate of the store.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">delegate</span><span class="p">:</span> <span class="kt">PagedArrayDelegate</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC8FrostKit10PagedStore11firstObjectGSqPSs9AnyObject__">
+                    <a name="//apple_ref/swift/Property/firstObject" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC8FrostKit10PagedStore11firstObjectGSqPSs9AnyObject__">firstObject</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Thefirst object in the store.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">firstObject</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC8FrostKit10PagedStore10lastObjectGSqPSs9AnyObject__">
+                    <a name="//apple_ref/swift/Property/lastObject" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC8FrostKit10PagedStore10lastObjectGSqPSs9AnyObject__">lastObject</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">The last object in the store.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">lastObject</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC8FrostKit10PagedStore11descriptionSS">
+                    <a name="//apple_ref/swift/Property/description" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC8FrostKit10PagedStore11descriptionSS">description</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">A string that represents the contents of the stores array, formatted as a property list.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">override</span> <span class="k">var</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit10PagedStorecFMS0_FT_S0_">
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit10PagedStorecFMS0_FT_S0_">init()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Undocumented</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit10PagedStorecFMS0_FT5storeS0__S0_">
+                    <a name="//apple_ref/swift/Method/init(store:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit10PagedStorecFMS0_FT5storeS0__S0_">init(store:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Initializes a store from anouther store.</p>
+                        <a href="../Classes/PagedStore/init(store:).html" class="see-more">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">store</span><span class="p">:</span> <span class="kt">PagedStore</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">store</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The store object to base the new one from.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit10PagedStorecFMS0_FT10totalCountSi14objectsPerPageSi_S0_">
+                    <a name="//apple_ref/swift/Method/init(totalCount:objectsPerPage:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit10PagedStorecFMS0_FT10totalCountSi14objectsPerPageSi_S0_">init(totalCount:objectsPerPage:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Initializes a store object from the total count and the number of objects per page.</p>
+                        <a href="../Classes/PagedStore/init(totalCount:objectsPerPage:).html" class="see-more">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">totalCount</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">objectsPerPage</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">totalCount</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The total count of the store.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">objectsPerPage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The total objects per page. This should be the same for all pages (though it is excepted the last page may not furfil this value).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit10PagedStorecFMS0_FT4jsonCSo12NSDictionary14objectsPerPageSi_S0_">
+                    <a name="//apple_ref/swift/Method/init(json:objectsPerPage:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit10PagedStorecFMS0_FT4jsonCSo12NSDictionary14objectsPerPageSi_S0_">init(json:objectsPerPage:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Initializes a store object from a JSON dictionary returned from FUS. It is assumed that the values returned in the dictionary will always be from page 1 (the first page).</p>
+                        <a href="../Classes/PagedStore/init(json:objectsPerPage:).html" class="see-more">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">json</span><span class="p">:</span> <span class="kt">NSDictionary</span><span class="p">,</span> <span class="nv">objectsPerPage</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">json</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The JSON dictionary returned from FUS.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">objectsPerPage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The total objects per page. This should be the same for all pages (though it is excepted the last page may not furfil this value).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit10PagedStorecFMS0_FT15nonPagedObjectsCSo7NSArray_S0_">
+                    <a name="//apple_ref/swift/Method/init(nonPagedObjects:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit10PagedStorecFMS0_FT15nonPagedObjectsCSo7NSArray_S0_">init(nonPagedObjects:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Initializes a store object for a non-paged array of objects returned from FUS. This creates a normal paged store but takes the whole array of objects as page 1 (the first page).</p>
+                        <a href="../Classes/PagedStore/init(nonPagedObjects:).html" class="see-more">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">nonPagedObjects</span><span class="p">:</span> <span class="kt">NSArray</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">nonPagedObjects</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">An array of objects to store.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <hr/>
+                <a name="/NSCoding%20Methods"></a>
+                <a name="//apple_ref/swift/Section/NSCoding Methods" class="dashAnchor"></a>
+                <a href="#/NSCoding%20Methods">
+                  <h3 class="section-name">NSCoding Methods</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit10PagedStorecFMS0_FT5coderCSo7NSCoder_S0_">
+                    <a name="//apple_ref/swift/Method/init(coder:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit10PagedStorecFMS0_FT5coderCSo7NSCoder_S0_">init(coder:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Undocumented</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit10PagedStore15encodeWithCoderFS0_FCSo7NSCoderT_">
+                    <a name="//apple_ref/swift/Method/encodeWithCoder(_:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit10PagedStore15encodeWithCoderFS0_FCSo7NSCoderT_">encodeWithCoder(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Undocumented</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <hr/>
+                <a name="/NSCopying%20Methods"></a>
+                <a name="//apple_ref/swift/Section/NSCopying Methods" class="dashAnchor"></a>
+                <a href="#/NSCopying%20Methods">
+                  <h3 class="section-name">NSCopying Methods</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit10PagedStore12copyWithZoneFS0_FV10ObjectiveC6NSZonePSs9AnyObject_">
+                    <a name="//apple_ref/swift/Method/copyWithZone(_:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit10PagedStore12copyWithZoneFS0_FV10ObjectiveC6NSZonePSs9AnyObject_">copyWithZone(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Undocumented</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <hr/>
+                <a name="/Helper%20Methods"></a>
+                <a name="//apple_ref/swift/Section/Helper Methods" class="dashAnchor"></a>
+                <a href="#/Helper%20Methods">
+                  <h3 class="section-name">Helper Methods</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit10PagedStore10setObjectsFS0_FTCSo7NSArray4pageSi10totalCountGSqSi__T_">
+                    <a name="//apple_ref/swift/Method/setObjects(_:page:totalCount:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit10PagedStore10setObjectsFS0_FTCSo7NSArray4pageSi10totalCountGSqSi__T_">setObjects(_:page:totalCount:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Sets object into the store for a current page. This will either replace palceholder objects with data or update previous stored objects with the new values. If <code>totalCount</code> is returned and if it is different from the previous number then the store will add or remove the relevaent placeholders or objects in the store respectively.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">setObjects</span><span class="p">(</span><span class="nv">newObjects</span><span class="p">:</span> <span class="kt">NSArray</span><span class="p">,</span> <span class="nv">page</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">totalCount</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">newObjects</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The new objects to add or update into the store.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">page</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The page the objects have come from in FUS.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">totalCount</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The updated total objects count.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit10PagedStore13objectAtIndexFS0_FSiPSs9AnyObject_">
+                    <a name="//apple_ref/swift/Method/objectAtIndex(_:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit10PagedStore13objectAtIndexFS0_FSiPSs9AnyObject_">objectAtIndex(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Returns the object located at the specified index in the store.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">objectAtIndex</span><span class="p">(</span><span class="nv">index</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyObject</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">index</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">An index within the bounds of the store.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para">The object located at index.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit10PagedStore12pageForIndexFS0_FSiSi">
+                    <a name="//apple_ref/swift/Method/pageForIndex(_:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit10PagedStore12pageForIndexFS0_FSiSi">pageForIndex(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Returns the page number of the specified index in the store.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">pageForIndex</span><span class="p">(</span><span class="nv">index</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">index</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">An index with the bounds of the store.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para">The page number the index is located in.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit10PagedStore13indexOfObjectFS0_FPSs9AnyObject_Si">
+                    <a name="//apple_ref/swift/Method/indexOfObject(_:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit10PagedStore13indexOfObjectFS0_FPSs9AnyObject_Si">indexOfObject(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Returns the lowest index whose corresponding store value is equal to a given object.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">indexOfObject</span><span class="p">(</span><span class="nv">anObject</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">anObject</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The object to find in the store.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para">The lowest index whose corresponding store value is equal to anObject. If none of the objects in the store is equal to anObject, returns NSNotFound.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit10PagedStore15indexSetForPageFS0_FSiCSo10NSIndexSet">
+                    <a name="//apple_ref/swift/Method/indexSetForPage(_:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit10PagedStore15indexSetForPageFS0_FSiCSo10NSIndexSet">indexSetForPage(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Returns the index set of the objects in the page requested.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">indexSetForPage</span><span class="p">(</span><span class="nv">page</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">NSIndexSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">page</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The page of the residing index sets.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para">An index set of the indexes on the given page.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit10PagedStore13pageForObjectFS0_FPSs9AnyObject_Si">
+                    <a name="//apple_ref/swift/Method/pageForObject(_:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit10PagedStore13pageForObjectFS0_FPSs9AnyObject_Si">pageForObject(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Returns the first page number whose corresponding store value is equal to a given object.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">pageForObject</span><span class="p">(</span><span class="nv">anObject</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">anObject</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The object to find in the store.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para">The lowest page number whose corresponding store value is equal to anObject. If none of the objects in the store is equal to anObject, returns NSNotFound.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p class="copyright">&copy; 2015 <a class="link" href="" target="_blank" rel="external">James Barrow</a>. All rights reserved. (Last updated: 2015-01-21)</p>
+          <p class="copyright">Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.0.20</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

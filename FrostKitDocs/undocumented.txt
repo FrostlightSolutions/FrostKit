@@ -53,6 +53,17 @@ BaseWebViewController.swift
 	func updateForwardButton()
 	func updateBackForwardButtons()
 	func loadBaseURL() -> String
+PagedStore.swift
+	protocol PagedArrayDelegate
+	func pagedArray(pagedArray: PagedStore, willAccessIndex: Int, returnObject: AnyObject)
+	override init()
+	convenience init(store: PagedStore)
+	convenience init(totalCount: Int, objectsPerPage: Int)
+	convenience init(json: NSDictionary, objectsPerPage: Int)
+	convenience init(nonPagedObjects: NSArray)
+	required init(coder aDecoder: NSCoder)
+	func encodeWithCoder(aCoder: NSCoder)
+	func copyWithZone(zone: NSZone) -> AnyObject
 UIViewController.h
 	class UIViewController : UIResponder, NSCoding, UIAppearanceContainer, NSObjectProtocol, UITraitEnvironment, UIContentContainer
 SocialHelper.swift
@@ -75,6 +86,12 @@ UIColor.h
 	class UIColor : NSObject, NSSecureCoding, NSCoding, NSCopying
 UIColorExtensions.swift
 	public convenience init(hexString: String)
+UserStore.swift
+	struct Singleton
+	static let instance : UserStore = UserStore.loadUser()
+	override init()
+	public required convenience init(coder aDecoder: NSCoder)
+	public func encodeWithCoder(aCoder: NSCoder)
 FrostKit.swift
 	internal func FKLocalizedString(key: String, comment: String = "") -> String
 	public class FrostKit
@@ -102,3 +119,13 @@ KeychainHelper.swift
 	public class func deleteKeychain() -> Bool
 NSCalendar.h
 	class NSCalendar : NSObject, NSCopying, NSSecureCoding, NSCoding
+ServiceClient.swift
+	public class ServiceClient: NSObject
+	class func request(URLString: URLStringConvertible, method: Alamofire.Method = .GET, parameters: [String : AnyObject]? = nil, encoding: Alamofire.ParameterEncoding = .URL, completed: (error: NSError?) -> ()) -> Alamofire.Request
+OAuthToken.swift
+	override init()
+	convenience init(oAuthToken: OAuthToken)
+	convenience init(json: NSDictionary, requestDate: NSDate = NSDate())
+	public required convenience init(coder aDecoder: NSCoder)
+	public func encodeWithCoder(aCoder: NSCoder)
+	public func copyWithZone(zone: NSZone) -> AnyObject
