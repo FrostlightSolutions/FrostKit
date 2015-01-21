@@ -14,8 +14,8 @@ let expectationTimeout: NSTimeInterval = 60
 
 class ServiceClientTests: XCTestCase {
     
-    let username = "odin"
-    let password = "odin"
+    let username = "frostkit"
+    let password = "frostkit"
     
     override func setUp() {
         super.setUp()
