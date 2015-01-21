@@ -64,6 +64,12 @@ class PagedStore: NSObject {
         setObjects(objects, page: page)
     }
     
+    convenience init(nonPagedObjects: NSArray) {
+        
+        self.init(totalCount: nonPagedObjects.count, objectsPerPage: nonPagedObjects.count)
+        setObjects(nonPagedObjects, page: 1)
+    }
+    
     // MARK: - Helper Methods
     
     func setObjects(newObjects: NSArray, page: Int, totalCount: Int? = nil) {
