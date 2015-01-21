@@ -8,6 +8,11 @@
 
 import UIKit
 
+/// 
+/// An object containing the data and helper methods for a NSDictionary representing an OAuth token from FUS.
+///
+/// For more information on how FUS deals with OAuth2, check out the Wiki page at: https://github.com/FrostlightSolutions/fus-server/wiki/OAuth2
+///
 public class OAuthToken: NSObject, NSCoding, NSCopying {
     
     /// The `access_token` returned from FUS.
