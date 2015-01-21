@@ -12,7 +12,7 @@ protocol PagedArrayDelegate {
     func pagedArray(pagedArray: PagedStore, willAccessIndex: Int, returnObject: AnyObject)
 }
 
-class PagedStore: NSObject {
+class PagedStore: NSObject, NSCoding, NSCopying {
     
     private lazy var _count = 0
     var count: Int {
@@ -35,6 +35,18 @@ class PagedStore: NSObject {
     }
     override var description: String {
         return objects.description
+    }
+    
+    override init() {
+        super.init()
+    }
+    
+    convenience init(store: PagedStore) {
+        self.init()
+        
+        _count = store._count
+        _objectsPerPage = store._objectsPerPage
+        objects = store.objects
     }
     
     convenience init(totalCount: Int, objectsPerPage: Int) {
@@ -68,6 +80,31 @@ class PagedStore: NSObject {
         
         self.init(totalCount: nonPagedObjects.count, objectsPerPage: nonPagedObjects.count)
         setObjects(nonPagedObjects, page: 1)
+    }
+    
+    // MARK: - NSCoding Methods
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init()
+        
+        _count = aDecoder.decodeIntegerForKey("count")
+        _objectsPerPage = aDecoder.decodeIntegerForKey("objectsPerPage")
+        if let objects = aDecoder.decodeObjectForKey("objects") as? NSArray {
+            self.objects = objects
+        }
+    }
+    
+    func encodeWithCoder(aCoder: NSCoder) {
+        
+        aCoder.encodeInteger(_count, forKey: "count")
+        aCoder.encodeInteger(_objectsPerPage, forKey: "objectsPerPage")
+        aCoder.encodeObject(objects, forKey: "objects")
+    }
+    
+    // MARK: - NSCopying Methods
+    
+    func copyWithZone(zone: NSZone) -> AnyObject {
+        return PagedStore(store: self)
     }
     
     // MARK: - Helper Methods
