@@ -14,7 +14,7 @@ protocol PagedArrayDelegate {
 
 class PagedStore: NSObject {
     
-    private lazy var _totalCount = 0
+    private lazy var _count = 0
     var count: Int {
         return objects.count
     }
@@ -23,7 +23,7 @@ class PagedStore: NSObject {
         return _objectsPerPage
     }
     var numberOfPages: Int {
-        return Int(ceil(Double(_totalCount) / Double(_objectsPerPage)))
+        return Int(ceil(Double(_count) / Double(_objectsPerPage)))
     }
     var delegate: PagedArrayDelegate?
     private lazy var objects = NSArray()
@@ -40,14 +40,28 @@ class PagedStore: NSObject {
     convenience init(totalCount: Int, objectsPerPage: Int) {
         self.init()
         
-        _totalCount = totalCount
+        _count = totalCount
         _objectsPerPage = objectsPerPage
         
-        let objects = NSMutableArray(capacity: _totalCount)
-        for pageIndex in 0..<_totalCount {
+        let objects = NSMutableArray(capacity: _count)
+        for pageIndex in 0..<_count {
             objects.addObject(NSNull())
         }
         self.objects = objects
+    }
+    
+    convenience init(json: NSDictionary, objectsPerPage: Int, page: Int) {
+        var totalCount = 0
+        if let count = json["count"] as? Int {
+            totalCount = count
+        }
+        var objects = []
+        if let results = json["results"] as? NSArray {
+            objects = results
+        }
+        
+        self.init(totalCount: totalCount, objectsPerPage: objectsPerPage)
+        setObjects(objects, page: page)
     }
     
     // MARK: - Helper Methods
@@ -57,17 +71,17 @@ class PagedStore: NSObject {
         let objects = self.objects.mutableCopy() as NSMutableArray
         
         if let newTotalCount = totalCount {
-            if newTotalCount > _totalCount {
+            if newTotalCount > _count {
                 // Add missing placeholder objects
-                for index in _totalCount..<newTotalCount {
+                for index in _count..<newTotalCount {
                     objects.addObject(NSNull())
                 }
-            } else if _totalCount > newTotalCount {
+            } else if _count > newTotalCount {
                 // Remove extra objects
-                let range = NSMakeRange(newTotalCount, _totalCount - newTotalCount)
+                let range = NSMakeRange(newTotalCount, _count - newTotalCount)
                 objects.removeObjectsInRange(range)
             }
-            _totalCount = newTotalCount
+            _count = newTotalCount
         }
         
         let indexSet = indexSetForPage(page)
@@ -92,7 +106,7 @@ class PagedStore: NSObject {
         
         var rangeLength = objectsPerPage
         if page == numberOfPages {
-            rangeLength = _totalCount - ((numberOfPages - 1) * objectsPerPage)
+            rangeLength = _count - ((numberOfPages - 1) * objectsPerPage)
         }
         return NSIndexSet(indexesInRange: NSMakeRange((page - 1) * objectsPerPage, rangeLength))
     }
