@@ -81,47 +81,70 @@ class ServiceClientTests: XCTestCase {
         pagedStore.setObjects(["1", "2", "3"], page: 1)
         pagedStore.setObjects(["4", "5", "6"], page: 2)
         pagedStore.setObjects(["7", "8"], page: 3)
-        println(pagedStore.objects)
         return pagedStore
     }
     
-    func testPagedArraySecondPageSubscript() {
+    func testPagedStoreSecondPageSubscript() {
         
-        let four = pagedStore.objects[3] as String
+        let four = pagedStore[3] as String
         if four == "4" {
-            XCTAssert(true, "Success! 1st item of the 2nd page is 4")
+            XCTAssert(true, "Success! 1st item of the 2nd page is \(four)")
         } else {
             XCTAssert(false, "Failed! 1st item of the 2nd page is \(four) instead of 4")
         }
     }
     
-    func testPagedArrayCount() {
+    func testPagedStoreCount() {
         
-        let count = pagedStore.objects.count
+        let count = pagedStore.count
         if count == 8 {
-            XCTAssert(true, "Success! Count is 8")
+            XCTAssert(true, "Success! Count is \(count)")
         } else {
             XCTAssert(false, "Failed! Count is \(count) instead of 8")
         }
     }
     
-    func testFirstObject() {
+    func testPagedStoreFirstObject() {
         
-        let object = pagedStore.objects.firstObject as String
+        let object = pagedStore.firstObject as String
         if object == "1" {
-            XCTAssert(true, "Success! Count is 8")
+            XCTAssert(true, "Success! First object is \(object)")
         } else {
             XCTAssert(false, "Failed! First object is \(object) instead of 1")
         }
     }
     
-    func testLastObject() {
+    func testPagedStoreLastObject() {
         
-        let object = pagedStore.objects.lastObject as String
+        let object = pagedStore.lastObject as String
         if object == "8" {
-            XCTAssert(true, "Success! Count is 8")
+            XCTAssert(true, "Success! Lasr object is \(object)")
         } else {
             XCTAssert(false, "Failed! Last object is \(object) instead of 1")
+        }
+    }
+    
+    func testPagedStoreUpdateBiggerTotalCount() {
+        
+        let pagedStore = self.pagedStore
+        pagedStore.setObjects(["7", "8", "9"], page: 3, totalCount: 9)
+        let count = pagedStore.count
+        if count == 9 {
+            XCTAssert(true, "Success! Count is now \(count)")
+        } else {
+            XCTAssert(false, "Failed! Count is \(count) instead of 9")
+        }
+    }
+    
+    func testPagedStoreUpdateSmallerTotalCount() {
+        
+        let pagedStore = self.pagedStore
+        pagedStore.setObjects(["4"], page: 2, totalCount: 4)
+        let count = pagedStore.count
+        if count == 4 {
+            XCTAssert(true, "Success! Count is now \(count)")
+        } else {
+            XCTAssert(false, "Failed! Count is \(count) instead of 4")
         }
     }
     

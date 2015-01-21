@@ -15,6 +15,9 @@ protocol PagedArrayDelegate {
 class PagedStore: NSObject {
     
     private lazy var _totalCount = 0
+    var count: Int {
+        return objects.count
+    }
     private lazy var _objectsPerPage = 0
     var objectsPerPage: Int {
         return _objectsPerPage
@@ -23,7 +26,16 @@ class PagedStore: NSObject {
         return Int(ceil(Double(_totalCount) / Double(_objectsPerPage)))
     }
     var delegate: PagedArrayDelegate?
-    lazy var objects = NSArray()
+    private lazy var objects = NSArray()
+    var firstObject: AnyObject? {
+        return objects.firstObject
+    }
+    var lastObject: AnyObject? {
+        return objects.lastObject
+    }
+    override var description: String {
+        return objects.description
+    }
     
     convenience init(totalCount: Int, objectsPerPage: Int) {
         self.init()
@@ -40,16 +52,40 @@ class PagedStore: NSObject {
     
     // MARK: - Helper Methods
     
-    func setObjects(newObjects: NSArray, page: Int) {
+    func setObjects(newObjects: NSArray, page: Int, totalCount: Int? = nil) {
+        
+        let objects = self.objects.mutableCopy() as NSMutableArray
+        
+        if let newTotalCount = totalCount {
+            if newTotalCount > _totalCount {
+                // Add missing placeholder objects
+                for index in _totalCount..<newTotalCount {
+                    objects.addObject(NSNull())
+                }
+            } else if _totalCount > newTotalCount {
+                // Remove extra objects
+                let range = NSMakeRange(newTotalCount, _totalCount - newTotalCount)
+                objects.removeObjectsInRange(range)
+            }
+            _totalCount = newTotalCount
+        }
         
         let indexSet = indexSetForPage(page)
-        let objects = self.objects.mutableCopy() as NSMutableArray
         objects.replaceObjectsAtIndexes(indexSet, withObjects: newObjects)
+        
         self.objects = objects
+    }
+    
+    subscript (idx: Int) -> AnyObject {
+        return objects[idx]
     }
     
     func pageForIndex(index: Int) -> Int {
         return index / objectsPerPage
+    }
+    
+    func indexOfObject(anObject: AnyObject) -> Int {
+        return objects.indexOfObject(anObject)
     }
     
     func indexSetForPage(page: Int) -> NSIndexSet {
@@ -59,6 +95,11 @@ class PagedStore: NSObject {
             rangeLength = _totalCount - ((numberOfPages - 1) * objectsPerPage)
         }
         return NSIndexSet(indexesInRange: NSMakeRange((page - 1) * objectsPerPage, rangeLength))
+    }
+    
+    func pageForObject(anObject: AnyObject) -> Int {
+        let index = indexOfObject(anObject)
+        return Int(floor(Double(index) / Double(objectsPerPage)))
     }
     
 }
