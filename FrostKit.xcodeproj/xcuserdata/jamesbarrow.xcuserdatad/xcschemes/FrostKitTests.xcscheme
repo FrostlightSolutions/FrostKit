@@ -39,6 +39,9 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "FontTests">
+               </Test>
+               <Test
                   Identifier = "FrostKitTests">
                </Test>
                <Test
