@@ -48,6 +48,15 @@
                   Identifier = "NSDateExtensionsTests">
                </Test>
                <Test
+                  Identifier = "PagedStoreTests/testArraySize()">
+               </Test>
+               <Test
+                  Identifier = "PagedStoreTests/testEmptyArraySize()">
+               </Test>
+               <Test
+                  Identifier = "ServiceClientTests">
+               </Test>
+               <Test
                   Identifier = "UIColorExtensionsTest">
                </Test>
             </SkippedTests>

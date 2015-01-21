@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		180EFDF11A6FD3A000325C09 /* PagedStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180EFDF01A6FD3A000325C09 /* PagedStoreTests.swift */; };
 		1811D7B81A0AD1CA00E8B873 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B41A0AD1CA00E8B873 /* BaseWebViewController.swift */; };
 		1811D7B91A0AD1CA00E8B873 /* UIWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B51A0AD1CA00E8B873 /* UIWebViewController.swift */; };
 		1811D7BA1A0AD1CA00E8B873 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B61A0AD1CA00E8B873 /* WebViewController.swift */; };
@@ -134,6 +135,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		180EFDF01A6FD3A000325C09 /* PagedStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagedStoreTests.swift; sourceTree = "<group>"; };
 		1811D76A1A0ACAED00E8B873 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		1811D7B41A0AD1CA00E8B873 /* BaseWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
 		1811D7B51A0AD1CA00E8B873 /* UIWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIWebViewController.swift; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 		18C0067319DBFFE900811755 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				180EFDF01A6FD3A000325C09 /* PagedStoreTests.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -628,6 +631,7 @@
 				181BCC3619DF60810056C8F8 /* KeychainHelperTests.swift in Sources */,
 				186B08051A6D5F2E00CAF920 /* BaseWebViewController.swift in Sources */,
 				185D3D5D1A6E936F00BE700D /* PagedStore.swift in Sources */,
+				180EFDF11A6FD3A000325C09 /* PagedStoreTests.swift in Sources */,
 				186B07FD1A6D5F2700CAF920 /* UIColorExtensions.swift in Sources */,
 				186B08041A6D5F2E00CAF920 /* WebViewController.swift in Sources */,
 				18DE01F619DCBE45008A1506 /* FontTests.swift in Sources */,
