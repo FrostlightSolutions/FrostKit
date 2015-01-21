@@ -76,4 +76,53 @@ class ServiceClientTests: XCTestCase {
         }
     }
     
+     var pagedStore: PagedStore {
+        let pagedStore = PagedStore(totalCount: 8, objectsPerPage: 3)
+        pagedStore.setObjects(["1", "2", "3"], page: 1)
+        pagedStore.setObjects(["4", "5", "6"], page: 2)
+        pagedStore.setObjects(["7", "8"], page: 3)
+        println(pagedStore.objects)
+        return pagedStore
+    }
+    
+    func testPagedArraySecondPageSubscript() {
+        
+        let four = pagedStore.objects[3] as String
+        if four == "4" {
+            XCTAssert(true, "Success! 1st item of the 2nd page is 4")
+        } else {
+            XCTAssert(false, "Failed! 1st item of the 2nd page is \(four) instead of 4")
+        }
+    }
+    
+    func testPagedArrayCount() {
+        
+        let count = pagedStore.objects.count
+        if count == 8 {
+            XCTAssert(true, "Success! Count is 8")
+        } else {
+            XCTAssert(false, "Failed! Count is \(count) instead of 8")
+        }
+    }
+    
+    func testFirstObject() {
+        
+        let object = pagedStore.objects.firstObject as String
+        if object == "1" {
+            XCTAssert(true, "Success! Count is 8")
+        } else {
+            XCTAssert(false, "Failed! First object is \(object) instead of 1")
+        }
+    }
+    
+    func testLastObject() {
+        
+        let object = pagedStore.objects.lastObject as String
+        if object == "8" {
+            XCTAssert(true, "Success! Count is 8")
+        } else {
+            XCTAssert(false, "Failed! Last object is \(object) instead of 1")
+        }
+    }
+    
 }
