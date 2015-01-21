@@ -7,21 +7,27 @@ FrostKit
 - [x] LocalStorage
 - [x] ImageCache
 - [x] ContentManager
-- [ ] UserObject
-- [ ] ServiceClient
+- [ ] UserObject - **_in progress_**
+- [ ] ServiceClient - **_in progress_**
 
 #### Helpers
 - [x] SocialHelper
 - [x] KeychainHelper
 
 #### View Controllers
-- [x] WebViewController (WKWebView only at the moment)
+- [x] WebViewController
+- [x] UIWebViewController
+- [x] WKWebViewController
 
 #### General
 - [x] Extensions
 - [x] FontAwesome
-- [ ] Unit Tests
-- [ ] Wiki/Documentation
+- [x] IonIcons
+- [ ] Unit Tests - **_in progress_**
+- [ ] Wiki/Documentation - **_in progress_**
+
+#### Submodules
+- [x] Alamofire
 
 ## Requirements
 
