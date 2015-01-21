@@ -16,6 +16,7 @@ import UIKit
 public class UserStore: NSObject, NSCoding {
 
     private var oAuthToken: OAuthToken?
+    /// Helper class variable to get the current OAuthToken.
     public class var oAuthToken: OAuthToken? {
         get { return shared.oAuthToken }
         set { shared.oAuthToken = newValue }
