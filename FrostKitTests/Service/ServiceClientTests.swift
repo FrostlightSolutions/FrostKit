@@ -76,4 +76,30 @@ class ServiceClientTests: XCTestCase {
         }
     }
     
+    func testNotificationsGetRequest() {
+        
+        let expectation = expectationWithDescription("Test Notifications Get Request")
+        
+        login { () -> () in
+            self.refresh({ () -> () in
+                self.getNotificationsRequest({ () -> () in
+                    expectation.fulfill()
+                })
+            })
+        }
+        
+        self.waitForExpectationsWithTimeout(expectationTimeout, handler: { (completionHandler) -> Void in })
+    }
+    
+    func getNotificationsRequest(complete: () -> ()) {
+        ServiceClient.request(ServiceClient.Router.Notifications, completed: { (json, error) -> () in
+            if let anError = error {
+                XCTAssert(false, "Failed to get Notifications \(anError.localizedDescription)")
+            } else {
+                XCTAssert(true, "Got Notifications Response")
+            }
+            complete()
+        })
+    }
+    
 }
