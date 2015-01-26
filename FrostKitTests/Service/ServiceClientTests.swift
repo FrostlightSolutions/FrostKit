@@ -92,7 +92,7 @@ class ServiceClientTests: XCTestCase {
     }
     
     func getNotificationsRequest(complete: () -> ()) {
-        ServiceClient.request(ServiceClient.Router.Notifications, completed: { (json, error) -> () in
+        ServiceClient.request(Router.Notifications(1), completed: { (json, error) -> () in
             if let anError = error {
                 XCTAssert(false, "Failed to get Notifications \(anError.localizedDescription)")
             } else {
