@@ -9,8 +9,9 @@
 import UIKit
 
 
-protocol PagedArrayDelegate {
-    func pagedArray(pagedArray: PagedStore, willAccessIndex: Int, returnObject: AnyObject)
+@objc public protocol PagedStoreDelegate {
+    optional func pagedStore(pagedStore: PagedStore, willAccessIndex: Int, returnObject: AnyObject)
+    optional func pagedStore(pagedStore: PagedStore, willAccessPage: Int)
 }
 
 ///
@@ -20,39 +21,40 @@ protocol PagedArrayDelegate {
 ///
 /// For more information on how FUS passes paginated data to clients, check out the Wiki page at: https://github.com/FrostlightSolutions/fus-server/wiki/Pagination-API
 ///
-class PagedStore: NSObject, NSCoding, NSCopying {
+public class PagedStore: NSObject, NSCoding, NSCopying {
     
     private lazy var _count = 0
     /// Returns the total count of object stored.
-    var count: Int {
+    public var count: Int {
         return objects.count
     }
     private lazy var _objectsPerPage = 0
     /// Returns the total number of objects per page. All pages will have the same number of objects, apart from the last which might have less.
-    var objectsPerPage: Int {
+    public var objectsPerPage: Int {
         return _objectsPerPage
     }
     /// THe number of pages in the store (not loaded, in total).
-    var numberOfPages: Int {
+    public var numberOfPages: Int {
         return Int(ceil(Double(_count) / Double(_objectsPerPage)))
     }
     /// The delegate of the store.
-    var delegate: PagedArrayDelegate?
+    public var delegate: PagedStoreDelegate?
+    private var lastAccessedPage = NSNotFound
     private lazy var objects = NSArray()
     /// Thefirst object in the store.
-    var firstObject: AnyObject? {
+    public var firstObject: AnyObject? {
         return objects.firstObject
     }
     /// The last object in the store.
-    var lastObject: AnyObject? {
+    public var lastObject: AnyObject? {
         return objects.lastObject
     }
     /// A string that represents the contents of the stores array, formatted as a property list.
-    override var description: String {
+    override public var description: String {
         return objects.description
     }
     
-    override init() {
+    override public init() {
         super.init()
     }
     
@@ -75,7 +77,7 @@ class PagedStore: NSObject, NSCoding, NSCopying {
     :param: totalCount     The total count of the store.
     :param: objectsPerPage The total objects per page. This should be the same for all pages (though it is excepted the last page may not furfil this value).
     */
-    convenience init(totalCount: Int, objectsPerPage: Int) {
+    convenience public init(totalCount: Int, objectsPerPage: Int) {
         self.init()
         
         _count = totalCount
@@ -94,7 +96,7 @@ class PagedStore: NSObject, NSCoding, NSCopying {
     :param: json           The JSON dictionary returned from FUS.
     :param: objectsPerPage The total objects per page. This should be the same for all pages (though it is excepted the last page may not furfil this value).
     */
-    convenience init(json: NSDictionary, objectsPerPage: Int) {
+    convenience public init(json: NSDictionary, objectsPerPage: Int) {
         var totalCount = 0
         if let count = json["count"] as? Int {
             totalCount = count
@@ -113,7 +115,7 @@ class PagedStore: NSObject, NSCoding, NSCopying {
     
     :param: nonPagedObjects An array of objects to store.
     */
-    convenience init(nonPagedObjects: NSArray) {
+    convenience public init(nonPagedObjects: NSArray) {
         
         self.init(totalCount: nonPagedObjects.count, objectsPerPage: nonPagedObjects.count)
         setObjects(nonPagedObjects, page: 1)
@@ -121,7 +123,7 @@ class PagedStore: NSObject, NSCoding, NSCopying {
     
     // MARK: - NSCoding Methods
     
-    required init(coder aDecoder: NSCoder) {
+    required public init(coder aDecoder: NSCoder) {
         super.init()
         
         _count = aDecoder.decodeIntegerForKey("count")
@@ -131,8 +133,7 @@ class PagedStore: NSObject, NSCoding, NSCopying {
         }
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        
+    public func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeInteger(_count, forKey: "count")
         aCoder.encodeInteger(_objectsPerPage, forKey: "objectsPerPage")
         aCoder.encodeObject(objects, forKey: "objects")
@@ -140,7 +141,7 @@ class PagedStore: NSObject, NSCoding, NSCopying {
     
     // MARK: - NSCopying Methods
     
-    func copyWithZone(zone: NSZone) -> AnyObject {
+    public func copyWithZone(zone: NSZone) -> AnyObject {
         return PagedStore(store: self)
     }
     
@@ -153,28 +154,30 @@ class PagedStore: NSObject, NSCoding, NSCopying {
     :param: page       The page the objects have come from in FUS.
     :param: totalCount The updated total objects count.
     */
-    func setObjects(newObjects: NSArray, page: Int, totalCount: Int? = nil) {
+    public func setObjects(newObjects: NSArray, page: Int, totalCount: Int? = nil) {
         
-        let objects = self.objects.mutableCopy() as NSMutableArray
-        
-        if let newTotalCount = totalCount {
-            if newTotalCount > _count {
-                // Add missing placeholder objects
-                for index in _count..<newTotalCount {
-                    objects.addObject(NSNull())
+        if newObjects.count > 0 {
+            let objects = self.objects.mutableCopy() as NSMutableArray
+            
+            if let newTotalCount = totalCount {
+                if newTotalCount > _count {
+                    // Add missing placeholder objects
+                    for index in _count..<newTotalCount {
+                        objects.addObject(NSNull())
+                    }
+                } else if _count > newTotalCount {
+                    // Remove extra objects
+                    let range = NSMakeRange(newTotalCount, _count - newTotalCount)
+                    objects.removeObjectsInRange(range)
                 }
-            } else if _count > newTotalCount {
-                // Remove extra objects
-                let range = NSMakeRange(newTotalCount, _count - newTotalCount)
-                objects.removeObjectsInRange(range)
+                _count = newTotalCount
             }
-            _count = newTotalCount
+            
+            let indexSet = indexSetForPage(page)
+            objects.replaceObjectsAtIndexes(indexSet, withObjects: newObjects)
+            
+            self.objects = objects
         }
-        
-        let indexSet = indexSetForPage(page)
-        objects.replaceObjectsAtIndexes(indexSet, withObjects: newObjects)
-        
-        self.objects = objects
     }
     
     /**
@@ -184,15 +187,19 @@ class PagedStore: NSObject, NSCoding, NSCopying {
     
     :returns: The object located at index.
     */
-    func objectAtIndex(index: Int) -> AnyObject {
-        let object: AnyObject = objects[index]
-        if let delegate = self.delegate {
-            delegate.pagedArray(self, willAccessIndex: index, returnObject: object)
+    public func objectAtIndex(index: Int) -> AnyObject {
+        let page = pageForIndex(index)
+        if page != lastAccessedPage {
+            lastAccessedPage = page
+            delegate?.pagedStore?(self, willAccessPage: page)
         }
+        
+        let object: AnyObject = objects[index]
+        delegate?.pagedStore?(self, willAccessIndex: index, returnObject: object)
         return object
     }
     
-    subscript (idx: Int) -> AnyObject {
+    public subscript (idx: Int) -> AnyObject {
         return objectAtIndex(idx)
     }
     
@@ -203,8 +210,8 @@ class PagedStore: NSObject, NSCoding, NSCopying {
     
     :returns: The page number the index is located in.
     */
-    func pageForIndex(index: Int) -> Int {
-        return index / objectsPerPage
+    public func pageForIndex(index: Int) -> Int {
+        return (index / objectsPerPage) + 1
     }
     
     /**
@@ -214,7 +221,7 @@ class PagedStore: NSObject, NSCoding, NSCopying {
     
     :returns: The lowest index whose corresponding store value is equal to anObject. If none of the objects in the store is equal to anObject, returns NSNotFound.
     */
-    func indexOfObject(anObject: AnyObject) -> Int {
+    public func indexOfObject(anObject: AnyObject) -> Int {
         return objects.indexOfObject(anObject)
     }
     
@@ -225,7 +232,7 @@ class PagedStore: NSObject, NSCoding, NSCopying {
     
     :returns: An index set of the indexes on the given page.
     */
-    func indexSetForPage(page: Int) -> NSIndexSet {
+    public func indexSetForPage(page: Int) -> NSIndexSet {
         
         var rangeLength = objectsPerPage
         if page == numberOfPages {
@@ -241,7 +248,7 @@ class PagedStore: NSObject, NSCoding, NSCopying {
     
     :returns: The lowest page number whose corresponding store value is equal to anObject. If none of the objects in the store is equal to anObject, returns NSNotFound.
     */
-    func pageForObject(anObject: AnyObject) -> Int {
+    public func pageForObject(anObject: AnyObject) -> Int {
         let index = indexOfObject(anObject)
         if index == NSNotFound {
             return index
