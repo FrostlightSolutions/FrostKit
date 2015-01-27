@@ -166,7 +166,7 @@ public class DataUpdater: NSObject {
             }
             // TODO: Add paged int if available
             let request = ServiceClient.request(Router.Custom(urlString, nil), completed: { (object, error) -> () in
-                self.requestStore.removeRequestFor(urlString)
+                self.requestStore.removeRequestFor(router: urlRouter)
                 if let anError = error {
                     NSLog("Data Updater Failure: %@", anError.localizedDescription)
                 } else {
@@ -176,7 +176,7 @@ public class DataUpdater: NSObject {
                 }
                 self.endRefreshing()
             })
-            self.requestStore.addRequest(request, urlString: urlString)
+            self.requestStore.addRequest(request, router: urlRouter)
         }
     }
     

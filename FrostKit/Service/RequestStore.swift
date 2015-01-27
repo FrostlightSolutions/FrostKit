@@ -14,7 +14,12 @@ public class RequestStore: NSObject {
     lazy var store = Dictionary<String, Request>()
     private var locked = false
     
+    func addRequest(request: Request, router: Router) {
+        addRequest(request, urlString: router.URLRequest.URL.absoluteString!)
+    }
+    
     func addRequest(request: Request, urlString: String) {
+//        NSLog("Add Request: \(request)\nWith URL: \(urlString)")
         if locked == true {
             return
         }
@@ -26,7 +31,11 @@ public class RequestStore: NSObject {
         }
     }
     
-    func removeRequestFor(urlString: String) {
+    func removeRequestFor(#router: Router) {
+        removeRequestFor(urlString: router.URLRequest.URL.absoluteString!)
+    }
+    
+    func removeRequestFor(#urlString: String) {
         if let storedRequest = store[urlString] {
             storedRequest.cancel()
             store.removeValueForKey(urlString)
