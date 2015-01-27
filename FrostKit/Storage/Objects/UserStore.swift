@@ -15,12 +15,17 @@ import UIKit
 ///
 public class UserStore: NSObject, NSCoding {
 
+    /// THe OAuthToken for the current user.
     private var oAuthToken: OAuthToken?
     /// Helper class variable to get the current OAuthToken.
     public class var oAuthToken: OAuthToken? {
         get { return current.oAuthToken }
         set { current.oAuthToken = newValue }
     }
+    /// A dictionary of DataStores with keys of the URLs used to retrive the data.
+    private lazy var contentData = Dictionary<String, DataStore>()
+    /// If set to `true` then content data is manged the same as downloaded images or documents. If `false` then content data is kept indefinitely. The default is `false`.
+    public var shouldManageContentData = false
     
     // MARK: - Singleton
     
@@ -46,11 +51,15 @@ public class UserStore: NSObject, NSCoding {
         self.init()
         
         oAuthToken = aDecoder.decodeObjectForKey("OAuthToken") as? OAuthToken
+        if let contentData = aDecoder.decodeObjectForKey("contentData") as? [String: DataStore] {
+            self.contentData = contentData
+        }
     }
     
     public func encodeWithCoder(aCoder: NSCoder) {
         
         aCoder.encodeObject(oAuthToken, forKey: "OAuthToken")
+        aCoder.encodeObject(contentData, forKey: "contentData")
     }
     
     // MARK: - Save / Load Methods
@@ -74,6 +83,22 @@ public class UserStore: NSObject, NSCoding {
             return userStore
         }
         return UserStore()
+    }
+    
+    // MARK: - Content Data Methods
+    
+    public func dataStoreForURL(urlString: String) -> DataStore? {
+        if shouldManageContentData == true {
+            ContentManager.saveContentMetadata(absolutePath: urlString)
+        }
+        return contentData[urlString]
+    }
+    
+    public func setDataStore(dataStore: DataStore, urlString: String) {
+        contentData[urlString] = dataStore
+        if shouldManageContentData == true {
+            ContentManager.saveContentMetadata(absolutePath: urlString)
+        }
     }
 
 }
