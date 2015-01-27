@@ -100,7 +100,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     :param: json           The JSON dictionary returned from FUS.
     :param: objectsPerPage The total objects per page. This should be the same for all pages (though it is excepted the last page may not furfil this value).
     */
-    convenience public init(json: NSDictionary, objectsPerPage: Int = 10) {
+    convenience public init(json: NSDictionary) {
         var totalCount = 0
         if let count = json["count"] as? Int {
             totalCount = count
@@ -108,6 +108,11 @@ public class DataStore: NSObject, NSCoding, NSCopying {
         var objects = []
         if let results = json["results"] as? NSArray {
             objects = results
+        }
+        
+        var objectsPerPage = 10
+        if let perPage = json["per_page"] as? Int {
+            objectsPerPage = perPage
         }
         
         self.init(totalCount: totalCount, objectsPerPage: objectsPerPage)
@@ -217,12 +222,60 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     }
     
     /**
+    Helper method to set or update a page's data from a JSON response.
+    
+    :param: json The JSON dictionary to parse.
+    */
+    public func setObjectFrom(#json: NSDictionary, page: Int) {
+        var totalCount = 0
+        if let count = json["count"] as? Int {
+            totalCount = count
+        }
+        var objects = []
+        if let results = json["results"] as? NSArray {
+            objects = results
+        }
+        
+        if let perPage = json["per_page"] as? Int {
+            if objectsPerPage != perPage {
+                _objectsPerPage = perPage
+            }
+        }
+        
+        setObjects(objects, page: page, totalCount: totalCount)
+    }
+    
+    /**
     A helper method for setting or updating the dictionary object.
     
     :param: dictionary The dictionary object to set or update in the store.
     */
     public func setDictionary(dictionary: NSDictionary) {
         setObjects([dictionary], page: 1)
+    }
+    
+    /**
+    A helper method to set or update the store from a paged, non-paged or single object. This setter will work out what type of store needs to be made and call the correct set method. If none of the expected type are passed in it does nothing.
+    
+    :param: object A NSDictionary or NSArray representing a paged, non-paged or single object.
+    */
+    public func setFrom(#object: AnyObject, page: Int?) {
+        if let dict = object as? NSDictionary {
+            if dict["results"] != nil && dict["count"] != nil {
+                var thePage = 1
+                if page != nil {
+                    thePage = page!
+                }
+                // Paged Dictionary Reference with Objects
+                setObjectFrom(json: dict, page: thePage)
+            } else {
+                // Single Object
+                setDictionary(dict)
+            }
+        } else if let array = object as? NSArray {
+            // Non-Paged Array of Objects
+            setObjects(array, page: 1, totalCount: array.count)
+        }
     }
     
     /**

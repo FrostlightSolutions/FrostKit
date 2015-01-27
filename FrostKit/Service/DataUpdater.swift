@@ -144,11 +144,13 @@ public class DataUpdater: NSObject {
     
     func updateDataForSegment(segment: Int) {
         if let sectionDict = sectionDictionaryForSegment(segment) {
-            // TODO: Add paged int if available
             let urlString = sectionDict["url"] as String
-            let request = ServiceClient.getRequest(Router.Custom(urlString, nil), localCompleted: { (object) -> () in
-                self.loadData(object, segment: segment)
-            }, requestCompleted: { (object, error) -> () in
+            // Load local data if available
+            if let localDataStore = UserStore.current.dataStoreForURL(urlString) {
+                loadData(localDataStore, segment: segment)
+            }
+            // TODO: Add paged int if available
+            let request = ServiceClient.request(Router.Custom(urlString, nil), completed: { (object, error) -> () in
                 self.requestStore.removeRequestFor(urlString)
                 if let anError = error {
                     NSLog("Data Updater Failure: %@", anError.localizedDescription)
