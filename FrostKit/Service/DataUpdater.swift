@@ -8,9 +8,9 @@
 
 import UIKit
 
-public class DataUpdater: NSObject {
+public class DataUpdater: NSObject, DataStoreDelegate {
 
-    let requestStore = RequestStore()
+    public let requestStore = RequestStore()
     @IBOutlet var viewController: UIViewController! {
         didSet {
             let refreshControl = UIRefreshControl()
@@ -37,7 +37,7 @@ public class DataUpdater: NSObject {
     }
     @IBOutlet var collectionView: UICollectionView?
     @IBOutlet var segmentedControl: UISegmentedControl?
-    var currentSegmentIndex: Int {
+    public var currentSegmentIndex: Int {
         if let segmentedControl = self.segmentedControl {
             if segmentedControl.selectedSegmentIndex != UISegmentedControlNoSegment {
                 return segmentedControl.selectedSegmentIndex
@@ -46,10 +46,11 @@ public class DataUpdater: NSObject {
         return 1
     }
     lazy var segmentSectionDictionarys = Array<NSDictionary>()
-    lazy var baseDataStore = DataStore()
-    var dataStore: DataStore {
+    private lazy var baseDataStore = DataStore()
+    public var dataStore: DataStore {
         return baseDataStore
     }
+    private var lastLoadedPage: Int?
     
     convenience public init(viewController: UIViewController, tableView: UITableView) {
         self.init()
@@ -65,7 +66,7 @@ public class DataUpdater: NSObject {
         self.collectionView = collectionView
     }
     
-    func viewWillAppear(animated: Bool) {
+    public func viewWillAppear(animated: Bool) {
         endRefreshing()
         updateData()
     }
@@ -92,7 +93,7 @@ public class DataUpdater: NSObject {
     
     // MARK: - Section Dictionary Getter / Setter Methods
     
-    func sectionDictionaryForSegment(segment: Int) -> NSDictionary? {
+    public func sectionDictionaryForSegment(segment: Int) -> NSDictionary? {
         if segment != NSNotFound && segment < segmentSectionDictionarys.count {
             return segmentSectionDictionarys[segment]
         } else {
@@ -100,11 +101,11 @@ public class DataUpdater: NSObject {
         }
     }
     
-    func currentSectionDictionary() -> NSDictionary? {
+    public func currentSectionDictionary() -> NSDictionary? {
         return sectionDictionaryForSegment(currentSegmentIndex)
     }
     
-    func setSectionDictionary(sectionDictionary: NSDictionary, segment: Int) {
+    public func setSectionDictionary(sectionDictionary: NSDictionary, segment: Int) {
         if segment != NSNotFound {
             while segment >= segmentSectionDictionarys.count {
                 segmentSectionDictionarys.append(NSDictionary())
@@ -113,13 +114,13 @@ public class DataUpdater: NSObject {
         }
     }
     
-    func setSectionDictionarys(sectionDictionarys: [NSDictionary]) {
+    public func setSectionDictionarys(sectionDictionarys: [NSDictionary]) {
         for index in 0..<sectionDictionarys.count {
             setSectionDictionary(sectionDictionarys[index], segment: index)
         }
     }
     
-    func setSectionDictionary(sectionDictionary: NSDictionary) {
+    public func setSectionDictionary(sectionDictionary: NSDictionary) {
         setSectionDictionarys([sectionDictionary])
     }
     
@@ -134,11 +135,12 @@ public class DataUpdater: NSObject {
     
     // MARK: - Update and Load Methods
     
-    func refreshControlTriggered(sender: UIRefreshControl) {
+    func refreshControlTriggered(sender: UIRefreshControl!) {
+        lastLoadedPage = nil
         updateData()
     }
     
-    func updateData() {
+    public func updateData() {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
             self.updateDataStoreForSegment(self.currentSegmentIndex)
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -147,7 +149,7 @@ public class DataUpdater: NSObject {
         })
     }
     
-    func updateDataStoreForSegment(segment: Int) {
+    public func updateDataStoreForSegment(segment: Int) {
         if let sectionDict = sectionDictionaryForSegment(segment) {
             let urlString = sectionDict["url"] as String
             // TODO: Load local data if available and dataStore == nil MOVE from here.
@@ -185,7 +187,7 @@ public class DataUpdater: NSObject {
         })
     }
     
-    func reloadData() {
+    public func reloadData() {
         if let tableView = self.tableView {
             tableView.reloadData()
         } else if let collectionView = self.collectionView {
@@ -193,7 +195,15 @@ public class DataUpdater: NSObject {
         }
     }
     
-    func endRefreshing() {
+    public func reloadRowsAtIndexPaths(indexPaths: [AnyObject]) {
+        if let tableView = self.tableView {
+            tableView.reloadRowsAtIndexPaths(indexPaths, withRowAnimation: .Fade)
+        } else if let collectionView = self.collectionView {
+            collectionView.reloadItemsAtIndexPaths(indexPaths)
+        }
+    }
+    
+    public func endRefreshing() {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             var refreshControl: UIRefreshControl?
             if let tableViewController = self.viewController as? UITableViewController {
@@ -210,7 +220,7 @@ public class DataUpdater: NSObject {
     
     // MARK: - Segmented Control Methods
     
-    func showSegmentedControl() {
+    public func showSegmentedControl() {
         if let tableView = self.tableView {
             if segmentedControl?.hidden == true {
                 if let headerView = tableView.tableHeaderView {
@@ -223,7 +233,7 @@ public class DataUpdater: NSObject {
         }
     }
     
-    func hideSegmentedControl() {
+    public func hideSegmentedControl() {
         if let tableView = self.tableView {
             if segmentedControl?.hidden == false {
                 if let headerView = tableView.tableHeaderView {
@@ -238,13 +248,22 @@ public class DataUpdater: NSObject {
     
     // TODO: Methods for getting a segments filters
     
-    func updateSegmentedControlTitles() {
+    public func updateSegmentedControlTitles() {
         // TODO: Update according to filters
     }
     
     @IBAction func segmentedControlDidChange(sender: UISegmentedControl) {
         reloadData()
         if let sectionData = currentSectionDictionary() {
+            updateData()
+        }
+    }
+    
+    // MARK: - Data Store Delegate Methods
+    
+    public func dataStore(dataStore: DataStore, willAccessPage page: Int) {
+        if page > lastLoadedPage && page != 1 {
+            lastLoadedPage = page
             updateData()
         }
     }
