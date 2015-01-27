@@ -57,6 +57,9 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     override public var description: String {
         return objects.description
     }
+    override public var hash: Int {
+        return objects.hash ^ objectsPerPage
+    }
     
     override public init() {
         super.init()
@@ -184,6 +187,27 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     
     public func copyWithZone(zone: NSZone) -> AnyObject {
         return DataStore(store: self)
+    }
+    
+    // MARK: - Comparison Methods
+    
+    public func isEqualToDataStore(object: DataStore?) -> Bool {
+        if let dataStore = object {
+            
+            let haveEqualCounts = self.count == dataStore.count
+            let haveEqualObjectsPerPage = self.objectsPerPage == dataStore.objectsPerPage
+            let haveEqualObjects = self.objects.isEqualToArray(dataStore.objects)
+            
+            return haveEqualCounts && haveEqualObjectsPerPage && haveEqualObjects
+        }
+        return false
+    }
+    
+    public override func isEqual(object: AnyObject?) -> Bool {
+        if let dataStore = object as? DataStore {
+            return self.isEqualToDataStore(dataStore)
+        }
+        return false
     }
     
     // MARK: - Helper Methods
