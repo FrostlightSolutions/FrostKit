@@ -19,11 +19,11 @@ public class RequestStore: NSObject {
             return
         }
         
-        if let storedRequest = store[urlString] {
-            storedRequest.cancel()
+        if store[urlString] != nil {
+            request.cancel()
+        } else {
+            store[urlString] = request
         }
-        
-        store[urlString] = request
     }
     
     func removeRequestFor(urlString: String) {
