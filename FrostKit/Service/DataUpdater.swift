@@ -41,9 +41,9 @@ public class DataUpdater: NSObject {
         return 1
     }
     lazy var segmentSectionDictionarys = Array<NSDictionary>()
-    lazy var baseDataArray = NSArray()
-    var dataArray: NSArray {
-        return baseDataArray
+    lazy var baseDataStore = DataStore()
+    var dataStore: DataStore {
+        return baseDataStore
     }
     
     convenience public init(viewController: UIViewController, tableView: UITableView) {
@@ -109,20 +109,20 @@ public class DataUpdater: NSObject {
         setSectionDictionarys([sectionDictionary])
     }
     
-    // MARK: - Data Getter / Setter Methods
+    // MARK: - Data Store Getter / Setter Methods
     
-    func setDataArray(dataArray: NSArray, segment: Int) {
+    func setDataStore(dataStore: DataStore, segment: Int) {
         var shouldReloadData = false
         
         if currentSegmentIndex == segment {
-            if baseDataArray.isEqualToArray(dataArray) == false {
-                baseDataArray = dataArray
+            if baseDataStore != dataStore {
+                baseDataStore = dataStore
                 shouldReloadData = true
             }
         }
         
         if shouldReloadData == true {
-            updateTableFooter(count: dataArray.count)
+            updateTableFooter(count: dataStore.count)
             reloadData()
         }
     }
@@ -135,19 +135,19 @@ public class DataUpdater: NSObject {
     
     func updateData() {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-            self.updateDataForSegment(self.currentSegmentIndex)
+            self.updateDataStoreForSegment(self.currentSegmentIndex)
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 // TODO: Call updatedData() function in the current view controller.
             })
         })
     }
     
-    func updateDataForSegment(segment: Int) {
+    func updateDataStoreForSegment(segment: Int) {
         if let sectionDict = sectionDictionaryForSegment(segment) {
             let urlString = sectionDict["url"] as String
             // Load local data if available
             if let localDataStore = UserStore.current.dataStoreForURL(urlString) {
-                loadData(localDataStore, segment: segment)
+                loadDataStore(localDataStore, segment: segment)
             }
             // TODO: Add paged int if available
             let request = ServiceClient.request(Router.Custom(urlString, nil), completed: { (object, error) -> () in
@@ -155,7 +155,9 @@ public class DataUpdater: NSObject {
                 if let anError = error {
                     NSLog("Data Updater Failure: %@", anError.localizedDescription)
                 } else {
-                    self.loadData(object, segment: segment)
+                    if let dataStore = object {
+                        self.loadDataStore(dataStore, segment: segment)
+                    }
                 }
                 self.endRefreshing()
             })
@@ -163,13 +165,10 @@ public class DataUpdater: NSObject {
         }
     }
     
-    func loadData(object: AnyObject?, segment: Int) {
+    func loadDataStore(dataStore: DataStore, segment: Int) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
-            // TODO: Impliment as DataObjectStore
-            if let dataArray = object as? NSArray {
-                self.setDataArray(dataArray, segment: segment)
-                self.reloadData()
-            }
+            self.setDataStore(dataStore, segment: segment)
+            self.reloadData()
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 // TODO: Call loadedData() function in the current view controller.
