@@ -13,24 +13,29 @@ public class DataUpdater: NSObject {
     let requestStore = RequestStore()
     @IBOutlet var viewController: UIViewController! {
         didSet {
-            if let tableViewController = viewController as? UITableViewController {
-                let refreshControl = UIRefreshControl()
-                refreshControl.addTarget(self, action: "refreshControlTriggered:", forControlEvents: .ValueChanged)
-                refreshControl.tintColor = FrostKit.shared.tintColor
-                tableViewController.refreshControl = refreshControl
-            }
-        }
-    }
-    @IBOutlet var tableView: UITableView! {
-        didSet {
-            tableView.estimatedRowHeight = 44
-            if UIDevice.SystemVersion.majorVersion >= 8 {
-                tableView.rowHeight = UITableViewAutomaticDimension
-            }
+            let refreshControl = UIRefreshControl()
+            refreshControl.addTarget(self, action: "refreshControlTriggered:", forControlEvents: .ValueChanged)
+            refreshControl.tintColor = FrostKit.shared.tintColor
             
-            updateTableFooter()
+            if let tableViewController = viewController as? UITableViewController {
+                tableViewController.refreshControl = refreshControl
+            } else if let collectionViewController = viewController as? UICollectionViewController {
+                collectionViewController.refreshControl = refreshControl
+            }
         }
     }
+    @IBOutlet var tableView: UITableView? {
+        didSet {
+            if let tableView = self.tableView {
+                tableView.estimatedRowHeight = 44
+                if UIDevice.SystemVersion.majorVersion >= 8 {
+                    tableView.rowHeight = UITableViewAutomaticDimension
+                }
+                updateTableFooter()
+            }
+        }
+    }
+    @IBOutlet var collectionView: UICollectionView?
     @IBOutlet var segmentedControl: UISegmentedControl?
     var currentSegmentIndex: Int {
         if let segmentedControl = self.segmentedControl {
@@ -53,26 +58,35 @@ public class DataUpdater: NSObject {
         self.tableView = tableView
     }
     
+    convenience public init(viewController: UIViewController, collectionView: UICollectionView) {
+        self.init()
+        
+        self.viewController = viewController
+        self.collectionView = collectionView
+    }
+    
     func viewWillAppear(animated: Bool) {
         endRefreshing()
         updateData()
     }
     
     func updateTableFooter(count: Int = 0) {
-        // If the data array is empty, add a table footer with a label telling the user
-        if count <= 0 {
-            let noContentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 44))
-            noContentLabel.backgroundColor = UIColor.clearColor()
-            noContentLabel.text = FKLocalizedString("NO_CONTENT_FOUND", comment: "No Content Found")
-            noContentLabel.textColor = UIColor.lightGrayColor()
-            noContentLabel.textAlignment = .Center
-            noContentLabel.font = UIFont.systemFontOfSize(14)
-            noContentLabel.minimumScaleFactor = 0.5
-            tableView.tableFooterView = noContentLabel
-        } else {
-            let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 0))
-            footerView.backgroundColor = UIColor.clearColor()
-            tableView.tableFooterView = footerView
+        if let tableView = self.tableView {
+            // If the data array is empty, add a table footer with a label telling the user
+            if count <= 0 {
+                let noContentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 44))
+                noContentLabel.backgroundColor = UIColor.clearColor()
+                noContentLabel.text = FKLocalizedString("NO_CONTENT_FOUND", comment: "No Content Found")
+                noContentLabel.textColor = UIColor.lightGrayColor()
+                noContentLabel.textAlignment = .Center
+                noContentLabel.font = UIFont.systemFontOfSize(14)
+                noContentLabel.minimumScaleFactor = 0.5
+                tableView.tableFooterView = noContentLabel
+            } else {
+                let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 0))
+                footerView.backgroundColor = UIColor.clearColor()
+                tableView.tableFooterView = footerView
+            }
         }
     }
     
@@ -177,27 +191,36 @@ public class DataUpdater: NSObject {
     }
     
     func reloadData() {
-        tableView.reloadData()
+        if let tableView = self.tableView {
+            tableView.reloadData()
+        } else if let collectionView = self.collectionView {
+            collectionView.reloadData()
+        }
     }
     
     func endRefreshing() {
-        if let tableViewController = viewController as? UITableViewController {
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                if tableViewController.refreshControl?.refreshing == true {
-                    tableViewController.refreshControl?.endRefreshing()
-                }
-            })
-        }
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            var refreshControl: UIRefreshControl?
+            if let tableViewController = self.viewController as? UITableViewController {
+                refreshControl = tableViewController.refreshControl
+            } else if let collectionViewController = self.viewController as? UICollectionViewController {
+                refreshControl = collectionViewController.refreshControl
+            }
+            
+            if refreshControl?.refreshing == true {
+                refreshControl?.endRefreshing()
+            }
+        })
     }
     
     // MARK: - Segmented Control Methods
     
     func showSegmentedControl() {
-        if let segmentedControl = self.segmentedControl {
-            if segmentedControl.hidden == true {
+        if let tableView = self.tableView {
+            if segmentedControl?.hidden == true {
                 if let headerView = tableView.tableHeaderView {
                     tableView.tableHeaderView = nil
-                    segmentedControl.hidden = false
+                    segmentedControl?.hidden = false
                     headerView.frame = CGRect(x: 0, y: 0, width: headerView.bounds.width, height: 88)
                     tableView.tableHeaderView = headerView
                 }
@@ -206,11 +229,11 @@ public class DataUpdater: NSObject {
     }
     
     func hideSegmentedControl() {
-        if let segmentedControl = self.segmentedControl {
-            if segmentedControl.hidden == false {
+        if let tableView = self.tableView {
+            if segmentedControl?.hidden == false {
                 if let headerView = tableView.tableHeaderView {
                     tableView.tableHeaderView = nil
-                    segmentedControl.hidden = true
+                    segmentedControl?.hidden = true
                     headerView.frame = CGRect(x: 0, y: 0, width: headerView.bounds.width, height: 44)
                     tableView.tableHeaderView = headerView
                 }
