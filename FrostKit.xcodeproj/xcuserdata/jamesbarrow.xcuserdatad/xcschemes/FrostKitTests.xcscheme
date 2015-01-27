@@ -39,6 +39,12 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "DataStoreTests/testArraySize()">
+               </Test>
+               <Test
+                  Identifier = "DataStoreTests/testEmptyArraySize()">
+               </Test>
+               <Test
                   Identifier = "FontTests">
                </Test>
                <Test
@@ -51,10 +57,7 @@
                   Identifier = "NSDateExtensionsTests">
                </Test>
                <Test
-                  Identifier = "PagedStoreTests/testArraySize()">
-               </Test>
-               <Test
-                  Identifier = "PagedStoreTests/testEmptyArraySize()">
+                  Identifier = "ServiceClientTests">
                </Test>
                <Test
                   Identifier = "UIColorExtensionsTest">
