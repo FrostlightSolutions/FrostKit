@@ -11,27 +11,25 @@ import Alamofire
 
 public class RequestStore: NSObject {
     
-    lazy var store = Dictionary<Int, Request>()
+    lazy var store = Dictionary<String, Request>()
     private var locked = false
     
-    func addRequest(request: Request) {
+    func addRequest(request: Request, urlString: String) {
         if locked == true {
             return
         }
         
-        let identifier = request.task.taskIdentifier
-        if let storedRequest = store[identifier] {
+        if let storedRequest = store[urlString] {
             storedRequest.cancel()
-        } else {
-            store[identifier] = request
         }
+        
+        store[urlString] = request
     }
     
-    func removeRequest(request: Request) {
-        let identifier = request.task.taskIdentifier
-        if let storedRequest = store[identifier] {
+    func removeRequestFor(urlString: String) {
+        if let storedRequest = store[urlString] {
             storedRequest.cancel()
-            store.removeValueForKey(identifier)
+            store.removeValueForKey(urlString)
         }
     }
     
