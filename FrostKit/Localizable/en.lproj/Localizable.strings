@@ -10,6 +10,9 @@
 
 "CANCEL" = "Cancel";
 
+/* DataUpdater */
+"NO_CONTENT_FOUND" = "No Content Found";
+
 /* WebViewController */
 
 "OPEN_IN_SAFARI" = "Open in Safari";

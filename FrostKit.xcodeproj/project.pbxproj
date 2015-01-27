@@ -74,6 +74,7 @@
 		18C0DBAF1A6D182400307EAA /* Alamofire.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 18C0DBA71A6D174E00307EAA /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18C0DBB11A6D18AB00307EAA /* ServiceClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0DBB01A6D18AB00307EAA /* ServiceClientTests.swift */; };
 		18CB51701A76454A005064C8 /* RequestStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* RequestStore.swift */; };
+		18CB51751A765335005064C8 /* DataUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB51741A765335005064C8 /* DataUpdater.swift */; };
 		18CB517A1A7655ED005064C8 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB51791A7655ED005064C8 /* UIDeviceExtensions.swift */; };
 		18CBAA051A6D315F009CBCA0 /* OAuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CBAA041A6D315F009CBCA0 /* OAuthToken.swift */; };
 		18CFF9FE19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFF9FD19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift */; };
@@ -168,6 +169,7 @@
 		18C0DBA01A6D174E00307EAA /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		18C0DBB01A6D18AB00307EAA /* ServiceClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceClientTests.swift; sourceTree = "<group>"; };
 		18CB516F1A76454A005064C8 /* RequestStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestStore.swift; sourceTree = "<group>"; };
+		18CB51741A765335005064C8 /* DataUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdater.swift; sourceTree = "<group>"; };
 		18CB51791A7655ED005064C8 /* UIDeviceExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDeviceExtensions.swift; sourceTree = "<group>"; };
 		18CBAA041A6D315F009CBCA0 /* OAuthToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthToken.swift; sourceTree = "<group>"; };
 		18CFF9FD19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimeZoneExtensions.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 			children = (
 				1899C4FA1A6D152C001638CF /* ServiceClient.swift */,
 				18CB516F1A76454A005064C8 /* RequestStore.swift */,
+				18CB51741A765335005064C8 /* DataUpdater.swift */,
 				18CBAA011A6D2F3F009CBCA0 /* Authorization */,
 			);
 			path = Service;
@@ -609,6 +612,7 @@
 				18C0066A19DB767A00811755 /* UIColorExtensions.swift in Sources */,
 				186B07F31A6D5C4700CAF920 /* UserStore.swift in Sources */,
 				18E3F23219DE07670032ABB7 /* FrostKit.swift in Sources */,
+				18CB51751A765335005064C8 /* DataUpdater.swift in Sources */,
 				18CB517A1A7655ED005064C8 /* UIDeviceExtensions.swift in Sources */,
 				18C0066319DB5C7200811755 /* ImageCache.swift in Sources */,
 				18DE01ED19DCBB5B008A1506 /* UIFontExtensiosns.swift in Sources */,
