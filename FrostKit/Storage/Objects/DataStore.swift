@@ -218,12 +218,14 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     :param: newObjects The new objects to add or update into the store.
     :param: page       The page the objects have come from in FUS.
     :param: totalCount The updated total objects count.
+    
+    :returns: `true` if updated store is different from previous store, `false` if nothing changed.
     */
-    public func setObjects(newObjects: NSArray, page: Int, totalCount: Int? = nil) {
+    public func setObjects(newObjects: NSArray, page: Int, totalCount: Int? = nil) -> Bool {
         
+        var objectsChanged = false
+        let objects = self.objects.mutableCopy() as NSMutableArray
         if newObjects.count > 0 {
-            let objects = self.objects.mutableCopy() as NSMutableArray
-            
             if let newTotalCount = totalCount {
                 if newTotalCount > _count {
                     // Add missing placeholder objects
@@ -240,17 +242,26 @@ public class DataStore: NSObject, NSCoding, NSCopying {
             
             let indexSet = indexSetForPage(page)
             objects.replaceObjectsAtIndexes(indexSet, withObjects: newObjects)
-            
-            self.objects = objects
+        } else {
+            objects.removeAllObjects()
         }
+        
+        if self.objects.isEqualToArray(objects) == false {
+            objectsChanged = true
+        }
+        
+        self.objects = objects
+        return objectsChanged
     }
     
     /**
     Helper method to set or update a page's data from a JSON response.
     
     :param: json The JSON dictionary to parse.
+    
+    :returns: `true` if updated store is different from previous store, `false` if nothing changed.
     */
-    public func setObjectFrom(#json: NSDictionary, page: Int) {
+    public func setObjectFrom(#json: NSDictionary, page: Int) -> Bool {
         var totalCount = 0
         if let count = json["count"] as? Int {
             totalCount = count
@@ -266,24 +277,28 @@ public class DataStore: NSObject, NSCoding, NSCopying {
             }
         }
         
-        setObjects(objects, page: page, totalCount: totalCount)
+        return setObjects(objects, page: page, totalCount: totalCount)
     }
     
     /**
     A helper method for setting or updating the dictionary object.
     
     :param: dictionary The dictionary object to set or update in the store.
+    
+    :returns: `true` if updated store is different from previous store, `false` if nothing changed.
     */
-    public func setDictionary(dictionary: NSDictionary) {
-        setObjects([dictionary], page: 1)
+    public func setDictionary(dictionary: NSDictionary) -> Bool {
+        return setObjects([dictionary], page: 1)
     }
     
     /**
     A helper method to set or update the store from a paged, non-paged or single object. This setter will work out what type of store needs to be made and call the correct set method. If none of the expected type are passed in it does nothing.
     
     :param: object A NSDictionary or NSArray representing a paged, non-paged or single object.
+    
+    :returns: `true` if updated store is different from previous store, `false` if nothing changed.
     */
-    public func setFrom(#object: AnyObject, page: Int?) {
+    public func setFrom(#object: AnyObject, page: Int?) -> Bool {
         if let dict = object as? NSDictionary {
             if dict["results"] != nil && dict["count"] != nil {
                 var thePage = 1
@@ -291,15 +306,16 @@ public class DataStore: NSObject, NSCoding, NSCopying {
                     thePage = page!
                 }
                 // Paged Dictionary Reference with Objects
-                setObjectFrom(json: dict, page: thePage)
+                return setObjectFrom(json: dict, page: thePage)
             } else {
                 // Single Object
-                setDictionary(dict)
+                return setDictionary(dict)
             }
         } else if let array = object as? NSArray {
             // Non-Paged Array of Objects
-            setObjects(array, page: 1, totalCount: array.count)
+            return setObjects(array, page: 1, totalCount: array.count)
         }
+        return false
     }
     
     /**

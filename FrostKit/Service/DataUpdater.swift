@@ -111,11 +111,11 @@ public class DataUpdater: NSObject {
     
     // MARK: - Data Store Getter / Setter Methods
     
-    func setDataStore(dataStore: DataStore, segment: Int) {
+    func setDataStore(dataStore: DataStore, segment: Int) -> Bool {
         var shouldReloadData = false
         
         if currentSegmentIndex == segment {
-            if baseDataStore != dataStore {
+            if baseDataStore.isEqualToDataStore(dataStore) == false {
                 baseDataStore = dataStore
                 shouldReloadData = true
             }
@@ -125,6 +125,7 @@ public class DataUpdater: NSObject {
             updateTableFooter(count: dataStore.count)
             reloadData()
         }
+        return shouldReloadData
     }
     
     // MARK: - Update and Load Methods
@@ -168,7 +169,6 @@ public class DataUpdater: NSObject {
     func loadDataStore(dataStore: DataStore, segment: Int) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
             self.setDataStore(dataStore, segment: segment)
-            self.reloadData()
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 // TODO: Call loadedData() function in the current view controller.
@@ -218,7 +218,7 @@ public class DataUpdater: NSObject {
         }
     }
     
-    // TODO: Methods for getting a segments filter
+    // TODO: Methods for getting a segments filters
     
     func updateSegmentedControlTitles() {
         // TODO: Update according to filters
