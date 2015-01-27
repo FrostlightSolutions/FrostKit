@@ -49,6 +49,10 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     public var lastObject: AnyObject? {
         return objects.lastObject
     }
+    /// Returns a dictionary object if it is the first item in the array. This is used as a convenience method for getting a single dictionary object in the store.
+    public var dictionary: NSDictionary? {
+        return firstObject as? NSDictionary
+    }
     /// A string that represents the contents of the stores array, formatted as a property list.
     override public var description: String {
         return objects.description
@@ -119,6 +123,15 @@ public class DataStore: NSObject, NSCoding, NSCopying {
         
         self.init(totalCount: nonPagedObjects.count, objectsPerPage: nonPagedObjects.count)
         setObjects(nonPagedObjects, page: 1)
+    }
+    
+    /**
+    Initializes a store object for a non-paged single NSDictionary object returned from FUS. This creates a normal paged store but only sets it wit 1 object. To access this object you should use the `dictionary` variable on the store object.
+    
+    :param: dictionary The dictionary to store.
+    */
+    convenience public init(dictionary: NSDictionary) {
+        self.init(nonPagedObjects: [dictionary])
     }
     
     // MARK: - NSCoding Methods
