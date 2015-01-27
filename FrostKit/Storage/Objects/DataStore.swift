@@ -10,8 +10,8 @@ import UIKit
 
 
 @objc public protocol DataStoreDelegate {
-    optional func dataStore(dataStore: DataStore, willAccessIndex: Int, returnObject: AnyObject)
-    optional func dataStore(dataStore: DataStore, willAccessPage: Int)
+    optional func dataStore(dataStore: DataStore, willAccessIndex index: Int, returnObject object: AnyObject)
+    optional func dataStore(dataStore: DataStore, willAccessPage page: Int)
 }
 
 ///
@@ -299,6 +299,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     :returns: `true` if updated store is different from previous store, `false` if nothing changed.
     */
     public func setFrom(#object: AnyObject, page: Int?) -> Bool {
+        var hasChanged = false
         if let dict = object as? NSDictionary {
             if dict["results"] != nil && dict["count"] != nil {
                 var thePage = 1
@@ -306,16 +307,16 @@ public class DataStore: NSObject, NSCoding, NSCopying {
                     thePage = page!
                 }
                 // Paged Dictionary Reference with Objects
-                return setObjectFrom(json: dict, page: thePage)
+                hasChanged = setObjectFrom(json: dict, page: thePage)
             } else {
                 // Single Object
-                return setDictionary(dict)
+                hasChanged = setDictionary(dict)
             }
         } else if let array = object as? NSArray {
             // Non-Paged Array of Objects
-            return setObjects(array, page: 1, totalCount: array.count)
+            hasChanged = setObjects(array, page: 1, totalCount: array.count)
         }
-        return false
+        return hasChanged
     }
     
     /**
@@ -377,6 +378,22 @@ public class DataStore: NSObject, NSCoding, NSCopying {
             rangeLength = _count - ((numberOfPages - 1) * objectsPerPage)
         }
         return NSIndexSet(indexesInRange: NSMakeRange((page - 1) * objectsPerPage, rangeLength))
+    }
+    
+    /**
+    Retirns the index paths for the object in the page requested.
+    
+    :param: page The page of the residing index sets.
+    
+    :returns: An array of index paths on the given page.
+    */
+    public func indexPathsForPage(page: Int) -> [NSIndexPath] {
+        let indexSet = indexSetForPage(page)
+        var indexPaths = Array<NSIndexPath>()
+        indexSet.enumerateIndexesUsingBlock({ (idx, stop) -> Void in
+            indexPaths.append(NSIndexPath(forRow: idx, inSection: 0))
+        })
+        return indexPaths
     }
     
     /**

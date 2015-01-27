@@ -123,23 +123,13 @@ public class DataUpdater: NSObject {
         setSectionDictionarys([sectionDictionary])
     }
     
-    // MARK: - Data Store Getter / Setter Methods
+    // MARK: - Data Getter / Setter Methods
     
-    func setDataStore(dataStore: DataStore, segment: Int) -> Bool {
-        var shouldReloadData = false
-        
-        if currentSegmentIndex == segment {
-            if baseDataStore.isEqualToDataStore(dataStore) == false {
-                baseDataStore = dataStore
-                shouldReloadData = true
-            }
+    public func objectAtIndexPath(indexPath: NSIndexPath) -> AnyObject? {
+        if indexPath.row < dataStore.count {
+            return dataStore[indexPath.row]
         }
-        
-        if shouldReloadData == true {
-            updateTableFooter(count: dataStore.count)
-            reloadData()
-        }
-        return shouldReloadData
+        return nil
     }
     
     // MARK: - Update and Load Methods
@@ -160,18 +150,20 @@ public class DataUpdater: NSObject {
     func updateDataStoreForSegment(segment: Int) {
         if let sectionDict = sectionDictionaryForSegment(segment) {
             let urlString = sectionDict["url"] as String
-            // Load local data if available
-            if let localDataStore = UserStore.current.dataStoreForURL(urlString) {
-                loadDataStore(localDataStore, segment: segment)
-            }
-            // TODO: Add paged int if available
-            let request = ServiceClient.request(Router.Custom(urlString, nil), completed: { (object, error) -> () in
+            // TODO: Load local data if available and dataStore == nil MOVE from here.
+//            if let localDataStore = UserStore.current.dataStoreForURL(urlString) {
+//                loadDataStore(localDataStore, segment: segment)
+//            }
+            
+            let page = self.lastLoadedPage
+            let urlRouter = Router.Custom(urlString, page)
+            let request = ServiceClient.request(urlRouter, completed: { (json, error) -> () in
                 self.requestStore.removeRequestFor(router: urlRouter)
                 if let anError = error {
                     NSLog("Data Updater Failure: %@", anError.localizedDescription)
                 } else {
-                    if let dataStore = object {
-                        self.loadDataStore(dataStore, segment: segment)
+                    if let object: AnyObject = json {
+                        self.loadJSON(object, segment: segment, page: page)
                     }
                 }
                 self.endRefreshing()
@@ -180,14 +172,17 @@ public class DataUpdater: NSObject {
         }
     }
     
-    func loadDataStore(dataStore: DataStore, segment: Int) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
-            self.setDataStore(dataStore, segment: segment)
+    private func loadJSON(json: AnyObject, segment: Int, page: Int?) {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            if self.dataStore.setFrom(object: json, page: page) == true {
+                self.dataStore.delegate = self
+                self.updateTableFooter(count: self.dataStore.count)
+                self.reloadData()
+//                let timer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "reloadData", userInfo: nil, repeats: false)
+            }
             
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                // TODO: Call loadedData() function in the current view controller.
-            })
-        }
+            // TODO: Call loadedData() function in the current view controller.
+        })
     }
     
     func reloadData() {
