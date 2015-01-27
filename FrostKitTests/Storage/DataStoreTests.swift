@@ -1,5 +1,5 @@
 //
-//  PagedStoreTests.swift
+//  DataStoreTests.swift
 //  FrostKit
 //
 //  Created by James Barrow on 21/01/2015.
@@ -10,14 +10,14 @@ import UIKit
 import XCTest
 import FrostKit
 
-class PagedStoreTests: XCTestCase {
+class DataStoreTests: XCTestCase {
 
-    var pagedStore: PagedStore {
-        let pagedStore = PagedStore(totalCount: 8, objectsPerPage: 3)
-        pagedStore.setObjects(["1", "2", "3"], page: 1)
-        pagedStore.setObjects(["4", "5", "6"], page: 2)
-        pagedStore.setObjects(["7", "8"], page: 3)
-        return pagedStore
+    var dataStore: DataStore {
+        let dataStore = DataStore(totalCount: 8, objectsPerPage: 3)
+        dataStore.setObjects(["1", "2", "3"], page: 1)
+        dataStore.setObjects(["4", "5", "6"], page: 2)
+        dataStore.setObjects(["7", "8"], page: 3)
+        return dataStore
     }
     let loopCount = 1_000_000
     
@@ -31,9 +31,9 @@ class PagedStoreTests: XCTestCase {
         super.tearDown()
     }
     
-    func testPagedStoreSecondPageSubscript() {
+    func testDataStoreSecondPageSubscript() {
         
-        let four = pagedStore[3] as String
+        let four = dataStore[3] as String
         if four == "4" {
             XCTAssert(true, "Success! 1st item of the 2nd page is \(four)")
         } else {
@@ -41,9 +41,9 @@ class PagedStoreTests: XCTestCase {
         }
     }
     
-    func testPagedStoreCount() {
+    func testDataStoreCount() {
         
-        let count = pagedStore.count
+        let count = dataStore.count
         if count == 8 {
             XCTAssert(true, "Success! Count is \(count)")
         } else {
@@ -51,9 +51,9 @@ class PagedStoreTests: XCTestCase {
         }
     }
     
-    func testPagedStoreFirstObject() {
+    func testDataStoreFirstObject() {
         
-        let object = pagedStore.firstObject as String
+        let object = dataStore.firstObject as String
         if object == "1" {
             XCTAssert(true, "Success! First object is \(object)")
         } else {
@@ -61,9 +61,9 @@ class PagedStoreTests: XCTestCase {
         }
     }
     
-    func testPagedStoreLastObject() {
+    func testDataStoreLastObject() {
         
-        let object = pagedStore.lastObject as String
+        let object = dataStore.lastObject as String
         if object == "8" {
             XCTAssert(true, "Success! Lasr object is \(object)")
         } else {
@@ -71,11 +71,11 @@ class PagedStoreTests: XCTestCase {
         }
     }
     
-    func testPagedStoreUpdateBiggerTotalCount() {
+    func testDataStoreUpdateBiggerTotalCount() {
         
-        let pagedStore = self.pagedStore
-        pagedStore.setObjects(["7", "8", "9"], page: 3, totalCount: 9)
-        let count = pagedStore.count
+        let dataStore = self.dataStore
+        dataStore.setObjects(["7", "8", "9"], page: 3, totalCount: 9)
+        let count = dataStore.count
         if count == 9 {
             XCTAssert(true, "Success! Count is now \(count)")
         } else {
@@ -83,11 +83,11 @@ class PagedStoreTests: XCTestCase {
         }
     }
     
-    func testPagedStoreUpdateSmallerTotalCount() {
+    func testDataStoreUpdateSmallerTotalCount() {
         
-        let pagedStore = self.pagedStore
-        pagedStore.setObjects(["4"], page: 2, totalCount: 4)
-        let count = pagedStore.count
+        let dataStore = self.dataStore
+        dataStore.setObjects(["4"], page: 2, totalCount: 4)
+        let count = dataStore.count
         if count == 4 {
             XCTAssert(true, "Success! Count is now \(count)")
         } else {

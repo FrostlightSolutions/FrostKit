@@ -1,5 +1,5 @@
 //
-//  PagedStore.swift
+//  DataStore.swift
 //  FrostKit
 //
 //  Created by James Barrow on 20/01/2015.
@@ -9,19 +9,19 @@
 import UIKit
 
 
-@objc public protocol PagedStoreDelegate {
-    optional func pagedStore(pagedStore: PagedStore, willAccessIndex: Int, returnObject: AnyObject)
-    optional func pagedStore(pagedStore: PagedStore, willAccessPage: Int)
+@objc public protocol DataStoreDelegate {
+    optional func dataStore(dataStore: DataStore, willAccessIndex: Int, returnObject: AnyObject)
+    optional func dataStore(dataStore: DataStore, willAccessPage: Int)
 }
 
 ///
-/// Paged store allows storing of data in a paged form. It allows pre populating an array (with NSNull objects) in the store with the total number of object until they are called upon to be updated with the real data.
+/// Data store allows storing of data in a paged form. It allows pre populating an array (with NSNull objects) in the store with the total number of object until they are called upon to be updated with the real data.
 ///
 /// This class allows for a correct representation of how large a table or collection view is when used like an array in a data source for these UI items. It also allows the ability to only load items when they are needed and with the delegate method cancel or lower priority fast scroll past pages.
 ///
 /// For more information on how FUS passes paginated data to clients, check out the Wiki page at: https://github.com/FrostlightSolutions/fus-server/wiki/Pagination-API
 ///
-public class PagedStore: NSObject, NSCoding, NSCopying {
+public class DataStore: NSObject, NSCoding, NSCopying {
     
     private lazy var _count = 0
     /// Returns the total count of object stored.
@@ -38,7 +38,7 @@ public class PagedStore: NSObject, NSCoding, NSCopying {
         return Int(ceil(Double(_count) / Double(_objectsPerPage)))
     }
     /// The delegate of the store.
-    public var delegate: PagedStoreDelegate?
+    public var delegate: DataStoreDelegate?
     private var lastAccessedPage = NSNotFound
     private lazy var objects = NSArray()
     /// Thefirst object in the store.
@@ -63,7 +63,7 @@ public class PagedStore: NSObject, NSCoding, NSCopying {
     
     :param: store The store object to base the new one from.
     */
-    convenience init(store: PagedStore) {
+    convenience init(store: DataStore) {
         self.init()
         
         _count = store._count
@@ -142,7 +142,7 @@ public class PagedStore: NSObject, NSCoding, NSCopying {
     // MARK: - NSCopying Methods
     
     public func copyWithZone(zone: NSZone) -> AnyObject {
-        return PagedStore(store: self)
+        return DataStore(store: self)
     }
     
     // MARK: - Helper Methods
@@ -191,11 +191,11 @@ public class PagedStore: NSObject, NSCoding, NSCopying {
         let page = pageForIndex(index)
         if page != lastAccessedPage {
             lastAccessedPage = page
-            delegate?.pagedStore?(self, willAccessPage: page)
+            delegate?.dataStore?(self, willAccessPage: page)
         }
         
         let object: AnyObject = objects[index]
-        delegate?.pagedStore?(self, willAccessIndex: index, returnObject: object)
+        delegate?.dataStore?(self, willAccessIndex: index, returnObject: object)
         return object
     }
     
