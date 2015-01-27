@@ -100,7 +100,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     :param: json           The JSON dictionary returned from FUS.
     :param: objectsPerPage The total objects per page. This should be the same for all pages (though it is excepted the last page may not furfil this value).
     */
-    convenience public init(json: NSDictionary, objectsPerPage: Int) {
+    convenience public init(json: NSDictionary, objectsPerPage: Int = 10) {
         var totalCount = 0
         if let count = json["count"] as? Int {
             totalCount = count
@@ -132,6 +132,29 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     */
     convenience public init(dictionary: NSDictionary) {
         self.init(nonPagedObjects: [dictionary])
+    }
+    
+    /**
+    Initializes a store object from a paged, non-paged or single object. This init will work out what type of store needs to be made and call the correct init method. If none of the expected type are passed in it just creates an empty object.
+    
+    :param: object A NSDictionary or NSArray representing a paged, non-paged or single object.
+    */
+    convenience public init(object: AnyObject) {
+        if let dict = object as? NSDictionary {
+            if dict["results"] != nil && dict["count"] != nil {
+                // Paged Dictionary Reference with Objects
+                self.init(json: dict)
+            } else {
+                // Single Object
+                self.init(dictionary: dict)
+            }
+        } else if let array = object as? NSArray {
+            // Non-Paged Array of Objects
+            self.init(nonPagedObjects: array)
+        } else {
+            // Unknown Object Type
+            self.init()
+        }
     }
     
     // MARK: - NSCoding Methods
@@ -191,6 +214,15 @@ public class DataStore: NSObject, NSCoding, NSCopying {
             
             self.objects = objects
         }
+    }
+    
+    /**
+    A helper method for setting or updating the dictionary object.
+    
+    :param: dictionary The dictionary object to set or update in the store.
+    */
+    public func setDictionary(dictionary: NSDictionary) {
+        setObjects([dictionary], page: 1)
     }
     
     /**
