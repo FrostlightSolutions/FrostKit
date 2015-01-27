@@ -18,8 +18,8 @@ public class UserStore: NSObject, NSCoding {
     private var oAuthToken: OAuthToken?
     /// Helper class variable to get the current OAuthToken.
     public class var oAuthToken: OAuthToken? {
-        get { return shared.oAuthToken }
-        set { shared.oAuthToken = newValue }
+        get { return current.oAuthToken }
+        set { current.oAuthToken = newValue }
     }
     
     // MARK: - Singleton
@@ -27,9 +27,9 @@ public class UserStore: NSObject, NSCoding {
     /**
     Returns the shared user store object.
     
-    :returns: The shared user store object.
+    :returns: The currnet user store object.
     */
-    class var shared: UserStore {
+    class var current: UserStore {
         struct Singleton {
             static let instance : UserStore = UserStore.loadUser()
         }
@@ -61,7 +61,7 @@ public class UserStore: NSObject, NSCoding {
     :returns: `true` if the save completed successfully, `false` if it failed.
     */
     class func saveUser() -> Bool {
-        return LocalStorage.saveUserData(UserStore.shared)
+        return LocalStorage.saveUserData(UserStore.current)
     }
     
     /**

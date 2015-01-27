@@ -20,7 +20,7 @@ class ServiceClientTests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        UserStore.shared
+        UserStore.current
     }
     
     override func tearDown() {
