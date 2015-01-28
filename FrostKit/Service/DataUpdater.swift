@@ -36,20 +36,8 @@ public class DataUpdater: NSObject, DataStoreDelegate {
         }
     }
     @IBOutlet var collectionView: UICollectionView?
-    @IBOutlet var segmentedControl: UISegmentedControl?
-    public var currentSegmentIndex: Int {
-        if let segmentedControl = self.segmentedControl {
-            if segmentedControl.selectedSegmentIndex != UISegmentedControlNoSegment {
-                return segmentedControl.selectedSegmentIndex
-            }
-        }
-        return 1
-    }
-    lazy var segmentSectionDictionarys = Array<NSDictionary>()
-    private lazy var baseDataStore = DataStore()
-    public var dataStore: DataStore {
-        return baseDataStore
-    }
+    public var sectionDictionary: NSDictionary?
+    public lazy var dataStore = DataStore()
     private var lastLoadedPage: Int?
     
     convenience public init(viewController: UIViewController, tableView: UITableView) {
@@ -91,39 +79,6 @@ public class DataUpdater: NSObject, DataStoreDelegate {
         }
     }
     
-    // MARK: - Section Dictionary Getter / Setter Methods
-    
-    public func sectionDictionaryForSegment(segment: Int) -> NSDictionary? {
-        if segment != NSNotFound && segment < segmentSectionDictionarys.count {
-            return segmentSectionDictionarys[segment]
-        } else {
-            return segmentSectionDictionarys.first
-        }
-    }
-    
-    public func currentSectionDictionary() -> NSDictionary? {
-        return sectionDictionaryForSegment(currentSegmentIndex)
-    }
-    
-    public func setSectionDictionary(sectionDictionary: NSDictionary, segment: Int) {
-        if segment != NSNotFound {
-            while segment >= segmentSectionDictionarys.count {
-                segmentSectionDictionarys.append(NSDictionary())
-            }
-            segmentSectionDictionarys[segment] = sectionDictionary
-        }
-    }
-    
-    public func setSectionDictionarys(sectionDictionarys: [NSDictionary]) {
-        for index in 0..<sectionDictionarys.count {
-            setSectionDictionary(sectionDictionarys[index], segment: index)
-        }
-    }
-    
-    public func setSectionDictionary(sectionDictionary: NSDictionary) {
-        setSectionDictionarys([sectionDictionary])
-    }
-    
     // MARK: - Data Getter / Setter Methods
     
     public func objectAtIndexPath(indexPath: NSIndexPath) -> AnyObject? {
@@ -142,45 +97,41 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     
     public func updateData() {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-            self.updateDataStoreForSegment(self.currentSegmentIndex)
+            if let sectionDictionary = self.sectionDictionary {
+                let urlString = sectionDictionary["url"] as String
+                // TODO: Load local data if available and dataStore == nil MOVE from here.
+//                if let localDataStore = UserStore.current.dataStoreForURL(urlString) {
+//                    loadDataStore(localDataStore, segment: segment)
+//                }
+                
+                let page = self.lastLoadedPage
+                let urlRouter = Router.Custom(urlString, page)
+                let request = ServiceClient.request(urlRouter, completed: { (json, error) -> () in
+                    self.requestStore.removeRequestFor(router: urlRouter)
+                    if let anError = error {
+                        NSLog("Data Updater Failure: %@", anError.localizedDescription)
+                    } else {
+                        if let object: AnyObject = json {
+                            self.loadJSON(object, page: page)
+                        }
+                    }
+                    self.endRefreshing()
+                })
+                self.requestStore.addRequest(request, router: urlRouter)
+            }
+            
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 // TODO: Call updatedData() function in the current view controller.
             })
         })
     }
     
-    public func updateDataStoreForSegment(segment: Int) {
-        if let sectionDict = sectionDictionaryForSegment(segment) {
-            let urlString = sectionDict["url"] as String
-            // TODO: Load local data if available and dataStore == nil MOVE from here.
-//            if let localDataStore = UserStore.current.dataStoreForURL(urlString) {
-//                loadDataStore(localDataStore, segment: segment)
-//            }
-            
-            let page = self.lastLoadedPage
-            let urlRouter = Router.Custom(urlString, page)
-            let request = ServiceClient.request(urlRouter, completed: { (json, error) -> () in
-                self.requestStore.removeRequestFor(router: urlRouter)
-                if let anError = error {
-                    NSLog("Data Updater Failure: %@", anError.localizedDescription)
-                } else {
-                    if let object: AnyObject = json {
-                        self.loadJSON(object, segment: segment, page: page)
-                    }
-                }
-                self.endRefreshing()
-            })
-            self.requestStore.addRequest(request, router: urlRouter)
-        }
-    }
-    
-    private func loadJSON(json: AnyObject, segment: Int, page: Int?) {
+    private func loadJSON(json: AnyObject, page: Int?) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             if self.dataStore.setFrom(object: json, page: page) == true {
                 self.dataStore.delegate = self
                 self.updateTableFooter(count: self.dataStore.count)
                 self.reloadData()
-//                let timer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "reloadData", userInfo: nil, repeats: false)
             }
             
             // TODO: Call loadedData() function in the current view controller.
@@ -216,47 +167,6 @@ public class DataUpdater: NSObject, DataStoreDelegate {
                 refreshControl?.endRefreshing()
             }
         })
-    }
-    
-    // MARK: - Segmented Control Methods
-    
-    public func showSegmentedControl() {
-        if let tableView = self.tableView {
-            if segmentedControl?.hidden == true {
-                if let headerView = tableView.tableHeaderView {
-                    tableView.tableHeaderView = nil
-                    segmentedControl?.hidden = false
-                    headerView.frame = CGRect(x: 0, y: 0, width: headerView.bounds.width, height: 88)
-                    tableView.tableHeaderView = headerView
-                }
-            }
-        }
-    }
-    
-    public func hideSegmentedControl() {
-        if let tableView = self.tableView {
-            if segmentedControl?.hidden == false {
-                if let headerView = tableView.tableHeaderView {
-                    tableView.tableHeaderView = nil
-                    segmentedControl?.hidden = true
-                    headerView.frame = CGRect(x: 0, y: 0, width: headerView.bounds.width, height: 44)
-                    tableView.tableHeaderView = headerView
-                }
-            }
-        }
-    }
-    
-    // TODO: Methods for getting a segments filters
-    
-    public func updateSegmentedControlTitles() {
-        // TODO: Update according to filters
-    }
-    
-    @IBAction func segmentedControlDidChange(sender: UISegmentedControl) {
-        reloadData()
-        if let sectionData = currentSectionDictionary() {
-            updateData()
-        }
     }
     
     // MARK: - Data Store Delegate Methods
