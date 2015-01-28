@@ -46,7 +46,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
             }
         }
     }
-    public lazy var dataStore = DataStore()
+    public var dataStore: DataStore?
     private var lastLoadedPage: Int?
     
     convenience public init(viewController: UIViewController, tableView: UITableView) {
@@ -91,8 +91,8 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     // MARK: - Data Getter / Setter Methods
     
     public func objectAtIndexPath(indexPath: NSIndexPath) -> AnyObject? {
-        if indexPath.row < dataStore.count {
-            return dataStore[indexPath.row]
+        if indexPath.row < dataStore?.count {
+            return dataStore?[indexPath.row]
         }
         return nil
     }
@@ -132,15 +132,29 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     
     private func loadJSON(json: AnyObject, page: Int?) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            if self.dataStore.setFrom(object: json, page: page) == true {
-                self.dataStore.delegate = self
-                self.updateTableFooter(count: self.dataStore.count)
-                self.reloadData()
-                
-                if let sectionDictionary = self.sectionDictionary {
-                    let urlString = sectionDictionary["url"] as String
-                    UserStore.current.setDataStore(self.dataStore, urlString: urlString)
+            var shouldUpdate = false
+            if let dataStore = self.dataStore {
+                shouldUpdate = dataStore.setFrom(object: json, page: page)
+            } else {
+                if page == nil || page! == 1 {
+                    self.dataStore = DataStore(object: json)
+                    self.dataStore?.delegate = self
+                    shouldUpdate = true
+                } else {
+                    NSLog("Can't create a data store for a non-page 1 object!")
                 }
+            }
+            
+            if shouldUpdate == true {
+                if let dataStore = self.dataStore {
+                    self.updateTableFooter(count: dataStore.count)
+                    
+                    if let sectionDictionary = self.sectionDictionary {
+                        let urlString = sectionDictionary["url"] as String
+                        UserStore.current.setDataStore(dataStore, urlString: urlString)
+                    }
+                }
+                self.reloadData()
             }
             
             // TODO: Call loadedData() function in the current view controller.

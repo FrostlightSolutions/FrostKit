@@ -14,6 +14,7 @@ import UIKit
     optional func dataStore(dataStore: DataStore, willAccessPage page: Int)
 }
 
+// TODO: Update documentation
 ///
 /// Data store allows storing of data in a paged form. It allows pre populating an array (with NSNull objects) in the store with the total number of object until they are called upon to be updated with the real data.
 ///
@@ -23,24 +24,21 @@ import UIKit
 ///
 public class DataStore: NSObject, NSCoding, NSCopying {
     
-    private lazy var _count = 0
-    /// Returns the total count of object stored.
-    public var count: Int {
-        return objects.count
-    }
-    private lazy var _objectsPerPage = 0
+    /// Returns the total count of objects stated by FUS.
+    public var count = 0
+    private var _objectsPerPage = 0
     /// Returns the total number of objects per page. All pages will have the same number of objects, apart from the last which might have less.
     public var objectsPerPage: Int {
         return _objectsPerPage
     }
     /// THe number of pages in the store (not loaded, in total).
     public var numberOfPages: Int {
-        return Int(ceil(Double(_count) / Double(_objectsPerPage)))
+        return Int(ceil(Double(count) / Double(_objectsPerPage)))
     }
     /// The delegate of the store.
     public var delegate: DataStoreDelegate?
     private var lastAccessedPage = NSNotFound
-    private lazy var objects = NSArray()
+    private var objects = NSArray()
     /// Thefirst object in the store.
     public var firstObject: AnyObject? {
         return objects.firstObject
@@ -61,19 +59,15 @@ public class DataStore: NSObject, NSCoding, NSCopying {
         return objects.hash ^ objectsPerPage
     }
     
-    override public init() {
-        super.init()
-    }
-    
     /**
     Initializes a store from anouther store.
     
     :param: store The store object to base the new one from.
     */
-    convenience init(store: DataStore) {
-        self.init()
+    init(store: DataStore) {
+        super.init()
         
-        _count = store._count
+        count = store.count
         _objectsPerPage = store._objectsPerPage
         objects = store.objects.copy() as NSArray
     }
@@ -84,17 +78,12 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     :param: totalCount     The total count of the store.
     :param: objectsPerPage The total objects per page. This should be the same for all pages (though it is excepted the last page may not furfil this value).
     */
-    convenience public init(totalCount: Int, objectsPerPage: Int) {
-        self.init()
+    public init(totalCount: Int, objectsPerPage: Int) {
+        super.init()
         
-        _count = totalCount
+        count = totalCount
         _objectsPerPage = objectsPerPage
-        
-        let objects = NSMutableArray(capacity: _count)
-        for pageIndex in 0..<_count {
-            objects.addObject(NSNull())
-        }
-        self.objects = objects
+        objects = NSMutableArray(capacity: count)
     }
     
     /**
@@ -161,7 +150,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
             self.init(nonPagedObjects: array)
         } else {
             // Unknown Object Type
-            self.init()
+            self.init(nonPagedObjects: [])
         }
     }
     
@@ -170,7 +159,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     required public init(coder aDecoder: NSCoder) {
         super.init()
         
-        _count = aDecoder.decodeIntegerForKey("count")
+        count = aDecoder.decodeIntegerForKey("count")
         _objectsPerPage = aDecoder.decodeIntegerForKey("objectsPerPage")
         if let objects = aDecoder.decodeObjectForKey("objects") as? NSArray {
             self.objects = objects
@@ -178,7 +167,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     }
     
     public func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeInteger(_count, forKey: "count")
+        aCoder.encodeInteger(count, forKey: "count")
         aCoder.encodeInteger(_objectsPerPage, forKey: "objectsPerPage")
         aCoder.encodeObject(objects, forKey: "objects")
     }
@@ -227,23 +216,28 @@ public class DataStore: NSObject, NSCoding, NSCopying {
         let objects = self.objects.mutableCopy() as NSMutableArray
         if newObjects.count > 0 {
             if let newTotalCount = totalCount {
-                if newTotalCount > _count {
-                    // Add missing placeholder objects
-                    for index in _count..<newTotalCount {
-                        objects.addObject(NSNull())
-                    }
-                } else if _count > newTotalCount {
-                    // Remove extra objects
-                    let range = NSMakeRange(newTotalCount, _count - newTotalCount)
-                    objects.removeObjectsInRange(range)
-                }
-                _count = newTotalCount
+                count = newTotalCount
             }
             
-            let indexSet = indexSetForPage(page)
-            objects.replaceObjectsAtIndexes(indexSet, withObjects: newObjects)
-        } else {
-            objects.removeAllObjects()
+            if count > objects.count {
+                // Replace existing objects or add new objects if out of bounds
+                var newObjectIndex = 0
+                let indexSet = indexSetForPage(page)
+                for index in indexSet.firstIndex...indexSet.lastIndex {
+                    let newObject: AnyObject = newObjects[newObjectIndex]
+                    newObjectIndex++
+                    
+                    if index < objects.count {
+                        objects.replaceObjectAtIndex(index, withObject: newObject)
+                    } else {
+                        objects.addObject(newObject)
+                    }
+                }
+            } else if objects.count > count {
+                // Remove extra objects
+                let range = NSMakeRange(count, objects.count - count)
+                objects.removeObjectsInRange(range)
+            }
         }
         
         if self.objects.isEqualToArray(objects) == false {
@@ -326,19 +320,22 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     
     :returns: The object located at index.
     */
-    public func objectAtIndex(index: Int) -> AnyObject {
+    public func objectAtIndex(index: Int) -> AnyObject? {
         let page = pageForIndex(index)
         if page != lastAccessedPage {
             lastAccessedPage = page
             delegate?.dataStore?(self, willAccessPage: page)
         }
         
-        let object: AnyObject = objects[index]
-        delegate?.dataStore?(self, willAccessIndex: index, returnObject: object)
-        return object
+        if index < objects.count {
+            let object: AnyObject = objects[index]
+            delegate?.dataStore?(self, willAccessIndex: index, returnObject: object)
+            return object
+        }
+        return nil
     }
     
-    public subscript (idx: Int) -> AnyObject {
+    public subscript (idx: Int) -> AnyObject? {
         return objectAtIndex(idx)
     }
     
@@ -375,7 +372,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
         
         var rangeLength = objectsPerPage
         if page == numberOfPages {
-            rangeLength = _count - ((numberOfPages - 1) * objectsPerPage)
+            rangeLength = count - ((numberOfPages - 1) * objectsPerPage)
         }
         return NSIndexSet(indexesInRange: NSMakeRange((page - 1) * objectsPerPage, rangeLength))
     }
