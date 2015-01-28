@@ -36,7 +36,16 @@ public class DataUpdater: NSObject, DataStoreDelegate {
         }
     }
     @IBOutlet var collectionView: UICollectionView?
-    public var sectionDictionary: NSDictionary?
+    public var sectionDictionary: NSDictionary? {
+        didSet {
+            if let sectionDictionary = self.sectionDictionary {
+                let urlString = sectionDictionary["url"] as String
+                if let localDataStore = UserStore.current.dataStoreForURL(urlString) {
+                    dataStore = localDataStore
+                }
+            }
+        }
+    }
     public lazy var dataStore = DataStore()
     private var lastLoadedPage: Int?
     
@@ -99,11 +108,6 @@ public class DataUpdater: NSObject, DataStoreDelegate {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
             if let sectionDictionary = self.sectionDictionary {
                 let urlString = sectionDictionary["url"] as String
-                // TODO: Load local data if available and dataStore == nil MOVE from here.
-//                if let localDataStore = UserStore.current.dataStoreForURL(urlString) {
-//                    loadDataStore(localDataStore, segment: segment)
-//                }
-                
                 let page = self.lastLoadedPage
                 let urlRouter = Router.Custom(urlString, page)
                 let request = ServiceClient.request(urlRouter, completed: { (json, error) -> () in
@@ -132,6 +136,11 @@ public class DataUpdater: NSObject, DataStoreDelegate {
                 self.dataStore.delegate = self
                 self.updateTableFooter(count: self.dataStore.count)
                 self.reloadData()
+                
+                if let sectionDictionary = self.sectionDictionary {
+                    let urlString = sectionDictionary["url"] as String
+                    UserStore.current.setDataStore(self.dataStore, urlString: urlString)
+                }
             }
             
             // TODO: Call loadedData() function in the current view controller.
