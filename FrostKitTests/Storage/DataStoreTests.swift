@@ -104,33 +104,5 @@ class DataStoreTests: XCTestCase {
             XCTAssert(false, "Failed! Hash is: \(hash) but should be 11")
         }
     }
-    
-    func testArraySize() {
-        
-        let fullArray = NSMutableArray()
-        
-        measureBlock { () -> Void in
-            for index in 1...self.loopCount {
-                fullArray.addObject("Hello World \(index)")
-            }
-        }
-        
-        let fullData = NSKeyedArchiver.archivedDataWithRootObject(fullArray)
-        println(" Full Array Size: \(fullData.lengthFormattedString)")
-    }
-    
-    func testEmptyArraySize() {
-        
-        let emptyArray = NSMutableArray()
-        
-        measureBlock { () -> Void in
-            for index in 1...self.loopCount {
-                emptyArray.addObject(NSNull())
-            }
-        }
-        
-        let emptyData = NSKeyedArchiver.archivedDataWithRootObject(emptyArray)
-        println("Empty Array Size: \(emptyData.lengthFormattedString)")
-    }
 
 }
