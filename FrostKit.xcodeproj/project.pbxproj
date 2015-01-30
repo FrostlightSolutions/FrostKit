@@ -75,7 +75,6 @@
 		18C0067519DC001000811755 /* NSDateExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0067419DC001000811755 /* NSDateExtensionsTests.swift */; };
 		18C0067619DC00C000811755 /* FrostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18839B1719D9FA8C00760157 /* FrostKit.framework */; };
 		18C0067819DC23A100811755 /* UIColorExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0067719DC23A100811755 /* UIColorExtensionsTest.swift */; };
-		18C0DBAF1A6D182400307EAA /* Alamofire.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 18C0DBA71A6D174E00307EAA /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18C0DBB11A6D18AB00307EAA /* ServiceClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0DBB01A6D18AB00307EAA /* ServiceClientTests.swift */; };
 		18CB51701A76454A005064C8 /* RequestStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* RequestStore.swift */; };
 		18CB51751A765335005064C8 /* DataUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB51741A765335005064C8 /* DataUpdater.swift */; };
@@ -133,20 +132,6 @@
 			remoteInfo = "Alamofire iOS";
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		18C0DBAE1A6D17F700307EAA /* Copy Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				18C0DBAF1A6D182400307EAA /* Alamofire.framework in Copy Frameworks */,
-			);
-			name = "Copy Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		180EFDF01A6FD3A000325C09 /* DataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStoreTests.swift; sourceTree = "<group>"; };
@@ -475,7 +460,6 @@
 				18839B1319D9FA8C00760157 /* Frameworks */,
 				18839B1419D9FA8C00760157 /* Headers */,
 				18839B1519D9FA8C00760157 /* Resources */,
-				18C0DBAE1A6D17F700307EAA /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
