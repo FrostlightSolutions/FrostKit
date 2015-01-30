@@ -80,6 +80,7 @@
 		18CB51751A765335005064C8 /* DataUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB51741A765335005064C8 /* DataUpdater.swift */; };
 		18CB517A1A7655ED005064C8 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB51791A7655ED005064C8 /* UIDeviceExtensions.swift */; };
 		18CBAA051A6D315F009CBCA0 /* OAuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CBAA041A6D315F009CBCA0 /* OAuthToken.swift */; };
+		18CDFDF21A7C0CFA00EF4B10 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C0DBA71A6D174E00307EAA /* Alamofire.framework */; };
 		18CFF9FE19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFF9FD19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift */; };
 		18DC212919DE970200FEB57E /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18DC212719DE970200FEB57E /* ionicons.ttf */; };
 		18DC212B19DEA21000FEB57E /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC212A19DEA21000FEB57E /* UIViewControllerExtensions.swift */; };
@@ -194,6 +195,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18CDFDF21A7C0CFA00EF4B10 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
