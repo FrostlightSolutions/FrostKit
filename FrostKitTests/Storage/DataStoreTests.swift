@@ -19,7 +19,31 @@ class DataStoreTests: XCTestCase {
         dataStore.setObjects(["7", "8"], page: 3)
         return dataStore
     }
-    let loopCount = 1_000_000
+    var pagedJSON: [String: AnyObject] {
+        if let filePath = NSBundle(forClass: self.dynamicType).pathForResource("Notifications", ofType: "json") {
+            if let fileData = NSData(contentsOfFile: filePath) {
+                if let jsonDict = NSJSONSerialization.JSONObjectWithData(fileData, options: nil, error: nil) as? [String: AnyObject] {
+                    return jsonDict
+                }
+            }
+        }
+        return Dictionary<String,AnyObject>()
+    }
+    var nonPagedObjects: [AnyObject] {
+        if let array = pagedJSON["results"] as? [AnyObject] {
+            return array
+        }
+        return Array<AnyObject>()
+    }
+    var dictionary: [String:AnyObject] {
+        return self.nonPagedObjects[0] as [String:AnyObject]
+    }
+    var totalCount: Int {
+        return pagedJSON["count"] as Int
+    }
+    var objectsPerPage: Int {
+        return pagedJSON["per_page"] as Int
+    }
     
     override func setUp() {
         super.setUp()
@@ -102,6 +126,48 @@ class DataStoreTests: XCTestCase {
             XCTAssert(true, "Success! Hash is: \(hash)")
         } else {
             XCTAssert(false, "Failed! Hash is: \(hash) but should be 11")
+        }
+    }
+    
+    func testCreateDataStoreFromTotalCountAndObjectsPerPage() {
+        measureBlock { () -> Void in
+            let dataStore = DataStore(totalCount: self.totalCount, objectsPerPage: self.objectsPerPage)
+        }
+    }
+    
+    func testCreateDataStoreFromJSON() {
+        measureBlock { () -> Void in
+            let dataStore = DataStore(json: self.pagedJSON)
+        }
+    }
+    
+    func testCreateDataStoreFromNonPagedObjects() {
+        measureBlock { () -> Void in
+            let dataStore = DataStore(nonPagedObjects: self.nonPagedObjects)
+        }
+    }
+    
+    func testCreateDataStoreFromDictionary() {
+        measureBlock { () -> Void in
+            let dataStore = DataStore(dictionary: self.dictionary)
+        }
+    }
+    
+    func testCreateDataStoreFromObjectJSON() {
+        measureBlock { () -> Void in
+            let dataStore = DataStore(object: self.pagedJSON)
+        }
+    }
+    
+    func testCreateDataStoreFromObjectNonPagedObjects() {
+        measureBlock { () -> Void in
+            let dataStore = DataStore(object: self.nonPagedObjects)
+        }
+    }
+    
+    func testCreateDataStoreFromObjectDictionary() {
+        measureBlock { () -> Void in
+            let dataStore = DataStore(object: self.dictionary)
         }
     }
 

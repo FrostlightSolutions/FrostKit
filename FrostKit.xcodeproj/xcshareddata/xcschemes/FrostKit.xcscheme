@@ -28,7 +28,26 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "18839B2119D9FA8C00760157"
+               BuildableName = "FrostKitTests.xctest"
+               BlueprintName = "FrostKitTests"
+               ReferencedContainer = "container:FrostKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "18839B1619D9FA8C00760157"
+            BuildableName = "FrostKit.framework"
+            BlueprintName = "FrostKit"
+            ReferencedContainer = "container:FrostKit.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"

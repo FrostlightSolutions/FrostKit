@@ -1,0 +1,59 @@
+{
+    "count": 56,
+    "next": "http://example.com/api/fus/push/notifications/?page=2",
+    "num_pages": 6,
+    "per_page": 10,
+    "previous": "",
+    "results": [
+        {
+            "date": "2015-01-22T16:29:33.733625Z",
+            "id": 56,
+            "message": "Message number 55"
+        },
+        {
+            "date": "2015-01-22T16:29:33.730309Z",
+            "id": 55,
+            "message": "Message number 54"
+        },
+        {
+            "date": "2015-01-22T16:29:33.725928Z",
+            "id": 54,
+            "message": "Message number 53"
+        },
+        {
+            "date": "2015-01-22T16:29:33.722949Z",
+            "id": 53,
+            "message": "Message number 52"
+        },
+        {
+            "date": "2015-01-22T16:29:33.720042Z",
+            "id": 52,
+            "message": "Message number 51"
+        },
+        {
+            "date": "2015-01-22T16:29:33.717013Z",
+            "id": 51,
+            "message": "Message number 50"
+        },
+        {
+            "date": "2015-01-22T16:29:33.712580Z",
+            "id": 50,
+            "message": "Message number 49"
+        },
+        {
+            "date": "2015-01-22T16:29:33.709342Z",
+            "id": 49,
+            "message": "Message number 48"
+        },
+        {
+            "date": "2015-01-22T16:29:33.706071Z",
+            "id": 48,
+            "message": "Message number 47"
+        },
+        {
+            "date": "2015-01-22T16:29:33.702996Z",
+            "id": 47,
+            "message": "Message number 46"
+        }
+    ]
+}
