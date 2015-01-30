@@ -24,7 +24,7 @@ extension UIFont {
         if let font = UIFont(name: "FontAwesome", size: size) {
             return font
         } else {
-            println("ERROR: Unable to load FontAwesome font.")
+            NSLog("ERROR: Unable to load FontAwesome font.")
             return UIFont.systemFontOfSize(size)
         }
     }
@@ -40,7 +40,7 @@ extension UIFont {
         if let font = UIFont(name: "Ionicons", size: size) {
             return font
         } else {
-            println("ERROR: Unable to load Ionicons font.")
+            NSLog("ERROR: Unable to load Ionicons font.")
             return UIFont.systemFontOfSize(size)
         }
     }

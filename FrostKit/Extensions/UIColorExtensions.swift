@@ -54,7 +54,7 @@ extension UIColor {
             // Default parsed value
             break
         default:
-            println("Error: Can't parse color with hex: \(hexString)")
+            NSLog("Error: Can't parse color with hex: \(hexString)")
             return UIColor.clearColor()
         }
         

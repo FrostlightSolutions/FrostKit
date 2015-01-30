@@ -34,7 +34,7 @@ public func WebViewController(viewType: WebViewType = .Automatic) -> BaseWebView
         if NSClassFromString("WKWebView") != nil {
             return WKWebViewController()
         } else {
-            println("WARNING: WKWebViewController is not available on the running version of iOS. Using UIWebViewController instead.")
+            NSLog("Warning: WKWebViewController is not available on the running version of iOS. Using UIWebViewController instead.")
             return UIWebViewController()
         }
     default:

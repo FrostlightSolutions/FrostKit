@@ -79,7 +79,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             
         } else {
             // TODO: Handle social service unavailability
-            println("Error: Social Service Unavailable!")
+            NSLog("Error: Social Service Unavailable!")
         }
     }
     
@@ -101,7 +101,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         if let url = NSURL(string: urlString) {
             UIApplication.sharedApplication().openURL(url)
         } else {
-            println("ERROR: Could not create URL to prompt phone.")
+            NSLog("Error: Could not create URL to prompt phone.")
         }
     }
     
@@ -148,7 +148,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             
         } else {
             // TODO: Handle eamil service unavailability
-            println("Error: Email Service Unavailable!")
+            NSLog("Error: Email Service Unavailable!")
         }
     }
     
@@ -209,7 +209,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             
         } else {
             // TODO: Handle message service unavailability
-            println("Error: Message Service Unavailable!")
+            NSLog("Error: Message Service Unavailable!")
         }
     }
     
@@ -240,13 +240,13 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         
         switch result.value {
         case MFMailComposeResultCancelled.value:
-            println("Email cancelled")
+            NSLog("Email cancelled")
         case MFMailComposeResultSaved.value:
-            println("Email saved")
+            NSLog("Email saved")
         case MFMailComposeResultSent.value:
-            println("Email sent")
+            NSLog("Email sent")
         case MFMailComposeResultFailed.value:
-            println("Email sent failure: \(error.localizedDescription)")
+            NSLog("Email sent failure: \(error.localizedDescription)")
         default:
             break
         }
@@ -261,11 +261,11 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         
         switch result.value {
         case MessageComposeResultCancelled.value:
-            println("Message cancelled")
+            NSLog("Message cancelled")
         case MessageComposeResultSent.value:
-            println("Message sent")
+            NSLog("Message sent")
         case MessageComposeResultFailed.value:
-            println("Message failed")
+            NSLog("Message failed")
         default:
             break
         }

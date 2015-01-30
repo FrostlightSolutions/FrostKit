@@ -99,7 +99,7 @@ public class LocalStorage: NSObject {
         case .CachesDirectory:
             return cachesURL()
         default:
-            println("Error: Base URL for directory \"\(directory)\" requested is not supported!")
+            NSLog("Error: Base URL for directory \"\(directory)\" requested is not supported!")
             return nil
         }
     }
@@ -148,9 +148,9 @@ public class LocalStorage: NSObject {
         let success = NSFileManager.defaultManager().createDirectoryAtURL(url, withIntermediateDirectories: true, attributes: nil, error: &error)
         if success == false {
             if let anError = error {
-                println(anError.localizedDescription)
+                NSLog(anError.localizedDescription)
             } else {
-                println("Error: Directory not able to be created at URL \(url)")
+                NSLog("Error: Directory not able to be created at URL \(url)")
             }
         }
         
@@ -180,7 +180,7 @@ public class LocalStorage: NSObject {
             let success = NSKeyedArchiver.archiveRootObject(data, toFile: path)
             
             if success == false {
-                println("Error: Can't save object to file at path: \(path)")
+                NSLog("Error: Can't save object to file at path: \(path)")
             }
             
             return success
@@ -247,9 +247,9 @@ public class LocalStorage: NSObject {
         let success = NSFileManager.defaultManager().moveItemAtURL(fromURL, toURL: toURL, error: &error)
         if success == false {
             if let anError = error {
-                println(anError.localizedDescription)
+                NSLog(anError.localizedDescription)
             } else {
-                println("Error: Can't move item from \(fromURL) to \(toURL)")
+                NSLog("Error: Can't move item from \(fromURL) to \(toURL)")
             }
         }
         
@@ -373,9 +373,9 @@ public class LocalStorage: NSObject {
         let success = NSFileManager.defaultManager().removeItemAtURL(absoluteURL, error: &error)
         if success == false {
             if let anError = error {
-                println(anError.localizedDescription)
+                NSLog(anError.localizedDescription)
             } else {
-                println("Error: Directory or data not able to be deleted at URL \(absoluteURL)")
+                NSLog("Error: Directory or data not able to be deleted at URL \(absoluteURL)")
             }
         } else {
             ContentManager.removeContentMetadata(absoluteURL: absoluteURL)

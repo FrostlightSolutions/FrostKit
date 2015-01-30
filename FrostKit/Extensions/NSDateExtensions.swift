@@ -302,7 +302,7 @@ extension NSDate {
         if let date = calendar.dateFromComponents(components) {
             return date
         } else {
-            println("Error: Failed to strip time from date \(self)")
+            NSLog("Error: Failed to strip time from date \(self)")
             return self
         }
     }
@@ -323,7 +323,7 @@ extension NSDate {
         if let date = calendar.dateByAddingComponents(components, toDate: self, options: NSCalendarOptions.SearchBackwards) {
             return date
         } else {
-            println("Error: Failed to add \(days) days to date \(self)")
+            NSLog("Error: Failed to add \(days) days to date \(self)")
             return self
         }
     }

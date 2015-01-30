@@ -57,7 +57,7 @@ public class ImageCache: NSObject {
                 case .CachesDirectory:
                     image = LocalStorage.loadImageFromCaches(reletivePath: reletivePath, fileName: fileName)
                 default:
-                    println("Error: Directory \"\(directory)\" requested for loading \(fileName) is not supported!")
+                    NSLog("Error: Directory \"\(directory)\" requested for loading \(fileName) is not supported!")
                 }
                 
                 if let anImage = image {
@@ -71,7 +71,7 @@ public class ImageCache: NSObject {
             
             return image
         } else {
-            println("Error: Could not get path from absolute URL \(absoluteURL) when loading image!")
+            NSLog("Error: Could not get path from absolute URL \(absoluteURL) when loading image!")
         }
         
         return nil
@@ -126,7 +126,7 @@ public class ImageCache: NSObject {
             
             return thumbnailImage
         } else {
-            println("Error: Could not get path from absolute URL \(absoluteURL) when loading thumbnail!")
+            NSLog("Error: Could not get path from absolute URL \(absoluteURL) when loading thumbnail!")
         }
         
         return nil
@@ -146,7 +146,7 @@ public class ImageCache: NSObject {
     
     /// Clears all the images in the cache.
     public func clearCache() {
-        println("Clearing image cache")
+        NSLog("Clearing image cache")
         cache.removeAllObjects()
     }
     

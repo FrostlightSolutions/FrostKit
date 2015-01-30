@@ -43,7 +43,7 @@ public class KeychainHelper: NSObject {
             }
         } else {
             let error = NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
-            println("ERROR: Search Keychain for Data: \(error.localizedDescription)")
+            NSLog("ERROR: Search Keychain for Data: \(error.localizedDescription)")
         }
         
         return nil
@@ -79,7 +79,7 @@ public class KeychainHelper: NSObject {
                 return updateKeychainValue(valueDict)
             } else {
                 let error = NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
-                println("ERROR: Set Keychain Details: \(error.localizedDescription)")
+                NSLog("ERROR: Set Keychain Details: \(error.localizedDescription)")
             }
         }
         
@@ -98,7 +98,7 @@ public class KeychainHelper: NSObject {
             return true
         } else {
             let error = NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
-            println("ERROR: Update Keychain Details: \(error.localizedDescription)")
+            NSLog("ERROR: Update Keychain Details: \(error.localizedDescription)")
         }
         
         return false
@@ -113,7 +113,7 @@ public class KeychainHelper: NSObject {
             return true
         } else {
             let error = NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
-            println("ERROR: Delete Keychain Details: \(error.localizedDescription)")
+            NSLog("ERROR: Delete Keychain Details: \(error.localizedDescription)")
         }
         
         return false

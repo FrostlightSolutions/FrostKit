@@ -55,12 +55,12 @@ public class CustomFonts: NSObject {
             let provider = CGDataProviderCreateWithCFData(fontData)
             let font = CGFontCreateWithDataProvider(provider)
             if CTFontManagerRegisterGraphicsFont(font, &error) == false {
-                println("ERROR: Failed to load \"\(name)\" font!")
+                NSLog("ERROR: Failed to load \"\(name)\" font!")
             } else {
-                println("Loaded \"\(name)\" successfully")
+                NSLog("Loaded \"\(name)\" successfully")
             }
         } else {
-            println("ERROR: Failed to get URL for \"\(name)\" font!")
+            NSLog("ERROR: Failed to get URL for \"\(name)\" font!")
         }
     }
     
@@ -70,7 +70,7 @@ public class CustomFonts: NSObject {
         for fontFamily in UIFont.familyNames() {
             
             let name = fontFamily as String
-            println("\(name): \(UIFont.fontNamesForFamilyName(name))")
+            NSLog("\(name): \(UIFont.fontNamesForFamilyName(name))")
         }
     }
     
@@ -95,7 +95,7 @@ public class CustomFonts: NSObject {
                     
                     let items = constantsString.componentsSeparatedByString("\n")
                     
-                    println("\n------------------------------\n")
+                    NSLog("\n------------------------------\n")
                     
                     for item in items {
                         
@@ -113,11 +113,11 @@ public class CustomFonts: NSObject {
                             let key = array[0].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
                             let value = array[1].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
                             
-                            println("let \(key) = \"\\u{\(value)}\"")
+                            NSLog("let \(key) = \"\\u{\(value)}\"")
                         }
                     }
                     
-                    println("\n------------------------------\n")
+                    NSLog("\n------------------------------\n")
                     
                     return true
                 }
