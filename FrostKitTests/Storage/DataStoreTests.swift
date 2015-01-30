@@ -135,7 +135,7 @@ class DataStoreTests: XCTestCase {
             if dataStore.count > 0 {
                 XCTAssert(true, "Success!")
             } else {
-                XCTAssert(true, "Failed! No items in created DataStore from Total Count and Object Per Page")
+                XCTAssert(false, "Failed! No items in created DataStore from Total Count and Object Per Page")
             }
         }
     }
@@ -146,7 +146,7 @@ class DataStoreTests: XCTestCase {
             if dataStore.count > 0 {
                 XCTAssert(true, "Success!")
             } else {
-                XCTAssert(true, "Failed! No items in created DataStore from JSON")
+                XCTAssert(false, "Failed! No items in created DataStore from JSON")
             }
         }
     }
@@ -157,7 +157,7 @@ class DataStoreTests: XCTestCase {
             if dataStore.count > 0 {
                 XCTAssert(true, "Success!")
             } else {
-                XCTAssert(true, "Failed! No items in created DataStore from Non-Paged Objects")
+                XCTAssert(false, "Failed! No items in created DataStore from Non-Paged Objects")
             }
         }
     }
@@ -168,7 +168,7 @@ class DataStoreTests: XCTestCase {
             if dataStore.count > 0 {
                 XCTAssert(true, "Success!")
             } else {
-                XCTAssert(true, "Failed! No items in created DataStore from Dictionary")
+                XCTAssert(false, "Failed! No items in created DataStore from Dictionary")
             }
         }
     }
@@ -179,7 +179,7 @@ class DataStoreTests: XCTestCase {
             if dataStore.count > 0 {
                 XCTAssert(true, "Success!")
             } else {
-                XCTAssert(true, "Failed! No items in created DataStore from Object -> JSON")
+                XCTAssert(false, "Failed! No items in created DataStore from Object -> JSON")
             }
         }
     }
@@ -190,7 +190,7 @@ class DataStoreTests: XCTestCase {
             if dataStore.count > 0 {
                 XCTAssert(true, "Success!")
             } else {
-                XCTAssert(true, "Failed! No items in created DataStore from Object -> Non-Paged Objects")
+                XCTAssert(false, "Failed! No items in created DataStore from Object -> Non-Paged Objects")
             }
         }
     }
@@ -201,7 +201,7 @@ class DataStoreTests: XCTestCase {
             if dataStore.count > 0 {
                 XCTAssert(true, "Success!")
             } else {
-                XCTAssert(true, "Failed! No items in created DataStore from Object -> Dictionary")
+                XCTAssert(false, "Failed! No items in created DataStore from Object -> Dictionary")
             }
         }
     }
