@@ -10,8 +10,6 @@ import UIKit
 import XCTest
 import FrostKit
 
-let expectationTimeout: NSTimeInterval = 60
-
 class ServiceClientTests: XCTestCase {
     
     let username = "frostkit"
@@ -43,7 +41,7 @@ class ServiceClientTests: XCTestCase {
     
     func testLoginAndThenRefresh() {
         
-        let expectation = expectationWithDescription("Test Login")
+        let expectation = expectationWithDescription("Test Login then Refresh")
         
         login { () -> () in
             self.refresh({ () -> () in
