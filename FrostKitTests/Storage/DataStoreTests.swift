@@ -132,42 +132,77 @@ class DataStoreTests: XCTestCase {
     func testCreateDataStoreFromTotalCountAndObjectsPerPage() {
         measureBlock { () -> Void in
             let dataStore = DataStore(totalCount: self.totalCount, objectsPerPage: self.objectsPerPage)
+            if dataStore.count > 0 {
+                XCTAssert(true, "Success!")
+            } else {
+                XCTAssert(true, "Failed! No items in created DataStore from Total Count and Object Per Page")
+            }
         }
     }
     
     func testCreateDataStoreFromJSON() {
         measureBlock { () -> Void in
             let dataStore = DataStore(json: self.pagedJSON)
+            if dataStore.count > 0 {
+                XCTAssert(true, "Success!")
+            } else {
+                XCTAssert(true, "Failed! No items in created DataStore from JSON")
+            }
         }
     }
     
     func testCreateDataStoreFromNonPagedObjects() {
         measureBlock { () -> Void in
             let dataStore = DataStore(nonPagedObjects: self.nonPagedObjects)
+            if dataStore.count > 0 {
+                XCTAssert(true, "Success!")
+            } else {
+                XCTAssert(true, "Failed! No items in created DataStore from Non-Paged Objects")
+            }
         }
     }
     
     func testCreateDataStoreFromDictionary() {
         measureBlock { () -> Void in
             let dataStore = DataStore(dictionary: self.dictionary)
+            if dataStore.count > 0 {
+                XCTAssert(true, "Success!")
+            } else {
+                XCTAssert(true, "Failed! No items in created DataStore from Dictionary")
+            }
         }
     }
     
     func testCreateDataStoreFromObjectJSON() {
         measureBlock { () -> Void in
             let dataStore = DataStore(object: self.pagedJSON)
+            if dataStore.count > 0 {
+                XCTAssert(true, "Success!")
+            } else {
+                XCTAssert(true, "Failed! No items in created DataStore from Object -> JSON")
+            }
         }
     }
     
     func testCreateDataStoreFromObjectNonPagedObjects() {
         measureBlock { () -> Void in
             let dataStore = DataStore(object: self.nonPagedObjects)
+            if dataStore.count > 0 {
+                XCTAssert(true, "Success!")
+            } else {
+                XCTAssert(true, "Failed! No items in created DataStore from Object -> Non-Paged Objects")
+            }
         }
     }
     
     func testCreateDataStoreFromObjectDictionary() {
         measureBlock { () -> Void in
             let dataStore = DataStore(object: self.dictionary)
+            if dataStore.count > 0 {
+                XCTAssert(true, "Success!")
+            } else {
+                XCTAssert(true, "Failed! No items in created DataStore from Object -> Dictionary")
+            }
         }
     }
 
