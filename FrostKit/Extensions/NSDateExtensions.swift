@@ -247,7 +247,7 @@ extension NSDate {
         
         if compare == NSComparisonResult.OrderedAscending {
             
-            if option == .Before || option == .After {
+            if option == .Before || option == .BeforeOrEqualTo {
                 return true
             }
         } else if compare == NSComparisonResult.OrderedDescending {
