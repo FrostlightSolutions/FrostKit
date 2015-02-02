@@ -14,14 +14,14 @@ import Social
 ///
 public class BaseWebViewController: UIViewController {
     
-    internal var webView: AnyObject?
-    private let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-    internal let progrssView = UIProgressView(progressViewStyle: .Bar)
+    var webView: AnyObject?
+    let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+    let progrssView = UIProgressView(progressViewStyle: .Bar)
     
-    private var backButton: UIBarButtonItem?
-    private var forwardButton: UIBarButtonItem?
+    var backButton: UIBarButtonItem?
+    var forwardButton: UIBarButtonItem?
     
-    var urlString: String? {
+    public var urlString: String? {
         didSet {
             if webView != nil {
                 self.loadBaseURL()
@@ -29,27 +29,27 @@ public class BaseWebViewController: UIViewController {
         }
     }
     
-    var URL: NSURL? {
+    public var URL: NSURL? {
         get {
             // Functionality overriden in subclasses
             return nil
         }
     }
     
-    var titleOverride: String? {
+    public var titleOverride: String? {
         didSet {
             navigationItem.title = titleOverride
         }
     }
     
-    var loading: Bool {
+    public var loading: Bool {
         get {
             // Functionality overriden in subclasses
             return false
         }
     }
     
-    func stopLoading() {
+    public func stopLoading() {
         // Functionality overriden in subclasses
     }
     

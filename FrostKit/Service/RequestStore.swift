@@ -19,7 +19,6 @@ public class RequestStore: NSObject {
     }
     
     func addRequest(request: Request, urlString: String) {
-//        NSLog("Add Request: \(request)\nWith URL: \(urlString)")
         if locked == true {
             return
         }
