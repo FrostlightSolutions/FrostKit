@@ -85,25 +85,26 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     
     // MARK: - Prompt Methods
     
-    public class func phonePrompt(#number: String) {
-        
-        let hasPlusPrefix = number.rangeOfString("+")
-        
-        let characterSet = NSCharacterSet.decimalDigitCharacterSet().invertedSet
-        let componentsArray = number.componentsSeparatedByCharactersInSet(characterSet)
-        var parsedNumber = join("", componentsArray)
-        
-        if hasPlusPrefix != nil {
-            parsedNumber = "+".stringByAppendingString(parsedNumber)
-        }
-        
-        let urlString = NSString(format: "telprompt://%@", parsedNumber)
-        if let url = NSURL(string: urlString) {
-            UIApplication.sharedApplication().openURL(url)
-        } else {
-            NSLog("Error: Could not create URL to prompt phone.")
-        }
-    }
+    // TODO: Reimpliment when not used as extension API only
+//    public class func phonePrompt(#number: String) {
+//        
+//        let hasPlusPrefix = number.rangeOfString("+")
+//        
+//        let characterSet = NSCharacterSet.decimalDigitCharacterSet().invertedSet
+//        let componentsArray = number.componentsSeparatedByCharactersInSet(characterSet)
+//        var parsedNumber = join("", componentsArray)
+//        
+//        if hasPlusPrefix != nil {
+//            parsedNumber = "+".stringByAppendingString(parsedNumber)
+//        }
+//        
+//        let urlString = NSString(format: "telprompt://%@", parsedNumber)
+//        if let url = NSURL(string: urlString) {
+//            UIApplication.sharedApplication().openURL(url)
+//        } else {
+//            NSLog("Error: Could not create URL to prompt phone.")
+//        }
+//    }
     
     public class func emailPrompt(#toRecipients: [String], ccRecipients: [String] = [], bccRecipients: [String] = [], subject: String = "", messageBody: String = "", isBodyHTML: Bool = false, attachments: [(data: NSData, mimeType: String, fileName: String)] = [], viewController: UIViewController, animated: Bool = true) {
         
