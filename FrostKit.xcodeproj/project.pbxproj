@@ -455,7 +455,7 @@
 				18839B1319D9FA8C00760157 /* Frameworks */,
 				18839B1419D9FA8C00760157 /* Headers */,
 				18839B1519D9FA8C00760157 /* Resources */,
-				1859D6B81A81544E00AB5F92 /* ShellScript */,
+				1859D6B81A81544E00AB5F92 /* Git Submodule Script */,
 			);
 			buildRules = (
 			);
@@ -595,13 +595,14 @@
 			shellPath = /bin/sh;
 			shellScript = "cd ~/Dropbox/Pig\\ on\\ a\\ Hill/Projects/Frameworks/FrostKit/\n~/Dropbox/Pig\\ on\\ a\\ Hill/API\\:SDK/Forks/jazzy/bin/jazzy -x -project,\"${SRCROOT}/FrostKit.xcodeproj\",-scheme,FrostKit -c -m FrostKit -a James\\ Barrow -g https:\\/\\/github.com/FrostlightSolutions/FrostKit -o FrostKitDocs";
 		};
-		1859D6B81A81544E00AB5F92 /* ShellScript */ = {
+		1859D6B81A81544E00AB5F92 /* Git Submodule Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Git Submodule Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
