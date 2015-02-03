@@ -22,6 +22,7 @@
 
 /* Begin PBXBuildFile section */
 		180EFDF11A6FD3A000325C09 /* DataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180EFDF01A6FD3A000325C09 /* DataStoreTests.swift */; };
+		181056D51A81038E00665B96 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18213B2F1A7C143F002AD63C /* Alamofire.framework */; };
 		1811D7B81A0AD1CA00E8B873 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B41A0AD1CA00E8B873 /* BaseWebViewController.swift */; };
 		1811D7B91A0AD1CA00E8B873 /* UIWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B51A0AD1CA00E8B873 /* UIWebViewController.swift */; };
 		1811D7BA1A0AD1CA00E8B873 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B61A0AD1CA00E8B873 /* WebViewController.swift */; };
@@ -187,6 +188,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				181056D51A81038E00665B96 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
