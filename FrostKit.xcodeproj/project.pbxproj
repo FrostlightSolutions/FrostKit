@@ -28,6 +28,10 @@
 		1811D7BA1A0AD1CA00E8B873 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B61A0AD1CA00E8B873 /* WebViewController.swift */; };
 		1811D7BB1A0AD1CA00E8B873 /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B71A0AD1CA00E8B873 /* WKWebViewController.swift */; };
 		181BCC3619DF60810056C8F8 /* KeychainHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181BCC3519DF60810056C8F8 /* KeychainHelperTests.swift */; };
+		18318DC61A83C23E00412222 /* DeveloperTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18318DC21A83C23E00412222 /* DeveloperTools.swift */; };
+		18318DC71A83C23E00412222 /* DeveloperToolsBaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18318DC31A83C23E00412222 /* DeveloperToolsBaseURL.swift */; };
+		18318DC81A83C23E00412222 /* DeveloperToolsRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18318DC41A83C23E00412222 /* DeveloperToolsRoot.swift */; };
+		18318DC91A83C23E00412222 /* DeveloperToolsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18318DC51A83C23E00412222 /* DeveloperToolsStoryboard.storyboard */; };
 		183F85F71A7B0D9200885F56 /* ImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183F85F61A7B0D9200885F56 /* ImageCacheTests.swift */; };
 		183F85F91A7B0E1C00885F56 /* SmallLogoBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 183F85F81A7B0E1C00885F56 /* SmallLogoBlue.png */; };
 		185D3D5C1A6E936F00BE700D /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185D3D5B1A6E936F00BE700D /* DataStore.swift */; };
@@ -136,6 +140,12 @@
 		1811D7B71A0AD1CA00E8B873 /* WKWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
 		181BCC3519DF60810056C8F8 /* KeychainHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainHelperTests.swift; sourceTree = "<group>"; };
 		18213B271A7C143F002AD63C /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
+		18318DC21A83C23E00412222 /* DeveloperTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperTools.swift; sourceTree = "<group>"; };
+		18318DC31A83C23E00412222 /* DeveloperToolsBaseURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperToolsBaseURL.swift; sourceTree = "<group>"; };
+		18318DC41A83C23E00412222 /* DeveloperToolsRoot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperToolsRoot.swift; sourceTree = "<group>"; };
+		18318DC51A83C23E00412222 /* DeveloperToolsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DeveloperToolsStoryboard.storyboard; sourceTree = "<group>"; };
+		18318DCA1A83C35000412222 /* DeveloperToolsTemplate.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DeveloperToolsTemplate.plist; sourceTree = "<group>"; };
+		18318DCB1A83CF5800412222 /* SettingsTemplate.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SettingsTemplate.bundle; sourceTree = "<group>"; };
 		183F85F61A7B0D9200885F56 /* ImageCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageCacheTests.swift; path = FrostKitTests/Storage/ImageCacheTests.swift; sourceTree = SOURCE_ROOT; };
 		183F85F81A7B0E1C00885F56 /* SmallLogoBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SmallLogoBlue.png; sourceTree = "<group>"; };
 		185D3D5B1A6E936F00BE700D /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
@@ -233,6 +243,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		18318DC11A83C23E00412222 /* DeveloperTools */ = {
+			isa = PBXGroup;
+			children = (
+				18318DCB1A83CF5800412222 /* SettingsTemplate.bundle */,
+				18318DCA1A83C35000412222 /* DeveloperToolsTemplate.plist */,
+				18318DC21A83C23E00412222 /* DeveloperTools.swift */,
+				18318DC51A83C23E00412222 /* DeveloperToolsStoryboard.storyboard */,
+				18318DC41A83C23E00412222 /* DeveloperToolsRoot.swift */,
+				18318DC31A83C23E00412222 /* DeveloperToolsBaseURL.swift */,
+			);
+			path = DeveloperTools;
+			sourceTree = "<group>";
+		};
 		186B07F11A6D5C2D00CAF920 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
@@ -282,6 +305,7 @@
 				18839B4419DA27AE00760157 /* Helpers */,
 				18C0066619DB761800811755 /* Extensions */,
 				18DE01EB19DCBB18008A1506 /* Fonts */,
+				18318DC11A83C23E00412222 /* DeveloperTools */,
 				18839B1A19D9FA8C00760157 /* Supporting Files */,
 			);
 			path = FrostKit;
@@ -565,6 +589,7 @@
 			files = (
 				18DC212919DE970200FEB57E /* ionicons.ttf in Resources */,
 				18748B2219DF5661003942A3 /* Localizable.strings in Resources */,
+				18318DC91A83C23E00412222 /* DeveloperToolsStoryboard.storyboard in Resources */,
 				18DE01F319DCBCC4008A1506 /* fontawesome-webfont.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -604,9 +629,12 @@
 				1811D7B91A0AD1CA00E8B873 /* UIWebViewController.swift in Sources */,
 				18C0066C19DB769B00811755 /* NSDateExtensions.swift in Sources */,
 				1811D7BB1A0AD1CA00E8B873 /* WKWebViewController.swift in Sources */,
+				18318DC71A83C23E00412222 /* DeveloperToolsBaseURL.swift in Sources */,
 				18CFF9FE19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift in Sources */,
 				18DE01EF19DCBC28008A1506 /* CustomFonts.swift in Sources */,
 				18EA124119DC7D9000FD858D /* UIViewExtensions.swift in Sources */,
+				18318DC61A83C23E00412222 /* DeveloperTools.swift in Sources */,
+				18318DC81A83C23E00412222 /* DeveloperToolsRoot.swift in Sources */,
 				18CB51701A76454A005064C8 /* RequestStore.swift in Sources */,
 				1811D7B81A0AD1CA00E8B873 /* BaseWebViewController.swift in Sources */,
 				185D3D5C1A6E936F00BE700D /* DataStore.swift in Sources */,
