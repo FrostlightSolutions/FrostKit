@@ -32,7 +32,12 @@ class ServiceClientTests: XCTestCase {
         
         let expectation = expectationWithDescription("Test Login")
         
-        login { () -> () in
+        login { (error) -> () in
+            if let anError = error {
+                XCTAssert(false, "Login Error: \(anError.localizedDescription)")
+            } else {
+                XCTAssert(true, "Logged In")
+            }
             expectation.fulfill()
         }
         
@@ -43,60 +48,70 @@ class ServiceClientTests: XCTestCase {
         
         let expectation = expectationWithDescription("Test Login then Refresh")
         
-        login { () -> () in
-            self.refresh({ () -> () in
+        login { (loginError) -> () in
+            if let lError = loginError {
+                XCTAssert(false, "Login Error: \(lError.localizedDescription)")
                 expectation.fulfill()
-            })
+            } else {
+                self.refresh({ (refreshError) -> () in
+                    if let rError = refreshError {
+                        XCTAssert(false, "Refresh Error: \(rError.localizedDescription)")
+                    } else {
+                        XCTAssert(true, "Refreshed")
+                    }
+                    expectation.fulfill()
+                })
+            }
         }
         
         self.waitForExpectationsWithTimeout(expectationTimeout, handler: { (completionHandler) -> Void in })
-    }
-    
-    func login(complete: () -> ()) {
-        ServiceClient.loginUser(username: username, password: password) { (error) -> () in
-            if let anError = error {
-                XCTAssert(false, "Login Error: \(anError.localizedDescription)")
-            } else {
-                XCTAssert(true, "Logged In")
-            }
-            complete()
-        }
-    }
-    
-    func refresh(complete: () -> ()) {
-        ServiceClient.refreshOAuthToken() { (error) -> () in
-            if let anError = error {
-                XCTAssert(false, "Login Error: \(anError.localizedDescription)")
-            } else {
-                XCTAssert(true, "Logged In")
-            }
-            complete()
-        }
     }
     
     func testNotificationsGetRequest() {
         
         let expectation = expectationWithDescription("Test Notifications Get Request")
         
-        login { () -> () in
-            self.refresh({ () -> () in
-                self.getNotificationsRequest({ () -> () in
-                    expectation.fulfill()
+        login { (loginError) -> () in
+            if let lError = loginError {
+                XCTAssert(false, "Login Error: \(lError.localizedDescription)")
+                expectation.fulfill()
+            } else {
+                self.refresh({ (refreshError) -> () in
+                    if let rError = refreshError {
+                        XCTAssert(false, "Refresh Error: \(rError.localizedDescription)")
+                        expectation.fulfill()
+                    } else {
+                        self.getNotificationsRequest({ (notifError) -> () in
+                            if let nError = notifError {
+                                XCTAssert(false, "Failed to get Notifications \(nError.localizedDescription)")
+                            } else {
+                                XCTAssert(true, "Got Notifications Response")
+                            }
+                            expectation.fulfill()
+                        })
+                    }
                 })
-            })
+            }
         }
         
         self.waitForExpectationsWithTimeout(expectationTimeout, handler: { (completionHandler) -> Void in })
     }
     
-    func getNotificationsRequest(complete: () -> ()) {
+    func login(complete: (NSError?) -> ()) {
+        ServiceClient.loginUser(username: username, password: password) { (error) -> () in
+            complete(error)
+        }
+    }
+    
+    func refresh(complete: (NSError?) -> ()) {
+        ServiceClient.refreshOAuthToken() { (error) -> () in
+            complete(error)
+        }
+    }
+    
+    func getNotificationsRequest(complete: (NSError?) -> ()) {
         ServiceClient.request(Router.Notifications(1), completed: { (json, error) -> () in
-            if let anError = error {
-                XCTAssert(false, "Failed to get Notifications \(anError.localizedDescription)")
-            } else {
-                XCTAssert(true, "Got Notifications Response")
-            }
-            complete()
+            complete(error)
         })
     }
     
