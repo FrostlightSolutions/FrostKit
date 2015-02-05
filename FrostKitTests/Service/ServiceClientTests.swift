@@ -110,7 +110,7 @@ class ServiceClientTests: XCTestCase {
     }
     
     func getNotificationsRequest(complete: (NSError?) -> ()) {
-        ServiceClient.request(Router.Notifications(1), completed: { (json, error) -> () in
+        ServiceClient.request(Router.Custom("/api/fus/push/notifications/", 1), completed: { (json, error) -> () in
             complete(error)
         })
     }
