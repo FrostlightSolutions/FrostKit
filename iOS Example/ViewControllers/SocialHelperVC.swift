@@ -29,9 +29,12 @@ class SocialHelperVC: UITableViewController {
             SocialHelper.presentComposeViewController(SLServiceTypeTwitter, inViewController: self)
         case NSIndexPath(forRow: 1, inSection: 0):
             SocialHelper.presentComposeViewController(SLServiceTypeFacebook, inViewController: self)
-            // TODO: Reenable when solution is found
-//        case NSIndexPath(forRow: 0, inSection: 1):
-//            SocialHelper.phonePrompt(number: "(+46) 70 857 01 80")
+        case NSIndexPath(forRow: 0, inSection: 1):
+            if let phoneURL = SocialHelper.phonePromptFormattedURL(number: "(+46) 70 857 01 80") {
+                UIApplication.sharedApplication().openURL(phoneURL)
+            } else {
+                NSLog("Error: Could not create URL to prompt phone.")
+            }
         case NSIndexPath(forRow: 1, inSection: 1):
             SocialHelper.emailPrompt(toRecipients: ["info@frostlight.se"], viewController: self)
         case NSIndexPath(forRow: 2, inSection: 1):
