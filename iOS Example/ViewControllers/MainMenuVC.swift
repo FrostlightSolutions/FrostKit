@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import FrostKit
 
 class MainMenuVC: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Regiester for developer tools
+        DeveloperTools.registerViewController(self)
         
         self.clearsSelectionOnViewWillAppear = true
     }
