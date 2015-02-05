@@ -4,11 +4,15 @@
 <dict>
 	<key>URLs</key>
 	<array>
-		<string>http://www.site.com</string>
+		<string></string>
 	</array>
 	<key>DefaultDebugIndex</key>
 	<integer>0</integer>
 	<key>DefaultProductionIndex</key>
 	<integer>0</integer>
+	<key>OAuthClientToken</key>
+	<string></string>
+	<key>OAuthClientSecret</key>
+	<string></string>
 </dict>
 </plist>
