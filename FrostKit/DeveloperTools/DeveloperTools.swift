@@ -70,6 +70,8 @@ public class DeveloperTools: NSObject {
         }
     }
     
+    // MARK: - Register Methods
+    
     public class func registerViewController(viewController: UIViewController) {
         DeveloperTools.shared.registerViewController(viewController)
     }
@@ -114,6 +116,8 @@ public class DeveloperTools: NSObject {
             addGestureRecognizerToRegisteredViewControllers(currentGestureRecogniser)
         }
     }
+    
+    // MARK: - Gesture Methods
     
     private func addGestureRecognizerToRegisteredViewControllers(gestureRecognizer: UIGestureRecognizer) {
         for viewController in viewControllers {
