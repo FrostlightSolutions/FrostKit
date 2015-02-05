@@ -1,5 +1,5 @@
 //
-//  UIFontExtensiosns.swift
+//  UIFontExtensions.swift
 //  FrostKit
 //
 //  Created by James Barrow on 02/10/2014.

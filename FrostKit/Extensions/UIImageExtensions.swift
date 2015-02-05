@@ -1,5 +1,5 @@
 //
-//  UIImageExtensiosns.swift
+//  UIImageExtensions.swift
 //  FrostKit
 //
 //  Created by James Barrow on 01/10/2014.
