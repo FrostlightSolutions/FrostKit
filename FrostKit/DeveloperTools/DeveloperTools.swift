@@ -33,7 +33,7 @@ public class DeveloperTools: NSObject {
     private var timer: NSTimer?
     private var baseURLs = [""]
     private var urlIndex = 0
-    public var numberOfBaseURLs: Int {
+    var numberOfBaseURLs: Int {
         get { return baseURLs.count }
     }
     
@@ -47,20 +47,20 @@ public class DeveloperTools: NSObject {
                 }
                 
                 #if DEBUG
-                    if let defaultURLIndex = loadedBaseURLsDict["DefaultDebugIndex"] as? Int {
-                        urlIndex = defaultURLIndex
-                    }
-                    #else
-                    if let defaultURLIndex = loadedBaseURLsDict["DefaultProductionIndex"] as? Int {
+                if let defaultURLIndex = loadedBaseURLsDict["DefaultDebugIndex"] as? Int {
                     urlIndex = defaultURLIndex
-                    }
+                }
+                #else
+                if let defaultURLIndex = loadedBaseURLsDict["DefaultProductionIndex"] as? Int {
+                    urlIndex = defaultURLIndex
+                }
                 #endif
             }
             
             let tapGesture = tapGestureRecogniser()
             currentGestureRecogniser = tapGesture
         } else {
-            NSLog("WARNING! No DeveloperTools.plist file found.")
+            NSLog("Developer Tools WARNING! No DeveloperTools.plist file found. Only custom URLs will be available.")
         }
         
         let userDefaults = NSUserDefaults.standardUserDefaults()
@@ -70,7 +70,11 @@ public class DeveloperTools: NSObject {
         }
     }
     
-    public func registerViewController(viewController: UIViewController) {
+    public class func registerViewController(viewController: UIViewController) {
+        DeveloperTools.shared.registerViewController(viewController)
+    }
+    
+    func registerViewController(viewController: UIViewController) {
         if contains(viewControllers, viewController) == false {
             viewControllers.append(viewController)
             NSLog("Registeed \(viewController) for Developer Tools")
@@ -87,7 +91,11 @@ public class DeveloperTools: NSObject {
         }
     }
     
-    public func unregisterViewController(viewController: UIViewController) {
+    public class func unregisterViewController(viewController: UIViewController) {
+        DeveloperTools.shared.unregisterViewController(viewController)
+    }
+    
+    func unregisterViewController(viewController: UIViewController) {
         if let index = find(viewControllers, viewController) {
             if let currentGestureRecogniser = self.currentGestureRecogniser {
                 viewController.view.removeGestureRecognizer(currentGestureRecogniser)
@@ -217,21 +225,21 @@ public class DeveloperTools: NSObject {
     
     // MARK: - Base Server URL Methods
     
-    public func baseURL() -> String? {
-        return baseURLFromIndex(urlIndex)
+    public class func baseURL() -> String? {
+        return DeveloperTools.shared.baseURLFromIndex(DeveloperTools.shared.urlIndex)
     }
     
-    public func baseURLFromIndex(index: Int) -> String? {
+    func baseURLFromIndex(index: Int) -> String? {
         return baseURLs[index]
     }
     
-    public func setBaseURLIndex(index: Int) {
+    func setBaseURLIndex(index: Int) {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         userDefaults.setInteger(index, forKey: "DeveloperToolsURLIndex")
         userDefaults.synchronize()
     }
     
-    public func setCustomURL(customURL: String) {
+    func setCustomURL(customURL: String) {
         
         baseURLs[baseURLs.count-1] = customURL
         
