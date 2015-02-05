@@ -27,7 +27,7 @@ public class DeveloperTools: NSObject {
             return nil
         }
     }
-    private let storyboard = UIStoryboard(name: "DeveloperToolsStoryboard", bundle: nil)
+    private let storyboard = UIStoryboard(name: "DeveloperToolsStoryboard", bundle: NSBundle(forClass: DeveloperTools.self))
     private lazy var viewControllers = Array<UIViewController>()
     private var currentViewControllerIndex = NSNotFound
     private var currentViewController: UIViewController? {
@@ -71,6 +71,11 @@ public class DeveloperTools: NSObject {
         if let customURL = NSUserDefaults.standardUserDefaults().objectForKey("DeveloperToolsCustomURL") as? String {
             baseURLs[baseURLs.count-1] = customURL
         }
+        
+        let tapGesture = tapGestureRecogniser()
+        currentGestureRecogniser = tapGesture
+        
+        NSLog("Developer Tools Setup")
     }
     
     // MARK: - Register Methods
@@ -160,7 +165,7 @@ public class DeveloperTools: NSObject {
             return
         }
         
-        NSLog("%@ Unlock Phase One", 1)
+        NSLog("%@ Unlock Phase One", self)
         
         resetGestureRecogniser()
         
@@ -172,7 +177,7 @@ public class DeveloperTools: NSObject {
     }
     
     internal func unlockPhaseTwo(sender: AnyObject) {
-        NSLog("%@ Unlock Phase Two", 2)
+        NSLog("%@ Unlock Phase Two", self)
         
         resetGestureRecogniser()
         
@@ -184,7 +189,7 @@ public class DeveloperTools: NSObject {
     }
     
     internal func unlockPhaseThree(sender: AnyObject) {
-        NSLog("%@ Unlock Phase Three", 3)
+        NSLog("%@ Unlock Phase Three", self)
         
         resetGestureRecogniser()
         
@@ -209,7 +214,7 @@ public class DeveloperTools: NSObject {
     }
     
     internal func reset() {
-        NSLog("%@ Reset", 4)
+        NSLog("%@ Reset", self)
         
         resetGestureRecogniser()
         
