@@ -31,21 +31,19 @@ extension NSDate {
     
     /// `true` if the date is yesterday, `false` if it isn't.
     public var isYesterday: Bool {
-        
         let date = NSDate().dateByAddingDays(-1)
-        return self.compareToDate(date: date)
+        return compareToDate(date, option: DateCompareType.EqualTo)
     }
     
     /// `true` if the date is today, `false` if it isn't.
     public var isToday: Bool {
-        return self.compareToDate(date: NSDate())
+        return compareToDate(NSDate(), option: DateCompareType.EqualTo)
     }
     
     /// `true` if the date is tomorrow, `false` if it isn't.
     public var isTomorrow: Bool {
-        
         let date = NSDate().dateByAddingDays(1)
-        return self.compareToDate(date: date)
+        return compareToDate(date, option: DateCompareType.EqualTo)
     }
     
     /// `true` if the date is a weekday, `false` if it isn't.
@@ -222,7 +220,7 @@ extension NSDate {
         
         let calendar = NSCalendar.gregorianCalendar()
         let components = calendar.components(NSCalendarUnit.CalendarUnitWeekday, fromDate: self)
-        return (self.daysInMonth() - components.day) + 1
+        return (daysInMonth() - components.day) + 1
     }
     
     // MARK: - Date Comparison
@@ -236,7 +234,7 @@ extension NSDate {
     
         :returns: `true` if the dates conform with the date comparison type check, `false` if not
     */
-    public func compareToDate(#date: NSDate, option: DateCompareType = .EqualTo, stripTime: Bool = true) -> Bool {
+    public func compareToDate(date: NSDate, option: DateCompareType, stripTime: Bool = true) -> Bool {
         
         var compare: NSComparisonResult = .OrderedSame
         if stripTime == true {
@@ -273,7 +271,7 @@ extension NSDate {
         :returns: `true` if the comparison date is before date, `false` if not
     */
     public func isBefore(#date: NSDate) -> Bool {
-        return compareToDate(date: date, option: .Before)
+        return compareToDate(date, option: DateCompareType.Before)
     }
     
     /**
@@ -284,7 +282,7 @@ extension NSDate {
         :returns: `true` if the comparison date is after date, `false` if not
     */
     public func isAfter(#date: NSDate) -> Bool {
-        return compareToDate(date: date, option: .After)
+        return compareToDate(date, option: DateCompareType.After)
     }
     
     // MARK: -
