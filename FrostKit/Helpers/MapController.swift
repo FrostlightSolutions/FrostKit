@@ -196,9 +196,11 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     // MARK: - Polyline and Route Methods
     
     public func removeAllPolylines() {
-        for overlay in mapView.overlays {
-            if let polyline = overlay as? MKPolyline {
-                mapView.removeOverlay(polyline)
+        if let overlays = mapView.overlays {
+            for overlay in overlays {
+                if let polyline = overlay as? MKPolyline {
+                    mapView.removeOverlay(polyline)
+                }
             }
         }
     }
