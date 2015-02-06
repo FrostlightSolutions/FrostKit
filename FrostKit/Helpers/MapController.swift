@@ -22,6 +22,9 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         didSet {
             mapView.userTrackingMode = .Follow
             mapView.showsUserLocation = true
+            if autoAssingDelegate == true {
+                mapView.delegate = self
+            }
             
             if locationManager == nil {
                 locationManager = CLLocationManager()
@@ -36,6 +39,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
             }
         }
     }
+    @IBInspectable var autoAssingDelegate: Bool = true
     public var locationManager: CLLocationManager?
     public var addresses = Array<Address>()
     public var annotations = Dictionary<Address, Annotation>()
