@@ -129,6 +129,10 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         zoomToMapPoints([point])
     }
     
+    public func zoomToAnnotation(annotation: MKAnnotation) {
+        zoomToAnnotations([annotation])
+    }
+    
     public func zoomToAnnotations(annotations: [MKAnnotation]) {
         let count = annotations.count
         if count > 0 {
@@ -278,7 +282,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
                 // iOS 8+
                 let alertController = UIAlertController(title: annotation.title, message: annotation.subtitle, preferredStyle: .ActionSheet)
                 let zoomToAlertAction = UIAlertAction(title: FKLocalizedString("ZOOM_TO_", comment: "Zoom to..."), style: .Default, handler: { (action) -> Void in
-                    self.zoomToShowAll()
+                    self.zoomToAnnotation(annotation)
                 })
                 alertController.addAction(zoomToAlertAction)
                 let directionsAlertAction = UIAlertAction(title: FKLocalizedString("DIRECTIONS", comment: "Directions"), style: .Default, handler: { (action) -> Void in
@@ -338,7 +342,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         if let annotation = mapView.selectedAnnotations.first as? Annotation {
             switch buttonIndex {
             case 0:
-                zoomToShowAll()
+                zoomToAnnotation(annotation)
             case 1:
                 directionsToCurrentLocationFrom(coordinate: annotation.coordinate)
             case 2:
