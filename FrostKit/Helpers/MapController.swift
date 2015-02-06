@@ -15,14 +15,11 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     private let minimumZoomArc = 0.007  //approximately 1/2 mile (1 degree of arc ~= 69 miles)
     private let maximumDegreesArc: Double = 360
     private let annotationRegionPadFactor: Double = 1.15
-    
+    public let identifier = "FrostKitAnnotation"
     private var hasPlottedInitUsersLocation = false
-    private var zoomToSpecificLocation = false
-    
-    @IBOutlet public var viewController: UIViewController!
+    @IBOutlet public weak var viewController: UIViewController!
     @IBOutlet public weak var mapView: MKMapView! {
         didSet {
-            
             mapView.userTrackingMode = .Follow
             mapView.showsUserLocation = true
             
@@ -31,7 +28,6 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
             }
             
             if let locationManager = self.locationManager {
-                
                 if locationManager.respondsToSelector("requestWhenInUseAuthorization") {
                     locationManager.requestWhenInUseAuthorization()
                 }
@@ -40,12 +36,11 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
             }
         }
     }
-    var locationManager: CLLocationManager?
-    var addresses = Array<Address>()
-    var annotations = Dictionary<Address, Annotation>()
+    public var locationManager: CLLocationManager?
+    public var addresses = Array<Address>()
+    public var annotations = Dictionary<Address, Annotation>()
     
     deinit {
-        
         resetMap()
         purgeMap()
     }
@@ -60,9 +55,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     }
     
     private func purgeMap() {
-        
         if let locationManager = self.locationManager {
-            
             locationManager.stopUpdatingLocation()
             self.locationManager = nil
         }
@@ -71,21 +64,17 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         mapView.showsUserLocation = true
         mapView.mapType = .Standard
         mapView.delegate = nil
-//        mapView.removeFromSuperview()
-//        mapView = nil
     }
     
     // MARK: - Plot/Remove Annotations Methods
     
     public func plotAddresses(addresses: [Address]) {
-        
         for address in addresses {
             plotAddress(address)
         }
     }
     
     public func plotAddress(address: Address) {
-        
         if address.isValid == false {
             return
         }
@@ -113,8 +102,6 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
                 self.mapView.addAnnotation(annotation)
             })
         }
-        
-        zoomToSpecificLocation = false
     }
     
     public func removeAllAnnotations(includingCached: Bool = false) {
@@ -129,7 +116,6 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     public func clearData() {
         removeAllAnnotations(includingCached: true)
         addresses.removeAll(keepCapacity: false)
-        zoomToSpecificLocation = false
     }
     
     // MARK: - Zoom Map Methods
@@ -439,6 +425,7 @@ public class Address: NSObject {
         }
         return false
     }
+    
 }
 
 // MARK: - Annotation Object
