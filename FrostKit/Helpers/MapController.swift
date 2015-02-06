@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-public class MapController: NSObject {
+public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     
     private let minimumZoomArc = 0.007  //approximately 1/2 mile (1 degree of arc ~= 69 miles)
     private let maximumDegreesArc: Double = 360
@@ -19,7 +19,7 @@ public class MapController: NSObject {
     private var hasPlottedInitUsersLocation = false
     private var zoomToSpecificLocation = false
     
-    public var mapVC: UIViewController?
+    @IBOutlet public var viewController: UIViewController!
     @IBOutlet public weak var mapView: MKMapView! {
         didSet {
             
@@ -250,6 +250,112 @@ public class MapController: NSObject {
     public func plotRoute(route: MKRoute) {
         removeAllPolylines()
         mapView.addOverlay(route.polyline, level: .AboveRoads)
+    }
+    
+    // MARK: - MKMapViewDelegate Methods
+    
+    public func mapView(mapView: MKMapView!, viewForAnnotation anno: MKAnnotation!) -> MKAnnotationView! {
+        var annotationPinView: MKPinAnnotationView?
+        if let annotation = anno as? Annotation {
+            if let annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView {
+                annotationView.annotation = annotation
+                annotationPinView = annotationView
+            } else {
+                let pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                pinView.pinColor = .Red
+                pinView.animatesDrop = true
+                pinView.hidden = false
+                pinView.enabled = true
+                pinView.canShowCallout = true
+                pinView.draggable = false
+                pinView.rightCalloutAccessoryView = UIButton.buttonWithType(.DetailDisclosure) as UIView
+                annotationPinView = pinView
+            }
+        }
+        
+        return annotationPinView
+    }
+    
+    public func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+        if let annotation = view.annotation as? Annotation {
+            if NSClassFromString("UIAlertController") == nil {
+                // iOS 7
+                let title = ([annotation.title, annotation.subtitle] as NSArray).componentsJoinedByString("\n")
+                let actionSheet = UIActionSheet(title: title, delegate: self, cancelButtonTitle: FKLocalizedString("CANCEL", comment: "Cancel"), destructiveButtonTitle: nil, otherButtonTitles: FKLocalizedString("ZOOM_TO_", comment: "Zoom to..."), FKLocalizedString("DIRECTIONS", comment: "Directions"), FKLocalizedString("OPEN_IN_MAPS", comment: "Open in Maps"))
+                actionSheet.showFromRect(control.frame, inView: view, animated: true)
+            } else {
+                // iOS 8+
+                let alertController = UIAlertController(title: annotation.title, message: annotation.subtitle, preferredStyle: .ActionSheet)
+                let zoomToAlertAction = UIAlertAction(title: FKLocalizedString("ZOOM_TO_", comment: "Zoom to..."), style: .Default, handler: { (action) -> Void in
+                    self.zoomToShowAll()
+                })
+                alertController.addAction(zoomToAlertAction)
+                let directionsAlertAction = UIAlertAction(title: FKLocalizedString("DIRECTIONS", comment: "Directions"), style: .Default, handler: { (action) -> Void in
+                    self.directionsToCurrentLocationFrom(coordinate: annotation.coordinate)
+                })
+                alertController.addAction(directionsAlertAction)
+                let openInMapsAlertAction = UIAlertAction(title: FKLocalizedString("OPEN_IN_MAPS", comment: "Open in Maps"), style: .Default, handler: { (action) -> Void in
+                    self.directionsToCurrentLocationFrom(coordinate: annotation.coordinate, inApp: false)
+                })
+                alertController.addAction(openInMapsAlertAction)
+                let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL", comment: "Cancel"), style: .Cancel, handler: { (action) -> Void in
+                    alertController.dismissViewControllerAnimated(true, completion: nil)
+                })
+                alertController.addAction(cancelAlertAction)
+                viewController.presentViewController(alertController, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    public func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+        if let polyline = overlay as? MKPolyline {
+            let polylineRenderer = MKPolylineRenderer(polyline: polyline)
+            polylineRenderer.strokeColor = UIColor.blueColor()
+            polylineRenderer.lineWidth = 4
+            polylineRenderer.lineCap = kCGLineCapRound
+            polylineRenderer.lineJoin = kCGLineJoinRound
+            polylineRenderer.alpha = 0.6
+            return polylineRenderer
+        }
+        return nil
+    }
+    
+    public func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
+        if hasPlottedInitUsersLocation == false {
+            hasPlottedInitUsersLocation = true
+            zoomToShowAll()
+        }
+    }
+    
+    public func mapView(mapView: MKMapView!, didFailToLocateUserWithError error: NSError!) {
+        hasPlottedInitUsersLocation = false
+        zoomToShowAll()
+        
+        switch error.code {
+        case CLError.LocationUnknown.rawValue:
+            break
+        case CLError.Denied.rawValue:
+            break
+        default:
+            break
+        }
+    }
+    
+    // MARK: - UIActionSheetDelegate Methods
+    
+    public func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+        if let annotation = mapView.selectedAnnotations.first as? Annotation {
+            switch buttonIndex {
+            case 0:
+                zoomToShowAll()
+            case 1:
+                directionsToCurrentLocationFrom(coordinate: annotation.coordinate)
+            case 2:
+                directionsToCurrentLocationFrom(coordinate: annotation.coordinate, inApp: false)
+            default:
+                break
+            }
+        }
     }
     
 }
