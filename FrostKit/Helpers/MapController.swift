@@ -75,4 +75,171 @@ public class MapController: NSObject {
 //        mapView = nil
     }
     
+    // MARK: - Plot/Remove Annotations Methods
+    
+    public func plotAddresses(addresses: [Address]) {
+        
+        for address in addresses {
+            plotAddress(address)
+        }
+    }
+    
+    public func plotAddress(address: Address) {
+        
+        if address.isValid == false {
+            return
+        }
+        
+        if let index = find(addresses, address) {
+            addresses[index] = address
+        } else {
+            addresses.append(address)
+        }
+        
+        var annotation: Annotation?
+        if let currentAnnotation = annotations[address] {
+            // Annotation already exists, update the address
+            currentAnnotation.updateAddress(address)
+            annotation = currentAnnotation
+        } else {
+            // No previous annotation for this addres, create one
+            let newAnnotation = Annotation(address: address)
+            annotations[address] = newAnnotation
+            annotation = newAnnotation
+        }
+        
+        if let currentAnnotation = annotation {
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.mapView.addAnnotation(annotation)
+            })
+        }
+        
+        zoomToSpecificLocation = false
+    }
+    
+    public func removeAllAnnotations(includingCached: Bool = false) {
+        let annotations = Array(self.annotations.values)
+        mapView.removeAnnotations(annotations)
+        
+        if includingCached == true {
+            self.annotations.removeAll(keepCapacity: false)
+        }
+    }
+    
+    public func clearData() {
+        removeAllAnnotations(includingCached: true)
+        addresses.removeAll(keepCapacity: false)
+        zoomToSpecificLocation = false
+    }
+    
+}
+
+// MARK: - Address Object
+
+public class Address: NSObject {
+    
+    public var objectID: String?
+    public var coordinate = CLLocationCoordinate2DMake(0.0, 0.0)
+    public var latitude: CLLocationDegrees {
+        return coordinate.latitude
+    }
+    public var longitude: CLLocationDegrees {
+        return coordinate.longitude
+    }
+    public var isValid: Bool {
+        if latitude == 0 && longitude == 0 {
+            return false
+        } else {
+            return true
+        }
+    }
+    public var name = ""
+    public var simpleAddress = ""
+    override public var description: String {
+        return "\(self) Latitude: \(latitude) Longitude: \(longitude) Address: \(simpleAddress)"
+    }
+    override public var hash: Int {
+        return Int(latitude) ^ Int(longitude)
+    }
+    
+    convenience public init(dictionary: NSDictionary) {
+        self.init()
+        
+        objectID = dictionary["id"] as? String
+        
+        if let latitude = dictionary["latitude"] as? Double {
+            coordinate.latitude = latitude
+        } else if let latitude = dictionary["latitude"] as? Float {
+            coordinate.latitude = Double(latitude)
+        } else if let latitude = dictionary["latitude"] as? Int {
+            coordinate.latitude = Double(latitude)
+        }
+        
+        if let longitude = dictionary["longitude"] as? Double {
+            coordinate.longitude = longitude
+        } else if let longitude = dictionary["longitude"] as? Float {
+            coordinate.latitude = Double(longitude)
+        } else if let longitude = dictionary["longitude"] as? Int {
+            coordinate.latitude = Double(longitude)
+        }
+    }
+    
+    public class func addressesFromArrayOfDictionaries(array: [NSDictionary]) -> [Address] {
+        var adresses = Array<Address>()
+        for dictionary in array {
+            adresses.append(Address(dictionary: dictionary))
+        }
+        return adresses
+    }
+    
+    // MARK: - Comparison Methods
+    
+    public func isEqualToAddress(object: Address?) -> Bool {
+        if let address = object {
+            
+            let haveEqualLatitude = self.latitude == address.latitude
+            let haveEqualLongitude = self.longitude == address.longitude
+            let haveEqualName = self.name == address.name
+            let haveEqualSimpleAddress = self.simpleAddress == address.simpleAddress
+            
+            return haveEqualLatitude && haveEqualLongitude && haveEqualName && haveEqualSimpleAddress
+        }
+        return false
+    }
+    
+    public override func isEqual(object: AnyObject?) -> Bool {
+        if let address = object as? Address {
+            return self.isEqualToAddress(address)
+        }
+        return false
+    }
+}
+
+// MARK: - Annotation Object
+
+public class Annotation: NSObject, MKAnnotation {
+    
+    public var address: Address
+    public var coordinate: CLLocationCoordinate2D {
+        return address.coordinate
+    }
+    public var title: String {
+        return address.name
+    }
+    public var subtitle: String {
+        return address.simpleAddress
+    }
+    
+    public init(address: Address) {
+        self.address = address
+        
+        super.init()
+    }
+    
+    public func updateAddress(address: Address) {
+        if self.address.isEqualToAddress(address) == false {
+            self.address = address
+        }
+    }
+    
 }
