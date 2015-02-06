@@ -11,11 +11,24 @@ import UIKit
 public class MapViewController: UIViewController, UIActionSheetDelegate {
     
     @IBOutlet weak var mapController: MapController!
+    @IBInspectable var locationButton: Bool = true
+    @IBInspectable var searchButton: Bool = true
     
     override public func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = FKLocalizedString("MAP", comment: "Map")
+        
+        var barButtonItems = Array<UIBarButtonItem>()
+        if locationButton == true {
+            let locationButton = UIBarButtonItem(title: ionicon_ios_navigate_outline, font: UIFont.ionicons(size: 24), verticalOffset: -1, target: self, action: "locationButtonPressed:")
+            barButtonItems.append(locationButton)
+        }
+        if searchButton == true {
+            let searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: "searchButtonPressed:")
+            barButtonItems.append(searchButton)
+        }
+        navigationItem.setRightBarButtonItems(barButtonItems, animated: false)
     }
     
     override public func viewDidAppear(animated: Bool) {
