@@ -208,6 +208,50 @@ public class MapController: NSObject {
         zoomToMapPoints(polyline.points(), count: polyline.pointCount)
     }
     
+    // MARK: - Polyline and Route Methods
+    
+    public func removeAllPolylines() {
+        for overlay in mapView.overlays {
+            if let polyline = overlay as? MKPolyline {
+                mapView.removeOverlay(polyline)
+            }
+        }
+    }
+    
+    public func directionsToCurrentLocationFrom(#coordinate: CLLocationCoordinate2D, inApp: Bool = true) {
+        let currentLocationItem = MKMapItem.mapItemForCurrentLocation()
+        
+        let destinationPlacemark = MKPlacemark(coordinate: coordinate, addressDictionary: nil)
+        let destinationItem = MKMapItem(placemark: destinationPlacemark)
+        
+        if inApp == true {
+            let directionsRequest = MKDirectionsRequest()
+            directionsRequest.setSource(currentLocationItem)
+            directionsRequest.setDestination(destinationItem)
+            directionsRequest.transportType = .Automobile
+            directionsRequest.requestsAlternateRoutes = false
+            
+            let directions = MKDirections(request: directionsRequest)
+            directions.calculateDirectionsWithCompletionHandler({ (directionsResponse, error) -> Void in
+                if let anError = error {
+                    NSLog("Error getting directions: \(error.localizedDescription)")
+                } else {
+                    if let route = directionsResponse.routes.first as? MKRoute {
+                        self.plotRoute(route)
+                    }
+                }
+            })
+        } else {
+            let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
+            MKMapItem.openMapsWithItems([currentLocationItem, destinationItem], launchOptions: launchOptions)
+        }
+    }
+    
+    public func plotRoute(route: MKRoute) {
+        removeAllPolylines()
+        mapView.addOverlay(route.polyline, level: .AboveRoads)
+    }
+    
 }
 
 // MARK: - Address Object
