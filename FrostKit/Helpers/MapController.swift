@@ -132,6 +132,82 @@ public class MapController: NSObject {
         zoomToSpecificLocation = false
     }
     
+    // MARK: - Zoom Map Methods
+    
+    public func zoomToCoordinate(coordinare: CLLocationCoordinate2D) {
+        let point = MKMapPointForCoordinate(coordinare)
+        zoomToMapPoints([point])
+    }
+    
+    public func zoomToAnnotations(annotations: [MKAnnotation]) {
+        let count = annotations.count
+        if count > 0 {
+            var points = Array<MKMapPoint>()
+            for index in 0..<count {
+                let annotation = annotations[index]
+                points[index] = MKMapPointForCoordinate(annotation.coordinate)
+            }
+            zoomToMapPoints(points)
+        }
+    }
+    
+    public func zoomToMapPoints(points: [MKMapPoint]) {
+        let count = points.count
+        let cPoints: UnsafeMutablePointer<MKMapPoint> = UnsafeMutablePointer<MKMapPoint>.alloc(count)
+        cPoints.initializeFrom(points)
+        zoomToMapPoints(cPoints, count: count)
+        cPoints.destroy()
+    }
+    
+    public func zoomToMapPoints(points: UnsafeMutablePointer<MKMapPoint>, count: Int) {
+        let mapRect = MKPolygon(points: points, count: count).boundingMapRect
+        var region: MKCoordinateRegion = MKCoordinateRegionForMapRect(mapRect)
+        
+        if count <= 1 {
+            region.span = MKCoordinateSpanMake(minimumZoomArc, minimumZoomArc)
+        } else {
+            region.span = MKCoordinateSpanMake(region.span.latitudeDelta * annotationRegionPadFactor, region.span.longitudeDelta * annotationRegionPadFactor)
+            
+            if region.span.latitudeDelta > maximumDegreesArc {
+                region.span.latitudeDelta = maximumDegreesArc
+            } else if region.span.latitudeDelta < minimumZoomArc {
+                region.span.latitudeDelta = minimumZoomArc
+            }
+            
+            if region.span.longitudeDelta > maximumDegreesArc {
+                region.span.longitudeDelta = maximumDegreesArc
+            } else if region.span.longitudeDelta < minimumZoomArc {
+                region.span.longitudeDelta = minimumZoomArc
+            }
+        }
+        
+        mapView.setRegion(region, animated: true)
+    }
+    
+    public func zoomToCurrentLocation() {
+        zoomToCoordinate(mapView.userLocation.coordinate)
+    }
+    
+    public func zoomToShowAll(includingUser: Bool = true) {
+        if includingUser == true {
+            zoomToAnnotations(mapView.annotations as [MKAnnotation])
+        } else {
+            let annotations = Array(self.annotations.values)
+            zoomToAnnotations(annotations)
+        }
+    }
+    
+    public func zoomMapToAddress(address: Address) {
+        plotAddress(address)
+        
+        let annotation = annotations[address] as MKAnnotation
+        zoomToAnnotations([annotation])
+    }
+    
+    public func zoomToPolyline(polyline: MKPolyline) {
+        zoomToMapPoints(polyline.points(), count: polyline.pointCount)
+    }
+    
 }
 
 // MARK: - Address Object
