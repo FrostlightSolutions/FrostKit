@@ -245,6 +245,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     public func plotRoute(route: MKRoute) {
         removeAllPolylines()
         mapView.addOverlay(route.polyline, level: .AboveRoads)
+        zoomToPolyline(route.polyline)
     }
     
     // MARK: - MKMapViewDelegate Methods
