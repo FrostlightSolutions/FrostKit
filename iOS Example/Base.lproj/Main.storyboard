@@ -296,10 +296,10 @@
             </objects>
             <point key="canvasLocation" x="1830" y="461"/>
         </scene>
-        <!--Map View Controller-->
+        <!--Example Map View Controller-->
         <scene sceneID="6nw-z1-CBt">
             <objects>
-                <viewController id="uPQ-UR-85n" customClass="MapViewController" customModule="FrostKit" sceneMemberID="viewController">
+                <viewController id="uPQ-UR-85n" customClass="ExampleMapViewController" customModule="iOS_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AkB-A4-HLM"/>
                         <viewControllerLayoutGuide type="bottom" id="D7J-Sc-7dG"/>
