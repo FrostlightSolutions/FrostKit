@@ -373,7 +373,11 @@ public class Address: NSObject {
         return Int(latitude) ^ Int(longitude)
     }
     
-    convenience public init(dictionary: NSDictionary) {
+    override init() {
+        super.init()
+    }
+    
+    public convenience init(dictionary: NSDictionary) {
         self.init()
         
         objectID = dictionary["id"] as? String
@@ -392,6 +396,14 @@ public class Address: NSObject {
             coordinate.latitude = Double(longitude)
         } else if let longitude = dictionary["longitude"] as? Int {
             coordinate.latitude = Double(longitude)
+        }
+        
+        if let name = dictionary["name"] as? String {
+            self.name = name
+        }
+        
+        if let simpleAddress = dictionary["simpleAddress"] as? String {
+            self.simpleAddress = simpleAddress
         }
     }
     
@@ -431,7 +443,7 @@ public class Address: NSObject {
 
 public class Annotation: NSObject, MKAnnotation {
     
-    public var address: Address
+    public lazy var address = Address()
     public var coordinate: CLLocationCoordinate2D {
         return address.coordinate
     }
@@ -442,10 +454,14 @@ public class Annotation: NSObject, MKAnnotation {
         return address.simpleAddress
     }
     
-    public init(address: Address) {
-        self.address = address
-        
+    public override init() {
         super.init()
+    }
+    
+    public convenience init(address: Address) {
+        self.init()
+        
+        self.address = address
     }
     
     public func updateAddress(address: Address) {

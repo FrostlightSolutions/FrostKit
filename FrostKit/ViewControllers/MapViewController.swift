@@ -10,9 +10,9 @@ import UIKit
 
 public class MapViewController: UIViewController, UIActionSheetDelegate {
     
-    @IBOutlet weak var mapController: MapController!
-    @IBInspectable var locationButton: Bool = true
-    @IBInspectable var searchButton: Bool = true
+    @IBOutlet public weak var mapController: MapController!
+    @IBInspectable public var locationButton: Bool = true
+    @IBInspectable public var searchButton: Bool = true
     
     override public func viewDidLoad() {
         super.viewDidLoad()
