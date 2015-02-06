@@ -32,6 +32,11 @@
 		18318DC71A83C23E00412222 /* DeveloperToolsBaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18318DC31A83C23E00412222 /* DeveloperToolsBaseURL.swift */; };
 		18318DC81A83C23E00412222 /* DeveloperToolsRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18318DC41A83C23E00412222 /* DeveloperToolsRoot.swift */; };
 		18318DC91A83C23E00412222 /* DeveloperToolsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18318DC51A83C23E00412222 /* DeveloperToolsStoryboard.storyboard */; };
+		1836A2021A843EBC00E57F86 /* RequestStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* RequestStore.swift */; };
+		1836A2071A843EC000E57F86 /* DataUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB51741A765335005064C8 /* DataUpdater.swift */; };
+		1836A2081A843EE800E57F86 /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066B19DB769B00811755 /* NSDateExtensions.swift */; };
+		1836A2091A843EF100E57F86 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB51791A7655ED005064C8 /* UIDeviceExtensions.swift */; };
+		1836A20A1A843F0000E57F86 /* UICollectionViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A786CC1A77B39A006EADB9 /* UICollectionViewControllerExtensions.swift */; };
 		183F85F71A7B0D9200885F56 /* ImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183F85F61A7B0D9200885F56 /* ImageCacheTests.swift */; };
 		183F85F91A7B0E1C00885F56 /* SmallLogoBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 183F85F81A7B0E1C00885F56 /* SmallLogoBlue.png */; };
 		185D3D5C1A6E936F00BE700D /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185D3D5B1A6E936F00BE700D /* DataStore.swift */; };
@@ -674,12 +679,15 @@
 			files = (
 				186B08081A6D5F3400CAF920 /* ImageCache.swift in Sources */,
 				186B08021A6D5F2900CAF920 /* SocialHelper.swift in Sources */,
+				1836A2091A843EF100E57F86 /* UIDeviceExtensions.swift in Sources */,
 				186B07F51A6D5F0400CAF920 /* LocalStorage.swift in Sources */,
 				18697C501A841C9900E8B1CE /* DeveloperToolsBaseURL.swift in Sources */,
 				186B07FF1A6D5F2700CAF920 /* UIViewExtensions.swift in Sources */,
+				1836A20A1A843F0000E57F86 /* UICollectionViewControllerExtensions.swift in Sources */,
 				186B08031A6D5F2900CAF920 /* KeychainHelper.swift in Sources */,
 				186B07F61A6D5F2700CAF920 /* NSErrorExtensions.swift in Sources */,
 				186B07F81A6D5F2700CAF920 /* NSCalendarExtensions.swift in Sources */,
+				1836A2081A843EE800E57F86 /* NSDateExtensions.swift in Sources */,
 				186B07EE1A6D592900CAF920 /* OAuthToken.swift in Sources */,
 				186B07FB1A6D5F2700CAF920 /* NSBundleExtensions.swift in Sources */,
 				181BCC3619DF60810056C8F8 /* KeychainHelperTests.swift in Sources */,
@@ -692,7 +700,9 @@
 				18DE01F619DCBE45008A1506 /* FontTests.swift in Sources */,
 				186B08091A6D5F3400CAF920 /* ContentManager.swift in Sources */,
 				186B08061A6D5F2E00CAF920 /* UIWebViewController.swift in Sources */,
+				1836A2071A843EC000E57F86 /* DataUpdater.swift in Sources */,
 				186B07F91A6D5F2700CAF920 /* NSTimeZoneExtensions.swift in Sources */,
+				1836A2021A843EBC00E57F86 /* RequestStore.swift in Sources */,
 				18C0067819DC23A100811755 /* UIColorExtensionsTest.swift in Sources */,
 				18C0067519DC001000811755 /* NSDateExtensionsTests.swift in Sources */,
 				18697C4F1A841C9500E8B1CE /* DeveloperToolsRoot.swift in Sources */,
