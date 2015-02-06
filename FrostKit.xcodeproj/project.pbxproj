@@ -32,6 +32,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		18032B1B1A84F99400BEBB41 /* UIFontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EC19DCBB5B008A1506 /* UIFontExtensions.swift */; };
 		180EFDF11A6FD3A000325C09 /* DataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180EFDF01A6FD3A000325C09 /* DataStoreTests.swift */; };
 		181056D51A81038E00665B96 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18213B2F1A7C143F002AD63C /* Alamofire.framework */; };
 		1811D7B81A0AD1CA00E8B873 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B41A0AD1CA00E8B873 /* BaseWebViewController.swift */; };
@@ -113,7 +114,6 @@
 		18CBAA051A6D315F009CBCA0 /* OAuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CBAA041A6D315F009CBCA0 /* OAuthToken.swift */; };
 		18CFF9FE19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFF9FD19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift */; };
 		18DC212B19DEA21000FEB57E /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC212A19DEA21000FEB57E /* UIViewControllerExtensions.swift */; };
-		18DE01ED19DCBB5B008A1506 /* UIFontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EC19DCBB5B008A1506 /* UIFontExtensions.swift */; };
 		18DE01EF19DCBC28008A1506 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EE19DCBC28008A1506 /* CustomFonts.swift */; };
 		18DE01F619DCBE45008A1506 /* FontTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01F519DCBE45008A1506 /* FontTests.swift */; };
 		18E3F23219DE07670032ABB7 /* FrostKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23119DE07670032ABB7 /* FrostKit.swift */; };
@@ -716,7 +716,7 @@
 				18CB51751A765335005064C8 /* DataUpdater.swift in Sources */,
 				18CB517A1A7655ED005064C8 /* UIDeviceExtensions.swift in Sources */,
 				18C0066319DB5C7200811755 /* ImageCache.swift in Sources */,
-				18DE01ED19DCBB5B008A1506 /* UIFontExtensions.swift in Sources */,
+				18032B1B1A84F99400BEBB41 /* UIFontExtensions.swift in Sources */,
 				18C0066119DB5BF000811755 /* LocalStorage.swift in Sources */,
 				18C0067019DB7EDB00811755 /* ContentManager.swift in Sources */,
 				18E3F23A19DE15600032ABB7 /* UIBarButtonItemExtensions.swift in Sources */,
