@@ -172,7 +172,7 @@
 		18318DCB1A83CF5800412222 /* SettingsTemplate.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SettingsTemplate.bundle; sourceTree = "<group>"; };
 		1836A2171A84E7D300E57F86 /* ParseFontLessConstants.py */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text.script.python; path = ParseFontLessConstants.py; sourceTree = "<group>"; tabWidth = 2; };
 		1836A2191A84E9A000E57F86 /* FontAwesome.less */ = {isa = PBXFileReference; lastKnownFileType = text; path = FontAwesome.less; sourceTree = "<group>"; };
-		1836A21A1A84E9A000E57F86 /* IonIcons.less */ = {isa = PBXFileReference; lastKnownFileType = text; path = IonIcons.less; sourceTree = "<group>"; };
+		1836A21A1A84E9A000E57F86 /* Ionicons.less */ = {isa = PBXFileReference; lastKnownFileType = text; path = Ionicons.less; sourceTree = "<group>"; };
 		1836A21B1A84F38A00E57F86 /* FontConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontConstants.swift; sourceTree = "<group>"; };
 		1836A21F1A84F3BE00E57F86 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		1836A2201A84F3BE00E57F86 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
@@ -286,7 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				1836A2191A84E9A000E57F86 /* FontAwesome.less */,
-				1836A21A1A84E9A000E57F86 /* IonIcons.less */,
+				1836A21A1A84E9A000E57F86 /* Ionicons.less */,
 			);
 			path = LessConstantsFiles;
 			sourceTree = "<group>";
