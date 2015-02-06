@@ -40,6 +40,7 @@
 		1811D7BA1A0AD1CA00E8B873 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B61A0AD1CA00E8B873 /* WebViewController.swift */; };
 		1811D7BB1A0AD1CA00E8B873 /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B71A0AD1CA00E8B873 /* WKWebViewController.swift */; };
 		181BCC3619DF60810056C8F8 /* KeychainHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181BCC3519DF60810056C8F8 /* KeychainHelperTests.swift */; };
+		182BBBD41A853FB700D8F6F7 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182BBBD31A853FB700D8F6F7 /* MapViewController.swift */; };
 		18318DC61A83C23E00412222 /* DeveloperTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18318DC21A83C23E00412222 /* DeveloperTools.swift */; };
 		18318DC71A83C23E00412222 /* DeveloperToolsBaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18318DC31A83C23E00412222 /* DeveloperToolsBaseURL.swift */; };
 		18318DC81A83C23E00412222 /* DeveloperToolsRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18318DC41A83C23E00412222 /* DeveloperToolsRoot.swift */; };
@@ -165,6 +166,7 @@
 		1811D7B71A0AD1CA00E8B873 /* WKWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
 		181BCC3519DF60810056C8F8 /* KeychainHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainHelperTests.swift; sourceTree = "<group>"; };
 		18213B271A7C143F002AD63C /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
+		182BBBD31A853FB700D8F6F7 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		18318DC21A83C23E00412222 /* DeveloperTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperTools.swift; sourceTree = "<group>"; usesTabs = 0; };
 		18318DC31A83C23E00412222 /* DeveloperToolsBaseURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperToolsBaseURL.swift; sourceTree = "<group>"; };
 		18318DC41A83C23E00412222 /* DeveloperToolsRoot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperToolsRoot.swift; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 			isa = PBXGroup;
 			children = (
 				1811D7B31A0AD1CA00E8B873 /* WebViewController */,
+				182BBBD31A853FB700D8F6F7 /* MapViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -721,6 +724,7 @@
 				18C0066319DB5C7200811755 /* ImageCache.swift in Sources */,
 				186CFCEA1A29FA40002739A5 /* MapController.swift in Sources */,
 				18032B1B1A84F99400BEBB41 /* UIFontExtensions.swift in Sources */,
+				182BBBD41A853FB700D8F6F7 /* MapViewController.swift in Sources */,
 				18C0066119DB5BF000811755 /* LocalStorage.swift in Sources */,
 				18C0067019DB7EDB00811755 /* ContentManager.swift in Sources */,
 				18E3F23A19DE15600032ABB7 /* UIBarButtonItemExtensions.swift in Sources */,
