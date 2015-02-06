@@ -129,9 +129,8 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         let count = annotations.count
         if count > 0 {
             var points = Array<MKMapPoint>()
-            for index in 0..<count {
-                let annotation = annotations[index]
-                points[index] = MKMapPointForCoordinate(annotation.coordinate)
+            for annotation in annotations {
+                points.append(MKMapPointForCoordinate(annotation.coordinate))
             }
             zoomToMapPoints(points)
         }
