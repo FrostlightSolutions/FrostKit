@@ -171,22 +171,13 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         
         if count <= 1 {
             region.span = MKCoordinateSpanMake(minimumZoomArc, minimumZoomArc)
-        } else {
-            region.span = MKCoordinateSpanMake(region.span.latitudeDelta * annotationRegionPadFactor, region.span.longitudeDelta * annotationRegionPadFactor)
-            
-            if region.span.latitudeDelta > maximumDegreesArc {
-                region.span.latitudeDelta = maximumDegreesArc
-            } else if region.span.latitudeDelta < minimumZoomArc {
-                region.span.latitudeDelta = minimumZoomArc
-            }
-            
-            if region.span.longitudeDelta > maximumDegreesArc {
-                region.span.longitudeDelta = maximumDegreesArc
-            } else if region.span.longitudeDelta < minimumZoomArc {
-                region.span.longitudeDelta = minimumZoomArc
-            }
         }
         
+        zoomToRegion(region)
+    }
+    
+    public func zoomToRegion(var region: MKCoordinateRegion) {
+        region.span = normalizeRegionSpan(region.span)
         mapView.setRegion(region, animated: true)
     }
     
@@ -204,7 +195,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         }
     }
     
-    public func zoomMapToAddress(address: Address) {
+    public func zoomToAddress(address: Address) {
         plotAddress(address)
         
         let annotation = annotations[address] as MKAnnotation
@@ -260,6 +251,24 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         removeAllPolylines()
         mapView.addOverlay(route.polyline, level: .AboveRoads)
         zoomToPolyline(route.polyline)
+    }
+    
+    // MARK: - Helper Methods
+    
+    public func normalizeRegionSpan(var span: MKCoordinateSpan) -> MKCoordinateSpan {
+        span = MKCoordinateSpanMake(span.latitudeDelta * annotationRegionPadFactor, span.longitudeDelta * annotationRegionPadFactor)
+        if span.latitudeDelta > maximumDegreesArc {
+            span.latitudeDelta = maximumDegreesArc
+        } else if span.latitudeDelta < minimumZoomArc {
+            span.latitudeDelta = minimumZoomArc
+        }
+        
+        if span.longitudeDelta > maximumDegreesArc {
+            span.longitudeDelta = maximumDegreesArc
+        } else if span.longitudeDelta < minimumZoomArc {
+            span.longitudeDelta = minimumZoomArc
+        }
+        return span
     }
     
     // MARK: - MKMapViewDelegate Methods
