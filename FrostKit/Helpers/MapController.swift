@@ -410,7 +410,7 @@ public class Address: NSObject {
     public var name = ""
     public var simpleAddress = ""
     override public var description: String {
-        return "\(self) Latitude: \(latitude) Longitude: \(longitude) Address: \(simpleAddress)"
+        return "<Latitude: \(latitude) Longitude: \(longitude) Address: \(simpleAddress)>"
     }
     override public var hash: Int {
         return Int(latitude) ^ Int(longitude)
