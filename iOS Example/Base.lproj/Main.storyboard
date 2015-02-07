@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Xow-t6-bUh">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--FrostKit-->
@@ -12,6 +13,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="prx-VI-3on">
+                            <rect key="frame" x="0.0" y="240" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2014-2015 James Barrow - Frostlight Solutions. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2I-qC-zEq">
+                                    <rect key="frame" x="8" y="0.0" width="584" height="44"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="h2I-qC-zEq" secondAttribute="bottom" id="KNT-as-QpZ"/>
+                                <constraint firstItem="h2I-qC-zEq" firstAttribute="top" secondItem="prx-VI-3on" secondAttribute="top" id="Qrd-VO-lgt"/>
+                                <constraint firstItem="h2I-qC-zEq" firstAttribute="leading" secondItem="prx-VI-3on" secondAttribute="leadingMargin" id="Rb5-6F-d3I"/>
+                                <constraint firstAttribute="trailingMargin" secondItem="h2I-qC-zEq" secondAttribute="trailing" id="TsS-RI-Cen"/>
+                            </constraints>
+                        </view>
                         <sections>
                             <tableViewSection headerTitle="Helpers" id="c4z-8x-idH">
                                 <cells>
@@ -92,6 +113,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="GL8-X4-Iyc">
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
                         <sections>
                             <tableViewSection headerTitle="Social Notworks" id="G8r-Re-8z5">
                                 <cells>
@@ -191,6 +216,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="KvK-HR-jv1">
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
                         <sections>
                             <tableViewSection headerTitle="Presented" id="1eH-uj-AcA">
                                 <cells>
