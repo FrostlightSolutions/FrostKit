@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Social
 
 ///
 /// This class acts as a base view controller class for `UIWebViewController` and `WKWebViewController`. It defines the base values and functions used in subclesses of it. This class should not be used on it's own, always use it as a subclass such as though `UIWebViewController` or `WKWebViewController`.
