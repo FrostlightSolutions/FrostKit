@@ -133,7 +133,6 @@ public class BaseWebViewController: UIViewController {
     }
     
     func actionButtonPressed(sender: AnyObject?) {
-        
         var urlString = ""
         if let url = URL?.absoluteString {
             urlString = url

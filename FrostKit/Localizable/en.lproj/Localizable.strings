@@ -23,3 +23,16 @@
 
 "EMAIL" = "Email";
 "MESSAGE" = "Message";
+
+/* MapController */
+
+"ZOOM_TO_" = "Zoom to...";
+"DIRECTIONS" = "Directions";
+"OPEN_IN_MAPS" = "Open in Maps";
+
+/* MapViewController */
+
+"MAP" = "Map";
+"CURRENT_LOCATION" = "Current Location";
+"ALL_LOCATIONS" = "All Locations";
+"CLEAR_DIRECTIONS" = "Clear Directions";

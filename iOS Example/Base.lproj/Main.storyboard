@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Xow-t6-bUh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Xow-t6-bUh">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6243"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--FrostKit-->
         <scene sceneID="sYt-9K-qO6">
             <objects>
-                <tableViewController id="Zkj-xT-axX" customClass="MainMenuVC" customModule="iOS_7_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Zkj-xT-axX" customClass="MainMenuVC" customModule="iOS_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9vi-BF-eGL">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -54,6 +53,23 @@
                                             <segue destination="b0M-k3-9gi" kind="show" id="z1n-JK-aJF"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="LnZ-l3-TTS" style="IBUITableViewCellStyleDefault" id="qK9-v7-AhD">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qK9-v7-AhD" id="ZEj-0f-zSX">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="MapViewController" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LnZ-l3-TTS">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="uPQ-UR-85n" kind="show" id="1u2-2W-yRg"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -71,7 +87,7 @@
         <!--SocialHelper-->
         <scene sceneID="gjm-sZ-zRi">
             <objects>
-                <tableViewController id="akX-da-Xii" customClass="SocialHelperVC" customModule="iOS_7_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="akX-da-Xii" customClass="SocialHelperVC" customModule="iOS_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="gGa-5E-t6O">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -165,12 +181,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="teG-jP-TIW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1838" y="461"/>
+            <point key="canvasLocation" x="1830" y="-228"/>
         </scene>
         <!--WebViewController-->
         <scene sceneID="haL-fh-vSI">
             <objects>
-                <tableViewController id="b0M-k3-9gi" customClass="WebViewControllerVC" customModule="iOS_7_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="b0M-k3-9gi" customClass="WebViewControllerVC" customModule="iOS_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="xU4-H6-ixP">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -278,7 +294,45 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZAx-Zk-G2c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1838" y="1150"/>
+            <point key="canvasLocation" x="1830" y="461"/>
+        </scene>
+        <!--Example Map View Controller-->
+        <scene sceneID="6nw-z1-CBt">
+            <objects>
+                <viewController id="uPQ-UR-85n" customClass="ExampleMapViewController" customModule="iOS_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="AkB-A4-HLM"/>
+                        <viewControllerLayoutGuide type="bottom" id="D7J-Sc-7dG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lNd-Qf-AAm">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Qbj-q0-r0Z">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Qbj-q0-r0Z" firstAttribute="leading" secondItem="lNd-Qf-AAm" secondAttribute="leading" id="JG1-jS-DYa"/>
+                            <constraint firstItem="Qbj-q0-r0Z" firstAttribute="top" secondItem="lNd-Qf-AAm" secondAttribute="top" id="Wd2-b7-dpn"/>
+                            <constraint firstItem="D7J-Sc-7dG" firstAttribute="top" secondItem="Qbj-q0-r0Z" secondAttribute="bottom" id="cEc-J2-Ocv"/>
+                            <constraint firstAttribute="trailing" secondItem="Qbj-q0-r0Z" secondAttribute="trailing" id="irI-6M-KIb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapController" destination="nsd-kC-NtK" id="rC8-CC-gy0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vjp-Vy-Dbh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="nsd-kC-NtK" customClass="MapController" customModule="FrostKit">
+                    <connections>
+                        <outlet property="mapView" destination="Qbj-q0-r0Z" id="3aF-j0-yb7"/>
+                        <outlet property="viewController" destination="uPQ-UR-85n" id="wLm-pN-EDh"/>
+                    </connections>
+                </customObject>
+            </objects>
+            <point key="canvasLocation" x="1830" y="1149"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="P8m-GD-fTH">
