@@ -18,6 +18,22 @@
 			<key>File</key>
 			<string>Alamofire</string>
 		</dict>
+        <dict>
+            <key>Type</key>
+            <string>PSChildPaneSpecifier</string>
+            <key>Title</key>
+            <string>FontAwesome</string>
+            <key>File</key>
+            <string>FontAwesome</string>
+        </dict>
+        <dict>
+            <key>Type</key>
+            <string>PSChildPaneSpecifier</string>
+            <key>Title</key>
+            <string>Ionicons</string>
+            <key>File</key>
+            <string>Ionicons</string>
+        </dict>
 		<dict>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
