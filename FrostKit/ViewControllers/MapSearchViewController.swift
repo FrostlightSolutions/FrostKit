@@ -100,7 +100,24 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
             cell?.detailTextLabel?.text  = address.simpleAddress
         } else if let item = objectAtIndexPath(indexPath) as? MKMapItem {
             cell?.textLabel?.text = item.name
-            cell?.detailTextLabel?.text  = ([item.placemark.thoroughfare, item.placemark.locality, item.placemark.postalCode, item.placemark.country] as NSArray).componentsJoinedByString(", ")
+            
+            var addressComponents = Array<String>()
+            if let thoroughfare = item.placemark.thoroughfare {
+                addressComponents.append(thoroughfare)
+            }
+            if let locality = item.placemark.locality {
+                addressComponents.append(locality)
+            }
+            if let administrativeArea = item.placemark.administrativeArea {
+                addressComponents.append(administrativeArea)
+            }
+            if let postalCode = item.placemark.postalCode {
+                addressComponents.append(postalCode)
+            }
+            if let country = item.placemark.country {
+                addressComponents.append(country)
+            }
+            cell?.detailTextLabel?.text  = (addressComponents as NSArray).componentsJoinedByString(", ")
         }
         
         return cell!
