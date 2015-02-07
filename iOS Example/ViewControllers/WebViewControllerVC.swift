@@ -3,7 +3,7 @@
 //  iOS Example
 //
 //  Created by James Barrow on 02/10/2014.
-//  Copyright (c) 2014 Frostlight Solutions. All rights reserved.
+//  Copyright (c) 2014-2015 James Barrow - Frostlight Solutions. All rights reserved.
 //
 
 import UIKit

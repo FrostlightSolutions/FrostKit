@@ -229,7 +229,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0600;
-				ORGANIZATIONNAME = "Frostlight Solutions";
+				ORGANIZATIONNAME = "James Barrow - Frostlight Solutions";
 				TargetAttributes = {
 					18772BE819DD61E200F67CE7 = {
 						CreatedOnToolsVersion = 6.0.1;
