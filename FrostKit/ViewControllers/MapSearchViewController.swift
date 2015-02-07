@@ -7,12 +7,26 @@
 //
 
 import UIKit
+import MapKit
 
 public class MapSearchViewController: UITableViewController, UISearchControllerDelegate, UISearchBarDelegate {
 
     public let identifier = "FrostKitMapSearchCell"
     public weak var mapController: MapController?
-    private var searchResults: [Address]?
+    public weak var searchController: UISearchController?
+    public var searchBar: UISearchBar? {
+        return searchController?.searchBar
+    }
+    private var refreshControlHolder = UIRefreshControl()
+    private var plottedSearchResults: [Address]?
+    private var locationSeatchResponse: MKLocalSearchResponse?
+    private var locationSearchResults: [MKMapItem]? {
+        if let locationSeatchResponse = self.locationSeatchResponse {
+            return locationSeatchResponse.mapItems as? [MKMapItem]
+        } else {
+            return nil
+        }
+    }
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -31,10 +45,21 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
     
     // MARK: - Custom Getter / Setter Methods
     
-    public func objectAtIndexPath(indexPath: NSIndexPath) -> Address? {
-        if let searchResults = self.searchResults {
-            if indexPath.row < searchResults.count {
-                return searchResults[indexPath.row]
+    public func objectAtIndexPath(indexPath: NSIndexPath) -> AnyObject? {
+        if let searchBar = self.searchBar {
+            var array: NSArray?
+            switch searchBar.selectedScopeButtonIndex {
+            case 0:
+                array = self.plottedSearchResults
+            case 1:
+                array = self.locationSearchResults
+            default:
+                break
+            }
+            if let searchResults = array {
+                if indexPath.row < searchResults.count {
+                    return searchResults[indexPath.row]
+                }
             }
         }
         return nil
@@ -47,8 +72,19 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
     }
 
     override public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let searchResults = self.searchResults {
-            return searchResults.count
+        if let searchBar = self.searchBar {
+            switch searchBar.selectedScopeButtonIndex {
+            case 0:
+                if let plottedSearchResults = self.plottedSearchResults {
+                    return plottedSearchResults.count
+                }
+            case 1:
+                if let locationSearchResults = self.locationSearchResults {
+                    return locationSearchResults.count
+                }
+            default:
+                break
+            }
         }
         return 0
     }
@@ -59,28 +95,90 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
             cell = UITableViewCell(style: .Subtitle, reuseIdentifier: identifier)
         }
         
-        if let address = objectAtIndexPath(indexPath) {
+        if let address = objectAtIndexPath(indexPath) as? Address {
             cell?.textLabel?.text = address.name
             cell?.detailTextLabel?.text  = address.simpleAddress
+        } else if let item = objectAtIndexPath(indexPath) as? MKMapItem {
+            cell?.textLabel?.text = item.name
+            cell?.detailTextLabel?.text  = ([item.placemark.thoroughfare, item.placemark.locality, item.placemark.postalCode, item.placemark.country] as NSArray).componentsJoinedByString(", ")
         }
+        
         return cell!
     }
     
     public override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let address = objectAtIndexPath(indexPath) {
-            dismissViewControllerAnimated(true, completion: nil)
-            mapController?.zoomMapToAddress(address)
+        if let searchBar = self.searchBar {
+            switch searchBar.selectedScopeButtonIndex {
+            case 0:
+                if let address = objectAtIndexPath(indexPath) as? Address {
+                    mapController?.zoomToAddress(address)
+                }
+            case 1:
+                if let item = objectAtIndexPath(indexPath) as? MKMapItem {
+                    mapController?.zoomToAnnotation(item.placemark)
+                }
+            default:
+                break
+            }
         }
+        dismissViewControllerAnimated(true, completion: nil)
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     // MARK: - UISearchBarDelegate Methods
     
     public func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if let mapController = self.mapController {
-            searchResults = mapController.searchAddresses(searchText)
-            tableView.reloadData()
+        switch searchBar.selectedScopeButtonIndex {
+        case 0:
+            // Search address points plotted on the map
+            if let mapController = self.mapController {
+                plottedSearchResults = mapController.searchAddresses(searchText)
+                tableView.reloadData()
+            }
+        case 1:
+            // Search location on the map (not plotted points)
+            break
+        default:
+            break
         }
+    }
+    
+    public func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        switch searchBar.selectedScopeButtonIndex {
+        case 0:
+            // Search address points plotted on the map
+            break
+        case 1:
+            // Search location on the map (not plotted points)
+            refreshControl?.beginRefreshing()
+            let searchRequest = MKLocalSearchRequest()
+            searchRequest.naturalLanguageQuery = searchBar.text
+            if let mapController = self.mapController {
+                searchRequest.region = mapController.mapView.region
+            }
+            let localSearch = MKLocalSearch(request: searchRequest)
+            localSearch.startWithCompletionHandler({ (searchResponse, error) -> Void in
+                if error != nil {
+                    NSLog("Error performing local search: \(error.localizedDescription)")
+                } else {
+                    self.locationSeatchResponse = searchResponse
+                }
+                self.refreshControl?.endRefreshing()
+                self.tableView.reloadData()
+            })
+        default:
+            break
+        }
+    }
+    
+    public func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        if selectedScope == 0 {
+            refreshControl?.endRefreshing()
+            refreshControl = nil
+        } else {
+            refreshControl = refreshControlHolder
+        }
+        tableView.reloadData()
     }
     
 }

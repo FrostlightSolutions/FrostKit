@@ -30,8 +30,10 @@ public class MapViewController: UIViewController, UIActionSheetDelegate {
             searchTableViewController.mapController = mapController
             searchController = UISearchController(searchResultsController: searchTableViewController)
             searchController.searchBar.sizeToFit()
+            searchController.searchBar.scopeButtonTitles = [FKLocalizedString("MARKERS", comment: "Markers"), FKLocalizedString("LOCATIONS", comment: "Locations")]
             searchController.searchBar.delegate = searchTableViewController
             searchController.delegate = searchTableViewController
+            searchTableViewController.searchController = searchController
         }
     }
     
