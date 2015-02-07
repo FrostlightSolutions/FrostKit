@@ -40,6 +40,19 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         }
     }
     @IBInspectable var autoAssingDelegate: Bool = true
+    public var trackingUser: Bool = false {
+        didSet {
+            if trackingUser == true {
+                mapView.userTrackingMode = .Follow
+            } else {
+                mapView.userTrackingMode = .None
+            }
+            
+            if let mapViewController = viewController as? MapViewController {
+                mapViewController.updateNavigationButtons()
+            }
+        }
+    }
     public var locationManager: CLLocationManager?
     public var addresses = Array<Address>()
     public var annotations = Dictionary<Address, Annotation>()
@@ -178,6 +191,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     }
     
     public func zoomToCurrentLocation() {
+        trackingUser = true
         zoomToCoordinate(mapView.userLocation.coordinate)
     }
     
@@ -320,6 +334,15 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         if hasPlottedInitUsersLocation == false {
             hasPlottedInitUsersLocation = true
             zoomToShowAll()
+        }
+    }
+    
+    public func mapView(mapView: MKMapView!, didChangeUserTrackingMode mode: MKUserTrackingMode, animated: Bool) {
+        switch mode {
+        case .None:
+            trackingUser = false
+        case .Follow, .FollowWithHeading:
+            trackingUser = true
         }
     }
     

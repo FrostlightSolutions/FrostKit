@@ -18,17 +18,7 @@ public class MapViewController: UIViewController, UIActionSheetDelegate {
         super.viewDidLoad()
         
         navigationItem.title = FKLocalizedString("MAP", comment: "Map")
-        
-        var barButtonItems = Array<UIBarButtonItem>()
-        if locationButton == true {
-            let locationButton = UIBarButtonItem(title: ionicon_ios_navigate_outline, font: UIFont.ionicons(size: 24), verticalOffset: -1, target: self, action: "locationButtonPressed:")
-            barButtonItems.append(locationButton)
-        }
-        if searchButton == true {
-            let searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: "searchButtonPressed:")
-            barButtonItems.append(searchButton)
-        }
-        navigationItem.setRightBarButtonItems(barButtonItems, animated: false)
+        updateNavigationButtons(animated: false)
     }
     
     override public func viewDidAppear(animated: Bool) {
@@ -44,6 +34,24 @@ public class MapViewController: UIViewController, UIActionSheetDelegate {
     }
     
     // MARK: - Update Methods
+    
+    internal func updateNavigationButtons(animated: Bool = true) {
+        var barButtonItems = Array<UIBarButtonItem>()
+        if locationButton == true {
+            var title = ionicon_ios_navigate_outline
+            if mapController.trackingUser == true {
+                title = ionicon_ios_navigate
+            }
+            
+            let locationButton = UIBarButtonItem(title: title, font: UIFont.ionicons(size: 24), verticalOffset: -1, target: self, action: "locationButtonPressed:")
+            barButtonItems.append(locationButton)
+        }
+        if searchButton == true {
+            let searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: "searchButtonPressed:")
+            barButtonItems.append(searchButton)
+        }
+        navigationItem.setRightBarButtonItems(barButtonItems, animated: animated)
+    }
     
     public func updateAddresses() {
         // Used to be overriden by a subclass depending on the data service model
@@ -61,6 +69,7 @@ public class MapViewController: UIViewController, UIActionSheetDelegate {
             let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
             let currentLocationAlertAction = UIAlertAction(title: FKLocalizedString("CURRENT_LOCATION", comment: "Current Location"), style: .Default, handler: { (action) -> Void in
                 self.mapController.zoomToCurrentLocation()
+                self.updateNavigationButtons()
             })
             alertController.addAction(currentLocationAlertAction)
             let allLocationsAlertAction = UIAlertAction(title: FKLocalizedString("ALL_LOCATIONS", comment: "All Locations"), style: .Default, handler: { (action) -> Void in
@@ -89,6 +98,7 @@ public class MapViewController: UIViewController, UIActionSheetDelegate {
         switch buttonIndex {
         case 0:
             mapController.zoomToCurrentLocation()
+            updateNavigationButtons()
         case 1:
             mapController.zoomToShowAll()
         case 2:
