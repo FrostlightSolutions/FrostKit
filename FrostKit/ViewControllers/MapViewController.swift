@@ -60,9 +60,13 @@ public class MapViewController: UIViewController, UIActionSheetDelegate {
             let locationButton = UIBarButtonItem(title: title, font: UIFont.ionicons(size: 24), verticalOffset: -1, target: self, action: "locationButtonPressed:")
             barButtonItems.append(locationButton)
         }
-        if searchButton == true {
-            let searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: "searchButtonPressed:")
-            barButtonItems.append(searchButton)
+        
+        // TODO: Reactivate for iOS 7 when UISearchDisplayController is implimented.
+        if UIDevice.SystemVersion.majorVersion >= 8 {
+            if searchButton == true {
+                let searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: "searchButtonPressed:")
+                barButtonItems.append(searchButton)
+            }
         }
         navigationItem.setRightBarButtonItems(barButtonItems, animated: animated)
     }
