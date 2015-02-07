@@ -185,6 +185,7 @@
 		1836A2201A84F3BE00E57F86 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
 		183F85F61A7B0D9200885F56 /* ImageCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageCacheTests.swift; path = FrostKitTests/Storage/ImageCacheTests.swift; sourceTree = SOURCE_ROOT; };
 		183F85F81A7B0E1C00885F56 /* SmallLogoBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SmallLogoBlue.png; sourceTree = "<group>"; };
+		1857BEA21A859FC400903910 /* AddressExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressExtensions.swift; sourceTree = "<group>"; };
 		185D3D5B1A6E936F00BE700D /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		186B07F21A6D5C4700CAF920 /* UserStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		186CFCE91A29FA40002739A5 /* MapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
@@ -309,6 +310,14 @@
 			path = FontFiles;
 			sourceTree = "<group>";
 		};
+		1857BE9D1A859FAA00903910 /* ExternalExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				1857BEA21A859FC400903910 /* AddressExtensions.swift */,
+			);
+			path = ExternalExtensions;
+			sourceTree = "<group>";
+		};
 		186B07F11A6D5C2D00CAF920 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
@@ -357,6 +366,7 @@
 				18839B4119DA27A800760157 /* ViewControllers */,
 				18839B4419DA27AE00760157 /* Helpers */,
 				18C0066619DB761800811755 /* Extensions */,
+				1857BE9D1A859FAA00903910 /* ExternalExtensions */,
 				18DE01EB19DCBB18008A1506 /* Fonts */,
 				18318DC11A83C23E00412222 /* DeveloperTools */,
 				18839B1A19D9FA8C00760157 /* Supporting Files */,
