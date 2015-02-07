@@ -377,6 +377,15 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         }
     }
     
+    // MARK: - Search Methods
+    
+    public func searchAddresses(searchString: String) -> [Address] {
+        if let predicate = NSPredicate(format: "name beginswith[cd] %@ || simpleAddress beginswith[cd] %@", searchString, searchString) {
+            return (addresses as NSArray).filteredArrayUsingPredicate(predicate) as [Address]
+        }
+        return Array<Address>()
+    }
+    
 }
 
 // MARK: - Address Object

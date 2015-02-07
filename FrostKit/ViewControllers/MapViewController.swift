@@ -13,12 +13,26 @@ public class MapViewController: UIViewController, UIActionSheetDelegate {
     @IBOutlet public weak var mapController: MapController!
     @IBInspectable public var locationButton: Bool = true
     @IBInspectable public var searchButton: Bool = true
+    public var searchController: UISearchController!
     
     override public func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = FKLocalizedString("MAP", comment: "Map")
         updateNavigationButtons(animated: false)
+        
+        if NSClassFromString("UISearchController") == nil {
+            // iOS 7
+            // TODO: Setup UISearchDisplayController for iOS 7.
+        } else {
+            // iOS 8+
+            let searchTableViewController = MapSearchViewController(style: .Plain)
+            searchTableViewController.mapController = mapController
+            searchController = UISearchController(searchResultsController: searchTableViewController)
+            searchController.searchBar.sizeToFit()
+            searchController.searchBar.delegate = searchTableViewController
+            searchController.delegate = searchTableViewController
+        }
     }
     
     override public func viewDidAppear(animated: Bool) {
@@ -89,7 +103,9 @@ public class MapViewController: UIViewController, UIActionSheetDelegate {
     }
     
     @IBAction public func searchButtonPressed(sender: UIBarButtonItem) {
-        // TODO: Impliment search
+        if let searchController = self.searchController {
+            presentViewController(searchController, animated: true, completion: nil)
+        }
     }
     
     // MARK: - UIActionSheetDelegate Methods

@@ -99,6 +99,8 @@
 		18839B4719DA27AE00760157 /* SocialHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B4519DA27AE00760157 /* SocialHelper.swift */; };
 		1899C4FB1A6D152C001638CF /* ServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1899C4FA1A6D152C001638CF /* ServiceClient.swift */; };
 		1899C4FD1A6D154A001638CF /* ServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1899C4FA1A6D152C001638CF /* ServiceClient.swift */; };
+		189B4C651A8663730055CEA3 /* MapSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189B4C641A8663730055CEA3 /* MapSearchViewController.swift */; };
+		189B4C661A8663730055CEA3 /* MapSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189B4C641A8663730055CEA3 /* MapSearchViewController.swift */; };
 		18A786CD1A77B39A006EADB9 /* UICollectionViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A786CC1A77B39A006EADB9 /* UICollectionViewControllerExtensions.swift */; };
 		18BB7C7519DC383900F21A64 /* NSCalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BB7C7419DC383900F21A64 /* NSCalendarExtensions.swift */; };
 		18BFF7571A7B01F0002612F9 /* Notifications.json in Resources */ = {isa = PBXBuildFile; fileRef = 18BFF7561A7B01F0002612F9 /* Notifications.json */; };
@@ -198,6 +200,7 @@
 		18839B2619D9FA8C00760157 /* FrostKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostKitTests.swift; sourceTree = "<group>"; };
 		18839B4519DA27AE00760157 /* SocialHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialHelper.swift; sourceTree = "<group>"; };
 		1899C4FA1A6D152C001638CF /* ServiceClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceClient.swift; sourceTree = "<group>"; };
+		189B4C641A8663730055CEA3 /* MapSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSearchViewController.swift; sourceTree = "<group>"; };
 		18A786CC1A77B39A006EADB9 /* UICollectionViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewControllerExtensions.swift; sourceTree = "<group>"; };
 		18BB7C7419DC383900F21A64 /* NSCalendarExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSCalendarExtensions.swift; sourceTree = "<group>"; };
 		18BFF7561A7B01F0002612F9 /* Notifications.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Notifications.json; sourceTree = "<group>"; };
@@ -409,6 +412,7 @@
 			children = (
 				1811D7B31A0AD1CA00E8B873 /* WebViewController */,
 				182BBBD31A853FB700D8F6F7 /* MapViewController.swift */,
+				189B4C641A8663730055CEA3 /* MapSearchViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -745,6 +749,7 @@
 				18E3F23A19DE15600032ABB7 /* UIBarButtonItemExtensions.swift in Sources */,
 				18EA124319DC8A8C00FD858D /* KeychainHelper.swift in Sources */,
 				18BB7C7519DC383900F21A64 /* NSCalendarExtensions.swift in Sources */,
+				189B4C651A8663730055CEA3 /* MapSearchViewController.swift in Sources */,
 				1899C4FB1A6D152C001638CF /* ServiceClient.swift in Sources */,
 				18C0066E19DB76C900811755 /* UIImageExtensions.swift in Sources */,
 				18CBAA051A6D315F009CBCA0 /* OAuthToken.swift in Sources */,
@@ -756,6 +761,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				189B4C661A8663730055CEA3 /* MapSearchViewController.swift in Sources */,
 				186B08081A6D5F3400CAF920 /* ImageCache.swift in Sources */,
 				186B08021A6D5F2900CAF920 /* SocialHelper.swift in Sources */,
 				1836A2091A843EF100E57F86 /* UIDeviceExtensions.swift in Sources */,
