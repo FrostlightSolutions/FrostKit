@@ -98,19 +98,19 @@ class ServiceClientTests: XCTestCase {
     }
     
     func login(complete: (NSError?) -> ()) {
-        ServiceClient.loginUser(username: username, password: password) { (error) -> () in
+        FUSServiceClient.loginUser(username: username, password: password) { (error) -> () in
             complete(error)
         }
     }
     
     func refresh(complete: (NSError?) -> ()) {
-        ServiceClient.refreshOAuthToken() { (error) -> () in
+        FUSServiceClient.refreshOAuthToken() { (error) -> () in
             complete(error)
         }
     }
     
     func getNotificationsRequest(complete: (NSError?) -> ()) {
-        ServiceClient.request(Router.Custom("/api/fus/push/notifications/", 1), completed: { (json, error) -> () in
+        FUSServiceClient.request(Router.Custom("/api/fus/push/notifications/", 1), completed: { (json, error) -> () in
             complete(error)
         })
     }

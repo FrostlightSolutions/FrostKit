@@ -163,7 +163,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
                 let urlString = sectionDictionary["url"] as String
                 let page = self.lastLoadedPage
                 let urlRouter = Router.Custom(urlString, page)
-                let request = ServiceClient.request(urlRouter, completed: { (json, error) -> () in
+                let request = FUSServiceClient.request(urlRouter, completed: { (json, error) -> () in
                     self.requestStore.removeRequestFor(router: urlRouter)
                     if let anError = error {
                         NSLog("Data Updater Failure: %@", anError.localizedDescription)
