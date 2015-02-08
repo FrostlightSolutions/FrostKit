@@ -8,19 +8,34 @@
 
 import UIKit
 
-
+/// The data store delegate provides callback for when a item or page will be accessed. This can be used to work out if a item or page needs to be updated with the API or service.
 @objc public protocol DataStoreDelegate {
+    /**
+    This function is called when an item will be accessed at an index.
+    
+    :param: dataStore The data store the item resides in.
+    :param: index     The index of the item being accessed.
+    :param: object    The item being accessed.
+    */
     optional func dataStore(dataStore: DataStore, willAccessIndex index: Int, returnObject object: AnyObject)
+    
+    /**
+    This function is called when a page will be accessed.
+    
+    :param: dataStore The data store the item resides in.
+    :param: page      The page being accessed.
+    */
     optional func dataStore(dataStore: DataStore, willAccessPage page: Int)
 }
 
-// TODO: Update documentation
 ///
-/// Data store allows storing of data in a paged form. It allows pre populating an array (with NSNull objects) in the store with the total number of object until they are called upon to be updated with the real data.
+/// Data store allows storing of data in paged or non-paged form. Paged data is added and removed dynamically as it is set or cleared from the store. For example, a data store might have 1000 entires, but if only the first 3 pages have been set then it will only be 3 * objects per page in size.
 ///
-/// This class allows for a correct representation of how large a table or collection view is when used like an array in a data source for these UI items. It also allows the ability to only load items when they are needed and with the delegate method cancel or lower priority fast scroll past pages.
+/// However it also provides a correct representation of how large a table or collection view should be when used like an array in a data source for these UI items. It also allows the ability to only load items when they are needed and with the delegate method, to cancel or lower priority during fast scrolling past pages.
 ///
 /// For more information on how FUS passes paginated data to clients, check out the Wiki page at: https://github.com/FrostlightSolutions/fus-server/wiki/Pagination-API
+///
+/// A data store object also allows for storing of non-paged data. This would be either an non-paged array or a single dictionary object of data.
 ///
 public class DataStore: NSObject, NSCoding, NSCopying {
     
@@ -31,15 +46,17 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     public var objectsPerPage: Int {
         return _objectsPerPage
     }
-    /// THe number of pages in the store (not loaded, in total).
+    /// The number of pages in the store (not loaded, in total).
     public var numberOfPages: Int {
         return Int(ceil(Double(count) / Double(_objectsPerPage)))
     }
     /// The delegate of the store.
     public var delegate: DataStoreDelegate?
+    /// The last accessed page.
     private var lastAccessedPage = NSNotFound
+    /// The objects in the store.
     private var objects = NSArray()
-    /// Thefirst object in the store.
+    /// The first object in the store.
     public var firstObject: AnyObject? {
         return objects.firstObject
     }
@@ -123,7 +140,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     }
     
     /**
-    Initializes a store object for a non-paged single NSDictionary object returned from FUS. This creates a normal paged store but only sets it wit 1 object. To access this object you should use the `dictionary` variable on the store object.
+    Initializes a store object for a non-paged single NSDictionary object returned from FUS. This creates a normal paged store but only sets it with 1 object. To access this object you should use the `dictionary` variable on the store object.
     
     :param: dictionary The dictionary to store.
     */
