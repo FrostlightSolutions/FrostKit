@@ -18,7 +18,6 @@
 		18772C1919DD637600F67CE7 /* FrostKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 18772C1519DD636900F67CE7 /* FrostKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18772C2519DD67A900F67CE7 /* MainMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772C2319DD67A900F67CE7 /* MainMenuVC.swift */; };
 		18772C2619DD67A900F67CE7 /* SocialHelperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772C2419DD67A900F67CE7 /* SocialHelperVC.swift */; };
-		18C3D38E1A8428990097878D /* DeveloperTools.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18C3D38C1A8428990097878D /* DeveloperTools.plist */; };
 		18C3D38F1A8428990097878D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18C3D38D1A8428990097878D /* Settings.bundle */; };
 		18E3F21F19DDDBD00032ABB7 /* WebViewControllerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F21E19DDDBD00032ABB7 /* WebViewControllerVC.swift */; };
 /* End PBXBuildFile section */
@@ -109,7 +108,6 @@
 		18772C0F19DD636800F67CE7 /* FrostKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = FrostKit.xcodeproj; sourceTree = "<group>"; };
 		18772C2319DD67A900F67CE7 /* MainMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuVC.swift; sourceTree = "<group>"; };
 		18772C2419DD67A900F67CE7 /* SocialHelperVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialHelperVC.swift; sourceTree = "<group>"; };
-		18C3D38C1A8428990097878D /* DeveloperTools.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DeveloperTools.plist; sourceTree = "<group>"; };
 		18C3D38D1A8428990097878D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		18E3F21E19DDDBD00032ABB7 /* WebViewControllerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewControllerVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -159,7 +157,6 @@
 		18772BEB19DD61E200F67CE7 /* iOS Example */ = {
 			isa = PBXGroup;
 			children = (
-				18C3D38C1A8428990097878D /* DeveloperTools.plist */,
 				18C3D38D1A8428990097878D /* Settings.bundle */,
 				18772BEE19DD61E200F67CE7 /* AppDelegate.swift */,
 				18772BF219DD61E200F67CE7 /* Main.storyboard */,
@@ -315,7 +312,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				18772BF419DD61E200F67CE7 /* Main.storyboard in Resources */,
-				18C3D38E1A8428990097878D /* DeveloperTools.plist in Resources */,
 				18C3D38F1A8428990097878D /* Settings.bundle in Resources */,
 				18772BF919DD61E200F67CE7 /* LaunchScreen.xib in Resources */,
 				18772BF619DD61E200F67CE7 /* Images.xcassets in Resources */,

@@ -177,7 +177,6 @@
 		18318DC31A83C23E00412222 /* DeveloperToolsBaseURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperToolsBaseURL.swift; sourceTree = "<group>"; };
 		18318DC41A83C23E00412222 /* DeveloperToolsRoot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperToolsRoot.swift; sourceTree = "<group>"; };
 		18318DC51A83C23E00412222 /* DeveloperToolsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DeveloperToolsStoryboard.storyboard; sourceTree = "<group>"; };
-		18318DCA1A83C35000412222 /* DeveloperToolsTemplate.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DeveloperToolsTemplate.plist; sourceTree = "<group>"; };
 		18318DCB1A83CF5800412222 /* SettingsTemplate.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SettingsTemplate.bundle; sourceTree = "<group>"; };
 		1836A2171A84E7D300E57F86 /* ParseFontLessConstants.py */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text.script.python; path = ParseFontLessConstants.py; sourceTree = "<group>"; tabWidth = 2; };
 		1836A2191A84E9A000E57F86 /* FontAwesome.less */ = {isa = PBXFileReference; lastKnownFileType = text; path = FontAwesome.less; sourceTree = "<group>"; };
@@ -286,7 +285,6 @@
 			isa = PBXGroup;
 			children = (
 				18318DCB1A83CF5800412222 /* SettingsTemplate.bundle */,
-				18318DCA1A83C35000412222 /* DeveloperToolsTemplate.plist */,
 				18318DC21A83C23E00412222 /* DeveloperTools.swift */,
 				18318DC51A83C23E00412222 /* DeveloperToolsStoryboard.storyboard */,
 				18318DC41A83C23E00412222 /* DeveloperToolsRoot.swift */,

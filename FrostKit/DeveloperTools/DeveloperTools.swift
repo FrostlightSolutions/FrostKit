@@ -8,8 +8,32 @@
 
 import UIKit
 
-public class DeveloperTools: NSObject {
+public class DeveloperToolsConstants {
+    
+    public class func baseURLs() -> [String] {
+        return [""]
+    }
+    
+    public class func defaultDebugIndex() -> Int {
+        return 0
+    }
+    
+    public class func defaultProductionIndex() -> Int {
+        return 0
+    }
+    
+    public class func OAuthClientToken() -> String {
+        return ""
+    }
+    
+    public class func OAuthClientSecret() -> String {
+        return ""
+    }
+    
+}
 
+public class DeveloperTools: NSObject {
+    
     // MARK: - Singleton
     
     public class var shared: DeveloperTools {
@@ -19,14 +43,6 @@ public class DeveloperTools: NSObject {
         return Singleton.instance
     }
     
-    private let developerToolsPlistPath = NSBundle.mainBundle().pathForResource("DeveloperTools", ofType: "plist")
-    private var developerToolsDict: NSDictionary? {
-        if let developerToolsPlistPath = self.developerToolsPlistPath {
-            return NSDictionary(contentsOfFile: developerToolsPlistPath)
-        } else {
-            return nil
-        }
-    }
     private let storyboard = UIStoryboard(name: "DeveloperToolsStoryboard", bundle: NSBundle(forClass: DeveloperTools.self))
     private lazy var viewControllers = Array<UIViewController>()
     private var currentViewControllerIndex = NSNotFound
@@ -48,23 +64,13 @@ public class DeveloperTools: NSObject {
     override init() {
         super.init()
         
-        if let developerToolsDict = self.developerToolsDict {
-            if let loadedBaseURLs = developerToolsDict["URLs"] as? Array<String> {
-                baseURLs = loadedBaseURLs + baseURLs
-            }
-            
-            #if DEBUG
-                if let defaultURLIndex = developerToolsDict["DefaultDebugIndex"] as? Int {
-                urlIndex = defaultURLIndex
-                }
-                #else
-                if let defaultURLIndex = loadedBaseURLsDict["DefaultProductionIndex"] as? Int {
-                urlIndex = defaultURLIndex
-                }
-            #endif
-        } else {
-            NSLog("Developer Tools WARNING! No DeveloperTools.plist file found, only custom URLs will be available. Check that there is a DeveloperTools.plist file included in the project.")
-        }
+        baseURLs = DeveloperToolsConstants.baseURLs() + baseURLs
+        
+        #if DEBUG
+            urlIndex = DeveloperToolsConstants.defaultDebugIndex()
+        #else
+            urlIndex = DeveloperToolsConstants.defaultProductionIndex()
+        #endif
         
         let userDefaults = NSUserDefaults.standardUserDefaults()
         urlIndex = userDefaults.integerForKey("DeveloperToolsURLIndex")
@@ -265,24 +271,4 @@ public class DeveloperTools: NSObject {
         userDefaults.synchronize()
     }
     
-    // MARK: - OAuth Methods
-    
-    public class func oAuthClientToken() -> String {
-        if let clientToken = DeveloperTools.shared.developerToolsDict?["OAuthClientToken"] as? String {
-            return clientToken
-        } else {
-            NSLog("Developer Tools WARNING! No OAuth client token found. Check that there is a DeveloperTools.plist file included in the project and it has an OAuthClientToken")
-            return ""
-        }
-    }
-    
-    public class func oAuthClientSecret() -> String {
-        if let clientSecret = DeveloperTools.shared.developerToolsDict?["OAuthClientSecret"] as? String {
-            return clientSecret
-        } else {
-            NSLog("Developer Tools WARNING! No OAuth client secret found. Check that there is a DeveloperTools.plist file included in the project and it has an OAuthClientSecret")
-            return ""
-        }
-    }
-
 }
