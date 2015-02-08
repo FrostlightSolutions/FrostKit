@@ -9,17 +9,28 @@
 import UIKit
 import MapKit
 
+///
+/// The map search view controller is used with the search control in a map view controller. It allows searching of points plotted on the map view as well a locations.
+///
 public class MapSearchViewController: UITableViewController, UISearchControllerDelegate, UISearchBarDelegate {
-
+    
+    /// The reuse identifier for the cell for the table view. This should be overriden when subclassing.
     public let identifier = "FrostKitMapSearchCell"
+    /// The map controller related to the map search view controller.
     public weak var mapController: MapController?
+    /// The search controller releated to the map search view controller.
     public weak var searchController: UISearchController?
+    /// A helper method to get the search controller's search bar.
     public var searchBar: UISearchBar? {
         return searchController?.searchBar
     }
+    /// The refresh control for the table view controller when searching locations.
     private var refreshControlHolder = UIRefreshControl()
+    /// An array of addresses returned after searching, or `nil` if no results are found.
     private var plottedSearchResults: [Address]?
+    /// The local search response from a locations search.
     private var locationSeatchResponse: MKLocalSearchResponse?
+    /// A helper to access the results array from a local search response.
     private var locationSearchResults: [MKMapItem]? {
         if let locationSeatchResponse = self.locationSeatchResponse {
             return locationSeatchResponse.mapItems as? [MKMapItem]
@@ -45,6 +56,13 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
     
     // MARK: - Custom Getter / Setter Methods
     
+    /**
+    The object at an index path of the selected array (plotted if segment 0 or location if segment 1).
+    
+    :param: indexPath The index path of the object.
+    
+    :returns: The object at the index path.
+    */
     public func objectAtIndexPath(indexPath: NSIndexPath) -> AnyObject? {
         if let searchBar = self.searchBar {
             var array: NSArray?
@@ -64,9 +82,9 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
         }
         return nil
     }
-
+    
     // MARK: - Table view data source
-
+    
     override public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -97,7 +115,7 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
         
         if let address = objectAtIndexPath(indexPath) as? Address {
             cell?.textLabel?.text = address.name
-            cell?.detailTextLabel?.text  = address.simpleAddress
+            cell?.detailTextLabel?.text  = address.addressString
         } else if let item = objectAtIndexPath(indexPath) as? MKMapItem {
             cell?.textLabel?.text = item.name
             

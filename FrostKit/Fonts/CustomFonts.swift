@@ -26,10 +26,10 @@ public class CustomFonts: NSObject {
     }
     
     /**
-        Load a custom font from it's name and extention from within the bundle without having to declare it in the `Info.plist`.
+    Load a custom font from it's name and extention from within the bundle without having to declare it in the `Info.plist`.
     
-        :param: name    The name of the font file name.
-        :param: ext     The extention of the file.
+    :param: name    The name of the font file name.
+    :param: ext     The extention of the file.
     */
     private class func loadFont(name: String, withExtension ext: String) {
         

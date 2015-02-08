@@ -14,9 +14,9 @@ import Foundation
 extension NSData {
     
     /**
-        Returns a string of the hex data object.
-        
-        :returns: Hex string of the data.
+    Returns a string of the hex data object.
+    
+    :returns: Hex string of the data.
     */
     public func hexString() -> NSString {
         var string = NSMutableString(capacity: self.length)

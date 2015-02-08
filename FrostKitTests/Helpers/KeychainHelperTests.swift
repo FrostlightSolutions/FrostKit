@@ -26,8 +26,8 @@ class KeychainHelperTests: XCTestCase {
         let username = "myName"
         let password = "qwerty1234567890!_<>,.!@#$%^&*()_+-=/?"
         
-        let setDetailsComplete = KeychainHelper.setDetails(password: password, username: username)
-        let updateDetailsComplete = KeychainHelper.setDetails(password: password, username: username)
+        let setDetailsComplete = KeychainHelper.setDetails(details: password, username: username)
+        let updateDetailsComplete = KeychainHelper.setDetails(details: password, username: username)
         let getDetailsComplete = (password == KeychainHelper.details(username: username))
         let deleteDetailsComplete = KeychainHelper.deleteKeychain()
         

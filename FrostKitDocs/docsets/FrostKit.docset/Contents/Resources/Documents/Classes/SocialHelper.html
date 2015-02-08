@@ -24,7 +24,7 @@
     <a title="SocialHelper Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p class="header-text"><a href="../index.html">FrostKit Docs</a> (55% documented)</p>
+        <p class="header-text"><a href="../index.html">FrostKit Docs</a> (68% documented)</p>
         <p id="header-links"><a href="https://github.com/FrostlightSolutions/FrostKit"><img id="header-icon" src="../img/gh.png" height="16px" width="16px" />View on GitHub</a></p>
       </div>
     </header>
@@ -44,6 +44,12 @@
           <a href="../Classes.html">Classes</a>
             <ul class="nav-chapters">
               <li class="nav-chapter">
+                <a href="../Classes/Address.html">Address</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/Annotation.html">Annotation</a>
+              </li>
+              <li class="nav-chapter">
                 <a href="../Classes/BaseWebViewController.html">BaseWebViewController</a>
               </li>
               <li class="nav-chapter">
@@ -51,6 +57,21 @@
               </li>
               <li class="nav-chapter">
                 <a href="../Classes/CustomFonts.html">CustomFonts</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/DataStore.html">DataStore</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/DataUpdater.html">DataUpdater</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/DeveloperTools.html">DeveloperTools</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/DeveloperToolsBaseURL.html">DeveloperToolsBaseURL</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/DeveloperToolsRoot.html">DeveloperToolsRoot</a>
               </li>
               <li class="nav-chapter">
                 <a href="../Classes/FrostKit.html">FrostKit</a>
@@ -65,10 +86,19 @@
                 <a href="../Classes/LocalStorage.html">LocalStorage</a>
               </li>
               <li class="nav-chapter">
+                <a href="../Classes/MapController.html">MapController</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/MapSearchViewController.html">MapSearchViewController</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/MapViewController.html">MapViewController</a>
+              </li>
+              <li class="nav-chapter">
                 <a href="../Classes/OAuthToken.html">OAuthToken</a>
               </li>
               <li class="nav-chapter">
-                <a href="../Classes/PagedStore.html">PagedStore</a>
+                <a href="../Classes/RequestStore.html">RequestStore</a>
               </li>
               <li class="nav-chapter">
                 <a href="../Classes/ServiceClient.html">ServiceClient</a>
@@ -88,6 +118,17 @@
             </ul>
           </li>
           <li class="part-name tasks">
+          <a href="../Global Variables.html">Global Variables</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Global Variables.html#/s:v8FrostKit9fa_adjustSS">fa_adjust</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Global Variables.html#/s:v8FrostKit13ionicon_alertSS">ionicon_alert</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
           <a href="../Enums.html">Enums</a>
             <ul class="nav-chapters">
               <li class="nav-chapter">
@@ -95,6 +136,9 @@
               </li>
               <li class="nav-chapter">
                 <a href="../Enums/Location.html">Location</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Enums/Router.html">Router</a>
               </li>
               <li class="nav-chapter">
                 <a href="../Enums/WebViewType.html">WebViewType</a>
@@ -126,7 +170,13 @@
                 <a href="../Extensions/UIBarButtonItem.html">UIBarButtonItem</a>
               </li>
               <li class="nav-chapter">
+                <a href="../Extensions/UICollectionViewController.html">UICollectionViewController</a>
+              </li>
+              <li class="nav-chapter">
                 <a href="../Extensions/UIColor.html">UIColor</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/UIDevice.html">UIDevice</a>
               </li>
               <li class="nav-chapter">
                 <a href="../Extensions/UIFont.html">UIFont</a>
@@ -157,7 +207,7 @@
           <a href="../Protocols.html">Protocols</a>
             <ul class="nav-chapters">
               <li class="nav-chapter">
-                <a href="../Protocols/PagedArrayDelegate.html">PagedArrayDelegate</a>
+                <a href="../Protocols/DataStoreDelegate.html">DataStoreDelegate</a>
               </li>
             </ul>
           </li>
@@ -170,7 +220,7 @@
         <h1 class="chapter-name">SocialHelper</h1>
         <section>
           <section class="section">
-            <p class="para">Undocumented</p>
+            <p class="para">The social helper class allows quick access to some social aspects, such as presenting an email/message. This class has a private singleton it used for dleegate methods, so that every presenting view controller does not have to impliment them seperately.</p>
           </section>
           <section class="section task-group-section">
             <div class="task-group">
@@ -203,24 +253,6 @@
                     </section>
                   </div>
                 </li>
-                <li class="item symbol">
-                  <div class="task-group-term">
-                    <code>
-                    <a name="/s:FC8FrostKit12SocialHelpercFMS0_FT_S0_">
-                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
-                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12SocialHelpercFMS0_FT_S0_">init()</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointy-thing-container"></div>
-                    <section class="section instance-method">
-                      <div class="pointy-thing"></div>
-                      <div class="abstract">
-                        <p class="para">Undocumented</p>
-                      </div>
-                    </section>
-                  </div>
-                </li>
               </ul>
             </div>
             <div class="task-group">
@@ -247,7 +279,95 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">Presents a compose view controller with the details passed in.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">presentComposeViewController</span><span class="p">(</span><span class="nv">serviceType</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">initialText</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">urls</span><span class="p">:</span> <span class="p">[</span><span class="kt">NSURL</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">images</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIImage</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">inViewController</span> <span class="nv">viewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">serviceType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The type of service type to present. For a list of possible values, see Service Type Constants.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">initialText</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The initial text to show in the <code>SLComposeViewController</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">urls</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The URLs to attach to the <code>SLComposeViewController</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">images</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The images to attach to the <code>SLComposeViewController</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">viewController</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The view controller to present the <code>SLComposeViewController</code> in.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">animated</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">If the presentation should be animated or not.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -268,9 +388,9 @@
                 <li class="item symbol">
                   <div class="task-group-term">
                     <code>
-                    <a name="/s:FC8FrostKit12SocialHelper11phonePromptFMS0_FT6numberSS_T_">
-                    <a name="//apple_ref/swift/Method/phonePrompt(number:)" class="dashAnchor"></a>
-                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12SocialHelper11phonePromptFMS0_FT6numberSS_T_">phonePrompt(number:)</a>
+                    <a name="/s:FC8FrostKit12SocialHelper23phonePromptFormattedURLFMS0_FT6numberSS_GSqCSo5NSURL_">
+                    <a name="//apple_ref/swift/Method/phonePromptFormattedURL(number:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit12SocialHelper23phonePromptFormattedURLFMS0_FT6numberSS_GSqCSo5NSURL_">phonePromptFormattedURL(number:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -278,7 +398,39 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">Returns a NSURL to call with <code>openURL(_:)</code> in <code>UIApplication</code> parsed from a number string.Note: <code>openURL(_:)</code> can not be called directly within a Framework so that has to be done manually inside the main application.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">phonePromptFormattedURL</span><span class="p">(</span><span class="nv">#number</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">NSURL</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">number</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The number to parse in to create the URL.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para">The URL of the parsed phone number, prefixed with <code>telprompt://</code>.</p>
                       </div>
                     </section>
                   </div>
@@ -296,7 +448,131 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">Creates a prompt for an email with the following parameters to pass into the <code>MFMailComposeViewController</code>.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">emailPrompt</span><span class="p">(</span><span class="nv">#toRecipients</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span> <span class="nv">ccRecipients</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span> <span class="nv">bccRecipients</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span> <span class="nv">subject</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">""</span><span class="p">,</span> <span class="nv">messageBody</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">""</span><span class="p">,</span> <span class="nv">isBodyHTML</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">attachments</span><span class="p">:</span> <span class="p">[(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">NSData</span><span class="p">,</span> <span class="nv">mimeType</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fileName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[],</span> <span class="nv">viewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">toRecipients</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The email addresses of the recipients of the email.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">ccRecipients</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The email addresses of the CC recipients of the email.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">bccRecipients</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The email addresses of the BCC recipients of the email.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">subject</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The subject of the email.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">messageBody</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The main body of the email.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">isBodyHTML</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">Tells the <code>MFMailComposeViewController</code> if the message body is HTML.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">attachments</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The attachments to add to the email, passed in as a tuple of data, mime type and the file name.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">viewController</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The view controller to present the <code>MFMailComposeViewController</code> in.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">animated</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">If the presentation should be animated or not.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -314,7 +590,95 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">Creates a prompt for a message with the following parameters to pass into the <code>MFMessageComposeViewController</code>.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">messagePrompt</span><span class="p">(</span><span class="nv">#recipients</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span> <span class="nv">subject</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">""</span><span class="p">,</span> <span class="nv">body</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">""</span><span class="p">,</span> <span class="nv">attachments</span><span class="p">:</span> <span class="p">[(</span><span class="nv">attachmentURL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">,</span> <span class="nv">alternateFilename</span><span class="p">:</span> <span class="kt">String</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[],</span> <span class="nv">viewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">recipients</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The recipients of the message.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">subject</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The subject of the message.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">body</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The main body of the message.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">attachments</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The attachments to add to the message, passed in as a tuple of attachment URL and alternate filename.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">viewController</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The view controller to present the <code>MFMailComposeViewController</code> in.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">animated</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">If the presentation should be animated or not.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -417,8 +781,8 @@
           </section>
         </section>
         <section id="footer">
-          <p class="copyright">&copy; 2015 <a class="link" href="" target="_blank" rel="external">James Barrow</a>. All rights reserved. (Last updated: 2015-01-21)</p>
-          <p class="copyright">Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.0.20</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p class="copyright">&copy; 2015 <a class="link" href="" target="_blank" rel="external">James Barrow</a>. All rights reserved. (Last updated: 2015-02-08)</p>
+          <p class="copyright">Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.1.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

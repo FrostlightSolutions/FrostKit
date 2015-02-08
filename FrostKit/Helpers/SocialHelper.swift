@@ -10,6 +10,9 @@ import UIKit
 import Social
 import MessageUI
 
+/// 
+/// The social helper class allows quick access to some social aspects, such as presenting an email/message. This class has a private singleton it used for dleegate methods, so that every presenting view controller does not have to impliment them seperately.
+///
 public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate {
     
     private enum AlertViewTags: Int {
@@ -38,10 +41,11 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         return Singleton.instance
     }
     
-    override init() { }
+    override private init() {
+        super.init()
+    }
     
     private func clear() {
-        
         toRecipients = []
         ccRecipients = []
         bccRecipients = []
@@ -56,6 +60,16 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     
     // MARK: - Scocial Methods
     
+    /**
+    Presents a compose view controller with the details passed in.
+    
+    :param: serviceType    The type of service type to present. For a list of possible values, see Service Type Constants.
+    :param: initialText    The initial text to show in the `SLComposeViewController`.
+    :param: urls           The URLs to attach to the `SLComposeViewController`.
+    :param: images         The images to attach to the `SLComposeViewController`.
+    :param: viewController The view controller to present the `SLComposeViewController` in.
+    :param: animated       If the presentation should be animated or not.
+    */
     public class func presentComposeViewController(serviceType: String, initialText: String? = nil, urls: [NSURL]? = nil, images: [UIImage]? = nil, inViewController viewController: UIViewController, animated: Bool = true) {
         
         if SLComposeViewController.isAvailableForServiceType(serviceType) {
@@ -85,6 +99,15 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     
     // MARK: - Prompt Methods
     
+    /**
+    Returns a NSURL to call with `openURL(_:)` in `UIApplication` parsed from a number string.
+    
+    Note: `openURL(_:)` can not be called directly within a Framework so that has to be done manually inside the main application.
+    
+    :param: number The number to parse in to create the URL.
+    
+    :returns: The URL of the parsed phone number, prefixed with `telprompt://`.
+    */
     public class func phonePromptFormattedURL(#number: String) -> NSURL? {
         let hasPlusPrefix = number.rangeOfString("+")
         
@@ -100,6 +123,19 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         return NSURL(string: urlString)
     }
     
+    /**
+    Creates a prompt for an email with the following parameters to pass into the `MFMailComposeViewController`.
+    
+    :param: toRecipients   The email addresses of the recipients of the email.
+    :param: ccRecipients   The email addresses of the CC recipients of the email.
+    :param: bccRecipients  The email addresses of the BCC recipients of the email.
+    :param: subject        The subject of the email.
+    :param: messageBody    The main body of the email.
+    :param: isBodyHTML     Tells the `MFMailComposeViewController` if the message body is HTML.
+    :param: attachments    The attachments to add to the email, passed in as a tuple of data, mime type and the file name.
+    :param: viewController The view controller to present the `MFMailComposeViewController` in.
+    :param: animated       If the presentation should be animated or not.
+    */
     public class func emailPrompt(#toRecipients: [String], ccRecipients: [String] = [], bccRecipients: [String] = [], subject: String = "", messageBody: String = "", isBodyHTML: Bool = false, attachments: [(data: NSData, mimeType: String, fileName: String)] = [], viewController: UIViewController, animated: Bool = true) {
         
         if MFMailComposeViewController.canSendMail() {
@@ -164,6 +200,16 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         viewController.presentViewController(mailVC, animated: animated, completion: nil)
     }
     
+    /**
+    Creates a prompt for a message with the following parameters to pass into the `MFMessageComposeViewController`.
+    
+    :param: recipients     The recipients of the message.
+    :param: subject        The subject of the message.
+    :param: body           The main body of the message.
+    :param: attachments    The attachments to add to the message, passed in as a tuple of attachment URL and alternate filename.
+    :param: viewController The view controller to present the `MFMailComposeViewController` in.
+    :param: animated       If the presentation should be animated or not.
+    */
     public class func messagePrompt(#recipients: [String], subject: String = "", body: String = "", attachments: [(attachmentURL: NSURL, alternateFilename: String)] = [], viewController: UIViewController, animated: Bool = true) {
         
         if MFMessageComposeViewController.canSendText() {

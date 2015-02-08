@@ -9,8 +9,12 @@
 import UIKit
 import WebKit
 
+///
+/// A subclass of BaseWebViewController that wraps a WKWebView in a view controller.
+///
 class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
+    /// The URL of the current page.
     override var URL: NSURL? {
         get {
             if let webView = self.webView as? WKWebView {
@@ -19,7 +23,7 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
             return nil
         }
     }
-    
+    /// The title to show in the navigation bar if something other than the loaded page's title is required.
     override var titleOverride: String? {
         didSet {
             if titleOverride != nil {
@@ -31,7 +35,7 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
             }
         }
     }
-    
+    /// Returns `true` if the web view is currently loading, `false` if not.
     override var loading: Bool {
         get {
             if let webView = self.webView as? WKWebView {
@@ -41,6 +45,9 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
         }
     }
     
+    /**
+    Stops the web view from being loaded any more.
+    */
     override func stopLoading() {
         if let webView = self.webView as? WKWebView {
             return webView.stopLoading()
@@ -99,6 +106,11 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     // MARK: - Action Methods
     
+    /**
+    Refrshes the web view when the refresh button is pressed in the toolbar.
+    
+    :param: sender The bar button item pressed.
+    */
     override func refreshButtonPressed(sender: AnyObject?) {
         
         if let webView = self.webView as? WKWebView {
@@ -111,6 +123,11 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
         }
     }
     
+    /**
+    Requests the web view go back a page.
+    
+    :param: sender The bar button item pressed.
+    */
     override func backButtonPressed(sender: AnyObject?) {
         
         if let webView = self.webView as? WKWebView {
@@ -123,6 +140,11 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
         }
     }
     
+    /**
+    Requests the web view go forward a page.
+    
+    :param: sender The bar button item pressed.
+    */
     override func forwardButtonPressed(sender: AnyObject?) {
         
         if let webView = self.webView as? WKWebView {
@@ -145,6 +167,11 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     // MARK: - Load Methods
     
+    /**
+    Creates a URL string, appending `http://` if the URL string does not already have it as a prefix and then loads the page in the web view.
+    
+    :returns: The base URL string.
+    */
     override func loadBaseURL() -> String {
         
         var urlString = super.loadBaseURL()

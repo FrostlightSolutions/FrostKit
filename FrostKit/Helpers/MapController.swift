@@ -10,14 +10,22 @@ import UIKit
 import MapKit
 import CoreLocation
 
+///
+/// The map controller handles basic map options and controls for a `MKMapView`. It provides automatic functions for adding/removing annotations, finding directions, zooming the map view and searching the annotations plotted on the map.
+///
+/// This class is designed to be subclassed if more specific actions, such a refining the standard search or customising the annotations plotted.
+///
 public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     
     private let minimumZoomArc = 0.007  //approximately 1/2 mile (1 degree of arc ~= 69 miles)
     private let maximumDegreesArc: Double = 360
     private let annotationRegionPadFactor: Double = 1.15
+    /// The reuse identifier for the annotations for the map view. This should be overriden when subclassing.
     public let identifier = "FrostKitAnnotation"
     private var hasPlottedInitUsersLocation = false
+    /// The view controller related to the map controller.
     @IBOutlet public weak var viewController: UIViewController!
+    /// The map view related to the map controller.
     @IBOutlet public weak var mapView: MKMapView! {
         didSet {
             mapView.userTrackingMode = .Follow
@@ -39,7 +47,15 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
             }
         }
     }
-    @IBInspectable var autoAssingDelegate: Bool = true
+    /// Refers to if the map controller should auto assign itself to the map view as a delegate.
+    @IBInspectable var autoAssingDelegate: Bool = true {
+        didSet {
+            if autoAssingDelegate == true {
+                mapView?.delegate = self
+            }
+        }
+    }
+    /// `true` if the user is currently being tracked in the map view or `false` if not.
     public var trackingUser: Bool = false {
         didSet {
             if trackingUser == true {
@@ -53,8 +69,11 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
             }
         }
     }
+    /// The location manager automatically created when assigning the map view to the map controller.
     public var locationManager: CLLocationManager?
+    /// An array of addresses plotted on the map view.
     public var addresses = Array<Address>()
+    /// A dictionary of annotations plotted to the map view with the address object as the key.
     public var annotations = Dictionary<Address, Annotation>()
     
     deinit {
@@ -62,6 +81,9 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         purgeMap()
     }
     
+    /**
+    Resets the map controller, clearing the addresses, annotations and removing all annotations and polylines on the map view.
+    */
     public func resetMap() {
         
         addresses.removeAll(keepCapacity: false)
@@ -71,6 +93,9 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         removeAllPolylines()
     }
     
+    /**
+    Attempt to purge the map view to free up some memory.
+    */
     private func purgeMap() {
         if let locationManager = self.locationManager {
             locationManager.stopUpdatingLocation()
@@ -85,12 +110,22 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     
     // MARK: - Plot/Remove Annotations Methods
     
+    /**
+    Plot an array of addresses to the map view.
+    
+    :param: addresses An array of addresses to plot.
+    */
     public func plotAddresses(addresses: [Address]) {
         for address in addresses {
             plotAddress(address)
         }
     }
     
+    /**
+    Plot an address to the map view.
+    
+    :param: address An address to plot.
+    */
     public func plotAddress(address: Address) {
         if address.isValid == false {
             return
@@ -121,6 +156,11 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         }
     }
     
+    /**
+    Remove all annotations plotted to the map.
+    
+    :param: includingCached If `true` then the cached annotations dictionary is also cleared.
+    */
     public func removeAllAnnotations(includingCached: Bool = false) {
         let annotations = Array(self.annotations.values)
         mapView.removeAnnotations(annotations)
@@ -130,6 +170,9 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         }
     }
     
+    /**
+    Clears all of the annotations from the map, including caced, and clears the addresses array.
+    */
     public func clearData() {
         removeAllAnnotations(includingCached: true)
         addresses.removeAll(keepCapacity: false)
@@ -137,15 +180,30 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     
     // MARK: - Zoom Map Methods
     
+    /**
+    Zoom the map view to a coordinate.
+    
+    :param: coordinare The coordinate to zoom to.
+    */
     public func zoomToCoordinate(coordinare: CLLocationCoordinate2D) {
         let point = MKMapPointForCoordinate(coordinare)
         zoomToMapPoints([point])
     }
     
+    /**
+    Zoom the map view to an annotation.
+    
+    :param: annotation The annotation to zoom to.
+    */
     public func zoomToAnnotation(annotation: MKAnnotation) {
         zoomToAnnotations([annotation])
     }
     
+    /**
+    Zoom the map to show multiple annotations.
+    
+    :param: annotations The annotations to zoom to.
+    */
     public func zoomToAnnotations(annotations: [MKAnnotation]) {
         let count = annotations.count
         if count > 0 {
@@ -157,6 +215,11 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         }
     }
     
+    /**
+    Zoom the map to show multiple map points.
+    
+    :param: points Swift array of `MKMapPoints` to zoom to.
+    */
     public func zoomToMapPoints(points: [MKMapPoint]) {
         let count = points.count
         let cPoints: UnsafeMutablePointer<MKMapPoint> = UnsafeMutablePointer<MKMapPoint>.alloc(count)
@@ -165,6 +228,12 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         cPoints.destroy()
     }
     
+    /**
+    Zoom the map to show multiple map points.
+    
+    :param: points C array array of `MKMapPoints` to zoom to.
+    :param: count  The number of points in the C array.
+    */
     public func zoomToMapPoints(points: UnsafeMutablePointer<MKMapPoint>, count: Int) {
         let mapRect = MKPolygon(points: points, count: count).boundingMapRect
         var region: MKCoordinateRegion = MKCoordinateRegionForMapRect(mapRect)
@@ -176,16 +245,29 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         zoomToRegion(region)
     }
     
+    /**
+    Zoom the map to show a region.
+    
+    :param: region The region to zoom the map to.
+    */
     public func zoomToRegion(var region: MKCoordinateRegion) {
         region.span = normalizeRegionSpan(region.span)
         mapView.setRegion(region, animated: true)
     }
     
+    /**
+    Zoom the map to show the users current location.
+    */
     public func zoomToCurrentLocation() {
         trackingUser = true
         zoomToCoordinate(mapView.userLocation.coordinate)
     }
     
+    /**
+    Zoom the map to show all points plotted on the map.
+    
+    :param: includingUser If `true` then the users annotation is also included in the points. If `false` then only plotted points are zoomed to.
+    */
     public func zoomToShowAll(includingUser: Bool = true) {
         if includingUser == true {
             zoomToAnnotations(mapView.annotations as [MKAnnotation])
@@ -195,6 +277,11 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         }
     }
     
+    /**
+    Zooms the map to an address object.
+    
+    :param: address The address object to zoom to.
+    */
     public func zoomToAddress(address: Address) {
         plotAddress(address)
         
@@ -202,12 +289,20 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         zoomToAnnotations([annotation])
     }
     
+    /**
+    Zooms the map to a polyline.
+    
+    :param: polyline The polyline to zoom to.
+    */
     public func zoomToPolyline(polyline: MKPolyline) {
         zoomToMapPoints(polyline.points(), count: polyline.pointCount)
     }
     
     // MARK: - Polyline and Route Methods
     
+    /**
+    Removes all the polylines plotted on the map view.
+    */
     public func removeAllPolylines() {
         if let overlays = mapView.overlays {
             for overlay in overlays {
@@ -218,6 +313,12 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         }
     }
     
+    /**
+    Gets directions to a coordinate from the users current location.
+    
+    :param: coordinate The coordinate to get directions to.
+    :param: inApp      If `true` diretions are plotted in-app on the map view. If `false` then the Maps.app is opened with the directions requested.
+    */
     public func directionsToCurrentLocationFrom(#coordinate: CLLocationCoordinate2D, inApp: Bool = true) {
         let currentLocationItem = MKMapItem.mapItemForCurrentLocation()
         
@@ -247,6 +348,11 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         }
     }
     
+    /**
+    Plots a route as a polyline after removing all previous reotes, and then zoom to display the new route.
+    
+    :param: route The route to plot.
+    */
     public func plotRoute(route: MKRoute) {
         removeAllPolylines()
         mapView.addOverlay(route.polyline, level: .AboveRoads)
@@ -255,6 +361,13 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     
     // MARK: - Helper Methods
     
+    /**
+    Normalizes a regions space with the constants preset.
+    
+    :param: span The span to normalize.
+    
+    :returns: The normalized span.
+    */
     public func normalizeRegionSpan(var span: MKCoordinateSpan) -> MKCoordinateSpan {
         span = MKCoordinateSpanMake(span.latitudeDelta * annotationRegionPadFactor, span.longitudeDelta * annotationRegionPadFactor)
         if span.latitudeDelta > maximumDegreesArc {
@@ -388,8 +501,15 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     
     // MARK: - Search Methods
     
+    /**
+    Performs a predicate search on the addresses dictionary that begins with the search string.
+    
+    :param: searchString The string to search the addresses by name or simple address.
+    
+    :returns: An array of addresses that meet the predicate search criteria.
+    */
     public func searchAddresses(searchString: String) -> [Address] {
-        if let predicate = NSPredicate(format: "name beginswith[cd] %@ || simpleAddress beginswith[cd] %@", searchString, searchString) {
+        if let predicate = NSPredicate(format: "name beginswith[cd] %@ || addressString beginswith[cd] %@", searchString, searchString) {
             return (addresses as NSArray).filteredArrayUsingPredicate(predicate) as [Address]
         }
         return Array<Address>()
@@ -399,16 +519,24 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
 
 // MARK: - Address Object
 
+///
+/// An object that contains details on a address to the plot on the map view, along with other data such as name and addressString.
+///
 public class Address: NSObject {
     
+    /// The ID of the addres object.
     public var objectID: String?
+    /// The coordinate of the address.
     public var coordinate = CLLocationCoordinate2DMake(0.0, 0.0)
+    /// The latitude of the address.
     public var latitude: CLLocationDegrees {
         return coordinate.latitude
     }
+    /// The longitude of the address.
     public var longitude: CLLocationDegrees {
         return coordinate.longitude
     }
+    /// If the address is valid then `true`, otherwise return `false`.
     public var isValid: Bool {
         if latitude == 0 && longitude == 0 {
             return false
@@ -416,10 +544,13 @@ public class Address: NSObject {
             return true
         }
     }
+    /// The name of the address object.
     public var name = ""
-    public var simpleAddress = ""
+    /// The address string of the object.
+    public var addressString = ""
+    /// Returns a string that represents the contents of the receiving class.
     override public var description: String {
-        return "<Latitude: \(latitude) Longitude: \(longitude) Address: \(simpleAddress)>"
+        return "<Latitude: \(latitude) Longitude: \(longitude) Address: \(addressString)>"
     }
     override public var hash: Int {
         return Int(latitude) ^ Int(longitude)
@@ -429,6 +560,11 @@ public class Address: NSObject {
         super.init()
     }
     
+    /**
+    A convenience initialiser for creating an address object from a dictionary returned from a FUS based system.
+    
+    :param: dictionary The dictionary to parse the information from.
+    */
     public convenience init(dictionary: NSDictionary) {
         self.init()
         
@@ -454,11 +590,18 @@ public class Address: NSObject {
             self.name = name
         }
         
-        if let simpleAddress = dictionary["simpleAddress"] as? String {
-            self.simpleAddress = simpleAddress
+        if let addressString = dictionary["addressString"] as? String {
+            self.addressString = addressString
         }
     }
     
+    /**
+    A helper method for creating an array of address objects from an array of dictionaryies.
+    
+    :param: array An array of dictionaries returned by a FUS like system.
+    
+    :returns: An array of address objects.
+    */
     public class func addressesFromArrayOfDictionaries(array: [NSDictionary]) -> [Address] {
         var adresses = Array<Address>()
         for dictionary in array {
@@ -475,9 +618,9 @@ public class Address: NSObject {
             let haveEqualLatitude = self.latitude == address.latitude
             let haveEqualLongitude = self.longitude == address.longitude
             let haveEqualName = self.name == address.name
-            let haveEqualSimpleAddress = self.simpleAddress == address.simpleAddress
+            let haveEqualAddressString = self.addressString == address.addressString
             
-            return haveEqualLatitude && haveEqualLongitude && haveEqualName && haveEqualSimpleAddress
+            return haveEqualLatitude && haveEqualLongitude && haveEqualName && haveEqualAddressString
         }
         return false
     }
@@ -493,29 +636,46 @@ public class Address: NSObject {
 
 // MARK: - Annotation Object
 
+///
+/// An annotation object that is to be used with an address object.
+///
 public class Annotation: NSObject, MKAnnotation {
     
+    /// The address object for the annotation.
     public lazy var address = Address()
+    /// The coordinate of the address.
     public var coordinate: CLLocationCoordinate2D {
         return address.coordinate
     }
+    /// The name of the address.
     public var title: String {
         return address.name
     }
+    /// The address string of the address.
     public var subtitle: String {
-        return address.simpleAddress
+        return address.addressString
     }
     
     public override init() {
         super.init()
     }
     
+    /**
+    A convenience method for making an annotation object from an address object.
+    
+    :param: address The address object to base the annotation off of.
+    */
     public convenience init(address: Address) {
         self.init()
         
         self.address = address
     }
     
+    /**
+    Updates the annotation with an address.
+    
+    :param: address The address to update the annotation with.
+    */
     public func updateAddress(address: Address) {
         if self.address.isEqualToAddress(address) == false {
             self.address = address

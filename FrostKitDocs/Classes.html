@@ -23,7 +23,7 @@
     <a title="Classes  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p class="header-text"><a href="index.html">FrostKit Docs</a> (55% documented)</p>
+        <p class="header-text"><a href="index.html">FrostKit Docs</a> (68% documented)</p>
         <p id="header-links"><a href="https://github.com/FrostlightSolutions/FrostKit"><img id="header-icon" src="img/gh.png" height="16px" width="16px" />View on GitHub</a></p>
       </div>
     </header>
@@ -43,6 +43,12 @@
           <a href="Classes.html">Classes</a>
             <ul class="nav-chapters">
               <li class="nav-chapter">
+                <a href="Classes/Address.html">Address</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="Classes/Annotation.html">Annotation</a>
+              </li>
+              <li class="nav-chapter">
                 <a href="Classes/BaseWebViewController.html">BaseWebViewController</a>
               </li>
               <li class="nav-chapter">
@@ -50,6 +56,21 @@
               </li>
               <li class="nav-chapter">
                 <a href="Classes/CustomFonts.html">CustomFonts</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="Classes/DataStore.html">DataStore</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="Classes/DataUpdater.html">DataUpdater</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="Classes/DeveloperTools.html">DeveloperTools</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="Classes/DeveloperToolsBaseURL.html">DeveloperToolsBaseURL</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="Classes/DeveloperToolsRoot.html">DeveloperToolsRoot</a>
               </li>
               <li class="nav-chapter">
                 <a href="Classes/FrostKit.html">FrostKit</a>
@@ -64,10 +85,19 @@
                 <a href="Classes/LocalStorage.html">LocalStorage</a>
               </li>
               <li class="nav-chapter">
+                <a href="Classes/MapController.html">MapController</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="Classes/MapSearchViewController.html">MapSearchViewController</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="Classes/MapViewController.html">MapViewController</a>
+              </li>
+              <li class="nav-chapter">
                 <a href="Classes/OAuthToken.html">OAuthToken</a>
               </li>
               <li class="nav-chapter">
-                <a href="Classes/PagedStore.html">PagedStore</a>
+                <a href="Classes/RequestStore.html">RequestStore</a>
               </li>
               <li class="nav-chapter">
                 <a href="Classes/ServiceClient.html">ServiceClient</a>
@@ -87,6 +117,17 @@
             </ul>
           </li>
           <li class="part-name tasks">
+          <a href="Global Variables.html">Global Variables</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="Global Variables.html#/s:v8FrostKit9fa_adjustSS">fa_adjust</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="Global Variables.html#/s:v8FrostKit13ionicon_alertSS">ionicon_alert</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
           <a href="Enums.html">Enums</a>
             <ul class="nav-chapters">
               <li class="nav-chapter">
@@ -94,6 +135,9 @@
               </li>
               <li class="nav-chapter">
                 <a href="Enums/Location.html">Location</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="Enums/Router.html">Router</a>
               </li>
               <li class="nav-chapter">
                 <a href="Enums/WebViewType.html">WebViewType</a>
@@ -125,7 +169,13 @@
                 <a href="Extensions/UIBarButtonItem.html">UIBarButtonItem</a>
               </li>
               <li class="nav-chapter">
+                <a href="Extensions/UICollectionViewController.html">UICollectionViewController</a>
+              </li>
+              <li class="nav-chapter">
                 <a href="Extensions/UIColor.html">UIColor</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="Extensions/UIDevice.html">UIDevice</a>
               </li>
               <li class="nav-chapter">
                 <a href="Extensions/UIFont.html">UIFont</a>
@@ -156,7 +206,7 @@
           <a href="Protocols.html">Protocols</a>
             <ul class="nav-chapters">
               <li class="nav-chapter">
-                <a href="Protocols/PagedArrayDelegate.html">PagedArrayDelegate</a>
+                <a href="Protocols/DataStoreDelegate.html">DataStoreDelegate</a>
               </li>
             </ul>
           </li>
@@ -192,8 +242,17 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">A subclass of BaseWebViewController that wraps a UIWebView in a view controller.</p>
                         <a href="Classes/UIWebViewController.html" class="see-more">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">UIWebViewController</span><span class="p">:</span> <span class="kt">BaseWebViewController</span><span class="p">,</span> <span class="kt">UIWebViewDelegate</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -220,8 +279,17 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">A subclass of BaseWebViewController that wraps a WKWebView in a view controller.</p>
                         <a href="Classes/WKWebViewController.html" class="see-more">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">WKWebViewController</span><span class="p">:</span> <span class="kt">BaseWebViewController</span><span class="p">,</span> <span class="kt">WKNavigationDelegate</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -248,7 +316,7 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">How to update the font constants from less files<ol><li>Copy the values from the respective <code>.less</code> file</li><li>Paste them in the <code>variables.less</code> file in the FrostKit project</li><li>When in the <code>variables.less</code> file, press alt + cmd + 0 and add it to the FrostKit target</li><li>Uncomment the testBuildFontAwesomeConstants() in FontTest and run the test</li><li>Copy the constants printed in the debug console (they&rsquo;re wrapped in <code>----------</code>)</li><li>Paste the constants at the bottom of this file, replacing the ones alredy present</li><li>Comment out testBuildFontAwesomeConstants() again</li><li>Remove <code>variables.less</code> from the FrostKit target</li><li>Update the .ttf font from the respective link</li></ol>Note: Replace links for building other custom fonts and .less files.<dl><dt>FontAwesome Links</dt><dd></dd></dl><ul><li><a href="https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/less/variables.less">https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/less/variables.less</a></li><li><a href="https://github.com/FortAwesome/Font-Awesome/blob/master/fonts/fontawesome-webfont.ttf">https://github.com/FortAwesome/Font-Awesome/blob/master/fonts/fontawesome-webfont.ttf</a></li></ul><dl><dt>IonIcons Links</dt><dd></dd></dl><ul><li><a href="https://raw.githubusercontent.com/driftyco/ionicons/master/less/_ionicons-variables.less">https://raw.githubusercontent.com/driftyco/ionicons/master/less/_ionicons-variables.less</a></li><li><a href="https://github.com/driftyco/ionicons/blob/master/fonts/ionicons.ttf">https://github.com/driftyco/ionicons/blob/master/fonts/ionicons.ttf</a></li></ul></p>
+                        <p class="para"><dl><dt>FontAwesome Links</dt><dd></dd></dl><ul><li><a href="https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/less/variables.less">https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/less/variables.less</a></li><li><a href="https://github.com/FortAwesome/Font-Awesome/blob/master/fonts/fontawesome-webfont.ttf">https://github.com/FortAwesome/Font-Awesome/blob/master/fonts/fontawesome-webfont.ttf</a></li></ul><dl><dt>IonIcons Links</dt><dd></dd></dl><ul><li><a href="https://raw.githubusercontent.com/driftyco/ionicons/master/less/_ionicons-variables.less">https://raw.githubusercontent.com/driftyco/ionicons/master/less/_ionicons-variables.less</a></li><li><a href="https://github.com/driftyco/ionicons/blob/master/fonts/ionicons.ttf">https://github.com/driftyco/ionicons/blob/master/fonts/ionicons.ttf</a></li></ul></p>
                         <a href="Classes/CustomFonts.html" class="see-more">See more</a>
                       </div>
                       <div class="declaration">
@@ -269,6 +337,127 @@
               <div class="task-name-container">
                 
                 <a name="/Unnamed4"></a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:C8FrostKit14DeveloperTools">
+                    <a name="//apple_ref/swift/Class/DeveloperTools" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:C8FrostKit14DeveloperTools">DeveloperTools</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Undocumented</p>
+                        <a href="Classes/DeveloperTools.html" class="see-more">See more</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Unnamed5"></a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:C8FrostKit18DeveloperToolsRoot">
+                    <a name="//apple_ref/swift/Class/DeveloperToolsRoot" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:C8FrostKit18DeveloperToolsRoot">DeveloperToolsRoot</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Undocumented</p>
+                        <a href="Classes/DeveloperToolsRoot.html" class="see-more">See more</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Unnamed6"></a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:C8FrostKit21DeveloperToolsBaseURL">
+                    <a name="//apple_ref/swift/Class/DeveloperToolsBaseURL" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:C8FrostKit21DeveloperToolsBaseURL">DeveloperToolsBaseURL</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Undocumented</p>
+                        <a href="Classes/DeveloperToolsBaseURL.html" class="see-more">See more</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Unnamed7"></a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:C8FrostKit12RequestStore">
+                    <a name="//apple_ref/swift/Class/RequestStore" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:C8FrostKit12RequestStore">RequestStore</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">The request store keeps track of all requests passed into it. It stops duplicate requests being called by canceling any already running requests passed to it, until they are done and removed.It will however be able to differentuate between different page requests, and so not cancel a page <code>n</code> request if page <code>n+1</code> is also requested.</p>
+                        <a href="Classes/RequestStore.html" class="see-more">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">RequestStore</span><span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Unnamed8"></a>
                 
               </div>
               <ul class="task-group-list">
@@ -305,16 +494,16 @@
             <div class="task-group">
               <div class="task-name-container">
                 
-                <a name="/Unnamed5"></a>
+                <a name="/Unnamed9"></a>
                 
               </div>
               <ul class="task-group-list">
                 <li class="item symbol">
                   <div class="task-group-term">
                     <code>
-                    <a name="/s:C8FrostKit10PagedStore">
-                    <a name="//apple_ref/swift/Class/PagedStore" class="dashAnchor"></a>
-                    <a class="x-instance-method Swift" href="#/s:C8FrostKit10PagedStore">PagedStore</a>
+                    <a name="/s:C8FrostKit9DataStore">
+                    <a name="//apple_ref/swift/Class/DataStore" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:C8FrostKit9DataStore">DataStore</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -322,15 +511,15 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Paged store allows storing of data in a paged form. It allows pre populating an array (with NSNull objects) in the store with the total number of object until they are called upon to be updated with the real data.This class allows for a correct representation of how large a table or collection view is when used like an array in a data source for these UI items. It also allows the ability to only load items when they are needed and with the delegate method cancel or lower priority fast scroll past pages.For more information on how FUS passes paginated data to clients, check out the Wiki page at: <a href="https://github.com/FrostlightSolutions/fus-server/wiki/Pagination-API">https://github.com/FrostlightSolutions/fus-server/wiki/Pagination-API</a></p>
-                        <a href="Classes/PagedStore.html" class="see-more">See more</a>
+                        <p class="para">Data store allows storing of data in paged or non-paged form. Paged data is added and removed dynamically as it is set or cleared from the store. For example, a data store might have 1000 entires, but if only the first 3 pages have been set then it will only be 3 * objects per page in size.However it also provides a correct representation of how large a table or collection view should be when used like an array in a data source for these UI items. It also allows the ability to only load items when they are needed and with the delegate method, to cancel or lower priority during fast scrolling past pages.For more information on how FUS passes paginated data to clients, check out the Wiki page at: <a href="https://github.com/FrostlightSolutions/fus-server/wiki/Pagination-APIA">https://github.com/FrostlightSolutions/fus-server/wiki/Pagination-APIA</a> data store object also allows for storing of non-paged data. This would be either an non-paged array or a single dictionary object of data.</p>
+                        <a href="Classes/DataStore.html" class="see-more">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
             
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">PagedStore</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">NSCoding</span><span class="p">,</span> <span class="kt">NSCopying</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DataStore</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">NSCoding</span><span class="p">,</span> <span class="kt">NSCopying</span></code></pre>
 
                         </div>
                       </div>
@@ -342,7 +531,7 @@
             <div class="task-group">
               <div class="task-name-container">
                 
-                <a name="/Unnamed6"></a>
+                <a name="/Unnamed10"></a>
                 
               </div>
               <ul class="task-group-list">
@@ -359,8 +548,17 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">The social helper class allows quick access to some social aspects, such as presenting an email/message. This class has a private singleton it used for dleegate methods, so that every presenting view controller does not have to impliment them seperately.</p>
                         <a href="Classes/SocialHelper.html" class="see-more">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SocialHelper</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">UINavigationControllerDelegate</span><span class="p">,</span> <span class="kt">MFMailComposeViewControllerDelegate</span><span class="p">,</span> <span class="kt">MFMessageComposeViewControllerDelegate</span><span class="p">,</span> <span class="kt">UIAlertViewDelegate</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -370,7 +568,7 @@
             <div class="task-group">
               <div class="task-name-container">
                 
-                <a name="/Unnamed7"></a>
+                <a name="/Unnamed11"></a>
                 
               </div>
               <ul class="task-group-list">
@@ -407,7 +605,7 @@
             <div class="task-group">
               <div class="task-name-container">
                 
-                <a name="/Unnamed8"></a>
+                <a name="/Unnamed12"></a>
                 
               </div>
               <ul class="task-group-list">
@@ -435,7 +633,44 @@
             <div class="task-group">
               <div class="task-name-container">
                 
-                <a name="/Unnamed9"></a>
+                <a name="/Unnamed13"></a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:C8FrostKit11DataUpdater">
+                    <a name="//apple_ref/swift/Class/DataUpdater" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:C8FrostKit11DataUpdater">DataUpdater</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">The data updater is a class that helpers update data from a FUS based system. It is made to be inserted into IB via an NSObject.It handles controlling loading, updating, saving of data along wit using the request store and data stores to mange these functions. It is also written to work with a data soruce for either UITableView or UICollectionView.</p>
+                        <a href="Classes/DataUpdater.html" class="see-more">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DataUpdater</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">DataStoreDelegate</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Unnamed14"></a>
                 
               </div>
               <ul class="task-group-list">
@@ -472,7 +707,163 @@
             <div class="task-group">
               <div class="task-name-container">
                 
-                <a name="/Unnamed10"></a>
+                <a name="/Unnamed15"></a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:C8FrostKit13MapController">
+                    <a name="//apple_ref/swift/Class/MapController" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:C8FrostKit13MapController">MapController</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">The map controller handles basic map options and controls for a <code>MKMapView</code>. It provides automatic functions for adding/removing annotations, finding directions, zooming the map view and searching the annotations plotted on the map.This class is designed to be subclassed if more specific actions, such a refining the standard search or customising the annotations plotted.</p>
+                        <a href="Classes/MapController.html" class="see-more">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">MapController</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">MKMapViewDelegate</span><span class="p">,</span> <span class="kt">UIActionSheetDelegate</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <hr/>
+                <a name="/Address%20Object"></a>
+                <a name="//apple_ref/swift/Section/Address Object" class="dashAnchor"></a>
+                <a href="#/Address%20Object">
+                  <h3 class="section-name">Address Object</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:C8FrostKit7Address">
+                    <a name="//apple_ref/swift/Class/Address" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:C8FrostKit7Address">Address</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">An object that contains details on a address to the plot on the map view, along with other data such as name and addressString.</p>
+                        <a href="Classes/Address.html" class="see-more">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Address</span><span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <hr/>
+                <a name="/Annotation%20Object"></a>
+                <a name="//apple_ref/swift/Section/Annotation Object" class="dashAnchor"></a>
+                <a href="#/Annotation%20Object">
+                  <h3 class="section-name">Annotation Object</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:C8FrostKit10Annotation">
+                    <a name="//apple_ref/swift/Class/Annotation" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:C8FrostKit10Annotation">Annotation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">An annotation object that is to be used with an address object.</p>
+                        <a href="Classes/Annotation.html" class="see-more">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Annotation</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">MKAnnotation</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Unnamed16"></a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:C8FrostKit17MapViewController">
+                    <a name="//apple_ref/swift/Class/MapViewController" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:C8FrostKit17MapViewController">MapViewController</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">The map view controller is made to contain a map view and map controller and allow them to be presnted as a view controller.This class is designed to be subclassed if more specific actions, such a updating the addresses or objects to plot.</p>
+                        <a href="Classes/MapViewController.html" class="see-more">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">MapViewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="kt">UIActionSheetDelegate</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Unnamed17"></a>
                 
               </div>
               <ul class="task-group-list">
@@ -511,7 +902,7 @@
             <div class="task-group">
               <div class="task-name-container">
                 
-                <a name="/Unnamed11"></a>
+                <a name="/Unnamed18"></a>
                 
               </div>
               <ul class="task-group-list">
@@ -548,7 +939,7 @@
             <div class="task-group">
               <div class="task-name-container">
                 
-                <a name="/Unnamed12"></a>
+                <a name="/Unnamed19"></a>
                 
               </div>
               <ul class="task-group-list">
@@ -565,8 +956,17 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">The keychain helper allows access to the keychain for saving passwords safely.</p>
                         <a href="Classes/KeychainHelper.html" class="see-more">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">KeychainHelper</span><span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -576,7 +976,44 @@
             <div class="task-group">
               <div class="task-name-container">
                 
-                <a name="/Unnamed13"></a>
+                <a name="/Unnamed20"></a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:C8FrostKit23MapSearchViewController">
+                    <a name="//apple_ref/swift/Class/MapSearchViewController" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:C8FrostKit23MapSearchViewController">MapSearchViewController</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">The map search view controller is used with the search control in a map view controller. It allows searching of points plotted on the map view as well a locations.</p>
+                        <a href="Classes/MapSearchViewController.html" class="see-more">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">MapSearchViewController</span><span class="p">:</span> <span class="kt">UITableViewController</span><span class="p">,</span> <span class="kt">UISearchControllerDelegate</span><span class="p">,</span> <span class="kt">UISearchBarDelegate</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Unnamed21"></a>
                 
               </div>
               <ul class="task-group-list">
@@ -593,8 +1030,17 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">The service client for a FUS based system. It provides methods for login, refreshing OAuth tokens and making generic requests.</p>
                         <a href="Classes/ServiceClient.html" class="see-more">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">ServiceClient</span><span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -604,7 +1050,7 @@
             <div class="task-group">
               <div class="task-name-container">
                 
-                <a name="/Unnamed14"></a>
+                <a name="/Unnamed22"></a>
                 
               </div>
               <ul class="task-group-list">
@@ -641,8 +1087,8 @@
           </section>
         </section>
         <section id="footer">
-          <p class="copyright">&copy; 2015 <a class="link" href="" target="_blank" rel="external">James Barrow</a>. All rights reserved. (Last updated: 2015-01-21)</p>
-          <p class="copyright">Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.0.20</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p class="copyright">&copy; 2015 <a class="link" href="" target="_blank" rel="external">James Barrow</a>. All rights reserved. (Last updated: 2015-02-08)</p>
+          <p class="copyright">Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.1.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

@@ -13,13 +13,17 @@ import UIKit
 ///
 public class BaseWebViewController: UIViewController {
     
+    /// The web view. This will either be UIWebView or WKWebView depending on the requested type.
     var webView: AnyObject?
+    /// The activity indicator view showing if the web view is loading or not.
     let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+    /// The progress view to show the percent a web view has loaded. This will only be used in a WKWebView based controller.
     let progrssView = UIProgressView(progressViewStyle: .Bar)
-    
+    /// The back button for the toolbar.
     var backButton: UIBarButtonItem?
+    /// The forward button for the toolbar.
     var forwardButton: UIBarButtonItem?
-    
+    /// The URL string to set for the page to be loaded.
     public var urlString: String? {
         didSet {
             if webView != nil {
@@ -27,27 +31,26 @@ public class BaseWebViewController: UIViewController {
             }
         }
     }
-    
+    /// The URL of the current page.
     public var URL: NSURL? {
-        get {
-            // Functionality overriden in subclasses
-            return nil
-        }
+        // Functionality overriden in subclasses
+        return nil
     }
-    
+    /// The title to show in the navigation bar if something other than the loaded page's title is required.
     public var titleOverride: String? {
         didSet {
             navigationItem.title = titleOverride
         }
     }
-    
+    /// Returns `true` if the web view is currently loading, `false` if not.
     public var loading: Bool {
-        get {
-            // Functionality overriden in subclasses
-            return false
-        }
+        // Functionality overriden in subclasses
+        return false
     }
     
+    /**
+    Stops the web view from being loaded any more.
+    */
     public func stopLoading() {
         // Functionality overriden in subclasses
     }
@@ -115,22 +118,47 @@ public class BaseWebViewController: UIViewController {
     
     // MARK: - Action Methods
     
+    /**
+    Dismissed the current view if presented modally.
+    
+    :param: sender The bar button item pressed.
+    */
     func doneButtonPressed(sender: AnyObject?) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func backButtonPressed(sender: AnyObject?) {
-        // Functionality overriden in subclasses
-    }
+    /**
+    Refrshes the web view when the refresh button is pressed in the toolbar.
     
-    func forwardButtonPressed(sender: AnyObject?) {
-        // Functionality overriden in subclasses
-    }
-    
+    :param: sender The bar button item pressed.
+    */
     func refreshButtonPressed(sender: AnyObject?) {
         // Functionality overriden in subclasses
     }
     
+    /**
+    Requests the web view go back a page.
+    
+    :param: sender The bar button item pressed.
+    */
+    func backButtonPressed(sender: AnyObject?) {
+        // Functionality overriden in subclasses
+    }
+    
+    /**
+    Requests the web view go forward a page.
+    
+    :param: sender The bar button item pressed.
+    */
+    func forwardButtonPressed(sender: AnyObject?) {
+        // Functionality overriden in subclasses
+    }
+    
+    /**
+    Calls and presents a UIActivityViewController.
+    
+    :param: sender The bar button item pressed.
+    */
     func actionButtonPressed(sender: AnyObject?) {
         var urlString = ""
         if let url = URL?.absoluteString {
@@ -144,6 +172,9 @@ public class BaseWebViewController: UIViewController {
     
     // MARK: - UI Update Methods
     
+    /**
+    Sets up the toolbar with the required buttons and actions for them.
+    */
     func setupToolbar() {
         
         if let navController = navigationController {
@@ -165,6 +196,9 @@ public class BaseWebViewController: UIViewController {
         }
     }
     
+    /**
+    Updates the progress view with the current loading % of the web view if available, otherwise it hides the progress view.
+    */
     func updateProgrssViewVisability() {
         
         if progrssView.progress >= 1.0 || progrssView.progress <= 0.0 {
@@ -193,6 +227,9 @@ public class BaseWebViewController: UIViewController {
         }
     }
     
+    /**
+    Updates the activity indicator view of the web view if available, otherwise it hides the activity indicator view.
+    */
     func updateActivityViewVisability() {
         
         if loading == true {
@@ -215,6 +252,9 @@ public class BaseWebViewController: UIViewController {
         }
     }
     
+    /**
+    Updates the back button in the toolbar depending on if it should be active or not.
+    */
     func updateBackButton() {
         
         if let webView: AnyObject = webView {
@@ -222,6 +262,9 @@ public class BaseWebViewController: UIViewController {
         }
     }
     
+    /**
+    Updates the forward button in the toolbar depending on if it should be active or not.
+    */
     func updateForwardButton() {
         
         if let webView: AnyObject = webView {
@@ -229,6 +272,9 @@ public class BaseWebViewController: UIViewController {
         }
     }
     
+    /**
+    Updates the back and forwards button in the toolbar depending on if they should be active or not.
+    */
     func updateBackForwardButtons() {
         
         updateBackButton()
@@ -237,6 +283,11 @@ public class BaseWebViewController: UIViewController {
     
     // MARK: - Load Methods
     
+    /**
+    Creates a URL string, appending `http://` if the URL string does not already have it as a prefix.
+    
+    :returns: The base URL string.
+    */
     func loadBaseURL() -> String {
         if var urlString = self.urlString {
             

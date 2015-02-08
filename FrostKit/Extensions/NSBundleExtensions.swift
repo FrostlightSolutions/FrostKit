@@ -14,18 +14,18 @@ import Foundation
 extension NSBundle {
     
     /**
-        Returns the bundle version of the app as a string.
+    Returns the bundle version of the app as a string.
     
-        :returns: The bundle version of the app.
+    :returns: The bundle version of the app.
     */
     public class func appVersion(bundle: NSBundle = NSBundle.mainBundle()) -> String {
         return bundle.objectForInfoDictionaryKey("CFBundleVersion") as String
     }
     
     /**
-        Returns the version of the app as a string.
-        
-        :returns: The version of the app.
+    Returns the version of the app as a string.
+    
+    :returns: The version of the app.
     */
     public class func appName(bundle: NSBundle = NSBundle.mainBundle()) -> String {
         return bundle.objectForInfoDictionaryKey("CFBundleName") as String

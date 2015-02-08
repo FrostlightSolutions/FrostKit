@@ -8,6 +8,9 @@
 
 import UIKit
 
+///
+/// The keychain helper allows access to the keychain for saving passwords safely.
+///
 public class KeychainHelper: NSObject {
     
     private class func setupSearchDirectory() -> NSMutableDictionary {
@@ -49,6 +52,13 @@ public class KeychainHelper: NSObject {
         return nil
     }
     
+    /**
+    Gets the details saved for a paticular username.
+    
+    :param: username The username of the details to return.
+    
+    :returns: The details saved with the username if found, otherwise `nil`.
+    */
     public class func details(#username: String) -> String? {
         
         let valueData = searchKeychainForMatchingData()
@@ -63,9 +73,17 @@ public class KeychainHelper: NSObject {
         return nil
     }
     
-    public class func setDetails(#password: String, username: String) -> Bool {
+    /**
+    Set details for a username to the keychain.
+    
+    :param: details  The details to save.
+    :param: username The username to reference the details with.
+    
+    :returns: Returns `true` if the details were successfully saved, `false` if not.
+    */
+    public class func setDetails(#details: String, username: String) -> Bool {
         
-        let valueDict = [username: password]
+        let valueDict = [username: details]
         let secDict = setupSearchDirectory()
         let valueData = NSKeyedArchiver.archivedDataWithRootObject(valueDict)
         secDict.setObject(valueData, forKey: String(kSecValueData))
@@ -104,6 +122,11 @@ public class KeychainHelper: NSObject {
         return false
     }
     
+    /**
+    Deletes the currently saved keychain.
+    
+    :returns: Returns `true` if deletion has succeeded or `false` if it failed.
+    */
     public class func deleteKeychain() -> Bool {
         
         let secDict = setupSearchDirectory()
