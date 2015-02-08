@@ -23,9 +23,9 @@ extension Address {
     :param: geoPoint         The PFGeoPoint to get the locational data from.
     :param: object           The PFObject to get the main data from.
     :param: nameKey          The key for the name string in the PFObject.
-    :param: simpleAddressKey The key for the simple address string in the PFObject.
+    :param: addressStringKey The key for the simple address string in the PFObject.
     */
-    public convenience init(geoPoint: PFGeoPoint, object: PFObject, nameKey: String? = nil, simpleAddressKey: String? = nil) {
+    public convenience init(geoPoint: PFGeoPoint, object: PFObject, nameKey: String? = nil, addressStringKey: String? = nil) {
         self.init()
         
         objectID = parseObject.objectId
@@ -37,9 +37,9 @@ extension Address {
             }
         }
         
-        if let key = simpleAddressKey {
-            if let simpleAddress = parseObject.objectForKey(key) as? String {
-                self.simpleAddress = simpleAddress
+        if let key = addressStringKey {
+            if let addressString = parseObject.objectForKey(key) as? String {
+                self.addressString = addressString
             }
         }
     }

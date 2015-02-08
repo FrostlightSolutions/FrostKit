@@ -17,7 +17,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     
     /// The request store for this data updater to manage it's request calls.
     public let requestStore = RequestStore()
-    /// The view controller this data updater is linked to. This can be set in IB and will automatically attempt to add a UIRefreshControl to a UITableViewController or UICollectionViewController.
+    /// The view controller this data updater is related to. This can be set in IB and will automatically attempt to add a UIRefreshControl to a UITableViewController or UICollectionViewController.
     @IBOutlet var viewController: UIViewController! {
         didSet {
             let refreshControl = UIRefreshControl()

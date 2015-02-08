@@ -97,7 +97,7 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
         
         if let address = objectAtIndexPath(indexPath) as? Address {
             cell?.textLabel?.text = address.name
-            cell?.detailTextLabel?.text  = address.simpleAddress
+            cell?.detailTextLabel?.text  = address.addressString
         } else if let item = objectAtIndexPath(indexPath) as? MKMapItem {
             cell?.textLabel?.text = item.name
             

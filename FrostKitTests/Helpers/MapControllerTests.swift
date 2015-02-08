@@ -15,7 +15,7 @@ class MapControllerTests: XCTestCase {
     
     let coordinate = CLLocationCoordinate2DMake(59.314446, 18.074375)
     let addressName = "Frostlight Solutions AB"
-    let simpleAddress = "Folkungagatan 49, 11622 Stockholm, SWEDEN"
+    let addressString = "Folkungagatan 49, 11622 Stockholm, SWEDEN"
     lazy var addressDictionary = NSDictionary()
     lazy var address = Address()
     lazy var annotation = Annotation()
@@ -24,7 +24,7 @@ class MapControllerTests: XCTestCase {
         super.setUp()
         
         // Put setup code here. This method is called before the invocation of each test method in the class.§
-        addressDictionary = ["latitude": coordinate.latitude, "longitude": coordinate.longitude, "name": addressName, "simpleAddress": simpleAddress]
+        addressDictionary = ["latitude": coordinate.latitude, "longitude": coordinate.longitude, "name": addressName, "addressString": addressString]
         address = Address(dictionary: addressDictionary)
         annotation = Annotation(address: address)
     }
@@ -76,11 +76,11 @@ class MapControllerTests: XCTestCase {
         }
     }
     
-    func testAddressSimpleAddress() {
-        if address.simpleAddress == simpleAddress {
+    func testAddressStringAddress() {
+        if address.addressString == addressString {
             XCTAssert(true, "Pass")
         } else {
-            XCTAssert(false, "Failed! Address simple address is '\(address.simpleAddress)' but should be '\(simpleAddress)'.")
+            XCTAssert(false, "Failed! Address simple address is '\(address.addressString)' but should be '\(addressString)'.")
         }
     }
     
