@@ -14,15 +14,15 @@ import UIKit
 extension UIBarButtonItem {
     
     /**
-        A convenience init for creating a bar button item with a title with a specific font.
+    A convenience init for creating a bar button item with a title with a specific font.
     
-        :param: title               The item’s title. If `nil` a title is not displayed.
-        :param: font                The font to use for rendering.
-        :param: verticalOffset      The vertical offset to apply to the `title`.
-        :param: target              The object that receives the `action` message.
-        :param: action              The action to send to `target` when this item is selected.
+    :param: title               The item’s title. If `nil` a title is not displayed.
+    :param: font                The font to use for rendering.
+    :param: verticalOffset      The vertical offset to apply to the `title`.
+    :param: target              The object that receives the `action` message.
+    :param: action              The action to send to `target` when this item is selected.
     
-        :returns: Newly initialized item with the specified properties..
+    :returns: Newly initialized item with the specified properties..
     */
     public convenience init(title: String?, font: UIFont, verticalOffset: CGFloat = 0, target: AnyObject?, action: Selector) {
 

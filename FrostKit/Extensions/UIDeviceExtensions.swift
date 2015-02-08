@@ -13,15 +13,22 @@ import UIKit
 ///
 extension UIDevice {
     
+    /**
+    *  Gets the system version in it's major, minor or path parts or in full.
+    */
     struct SystemVersion {
+        /// The full system version.
         static let version = UIDevice.currentDevice().systemVersion
         private static let versionComponents = version.componentsSeparatedByString(".")
+        /// The major system version.
         static var majorVersion: Int {
             return UIDevice.systemVersionAtIndex(0, components: versionComponents)
         }
+        /// The minor system version.
         static var minorVersion: Int {
             return UIDevice.systemVersionAtIndex(1, components: versionComponents)
         }
+        /// The minor path version.
         static var pathVersion: Int {
             return UIDevice.systemVersionAtIndex(2, components: versionComponents)
         }

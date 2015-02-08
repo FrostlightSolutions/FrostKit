@@ -160,12 +160,12 @@ extension NSDate {
     }
     
     /**
-        Returns the number of days between two dates
+    Returns the number of days between two dates
     
-        :param: fromDate    The first date to count days from
-        :param: toDate      The second date to count days to
+    :param: fromDate    The first date to count days from
+    :param: toDate      The second date to count days to
     
-        :returns: The number of days beteen `fromDate` and `toDate`
+    :returns: The number of days beteen `fromDate` and `toDate`
     */
     public class func daysBetweenDates(#fromDate: NSDate, toDate: NSDate) -> Int {
         
@@ -182,9 +182,9 @@ extension NSDate {
     }
     
     /**
-        Returns the number of days left in the current week assuming Monday is the start of the week and inclusive of today
+    Returns the number of days left in the current week assuming Monday is the start of the week and inclusive of today
     
-        :returns: The number of days left in the current week
+    :returns: The number of days left in the current week
     */
     public func daysRemainingInWeek() -> Int {
         
@@ -200,9 +200,9 @@ extension NSDate {
     }
     
     /**
-        Returns the number of days in the current month
-        
-        :returns: The number of days in the current month
+    Returns the number of days in the current month
+    
+    :returns: The number of days in the current month
     */
     public func daysInMonth() -> Int {
         
@@ -212,9 +212,9 @@ extension NSDate {
     }
     
     /**
-        Returns the number of days left in the month, inclusive of today
-        
-        :returns: The number of days left in the current month
+    Returns the number of days left in the month, inclusive of today
+    
+    :returns: The number of days left in the current month
     */
     public func daysRemainingInMonth() -> Int {
         
@@ -226,13 +226,15 @@ extension NSDate {
     // MARK: - Date Comparison
     
     /**
-        Compares two dates against each other depending on the date comparison type. This also take and extra variable that alows stripping of the time in the date.
+    Compares two dates against each other depending on the date comparison type. This also take and extra variable that alows stripping of the time in the date.
     
-        :param: date        The date to compare against
-        :param: option      The date comparison type defining the logic check. By default this is set to `EqualTo`.
-        :param: stripTime   Whether the time should be stipped from the date before the comparison. By default this is set to `true`.
+    Note: When passing in a DateCompareType as an option, it must always be prefixed with DateCompareType. Passing in the base only prefixed with `.` will cause the current build of Xcode (6.1.1) to throw an compiler error (sometimes).
     
-        :returns: `true` if the dates conform with the date comparison type check, `false` if not
+    :param: date        The date to compare against
+    :param: option      The date comparison type defining the logic check. By default this is set to `EqualTo`.
+    :param: stripTime   Whether the time should be stipped from the date before the comparison. By default this is set to `true`.
+    
+    :returns: `true` if the dates conform with the date comparison type check, `false` if not
     */
     public func compareToDate(date: NSDate, option: DateCompareType, stripTime: Bool = true) -> Bool {
         
@@ -264,22 +266,22 @@ extension NSDate {
     }
     
     /**
-        Helper method for the `Before` date comparison type used in `compareToDate(date:option:striptime:)`. This with compare with the time stripped.
-        
-        :param: date        The date to compare against
-        
-        :returns: `true` if the comparison date is before date, `false` if not
+    Helper method for the `Before` date comparison type used in `compareToDate(date:option:striptime:)`. This with compare with the time stripped.
+    
+    :param: date        The date to compare against
+    
+    :returns: `true` if the comparison date is before date, `false` if not
     */
     public func isBefore(#date: NSDate) -> Bool {
         return compareToDate(date, option: DateCompareType.Before)
     }
     
     /**
-        Helper method for the `After` date comparison type used in `compareToDate(date:option:striptime:)`. This with compare with the time stripped.
-        
-        :param: date        The date to compare against
-        
-        :returns: `true` if the comparison date is after date, `false` if not
+    Helper method for the `After` date comparison type used in `compareToDate(date:option:striptime:)`. This with compare with the time stripped.
+    
+    :param: date        The date to compare against
+    
+    :returns: `true` if the comparison date is after date, `false` if not
     */
     public func isAfter(#date: NSDate) -> Bool {
         return compareToDate(date, option: DateCompareType.After)
@@ -288,9 +290,9 @@ extension NSDate {
     // MARK: -
     
     /**
-        Creates a new object which is a copy of the current date but with time stripped out (set to midnight)
+    Creates a new object which is a copy of the current date but with time stripped out (set to midnight)
     
-        :returns: A copy of the current date with no time
+    :returns: A copy of the current date with no time
     */
     public func stripTime() -> NSDate {
         
@@ -306,11 +308,11 @@ extension NSDate {
     }
     
     /**
-        Creates a new object which is a copy of the current date but with a certain number of dats added to it
+    Creates a new object which is a copy of the current date but with a certain number of dats added to it
     
-        :param: days        The number of days to add to the new date
-        
-        :returns: A copy of the current date `days` added to it
+    :param: days        The number of days to add to the new date
+    
+    :returns: A copy of the current date `days` added to it
     */
     public func dateByAddingDays(days: Int) -> NSDate {
         
@@ -329,36 +331,36 @@ extension NSDate {
     // MARK: - Date Strings
     
     /**
-        A helper method for getting a formatted string of the date and time in `ShortStyle`
+    A helper method for getting a formatted string of the date and time in `ShortStyle`
     
-        :retuerns: A string of formatted date time in `ShortStyle`
+    :retuerns: A string of formatted date time in `ShortStyle`
     */
     public func dateTimeShortString() -> String {
         return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
     }
     
     /**
-        A helper method for getting a formatted string of the date in `ShortStyle`
-        
-        :retuerns: A string of formatted date in `ShortStyle`
+    A helper method for getting a formatted string of the date in `ShortStyle`
+    
+    :retuerns: A string of formatted date in `ShortStyle`
     */
     public func dateShortString() -> String {
         return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .ShortStyle, timeStyle: .NoStyle)
     }
     
     /**
-        A helper method for getting a formatted string of the date in `FullStyle`
-        
-        :retuerns: A string of formatted date in `FullStyle`
+    A helper method for getting a formatted string of the date in `FullStyle`
+    
+    :retuerns: A string of formatted date in `FullStyle`
     */
     public func dateFullString() -> String {
         return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .FullStyle, timeStyle: .NoStyle)
     }
     
     /**
-        A helper method for getting a formatted string of the time in `ShortStyle`
-        
-        :retuerns: A string of formatted time in `ShortStyle`
+    A helper method for getting a formatted string of the time in `ShortStyle`
+    
+    :retuerns: A string of formatted time in `ShortStyle`
     */
     public func timeShortString() -> String {
         return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .NoStyle, timeStyle: .ShortStyle)

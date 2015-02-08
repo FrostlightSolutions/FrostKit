@@ -12,7 +12,7 @@ import Alamofire
 /// 
 /// The request store keeps track of all requests passed into it. It stops duplicate requests being called by canceling any already running requests passed to it, until they are done and removed.
 /// 
-/// It will however be able to differentuate between different page requests, and so not cancel a page 'n' request if page 'n+1' is also requested.
+/// It will however be able to differentuate between different page requests, and so not cancel a page `n` request if page `n+1` is also requested.
 ///
 public class RequestStore: NSObject {
     

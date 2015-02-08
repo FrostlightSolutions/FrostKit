@@ -14,9 +14,9 @@ import UIKit
 extension UIView {
     
     /**
-        Returns a screen shot of the view.
+    Returns a screen shot of the view.
     
-        :returns: A screen shot of the view.
+    :returns: A screen shot of the view.
     */
     public func screenshot() -> UIImage {
         
