@@ -77,14 +77,8 @@ DataStore.swift
 UIViewController.h
 	class UIViewController : UIResponder, NSCoding, UIAppearanceContainer, NSObjectProtocol, UITraitEnvironment, UIContentContainer
 SocialHelper.swift
-	public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate
 	struct Singleton
 	static let instance : SocialHelper = SocialHelper()
-	override init()
-	public class func presentComposeViewController(serviceType: String, initialText: String? = nil, urls: [NSURL]? = nil, images: [UIImage]? = nil, inViewController viewController: UIViewController, animated: Bool = true)
-	public class func phonePromptFormattedURL(#number: String) -> NSURL?
-	public class func emailPrompt(#toRecipients: [String], ccRecipients: [String] = [], bccRecipients: [String] = [], subject: String = "", messageBody: String = "", isBodyHTML: Bool = false, attachments: [(data: NSData, mimeType: String, fileName: String)] = [], viewController: UIViewController, animated: Bool = true)
-	public class func messagePrompt(#recipients: [String], subject: String = "", body: String = "", attachments: [(attachmentURL: NSURL, alternateFilename: String)] = [], viewController: UIViewController, animated: Bool = true)
 	public func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!)
 	public func messageComposeViewController(controller: MFMessageComposeViewController!, didFinishWithResult result: MessageComposeResult)
 	public func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int)
@@ -120,35 +114,7 @@ ImageCache.swift
 	struct Singleton
 	static let instance : ImageCache = ImageCache()
 MapController.swift
-	public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate
-	public let identifier = "FrostKitAnnotation"
-	@IBOutlet public weak var viewController: UIViewController!
-	@IBOutlet public weak var mapView: MKMapView!
-	@IBInspectable var autoAssingDelegate: Bool = true
-	public var trackingUser: Bool = false
-	public var locationManager: CLLocationManager?
-	public var addresses = Array<Address>()
-	public var annotations = Dictionary<Address, Annotation>()
 	deinit
-	public func resetMap()
-	public func plotAddresses(addresses: [Address])
-	public func plotAddress(address: Address)
-	public func removeAllAnnotations(includingCached: Bool = false)
-	public func clearData()
-	public func zoomToCoordinate(coordinare: CLLocationCoordinate2D)
-	public func zoomToAnnotation(annotation: MKAnnotation)
-	public func zoomToAnnotations(annotations: [MKAnnotation])
-	public func zoomToMapPoints(points: [MKMapPoint])
-	public func zoomToMapPoints(points: UnsafeMutablePointer<MKMapPoint>, count: Int)
-	public func zoomToRegion(var region: MKCoordinateRegion)
-	public func zoomToCurrentLocation()
-	public func zoomToShowAll(includingUser: Bool = true)
-	public func zoomToAddress(address: Address)
-	public func zoomToPolyline(polyline: MKPolyline)
-	public func removeAllPolylines()
-	public func directionsToCurrentLocationFrom(#coordinate: CLLocationCoordinate2D, inApp: Bool = true)
-	public func plotRoute(route: MKRoute)
-	public func normalizeRegionSpan(var span: MKCoordinateSpan) -> MKCoordinateSpan
 	public func mapView(mapView: MKMapView!, viewForAnnotation anno: MKAnnotation!) -> MKAnnotationView!
 	public func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!)
 	public func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer!
@@ -156,45 +122,19 @@ MapController.swift
 	public func mapView(mapView: MKMapView!, didChangeUserTrackingMode mode: MKUserTrackingMode, animated: Bool)
 	public func mapView(mapView: MKMapView!, didFailToLocateUserWithError error: NSError!)
 	public func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int)
-	public func searchAddresses(searchString: String) -> [Address]
-	public class Address: NSObject
-	public var objectID: String?
-	public var coordinate = CLLocationCoordinate2DMake(0.0, 0.0)
-	public var latitude: CLLocationDegrees
-	public var longitude: CLLocationDegrees
-	public var isValid: Bool
-	public var name = ""
-	public var simpleAddress = ""
-	override public var description: String
 	override public var hash: Int
 	override init()
 	public convenience init(dictionary: NSDictionary)
-	public class func addressesFromArrayOfDictionaries(array: [NSDictionary]) -> [Address]
 	public func isEqualToAddress(object: Address?) -> Bool
 	public override func isEqual(object: AnyObject?) -> Bool
-	public class Annotation: NSObject, MKAnnotation
-	public lazy var address = Address()
-	public var coordinate: CLLocationCoordinate2D
-	public var title: String
-	public var subtitle: String
 	public override init()
 	public convenience init(address: Address)
-	public func updateAddress(address: Address)
 UIFont.h
 	class UIFont : NSObject, NSCopying
 MapViewController.swift
-	public class MapViewController: UIViewController, UIActionSheetDelegate
-	@IBOutlet public weak var mapController: MapController!
-	@IBInspectable public var locationButton: Bool = true
-	@IBInspectable public var searchButton: Bool = true
-	public var searchController: UISearchController!
 	override public func viewDidLoad()
 	override public func viewDidAppear(animated: Bool)
 	override public func didReceiveMemoryWarning()
-	internal func updateNavigationButtons(animated: Bool = true)
-	public func updateAddresses()
-	@IBAction public func locationButtonPressed(sender: UIBarButtonItem)
-	@IBAction public func searchButtonPressed(sender: UIBarButtonItem)
 	public func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int)
 ContentManager.swift
 	struct Singleton
@@ -203,22 +143,11 @@ UIBarButtonItem.h
 	class UIBarButtonItem : UIBarItem, NSCoding
 UIBarButtonItemExtensions.swift
 	public convenience init(title: String?, font: UIFont, verticalOffset: CGFloat = 0, target: AnyObject?, action: Selector)
-KeychainHelper.swift
-	public class KeychainHelper: NSObject
-	public class func details(#username: String) -> String?
-	public class func setDetails(#password: String, username: String) -> Bool
-	public class func deleteKeychain() -> Bool
 NSCalendar.h
 	class NSCalendar : NSObject, NSCopying, NSSecureCoding, NSCoding
 MapSearchViewController.swift
-	public class MapSearchViewController: UITableViewController, UISearchControllerDelegate, UISearchBarDelegate
-	public let identifier = "FrostKitMapSearchCell"
-	public weak var mapController: MapController?
-	public weak var searchController: UISearchController?
-	public var searchBar: UISearchBar?
 	override public func viewDidLoad()
 	override public func didReceiveMemoryWarning()
-	public func objectAtIndexPath(indexPath: NSIndexPath) -> AnyObject?
 	override public func numberOfSectionsInTableView(tableView: UITableView) -> Int
 	override public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	override public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
