@@ -1,69 +1,79 @@
 UIWebViewController.swift
-	class UIWebViewController: BaseWebViewController, UIWebViewDelegate
-	override var URL: NSURL?
-	override var loading: Bool
-	override func stopLoading()
 	override func viewDidLoad()
-	override func refreshButtonPressed(sender: AnyObject?)
-	override func backButtonPressed(sender: AnyObject?)
-	override func forwardButtonPressed(sender: AnyObject?)
 	func webViewDidStartLoad(webView: UIWebView)
 	func webViewDidFinishLoad(webView: UIWebView)
 	func webView(webView: UIWebView, didFailLoadWithError error: NSError)
-	override func loadBaseURL() -> String
+FontConstants.swift
+	public let ionicon_alert = "\u{f101}"
+	public let fa_adjust = "\u{f042}"
 NSDate.h
 	class NSDate : NSObject, NSCopying, NSSecureCoding, NSCoding
 WKWebViewController.swift
-	class WKWebViewController: BaseWebViewController, WKNavigationDelegate
-	override var URL: NSURL?
-	override var titleOverride: String?
-	override var loading: Bool
-	override func stopLoading()
 	override func viewDidLoad()
 	deinit
 	override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>)
-	override func refreshButtonPressed(sender: AnyObject?)
-	override func backButtonPressed(sender: AnyObject?)
-	override func forwardButtonPressed(sender: AnyObject?)
 	func webView(webView: WKWebView!, decidePolicyForNavigationAction navigationAction: WKNavigationAction!, decisionHandler: ((WKNavigationActionPolicy) -> Void)!)
-	override func loadBaseURL() -> String
 NSTimeZone.h
 	class NSTimeZone : NSObject, NSCopying, NSSecureCoding, NSCoding
+DeveloperTools.swift
+	public class DeveloperTools: NSObject
+	public class var shared: DeveloperTools
+	struct Singleton
+	static let instance : DeveloperTools = DeveloperTools()
+	internal var numberOfBaseURLs: Int
+	override init()
+	public class func registerViewController(viewController: UIViewController)
+	func registerViewController(viewController: UIViewController)
+	public class func unregisterViewController(viewController: UIViewController)
+	func unregisterViewController(viewController: UIViewController)
+	internal func unlockPhaseOne(sender: AnyObject)
+	internal func unlockPhaseTwo(sender: AnyObject)
+	internal func unlockPhaseThree(sender: AnyObject)
+	internal func reset()
+	public class func baseURL() -> String
+	func baseURLFromIndex(index: Int) -> String?
+	func setBaseURLIndex(index: Int)
+	func setCustomURL(customURL: String)
+	public class func oAuthClientToken() -> String
+	public class func oAuthClientSecret() -> String
+DeveloperToolsRoot.swift
+	class DeveloperToolsRoot: UITableViewController
+	override func viewDidLoad()
+	override func didReceiveMemoryWarning()
+	@IBAction func cancelButtonPressed(sender: AnyObject)
+	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+DeveloperToolsBaseURL.swift
+	class DeveloperToolsBaseURL: UITableViewController, UITextFieldDelegate
+	var customURLTextField: UITextField?
+	override func viewDidLoad()
+	override func viewDidAppear(animated: Bool)
+	override func didReceiveMemoryWarning()
+	override func numberOfSectionsInTableView(tableView: UITableView) -> Int
+	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+	override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath)
+	func textFieldDidBeginEditing(textField: UITextField)
+	func textFieldDidEndEditing(textField: UITextField)
+	func textFieldShouldReturn(textField: UITextField) -> Bool
 BaseWebViewController.swift
-	internal var webView: AnyObject?
-	internal let progrssView = UIProgressView(progressViewStyle: .Bar)
-	var urlString: String?
-	var URL: NSURL?
-	var titleOverride: String?
-	var loading: Bool
-	func stopLoading()
 	public override func viewDidLoad()
 	public override func viewWillDisappear(animated: Bool)
 	public override func viewDidDisappear(animated: Bool)
 	public override func didReceiveMemoryWarning()
-	func doneButtonPressed(sender: AnyObject?)
-	func backButtonPressed(sender: AnyObject?)
-	func forwardButtonPressed(sender: AnyObject?)
-	func refreshButtonPressed(sender: AnyObject?)
-	func actionButtonPressed(sender: AnyObject?)
-	func setupToolbar()
-	func updateProgrssViewVisability()
-	func updateActivityViewVisability()
-	func updateBackButton()
-	func updateForwardButton()
-	func updateBackForwardButtons()
-	func loadBaseURL() -> String
-PagedStore.swift
-	protocol PagedArrayDelegate
-	func pagedArray(pagedArray: PagedStore, willAccessIndex: Int, returnObject: AnyObject)
-	override init()
-	convenience init(store: PagedStore)
-	convenience init(totalCount: Int, objectsPerPage: Int)
-	convenience init(json: NSDictionary, objectsPerPage: Int)
-	convenience init(nonPagedObjects: NSArray)
-	required init(coder aDecoder: NSCoder)
-	func encodeWithCoder(aCoder: NSCoder)
-	func copyWithZone(zone: NSZone) -> AnyObject
+DataStore.swift
+	override public var hash: Int
+	init(store: DataStore)
+	public init(totalCount: Int, objectsPerPage: Int)
+	convenience public init(json: NSDictionary)
+	convenience public init(nonPagedObjects: NSArray)
+	convenience public init(dictionary: NSDictionary)
+	convenience public init(object: AnyObject)
+	required public init(coder aDecoder: NSCoder)
+	public func encodeWithCoder(aCoder: NSCoder)
+	public func copyWithZone(zone: NSZone) -> AnyObject
+	public func isEqualToDataStore(object: DataStore?) -> Bool
+	public override func isEqual(object: AnyObject?) -> Bool
 UIViewController.h
 	class UIViewController : UIResponder, NSCoding, UIAppearanceContainer, NSObjectProtocol, UITraitEnvironment, UIContentContainer
 SocialHelper.swift
@@ -72,7 +82,7 @@ SocialHelper.swift
 	static let instance : SocialHelper = SocialHelper()
 	override init()
 	public class func presentComposeViewController(serviceType: String, initialText: String? = nil, urls: [NSURL]? = nil, images: [UIImage]? = nil, inViewController viewController: UIViewController, animated: Bool = true)
-	public class func phonePrompt(#number: String)
+	public class func phonePromptFormattedURL(#number: String) -> NSURL?
 	public class func emailPrompt(#toRecipients: [String], ccRecipients: [String] = [], bccRecipients: [String] = [], subject: String = "", messageBody: String = "", isBodyHTML: Bool = false, attachments: [(data: NSData, mimeType: String, fileName: String)] = [], viewController: UIViewController, animated: Bool = true)
 	public class func messagePrompt(#recipients: [String], subject: String = "", body: String = "", attachments: [(attachmentURL: NSURL, alternateFilename: String)] = [], viewController: UIViewController, animated: Bool = true)
 	public func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!)
@@ -100,11 +110,92 @@ FrostKit.swift
 	struct Singleton
 	static let instance : FrostKit = FrostKit()
 	init()
+DataUpdater.swift
+	convenience public init(viewController: UIViewController, tableView: UITableView)
+	convenience public init(viewController: UIViewController, collectionView: UICollectionView)
+	public func dataStore(dataStore: DataStore, willAccessPage page: Int)
+UIDevice.h
+	class UIDevice : NSObject
 ImageCache.swift
 	struct Singleton
 	static let instance : ImageCache = ImageCache()
+MapController.swift
+	public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate
+	public let identifier = "FrostKitAnnotation"
+	@IBOutlet public weak var viewController: UIViewController!
+	@IBOutlet public weak var mapView: MKMapView!
+	@IBInspectable var autoAssingDelegate: Bool = true
+	public var trackingUser: Bool = false
+	public var locationManager: CLLocationManager?
+	public var addresses = Array<Address>()
+	public var annotations = Dictionary<Address, Annotation>()
+	deinit
+	public func resetMap()
+	public func plotAddresses(addresses: [Address])
+	public func plotAddress(address: Address)
+	public func removeAllAnnotations(includingCached: Bool = false)
+	public func clearData()
+	public func zoomToCoordinate(coordinare: CLLocationCoordinate2D)
+	public func zoomToAnnotation(annotation: MKAnnotation)
+	public func zoomToAnnotations(annotations: [MKAnnotation])
+	public func zoomToMapPoints(points: [MKMapPoint])
+	public func zoomToMapPoints(points: UnsafeMutablePointer<MKMapPoint>, count: Int)
+	public func zoomToRegion(var region: MKCoordinateRegion)
+	public func zoomToCurrentLocation()
+	public func zoomToShowAll(includingUser: Bool = true)
+	public func zoomToAddress(address: Address)
+	public func zoomToPolyline(polyline: MKPolyline)
+	public func removeAllPolylines()
+	public func directionsToCurrentLocationFrom(#coordinate: CLLocationCoordinate2D, inApp: Bool = true)
+	public func plotRoute(route: MKRoute)
+	public func normalizeRegionSpan(var span: MKCoordinateSpan) -> MKCoordinateSpan
+	public func mapView(mapView: MKMapView!, viewForAnnotation anno: MKAnnotation!) -> MKAnnotationView!
+	public func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!)
+	public func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer!
+	public func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!)
+	public func mapView(mapView: MKMapView!, didChangeUserTrackingMode mode: MKUserTrackingMode, animated: Bool)
+	public func mapView(mapView: MKMapView!, didFailToLocateUserWithError error: NSError!)
+	public func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int)
+	public func searchAddresses(searchString: String) -> [Address]
+	public class Address: NSObject
+	public var objectID: String?
+	public var coordinate = CLLocationCoordinate2DMake(0.0, 0.0)
+	public var latitude: CLLocationDegrees
+	public var longitude: CLLocationDegrees
+	public var isValid: Bool
+	public var name = ""
+	public var simpleAddress = ""
+	override public var description: String
+	override public var hash: Int
+	override init()
+	public convenience init(dictionary: NSDictionary)
+	public class func addressesFromArrayOfDictionaries(array: [NSDictionary]) -> [Address]
+	public func isEqualToAddress(object: Address?) -> Bool
+	public override func isEqual(object: AnyObject?) -> Bool
+	public class Annotation: NSObject, MKAnnotation
+	public lazy var address = Address()
+	public var coordinate: CLLocationCoordinate2D
+	public var title: String
+	public var subtitle: String
+	public override init()
+	public convenience init(address: Address)
+	public func updateAddress(address: Address)
 UIFont.h
 	class UIFont : NSObject, NSCopying
+MapViewController.swift
+	public class MapViewController: UIViewController, UIActionSheetDelegate
+	@IBOutlet public weak var mapController: MapController!
+	@IBInspectable public var locationButton: Bool = true
+	@IBInspectable public var searchButton: Bool = true
+	public var searchController: UISearchController!
+	override public func viewDidLoad()
+	override public func viewDidAppear(animated: Bool)
+	override public func didReceiveMemoryWarning()
+	internal func updateNavigationButtons(animated: Bool = true)
+	public func updateAddresses()
+	@IBAction public func locationButtonPressed(sender: UIBarButtonItem)
+	@IBAction public func searchButtonPressed(sender: UIBarButtonItem)
+	public func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int)
 ContentManager.swift
 	struct Singleton
 	static let instance : ContentManager = ContentManager()
@@ -119,9 +210,24 @@ KeychainHelper.swift
 	public class func deleteKeychain() -> Bool
 NSCalendar.h
 	class NSCalendar : NSObject, NSCopying, NSSecureCoding, NSCoding
+MapSearchViewController.swift
+	public class MapSearchViewController: UITableViewController, UISearchControllerDelegate, UISearchBarDelegate
+	public let identifier = "FrostKitMapSearchCell"
+	public weak var mapController: MapController?
+	public weak var searchController: UISearchController?
+	public var searchBar: UISearchBar?
+	override public func viewDidLoad()
+	override public func didReceiveMemoryWarning()
+	public func objectAtIndexPath(indexPath: NSIndexPath) -> AnyObject?
+	override public func numberOfSectionsInTableView(tableView: UITableView) -> Int
+	override public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+	override public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+	public override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+	public func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
+	public func searchBarSearchButtonClicked(searchBar: UISearchBar)
+	public func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int)
 ServiceClient.swift
-	public class ServiceClient: NSObject
-	class func request(URLString: URLStringConvertible, method: Alamofire.Method = .GET, parameters: [String : AnyObject]? = nil, encoding: Alamofire.ParameterEncoding = .URL, completed: (error: NSError?) -> ()) -> Alamofire.Request
+	var page: Int?
 OAuthToken.swift
 	override init()
 	convenience init(oAuthToken: OAuthToken)
@@ -129,3 +235,5 @@ OAuthToken.swift
 	public required convenience init(coder aDecoder: NSCoder)
 	public func encodeWithCoder(aCoder: NSCoder)
 	public func copyWithZone(zone: NSZone) -> AnyObject
+UICollectionViewController.h
+	class UICollectionViewController : UIViewController, UICollectionViewDelegate, UIScrollViewDelegate, NSObjectProtocol, UICollectionViewDataSource

@@ -24,7 +24,7 @@
     <a title="WKWebViewController Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p class="header-text"><a href="../index.html">FrostKit Docs</a> (55% documented)</p>
+        <p class="header-text"><a href="../index.html">FrostKit Docs</a> (52% documented)</p>
         <p id="header-links"><a href="https://github.com/FrostlightSolutions/FrostKit"><img id="header-icon" src="../img/gh.png" height="16px" width="16px" />View on GitHub</a></p>
       </div>
     </header>
@@ -44,6 +44,12 @@
           <a href="../Classes.html">Classes</a>
             <ul class="nav-chapters">
               <li class="nav-chapter">
+                <a href="../Classes/Address.html">Address</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/Annotation.html">Annotation</a>
+              </li>
+              <li class="nav-chapter">
                 <a href="../Classes/BaseWebViewController.html">BaseWebViewController</a>
               </li>
               <li class="nav-chapter">
@@ -51,6 +57,21 @@
               </li>
               <li class="nav-chapter">
                 <a href="../Classes/CustomFonts.html">CustomFonts</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/DataStore.html">DataStore</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/DataUpdater.html">DataUpdater</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/DeveloperTools.html">DeveloperTools</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/DeveloperToolsBaseURL.html">DeveloperToolsBaseURL</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/DeveloperToolsRoot.html">DeveloperToolsRoot</a>
               </li>
               <li class="nav-chapter">
                 <a href="../Classes/FrostKit.html">FrostKit</a>
@@ -65,10 +86,19 @@
                 <a href="../Classes/LocalStorage.html">LocalStorage</a>
               </li>
               <li class="nav-chapter">
+                <a href="../Classes/MapController.html">MapController</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/MapSearchViewController.html">MapSearchViewController</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/MapViewController.html">MapViewController</a>
+              </li>
+              <li class="nav-chapter">
                 <a href="../Classes/OAuthToken.html">OAuthToken</a>
               </li>
               <li class="nav-chapter">
-                <a href="../Classes/PagedStore.html">PagedStore</a>
+                <a href="../Classes/RequestStore.html">RequestStore</a>
               </li>
               <li class="nav-chapter">
                 <a href="../Classes/ServiceClient.html">ServiceClient</a>
@@ -88,6 +118,17 @@
             </ul>
           </li>
           <li class="part-name tasks">
+          <a href="../Global Variables.html">Global Variables</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Global Variables.html#/s:v8FrostKit9fa_adjustSS">fa_adjust</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Global Variables.html#/s:v8FrostKit13ionicon_alertSS">ionicon_alert</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
           <a href="../Enums.html">Enums</a>
             <ul class="nav-chapters">
               <li class="nav-chapter">
@@ -95,6 +136,9 @@
               </li>
               <li class="nav-chapter">
                 <a href="../Enums/Location.html">Location</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Enums/Router.html">Router</a>
               </li>
               <li class="nav-chapter">
                 <a href="../Enums/WebViewType.html">WebViewType</a>
@@ -126,7 +170,13 @@
                 <a href="../Extensions/UIBarButtonItem.html">UIBarButtonItem</a>
               </li>
               <li class="nav-chapter">
+                <a href="../Extensions/UICollectionViewController.html">UICollectionViewController</a>
+              </li>
+              <li class="nav-chapter">
                 <a href="../Extensions/UIColor.html">UIColor</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/UIDevice.html">UIDevice</a>
               </li>
               <li class="nav-chapter">
                 <a href="../Extensions/UIFont.html">UIFont</a>
@@ -157,7 +207,7 @@
           <a href="../Protocols.html">Protocols</a>
             <ul class="nav-chapters">
               <li class="nav-chapter">
-                <a href="../Protocols/PagedArrayDelegate.html">PagedArrayDelegate</a>
+                <a href="../Protocols/DataStoreDelegate.html">DataStoreDelegate</a>
               </li>
             </ul>
           </li>
@@ -170,7 +220,7 @@
         <h1 class="chapter-name">WKWebViewController</h1>
         <section>
           <section class="section">
-            <p class="para">Undocumented</p>
+            <p class="para">A subclass of BaseWebViewController that wraps a WKWebView in a view controller.</p>
           </section>
           <section class="section task-group-section">
             <div class="task-group">
@@ -193,7 +243,16 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">The URL of the current page.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">override</span> <span class="k">var</span> <span class="nv">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">?</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -211,7 +270,16 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">The title to show in the navigation bar if something other than the loaded page&rsquo;s title is required.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">override</span> <span class="k">var</span> <span class="nv">titleOverride</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -229,7 +297,16 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">Returns <code>true</code> if the web view is currently loading, <code>false</code> if not.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">override</span> <span class="k">var</span> <span class="nv">loading</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -247,7 +324,16 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">Stops the web view from being loaded any more.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">stopLoading</span><span class="p">()</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -345,7 +431,35 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">Refrshes the web view when the refresh button is pressed in the toolbar.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">refreshButtonPressed</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The bar button item pressed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -363,7 +477,35 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">Requests the web view go back a page.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">backButtonPressed</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The bar button item pressed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -381,7 +523,35 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">Requests the web view go forward a page.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">forwardButtonPressed</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The bar button item pressed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -443,7 +613,20 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">Creates a URL string, appending <code>http://</code> if the URL string does not already have it as a prefix and then loads the page in the web view.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">loadBaseURL</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para">The base URL string.</p>
                       </div>
                     </section>
                   </div>
@@ -453,7 +636,7 @@
           </section>
         </section>
         <section id="footer">
-          <p class="copyright">&copy; 2015 <a class="link" href="" target="_blank" rel="external">James Barrow</a>. All rights reserved. (Last updated: 2015-01-21)</p>
+          <p class="copyright">&copy; 2015 <a class="link" href="" target="_blank" rel="external">James Barrow</a>. All rights reserved. (Last updated: 2015-02-08)</p>
           <p class="copyright">Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.0.20</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -24,7 +24,7 @@
     <a title="BaseWebViewController Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p class="header-text"><a href="../index.html">FrostKit Docs</a> (55% documented)</p>
+        <p class="header-text"><a href="../index.html">FrostKit Docs</a> (52% documented)</p>
         <p id="header-links"><a href="https://github.com/FrostlightSolutions/FrostKit"><img id="header-icon" src="../img/gh.png" height="16px" width="16px" />View on GitHub</a></p>
       </div>
     </header>
@@ -44,6 +44,12 @@
           <a href="../Classes.html">Classes</a>
             <ul class="nav-chapters">
               <li class="nav-chapter">
+                <a href="../Classes/Address.html">Address</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/Annotation.html">Annotation</a>
+              </li>
+              <li class="nav-chapter">
                 <a href="../Classes/BaseWebViewController.html">BaseWebViewController</a>
               </li>
               <li class="nav-chapter">
@@ -51,6 +57,21 @@
               </li>
               <li class="nav-chapter">
                 <a href="../Classes/CustomFonts.html">CustomFonts</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/DataStore.html">DataStore</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/DataUpdater.html">DataUpdater</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/DeveloperTools.html">DeveloperTools</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/DeveloperToolsBaseURL.html">DeveloperToolsBaseURL</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/DeveloperToolsRoot.html">DeveloperToolsRoot</a>
               </li>
               <li class="nav-chapter">
                 <a href="../Classes/FrostKit.html">FrostKit</a>
@@ -65,10 +86,19 @@
                 <a href="../Classes/LocalStorage.html">LocalStorage</a>
               </li>
               <li class="nav-chapter">
+                <a href="../Classes/MapController.html">MapController</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/MapSearchViewController.html">MapSearchViewController</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/MapViewController.html">MapViewController</a>
+              </li>
+              <li class="nav-chapter">
                 <a href="../Classes/OAuthToken.html">OAuthToken</a>
               </li>
               <li class="nav-chapter">
-                <a href="../Classes/PagedStore.html">PagedStore</a>
+                <a href="../Classes/RequestStore.html">RequestStore</a>
               </li>
               <li class="nav-chapter">
                 <a href="../Classes/ServiceClient.html">ServiceClient</a>
@@ -88,6 +118,17 @@
             </ul>
           </li>
           <li class="part-name tasks">
+          <a href="../Global Variables.html">Global Variables</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Global Variables.html#/s:v8FrostKit9fa_adjustSS">fa_adjust</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Global Variables.html#/s:v8FrostKit13ionicon_alertSS">ionicon_alert</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
           <a href="../Enums.html">Enums</a>
             <ul class="nav-chapters">
               <li class="nav-chapter">
@@ -95,6 +136,9 @@
               </li>
               <li class="nav-chapter">
                 <a href="../Enums/Location.html">Location</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Enums/Router.html">Router</a>
               </li>
               <li class="nav-chapter">
                 <a href="../Enums/WebViewType.html">WebViewType</a>
@@ -126,7 +170,13 @@
                 <a href="../Extensions/UIBarButtonItem.html">UIBarButtonItem</a>
               </li>
               <li class="nav-chapter">
+                <a href="../Extensions/UICollectionViewController.html">UICollectionViewController</a>
+              </li>
+              <li class="nav-chapter">
                 <a href="../Extensions/UIColor.html">UIColor</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Extensions/UIDevice.html">UIDevice</a>
               </li>
               <li class="nav-chapter">
                 <a href="../Extensions/UIFont.html">UIFont</a>
@@ -157,7 +207,7 @@
           <a href="../Protocols.html">Protocols</a>
             <ul class="nav-chapters">
               <li class="nav-chapter">
-                <a href="../Protocols/PagedArrayDelegate.html">PagedArrayDelegate</a>
+                <a href="../Protocols/DataStoreDelegate.html">DataStoreDelegate</a>
               </li>
             </ul>
           </li>
@@ -193,7 +243,43 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">The web view. This will either be UIWebView or WKWebView depending on the requested type.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">webView</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC8FrostKit21BaseWebViewController21activityIndicatorViewGSQCSo23UIActivityIndicatorView_">
+                    <a name="//apple_ref/swift/Property/activityIndicatorView" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC8FrostKit21BaseWebViewController21activityIndicatorViewGSQCSo23UIActivityIndicatorView_">activityIndicatorView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">The activity indicator view showing if the web view is loading or not.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">let</span> <span class="nv">activityIndicatorView</span> <span class="o">=</span> <span class="kt">UIActivityIndicatorView</span><span class="p">(</span><span class="nv">activityIndicatorStyle</span><span class="p">:</span> <span class="o">.</span><span class="kt">Gray</span><span class="p">)</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -211,7 +297,70 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">The progress view to show the percent a web view has loaded. This will only be used in a WKWebView based controller.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">let</span> <span class="nv">progrssView</span> <span class="o">=</span> <span class="kt">UIProgressView</span><span class="p">(</span><span class="nv">progressViewStyle</span><span class="p">:</span> <span class="o">.</span><span class="kt">Bar</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC8FrostKit21BaseWebViewController10backButtonGSqCSo15UIBarButtonItem_">
+                    <a name="//apple_ref/swift/Property/backButton" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC8FrostKit21BaseWebViewController10backButtonGSqCSo15UIBarButtonItem_">backButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">The back button for the toolbar.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">backButton</span><span class="p">:</span> <span class="kt">UIBarButtonItem</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC8FrostKit21BaseWebViewController13forwardButtonGSqCSo15UIBarButtonItem_">
+                    <a name="//apple_ref/swift/Property/forwardButton" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC8FrostKit21BaseWebViewController13forwardButtonGSqCSo15UIBarButtonItem_">forwardButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">The forward button for the toolbar.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">forwardButton</span><span class="p">:</span> <span class="kt">UIBarButtonItem</span><span class="p">?</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -229,7 +378,16 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">The URL string to set for the page to be loaded.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">urlString</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -247,7 +405,16 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">The URL of the current page.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">?</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -265,7 +432,16 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">The title to show in the navigation bar if something other than the loaded page&rsquo;s title is required.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">titleOverride</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -283,7 +459,16 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">Returns <code>true</code> if the web view is currently loading, <code>false</code> if not.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">loading</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -301,7 +486,16 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">Stops the web view from being loaded any more.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">stopLoading</span><span class="p">()</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -404,43 +598,35 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">Dismissed the current view if presented modally.</p>
                       </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item symbol">
-                  <div class="task-group-term">
-                    <code>
-                    <a name="/s:FC8FrostKit21BaseWebViewController17backButtonPressedFS0_FGSqPSs9AnyObject__T_">
-                    <a name="//apple_ref/swift/Method/backButtonPressed(_:)" class="dashAnchor"></a>
-                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit21BaseWebViewController17backButtonPressedFS0_FGSqPSs9AnyObject__T_">backButtonPressed(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointy-thing-container"></div>
-                    <section class="section instance-method">
-                      <div class="pointy-thing"></div>
-                      <div class="abstract">
-                        <p class="para">Undocumented</p>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">doneButtonPressed</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">?)</span></code></pre>
+
+                        </div>
                       </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item symbol">
-                  <div class="task-group-term">
-                    <code>
-                    <a name="/s:FC8FrostKit21BaseWebViewController20forwardButtonPressedFS0_FGSqPSs9AnyObject__T_">
-                    <a name="//apple_ref/swift/Method/forwardButtonPressed(_:)" class="dashAnchor"></a>
-                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit21BaseWebViewController20forwardButtonPressedFS0_FGSqPSs9AnyObject__T_">forwardButtonPressed(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointy-thing-container"></div>
-                    <section class="section instance-method">
-                      <div class="pointy-thing"></div>
-                      <div class="abstract">
-                        <p class="para">Undocumented</p>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The bar button item pressed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -458,7 +644,127 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">Refrshes the web view when the refresh button is pressed in the toolbar.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">refreshButtonPressed</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The bar button item pressed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit21BaseWebViewController17backButtonPressedFS0_FGSqPSs9AnyObject__T_">
+                    <a name="//apple_ref/swift/Method/backButtonPressed(_:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit21BaseWebViewController17backButtonPressedFS0_FGSqPSs9AnyObject__T_">backButtonPressed(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Requests the web view go back a page.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">backButtonPressed</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The bar button item pressed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC8FrostKit21BaseWebViewController20forwardButtonPressedFS0_FGSqPSs9AnyObject__T_">
+                    <a name="//apple_ref/swift/Method/forwardButtonPressed(_:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC8FrostKit21BaseWebViewController20forwardButtonPressedFS0_FGSqPSs9AnyObject__T_">forwardButtonPressed(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Requests the web view go forward a page.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">forwardButtonPressed</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The bar button item pressed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -476,7 +782,35 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">Calls and presents a UIActivityViewController.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">actionButtonPressed</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The bar button item pressed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -507,7 +841,16 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">Sets up the toolbar with the required buttons and actions for them.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">setupToolbar</span><span class="p">()</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -525,7 +868,16 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">Updates the progress view with the current loading % of the web view if available, otherwise it hides the progress view.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">updateProgrssViewVisability</span><span class="p">()</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -543,7 +895,16 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">Updates the activity indicator view of the web view if available, otherwise it hides the activity indicator view.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">updateActivityViewVisability</span><span class="p">()</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -561,7 +922,16 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">Updates the back button in the toolbar depending on if it should be active or not.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">updateBackButton</span><span class="p">()</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -579,7 +949,16 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">Updates the forward button in the toolbar depending on if it should be active or not.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">updateForwardButton</span><span class="p">()</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -597,7 +976,16 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">Updates the back and forwards button in the toolbar depending on if they should be active or not.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">updateBackForwardButtons</span><span class="p">()</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -628,7 +1016,20 @@
                     <section class="section instance-method">
                       <div class="pointy-thing"></div>
                       <div class="abstract">
-                        <p class="para">Undocumented</p>
+                        <p class="para">Creates a URL string, appending <code>http://</code> if the URL string does not already have it as a prefix.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">loadBaseURL</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para">The base URL string.</p>
                       </div>
                     </section>
                   </div>
@@ -638,7 +1039,7 @@
           </section>
         </section>
         <section id="footer">
-          <p class="copyright">&copy; 2015 <a class="link" href="" target="_blank" rel="external">James Barrow</a>. All rights reserved. (Last updated: 2015-01-21)</p>
+          <p class="copyright">&copy; 2015 <a class="link" href="" target="_blank" rel="external">James Barrow</a>. All rights reserved. (Last updated: 2015-02-08)</p>
           <p class="copyright">Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.0.20</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
