@@ -16,14 +16,15 @@ import UIKit
 ///
 public class ImageCache: NSObject {
     
+    /// The cache store for the images.
     private let cache = NSCache()
     
     // MARK: - Singleton
     
     /**
-        Returns the shared image cache object.
+    Returns the shared image cache object.
     
-        :returns: The shared image cache object.
+    :returns: The shared image cache object.
     */
     public class var shared: ImageCache {
         struct Singleton {
@@ -33,14 +34,14 @@ public class ImageCache: NSObject {
     }
     
     /**
-        Load an image from cache. If the image is not available in cache then it will be attempted to be loaded from the local store.
-        This is a private method. Use the public class method from outside this class.
+    Load an image from cache. If the image is not available in cache then it will be attempted to be loaded from the local store.
+    This is a private method. Use the public class method from outside this class.
     
-        :param: directory       The search path directory to use.
-        :param: reletivePath    The reletive path to of the file or directory.
-        :param: fileName        The name of the file (including the extension).
+    :param: directory       The search path directory to use.
+    :param: reletivePath    The reletive path to of the file or directory.
+    :param: fileName        The name of the file (including the extension).
     
-        :returns: The image at the absolute path made from the passed in argments or `nil` if not found.
+    :returns: The image at the absolute path made from the passed in argments or `nil` if not found.
     */
     private func loadImage(#directory: NSSearchPathDirectory, reletivePath: String, fileName: String) -> UIImage? {
         
@@ -78,26 +79,26 @@ public class ImageCache: NSObject {
     }
     
     /**
-        Load an image from cache. If the image is not available in cache then it will be attempted to be loaded from the local store.
-        
-        :param: directory       The search path directory to use.
-        :param: reletivePath    The reletive path to of the file or directory.
-        :param: fileName        The name of the file (including the extension).
-        :param: complete        A closure that returns the image at the absolute path made from the passed in argments or `nil` if not found.
+    Load an image from cache. If the image is not available in cache then it will be attempted to be loaded from the local store.
+    
+    :param: directory       The search path directory to use.
+    :param: reletivePath    The reletive path to of the file or directory.
+    :param: fileName        The name of the file (including the extension).
+    :param: complete        A closure that returns the image at the absolute path made from the passed in argments or `nil` if not found.
     */
     public func loadImage(#directory: NSSearchPathDirectory, reletivePath: String, fileName: String, complete: (UIImage?) -> ()) {
         complete(loadImage(directory: directory, reletivePath: reletivePath, fileName: fileName))
     }
     
     /**
-        Load a thumbnail image from cache. If the image is not available in cache then it will be attempted to be loaded from the local store.
-        This is a private method. Use the public class method from outside this class.
-        
-        :param: directory       The search path directory to use.
-        :param: reletivePath    The reletive path to of the file or directory.
-        :param: fileName        The name of the file (including the extension).
-        
-        :returns: The thumbnail image at the absolute path made from the passed in argments or `nil` if not found.
+    Load a thumbnail image from cache. If the image is not available in cache then it will be attempted to be loaded from the local store.
+    This is a private method. Use the public class method from outside this class.
+    
+    :param: directory       The search path directory to use.
+    :param: reletivePath    The reletive path to of the file or directory.
+    :param: fileName        The name of the file (including the extension).
+    
+    :returns: The thumbnail image at the absolute path made from the passed in argments or `nil` if not found.
     */
     private func loadTumbnailImage(#directory: NSSearchPathDirectory, reletivePath: String, fileName: String, size: CGSize) -> UIImage? {
         
@@ -133,18 +134,20 @@ public class ImageCache: NSObject {
     }
     
     /**
-        Load a thumbnail image from cache. If the image is not available in cache then it will be attempted to be loaded from the local store.
-        
-        :param: directory       The search path directory to use.
-        :param: reletivePath    The reletive path to of the file or directory.
-        :param: fileName        The name of the file (including the extension).
-        :param: complete        A closure that returns the image at the absolute path made from the passed in argments or `nil` if not found.
+    Load a thumbnail image from cache. If the image is not available in cache then it will be attempted to be loaded from the local store.
+    
+    :param: directory       The search path directory to use.
+    :param: reletivePath    The reletive path to of the file or directory.
+    :param: fileName        The name of the file (including the extension).
+    :param: complete        A closure that returns the image at the absolute path made from the passed in argments or `nil` if not found.
     */
     public func loadTumbnailImage(#directory: NSSearchPathDirectory, reletivePath: String, fileName: String, size: CGSize, complete: (UIImage?) -> ()) {
         complete(loadTumbnailImage(directory: directory, reletivePath: reletivePath, fileName: fileName, size: size))
     }
     
-    /// Clears all the images in the cache.
+    /**
+    Clears all the images in the cache.
+    */
     public func clearCache() {
         NSLog("Clearing image cache")
         cache.removeAllObjects()

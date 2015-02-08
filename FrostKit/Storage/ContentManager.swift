@@ -16,7 +16,6 @@ import UIKit
 ///
 public class ContentManager: NSObject {
     
-    // TODO: contentMetadata needs to be saved in a User.data object (once it's been added to the framework).
     // A dictioary holding the metadata for all managed objects, where the key is an absolute path and the value is the date.
     private let contentMetadata = NSMutableDictionary()
     
@@ -27,9 +26,9 @@ public class ContentManager: NSObject {
     // MARK: - Singleton
     
     /**
-        Returns the shared content manager object.
+    Returns the shared content manager object.
     
-        :returns: The shared content manager object.
+    :returns: The shared content manager object.
     */
     public class var shared: ContentManager {
         struct Singleton {
@@ -80,9 +79,9 @@ public class ContentManager: NSObject {
     }
     
     /**
-        Creates or updates metadata for an object at an absolute URL.
+    Creates or updates metadata for an object at an absolute URL.
     
-        :param: absoluteURL    The absolute URL of the item.
+    :param: absoluteURL    The absolute URL of the item.
     */
     public class func saveContentMetadata(#absoluteURL: NSURL) {
         if let absolutePath = absoluteURL.path {
@@ -91,18 +90,18 @@ public class ContentManager: NSObject {
     }
     
     /**
-        Creates or updates metadata for an object at an absolute path.
-        
-        :param: absolutePath    The absolute path of the item.
+    Creates or updates metadata for an object at an absolute path.
+    
+    :param: absolutePath    The absolute path of the item.
     */
     public class func saveContentMetadata(#absolutePath: String) {
         shared.contentMetadata.setObject(NSDate().copy(), forKey: absolutePath)
     }
     
     /**
-        Removed metadata for an object at an absolute URL.
-        
-        :param: absoluteURL    The absolute URL of the item.
+    Removed metadata for an object at an absolute URL.
+    
+    :param: absoluteURL    The absolute URL of the item.
     */
     public class func removeContentMetadata(#absoluteURL: NSURL) {
         if let absolutePath = absoluteURL.path {
@@ -111,9 +110,9 @@ public class ContentManager: NSObject {
     }
     
     /**
-        Removed metadata for an object at an absolute path.
-        
-        :param: absolutePath    The absolute path of the item.
+    Removed metadata for an object at an absolute path.
+    
+    :param: absolutePath    The absolute path of the item.
     */
     public class func removeContentMetadata(#absolutePath: String) {
         shared.contentMetadata.removeObjectForKey(absolutePath)

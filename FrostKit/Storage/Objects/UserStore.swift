@@ -15,7 +15,7 @@ import UIKit
 ///
 public class UserStore: NSObject, NSCoding {
 
-    /// THe OAuthToken for the current user.
+    /// The OAuthToken for the current user.
     private var oAuthToken: OAuthToken?
     /// Helper class variable to get the current OAuthToken.
     public class var oAuthToken: OAuthToken? {
@@ -87,6 +87,13 @@ public class UserStore: NSObject, NSCoding {
     
     // MARK: - Content Data Methods
     
+    /**
+    Gets the data store located in the user object for a paticular url string (usually an absolute path).
+    
+    :param: urlString The url string to use as a key.
+    
+    :returns: The data store or `nil` if none if found.
+    */
     public func dataStoreForURL(urlString: String) -> DataStore? {
         if shouldManageContentData == true {
             ContentManager.saveContentMetadata(absolutePath: urlString)
@@ -94,6 +101,12 @@ public class UserStore: NSObject, NSCoding {
         return contentData[urlString]
     }
     
+    /**
+    Sets the data store in the user object for a paticular url string (usually an absolute path).
+    
+    :param: dataStore The data store to set.
+    :param: urlString The url string to use as a key.
+    */
     public func setDataStore(dataStore: DataStore, urlString: String) {
         contentData[urlString] = dataStore
         if shouldManageContentData == true {
