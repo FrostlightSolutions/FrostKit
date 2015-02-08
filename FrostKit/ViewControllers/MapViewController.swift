@@ -8,11 +8,20 @@
 
 import UIKit
 
+///
+/// The map view controller is made to contain a map view and map controller and allow them to be presnted as a view controller.
+///
+/// This class is designed to be subclassed if more specific actions, such a updating the addresses or objects to plot.
+///
 public class MapViewController: UIViewController, UIActionSheetDelegate {
     
+    /// The map controller related to the map view controller.
     @IBOutlet public weak var mapController: MapController!
+    /// Dictates if the location button should be shown.
     @IBInspectable public var locationButton: Bool = true
+    /// Dictates if the search button should be shown. Note: Search is only available on iOS 8+.
     @IBInspectable public var searchButton: Bool = true
+    /// The search controller for using in iOS 8+ projects.
     public var searchController: UISearchController!
     
     override public func viewDidLoad() {
@@ -51,6 +60,11 @@ public class MapViewController: UIViewController, UIActionSheetDelegate {
     
     // MARK: - Update Methods
     
+    /**
+    Updates the navigation bar buttons.
+    
+    :param: animated If the buttons should animate when they update.
+    */
     internal func updateNavigationButtons(animated: Bool = true) {
         var barButtonItems = Array<UIBarButtonItem>()
         if locationButton == true {
@@ -73,12 +87,20 @@ public class MapViewController: UIViewController, UIActionSheetDelegate {
         navigationItem.setRightBarButtonItems(barButtonItems, animated: animated)
     }
     
+    /**
+    Update objects to be plotted on the map. This method is to be overriden by a subclass to specify the specific methods to call new objects from the server.
+    */
     public func updateAddresses() {
         // Used to be overriden by a subclass depending on the data service model
     }
     
     // MARK: - Action Methods
     
+    /**
+    Show the options for the map view controller when the location button is pressed.
+    
+    :param: sender The location button pressed.
+    */
     @IBAction public func locationButtonPressed(sender: UIBarButtonItem) {
         if NSClassFromString("UIAlertController") == nil {
             // iOS 7
@@ -108,6 +130,11 @@ public class MapViewController: UIViewController, UIActionSheetDelegate {
         }
     }
     
+    /**
+    Shows the map search view controller.
+    
+    :param: sender The search button pressed.
+    */
     @IBAction public func searchButtonPressed(sender: UIBarButtonItem) {
         if let searchController = self.searchController {
             presentViewController(searchController, animated: true, completion: nil)
