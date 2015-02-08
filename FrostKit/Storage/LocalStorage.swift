@@ -9,7 +9,7 @@
 import UIKit
 
 /// Describes the location of the directory for saving files.
-public enum Location: UInt {
+public enum DirectoryLocation: UInt {
     /// User Data directory.
     case UserData
     /// Document directory.
