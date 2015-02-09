@@ -152,9 +152,16 @@ public class FUSServiceClient: NSObject {
     
     :param: completed Is called on completion of the request and returns an error if the process failed, otherwise it retuens `nil`.
     */
-    public class func refreshOAuthToken(completed: (error: NSError?) -> ()) {
+    public class func refreshOAuthToken(completed: (error: NSError?) -> (), force: Bool = false) {
         
         if let oAuthToken = UserStore.current.oAuthToken {
+            
+            if force == false {
+                if oAuthToken.expired == false {
+                    completed(error: nil)
+                    return
+                }
+            }
             
             let requestDate = NSDate()
             var parameters = ["grant_type": "refresh_token", "refresh_token": oAuthToken.refreshToken]
