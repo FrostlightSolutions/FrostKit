@@ -14,7 +14,9 @@ import UIKit
 /// This object should be deleted or cleared on a user logging out.
 ///
 public class UserStore: NSObject, NSCoding {
-
+    
+    /// The username of the current user, or `nil` if there is none.
+    public var username: String?
     /// The OAuthToken for the current user.
     private var oAuthToken: OAuthToken?
     /// Helper class variable to get the current OAuthToken.
@@ -26,6 +28,15 @@ public class UserStore: NSObject, NSCoding {
     private lazy var contentData = Dictionary<String, DataStore>()
     /// If set to `true` then content data is manged the same as downloaded images or documents. If `false` then content data is kept indefinitely. The default is `false`.
     public var shouldManageContentData = false
+    /// Returns `true` is the user is logged in and `false` if not. A user is assumed as logged in if the UserStore has a username set and details can be retrieved from the keychain wit that username.
+    public var isLoggedIn: Bool {
+        if let username = self.username {
+            if let details = KeychainHelper.details(username: username) {
+                return true
+            }
+        }
+        return false
+    }
     
     // MARK: - Singleton
     
@@ -34,15 +45,23 @@ public class UserStore: NSObject, NSCoding {
     
     :returns: The currnet user store object.
     */
-    class var current: UserStore {
+    public class var current: UserStore {
         struct Singleton {
-            static let instance : UserStore = UserStore.loadUser()
+            static let instance: UserStore = UserStore.loadUser()
         }
         return Singleton.instance
     }
     
     override init() {
         super.init()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationDidBecomeActiveNotification:", name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillResignActiveNotification:", name: UIApplicationWillResignActiveNotification, object: nil)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIApplicationWillResignActiveNotification, object: nil)
     }
     
     // MARK: - NSCoding Methods
@@ -50,6 +69,7 @@ public class UserStore: NSObject, NSCoding {
     public required convenience init(coder aDecoder: NSCoder) {
         self.init()
         
+        username = aDecoder.decodeObjectForKey("username") as? String
         oAuthToken = aDecoder.decodeObjectForKey("OAuthToken") as? OAuthToken
         if let contentData = aDecoder.decodeObjectForKey("contentData") as? [String: DataStore] {
             self.contentData = contentData
@@ -58,8 +78,19 @@ public class UserStore: NSObject, NSCoding {
     
     public func encodeWithCoder(aCoder: NSCoder) {
         
+        aCoder.encodeObject(username, forKey: "username")
         aCoder.encodeObject(oAuthToken, forKey: "OAuthToken")
         aCoder.encodeObject(contentData, forKey: "contentData")
+    }
+    
+    // MARK: - NSNotificationCenter Methods
+    
+    func applicationDidBecomeActiveNotification(sender: AnyObject) {
+        NSLog("applicationDidBecomeActiveNotification")
+    }
+    
+    func applicationWillResignActiveNotification(sender: AnyObject) {
+        NSLog("applicationWillResignActiveNotification")
     }
     
     // MARK: - Save / Load Methods

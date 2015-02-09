@@ -139,6 +139,9 @@ public class FUSServiceClient: NSObject {
             } else if let jsonDict = responseJSON as? NSDictionary {
                 let oAuthToken = OAuthToken(json: jsonDict, requestDate: requestDate)
                 UserStore.oAuthToken = oAuthToken
+                UserStore.current.username = username
+                KeychainHelper.setDetails(details: password, username: username)
+                UserStore.saveUser()
                 completed(error: responseError)
             } else {
                 completed(error: NSError.errorWithMessage("Returned JSON is not a NSDictionary: \(responseJSON)"))
@@ -171,6 +174,7 @@ public class FUSServiceClient: NSObject {
                 } else if let jsonDict = responseJSON as? NSDictionary {
                     let oAuthToken = OAuthToken(json: jsonDict, requestDate: requestDate)
                     UserStore.oAuthToken = oAuthToken
+                    UserStore.saveUser()
                     completed(error: responseError)
                 } else {
                     completed(error: NSError.errorWithMessage("Returned JSON is not a NSDictionary: \(responseJSON)"))

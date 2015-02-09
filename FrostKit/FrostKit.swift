@@ -32,6 +32,7 @@ public class FrostKit {
     
     init() {
         CustomFonts.loadCustomFonts()
+        UserStore.current
     }
     
     // MARK: - Setup Methods
