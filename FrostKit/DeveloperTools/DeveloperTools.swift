@@ -8,28 +8,20 @@
 
 import UIKit
 
-public class DeveloperToolsConstants {
-    
-    public class func baseURLs() -> [String] {
-        return [""]
-    }
-    
-    public class func defaultDebugIndex() -> Int {
-        return 0
-    }
-    
-    public class func defaultProductionIndex() -> Int {
-        return 0
-    }
-    
-    public class func OAuthClientToken() -> String {
-        return ""
-    }
-    
-    public class func OAuthClientSecret() -> String {
-        return ""
-    }
-    
+public protocol DeveloperToolsConstantsProtocol {
+    class var baseURLs: [String] { get }
+    class var defaultDebugIndex: Int { get }
+    class var defaultProductionIndex: Int { get }
+    class var OAuthClientToken: String { get }
+    class var OAuthClientSecret: String { get }
+}
+
+public struct DeveloperToolsConstants: DeveloperToolsConstantsProtocol {
+    public static var baseURLs = [""]
+    public static var defaultDebugIndex = 0
+    public static var defaultProductionIndex = 0
+    public static var OAuthClientToken = ""
+    public static var OAuthClientSecret = ""
 }
 
 public class DeveloperTools: NSObject {
@@ -64,12 +56,12 @@ public class DeveloperTools: NSObject {
     override init() {
         super.init()
         
-        baseURLs = DeveloperToolsConstants.baseURLs() + baseURLs
+        baseURLs = DeveloperToolsConstants.baseURLs + baseURLs
         
         #if DEBUG
-            urlIndex = DeveloperToolsConstants.defaultDebugIndex()
+            urlIndex = DeveloperToolsConstants.defaultDebugIndex
         #else
-            urlIndex = DeveloperToolsConstants.defaultProductionIndex()
+            urlIndex = DeveloperToolsConstants.defaultProductionIndex
         #endif
         
         let userDefaults = NSUserDefaults.standardUserDefaults()
