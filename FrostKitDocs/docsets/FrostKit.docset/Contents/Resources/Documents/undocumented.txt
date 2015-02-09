@@ -34,8 +34,6 @@ DeveloperTools.swift
 	func baseURLFromIndex(index: Int) -> String?
 	func setBaseURLIndex(index: Int)
 	func setCustomURL(customURL: String)
-	public class func oAuthClientToken() -> String
-	public class func oAuthClientSecret() -> String
 DeveloperToolsRoot.swift
 	class DeveloperToolsRoot: UITableViewController
 	override func viewDidLoad()
@@ -92,18 +90,32 @@ UIColorExtensions.swift
 	public convenience init(hexString: String)
 UserStore.swift
 	struct Singleton
-	static let instance : UserStore = UserStore.loadUser()
+	static let instance: UserStore = UserStore.loadUser()
 	override init()
+	deinit
 	public required convenience init(coder aDecoder: NSCoder)
 	public func encodeWithCoder(aCoder: NSCoder)
+	func applicationDidBecomeActiveNotification(sender: AnyObject)
+	func applicationWillResignActiveNotification(sender: AnyObject)
 FrostKit.swift
 	internal func FKLocalizedString(key: String, comment: String = "") -> String
 	public class FrostKit
-	public var tintColor: UIColor?
-	public class var shared: FrostKit
+	public var FUSName: String?
+	public var baseTintColor: UIColor?
+	public var baseURLs: [String]!
+	public var defaultDebugIndex = 0
+	public var defaultProductionIndex = 0
+	public var OAuthClientToken: String?
+	public var OAuthClientSecret: String?
+	internal class var shared: FrostKit
 	struct Singleton
 	static let instance : FrostKit = FrostKit()
 	init()
+	public class func setup()
+	public class func setup(#FUSName: String)
+	public class func setup(#tintColor: UIColor)
+	public class func setup(#baseURLs: [String], defaultDebugIndex: Int = 0, defaultProductionIndex: Int = 0, OAuthClientToken: String? = nil, OAuthClientSecret: String? = nil)
+	public class func tintColor() -> UIColor?
 DataUpdater.swift
 	convenience public init(viewController: UIViewController, tableView: UITableView)
 	convenience public init(viewController: UIViewController, collectionView: UICollectionView)
@@ -155,11 +167,10 @@ MapSearchViewController.swift
 	public func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
 	public func searchBarSearchButtonClicked(searchBar: UISearchBar)
 	public func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int)
-ServiceClient.swift
+FUSServiceClient.swift
 	var page: Int?
 OAuthToken.swift
 	override init()
-	convenience init(oAuthToken: OAuthToken)
 	convenience init(json: NSDictionary, requestDate: NSDate = NSDate())
 	public required convenience init(coder aDecoder: NSCoder)
 	public func encodeWithCoder(aCoder: NSCoder)
