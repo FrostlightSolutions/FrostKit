@@ -139,8 +139,7 @@ public class FUSServiceClient: NSObject {
             parameters["client_secret"] = OAuthClientSecret
         }
         
-        Alamofire.request(Router.Token(parameters)).validate().responseJSON { (request, response, responseJSON,
-            responseError) -> Void in
+        Alamofire.request(Router.Token(parameters)).validate().responseJSON { (request, response, responseJSON, responseError) -> Void in
             if responseError != nil {
                 completed(error: responseError)
             } else if let jsonDict = responseJSON as? NSDictionary {
@@ -179,8 +178,7 @@ public class FUSServiceClient: NSObject {
                 parameters["client_secret"] = OAuthClientSecret
             }
             
-            Alamofire.request(Router.Token(parameters)).validate().responseJSON { (request, response, responseJSON,
-                responseError) -> Void in
+            Alamofire.request(Router.Token(parameters)).validate().responseJSON { (request, response, responseJSON, responseError) -> Void in
                 if responseError != nil {
                     completed(error: responseError)
                 } else if let jsonDict = responseJSON as? NSDictionary {
@@ -194,6 +192,24 @@ public class FUSServiceClient: NSObject {
         } else {
             completed(error: NSError.errorWithMessage("No OAuthToken in User Store."))
         }
+    }
+    
+    /**
+    Updates the current users sections from a FUS based system and stores them in the user store.
+    
+    :param: completed Is called on completion of the request and returns an error if the process failed, otherwise it retuens `nil`.
+    */
+    public class func updateSections(completed: (error: NSError?) -> ()) {
+        Alamofire.request(Router.Sections).validate().responseJSON({ (requestObject, responseObject, responseJSON, responseError) -> Void in
+            if responseError != nil {
+                completed(error: responseError)
+            } else if let jsonArray = responseJSON as? [[String: String]] {
+                UserStore.current.sections = jsonArray
+                completed(error: responseError)
+            } else {
+                completed(error: NSError.errorWithMessage("Returned JSON is not an Array: \(responseJSON)"))
+            }
+        })
     }
     
     // MARK: - Generic Methods
