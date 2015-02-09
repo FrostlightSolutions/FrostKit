@@ -21,29 +21,52 @@ public class CustomFonts: NSObject {
     
     /// Loads custom fonts imbedded in the Framework.
     public class func loadCustomFonts() {
-        loadFont("fontawesome-webfont", withExtension: "ttf")
-        loadFont("ionicons", withExtension: "ttf")
+        loadCustomFont("fontawesome-webfont", withExtension: "ttf", bundle: NSBundle(forClass: CustomFonts.self))
+        loadCustomFont("ionicons", withExtension: "ttf", bundle: NSBundle(forClass: CustomFonts.self))
     }
     
     /**
-    Load a custom font from it's name and extention from within the bundle without having to declare it in the `Info.plist`.
+    Load custom fonts with names including the file name and extension.
     
-    :param: name    The name of the font file name.
-    :param: ext     The extention of the file.
+    :param: fontNames An array of strings of the font file names.
+    :param: bundle    The bundle to look for the file names in. By default this uses the main app bundle.
     */
-    private class func loadFont(name: String, withExtension ext: String) {
-        
-        let bundle = NSBundle(forClass: CustomFonts.self)
-        if let url = bundle.URLForResource(name, withExtension: ext) {
+    public class func loadCustomFonts(fontNames: [String], bundle: NSBundle = NSBundle.mainBundle()) {
+        for fontName in fontNames {
+            let name = fontName.componentsSeparatedByString(".").first
+            let ext = fontName.pathExtension
             
+            if name != nil && countElements(name!) > 0 && countElements(ext) > 0 {
+                loadCustomFont(name!, withExtension: ext, bundle: bundle)
+            } else {
+                NSLog("ERROR: Failed to load '\(fontName)' font as the name or extension are invalid!")
+            }
+        }
+    }
+    
+    /**
+        Load a custom font from it's name and extention from within the bundle without having to declare it in the `Info.plist`.
+        
+        :param: name    The name of the font file name.
+        :param: ext     The extention of the file.
+        :param: bundle  The bundle the files are located in. By default this uses the main app bundle.
+    */
+    public class func loadCustomFont(name: String, withExtension ext: String, bundle: NSBundle = NSBundle.mainBundle()) {
+        
+        if let url = bundle.URLForResource(name, withExtension: ext) {
             let fontData = NSData(contentsOfURL: url)
             var error: Unmanaged<CFErrorRef>?
             let provider = CGDataProviderCreateWithCFData(fontData)
             let font = CGFontCreateWithDataProvider(provider)
             if CTFontManagerRegisterGraphicsFont(font, &error) == false {
-                NSLog("ERROR: Failed to load \"\(name)\" font!")
+                var errorString = "ERROR: Failed to load '\(name)' font"
+                if let anError = error {
+                    let errorDescription = CFErrorCopyDescription(anError.takeRetainedValue()) as NSString
+                    errorString = errorString.stringByAppendingString("with error: \(errorDescription)")
+                }
+                NSLog(errorString + "!")
             } else {
-                NSLog("Loaded \"\(name)\" successfully")
+                NSLog("Loaded '\(name)' successfully")
             }
         } else {
             NSLog("ERROR: Failed to get URL for \"\(name)\" font!")
