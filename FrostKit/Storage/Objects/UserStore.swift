@@ -127,6 +127,24 @@ public class UserStore: NSObject, NSCoding {
         return UserStore()
     }
     
+    // MARK: - Logout and Reset Methods
+    
+    /**
+    Logs out and resets the current user.
+    */
+    public class func logoutCurrentUser() {
+        UserStore.current.resetUser()
+    }
+    
+    /**
+    Resets all the user stores data to nil and empties the content data.
+    */
+    private func resetUser() {
+        username = nil
+        oAuthToken = nil
+        contentData.removeAll(keepCapacity: true)
+    }
+    
     // MARK: - Content Data Methods
     
     /**
