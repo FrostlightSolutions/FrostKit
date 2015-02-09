@@ -8,22 +8,6 @@
 
 import UIKit
 
-public protocol DeveloperToolsConstantsProtocol {
-    class var baseURLs: [String] { get }
-    class var defaultDebugIndex: Int { get }
-    class var defaultProductionIndex: Int { get }
-    class var OAuthClientToken: String { get }
-    class var OAuthClientSecret: String { get }
-}
-
-public struct DeveloperToolsConstants: DeveloperToolsConstantsProtocol {
-    public static var baseURLs = [""]
-    public static var defaultDebugIndex = 0
-    public static var defaultProductionIndex = 0
-    public static var OAuthClientToken = ""
-    public static var OAuthClientSecret = ""
-}
-
 public class DeveloperTools: NSObject {
     
     // MARK: - Singleton
@@ -56,12 +40,12 @@ public class DeveloperTools: NSObject {
     override init() {
         super.init()
         
-        baseURLs = DeveloperToolsConstants.baseURLs + baseURLs
+        baseURLs = FrostKit.shared.baseURLs + baseURLs
         
         #if DEBUG
-            urlIndex = DeveloperToolsConstants.defaultDebugIndex
+            urlIndex = FrostKit.shared.defaultDebugIndex
         #else
-            urlIndex = DeveloperToolsConstants.defaultProductionIndex
+            urlIndex = FrostKit.shared.defaultProductionIndex
         #endif
         
         let userDefaults = NSUserDefaults.standardUserDefaults()

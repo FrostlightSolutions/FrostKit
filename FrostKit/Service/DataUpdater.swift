@@ -22,7 +22,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
         didSet {
             let refreshControl = UIRefreshControl()
             refreshControl.addTarget(self, action: "refreshControlTriggered:", forControlEvents: .ValueChanged)
-            refreshControl.tintColor = FrostKit.shared.tintColor
+            refreshControl.tintColor = FrostKit.shared.baseTintColor
             
             if let tableViewController = viewController as? UITableViewController {
                 tableViewController.refreshControl = refreshControl

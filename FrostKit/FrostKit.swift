@@ -14,11 +14,16 @@ internal func FKLocalizedString(key: String, comment: String = "") -> String {
 
 public class FrostKit {
     
-    public var tintColor: UIColor?
+    public var baseTintColor: UIColor?
+    public var baseURLs: [String]!
+    public var defaultDebugIndex = 0
+    public var defaultProductionIndex = 0
+    public var OAuthClientToken: String?
+    public var OAuthClientSecret: String?
     
     // MARK: - Singleton
     
-    public class var shared: FrostKit {
+    internal class var shared: FrostKit {
     struct Singleton {
         static let instance : FrostKit = FrostKit()
         }
@@ -28,4 +33,33 @@ public class FrostKit {
     init() {
         CustomFonts.loadCustomFonts()
     }
+    
+    // MARK: - Setup Methods
+    
+    public class func setup() {
+        FrostKit.shared
+    }
+    
+    public class func setup(tintColor: UIColor) {
+        FrostKit.shared
+        
+        FrostKit.shared.baseTintColor = tintColor
+    }
+    
+    public class func setup(baseURLs: [String], defaultDebugIndex: Int = 0, defaultProductionIndex: Int = 0, OAuthClientToken: String? = nil, OAuthClientSecret: String? = nil) {
+        FrostKit.setup()
+        
+        FrostKit.shared.baseURLs = baseURLs
+        FrostKit.shared.defaultDebugIndex = defaultDebugIndex
+        FrostKit.shared.defaultProductionIndex = defaultProductionIndex
+        FrostKit.shared.OAuthClientToken = OAuthClientToken
+        FrostKit.shared.OAuthClientSecret = OAuthClientSecret
+    }
+    
+    // MARK: - Custom Getter Methods
+    
+    public class func tintColor() -> UIColor? {
+        return FrostKit.shared.baseTintColor
+    }
+    
 }

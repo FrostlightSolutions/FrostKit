@@ -124,7 +124,15 @@ public class FUSServiceClient: NSObject {
     public class func loginUser(#username: String, password: String, completed: (error: NSError?) -> ()) {
         
         let requestDate = NSDate()
-        Alamofire.request(Router.Token(["grant_type": "password", "client_id": DeveloperToolsConstants.OAuthClientToken, "client_secret": DeveloperToolsConstants.OAuthClientSecret, "username": username, "password": password])).responseJSON { (request, response, responseJSON,
+        var parameters = ["grant_type": "password", "username": username, "password": password]
+        if let OAuthClientToken = FrostKit.shared.OAuthClientToken {
+            parameters["client_id"] = OAuthClientToken
+        }
+        if let OAuthClientSecret = FrostKit.shared.OAuthClientSecret {
+            parameters["client_secret"] = OAuthClientSecret
+        }
+        
+        Alamofire.request(Router.Token(parameters)).responseJSON { (request, response, responseJSON,
             responseError) -> Void in
             if responseError != nil {
                 completed(error: responseError)
@@ -148,7 +156,15 @@ public class FUSServiceClient: NSObject {
         if let oAuthToken = UserStore.oAuthToken {
             
             let requestDate = NSDate()
-            Alamofire.request(Router.Token(["grant_type": "refresh_token", "client_id": DeveloperToolsConstants.OAuthClientToken, "client_secret": DeveloperToolsConstants.OAuthClientSecret, "refresh_token": oAuthToken.refreshToken])).responseJSON { (request, response, responseJSON,
+            var parameters = ["grant_type": "refresh_token"]
+            if let OAuthClientToken = FrostKit.shared.OAuthClientToken {
+                parameters["client_id"] = OAuthClientToken
+            }
+            if let OAuthClientSecret = FrostKit.shared.OAuthClientSecret {
+                parameters["client_secret"] = OAuthClientSecret
+            }
+            
+            Alamofire.request(Router.Token(parameters)).responseJSON { (request, response, responseJSON,
                 responseError) -> Void in
                 if responseError != nil {
                     completed(error: responseError)
