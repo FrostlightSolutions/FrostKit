@@ -43,7 +43,7 @@ public class OAuthToken: NSObject, NSCoding, NSCopying {
     
     :param: oAuthToken The `OAuthToken` to take values from.
     */
-    convenience init(oAuthToken: OAuthToken) {
+    private convenience init(oAuthToken: OAuthToken) {
         self.init()
         
         self.accessToken = oAuthToken.accessToken

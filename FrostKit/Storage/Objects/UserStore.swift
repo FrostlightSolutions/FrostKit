@@ -17,12 +17,11 @@ public class UserStore: NSObject, NSCoding {
     
     /// The username of the current user, or `nil` if there is none.
     public var username: String?
-    /// The OAuthToken for the current user.
-    private var oAuthToken: OAuthToken?
-    /// Helper class variable to get the current OAuthToken.
-    public class var oAuthToken: OAuthToken? {
-        get { return current.oAuthToken }
-        set { current.oAuthToken = newValue }
+    /// The OAuthToken for the current user. A `username` mas ALWAYS be set before the OAuth token is.
+    internal var oAuthToken: OAuthToken? {
+        didSet {
+            updateKeychain()
+        }
     }
     /// A dictionary of DataStores with keys of the URLs used to retrive the data.
     private lazy var contentData = Dictionary<String, DataStore>()
@@ -31,7 +30,7 @@ public class UserStore: NSObject, NSCoding {
     /// Returns `true` is the user is logged in and `false` if not. A user is assumed as logged in if the UserStore has a username set and details can be retrieved from the keychain wit that username.
     public var isLoggedIn: Bool {
         if let username = self.username {
-            if let details = KeychainHelper.details(username: username) {
+            if let details = KeychainHelper.details(username: username) as? OAuthToken {
                 return true
             }
         }
@@ -69,8 +68,10 @@ public class UserStore: NSObject, NSCoding {
     public required convenience init(coder aDecoder: NSCoder) {
         self.init()
         
-        username = aDecoder.decodeObjectForKey("username") as? String
-        oAuthToken = aDecoder.decodeObjectForKey("OAuthToken") as? OAuthToken
+        if let username = aDecoder.decodeObjectForKey("username") as? String {
+            self.username = username
+            oAuthToken = KeychainHelper.details(username: username) as? OAuthToken
+        }
         if let contentData = aDecoder.decodeObjectForKey("contentData") as? [String: DataStore] {
             self.contentData = contentData
         }
@@ -79,21 +80,31 @@ public class UserStore: NSObject, NSCoding {
     public func encodeWithCoder(aCoder: NSCoder) {
         
         aCoder.encodeObject(username, forKey: "username")
-        aCoder.encodeObject(oAuthToken, forKey: "OAuthToken")
         aCoder.encodeObject(contentData, forKey: "contentData")
     }
     
     // MARK: - NSNotificationCenter Methods
     
     func applicationDidBecomeActiveNotification(sender: AnyObject) {
-        NSLog("applicationDidBecomeActiveNotification")
+        
     }
     
     func applicationWillResignActiveNotification(sender: AnyObject) {
-        NSLog("applicationWillResignActiveNotification")
+        UserStore.saveUser()
     }
     
     // MARK: - Save / Load Methods
+    
+    /**
+    Updates the keychain with the current OAuth token. If the OAuth token and a username is present, then the keychain is updated. If not, it is deleted.
+    */
+    private func updateKeychain() {
+        if oAuthToken != nil && username != nil {
+            KeychainHelper.setDetails(details: oAuthToken!, username: username!)
+        } else {
+            KeychainHelper.deleteKeychain()
+        }
+    }
     
     /**
     Saves the current UserStore shared instance.

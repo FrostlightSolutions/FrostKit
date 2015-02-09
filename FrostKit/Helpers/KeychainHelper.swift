@@ -59,14 +59,14 @@ public class KeychainHelper: NSObject {
     
     :returns: The details saved with the username if found, otherwise `nil`.
     */
-    public class func details(#username: String) -> String? {
+    public class func details(#username: String) -> AnyObject? {
         
         let valueData = searchKeychainForMatchingData()
         if let data = valueData {
             
             let valueDict = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSDictionary
             if let dict = valueDict {
-                return dict.objectForKey(username) as? String
+                return dict.objectForKey(username)
             }
         }
         
@@ -81,7 +81,7 @@ public class KeychainHelper: NSObject {
     
     :returns: Returns `true` if the details were successfully saved, `false` if not.
     */
-    public class func setDetails(#details: String, username: String) -> Bool {
+    public class func setDetails(#details: AnyObject, username: String) -> Bool {
         
         let valueDict = [username: details]
         let secDict = setupSearchDirectory()

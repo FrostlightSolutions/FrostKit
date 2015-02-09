@@ -87,7 +87,7 @@ public enum Router: URLRequestConvertible {
         case .Token:
             break
         default:
-            if let oAuthToken = UserStore.oAuthToken {
+            if let oAuthToken = UserStore.current.oAuthToken {
                 mutableURLRequest.setValue("Bearer \(oAuthToken.accessToken)", forHTTPHeaderField: "Authorization")
             }
         }
@@ -137,10 +137,8 @@ public class FUSServiceClient: NSObject {
             if responseError != nil {
                 completed(error: responseError)
             } else if let jsonDict = responseJSON as? NSDictionary {
-                let oAuthToken = OAuthToken(json: jsonDict, requestDate: requestDate)
-                UserStore.oAuthToken = oAuthToken
                 UserStore.current.username = username
-                KeychainHelper.setDetails(details: password, username: username)
+                UserStore.current.oAuthToken = OAuthToken(json: jsonDict, requestDate: requestDate)
                 UserStore.saveUser()
                 completed(error: responseError)
             } else {
@@ -156,10 +154,10 @@ public class FUSServiceClient: NSObject {
     */
     public class func refreshOAuthToken(completed: (error: NSError?) -> ()) {
         
-        if let oAuthToken = UserStore.oAuthToken {
+        if let oAuthToken = UserStore.current.oAuthToken {
             
             let requestDate = NSDate()
-            var parameters = ["grant_type": "refresh_token"]
+            var parameters = ["grant_type": "refresh_token", "refresh_token": oAuthToken.refreshToken]
             if let OAuthClientToken = FrostKit.shared.OAuthClientToken {
                 parameters["client_id"] = OAuthClientToken
             }
@@ -172,8 +170,7 @@ public class FUSServiceClient: NSObject {
                 if responseError != nil {
                     completed(error: responseError)
                 } else if let jsonDict = responseJSON as? NSDictionary {
-                    let oAuthToken = OAuthToken(json: jsonDict, requestDate: requestDate)
-                    UserStore.oAuthToken = oAuthToken
+                    UserStore.current.oAuthToken = OAuthToken(json: jsonDict, requestDate: requestDate)
                     UserStore.saveUser()
                     completed(error: responseError)
                 } else {
