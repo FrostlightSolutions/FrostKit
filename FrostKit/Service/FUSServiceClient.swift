@@ -132,7 +132,7 @@ public class FUSServiceClient: NSObject {
             parameters["client_secret"] = OAuthClientSecret
         }
         
-        Alamofire.request(Router.Token(parameters)).responseJSON { (request, response, responseJSON,
+        Alamofire.request(Router.Token(parameters)).validate().responseJSON { (request, response, responseJSON,
             responseError) -> Void in
             if responseError != nil {
                 completed(error: responseError)
@@ -164,7 +164,7 @@ public class FUSServiceClient: NSObject {
                 parameters["client_secret"] = OAuthClientSecret
             }
             
-            Alamofire.request(Router.Token(parameters)).responseJSON { (request, response, responseJSON,
+            Alamofire.request(Router.Token(parameters)).validate().responseJSON { (request, response, responseJSON,
                 responseError) -> Void in
                 if responseError != nil {
                     completed(error: responseError)
@@ -192,7 +192,7 @@ public class FUSServiceClient: NSObject {
     :returns: An Alamofire request.
     */
     public class func request(URLRequest: Router, completed: (json: AnyObject?, error: NSError?) -> ()) -> Alamofire.Request {
-        return Alamofire.request(URLRequest).responseJSON({ (requestObject, responseObject, responseJSON, responseError) -> Void in
+        return Alamofire.request(URLRequest).validate().responseJSON({ (requestObject, responseObject, responseJSON, responseError) -> Void in
             completed(json: responseJSON, error: responseError)
         })
     }
