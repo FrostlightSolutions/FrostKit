@@ -186,7 +186,8 @@
 		1836A2201A84F3BE00E57F86 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
 		183F85F61A7B0D9200885F56 /* ImageCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageCacheTests.swift; path = FrostKitTests/Storage/ImageCacheTests.swift; sourceTree = SOURCE_ROOT; };
 		183F85F81A7B0E1C00885F56 /* SmallLogoBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SmallLogoBlue.png; sourceTree = "<group>"; };
-		1857BEA21A859FC400903910 /* AddressExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressExtensions.swift; sourceTree = "<group>"; };
+		184E07921A8901A10074FD25 /* MBProgressHUDExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBProgressHUDExtensions.swift; sourceTree = "<group>"; };
+		184E07931A8901A10074FD25 /* ParseAddressExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseAddressExtensions.swift; sourceTree = "<group>"; };
 		185D3D5B1A6E936F00BE700D /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		186B07F21A6D5C4700CAF920 /* UserStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		186CFCE91A29FA40002739A5 /* MapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
@@ -314,7 +315,8 @@
 		1857BE9D1A859FAA00903910 /* ExternalExtensions */ = {
 			isa = PBXGroup;
 			children = (
-				1857BEA21A859FC400903910 /* AddressExtensions.swift */,
+				184E07931A8901A10074FD25 /* ParseAddressExtensions.swift */,
+				184E07921A8901A10074FD25 /* MBProgressHUDExtensions.swift */,
 			);
 			path = ExternalExtensions;
 			sourceTree = "<group>";

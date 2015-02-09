@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Parse
 
 ///
 /// Extention functions for NSError
