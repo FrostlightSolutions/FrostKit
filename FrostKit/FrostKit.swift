@@ -42,15 +42,15 @@ public class FrostKit {
         FrostKit.shared
     }
     
-    public class func setup(FUSName: String) {
+    public class func setup(#FUSName: String) {
         FrostKit.shared.FUSName = FUSName
     }
     
-    public class func setup(tintColor: UIColor) {
+    public class func setup(#tintColor: UIColor) {
         FrostKit.shared.baseTintColor = tintColor
     }
     
-    public class func setup(baseURLs: [String], defaultDebugIndex: Int = 0, defaultProductionIndex: Int = 0, OAuthClientToken: String? = nil, OAuthClientSecret: String? = nil) {
+    public class func setup(#baseURLs: [String], defaultDebugIndex: Int = 0, defaultProductionIndex: Int = 0, OAuthClientToken: String? = nil, OAuthClientSecret: String? = nil) {
         FrostKit.shared.baseURLs = baseURLs
         FrostKit.shared.defaultDebugIndex = defaultDebugIndex
         FrostKit.shared.defaultProductionIndex = defaultProductionIndex
