@@ -140,13 +140,13 @@ public class FUSServiceClient: NSObject {
         }
         
         Alamofire.request(Router.Token(parameters)).validate().responseJSON { (request, response, responseJSON, responseError) -> Void in
-            if responseError != nil {
-                completed(error: responseError)
+            if let anError = responseError {
+                completed(error: self.errorForResponse(response, json: responseJSON, origError: anError))
             } else if let jsonDict = responseJSON as? NSDictionary {
                 UserStore.current.username = username
                 UserStore.current.oAuthToken = OAuthToken(json: jsonDict, requestDate: requestDate)
                 UserStore.saveUser()
-                completed(error: responseError)
+                completed(error: self.errorForResponse(response, json: responseJSON, origError: responseError))
             } else {
                 completed(error: NSError.errorWithMessage("Returned JSON is not a NSDictionary: \(responseJSON)"))
             }
@@ -157,6 +157,7 @@ public class FUSServiceClient: NSObject {
     Refresh an `OAuthToken` if it has expired.
     
     :param: completed Is called on completion of the request and returns an error if the process failed, otherwise it retuens `nil`.
+    :param: force       Forces the OAuth token to refresh even if it hasn't expired.
     */
     public class func refreshOAuthToken(completed: (error: NSError?) -> (), force: Bool = false) {
         
@@ -179,12 +180,12 @@ public class FUSServiceClient: NSObject {
             }
             
             Alamofire.request(Router.Token(parameters)).validate().responseJSON { (request, response, responseJSON, responseError) -> Void in
-                if responseError != nil {
-                    completed(error: responseError)
+                if let anError = responseError {
+                    completed(error: self.errorForResponse(response, json: responseJSON, origError: anError))
                 } else if let jsonDict = responseJSON as? NSDictionary {
                     UserStore.current.oAuthToken = OAuthToken(json: jsonDict, requestDate: requestDate)
                     UserStore.saveUser()
-                    completed(error: responseError)
+                    completed(error: self.errorForResponse(response, json: responseJSON, origError: responseError))
                 } else {
                     completed(error: NSError.errorWithMessage("Returned JSON is not a NSDictionary: \(responseJSON)"))
                 }
@@ -201,11 +202,11 @@ public class FUSServiceClient: NSObject {
     */
     public class func updateSections(completed: (error: NSError?) -> ()) {
         Alamofire.request(Router.Sections).validate().responseJSON({ (requestObject, responseObject, responseJSON, responseError) -> Void in
-            if responseError != nil {
-                completed(error: responseError)
+            if let anError = responseError {
+                completed(error: self.errorForResponse(responseObject, json: responseJSON, origError: anError))
             } else if let jsonArray = responseJSON as? [[String: String]] {
                 UserStore.current.sections = jsonArray
-                completed(error: responseError)
+                completed(error: self.errorForResponse(responseObject, json: responseJSON, origError: responseError))
             } else {
                 completed(error: NSError.errorWithMessage("Returned JSON is not an Array: \(responseJSON)"))
             }
@@ -224,8 +225,39 @@ public class FUSServiceClient: NSObject {
     */
     public class func request(URLRequest: Router, completed: (json: AnyObject?, error: NSError?) -> ()) -> Alamofire.Request {
         return Alamofire.request(URLRequest).validate().responseJSON({ (requestObject, responseObject, responseJSON, responseError) -> Void in
-            completed(json: responseJSON, error: responseError)
+            completed(json: responseJSON, error: self.errorForResponse(responseObject, json: responseJSON, origError: responseError))
         })
+    }
+    
+    // MARK: - Error Handling
+    
+    /**
+    Creates an error object that joins the original error description, the response status code and the JSON error dictionary where available.
+    
+    :param: response  The response that had the error, or `nil` if it doesn't exist.
+    :param: json      The JSON response, or `nil` if there wasn't any.
+    :param: origError The original error returned by Alamofire, or `nil` if there isn't any.
+    
+    :returns: An arror with a localized description of all the information passed in.
+    */
+    private class func errorForResponse(response: NSHTTPURLResponse?, json: AnyObject?, origError: NSError?) -> NSError {
+        var errorString = ""
+        
+        if let anError = origError {
+            errorString += "\(anError.localizedDescription), "
+        }
+        
+        if let aResponse = response {
+            errorString += "Status Code \(aResponse.statusCode), "
+        }
+        
+        if let errorDictionary = json as? NSDictionary {
+            if let errorDescription = errorDictionary["error_description"] as? String {
+                errorString += "\(errorDescription)"
+            }
+        }
+        
+        return NSError.errorWithMessage(errorString)
     }
 
 }
