@@ -14,6 +14,7 @@ internal func FKLocalizedString(key: String, comment: String = "") -> String {
 
 public class FrostKit {
     
+    public var FUSName: String?
     public var baseTintColor: UIColor?
     public var baseURLs: [String]!
     public var defaultDebugIndex = 0
@@ -41,15 +42,15 @@ public class FrostKit {
         FrostKit.shared
     }
     
+    public class func setup(FUSName: String) {
+        FrostKit.shared.FUSName = FUSName
+    }
+    
     public class func setup(tintColor: UIColor) {
-        FrostKit.shared
-        
         FrostKit.shared.baseTintColor = tintColor
     }
     
     public class func setup(baseURLs: [String], defaultDebugIndex: Int = 0, defaultProductionIndex: Int = 0, OAuthClientToken: String? = nil, OAuthClientSecret: String? = nil) {
-        FrostKit.setup()
-        
         FrostKit.shared.baseURLs = baseURLs
         FrostKit.shared.defaultDebugIndex = defaultDebugIndex
         FrostKit.shared.defaultProductionIndex = defaultProductionIndex

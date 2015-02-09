@@ -47,6 +47,13 @@ public enum Router: URLRequestConvertible {
             return "/"
         case .Token:
             return "/api/fus/o/token/"
+        case .Sections:
+            if let name = FrostKit.shared.FUSName {
+                return "/api/\(name)/"
+            } else {
+                NSLog("Error: Project name not set in FrostKit setup!")
+                return ""
+            }
         default:
             return ""
         }
