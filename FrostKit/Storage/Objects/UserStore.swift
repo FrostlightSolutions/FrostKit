@@ -23,6 +23,8 @@ public class UserStore: NSObject, NSCoding {
             updateKeychain()
         }
     }
+    /// An array of section dictionaries returned by FUS.
+    public lazy var sections = Array<[String: String]>()
     /// A dictionary of DataStores with keys of the URLs used to retrive the data.
     private lazy var contentData = Dictionary<String, DataStore>()
     /// If set to `true` then content data is manged the same as downloaded images or documents. If `false` then content data is kept indefinitely. The default is `false`.
@@ -142,6 +144,7 @@ public class UserStore: NSObject, NSCoding {
     private func resetUser() {
         username = nil
         oAuthToken = nil
+        sections.removeAll(keepCapacity: true)
         contentData.removeAll(keepCapacity: true)
     }
     
@@ -172,6 +175,25 @@ public class UserStore: NSObject, NSCoding {
         if shouldManageContentData == true {
             ContentManager.saveContentMetadata(absolutePath: urlString)
         }
+    }
+    
+    // MARK: - Sections Search Methods
+    
+    /**
+    Searches the sections array for a section dictionary with a certain key. Return `nil` if no section dictionary is found.
+    
+    :param: key The key of the section dictionary to search for.
+    
+    :returns: A section dictionary or `nil` if none is found.
+    */
+    public func searchForSectionWithKey(key:String) -> [String: String]? {
+        if sections.count > 0 {
+            if let filter = NSPredicate(format: "%K == %@", "key", key) {
+                let filteredSections = (sections as NSArray).filteredArrayUsingPredicate(filter)
+                return filteredSections.first as? [String: String]
+            }
+        }
+        return nil
     }
 
 }
