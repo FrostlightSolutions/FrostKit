@@ -240,24 +240,22 @@ public class FUSServiceClient: NSObject {
     
     :returns: An arror with a localized description of all the information passed in.
     */
-    private class func errorForResponse(response: NSHTTPURLResponse?, json: AnyObject?, origError: NSError?) -> NSError {
-        var errorString = ""
-        
+    private class func errorForResponse(response: NSHTTPURLResponse?, json: AnyObject?, origError: NSError?) -> NSError? {
         if let anError = origError {
-            errorString += "\(anError.localizedDescription), "
-        }
-        
-        if let aResponse = response {
-            errorString += "Status Code \(aResponse.statusCode), "
-        }
-        
-        if let errorDictionary = json as? NSDictionary {
-            if let errorDescription = errorDictionary["error_description"] as? String {
-                errorString += "\(errorDescription)"
+            var errorString = "\(anError.localizedDescription), "
+            
+            if let aResponse = response {
+                errorString += "Status Code \(aResponse.statusCode), "
             }
+            
+            if let errorDictionary = json as? NSDictionary {
+                if let errorDescription = errorDictionary["error_description"] as? String {
+                    errorString += "\(errorDescription)"
+                }
+            }
+            return NSError.errorWithMessage(errorString)
         }
-        
-        return NSError.errorWithMessage(errorString)
+        return nil
     }
 
 }
