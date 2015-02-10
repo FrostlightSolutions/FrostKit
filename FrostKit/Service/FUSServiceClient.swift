@@ -89,6 +89,7 @@ public enum Router: URLRequestConvertible {
         
         let mutableURLRequest = NSMutableURLRequest(URL: URL)
         mutableURLRequest.HTTPMethod = method.rawValue
+        mutableURLRequest.cachePolicy = .ReloadIgnoringLocalCacheData
         
         switch self {
         case .Token:
