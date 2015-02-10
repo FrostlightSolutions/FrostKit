@@ -204,11 +204,15 @@ public class FUSServiceClient: NSObject {
         Alamofire.request(Router.Sections).validate().responseJSON({ (requestObject, responseObject, responseJSON, responseError) -> Void in
             if let anError = responseError {
                 completed(error: self.errorForResponse(responseObject, json: responseJSON, origError: anError))
-            } else if let jsonArray = responseJSON as? [[String: String]] {
-                UserStore.current.sections = jsonArray
-                completed(error: self.errorForResponse(responseObject, json: responseJSON, origError: responseError))
+            } else if let jsonDictionary = responseJSON as? [String: AnyObject] {
+                if let jsonArray = jsonDictionary["sections"] as? [[String: String]] {
+                    UserStore.current.sections = jsonArray
+                    completed(error: self.errorForResponse(responseObject, json: responseJSON, origError: responseError))
+                } else {
+                    completed(error: NSError.errorWithMessage("Returned JSON is not an Array: \(responseJSON)"))
+                }
             } else {
-                completed(error: NSError.errorWithMessage("Returned JSON is not an Array: \(responseJSON)"))
+                completed(error: NSError.errorWithMessage("Returned JSON is not a Dictionary: \(responseJSON)"))
             }
         })
     }
