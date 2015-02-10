@@ -19,17 +19,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     public let requestStore = RequestStore()
     /// The view controller this data updater is related to. This can be set in IB and will automatically attempt to add a UIRefreshControl to a UITableViewController or UICollectionViewController.
     @IBOutlet var viewController: UIViewController! {
-        didSet {
-            let refreshControl = UIRefreshControl()
-            refreshControl.addTarget(self, action: "refreshControlTriggered:", forControlEvents: .ValueChanged)
-            refreshControl.tintColor = FrostKit.shared.baseTintColor
-            
-            if let tableViewController = viewController as? UITableViewController {
-                tableViewController.refreshControl = refreshControl
-            } else if let collectionViewController = viewController as? UICollectionViewController {
-                collectionViewController.refreshControl = refreshControl
-            }
-        }
+        didSet { setRefreshControlForViewController(viewController) }
     }
     /// The table view to display data on.
     @IBOutlet var tableView: UITableView? {
@@ -72,6 +62,8 @@ public class DataUpdater: NSObject, DataStoreDelegate {
         
         self.viewController = viewController
         self.tableView = tableView
+        
+        setRefreshControlForViewController(viewController)
     }
     
     /**
@@ -85,6 +77,8 @@ public class DataUpdater: NSObject, DataStoreDelegate {
         
         self.viewController = viewController
         self.collectionView = collectionView
+        
+        setRefreshControlForViewController(viewController)
     }
     
     /**
@@ -122,8 +116,25 @@ public class DataUpdater: NSObject, DataStoreDelegate {
         }
     }
     
-    // MARK: - Data Getter / Setter Methods
+    // MARK: - Getter / Setter Methods
     
+    /**
+    Creates and set a `UIRefreshControl` for the passed in view controller, assuming it is either an `UITableViewController` or a `UICollectionViewController`.
+    
+    :param: viewController The view controller to add the refresh control to.
+    */
+    private func setRefreshControlForViewController(viewController: UIViewController) {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "refreshControlTriggered:", forControlEvents: .ValueChanged)
+        refreshControl.tintColor = FrostKit.shared.baseTintColor
+        
+        if let tableViewController = viewController as? UITableViewController {
+            tableViewController.refreshControl = refreshControl
+        } else if let collectionViewController = viewController as? UICollectionViewController {
+            collectionViewController.refreshControl = refreshControl
+        }
+    }
+
     /**
     Gets the object in the data store for a specific index path. By default this assumes 1 section only, and so the section component of indexPath is removed.
     
