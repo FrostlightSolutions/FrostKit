@@ -16,7 +16,7 @@ extension UIBarButtonItem {
     /**
     A convenience init for creating a bar button item with a title with a specific font.
     
-    :param: title               The item’s title. If `nil` a title is not displayed.
+    :param: title               The item's title. If `nil` a title is not displayed.
     :param: font                The font to use for rendering.
     :param: verticalOffset      The vertical offset to apply to the `title`.
     :param: target              The object that receives the `action` message.
