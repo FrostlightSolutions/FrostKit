@@ -556,7 +556,7 @@ public class Address: NSObject {
         return Int(latitude) ^ Int(longitude)
     }
     
-    override init() {
+    public override init() {
         super.init()
     }
     
