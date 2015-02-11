@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FrostKit
+import Parse
 
 ///
 /// Extention functions for NSError
@@ -27,17 +29,17 @@ extension Address {
     public convenience init(geoPoint: PFGeoPoint, object: PFObject, nameKey: String? = nil, addressStringKey: String? = nil) {
         self.init()
         
-        objectID = parseObject.objectId
-        coordinate = CLLocationCoordinate2DMake(parseGeoPoint.latitude, parseGeoPoint.longitude)
+        objectID = object.objectId
+        coordinate = CLLocationCoordinate2DMake(geoPoint.latitude, geoPoint.longitude)
         
         if let key = nameKey {
-            if let name = parseObject.objectForKey(key) as? String {
+            if let name = object.objectForKey(key) as? String {
                 self.name = name
             }
         }
         
         if let key = addressStringKey {
-            if let addressString = parseObject.objectForKey(key) as? String {
+            if let addressString = object.objectForKey(key) as? String {
                 self.addressString = addressString
             }
         }
