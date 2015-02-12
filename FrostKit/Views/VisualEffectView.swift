@@ -8,9 +8,9 @@
 
 import UIKit
 
-class VisualEffectView: UIVisualEffectView {
+public class VisualEffectView: UIVisualEffectView {
 
-    @IBInspectable var cornerRadius: CGFloat {
+    @IBInspectable public var cornerRadius: CGFloat {
         get {
             return layer.cornerRadius
         }

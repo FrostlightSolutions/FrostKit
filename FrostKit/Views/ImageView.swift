@@ -8,9 +8,9 @@
 
 import UIKit
 
-class ImageView: UIImageView {
+public class ImageView: UIImageView {
     
-    @IBInspectable var cornerRadius: CGFloat {
+    @IBInspectable public var cornerRadius: CGFloat {
         get {
             return layer.cornerRadius
         }
