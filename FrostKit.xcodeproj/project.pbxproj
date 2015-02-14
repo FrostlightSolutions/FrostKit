@@ -739,7 +739,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ~/Dropbox/Pig\\ on\\ a\\ Hill/Projects/Frameworks/FrostKit/\n~/Dropbox/Pig\\ on\\ a\\ Hill/API\\:SDK/Forks/jazzy/bin/jazzy -x -project,\"${SRCROOT}/FrostKit.xcodeproj\",-scheme,FrostKit -c -m FrostKit -a James\\ Barrow -g https:\\/\\/github.com/FrostlightSolutions/FrostKit -o FrostKitDocs";
+			shellScript = "cd ~/Documents/Pig\\ on\\ a\\ Hill/Projects/Frameworks/FrostKit/\n~/Documents/Pig\\ on\\ a\\ Hill/API\\:SDK/Forks/jazzy/bin/jazzy -x -project,\"${SRCROOT}/FrostKit.xcodeproj\",-scheme,FrostKit -c -m FrostKit -a James\\ Barrow -g https:\\/\\/github.com/FrostlightSolutions/FrostKit -o FrostKitDocs\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
