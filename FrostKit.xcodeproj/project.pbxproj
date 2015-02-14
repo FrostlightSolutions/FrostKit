@@ -50,6 +50,8 @@
 		18318DC71A83C23E00412222 /* DeveloperToolsBaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18318DC31A83C23E00412222 /* DeveloperToolsBaseURL.swift */; };
 		18318DC81A83C23E00412222 /* DeveloperToolsRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18318DC41A83C23E00412222 /* DeveloperToolsRoot.swift */; };
 		18318DC91A83C23E00412222 /* DeveloperToolsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18318DC51A83C23E00412222 /* DeveloperToolsStoryboard.storyboard */; };
+		183291591A8EECAB000BAE49 /* CarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183291581A8EECAB000BAE49 /* CarouselViewController.swift */; };
+		1832915A1A8EECAB000BAE49 /* CarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183291581A8EECAB000BAE49 /* CarouselViewController.swift */; };
 		1836A2021A843EBC00E57F86 /* RequestStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* RequestStore.swift */; };
 		1836A2071A843EC000E57F86 /* DataUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB51741A765335005064C8 /* DataUpdater.swift */; };
 		1836A2081A843EE800E57F86 /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066B19DB769B00811755 /* NSDateExtensions.swift */; };
@@ -189,6 +191,7 @@
 		18318DC41A83C23E00412222 /* DeveloperToolsRoot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperToolsRoot.swift; sourceTree = "<group>"; };
 		18318DC51A83C23E00412222 /* DeveloperToolsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DeveloperToolsStoryboard.storyboard; sourceTree = "<group>"; };
 		18318DCB1A83CF5800412222 /* SettingsTemplate.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SettingsTemplate.bundle; sourceTree = "<group>"; };
+		183291581A8EECAB000BAE49 /* CarouselViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselViewController.swift; sourceTree = "<group>"; };
 		1836A2171A84E7D300E57F86 /* ParseFontLessConstants.py */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text.script.python; path = ParseFontLessConstants.py; sourceTree = "<group>"; tabWidth = 2; };
 		1836A2191A84E9A000E57F86 /* FontAwesome.less */ = {isa = PBXFileReference; lastKnownFileType = text; path = FontAwesome.less; sourceTree = "<group>"; };
 		1836A21A1A84E9A000E57F86 /* Ionicons.less */ = {isa = PBXFileReference; lastKnownFileType = text; path = Ionicons.less; sourceTree = "<group>"; };
@@ -429,6 +432,7 @@
 				1811D7B31A0AD1CA00E8B873 /* WebViewController */,
 				182BBBD31A853FB700D8F6F7 /* MapViewController.swift */,
 				189B4C641A8663730055CEA3 /* MapSearchViewController.swift */,
+				183291581A8EECAB000BAE49 /* CarouselViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -744,6 +748,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				183291591A8EECAB000BAE49 /* CarouselViewController.swift in Sources */,
 				1811D7B91A0AD1CA00E8B873 /* UIWebViewController.swift in Sources */,
 				1836A21C1A84F38A00E57F86 /* FontConstants.swift in Sources */,
 				18C0066C19DB769B00811755 /* NSDateExtensions.swift in Sources */,
@@ -799,6 +804,7 @@
 				186B08021A6D5F2900CAF920 /* SocialHelper.swift in Sources */,
 				1818F6DB1A8CF39B000255A2 /* ImageView.swift in Sources */,
 				1836A2091A843EF100E57F86 /* UIDeviceExtensions.swift in Sources */,
+				1832915A1A8EECAB000BAE49 /* CarouselViewController.swift in Sources */,
 				186B07F51A6D5F0400CAF920 /* LocalStorage.swift in Sources */,
 				18697C501A841C9900E8B1CE /* DeveloperToolsBaseURL.swift in Sources */,
 				186B07FF1A6D5F2700CAF920 /* UIViewExtensions.swift in Sources */,
