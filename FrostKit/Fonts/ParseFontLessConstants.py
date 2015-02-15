@@ -23,17 +23,17 @@ def todaysFormattedDate():
 def parseFontConsatnts(inputPath, outputPath):
   name = inputPath.split('.')[0]
   contents = ''
-  contents+= '\n/*\n------------------------------\n'
-  contents+= name
-  contents+= '\n------------------------------\n*/\n\n'
+  contents += '\n/*\n------------------------------\n'
+  contents += name
+  contents += '\n------------------------------\n*/\n\n'
+  contents += 'public struct ' + name + ' {\n'
 
   openObject = open('LessConstantsFiles/' + inputPath)
   openFile = openObject.read()
-
+  
   for line in openFile.splitlines():
     if 'var' in line:
-      line = line.replace('@', '')
-      line = line.replace('-var', '')
+      line = line.split('-var')[1]
       line = line.replace('-', '_')
       line = line.replace(' ', '')
       line = line.replace('\"', '')
@@ -41,9 +41,11 @@ def parseFontConsatnts(inputPath, outputPath):
       line = line.replace(';', '')
 
       components = line.split(':')
-      swiftLine = 'public let ' + components[0] +' = \"\\u{' + components[1] + '}\"\n'
+      swiftLine = '\tstatic let ' + components[0] +' = \"\\u{' + components[1] + '}\"\n'
       
       contents += swiftLine
+
+  contents += '}'
 
   return contents
 
