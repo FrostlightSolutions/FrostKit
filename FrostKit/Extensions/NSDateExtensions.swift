@@ -366,4 +366,53 @@ extension NSDate {
         return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .NoStyle, timeStyle: .ShortStyle)
     }
     
+    /**
+    Takes the format of a date and returns a formatted string of the date.
+    
+    :param: format The format of the date string to return.
+    
+    :returns: The formatted date string.
+    */
+    public func dateStringFromFormat(format: String) -> String {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = format
+        return formatter.stringFromDate(self)
+    }
+    
+    /**
+    Returns the date's day of the week string. i.e. Monday
+    
+    :returns: The weekday string.
+    */
+    public func dayString() -> String {
+        return dateStringFromFormat("EEEE")
+    }
+    
+    /**
+    Returns the date's day of the week as a short string. i.e. Mon
+    
+    :returns: The short weekday string.
+    */
+    public func dayShortString() -> String {
+        return dateStringFromFormat("EEE")
+    }
+    
+    /**
+    Returns the date's month string. i.e. September
+    
+    :returns: The month string.
+    */
+    public func monthString() -> String {
+        return dateStringFromFormat("MMMM")
+    }
+    
+    /**
+    Returns the date's month short string. i.e. Sept
+    
+    :returns: The month short string.
+    */
+    public func monthShortString() -> String {
+        return dateStringFromFormat("MMM")
+    }
+    
 }
