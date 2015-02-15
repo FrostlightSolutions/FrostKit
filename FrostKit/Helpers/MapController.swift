@@ -270,7 +270,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     */
     public func zoomToShowAll(includingUser: Bool = true) {
         if includingUser == true {
-            zoomToAnnotations(mapView.annotations as [MKAnnotation])
+            zoomToAnnotations(mapView.annotations as! [MKAnnotation])
         } else {
             let annotations = Array(self.annotations.values)
             zoomToAnnotations(annotations)
@@ -285,7 +285,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     public func zoomToAddress(address: Address) {
         plotAddress(address)
         
-        let annotation = annotations[address] as MKAnnotation
+        let annotation = annotations[address] as! MKAnnotation
         zoomToAnnotations([annotation])
     }
     
@@ -400,7 +400,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
                 pinView.enabled = true
                 pinView.canShowCallout = true
                 pinView.draggable = false
-                pinView.rightCalloutAccessoryView = UIButton.buttonWithType(.DetailDisclosure) as UIView
+                pinView.rightCalloutAccessoryView = UIButton.buttonWithType(.DetailDisclosure) as! UIView
                 annotationPinView = pinView
             }
         }
@@ -412,7 +412,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         if let annotation = view.annotation as? Annotation {
             if NSClassFromString("UIAlertController") == nil {
                 // iOS 7
-                let title = ([annotation.title, annotation.subtitle] as NSArray).componentsJoinedByString("\n")
+                let title = [annotation.title, annotation.subtitle].componentsJoinedByString("\n")
                 let actionSheet = UIActionSheet(title: title, delegate: self, cancelButtonTitle: FKLocalizedString("CANCEL", comment: "Cancel"), destructiveButtonTitle: nil, otherButtonTitles: FKLocalizedString("ZOOM_TO_", comment: "Zoom to..."), FKLocalizedString("DIRECTIONS", comment: "Directions"), FKLocalizedString("OPEN_IN_MAPS", comment: "Open in Maps"))
                 actionSheet.showFromRect(control.frame, inView: view, animated: true)
             } else {
@@ -509,10 +509,8 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     :returns: An array of addresses that meet the predicate search criteria.
     */
     public func searchAddresses(searchString: String) -> [Address] {
-        if let predicate = NSPredicate(format: "name beginswith[cd] %@ || addressString beginswith[cd] %@", searchString, searchString) {
-            return (addresses as NSArray).filteredArrayUsingPredicate(predicate) as [Address]
-        }
-        return Array<Address>()
+        let predicate = NSPredicate(format: "name beginswith[cd] %@ || addressString beginswith[cd] %@", searchString, searchString)
+        return (addresses as NSArray).filteredArrayUsingPredicate(predicate) as! [Address]
     }
     
 }

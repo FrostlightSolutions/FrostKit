@@ -188,10 +188,9 @@ public class UserStore: NSObject, NSCoding {
     */
     public func searchForSectionWithKey(key:String) -> [String: String]? {
         if sections.count > 0 {
-            if let filter = NSPredicate(format: "%K == %@", "key", key) {
-                let filteredSections = (sections as NSArray).filteredArrayUsingPredicate(filter)
-                return filteredSections.first as? [String: String]
-            }
+            let filter = NSPredicate(format: "%K == %@", "key", key)
+            let filteredSections = (sections as NSArray).filteredArrayUsingPredicate(filter)
+            return filteredSections.first as? [String: String]
         }
         return nil
     }

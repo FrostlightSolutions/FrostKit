@@ -28,7 +28,7 @@ public class RequestStore: NSObject {
     :param: router  The router to determine the key.
     */
     func addRequest(request: Request, router: Router) {
-        addRequest(request, urlString: router.URLRequest.URL.absoluteString!)
+        addRequest(request, urlString: router.URLRequest.URL!.absoluteString!)
     }
     
     /**
@@ -55,7 +55,7 @@ public class RequestStore: NSObject {
     :param: router The router to determine the key of the request to remove.
     */
     func removeRequestFor(#router: Router) {
-        removeRequestFor(urlString: router.URLRequest.URL.absoluteString!)
+        removeRequestFor(urlString: router.URLRequest.URL!.absoluteString!)
     }
     
     /**

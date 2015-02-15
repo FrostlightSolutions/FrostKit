@@ -36,13 +36,13 @@ class DataStoreTests: XCTestCase {
         return Array<AnyObject>()
     }
     var dictionary: [String:AnyObject] {
-        return self.nonPagedObjects[0] as [String:AnyObject]
+        return self.nonPagedObjects[0] as! [String:AnyObject]
     }
     var totalCount: Int {
-        return pagedJSON["count"] as Int
+        return pagedJSON["count"] as! Int
     }
     var objectsPerPage: Int {
-        return pagedJSON["per_page"] as Int
+        return pagedJSON["per_page"] as! Int
     }
     
     override func setUp() {
@@ -57,7 +57,7 @@ class DataStoreTests: XCTestCase {
     
     func testDataStoreSecondPageSubscript() {
         
-        let four = dataStore[3] as String
+        let four = dataStore[3] as! String
         if four == "4" {
             XCTAssert(true, "Success! 1st item of the 2nd page is \(four)")
         } else {
@@ -77,7 +77,7 @@ class DataStoreTests: XCTestCase {
     
     func testDataStoreFirstObject() {
         
-        let object = dataStore.firstObject as String
+        let object = dataStore.firstObject as! String
         if object == "1" {
             XCTAssert(true, "Success! First object is \(object)")
         } else {
@@ -87,7 +87,7 @@ class DataStoreTests: XCTestCase {
     
     func testDataStoreLastObject() {
         
-        let object = dataStore.lastObject as String
+        let object = dataStore.lastObject as! String
         if object == "8" {
             XCTAssert(true, "Success! Lasr object is \(object)")
         } else {

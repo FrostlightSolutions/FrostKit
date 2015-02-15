@@ -86,7 +86,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
         
         count = store.count
         _objectsPerPage = store._objectsPerPage
-        objects = store.objects.copy() as NSArray
+        objects = store.objects.copy() as! NSArray
     }
     
     /**
@@ -202,7 +202,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
             
             let haveEqualCounts = self.count == dataStore.count
             let haveEqualObjectsPerPage = self.objectsPerPage == dataStore.objectsPerPage
-            let haveEqualObjects = self.objects.isEqualToArray(dataStore.objects)
+            let haveEqualObjects = self.objects.isEqualToArray(dataStore.objects as! [AnyObject])
             
             return haveEqualCounts && haveEqualObjectsPerPage && haveEqualObjects
         }
@@ -230,7 +230,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     public func setObjects(newObjects: NSArray, page: Int, totalCount: Int? = nil) -> Bool {
         
         var objectsChanged = false
-        let objects = self.objects.mutableCopy() as NSMutableArray
+        let objects = self.objects.mutableCopy() as! NSMutableArray
         if newObjects.count > 0 {
             if let newTotalCount = totalCount {
                 count = newTotalCount
@@ -257,7 +257,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
             }
         }
         
-        if self.objects.isEqualToArray(objects) == false {
+        if objects.isEqualToArray(self.objects as! [AnyObject]) == false {
             objectsChanged = true
         }
         

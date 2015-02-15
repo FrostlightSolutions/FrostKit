@@ -72,7 +72,7 @@ public class LocalStorage: NSObject {
     :returns: Documents directory URL.
     */
     private class func documentsURL() -> NSURL {
-        return NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0] as NSURL
+        return NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0] as! NSURL
     }
     
     /**
@@ -81,7 +81,7 @@ public class LocalStorage: NSObject {
     :returns: Caches directory URL.
     */
     private class func cachesURL() -> NSURL {
-        return NSFileManager.defaultManager().URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask)[0] as NSURL
+        return NSFileManager.defaultManager().URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask)[0] as! NSURL
     }
     
     /**

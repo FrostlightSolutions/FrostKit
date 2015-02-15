@@ -177,7 +177,7 @@ public class DeveloperTools: NSObject {
         
         // Present Tools
         if let viewController = currentViewController {
-            let developerToolsVC = storyboard.instantiateInitialViewController() as UIViewController
+            let developerToolsVC = storyboard.instantiateInitialViewController() as! UIViewController
             if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
                 developerToolsVC.modalPresentationStyle = .PageSheet
             }

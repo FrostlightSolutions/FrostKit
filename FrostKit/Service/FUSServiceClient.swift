@@ -202,7 +202,7 @@ public class FUSServiceClient: NSObject {
     :param: completed Is called on completion of the request and returns an error if the process failed, otherwise it retuens `nil`.
     */
     public class func updateSections(completed: (error: NSError?) -> ()) {
-        Alamofire.request(Router.Sections).validate().responseJSON({ (requestObject, responseObject, responseJSON, responseError) -> Void in
+        Alamofire.request(Router.Sections).validate().responseJSON(options: .MutableContainers) { (requestObject, responseObject, responseJSON, responseError) -> Void in
             if let anError = responseError {
                 completed(error: self.errorForResponse(responseObject, json: responseJSON, origError: anError))
             } else if let jsonDictionary = responseJSON as? [String: AnyObject] {
@@ -215,7 +215,7 @@ public class FUSServiceClient: NSObject {
             } else {
                 completed(error: NSError.errorWithMessage("Returned JSON is not a Dictionary: \(responseJSON)"))
             }
-        })
+        }
     }
     
     // MARK: - Generic Methods
@@ -229,7 +229,7 @@ public class FUSServiceClient: NSObject {
     :returns: An Alamofire request.
     */
     public class func request(URLRequest: Router, completed: (json: AnyObject?, error: NSError?) -> ()) -> Alamofire.Request {
-        return Alamofire.request(URLRequest).validate().responseJSON({ (requestObject, responseObject, responseJSON, responseError) -> Void in
+        return Alamofire.request(URLRequest).validate().responseJSON(options: .MutableContainers, completionHandler: { (requestObject, responseObject, responseJSON, responseError) -> Void in
             completed(json: responseJSON, error: self.errorForResponse(responseObject, json: responseJSON, origError: responseError))
         })
     }

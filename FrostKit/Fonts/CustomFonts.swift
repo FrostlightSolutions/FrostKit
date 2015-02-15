@@ -33,11 +33,11 @@ public class CustomFonts: NSObject {
     */
     public class func loadCustomFonts(fontNames: [String], bundle: NSBundle = NSBundle.mainBundle()) {
         for fontName in fontNames {
-            let name = fontName.componentsSeparatedByString(".").first
+            let filename = fontName.componentsSeparatedByString(".").first
             let ext = fontName.pathExtension
             
-            if name != nil && countElements(name!) > 0 && countElements(ext) > 0 {
-                loadCustomFont(name!, withExtension: ext, bundle: bundle)
+            if let name = filename where count(name) > 0 && count(ext) > 0 {
+                loadCustomFont(name, withExtension: ext, bundle: bundle)
             } else {
                 NSLog("ERROR: Failed to load '\(fontName)' font as the name or extension are invalid!")
             }
@@ -78,7 +78,7 @@ public class CustomFonts: NSObject {
         
         for fontFamily in UIFont.familyNames() {
             
-            let name = fontFamily as String
+            let name = fontFamily as! String
             NSLog("\(name): \(UIFont.fontNamesForFamilyName(name))")
         }
     }

@@ -26,7 +26,7 @@ extension UIBarButtonItem {
     */
     public convenience init(title: String?, font: UIFont, verticalOffset: CGFloat = 0, target: AnyObject?, action: Selector) {
 
-        let button = UIButton.buttonWithType(.System) as UIButton
+        let button = UIButton.buttonWithType(.System) as! UIButton
         button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         button.titleLabel?.font = font
         button.setTitle(title, forState: .Normal)

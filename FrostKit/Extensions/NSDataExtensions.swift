@@ -53,7 +53,7 @@ extension NSData {
         numberFormatter.maximumFractionDigits = 2
         
         if let stringSize = numberFormatter.stringFromNumber(NSNumber(double: bytes)) {
-            return NSString(format: "%@ %@B", stringSize, sUnits[exponent])
+            return NSString(format: "%@ %@B", stringSize, sUnits[exponent]) as! String
         } else {
             return "Unknown"
         }

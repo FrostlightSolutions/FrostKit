@@ -39,7 +39,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     public var sectionDictionary: NSDictionary? {
         didSet {
             if let sectionDictionary = self.sectionDictionary {
-                let urlString = sectionDictionary["url"] as String
+                let urlString = sectionDictionary["url"] as! String
                 if let localDataStore = UserStore.current.dataStoreForURL(urlString) {
                     dataStore = localDataStore
                 }
@@ -171,7 +171,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     public func updateData() {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
             if let sectionDictionary = self.sectionDictionary {
-                let urlString = sectionDictionary["url"] as String
+                let urlString = sectionDictionary["url"] as! String
                 let page = self.lastLoadedPage
                 let urlRouter = Router.Custom(urlString, page)
                 let request = FUSServiceClient.request(urlRouter, completed: { (json, error) -> () in
@@ -222,7 +222,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
                     self.updateTableFooter(count: dataStore.count)
                     
                     if let sectionDictionary = self.sectionDictionary {
-                        let urlString = sectionDictionary["url"] as String
+                        let urlString = sectionDictionary["url"] as! String
                         UserStore.current.setDataStore(dataStore, urlString: urlString)
                     }
                 }

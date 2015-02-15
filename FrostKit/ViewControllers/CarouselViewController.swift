@@ -77,7 +77,7 @@ public class CarouselViewController: UIViewController, UICollectionViewDelegate,
     }
     
     public func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCellWithReuseIdentifier("CarouselCell", forIndexPath: indexPath) as UICollectionViewCell
+        return collectionView.dequeueReusableCellWithReuseIdentifier("CarouselCell", forIndexPath: indexPath) as! UICollectionViewCell
     }
     
     // MARK: - UICollectionViewDelegate
@@ -86,7 +86,7 @@ public class CarouselViewController: UIViewController, UICollectionViewDelegate,
     
     // MARK: - UICollectionViewDelegateFlowLayout
     
-    public func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewFlowLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    public func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return collectionView.bounds.size
     }
     

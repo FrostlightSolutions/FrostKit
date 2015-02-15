@@ -13,17 +13,18 @@ import UIKit
 ///
 extension UIColor {
     
-    /**
-    A convenience init for creating a color object from a hex string.
-    
-    :param: hexString   A hex string to turn into a color object.
-    
-    :returns: A color object from the hex string.
-    */
-    public convenience init(hexString: String) {
-        let color = UIColor.colorWithHex(hexString)
-        self.init(CGColor: color.CGColor)
-    }
+    // TODO: Reimpliment
+//    /**
+//    A convenience init for creating a color object from a hex string.
+//    
+//    :param: hexString   A hex string to turn into a color object.
+//    
+//    :returns: A color object from the hex string.
+//    */
+//    public convenience init(hexString: String) {
+//        let color = UIColor.colorWithHex(hexString)
+//        self.init(CGColor: color.CGColor)
+//    }
     
     /**
     Creates a color object from a hex string.
@@ -44,7 +45,7 @@ extension UIColor {
         scanner.scanLocation = scanLocation
         scanner.scanHexInt(&rgbValue)
         
-        switch countElements(hexString) - scanLocation {
+        switch count(hexString) - scanLocation {
         case 3:
             // Normalize
             rgbValue = (rgbValue << 8) & 0x0F0000 | (rgbValue << 4) & 0x000F00 | rgbValue & 0x00000F
