@@ -333,6 +333,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
             directionsRequest.requestsAlternateRoutes = false
             
             let directions = MKDirections(request: directionsRequest)
+            NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
             directions.calculateDirectionsWithCompletionHandler({ (directionsResponse, error) -> Void in
                 if let anError = error {
                     NSLog("Error getting directions: \(error.localizedDescription)")
@@ -341,6 +342,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
                         self.plotRoute(route)
                     }
                 }
+                NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
             })
         } else {
             let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]

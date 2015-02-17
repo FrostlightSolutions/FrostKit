@@ -8,6 +8,9 @@
 
 import UIKit
 
+public let NetworkRequestDidBeginNotification = "com.FrostKit.activityIndicator.request.begin"
+public let NetworkRequestDidCompleteNotification = "com.FrostKit.activityIndicator.request.complete"
+
 internal func FKLocalizedString(key: String, comment: String = "") -> String {
     return NSLocalizedString(key, bundle: NSBundle(forClass: FrostKit.self), comment: comment)
 }

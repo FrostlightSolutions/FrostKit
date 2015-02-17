@@ -234,6 +234,7 @@ public class BaseWebViewController: UIViewController {
         
         if loading == true {
             
+            NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
             activityIndicatorView.startAnimating()
             
             UIView.animateWithDuration(0.25, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
@@ -244,6 +245,7 @@ public class BaseWebViewController: UIViewController {
                 }, completion: nil)
         } else {
             
+            NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
             UIView.animateWithDuration(0.25, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
                 
                 self.navigationItem.setRightBarButtonItem(nil, animated: true)
