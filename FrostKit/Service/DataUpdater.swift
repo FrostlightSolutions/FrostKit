@@ -42,6 +42,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
                 let urlString = sectionDictionary["url"] as String
                 if let localDataStore = UserStore.current.dataStoreForURL(urlString) {
                     dataStore = localDataStore
+                    dataStore?.delegate = self
                 }
             }
         }
@@ -51,7 +52,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     /// The highest loaded page. As the user scrolls down, this will incriment automatically. It will only be set back tot zero when the user pulls down to refresh on the table view or collection view.
     private var lastRequestedPage: Int = 1
     /// An array of loaded pages.
-    private var loadedPages = Array<Int>()
+    private var loadingPages = NSMutableSet()
     
     /**
     A convenience init for programatically creating a data update with a table view.
@@ -160,7 +161,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     */
     func refreshControlTriggered(sender: UIRefreshControl!) {
         lastRequestedPage = 1
-        loadedPages.removeAll(keepCapacity: true)
+        loadingPages.removeAllObjects()
         updateData()
     }
     
@@ -179,11 +180,9 @@ public class DataUpdater: NSObject, DataStoreDelegate {
                 let urlRouter = Router.Custom(urlString, page)
                 let request = FUSServiceClient.request(urlRouter, completed: { (json, error) -> () in
                     self.requestStore.removeRequestFor(router: urlRouter)
+                    self.loadingPages.removeObject(page)
                     if let anError = error {
-                        if let index = find(self.loadedPages, page) {
-                            self.loadedPages.removeAtIndex(index)
-                        }
-                        NSLog("Data Updater Failure: %@", anError.localizedDescription)
+                        NSLog("Data Updater Failurefor page \(page): \(anError.localizedDescription)")
                     } else {
                         if let object: AnyObject = json {
                             self.loadJSON(object, page: page)
@@ -192,6 +191,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
                     self.endRefreshing()
                 })
                 self.requestStore.addRequest(request, router: urlRouter)
+                self.loadingPages.addObject(page)
             }
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -284,9 +284,9 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     // MARK: - Data Store Delegate Methods
     
     public func dataStore(dataStore: DataStore, willAccessPage page: Int) {
-        if contains(loadedPages, page) == false {
+        if loadingPages.containsObject(page) == false {
+            NSLog("Loading page: \(page)")
             lastRequestedPage = page
-            loadedPages.append(page)
             updateData()
         }
     }
