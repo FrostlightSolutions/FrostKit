@@ -54,26 +54,37 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     public var delegate: DataStoreDelegate?
     /// The last accessed page.
     private var lastAccessedPage = NSNotFound
-    /// The objects in the store.
-    private var objects = NSArray()
+    /// The objects in the store as a dictionary of paged objects.
+    private var objects = NSDictionary()
+    /// An array of page numbers sorted numerically. This might not return all pages if a page was skipped.
+    private var sortedPages: NSArray {
+        let keysArray = objects.allKeys as NSArray
+        return keysArray.sortedArrayUsingSelector("compare:")
+    }
     /// The first object in the store.
     public var firstObject: AnyObject? {
-        return objects.firstObject
+        if let page = objects[1] as? NSArray {
+            return page.firstObject
+        }
+        return nil
     }
     /// The last object in the store.
     public var lastObject: AnyObject? {
-        return objects.lastObject
+        if let page = objects[numberOfPages] as? NSArray {
+            return page.lastObject
+        }
+        return nil
     }
     /// Returns a dictionary object if it is the first item in the array. This is used as a convenience method for getting a single dictionary object in the store.
     public var dictionary: NSDictionary? {
-        return firstObject as? NSDictionary
+        return objects
     }
     /// A string that represents the contents of the stores array, formatted as a property list.
     override public var description: String {
         return objects.description
     }
     override public var hash: Int {
-        return objects.hash ^ objectsPerPage
+        return objects.hash
     }
     
     /**
@@ -86,7 +97,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
         
         count = store.count
         _objectsPerPage = store._objectsPerPage
-        objects = store.objects.copy() as NSArray
+        objects = store.objects.copy() as NSDictionary
     }
     
     /**
@@ -100,7 +111,6 @@ public class DataStore: NSObject, NSCoding, NSCopying {
         
         count = totalCount
         _objectsPerPage = objectsPerPage
-        objects = NSMutableArray(capacity: count)
     }
     
     /**
@@ -134,7 +144,6 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     :param: nonPagedObjects An array of objects to store.
     */
     convenience public init(nonPagedObjects: NSArray) {
-        
         self.init(totalCount: nonPagedObjects.count, objectsPerPage: nonPagedObjects.count)
         setObjects(nonPagedObjects, page: 1)
     }
@@ -145,7 +154,8 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     :param: dictionary The dictionary to store.
     */
     convenience public init(dictionary: NSDictionary) {
-        self.init(nonPagedObjects: [dictionary])
+        self.init(totalCount: 1, objectsPerPage: 0)
+        setDictionary(dictionary)
     }
     
     /**
@@ -178,7 +188,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
         
         count = aDecoder.decodeIntegerForKey("count")
         _objectsPerPage = aDecoder.decodeIntegerForKey("objectsPerPage")
-        if let objects = aDecoder.decodeObjectForKey("objects") as? NSArray {
+        if let objects = aDecoder.decodeObjectForKey("objects") as? NSDictionary {
             self.objects = objects
         }
     }
@@ -202,7 +212,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
             
             let haveEqualCounts = self.count == dataStore.count
             let haveEqualObjectsPerPage = self.objectsPerPage == dataStore.objectsPerPage
-            let haveEqualObjects = self.objects.isEqualToArray(dataStore.objects)
+            let haveEqualObjects = self.objects.isEqualToDictionary(dataStore.objects)
             
             return haveEqualCounts && haveEqualObjectsPerPage && haveEqualObjects
         }
@@ -228,40 +238,27 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     :returns: `true` if updated store is different from previous store, `false` if nothing changed.
     */
     public func setObjects(newObjects: NSArray, page: Int, totalCount: Int? = nil) -> Bool {
-        
         var objectsChanged = false
-        let objects = self.objects.mutableCopy() as NSMutableArray
+        let objects = self.objects.mutableCopy() as NSMutableDictionary
         if newObjects.count > 0 {
+            // Update the total count
             if let newTotalCount = totalCount {
-                count = newTotalCount
+                if count != newTotalCount {
+                    count = newTotalCount
+                    objectsChanged = true
+                }
             }
             
-            if count > objects.count {
-                // Replace existing objects or add new objects if out of bounds
-                var newObjectIndex = 0
-                let indexSet = indexSetForPage(page)
-                for index in indexSet.firstIndex...indexSet.lastIndex {
-                    let newObject: AnyObject = newObjects[newObjectIndex]
-                    newObjectIndex++
-                    
-                    if index < objects.count {
-                        objects.replaceObjectAtIndex(index, withObject: newObject)
-                    } else {
-                        objects.addObject(newObject)
-                    }
-                }
-            } else if objects.count > count {
-                // Remove extra objects
-                let range = NSMakeRange(count, objects.count - count)
-                objects.removeObjectsInRange(range)
-            }
+            // Update paged items
+            objects[page] = newObjects
         }
         
-        if self.objects.isEqualToArray(objects) == false {
+        // If current instance of object is not equal to the stores, then update
+        if self.objects.isEqualToDictionary(objects) == false {
+            self.objects = objects
             objectsChanged = true
         }
         
-        self.objects = objects
         return objectsChanged
     }
     
@@ -299,7 +296,12 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     :returns: `true` if updated store is different from previous store, `false` if nothing changed.
     */
     public func setDictionary(dictionary: NSDictionary) -> Bool {
-        return setObjects([dictionary], page: 1)
+        if objects.isEqualToDictionary(dictionary) {
+            return false
+        } else {
+            objects = dictionary
+            return true
+        }
     }
     
     /**
@@ -344,16 +346,34 @@ public class DataStore: NSObject, NSCoding, NSCopying {
             delegate?.dataStore?(self, willAccessPage: page)
         }
         
-        if index < objects.count {
-            let object: AnyObject = objects[index]
-            delegate?.dataStore?(self, willAccessIndex: index, returnObject: object)
-            return object
+        var object: AnyObject?
+        if let pageObjects = objects[page] as? NSArray {
+            let pagedIndex = indexRelativeToPage(index)
+            if pagedIndex < pageObjects.count {
+                object = pageObjects[pagedIndex]
+            }
         }
-        return nil
+        
+        if object != nil {
+            delegate?.dataStore?(self, willAccessIndex: index, returnObject: object!)
+        }
+        
+        return object
     }
     
-    public subscript (idx: Int) -> AnyObject? {
+    public subscript(idx: Int) -> AnyObject? {
         return objectAtIndex(idx)
+    }
+    
+    /**
+    Returns the objects for a given page.
+    
+    :param: page The page of the objects.
+    
+    :returns: The objects of the page.
+    */
+    public func pageObjects(page: Int) -> NSArray? {
+        return objects[page] as? NSArray
     }
     
     /**
@@ -368,6 +388,21 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     }
     
     /**
+    Returns the reletive paged index of an index.
+    
+    For example, if a store has 3 items per page and 4 pages, getting the index of 10 would return 1, as it is the second item on the fourth page.
+    
+    :param: index The index of the object.
+    
+    :returns: The reletive paged index of the item.
+    */
+    private func indexRelativeToPage(index: Int) -> Int {
+        let page = pageForIndex(index)
+        let offset = (page - 1) * objectsPerPage
+        return max(index - offset, 0)
+    }
+    
+    /**
     Returns the lowest index whose corresponding store value is equal to a given object.
     
     :param: anObject The object to find in the store.
@@ -375,7 +410,16 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     :returns: The lowest index whose corresponding store value is equal to anObject. If none of the objects in the store is equal to anObject, returns NSNotFound.
     */
     public func indexOfObject(anObject: AnyObject) -> Int {
-        return objects.indexOfObject(anObject)
+        var index = NSNotFound
+        for (page, value) in objects {
+            if let pageObjects = value as? NSArray {
+                index = pageObjects.indexOfObject(anObject)
+                if index != NSNotFound {
+                    break
+                }
+            }
+        }
+        return index
     }
     
     /**
@@ -386,7 +430,6 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     :returns: An index set of the indexes on the given page.
     */
     public func indexSetForPage(page: Int) -> NSIndexSet {
-        
         var rangeLength = objectsPerPage
         if page == numberOfPages {
             rangeLength = count - ((numberOfPages - 1) * objectsPerPage)

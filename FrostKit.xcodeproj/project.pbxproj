@@ -175,6 +175,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		180664F91A93737200887B9D /* ActivityIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorManager.swift; sourceTree = "<group>"; };
 		180EFDF01A6FD3A000325C09 /* DataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStoreTests.swift; sourceTree = "<group>"; };
 		1811D76A1A0ACAED00E8B873 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		1811D7B41A0AD1CA00E8B873 /* BaseWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
@@ -333,6 +334,7 @@
 		1857BE9D1A859FAA00903910 /* ExternalExtensions */ = {
 			isa = PBXGroup;
 			children = (
+				180664F91A93737200887B9D /* ActivityIndicatorManager.swift */,
 				184E07931A8901A10074FD25 /* ParseAddressExtensions.swift */,
 				184E07921A8901A10074FD25 /* MBProgressHUDExtensions.swift */,
 			);
