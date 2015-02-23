@@ -160,7 +160,7 @@ public class FUSServiceClient: NSObject {
     :param: completed Is called on completion of the request and returns an error if the process failed, otherwise it retuens `nil`.
     :param: force       Forces the OAuth token to refresh even if it hasn't expired.
     */
-    public class func refreshOAuthToken(completed: (error: NSError?) -> (), force: Bool = false) {
+    public class func refreshOAuthToken(force: Bool = false, completed: (error: NSError?) -> ()) {
         
         if let oAuthToken = UserStore.current.oAuthToken {
             
