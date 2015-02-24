@@ -285,7 +285,6 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     
     public func dataStore(dataStore: DataStore, willAccessPage page: Int) {
         if loadingPages.containsObject(page) == false {
-            NSLog("Loading page: \(page)")
             lastRequestedPage = page
             updateData()
         }
