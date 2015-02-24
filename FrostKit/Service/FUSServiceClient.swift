@@ -148,7 +148,14 @@ public class FUSServiceClient: NSObject {
                 UserStore.current.username = username
                 UserStore.current.oAuthToken = OAuthToken(json: jsonDict, requestDate: requestDate)
                 UserStore.saveUser()
-                completed(error: self.errorForResponse(response, json: responseJSON, origError: responseError))
+                
+                FUSServiceClient.updateSections({ (error) -> () in
+                    if let anError = error {
+                        completed(error: anError)
+                    } else {
+                        completed(error: self.errorForResponse(response, json: responseJSON, origError: responseError))
+                    }
+                })
             } else {
                 completed(error: NSError.errorWithMessage("Returned JSON is not a NSDictionary: \(responseJSON)"))
             }
@@ -168,7 +175,13 @@ public class FUSServiceClient: NSObject {
             
             if force == false {
                 if oAuthToken.expired == false {
-                    completed(error: nil)
+                    FUSServiceClient.updateSections({ (error) -> () in
+                        if let anError = error {
+                            completed(error: anError)
+                        } else {
+                            completed(error: nil)
+                        }
+                    })
                     return
                 }
             }
@@ -189,7 +202,14 @@ public class FUSServiceClient: NSObject {
                 } else if let jsonDict = responseJSON as? NSDictionary {
                     UserStore.current.oAuthToken = OAuthToken(json: jsonDict, requestDate: requestDate)
                     UserStore.saveUser()
-                    completed(error: self.errorForResponse(response, json: responseJSON, origError: responseError))
+                    
+                    FUSServiceClient.updateSections({ (error) -> () in
+                        if let anError = error {
+                            completed(error: anError)
+                        } else {
+                            completed(error: self.errorForResponse(response, json: responseJSON, origError: responseError))
+                        }
+                    })
                 } else {
                     completed(error: NSError.errorWithMessage("Returned JSON is not a NSDictionary: \(responseJSON)"))
                 }
