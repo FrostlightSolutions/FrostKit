@@ -288,7 +288,14 @@ public class FUSServiceClient: NSObject {
                     errorString += "\(errorDescription)"
                 }
             }
-            return NSError.errorWithMessage(errorString)
+            
+            var userInfo = Dictionary<NSObject, AnyObject>()
+            if let errorUserInfo = anError.userInfo {
+                userInfo = errorUserInfo
+            }
+            userInfo[NSLocalizedDescriptionKey] = errorString
+            
+            return NSError(domain: anError.domain, code: anError.code, userInfo: userInfo)
         }
         return nil
     }
