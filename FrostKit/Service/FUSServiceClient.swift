@@ -264,6 +264,24 @@ public class FUSServiceClient: NSObject {
         })
     }
     
+    // MARK: - Helper Methods
+    
+    /**
+    Checks if an object is a URL path with a prefix of `http://` or `https://`.
+    
+    :param: item The item to check.
+    
+    :returns: Returns `true` if it is a path string or `false` if not.
+    */
+    public class func isItemSection(item: AnyObject) -> Bool {
+        if let path = item as? String {
+            if path.hasPrefix("http://") || path.hasPrefix("https://") {
+                return true
+            }
+        }
+        return false
+    }
+    
     // MARK: - Error Handling
     
     /**
