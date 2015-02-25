@@ -74,6 +74,9 @@ public class UserStore: NSObject, NSCoding {
             self.username = username
             oAuthToken = KeychainHelper.details(username: username) as? OAuthToken
         }
+        if let sections = aDecoder.decodeObjectForKey("sections") as? [[String: String]] {
+            self.sections = sections
+        }
         if let contentData = aDecoder.decodeObjectForKey("contentData") as? [String: DataStore] {
             self.contentData = contentData
         }
@@ -82,6 +85,7 @@ public class UserStore: NSObject, NSCoding {
     public func encodeWithCoder(aCoder: NSCoder) {
         
         aCoder.encodeObject(username, forKey: "username")
+        aCoder.encodeObject(sections, forKey: "sections")
         aCoder.encodeObject(contentData, forKey: "contentData")
     }
     
