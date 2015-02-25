@@ -252,7 +252,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
                     self.requestStore.removeRequestFor(router: urlRouter)
                     self.loadingPages.removeObject(page)
                     if let anError = error {
-                        NSLog("Data Updater Failurefor page \(page): \(anError.localizedDescription)")
+                        NSLog("Data Updater Failure for page \(page): \(anError.localizedDescription)")
                     } else {
                         if let object: AnyObject = json {
                             self.loadJSON(object, page: page)
