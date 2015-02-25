@@ -136,6 +136,7 @@ public class UserStore: NSObject, NSCoding {
     */
     public class func logoutCurrentUser() {
         UserStore.current.resetUser()
+        NSNotificationCenter.defaultCenter().postNotificationName(UserStoreLogoutClearData, object: nil)
     }
     
     /**

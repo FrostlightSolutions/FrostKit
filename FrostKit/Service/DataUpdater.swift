@@ -48,6 +48,12 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     /// An array of loaded pages.
     private var loadingPages = NSMutableSet()
     
+    public override init() {
+        super.init()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "clearData", name: UserStoreLogoutClearData, object: nil)
+    }
+    
     /**
     A convenience init for programatically creating a data update with a table view.
     
@@ -79,6 +85,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     }
     
     deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
         if let viewController = self.viewController {
             NSNotificationCenter.defaultCenter().removeObserver(viewController)
         }
@@ -92,6 +99,15 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     public func viewWillAppear(animated: Bool) {
         endRefreshing()
         updateData()
+    }
+    
+    // MARK: - Notifications
+    
+    func clearData() {
+        if let dataStore = self.dataStore {
+            dataStore.removeAllObjects()
+            reloadData()
+        }
     }
     
     // MARK: - Setup and Update Methods

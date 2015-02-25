@@ -231,6 +231,19 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     // MARK: - Helper Methods
     
     /**
+    Removes all of the objects from the store.
+    */
+    public func removeAllObjects(includingPagedMetadata: Bool = true) {
+        objects = NSDictionary()
+        
+        if includingPagedMetadata == true {
+            count = 0
+            _objectsPerPage = 0
+            lastAccessedPage = NSNotFound
+        }
+    }
+    
+    /**
     Sets object into the store for a current page. This will either replace palceholder objects with data or update previous stored objects with the new values. If `totalCount` is returned and if it is different from the previous number then the store will add or remove the relevaent placeholders or objects in the store respectively.
     
     :param: newObjects The new objects to add or update into the store.
