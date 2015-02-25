@@ -228,7 +228,7 @@ public class FUSServiceClient: NSObject {
     public class func updateSections(completed: (error: NSError?) -> ()) {
         
         NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
-        Alamofire.request(Router.Sections).validate().responseJSON({ (requestObject, responseObject, responseJSON, responseError) -> Void in
+        Alamofire.request(Router.Sections).validate().responseJSON { (requestObject, responseObject, responseJSON, responseError) -> Void in
             if let anError = responseError {
                 completed(error: self.errorForResponse(responseObject, json: responseJSON, origError: anError))
             } else if let jsonDictionary = responseJSON as? [String: AnyObject] {
@@ -240,11 +240,11 @@ public class FUSServiceClient: NSObject {
                 } else {
                     completed(error: NSError.errorWithMessage("Returned JSON is not an Array: \(responseJSON)"))
                 }
-                NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
             } else {
                 completed(error: NSError.errorWithMessage("Returned JSON is not a Dictionary: \(responseJSON)"))
             }
-        })
+            NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
+        }
     }
     
     // MARK: - Generic Methods
@@ -260,10 +260,10 @@ public class FUSServiceClient: NSObject {
     public class func request(URLRequest: Router, completed: (json: AnyObject?, error: NSError?) -> ()) -> Alamofire.Request {
         
         NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
-        return Alamofire.request(URLRequest).validate().responseJSON({ (requestObject, responseObject, responseJSON, responseError) -> Void in
+        return Alamofire.request(URLRequest).validate().responseJSON { (requestObject, responseObject, responseJSON, responseError) -> Void in
             completed(json: responseJSON, error: self.errorForResponse(responseObject, json: responseJSON, origError: responseError))
             NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
-        })
+        }
     }
     
     // MARK: - Helper Methods
