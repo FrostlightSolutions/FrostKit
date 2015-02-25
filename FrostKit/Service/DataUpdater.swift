@@ -240,6 +240,8 @@ public class DataUpdater: NSObject, DataStoreDelegate {
                 })
                 self.requestStore.addRequest(request, router: urlRouter)
                 self.loadingPages.addObject(page)
+            } else {
+                self.endRefreshing()
             }
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
