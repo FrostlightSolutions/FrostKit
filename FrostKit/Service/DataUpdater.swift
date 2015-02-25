@@ -30,17 +30,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
         didSet { setupCollectionView() }
     }
     /// The section dictionary from FUS describing the URL and name of the section to make requests for.
-    private var sectionDictionary: NSDictionary? {
-        didSet {
-            if let sectionDictionary = self.sectionDictionary {
-                let urlString = sectionDictionary["url"] as String
-                if let localDataStore = UserStore.current.dataStoreForURL(urlString) {
-                    dataStore = localDataStore
-                    dataStore?.delegate = self
-                }
-            }
-        }
-    }
+    private var sectionDictionary: NSDictionary?
     /// The parameters to use when updating the data.
     public var updateParameters = Dictionary<String, AnyObject>()
     /// The data store of data loaded, to update and to save.
@@ -101,6 +91,10 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     public func viewWillAppear(animated: Bool) {
         endRefreshing()
         updateData()
+    }
+    
+    public func viewDidAppear(animated: Bool) {
+        
     }
     
     // MARK: - Notifications
@@ -202,10 +196,22 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     :param: sectionDictionary The section dictionary returned from FUS.
     */
     public func setSectionDictionary(sectionDictionary: NSDictionary, updateData: Bool = true) {
-        self.sectionDictionary = sectionDictionary
-        
-        if updateData == true {
-            self.updateData()
+        if self.sectionDictionary == nil || self.sectionDictionary?.isEqualToDictionary(sectionDictionary) == false {
+            self.sectionDictionary = sectionDictionary
+            
+            if let sectionDictionary = self.sectionDictionary {
+                let urlString = sectionDictionary["url"] as String
+                let saveString = Router.Custom(urlString, nil, self.updateParameters).saveString
+                if let localDataStore = UserStore.current.dataStoreForURL(saveString) {
+                    dataStore = localDataStore
+                    dataStore?.delegate = self
+                    reloadData()
+                }
+            }
+            
+            if updateData == true {
+                self.updateData()
+            }
         }
     }
     
