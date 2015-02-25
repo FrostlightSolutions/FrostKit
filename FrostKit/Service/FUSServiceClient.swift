@@ -234,6 +234,7 @@ public class FUSServiceClient: NSObject {
             } else if let jsonDictionary = responseJSON as? [String: AnyObject] {
                 if let jsonArray = jsonDictionary["sections"] as? [[String: String]] {
                     UserStore.current.sections = jsonArray
+                    UserStore.saveUser()
                     completed(error: self.errorForResponse(responseObject, json: responseJSON, origError: responseError))
                 } else {
                     completed(error: NSError.errorWithMessage("Returned JSON is not an Array: \(responseJSON)"))
