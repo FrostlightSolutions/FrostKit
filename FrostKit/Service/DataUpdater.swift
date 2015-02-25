@@ -305,7 +305,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     :param: page The page the JSON is related to, or `nil` if the JSON is a non-paged response.
     */
     private func loadJSON(json: AnyObject, router: Router) {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
             var shouldUpdate = false
             if let dataStore = self.dataStore {
                 shouldUpdate = dataStore.setFrom(object: json, page: router.page)
@@ -318,20 +318,22 @@ public class DataUpdater: NSObject, DataStoreDelegate {
                     NSLog("Can't create a data store for a non-page 1 object!")
                 }
             }
-            
-            if shouldUpdate == true {
-                if let dataStore = self.dataStore {
-                    self.updateTableFooter(count: dataStore.count)
-                    
-                    if let sectionDictionary = self.sectionDictionary {
-                        let saveString = router.saveString
-                        UserStore.current.setDataStore(dataStore, urlString: saveString)
+        
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                if shouldUpdate == true {
+                    if let dataStore = self.dataStore {
+                        self.updateTableFooter(count: dataStore.count)
+                        
+                        if let sectionDictionary = self.sectionDictionary {
+                            let saveString = router.saveString
+                            UserStore.current.setDataStore(dataStore, urlString: saveString)
+                        }
                     }
+                    self.reloadData()
                 }
-                self.reloadData()
-            }
-            
-            // TODO: Call loadedData() function in the current view controller.
+                
+                // TODO: Call loadedData() function in the current view controller.
+            })
         })
     }
     
