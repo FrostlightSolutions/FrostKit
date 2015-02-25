@@ -54,6 +54,8 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     public var delegate: DataStoreDelegate?
     /// The last accessed page.
     private var lastAccessedPage = NSNotFound
+    /// Determines if the store has been accessed after loaded for the first time.
+    private var accessedAfterFirstLoad = false
     /// The objects in the store as a dictionary of paged objects.
     private var objects = NSDictionary()
     /// An array of page numbers sorted numerically. This might not return all pages if a page was skipped.
@@ -238,14 +240,14 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     :returns: `true` if updated store is different from previous store, `false` if nothing changed.
     */
     public func setObjects(newObjects: NSArray, page: Int, totalCount: Int? = nil) -> Bool {
-        var objectsChanged = false
+        var hasChanged = false
         let objects = self.objects.mutableCopy() as NSMutableDictionary
         if newObjects.count > 0 {
             // Update the total count
             if let newTotalCount = totalCount {
                 if count != newTotalCount {
                     count = newTotalCount
-                    objectsChanged = true
+                    hasChanged = true
                 }
             }
             
@@ -256,10 +258,15 @@ public class DataStore: NSObject, NSCoding, NSCopying {
         // If current instance of object is not equal to the stores, then update
         if self.objects.isEqualToDictionary(objects) == false {
             self.objects = objects
-            objectsChanged = true
+            hasChanged = true
         }
         
-        return objectsChanged
+        if accessedAfterFirstLoad == false {
+            accessedAfterFirstLoad = true
+            hasChanged = true
+        }
+        
+        return hasChanged
     }
     
     /**
@@ -296,12 +303,20 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     :returns: `true` if updated store is different from previous store, `false` if nothing changed.
     */
     public func setDictionary(dictionary: NSDictionary) -> Bool {
+        var hasChanged = false
         if objects.isEqualToDictionary(dictionary) {
-            return false
+            hasChanged = false
         } else {
             objects = dictionary
-            return true
+            hasChanged = true
         }
+        
+        if accessedAfterFirstLoad == false {
+            accessedAfterFirstLoad = true
+            hasChanged = true
+        }
+        
+        return hasChanged
     }
     
     /**
@@ -329,6 +344,12 @@ public class DataStore: NSObject, NSCoding, NSCopying {
             // Non-Paged Array of Objects
             hasChanged = setObjects(array, page: 1, totalCount: array.count)
         }
+        
+        if accessedAfterFirstLoad == false {
+            accessedAfterFirstLoad = true
+            hasChanged = true
+        }
+        
         return hasChanged
     }
     
