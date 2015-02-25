@@ -235,6 +235,7 @@ public class FUSServiceClient: NSObject {
                 if let jsonArray = jsonDictionary["sections"] as? [[String: String]] {
                     UserStore.current.sections = jsonArray
                     UserStore.saveUser()
+                    NSNotificationCenter.defaultCenter().postNotificationName(FUSServiceClientUpdateSections, object: nil)
                     completed(error: self.errorForResponse(responseObject, json: responseJSON, origError: responseError))
                 } else {
                     completed(error: NSError.errorWithMessage("Returned JSON is not an Array: \(responseJSON)"))

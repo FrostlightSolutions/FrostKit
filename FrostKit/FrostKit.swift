@@ -8,6 +8,7 @@
 
 import UIKit
 
+public let FUSServiceClientUpdateSections = "com.FrostKit.FUSServiceClient.updateSections"
 public let NetworkRequestDidBeginNotification = "com.FrostKit.activityIndicator.request.begin"
 public let NetworkRequestDidCompleteNotification = "com.FrostKit.activityIndicator.request.complete"
 

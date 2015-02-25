@@ -30,7 +30,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
         didSet { setupCollectionView() }
     }
     /// The section dictionary from FUS describing the URL and name of the section to make requests for.
-    public var sectionDictionary: NSDictionary? {
+    private var sectionDictionary: NSDictionary? {
         didSet {
             if let sectionDictionary = self.sectionDictionary {
                 let urlString = sectionDictionary["url"] as String
@@ -76,6 +76,12 @@ public class DataUpdater: NSObject, DataStoreDelegate {
         self.collectionView = collectionView
         
         setRefreshControlForViewController(viewController)
+    }
+    
+    deinit {
+        if let viewController = self.viewController {
+            NSNotificationCenter.defaultCenter().removeObserver(viewController)
+        }
     }
     
     /**
@@ -146,6 +152,9 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     */
     public func setViewController(viewController: UIViewController) {
         self.viewController = viewController
+        if viewController.respondsToSelector("updateSection") == true {
+            NSNotificationCenter.defaultCenter().addObserver(viewController, selector: "updateSection", name: FUSServiceClientUpdateSections, object: nil)
+        }
         setRefreshControlForViewController(self.viewController)
     }
     
@@ -167,6 +176,19 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     public func setCollectionView(collectionView: UICollectionView) {
         self.collectionView = collectionView
         setupCollectionView()
+    }
+    
+    /**
+    Set the section dictionary so that the data updater knows the URL of the data to update. Calling this function automatically calls an update of data once the section dictionary is set.
+    
+    :param: sectionDictionary The section dictionary returned from FUS.
+    */
+    public func setSectionDictionary(sectionDictionary: NSDictionary, updateData: Bool = true) {
+        self.sectionDictionary = sectionDictionary
+        
+        if updateData == true {
+            self.updateData()
+        }
     }
     
     /**
