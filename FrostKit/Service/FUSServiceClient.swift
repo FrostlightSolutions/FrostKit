@@ -24,7 +24,7 @@ public enum Router: URLRequestConvertible {
     case Root
     case Token([String: AnyObject])
     case Sections
-    case Custom(String, Int?)
+    case Custom(String, Int?, [String: AnyObject]?)
     
     // MARK: URLRequestConvertible
     
@@ -62,7 +62,7 @@ public enum Router: URLRequestConvertible {
     /// The absolute URL of the case.
     var URL: NSURL {
         switch self {
-        case .Custom(let urlString, _):
+        case .Custom(let urlString, _, _):
             return NSURL(string: urlString)!
         default:
             let URL = NSURL(string: Router.baseURLString)!
@@ -77,7 +77,7 @@ public enum Router: URLRequestConvertible {
     
     var page: Int? {
         switch self {
-        case .Custom(_, let page):
+        case .Custom(_, let page, _):
             return page
         default:
             return nil
@@ -103,12 +103,20 @@ public enum Router: URLRequestConvertible {
         switch self {
         case .Token(let parameters):
             return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
-        case .Custom(_, let page):
+        case .Custom(_, let page, let extraParameters):
+            var parameters = Dictionary<String, AnyObject>()
+            
             if page != nil {
-                return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: ["page": page!]).0
-            } else {
-                return mutableURLRequest
+                parameters["page"] = page!
             }
+            
+            if extraParameters != nil {
+                for (key, value) in extraParameters! {
+                    parameters[key] = value
+                }
+            }
+            
+            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
         default:
             return mutableURLRequest
         }

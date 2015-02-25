@@ -41,6 +41,8 @@ public class DataUpdater: NSObject, DataStoreDelegate {
             }
         }
     }
+    /// The parameters to use when updating the data.
+    public var updateParameters = Dictionary<String, AnyObject>()
     /// The data store of data loaded, to update and to save.
     public var dataStore: DataStore?
     /// The highest loaded page. As the user scrolls down, this will incriment automatically. It will only be set back tot zero when the user pulls down to refresh on the table view or collection view.
@@ -263,7 +265,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
             if let sectionDictionary = self.sectionDictionary {
                 let urlString = sectionDictionary["url"] as String
                 let page = self.lastRequestedPage
-                let urlRouter = Router.Custom(urlString, page)
+                let urlRouter = Router.Custom(urlString, page, self.updateParameters)
                 let request = FUSServiceClient.request(urlRouter, completed: { (json, error) -> () in
                     self.requestStore.removeRequestFor(router: urlRouter)
                     self.loadingPages.removeObject(page)
@@ -271,7 +273,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
                         NSLog("Data Updater Failure for page \(page): \(anError.localizedDescription)")
                     } else {
                         if let object: AnyObject = json {
-                            self.loadJSON(object, page: page)
+                            self.loadJSON(object, router: urlRouter)
                         }
                     }
                     self.endRefreshing()
@@ -296,13 +298,13 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     :param: json The JSON to update/load into the data store.
     :param: page The page the JSON is related to, or `nil` if the JSON is a non-paged response.
     */
-    private func loadJSON(json: AnyObject, page: Int?) {
+    private func loadJSON(json: AnyObject, router: Router) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             var shouldUpdate = false
             if let dataStore = self.dataStore {
-                shouldUpdate = dataStore.setFrom(object: json, page: page)
+                shouldUpdate = dataStore.setFrom(object: json, page: router.page)
             } else {
-                if page == nil || page! == 1 {
+                if router.page == nil || router.page! == 1 {
                     self.dataStore = DataStore(object: json)
                     self.dataStore?.delegate = self
                     shouldUpdate = true
