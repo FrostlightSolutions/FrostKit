@@ -75,6 +75,26 @@ public enum Router: URLRequestConvertible {
         return URL.absoluteString!
     }
     
+    /// A reference string to save the call under.
+    var saveString: String {
+        switch self {
+        case .Custom(let urlString, _, let parameters):
+            var saveString = urlString
+            
+            if let someParameters = parameters {
+                let keysArray = (someParameters as NSDictionary).allKeys as NSArray
+                let sortedKeys = keysArray.sortedArrayUsingSelector("compare:") as [String]
+                for key in sortedKeys {
+                    saveString = saveString.stringByAppendingPathComponent(someParameters[key] as String)
+                }
+            }
+            
+            return saveString
+        default:
+            return absoluteString
+        }
+    }
+    
     var page: Int? {
         switch self {
         case .Custom(_, let page, _):

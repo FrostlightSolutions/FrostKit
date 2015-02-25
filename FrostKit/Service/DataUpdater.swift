@@ -318,8 +318,8 @@ public class DataUpdater: NSObject, DataStoreDelegate {
                     self.updateTableFooter(count: dataStore.count)
                     
                     if let sectionDictionary = self.sectionDictionary {
-                        let urlString = sectionDictionary["url"] as String
-                        UserStore.current.setDataStore(dataStore, urlString: urlString)
+                        let saveString = router.saveString
+                        UserStore.current.setDataStore(dataStore, urlString: saveString)
                     }
                 }
                 self.reloadData()
