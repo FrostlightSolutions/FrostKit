@@ -481,9 +481,9 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     public func indexPathsForPage(page: Int) -> [NSIndexPath] {
         let indexSet = indexSetForPage(page)
         var indexPaths = Array<NSIndexPath>()
-        indexSet.enumerateIndexesUsingBlock({ (idx, stop) -> Void in
+        indexSet.enumerateIndexesUsingBlock { (idx, stop) -> Void in
             indexPaths.append(NSIndexPath(forRow: idx, inSection: 0))
-        })
+        }
         return indexPaths
     }
     
