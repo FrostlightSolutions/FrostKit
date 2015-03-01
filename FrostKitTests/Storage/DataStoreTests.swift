@@ -20,12 +20,10 @@ class DataStoreTests: XCTestCase {
         return dataStore
     }
     var pagedJSON: [String: AnyObject] {
-        if let filePath = NSBundle(forClass: self.dynamicType).pathForResource("Notifications", ofType: "json") {
-            if let fileData = NSData(contentsOfFile: filePath) {
-                if let jsonDict = NSJSONSerialization.JSONObjectWithData(fileData, options: nil, error: nil) as? [String: AnyObject] {
-                    return jsonDict
-                }
-            }
+        if  let filePath = NSBundle(forClass: self.dynamicType).pathForResource("Notifications", ofType: "json"),
+            let fileData = NSData(contentsOfFile: filePath),
+            let jsonDict = NSJSONSerialization.JSONObjectWithData(fileData, options: nil, error: nil) as? [String: AnyObject] {
+                return jsonDict
         }
         return Dictionary<String,AnyObject>()
     }
