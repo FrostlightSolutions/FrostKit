@@ -162,7 +162,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     
     :param: viewController The view controller to set.
     */
-    public func setViewController(viewController: UIViewController) {
+    public func setUpdaterViewController(viewController: UIViewController) {
         self.viewController = viewController
         if viewController.respondsToSelector("updateSection") == true {
             NSNotificationCenter.defaultCenter().addObserver(viewController, selector: "updateSection", name: FUSServiceClientUpdateSections, object: nil)
@@ -175,7 +175,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     
     :param: tableView The table view to set.
     */
-    public func setTableView(tableView: UITableView) {
+    public func setUpdaterTableView(tableView: UITableView) {
         self.tableView = tableView
         setupTableView()
     }
@@ -185,7 +185,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     
     :param: tableView The collection view to set.
     */
-    public func setCollectionView(collectionView: UICollectionView) {
+    public func setUpdaterCollectionView(collectionView: UICollectionView) {
         self.collectionView = collectionView
         setupCollectionView()
     }
@@ -196,11 +196,11 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     :param: sectionDictionary The section dictionary returned from FUS.
     */
     public func setSectionDictionary(sectionDictionary: NSDictionary, updateData: Bool = true) {
-        if self.sectionDictionary == nil || self.sectionDictionary?.isEqualToDictionary(sectionDictionary) == false {
+        if self.sectionDictionary == nil || self.sectionDictionary?.isEqualToDictionary(sectionDictionary as [NSObject : AnyObject]) == false {
             self.sectionDictionary = sectionDictionary
             
             if let sectionDictionary = self.sectionDictionary {
-                let urlString = sectionDictionary["url"] as String
+                let urlString = sectionDictionary["url"] as! String
                 let saveString = Router.Custom(urlString, nil, self.updateParameters).saveString
                 if let localDataStore = UserStore.current.dataStoreForURL(saveString) {
                     dataStore = localDataStore

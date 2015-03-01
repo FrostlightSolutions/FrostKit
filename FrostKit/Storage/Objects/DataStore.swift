@@ -214,7 +214,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
             
             let haveEqualCounts = self.count == dataStore.count
             let haveEqualObjectsPerPage = self.objectsPerPage == dataStore.objectsPerPage
-            let haveEqualObjects = self.objects.isEqualToDictionary(dataStore.objects)
+            let haveEqualObjects = self.objects.isEqualToDictionary(dataStore.objects as [NSObject : AnyObject])
             
             return haveEqualCounts && haveEqualObjectsPerPage && haveEqualObjects
         }
@@ -269,7 +269,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
         }
         
         // If current instance of object is not equal to the stores, then update
-        if self.objects.isEqualToDictionary(objects) == false {
+        if self.objects.isEqualToDictionary(objects as [NSObject : AnyObject]) == false {
             self.objects = objects
             hasChanged = true
         }
@@ -317,7 +317,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     */
     public func setDictionary(dictionary: NSDictionary) -> Bool {
         var hasChanged = false
-        if objects.isEqualToDictionary(dictionary) {
+        if objects.isEqualToDictionary(dictionary as [NSObject : AnyObject]) {
             hasChanged = false
         } else {
             objects = dictionary
