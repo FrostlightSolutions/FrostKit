@@ -19,19 +19,45 @@ internal func FKLocalizedString(key: String, comment: String = "") -> String {
 
 public class FrostKit {
     
-    public var FUSName: String?
-    public var baseTintColor: UIColor?
-    public var baseURLs: [String]!
-    public var defaultDebugIndex = 0
-    public var defaultProductionIndex = 0
-    public var OAuthClientToken: String?
-    public var OAuthClientSecret: String?
+    // MARK: - Private Variables
+    
+    private var FUSName: String?
+    private var tintColor: UIColor?
+    private var baseURLs: [String]!
+    private var defaultDebugIndex = 0
+    private var defaultProductionIndex = 0
+    private var OAuthClientID: String?
+    private var OAuthClientSecret: String?
+    
+    // MARK: - Public Class Variables
+    
+    public class var FUSName: String? {
+        return FrostKit.shared.FUSName
+    }
+    public class var tintColor: UIColor? {
+        return FrostKit.shared.tintColor
+    }
+    public class var baseURLs: [String]! {
+        return FrostKit.shared.baseURLs
+    }
+    public class var defaultDebugIndex: Int {
+        return FrostKit.shared.defaultDebugIndex
+    }
+    public class var defaultProductionIndex: Int {
+        return FrostKit.shared.defaultProductionIndex
+    }
+    public class var OAuthClientID: String? {
+        return FrostKit.shared.OAuthClientID
+    }
+    public class var OAuthClientSecret: String? {
+        return FrostKit.shared.OAuthClientSecret
+    }
     
     // MARK: - Singleton
     
     internal class var shared: FrostKit {
-    struct Singleton {
-        static let instance : FrostKit = FrostKit()
+        struct Singleton {
+            static let instance : FrostKit = FrostKit()
         }
         return Singleton.instance
     }
@@ -52,21 +78,15 @@ public class FrostKit {
     }
     
     public class func setup(#tintColor: UIColor) {
-        FrostKit.shared.baseTintColor = tintColor
+        FrostKit.shared.tintColor = tintColor
     }
     
-    public class func setup(#baseURLs: [String], defaultDebugIndex: Int = 0, defaultProductionIndex: Int = 0, OAuthClientToken: String? = nil, OAuthClientSecret: String? = nil) {
+    public class func setup(#baseURLs: [String], defaultDebugIndex: Int = 0, defaultProductionIndex: Int = 0, OAuthClientID: String? = nil, OAuthClientSecret: String? = nil) {
         FrostKit.shared.baseURLs = baseURLs
         FrostKit.shared.defaultDebugIndex = defaultDebugIndex
         FrostKit.shared.defaultProductionIndex = defaultProductionIndex
-        FrostKit.shared.OAuthClientToken = OAuthClientToken
+        FrostKit.shared.OAuthClientID = OAuthClientID
         FrostKit.shared.OAuthClientSecret = OAuthClientSecret
-    }
-    
-    // MARK: - Custom Getter Methods
-    
-    public class func tintColor() -> UIColor? {
-        return FrostKit.shared.baseTintColor
     }
     
 }
