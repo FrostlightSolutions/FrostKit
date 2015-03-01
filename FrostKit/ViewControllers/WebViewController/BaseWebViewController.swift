@@ -179,9 +179,9 @@ public class BaseWebViewController: UIViewController {
         
         if let navController = navigationController {
             
-            let backButton = UIBarButtonItem(title: ionicon_ios_arrow_left, font: UIFont.ionicons(size: 29), target: self, action: "backButtonPressed:")
-            let forwardButton = UIBarButtonItem(title: ionicon_ios_arrow_right, font: UIFont.ionicons(size: 29), target: self, action: "forwardButtonPressed:")
-            let refreshButton = UIBarButtonItem(title: ionicon_ios_refresh_empty, font: UIFont.ionicons(size: 34), target: self, action: "refreshButtonPressed:")
+            let backButton = UIBarButtonItem(title: IonIcons._ios_arrow_left, font: UIFont.ionicons(size: 29), target: self, action: "backButtonPressed:")
+            let forwardButton = UIBarButtonItem(title: IonIcons._ios_arrow_right, font: UIFont.ionicons(size: 29), target: self, action: "forwardButtonPressed:")
+            let refreshButton = UIBarButtonItem(title: IonIcons._ios_refresh_empty, font: UIFont.ionicons(size: 34), target: self, action: "refreshButtonPressed:")
             let actionButton = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: "actionButtonPressed:")
             let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
             
@@ -234,6 +234,7 @@ public class BaseWebViewController: UIViewController {
         
         if loading == true {
             
+            NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
             activityIndicatorView.startAnimating()
             
             UIView.animateWithDuration(0.25, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
@@ -244,6 +245,7 @@ public class BaseWebViewController: UIViewController {
                 }, completion: nil)
         } else {
             
+            NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
             UIView.animateWithDuration(0.25, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
                 
                 self.navigationItem.setRightBarButtonItem(nil, animated: true)

@@ -23,33 +23,28 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     }
     /// The table view to display data on.
     @IBOutlet var tableView: UITableView? {
-        didSet {
-            if let tableView = self.tableView {
-                tableView.estimatedRowHeight = 44
-                if UIDevice.SystemVersion.majorVersion >= 8 {
-                    tableView.rowHeight = UITableViewAutomaticDimension
-                }
-                updateTableFooter()
-            }
-        }
+        didSet { setupTableView() }
     }
     /// The collection view to display data on.
-    @IBOutlet var collectionView: UICollectionView?
-    /// The section dictionary from FUS describing the URL and name of the section to make requests for.
-    public var sectionDictionary: NSDictionary? {
-        didSet {
-            if let sectionDictionary = self.sectionDictionary {
-                let urlString = sectionDictionary["url"] as! String
-                if let localDataStore = UserStore.current.dataStoreForURL(urlString) {
-                    dataStore = localDataStore
-                }
-            }
-        }
+    @IBOutlet var collectionView: UICollectionView? {
+        didSet { setupCollectionView() }
     }
+    /// The section dictionary from FUS describing the URL and name of the section to make requests for.
+    private var sectionDictionary: NSDictionary?
+    /// The parameters to use when updating the data.
+    public var updateParameters = Dictionary<String, AnyObject>()
     /// The data store of data loaded, to update and to save.
     public var dataStore: DataStore?
     /// The highest loaded page. As the user scrolls down, this will incriment automatically. It will only be set back tot zero when the user pulls down to refresh on the table view or collection view.
-    private var lastLoadedPage: Int?
+    private var lastRequestedPage: Int = 1
+    /// An array of loaded pages.
+    private var loadingPages = NSMutableSet()
+    
+    public override init() {
+        super.init()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "clearData", name: UserStoreLogoutClearData, object: nil)
+    }
     
     /**
     A convenience init for programatically creating a data update with a table view.
@@ -81,6 +76,13 @@ public class DataUpdater: NSObject, DataStoreDelegate {
         setRefreshControlForViewController(viewController)
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+        if let viewController = self.viewController {
+            NSNotificationCenter.defaultCenter().removeObserver(viewController)
+        }
+    }
+    
     /**
     Notifies the data updater that its view was added to a view hierarchy.
     
@@ -89,6 +91,43 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     public func viewWillAppear(animated: Bool) {
         endRefreshing()
         updateData()
+    }
+    
+    public func viewDidAppear(animated: Bool) {
+        
+    }
+    
+    // MARK: - Notifications
+    
+    func clearData() {
+        if let dataStore = self.dataStore {
+            dataStore.removeAllObjects()
+            reloadData()
+        }
+    }
+    
+    // MARK: - Setup and Update Methods
+    
+    /**
+    Sets up the table view with some default values and settings.
+    */
+    private func setupTableView() {
+        if let tableView = self.tableView {
+            tableView.estimatedRowHeight = 44
+            if UIDevice.SystemVersion.majorVersion >= 8 {
+                tableView.rowHeight = UITableViewAutomaticDimension
+            }
+            updateTableFooter()
+        }
+    }
+    
+    /**
+    Sets up the collection view with some default values and settings.
+    */
+    private func setupCollectionView() {
+        if let collectionView = self.collectionView {
+            // TODO: Setup and update a "No Content" footer.
+        }
     }
     
     /**
@@ -117,6 +156,64 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     }
     
     // MARK: - Getter / Setter Methods
+    
+    /**
+    This is used to set the view controller if the data updater was created in code with the standard `init()` function.
+    
+    :param: viewController The view controller to set.
+    */
+    public func setViewController(viewController: UIViewController) {
+        self.viewController = viewController
+        if viewController.respondsToSelector("updateSection") == true {
+            NSNotificationCenter.defaultCenter().addObserver(viewController, selector: "updateSection", name: FUSServiceClientUpdateSections, object: nil)
+        }
+        setRefreshControlForViewController(self.viewController)
+    }
+    
+    /**
+    This is used to set the table view if the data updater was created in code with the standard `init()` function.
+    
+    :param: tableView The table view to set.
+    */
+    public func setTableView(tableView: UITableView) {
+        self.tableView = tableView
+        setupTableView()
+    }
+    
+    /**
+    This is used to set the collection view if the data updater was created in code with the standard `init()` function.
+    
+    :param: tableView The collection view to set.
+    */
+    public func setCollectionView(collectionView: UICollectionView) {
+        self.collectionView = collectionView
+        setupCollectionView()
+    }
+    
+    /**
+    Set the section dictionary so that the data updater knows the URL of the data to update. Calling this function automatically calls an update of data once the section dictionary is set.
+    
+    :param: sectionDictionary The section dictionary returned from FUS.
+    */
+    public func setSectionDictionary(sectionDictionary: NSDictionary, updateData: Bool = true) {
+        if self.sectionDictionary == nil || self.sectionDictionary?.isEqualToDictionary(sectionDictionary) == false {
+            self.sectionDictionary = sectionDictionary
+            
+            if let sectionDictionary = self.sectionDictionary {
+                let urlString = sectionDictionary["url"] as String
+                let saveString = Router.Custom(urlString, nil, self.updateParameters).saveString
+                if let localDataStore = UserStore.current.dataStoreForURL(saveString) {
+                    dataStore = localDataStore
+                    dataStore?.delegate = self
+                    reloadData()
+                }
+            }
+            
+            if updateData == true {
+                self.updateData()
+            }
+        }
+    }
     
     /**
     Creates and set a `UIRefreshControl` for the passed in view controller, assuming it is either an `UITableViewController` or a `UICollectionViewController`.
@@ -157,7 +254,8 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     :param: sender The refresh control that triggered this function.
     */
     func refreshControlTriggered(sender: UIRefreshControl!) {
-        lastLoadedPage = nil
+        lastRequestedPage = 1
+        loadingPages.removeAllObjects()
         updateData()
     }
     
@@ -172,20 +270,24 @@ public class DataUpdater: NSObject, DataStoreDelegate {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
             if let sectionDictionary = self.sectionDictionary {
                 let urlString = sectionDictionary["url"] as! String
-                let page = self.lastLoadedPage
-                let urlRouter = Router.Custom(urlString, page)
+                let page = self.lastRequestedPage
+                let urlRouter = Router.Custom(urlString, page, self.updateParameters)
                 let request = FUSServiceClient.request(urlRouter, completed: { (json, error) -> () in
                     self.requestStore.removeRequestFor(router: urlRouter)
+                    self.loadingPages.removeObject(page)
                     if let anError = error {
-                        NSLog("Data Updater Failure: %@", anError.localizedDescription)
+                        NSLog("Data Updater Failure for page \(page): \(anError.localizedDescription)")
                     } else {
                         if let object: AnyObject = json {
-                            self.loadJSON(object, page: page)
+                            self.loadJSON(object, router: urlRouter)
                         }
                     }
                     self.endRefreshing()
                 })
                 self.requestStore.addRequest(request, router: urlRouter)
+                self.loadingPages.addObject(page)
+            } else {
+                self.endRefreshing()
             }
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -202,13 +304,13 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     :param: json The JSON to update/load into the data store.
     :param: page The page the JSON is related to, or `nil` if the JSON is a non-paged response.
     */
-    private func loadJSON(json: AnyObject, page: Int?) {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+    private func loadJSON(json: AnyObject, router: Router) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
             var shouldUpdate = false
             if let dataStore = self.dataStore {
-                shouldUpdate = dataStore.setFrom(object: json, page: page)
+                shouldUpdate = dataStore.setFrom(object: json, page: router.page)
             } else {
-                if page == nil || page! == 1 {
+                if router.page == nil || router.page! == 1 {
                     self.dataStore = DataStore(object: json)
                     self.dataStore?.delegate = self
                     shouldUpdate = true
@@ -216,20 +318,22 @@ public class DataUpdater: NSObject, DataStoreDelegate {
                     NSLog("Can't create a data store for a non-page 1 object!")
                 }
             }
-            
-            if shouldUpdate == true {
-                if let dataStore = self.dataStore {
-                    self.updateTableFooter(count: dataStore.count)
-                    
-                    if let sectionDictionary = self.sectionDictionary {
-                        let urlString = sectionDictionary["url"] as! String
-                        UserStore.current.setDataStore(dataStore, urlString: urlString)
+        
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                if shouldUpdate == true {
+                    if let dataStore = self.dataStore {
+                        self.updateTableFooter(count: dataStore.count)
+                        
+                        if let sectionDictionary = self.sectionDictionary {
+                            let saveString = router.saveString
+                            UserStore.current.setDataStore(dataStore, urlString: saveString)
+                        }
                     }
+                    self.reloadData()
                 }
-                self.reloadData()
-            }
-            
-            // TODO: Call loadedData() function in the current view controller.
+                
+                // TODO: Call loadedData() function in the current view controller.
+            })
         })
     }
     
@@ -278,8 +382,8 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     // MARK: - Data Store Delegate Methods
     
     public func dataStore(dataStore: DataStore, willAccessPage page: Int) {
-        if page > lastLoadedPage && page != 1 {
-            lastLoadedPage = page
+        if loadingPages.containsObject(page) == false {
+            lastRequestedPage = page
             updateData()
         }
     }

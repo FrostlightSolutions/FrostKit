@@ -8,6 +8,11 @@
 
 import UIKit
 
+public let FUSServiceClientUpdateSections = "com.FrostKit.FUSServiceClient.updateSections"
+public let UserStoreLogoutClearData = "com.FrostKit.UserStore.logout.clearData"
+public let NetworkRequestDidBeginNotification = "com.FrostKit.activityIndicator.request.begin"
+public let NetworkRequestDidCompleteNotification = "com.FrostKit.activityIndicator.request.complete"
+
 internal func FKLocalizedString(key: String, comment: String = "") -> String {
     return NSLocalizedString(key, bundle: NSBundle(forClass: FrostKit.self), comment: comment)
 }

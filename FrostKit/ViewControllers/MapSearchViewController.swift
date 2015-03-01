@@ -192,6 +192,7 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
                 searchRequest.region = mapController.mapView.region
             }
             let localSearch = MKLocalSearch(request: searchRequest)
+            NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
             localSearch.startWithCompletionHandler({ (searchResponse, error) -> Void in
                 if error != nil {
                     NSLog("Error performing local search: \(error.localizedDescription)")
@@ -200,6 +201,7 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
                 }
                 self.refreshControl?.endRefreshing()
                 self.tableView.reloadData()
+                NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
             })
         default:
             break

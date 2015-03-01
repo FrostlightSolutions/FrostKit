@@ -24,7 +24,7 @@ public enum Router: URLRequestConvertible {
     case Root
     case Token([String: AnyObject])
     case Sections
-    case Custom(String, Int?)
+    case Custom(String, Int?, [String: AnyObject]?)
     
     // MARK: URLRequestConvertible
     
@@ -62,7 +62,7 @@ public enum Router: URLRequestConvertible {
     /// The absolute URL of the case.
     var URL: NSURL {
         switch self {
-        case .Custom(let urlString, _):
+        case .Custom(let urlString, _, _):
             return NSURL(string: urlString)!
         default:
             let URL = NSURL(string: Router.baseURLString)!
@@ -75,9 +75,29 @@ public enum Router: URLRequestConvertible {
         return URL.absoluteString!
     }
     
+    /// A reference string to save the call under.
+    var saveString: String {
+        switch self {
+        case .Custom(let urlString, _, let parameters):
+            var saveString = urlString
+            
+            if let someParameters = parameters {
+                let keysArray = (someParameters as NSDictionary).allKeys as NSArray
+                let sortedKeys = keysArray.sortedArrayUsingSelector("compare:") as [String]
+                for key in sortedKeys {
+                    saveString = saveString.stringByAppendingPathComponent(someParameters[key] as String)
+                }
+            }
+            
+            return saveString
+        default:
+            return absoluteString
+        }
+    }
+    
     var page: Int? {
         switch self {
-        case .Custom(_, let page):
+        case .Custom(_, let page, _):
             return page
         default:
             return nil
@@ -103,12 +123,20 @@ public enum Router: URLRequestConvertible {
         switch self {
         case .Token(let parameters):
             return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
-        case .Custom(_, let page):
+        case .Custom(_, let page, let extraParameters):
+            var parameters = Dictionary<String, AnyObject>()
+            
             if page != nil {
-                return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: ["page": page!]).0
-            } else {
-                return mutableURLRequest
+                parameters["page"] = page!
             }
+            
+            if extraParameters != nil {
+                for (key, value) in extraParameters! {
+                    parameters[key] = value
+                }
+            }
+            
+            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
         default:
             return mutableURLRequest
         }
@@ -140,6 +168,7 @@ public class FUSServiceClient: NSObject {
             parameters["client_secret"] = OAuthClientSecret
         }
         
+        NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
         Alamofire.request(Router.Token(parameters)).validate().responseJSON { (request, response, responseJSON, responseError) -> Void in
             if let anError = responseError {
                 completed(error: self.errorForResponse(response, json: responseJSON, origError: anError))
@@ -147,10 +176,18 @@ public class FUSServiceClient: NSObject {
                 UserStore.current.username = username
                 UserStore.current.oAuthToken = OAuthToken(json: jsonDict, requestDate: requestDate)
                 UserStore.saveUser()
-                completed(error: self.errorForResponse(response, json: responseJSON, origError: responseError))
+                
+                FUSServiceClient.updateSections({ (error) -> () in
+                    if let anError = error {
+                        completed(error: anError)
+                    } else {
+                        completed(error: self.errorForResponse(response, json: responseJSON, origError: responseError))
+                    }
+                })
             } else {
                 completed(error: NSError.errorWithMessage("Returned JSON is not a NSDictionary: \(responseJSON)"))
             }
+            NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
         }
     }
     
@@ -166,7 +203,13 @@ public class FUSServiceClient: NSObject {
             
             if force == false {
                 if oAuthToken.expired == false {
-                    completed(error: nil)
+                    FUSServiceClient.updateSections({ (error) -> () in
+                        if let anError = error {
+                            completed(error: anError)
+                        } else {
+                            completed(error: nil)
+                        }
+                    })
                     return
                 }
             }
@@ -180,16 +223,25 @@ public class FUSServiceClient: NSObject {
                 parameters["client_secret"] = OAuthClientSecret
             }
             
+            NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
             Alamofire.request(Router.Token(parameters)).validate().responseJSON { (request, response, responseJSON, responseError) -> Void in
                 if let anError = responseError {
                     completed(error: self.errorForResponse(response, json: responseJSON, origError: anError))
                 } else if let jsonDict = responseJSON as? NSDictionary {
                     UserStore.current.oAuthToken = OAuthToken(json: jsonDict, requestDate: requestDate)
                     UserStore.saveUser()
-                    completed(error: self.errorForResponse(response, json: responseJSON, origError: responseError))
+                    
+                    FUSServiceClient.updateSections({ (error) -> () in
+                        if let anError = error {
+                            completed(error: anError)
+                        } else {
+                            completed(error: self.errorForResponse(response, json: responseJSON, origError: responseError))
+                        }
+                    })
                 } else {
                     completed(error: NSError.errorWithMessage("Returned JSON is not a NSDictionary: \(responseJSON)"))
                 }
+                NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
             }
         } else {
             completed(error: NSError.errorWithMessage("No OAuthToken in User Store."))
@@ -202,12 +254,16 @@ public class FUSServiceClient: NSObject {
     :param: completed Is called on completion of the request and returns an error if the process failed, otherwise it retuens `nil`.
     */
     public class func updateSections(completed: (error: NSError?) -> ()) {
-        Alamofire.request(Router.Sections).validate().responseJSON(options: .MutableContainers) { (requestObject, responseObject, responseJSON, responseError) -> Void in
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
+        Alamofire.request(Router.Sections).validate().responseJSON { (requestObject, responseObject, responseJSON, responseError) -> Void in
             if let anError = responseError {
                 completed(error: self.errorForResponse(responseObject, json: responseJSON, origError: anError))
             } else if let jsonDictionary = responseJSON as? [String: AnyObject] {
                 if let jsonArray = jsonDictionary["sections"] as? [[String: String]] {
                     UserStore.current.sections = jsonArray
+                    UserStore.saveUser()
+                    NSNotificationCenter.defaultCenter().postNotificationName(FUSServiceClientUpdateSections, object: nil)
                     completed(error: self.errorForResponse(responseObject, json: responseJSON, origError: responseError))
                 } else {
                     completed(error: NSError.errorWithMessage("Returned JSON is not an Array: \(responseJSON)"))
@@ -215,6 +271,7 @@ public class FUSServiceClient: NSObject {
             } else {
                 completed(error: NSError.errorWithMessage("Returned JSON is not a Dictionary: \(responseJSON)"))
             }
+            NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
         }
     }
     
@@ -229,9 +286,30 @@ public class FUSServiceClient: NSObject {
     :returns: An Alamofire request.
     */
     public class func request(URLRequest: Router, completed: (json: AnyObject?, error: NSError?) -> ()) -> Alamofire.Request {
-        return Alamofire.request(URLRequest).validate().responseJSON(options: .MutableContainers, completionHandler: { (requestObject, responseObject, responseJSON, responseError) -> Void in
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
+        return Alamofire.request(URLRequest).validate().responseJSON { (requestObject, responseObject, responseJSON, responseError) -> Void in
             completed(json: responseJSON, error: self.errorForResponse(responseObject, json: responseJSON, origError: responseError))
-        })
+            NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
+        }
+    }
+    
+    // MARK: - Helper Methods
+    
+    /**
+    Checks if an object is a URL path with a prefix of `http://` or `https://`.
+    
+    :param: item The item to check.
+    
+    :returns: Returns `true` if it is a path string or `false` if not.
+    */
+    public class func isItemSection(item: AnyObject) -> Bool {
+        if let path = item as? String {
+            if path.hasPrefix("http://") || path.hasPrefix("https://") {
+                return true
+            }
+        }
+        return false
     }
     
     // MARK: - Error Handling
@@ -258,7 +336,14 @@ public class FUSServiceClient: NSObject {
                     errorString += "\(errorDescription)"
                 }
             }
-            return NSError.errorWithMessage(errorString)
+            
+            var userInfo = Dictionary<NSObject, AnyObject>()
+            if let errorUserInfo = anError.userInfo {
+                userInfo = errorUserInfo
+            }
+            userInfo[NSLocalizedDescriptionKey] = errorString
+            
+            return NSError(domain: anError.domain, code: anError.code, userInfo: userInfo)
         }
         return nil
     }

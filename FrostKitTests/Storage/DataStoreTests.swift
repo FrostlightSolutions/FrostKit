@@ -122,10 +122,10 @@ class DataStoreTests: XCTestCase {
     func testDataStoreHash() {
         let dataStore = self.dataStore
         let hash = dataStore.hash
-        if hash == 11 {
+        if hash == 3 {
             XCTAssert(true, "Success! Hash is: \(hash)")
         } else {
-            XCTAssert(false, "Failed! Hash is: \(hash) but should be 11")
+            XCTAssert(false, "Failed! Hash is: \(hash) but should be 3")
         }
     }
     
