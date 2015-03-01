@@ -48,7 +48,7 @@ public enum Router: URLRequestConvertible {
         case .Token:
             return "/api/fus/o/token/"
         case .Sections:
-            if let name = FrostKit.shared.FUSName {
+            if let name = FrostKit.FUSName {
                 return "/api/\(name)/"
             } else {
                 NSLog("Error: Project name not set in FrostKit setup!")
@@ -161,10 +161,10 @@ public class FUSServiceClient: NSObject {
         
         let requestDate = NSDate()
         var parameters = ["grant_type": "password", "username": username, "password": password]
-        if let OAuthClientToken = FrostKit.shared.OAuthClientToken {
-            parameters["client_id"] = OAuthClientToken
+        if let OAuthClientID = FrostKit.OAuthClientID {
+            parameters["client_id"] = OAuthClientID
         }
-        if let OAuthClientSecret = FrostKit.shared.OAuthClientSecret {
+        if let OAuthClientSecret = FrostKit.OAuthClientSecret {
             parameters["client_secret"] = OAuthClientSecret
         }
         
@@ -177,13 +177,13 @@ public class FUSServiceClient: NSObject {
                 UserStore.current.oAuthToken = OAuthToken(json: jsonDict, requestDate: requestDate)
                 UserStore.saveUser()
                 
-                FUSServiceClient.updateSections({ (error) -> () in
+                FUSServiceClient.updateSections { (error) -> () in
                     if let anError = error {
                         completed(error: anError)
                     } else {
                         completed(error: self.errorForResponse(response, json: responseJSON, origError: responseError))
                     }
-                })
+                }
             } else {
                 completed(error: NSError.errorWithMessage("Returned JSON is not a NSDictionary: \(responseJSON)"))
             }
@@ -202,22 +202,22 @@ public class FUSServiceClient: NSObject {
         if let oAuthToken = UserStore.current.oAuthToken {
             
             if force == false && oAuthToken.expired == false {
-                FUSServiceClient.updateSections({ (error) -> () in
+                FUSServiceClient.updateSections { (error) -> () in
                     if let anError = error {
                         completed(error: anError)
                     } else {
                         completed(error: nil)
                     }
-                })
+                }
                 return
             }
             
             let requestDate = NSDate()
             var parameters = ["grant_type": "refresh_token", "refresh_token": oAuthToken.refreshToken]
-            if let OAuthClientToken = FrostKit.shared.OAuthClientToken {
-                parameters["client_id"] = OAuthClientToken
+            if let OAuthClientID = FrostKit.OAuthClientID {
+                parameters["client_id"] = OAuthClientID
             }
-            if let OAuthClientSecret = FrostKit.shared.OAuthClientSecret {
+            if let OAuthClientSecret = FrostKit.OAuthClientSecret {
                 parameters["client_secret"] = OAuthClientSecret
             }
             
@@ -229,13 +229,13 @@ public class FUSServiceClient: NSObject {
                     UserStore.current.oAuthToken = OAuthToken(json: jsonDict, requestDate: requestDate)
                     UserStore.saveUser()
                     
-                    FUSServiceClient.updateSections({ (error) -> () in
+                    FUSServiceClient.updateSections { (error) -> () in
                         if let anError = error {
                             completed(error: anError)
                         } else {
                             completed(error: self.errorForResponse(response, json: responseJSON, origError: responseError))
                         }
-                    })
+                    }
                 } else {
                     completed(error: NSError.errorWithMessage("Returned JSON is not a NSDictionary: \(responseJSON)"))
                 }

@@ -334,14 +334,14 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
             
             let directions = MKDirections(request: directionsRequest)
             NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
-            directions.calculateDirectionsWithCompletionHandler({ (directionsResponse, error) -> Void in
+            directions.calculateDirectionsWithCompletionHandler { (directionsResponse, error) -> Void in
                 if let anError = error {
                     NSLog("Error getting directions: \(error.localizedDescription)")
                 } else if let route = directionsResponse.routes.first as? MKRoute {
                     self.plotRoute(route)
                 }
                 NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
-            })
+            }
         } else {
             let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
             MKMapItem.openMapsWithItems([currentLocationItem, destinationItem], launchOptions: launchOptions)

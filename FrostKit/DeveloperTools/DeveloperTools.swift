@@ -40,12 +40,12 @@ public class DeveloperTools: NSObject {
     override init() {
         super.init()
         
-        baseURLs = FrostKit.shared.baseURLs + baseURLs
+        baseURLs = FrostKit.baseURLs + baseURLs
         
         #if DEBUG
-            urlIndex = FrostKit.shared.defaultDebugIndex
+            urlIndex = FrostKit.defaultDebugIndex
         #else
-            urlIndex = FrostKit.shared.defaultProductionIndex
+            urlIndex = FrostKit.defaultProductionIndex
         #endif
         
         let userDefaults = NSUserDefaults.standardUserDefaults()
