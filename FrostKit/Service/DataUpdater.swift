@@ -277,10 +277,8 @@ public class DataUpdater: NSObject, DataStoreDelegate {
                     self.loadingPages.removeObject(page)
                     if let anError = error {
                         NSLog("Data Updater Failure for page \(page): \(anError.localizedDescription)")
-                    } else {
-                        if let object: AnyObject = json {
-                            self.loadJSON(object, router: urlRouter)
-                        }
+                    } else if let object: AnyObject = json {
+                        self.loadJSON(object, router: urlRouter)
                     }
                     self.endRefreshing()
                 })
@@ -309,14 +307,12 @@ public class DataUpdater: NSObject, DataStoreDelegate {
             var shouldUpdate = false
             if let dataStore = self.dataStore {
                 shouldUpdate = dataStore.setFrom(object: json, page: router.page)
+            } else if router.page == nil || router.page! == 1 {
+                self.dataStore = DataStore(object: json)
+                self.dataStore?.delegate = self
+                shouldUpdate = true
             } else {
-                if router.page == nil || router.page! == 1 {
-                    self.dataStore = DataStore(object: json)
-                    self.dataStore?.delegate = self
-                    shouldUpdate = true
-                } else {
-                    NSLog("Can't create a data store for a non-page 1 object!")
-                }
+                NSLog("Can't create a data store for a non-page 1 object!")
             }
         
             dispatch_async(dispatch_get_main_queue(), { () -> Void in

@@ -32,18 +32,13 @@ class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     Stops the web view from being loaded any more.
     */
     override func stopLoading() {
-        if let webView = self.webView as? UIWebView {
-            return webView.stopLoading()
-        }
+        (self.webView as? UIWebView)?.stopLoading()
     }
     
     override func viewDidLoad() {
         
         webView = UIWebView(frame: view.bounds)
-        
-        if let webView = self.webView as? UIWebView {
-            webView.delegate = self
-        }
+        (self.webView as? UIWebView)?.delegate = self
         
         super.viewDidLoad()
     }
@@ -60,7 +55,6 @@ class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
         if let webView = self.webView as? UIWebView {
             
             if webView.loading == true {
-                
                 webView.stopLoading()
             }
             webView.reload()

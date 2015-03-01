@@ -257,11 +257,9 @@ public class DataStore: NSObject, NSCoding, NSCopying {
         let objects = self.objects.mutableCopy() as! NSMutableDictionary
         if newObjects.count > 0 {
             // Update the total count
-            if let newTotalCount = totalCount {
-                if count != newTotalCount {
-                    count = newTotalCount
-                    hasChanged = true
-                }
+            if let newTotalCount = totalCount where count != newTotalCount {
+                count = newTotalCount
+                hasChanged = true
             }
             
             // Update paged items
@@ -299,10 +297,8 @@ public class DataStore: NSObject, NSCoding, NSCopying {
             objects = results
         }
         
-        if let perPage = json["per_page"] as? Int {
-            if objectsPerPage != perPage {
-                _objectsPerPage = perPage
-            }
+        if let perPage = json["per_page"] as? Int where objectsPerPage != perPage {
+            _objectsPerPage = perPage
         }
         
         return setObjects(objects, page: page, totalCount: totalCount)

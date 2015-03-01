@@ -337,10 +337,8 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
             directions.calculateDirectionsWithCompletionHandler({ (directionsResponse, error) -> Void in
                 if let anError = error {
                     NSLog("Error getting directions: \(error.localizedDescription)")
-                } else {
-                    if let route = directionsResponse.routes.first as? MKRoute {
-                        self.plotRoute(route)
-                    }
+                } else if let route = directionsResponse.routes.first as? MKRoute {
+                    self.plotRoute(route)
                 }
                 NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
             })

@@ -16,17 +16,11 @@ extension UIViewController {
     /// Retuns if the view controller is the root view controller in a navigation stack.
     public var isRoot: Bool {
         
-        if let navigationController = self.navigationController {
-            
-            if let viewControllers = navigationController.viewControllers {
-                
-                if let rootViewController = viewControllers[0] as? UIViewController {
-                    
-                    if self == rootViewController {
-                        return true
-                    }
-                }
-            }
+        if  let navigationController = self.navigationController,
+            let viewControllers = navigationController.viewControllers,
+            let rootViewController = viewControllers[0] as? UIViewController
+        where self == rootViewController {
+            return true
         }
         
         return false

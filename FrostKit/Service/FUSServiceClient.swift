@@ -201,17 +201,15 @@ public class FUSServiceClient: NSObject {
         
         if let oAuthToken = UserStore.current.oAuthToken {
             
-            if force == false {
-                if oAuthToken.expired == false {
-                    FUSServiceClient.updateSections({ (error) -> () in
-                        if let anError = error {
-                            completed(error: anError)
-                        } else {
-                            completed(error: nil)
-                        }
-                    })
-                    return
-                }
+            if force == false && oAuthToken.expired == false {
+                FUSServiceClient.updateSections({ (error) -> () in
+                    if let anError = error {
+                        completed(error: anError)
+                    } else {
+                        completed(error: nil)
+                    }
+                })
+                return
             }
             
             let requestDate = NSDate()
@@ -304,10 +302,8 @@ public class FUSServiceClient: NSObject {
     :returns: Returns `true` if it is a path string or `false` if not.
     */
     public class func isItemSection(item: AnyObject) -> Bool {
-        if let path = item as? String {
-            if path.hasPrefix("http://") || path.hasPrefix("https://") {
-                return true
-            }
+        if let path = item as? String where path.hasPrefix("http://") || path.hasPrefix("https://") {
+            return true
         }
         return false
     }
@@ -331,10 +327,8 @@ public class FUSServiceClient: NSObject {
                 errorString += "Status Code \(aResponse.statusCode), "
             }
             
-            if let errorDictionary = json as? NSDictionary {
-                if let errorDescription = errorDictionary["error_description"] as? String {
-                    errorString += "\(errorDescription)"
-                }
+            if let errorDictionary = json as? NSDictionary, let errorDescription = errorDictionary["error_description"] as? String {
+                errorString += "\(errorDescription)"
             }
             
             var userInfo = Dictionary<NSObject, AnyObject>()
