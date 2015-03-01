@@ -53,14 +53,14 @@ class ServiceClientTests: XCTestCase {
                 XCTAssert(false, "Login Error: \(lError.localizedDescription)")
                 expectation.fulfill()
             } else {
-                self.refresh({ (refreshError) -> () in
+                self.refresh { (refreshError) -> () in
                     if let rError = refreshError {
                         XCTAssert(false, "Refresh Error: \(rError.localizedDescription)")
                     } else {
                         XCTAssert(true, "Refreshed")
                     }
                     expectation.fulfill()
-                })
+                }
             }
         }
         
@@ -76,21 +76,21 @@ class ServiceClientTests: XCTestCase {
                 XCTAssert(false, "Login Error: \(lError.localizedDescription)")
                 expectation.fulfill()
             } else {
-                self.refresh({ (refreshError) -> () in
+                self.refresh { (refreshError) -> () in
                     if let rError = refreshError {
                         XCTAssert(false, "Refresh Error: \(rError.localizedDescription)")
                         expectation.fulfill()
                     } else {
-                        self.getNotificationsRequest({ (notifError) -> () in
+                        self.getNotificationsRequest { (notifError) -> () in
                             if let nError = notifError {
                                 XCTAssert(false, "Failed to get Notifications \(nError.localizedDescription)")
                             } else {
                                 XCTAssert(true, "Got Notifications Response")
                             }
                             expectation.fulfill()
-                        })
+                        }
                     }
-                })
+                }
             }
         }
         
@@ -110,7 +110,7 @@ class ServiceClientTests: XCTestCase {
     }
     
     func getNotificationsRequest(complete: (NSError?) -> ()) {
-        FUSServiceClient.request(Router.Custom("/api/fus/push/notifications/", 1), completed: { (json, error) -> () in
+        FUSServiceClient.request(Router.Custom("/api/fus/push/notifications/", 1, nil), completed: { (json, error) -> () in
             complete(error)
         })
     }
