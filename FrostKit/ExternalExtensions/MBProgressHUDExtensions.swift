@@ -1,6 +1,6 @@
 //
 //  MBProgressHUDExtensions.swift
-//  Greiff
+//  FrostKit
 //
 //  Created by James Barrow on 09/02/2015.
 //  Copyright (c) 2015 Forstlight Solutions. All rights reserved.
@@ -21,8 +21,8 @@ extension MBProgressHUD {
         }
         
         if let mainHUD = hud {
-            mainHUD.mode = MBProgressHUDModeText
-            mainHUD.animationType = MBProgressHUDAnimationFade
+            mainHUD.mode = .Text
+            mainHUD.animationType = .Fade
             mainHUD.removeFromSuperViewOnHide = true
             window?.addSubview(mainHUD)
         }
