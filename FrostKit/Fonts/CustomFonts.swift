@@ -59,12 +59,15 @@ public class CustomFonts: NSObject {
             let provider = CGDataProviderCreateWithCFData(fontData)
             let font = CGFontCreateWithDataProvider(provider)
             if CTFontManagerRegisterGraphicsFont(font, &error) == false {
-                var errorString = "ERROR: Failed to load '\(name)' font"
                 if let anError = error {
-                    let errorDescription = CFErrorCopyDescription(anError.takeRetainedValue()) as NSString
-                    errorString = errorString.stringByAppendingString("with error: \(errorDescription)")
+                    let errorCode = CFErrorGetCode(anError.takeRetainedValue())
+                    if errorCode == CTFontManagerError.AlreadyRegistered.rawValue {
+                        NSLog("Already loaded '\(name)'")
+                    } else {
+                        let errorDescription = CFErrorCopyDescription(anError.takeRetainedValue()) as NSString
+                        NSLog("ERROR: Failed to load '\(name)' font with error: \(errorDescription)!")
+                    }
                 }
-                NSLog(errorString + "!")
             } else {
                 NSLog("Loaded '\(name)' successfully")
             }
