@@ -445,13 +445,19 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     */
     public func indexOfObject(anObject: AnyObject) -> Int {
         var index = NSNotFound
+        var foundOnPage = 0
         for (page, value) in objects {
             if let pageObjects = value as? NSArray {
                 index = pageObjects.indexOfObject(anObject)
                 if index != NSNotFound {
+                    foundOnPage = page as Int
                     break
                 }
             }
+        }
+        
+        if index != NSNotFound {
+            return (objectsPerPage * (foundOnPage - 1)) + index
         }
         return index
     }
