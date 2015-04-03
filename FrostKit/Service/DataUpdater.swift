@@ -352,7 +352,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
                     NSLog("Can't create a data store for a non-page 1 object!")
                 }
             }
-        
+            
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 if shouldUpdate == true {
                     if let dataStore = self.dataStore {
@@ -439,6 +439,10 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     }
     
     // MARK: - Data Store Delegate Methods
+    
+    public func dataStoreInitialLoad(dataStore: DataStore) {
+        loadedData()
+    }
     
     public func dataStore(dataStore: DataStore, willAccessPage page: Int) {
         if loadingPages.containsObject(page) == false {

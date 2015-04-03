@@ -13,6 +13,16 @@ import UIKit
 ///
 @objc public protocol DataStoreDelegate {
     /**
+    This function is called when the data store's data is first loaded or created.
+    
+    Note you can create a data store object without adding data to it and this function will not be called. Only when data is first added to the data store will this function be called.
+    i.e. When object.count > 0
+    
+    :param: dataStore The data store loaded.
+    */
+    optional func dataStoreInitialLoad(dataStore: DataStore)
+    
+    /**
     This function is called when an item will be accessed at an index.
     
     :param: dataStore The data store the item resides in.
@@ -272,8 +282,17 @@ public class DataStore: NSObject, NSCoding, NSCopying {
         
         // If current instance of object is not equal to the stores, then update
         if self.objects.isEqualToDictionary(objects) == false {
+            var wasEmpty = false
+            if self.objects.count < 1 {
+                wasEmpty = true
+            }
+            
             self.objects = objects
             hasChanged = true
+            
+            if wasEmpty == true && objects.count > 0 {
+                delegate?.dataStoreInitialLoad?(self)
+            }
         }
         
         if accessedAfterFirstLoad == false {
