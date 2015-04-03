@@ -8,6 +8,31 @@
 
 import UIKit
 
+///
+/// The data updater delegate provides callback for when a updating or loading or data is complete.
+///
+@objc public protocol DataUpdaterDelegate {
+    /**
+    Called when the data updater has finished updating data, but before the data is loaded.
+    
+    Note that this function will not be called if the update fails.
+    
+    :param: dataUpdater The data updater that updated data.
+    :param: dataStore   The data store that got updated.
+    */
+    optional func dataUpdater(dataUpdater: DataUpdater, hasUpdatedDataStore dataStore: DataStore?)
+    
+    /**
+    Called when the data updater has finished loading data, but before the data is loaded.
+    
+    Note that this function will not be called if the update fails or no data is availabe to be loaded.
+    
+    :param: dataUpdater The data updater that loaded data.
+    :param: dataStore   The data store that got loaded.
+    */
+    optional func dataUpdater(dataUpdater: DataUpdater, hasLoadedDataStore dataStore: DataStore?)
+}
+
 /// 
 /// The data updater is a class that helpers update data from a FUS based system. It is made to be inserted into IB via an NSObject.
 ///
@@ -15,6 +40,8 @@ import UIKit
 ///
 public class DataUpdater: NSObject, DataStoreDelegate {
     
+    /// The delegate of the data updater.
+    public var delegate: DataUpdaterDelegate?
     /// The request store for this data updater to manage it's request calls.
     public let requestStore = RequestStore()
     /// The view controller this data updater is related to. This can be set in IB and will automatically attempt to add a UIRefreshControl to a UITableViewController or UICollectionViewController.
@@ -278,6 +305,10 @@ public class DataUpdater: NSObject, DataStoreDelegate {
                     if let anError = error {
                         NSLog("Data Updater Failure for page \(page): \(anError.localizedDescription)")
                     } else {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.updatedData()
+                        })
+                        
                         if let object: AnyObject = json {
                             self.loadJSON(object, router: urlRouter)
                         }
@@ -289,11 +320,14 @@ public class DataUpdater: NSObject, DataStoreDelegate {
             } else {
                 self.endRefreshing()
             }
-            
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                // TODO: Call updatedData() function in the current view controller.
-            })
         })
+    }
+    
+    /**
+    Calls the hasUpdatedDataStore delegate call.
+    */
+    private func updatedData() {
+        delegate?.dataUpdater?(self, hasUpdatedDataStore: dataStore)
     }
     
     /**
@@ -332,9 +366,16 @@ public class DataUpdater: NSObject, DataStoreDelegate {
                     self.reloadData()
                 }
                 
-                // TODO: Call loadedData() function in the current view controller.
+                self.loadedData()
             })
         })
+    }
+    
+    /**
+    Calls the hasLoadedDataStore delegate call.
+    */
+    private func loadedData() {
+        delegate?.dataUpdater?(self, hasLoadedDataStore: dataStore)
     }
     
     /**

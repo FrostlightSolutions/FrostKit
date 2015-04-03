@@ -8,7 +8,9 @@
 
 import UIKit
 
+///
 /// The data store delegate provides callback for when a item or page will be accessed. This can be used to work out if a item or page needs to be updated with the API or service.
+///
 @objc public protocol DataStoreDelegate {
     /**
     This function is called when an item will be accessed at an index.
