@@ -117,11 +117,11 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     */
     public func viewWillAppear(animated: Bool) {
         endRefreshing()
-        updateData()
     }
     
     public func viewDidAppear(animated: Bool) {
-        
+        beginRefreshing()
+        updateData()
     }
     
     // MARK: - Notifications
@@ -400,6 +400,24 @@ public class DataUpdater: NSObject, DataStoreDelegate {
         } else if let collectionView = self.collectionView {
             collectionView.reloadItemsAtIndexPaths(indexPaths)
         }
+    }
+    
+    /**
+    Calls the beginRefreshing function for the refresh control in the releated table view or collection view.
+    */
+    public func beginRefreshing() {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            var refreshControl: UIRefreshControl?
+            if let tableViewController = self.viewController as? UITableViewController {
+                refreshControl = tableViewController.refreshControl
+            } else if let collectionViewController = self.viewController as? UICollectionViewController {
+                refreshControl = collectionViewController.refreshControl
+            }
+            
+            if refreshControl?.refreshing == false {
+                refreshControl?.beginRefreshing()
+            }
+        })
     }
     
     /**
