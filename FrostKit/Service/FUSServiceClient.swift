@@ -350,9 +350,7 @@ public class FUSServiceClient: NSObject {
             }
             
             if let errorDictionary = json as? NSDictionary {
-                if let errorDescription = errorDictionary["error_description"] as? String {
-                    errorString += "\(errorDescription)"
-                }
+                errorString += "\(errorDictionary)"
             }
             
             var userInfo = Dictionary<NSObject, AnyObject>()
