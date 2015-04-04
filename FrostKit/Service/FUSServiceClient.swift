@@ -27,6 +27,7 @@ public enum Router: URLRequestConvertible {
     case Custom(String, Int?, [String: AnyObject]?)
     case CustomPOST(String, [String: AnyObject]?)
     case CustomPUT(String, [String: AnyObject]?)
+    case CustomDELETE(String)
     
     // MARK: URLRequestConvertible
     
@@ -41,6 +42,8 @@ public enum Router: URLRequestConvertible {
             return .POST
         case .CustomPUT:
             return .PUT
+        case .CustomDELETE:
+            return .DELETE
         default:
             return .GET
         }
@@ -82,6 +85,8 @@ public enum Router: URLRequestConvertible {
         case .CustomPOST(let urlString, _):
             return absoluteURLFromString(urlString)
         case .CustomPUT(let urlString, _):
+            return absoluteURLFromString(urlString)
+        case .CustomDELETE(let urlString):
             return absoluteURLFromString(urlString)
         default:
             return absoluteURLFromString(path)
@@ -155,6 +160,8 @@ public enum Router: URLRequestConvertible {
             return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
         case .CustomPUT(_, let parameters):
             return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
+        case .CustomDELETE(_):
+            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0
         default:
             return mutableURLRequest
         }
