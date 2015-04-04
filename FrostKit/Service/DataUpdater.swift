@@ -165,7 +165,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     func updateTableFooter(count: Int = 0) {
         if let tableView = self.tableView {
             // If the data array is empty, add a table footer with a label telling the user
-            if count <= 0 {
+            if count < 1 {
                 let noContentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 44))
                 noContentLabel.backgroundColor = UIColor.clearColor()
                 noContentLabel.text = FKLocalizedString("NO_CONTENT_FOUND", comment: "No Content Found")
@@ -356,8 +356,6 @@ public class DataUpdater: NSObject, DataStoreDelegate {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 if shouldUpdate == true {
                     if let dataStore = self.dataStore {
-                        self.updateTableFooter(count: dataStore.count)
-                        
                         if let sectionDictionary = self.sectionDictionary {
                             let saveString = router.saveString
                             UserStore.current.setDataStore(dataStore, urlString: saveString)
@@ -375,6 +373,10 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     Calls the hasLoadedDataStore delegate call.
     */
     private func loadedData() {
+        if let dataStore = self.dataStore {
+            updateTableFooter(count: dataStore.count)
+        }
+        
         delegate?.dataUpdater?(self, hasLoadedDataStore: dataStore)
     }
     
