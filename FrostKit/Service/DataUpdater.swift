@@ -60,12 +60,43 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     private var sectionDictionary: NSDictionary?
     /// The parameters to use when updating the data.
     public var updateParameters = Dictionary<String, AnyObject>()
-    /// The data store of data loaded, to update and to save.
-    public var dataStore: DataStore?
+    /// The data store of data loaded, to update and to save. This var will return the currently active data store.
+    public var dataStore: DataStore? {
+        get {
+            if searchString != nil {
+                return searchDataStore
+            } else {
+                return coreDataStore
+            }
+        }
+        set {
+            if searchString != nil {
+                searchDataStore = newValue
+            } else {
+                coreDataStore = newValue
+            }
+        }
+    }
+    /// The core data store of data loaded, to update and to save.
+    private var coreDataStore: DataStore?
+    /// The data store of search data loaded.
+    private var searchDataStore: DataStore?
     /// The highest loaded page. As the user scrolls down, this will incriment automatically. It will only be set back tot zero when the user pulls down to refresh on the table view or collection view.
     private var lastRequestedPage: Int = 1
     /// An array of loaded pages.
     private var loadingPages = NSMutableSet()
+    /// A string to search the current API call with, if `nil` then no search is performed
+    public var searchString: String? {
+        didSet {
+            if let searchString = self.searchString {
+                updateParameters["search"] = searchString
+            } else {
+                updateParameters.removeValueForKey("search")
+                searchDataStore = nil
+            }
+            lastRequestedPage = 1
+        }
+    }
     
     public override init() {
         super.init()
@@ -120,17 +151,19 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     }
     
     public func viewDidAppear(animated: Bool) {
-        beginRefreshing()
         updateData()
     }
     
     // MARK: - Notifications
     
     func clearData() {
-        if let dataStore = self.dataStore {
+        if let dataStore = self.coreDataStore {
             dataStore.removeAllObjects()
-            reloadData()
         }
+        searchString = nil
+        searchDataStore = nil
+        
+        reloadData()
     }
     
     // MARK: - Setup and Update Methods
@@ -230,8 +263,8 @@ public class DataUpdater: NSObject, DataStoreDelegate {
                 let urlString = sectionDictionary["url"] as String
                 let saveString = Router.Custom(urlString, nil, self.updateParameters).saveString
                 if let localDataStore = UserStore.current.dataStoreForURL(saveString) {
-                    dataStore = localDataStore
-                    dataStore?.delegate = self
+                    coreDataStore = localDataStore
+                    coreDataStore?.delegate = self
                     reloadData()
                 }
             }
@@ -294,6 +327,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     Once complete it will call the loadJSON function or log an error to the console.
     */
     public func updateData() {
+        beginRefreshing()
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
             if let sectionDictionary = self.sectionDictionary {
                 let urlString = sectionDictionary["url"] as String
@@ -354,11 +388,14 @@ public class DataUpdater: NSObject, DataStoreDelegate {
             }
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                // Only save if should update and it's not a search
                 if shouldUpdate == true {
-                    if let dataStore = self.dataStore {
-                        if let sectionDictionary = self.sectionDictionary {
-                            let saveString = router.saveString
-                            UserStore.current.setDataStore(dataStore, urlString: saveString)
+                    if self.searchString == nil {
+                        if let dataStore = self.coreDataStore {
+                            if let sectionDictionary = self.sectionDictionary {
+                                let saveString = router.saveString
+                                UserStore.current.setDataStore(dataStore, urlString: saveString)
+                            }
                         }
                     }
                     self.reloadData()
