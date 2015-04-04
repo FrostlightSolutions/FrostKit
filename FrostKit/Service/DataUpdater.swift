@@ -90,13 +90,21 @@ public class DataUpdater: NSObject, DataStoreDelegate {
         didSet {
             if let searchString = self.searchString {
                 updateParameters["search"] = searchString
+                for (key, value) in searchUpdateParameters {
+                    updateParameters[key] = value
+                }
             } else {
                 updateParameters.removeValueForKey("search")
+                for (key, _) in searchUpdateParameters {
+                    updateParameters.removeValueForKey(key)
+                }
                 searchDataStore = nil
             }
             lastRequestedPage = 1
         }
     }
+    /// Extra paramiters to pass to the updater when searching.
+    public var searchUpdateParameters = Dictionary<String, AnyObject>()
     
     public override init() {
         super.init()
