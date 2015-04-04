@@ -530,4 +530,28 @@ public class DataStore: NSObject, NSCoding, NSCopying {
         }
     }
     
+    /**
+    Search the store for an object to contains the key-value passed in.
+    
+    :param: key   A key to search for.
+    :param: value A value to check the key-value against.
+    
+    :returns: The object that contains the matching key-value.
+    */
+    public func searchForObjectWith(#key: String, value: NSObject) -> AnyObject? {
+        var object: AnyObject?
+        for (page, pageArray) in objects {
+            if let array = pageArray as? NSArray {
+                if array.count > 0 {
+                    if let filter = NSPredicate(format: "%K == %@", key, value) {
+                        let filteredArray = array.filteredArrayUsingPredicate(filter)
+                        object = filteredArray.first
+                        break
+                    }
+                }
+            }
+        }
+        return object
+    }
+    
 }
