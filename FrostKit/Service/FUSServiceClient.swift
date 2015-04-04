@@ -18,13 +18,15 @@ import Alamofire
 ///- Custom(String, Int?)                                  A custom URL passed in as a reletive path with an optional page number.
 ///
 public enum Router: URLRequestConvertible {
-    /// THe base URL parsed in form the developer tools plist.
+    /// The base URL parsed in form the developer tools plist.
     static let baseURLString = DeveloperTools.baseURL()
     
     case Root
     case Token([String: AnyObject])
     case Sections
     case Custom(String, Int?, [String: AnyObject]?)
+    case CustomPOST(String, [String: AnyObject]?)
+    case CustomPUT(String, [String: AnyObject]?)
     
     // MARK: URLRequestConvertible
     
@@ -35,6 +37,10 @@ public enum Router: URLRequestConvertible {
             return .POST
         case .Sections, .Custom:
             return .GET
+        case .CustomPOST:
+            return .POST
+        case .CustomPUT:
+            return .PUT
         default:
             return .GET
         }
@@ -59,14 +65,26 @@ public enum Router: URLRequestConvertible {
         }
     }
     
+    func absoluteURLFromString(urlString: String) -> NSURL {
+        if urlString.hasPrefix("http://") || urlString.hasPrefix("https://") {
+            return NSURL(string: urlString)!
+        } else {
+            let URL = NSURL(string: Router.baseURLString)!
+            return URL.URLByAppendingPathComponent(urlString)
+        }
+    }
+    
     /// The absolute URL of the case.
     var URL: NSURL {
         switch self {
         case .Custom(let urlString, _, _):
-            return NSURL(string: urlString)!
+            return absoluteURLFromString(urlString)
+        case .CustomPOST(let urlString, _):
+            return absoluteURLFromString(urlString)
+        case .CustomPUT(let urlString, _):
+            return absoluteURLFromString(urlString)
         default:
-            let URL = NSURL(string: Router.baseURLString)!
-            return URL.URLByAppendingPathComponent(path)
+            return absoluteURLFromString(path)
         }
     }
     
@@ -123,19 +141,19 @@ public enum Router: URLRequestConvertible {
         switch self {
         case .Token(let parameters):
             return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
-        case .Custom(_, let page, let extraParameters):
-            var parameters = Dictionary<String, AnyObject>()
+        case .Custom(_, let page, var parameters):
+            if parameters == nil {
+                parameters = Dictionary<String, AnyObject>()
+            }
             
             if page != nil {
-                parameters["page"] = page!
+                parameters!["page"] = page!
             }
             
-            if extraParameters != nil {
-                for (key, value) in extraParameters! {
-                    parameters[key] = value
-                }
-            }
-            
+            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
+        case .CustomPOST(_, let parameters):
+            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
+        case .CustomPUT(_, let parameters):
             return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
         default:
             return mutableURLRequest
