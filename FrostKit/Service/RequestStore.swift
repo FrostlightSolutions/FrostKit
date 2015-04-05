@@ -81,4 +81,29 @@ public class RequestStore: NSObject {
         locked = false
     }
     
+    /**
+    Checks to see if there is a rquest in the store that matches the passed in router.
+    
+    The routers are compared by their absoluteURL.
+    
+    :param: router The router to check for.
+    
+    :returns: If a matching request is found then `true` is returned, otherwise `false` is returned.
+    */
+    func containsRequestWithRouter(router: Router) -> Bool {
+        return containsRequestWithURL(router.URLRequest.URL.absoluteString!)
+    }
+    
+    /**
+    Checks to see if there is a rquest in the store that matches the passed in url string.
+    
+    :param: urlString The url string to check for.
+    
+    :returns: If a matching request is found then `true` is returned, otherwise `false` is returned.
+    */
+    func containsRequestWithURL(urlString: String) -> Bool {
+        let containsRequest = store[urlString] != nil
+        return containsRequest
+    }
+    
 }

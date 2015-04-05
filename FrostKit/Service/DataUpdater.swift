@@ -341,24 +341,26 @@ public class DataUpdater: NSObject, DataStoreDelegate {
                 let urlString = sectionDictionary["url"] as String
                 let page = self.lastRequestedPage
                 let urlRouter = Router.Custom(urlString, page, self.updateParameters)
-                let request = FUSServiceClient.request(urlRouter, completed: { (json, error) -> () in
-                    self.requestStore.removeRequestFor(router: urlRouter)
-                    self.loadingPages.removeObject(page)
-                    if let anError = error {
-                        NSLog("Data Updater Failure for page \(page): \(anError.localizedDescription)")
-                    } else {
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            self.updatedData()
-                        })
-                        
-                        if let object: AnyObject = json {
-                            self.loadJSON(object, router: urlRouter)
+                if self.requestStore.containsRequestWithRouter(urlRouter) == false {
+                    let request = FUSServiceClient.request(urlRouter, completed: { (json, error) -> () in
+                        self.requestStore.removeRequestFor(router: urlRouter)
+                        self.loadingPages.removeObject(page)
+                        if let anError = error {
+                            NSLog("Data Updater Failure for page \(page): \(anError.localizedDescription)")
+                        } else {
+                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                self.updatedData()
+                            })
+                            
+                            if let object: AnyObject = json {
+                                self.loadJSON(object, router: urlRouter)
+                            }
                         }
-                    }
-                    self.endRefreshing()
-                })
-                self.requestStore.addRequest(request, router: urlRouter)
-                self.loadingPages.addObject(page)
+                        self.endRefreshing()
+                    })
+                    self.requestStore.addRequest(request, router: urlRouter)
+                    self.loadingPages.addObject(page)
+                }
             } else {
                 self.endRefreshing()
             }
