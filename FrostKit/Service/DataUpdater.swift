@@ -205,7 +205,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     
     :param: count The count of data objects. By default 0 is passed in.
     */
-    func updateTableFooter(count: Int = 0) {
+    func updateTableFooter(count: Int = NSNotFound) {
         if let tableView = self.tableView {
             // If the data array is empty, add a table footer with a label telling the user
             if count < 1 {
@@ -337,7 +337,10 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     Once complete it will call the loadJSON function or log an error to the console.
     */
     public func updateData() {
-        beginRefreshing()
+        if dataStore?.count < 1 {
+            beginRefreshing()
+        }
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
             if let sectionDictionary = self.sectionDictionary {
                 let urlString = sectionDictionary["url"] as String
