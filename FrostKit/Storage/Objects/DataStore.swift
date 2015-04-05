@@ -267,18 +267,16 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     public func setObjects(newObjects: NSArray, page: Int, totalCount: Int? = nil) -> Bool {
         var hasChanged = false
         let objects = self.objects.mutableCopy() as NSMutableDictionary
-        if newObjects.count > 0 {
-            // Update the total count
-            if let newTotalCount = totalCount {
-                if count != newTotalCount {
-                    count = newTotalCount
-                    hasChanged = true
-                }
+        // Update the total count
+        if let newTotalCount = totalCount {
+            if count != newTotalCount {
+                count = newTotalCount
+                hasChanged = true
             }
-            
-            // Update paged items
-            objects[page] = newObjects
         }
+        
+        // Update paged items
+        objects[page] = newObjects
         
         // If current instance of object is not equal to the stores, then update
         if self.objects.isEqualToDictionary(objects) == false {
