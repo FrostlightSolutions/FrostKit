@@ -105,6 +105,8 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     }
     /// Extra paramiters to pass to the updater when searching.
     public var searchUpdateParameters = Dictionary<String, AnyObject>()
+    /// Saved the UserStore object on data change. This is set to `true` by default.
+    @IBInspectable var saveUserStroeOnDataChange: Bool = true
     
     public override init() {
         super.init()
@@ -405,6 +407,9 @@ public class DataUpdater: NSObject, DataStoreDelegate {
                             if let sectionDictionary = self.sectionDictionary {
                                 let saveString = router.saveString
                                 UserStore.current.setDataStore(dataStore, urlString: saveString)
+                                if self.saveUserStroeOnDataChange == true {
+                                    UserStore.saveUser()
+                                }
                             }
                         }
                     }
