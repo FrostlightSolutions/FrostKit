@@ -157,9 +157,9 @@ public enum Router: URLRequestConvertible {
             
             return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
         case .CustomPOST(_, let parameters):
-            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
+            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
         case .CustomPUT(_, let parameters):
-            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
+            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
         case .CustomDELETE(_):
             return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0
         default:
