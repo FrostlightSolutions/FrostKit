@@ -124,7 +124,7 @@ public class UserStore: NSObject, NSCoding {
     
     :returns: `true` if the save completed successfully, `false` if it failed.
     */
-    class func saveUser() -> Bool {
+    public class func saveUser() -> Bool {
         return LocalStorage.saveUserData(UserStore.current)
     }
     
