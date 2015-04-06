@@ -27,6 +27,22 @@ public enum DateCompareType {
 ///
 extension NSDate {
     
+    // MARK: - NSDate Creation
+    
+    /**
+    Creates an NSDate from the FUS standard date format.
+    
+    :param: fusDateString The date string to make into an NSDate.
+    
+    :returns: The NSDate created from the passed in string or `nil` if it could not be created.
+    */
+    public class func fusDate(fusDateString: String) -> NSDate? {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSSSSS'Z'"
+        dateFormatter.timeZone = NSTimeZone.utc()
+        return dateFormatter.dateFromString(fusDateString)
+    }
+    
     // MARK: - Date Checks
     
     /// `true` if the date is yesterday, `false` if it isn't.
