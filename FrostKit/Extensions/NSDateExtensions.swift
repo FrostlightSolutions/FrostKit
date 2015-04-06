@@ -40,6 +40,7 @@ extension NSDate {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSSSSS'Z'"
         dateFormatter.timeZone = NSTimeZone.utc()
+        dateFormatter.locale = NSLocale.systemLocale()
         return dateFormatter.dateFromString(fusDateString)
     }
     
