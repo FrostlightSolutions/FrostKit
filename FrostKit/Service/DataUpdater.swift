@@ -341,7 +341,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
             beginRefreshing()
         }
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
             if let sectionDictionary = self.sectionDictionary {
                 let urlString = sectionDictionary["url"] as String
                 let page = self.lastRequestedPage
@@ -388,7 +388,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     :param: page The page the JSON is related to, or `nil` if the JSON is a non-paged response.
     */
     private func loadJSON(json: AnyObject, router: Router) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
             var shouldUpdate = false
             if let dataStore = self.dataStore {
                 shouldUpdate = dataStore.setFrom(object: json, page: router.page)
@@ -402,23 +402,25 @@ public class DataUpdater: NSObject, DataStoreDelegate {
                 }
             }
             
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                // Only save if should update and it's not a search
-                if shouldUpdate == true {
-                    if self.searchString == nil {
-                        if let dataStore = self.coreDataStore {
-                            if let sectionDictionary = self.sectionDictionary {
-                                let saveString = router.saveString
-                                UserStore.current.setDataStore(dataStore, urlString: saveString)
-                                if self.saveUserStroeOnDataChange == true {
-                                    UserStore.saveUser()
-                                }
+            // Only save if should update and it's not a search
+            if shouldUpdate == true {
+                if self.searchString == nil {
+                    if let dataStore = self.coreDataStore {
+                        if let sectionDictionary = self.sectionDictionary {
+                            let saveString = router.saveString
+                            UserStore.current.setDataStore(dataStore, urlString: saveString)
+                            if self.saveUserStroeOnDataChange == true {
+                                UserStore.saveUser()
                             }
                         }
                     }
-                    self.reloadData()
                 }
-                
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.reloadData()
+                })
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.loadedData()
             })
         })
