@@ -177,6 +177,16 @@ public enum Router: URLRequestConvertible {
         }
     }
     
+    /// The size passed in for an image or `nil` if not set or not an image request.
+    var imageSize: CGSize? {
+        switch self {
+        case .ImageGET(_, let size):
+            return size
+        default:
+            return nil
+        }
+    }
+    
     /// The URL request of the case. Token requests to not include an Authorization HTTP header field, as that is what it is requesting.
     public var URLRequest: NSURLRequest {
         
