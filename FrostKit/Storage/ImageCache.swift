@@ -118,6 +118,14 @@ public class ImageCache: NSObject {
     }
     
     /**
+    Clears all the images in the cache.
+    */
+    public func clearCache() {
+        NSLog("Clearing image cache")
+        cache.removeAllObjects()
+    }
+    
+    /**
     A placeholder image from placekitten.com represented by the integer passed in.
     
     :param: size An integer representing the place kitten back.
@@ -138,12 +146,6 @@ public class ImageCache: NSObject {
         return placeKittenURLString(Int(arc4random_uniform(2000)+1000))
     }
     
-    /**
-    Clears all the images in the cache.
-    */
-    public func clearCache() {
-        NSLog("Clearing image cache")
-        cache.removeAllObjects()
-    }
+    
     
 }

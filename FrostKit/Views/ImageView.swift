@@ -20,6 +20,4 @@ public class ImageView: UIImageView {
         }
     }
     
-    public var uniqueString = ""
-    
 }

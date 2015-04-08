@@ -39,7 +39,6 @@
 		1811D7B91A0AD1CA00E8B873 /* UIWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B51A0AD1CA00E8B873 /* UIWebViewController.swift */; };
 		1811D7BA1A0AD1CA00E8B873 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B61A0AD1CA00E8B873 /* WebViewController.swift */; };
 		1811D7BB1A0AD1CA00E8B873 /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B71A0AD1CA00E8B873 /* WKWebViewController.swift */; };
-		1812BF0F1AD554150050914F /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1812BF0E1AD554150050914F /* Label.swift */; };
 		1818F6DA1A8CF39B000255A2 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1818F6D91A8CF39B000255A2 /* ImageView.swift */; };
 		1818F6DB1A8CF39B000255A2 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1818F6D91A8CF39B000255A2 /* ImageView.swift */; };
 		181BCC3619DF60810056C8F8 /* KeychainHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181BCC3519DF60810056C8F8 /* KeychainHelperTests.swift */; };
@@ -184,7 +183,6 @@
 		1811D7B51A0AD1CA00E8B873 /* UIWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIWebViewController.swift; sourceTree = "<group>"; };
 		1811D7B61A0AD1CA00E8B873 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		1811D7B71A0AD1CA00E8B873 /* WKWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
-		1812BF0E1AD554150050914F /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		1818F6D91A8CF39B000255A2 /* ImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		181BCC3519DF60810056C8F8 /* KeychainHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainHelperTests.swift; sourceTree = "<group>"; };
 		18213B271A7C143F002AD63C /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
@@ -541,7 +539,6 @@
 				1818F6D91A8CF39B000255A2 /* ImageView.swift */,
 				18DD78FE1A8CA70F00379FB5 /* VisualEffectView.swift */,
 				188D62971A8D56FE0098D976 /* InitialsImageView.swift */,
-				1812BF0E1AD554150050914F /* Label.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -790,7 +787,6 @@
 				186CFCEA1A29FA40002739A5 /* MapController.swift in Sources */,
 				18032B1B1A84F99400BEBB41 /* UIFontExtensions.swift in Sources */,
 				182BBBD41A853FB700D8F6F7 /* MapViewController.swift in Sources */,
-				1812BF0F1AD554150050914F /* Label.swift in Sources */,
 				18C0066119DB5BF000811755 /* LocalStorage.swift in Sources */,
 				18C0067019DB7EDB00811755 /* ContentManager.swift in Sources */,
 				18E3F23A19DE15600032ABB7 /* UIBarButtonItemExtensions.swift in Sources */,

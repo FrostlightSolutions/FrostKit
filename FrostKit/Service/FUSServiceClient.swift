@@ -19,7 +19,7 @@ import Alamofire
 ///
 public enum Router: URLRequestConvertible {
     /// The base URL parsed in form the developer tools plist.
-    static let baseURLString = DeveloperTools.baseURL()
+    public static let baseURLString = DeveloperTools.baseURL()
     
     case Root
     case Token([String: AnyObject])
