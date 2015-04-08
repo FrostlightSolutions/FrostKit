@@ -63,6 +63,7 @@
 		1836A2221A84F3BE00E57F86 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1836A21F1A84F3BE00E57F86 /* fontawesome-webfont.ttf */; };
 		1836A2231A84F3BE00E57F86 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1836A2201A84F3BE00E57F86 /* ionicons.ttf */; };
 		1836A2241A84F3BE00E57F86 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1836A2201A84F3BE00E57F86 /* ionicons.ttf */; };
+		183C7B6B1AD2F4A400CAE1A5 /* UIScreenExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C7B6A1AD2F4A400CAE1A5 /* UIScreenExtensions.swift */; };
 		183F85F71A7B0D9200885F56 /* ImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183F85F61A7B0D9200885F56 /* ImageCacheTests.swift */; };
 		183F85F91A7B0E1C00885F56 /* SmallLogoBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 183F85F81A7B0E1C00885F56 /* SmallLogoBlue.png */; };
 		185D3D5C1A6E936F00BE700D /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185D3D5B1A6E936F00BE700D /* DataStore.swift */; };
@@ -199,6 +200,7 @@
 		1836A21B1A84F38A00E57F86 /* FontConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontConstants.swift; sourceTree = "<group>"; };
 		1836A21F1A84F3BE00E57F86 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		1836A2201A84F3BE00E57F86 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
+		183C7B6A1AD2F4A400CAE1A5 /* UIScreenExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScreenExtensions.swift; sourceTree = "<group>"; };
 		183F85F61A7B0D9200885F56 /* ImageCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageCacheTests.swift; path = FrostKitTests/Storage/ImageCacheTests.swift; sourceTree = SOURCE_ROOT; };
 		183F85F81A7B0E1C00885F56 /* SmallLogoBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SmallLogoBlue.png; sourceTree = "<group>"; };
 		184E07921A8901A10074FD25 /* MBProgressHUDExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBProgressHUDExtensions.swift; sourceTree = "<group>"; };
@@ -496,6 +498,7 @@
 				18E3F23919DE15600032ABB7 /* UIBarButtonItemExtensions.swift */,
 				18DC212A19DEA21000FEB57E /* UIViewControllerExtensions.swift */,
 				18A786CC1A77B39A006EADB9 /* UICollectionViewControllerExtensions.swift */,
+				183C7B6A1AD2F4A400CAE1A5 /* UIScreenExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -767,6 +770,7 @@
 				1818F6DA1A8CF39B000255A2 /* ImageView.swift in Sources */,
 				1811D7B81A0AD1CA00E8B873 /* BaseWebViewController.swift in Sources */,
 				185D3D5C1A6E936F00BE700D /* DataStore.swift in Sources */,
+				183C7B6B1AD2F4A400CAE1A5 /* UIScreenExtensions.swift in Sources */,
 				18DC212B19DEA21000FEB57E /* UIViewControllerExtensions.swift in Sources */,
 				18EA123F19DC79F100FD858D /* NSDataExtensions.swift in Sources */,
 				18839B4719DA27AE00760157 /* SocialHelper.swift in Sources */,

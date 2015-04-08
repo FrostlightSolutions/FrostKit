@@ -13,18 +13,17 @@ import UIKit
 ///
 extension UIColor {
     
-    // TODO: Reimpliment
-//    /**
-//    A convenience init for creating a color object from a hex string.
-//    
-//    :param: hexString   A hex string to turn into a color object.
-//    
-//    :returns: A color object from the hex string.
-//    */
-//    public convenience init(hexString: String) {
-//        let color = UIColor.colorWithHex(hexString)
-//        self.init(CGColor: color.CGColor)
-//    }
+    /**
+    A convenience init for creating a color object from a hex string.
+    
+    :param: hexString   A hex string to turn into a color object.
+    
+    :returns: A color object from the hex string.
+    */
+    public convenience init(hexString: String, alpha: CGFloat = 1) {
+        let color = UIColor.colorWithHex(hexString, alpha: alpha)
+        self.init(CGColor: color.CGColor)
+    }
     
     /**
     Creates a color object from a hex string.
@@ -33,7 +32,7 @@ extension UIColor {
     
     :returns: A color object from the hex string.
     */
-    public class func colorWithHex(hexString: String) -> UIColor {
+    public class func colorWithHex(hexString: String, alpha: CGFloat = 1) -> UIColor {
         
         var scanLocation = 0
         if hexString.hasPrefix("#") {
@@ -59,6 +58,6 @@ extension UIColor {
             return UIColor.clearColor()
         }
         
-        return UIColor(red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0, green: CGFloat((rgbValue & 0x00FF00) >> 8)  / 255.0, blue: CGFloat(rgbValue & 0x0000FF) / 255.0, alpha: 1.0)
+        return UIColor(red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0, green: CGFloat((rgbValue & 0x00FF00) >> 8)  / 255.0, blue: CGFloat(rgbValue & 0x0000FF) / 255.0, alpha: alpha)
     }
 }

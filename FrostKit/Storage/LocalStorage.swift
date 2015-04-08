@@ -142,7 +142,7 @@ public class LocalStorage: NSObject {
     
     :returns: `true` if the directory is created. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    private class func createDirectory(#url: NSURL) -> Bool {
+    internal class func createDirectory(#url: NSURL) -> Bool {
         
         var error: NSError?
         let success = NSFileManager.defaultManager().createDirectoryAtURL(url, withIntermediateDirectories: true, attributes: nil, error: &error)
@@ -169,11 +169,13 @@ public class LocalStorage: NSObject {
     
     :returns: `true` if the data saves correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    private class func save(#data: AnyObject, baseURL: NSURL, reletivePath: String, fileName: String) -> Bool {
+    private class func save(#data: AnyObject, baseURL: NSURL, reletivePath: String, fileName: String? = nil) -> Bool {
         
         var url = baseURL.URLByAppendingPathComponent(reletivePath)
         createDirectory(url: url)
-        url = url.URLByAppendingPathComponent(fileName)
+        if let aFileName = fileName {
+            url = url.URLByAppendingPathComponent(aFileName)
+        }
         
         if let path = url.path {
             
@@ -198,7 +200,7 @@ public class LocalStorage: NSObject {
     
     :returns: `true` if the data saves correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func saveToDocuments(#data: AnyObject, reletivePath: String, fileName: String) -> Bool {
+    public class func saveToDocuments(#data: AnyObject, reletivePath: String, fileName: String? = nil) -> Bool {
         return save(data: data, baseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName)
     }
     
@@ -211,7 +213,7 @@ public class LocalStorage: NSObject {
     
     :returns: `true` if the data saves correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func saveToCaches(#data: AnyObject, reletivePath: String, fileName: String) -> Bool {
+    public class func saveToCaches(#data: AnyObject, reletivePath: String, fileName: String? = nil) -> Bool {
         return save(data: data, baseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName)
     }
     
@@ -238,7 +240,7 @@ public class LocalStorage: NSObject {
     
     :returns: `true` if the data is moved correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    private class func move(#fromBaseURL: NSURL, toBaseURL: NSURL, reletivePath: String, fileName: String) -> Bool {
+    private class func move(#fromBaseURL: NSURL, toBaseURL: NSURL, reletivePath: String, fileName: String? = nil) -> Bool {
         
         let fromURL = absoluteURL(baseURL: fromBaseURL, reletivePath: reletivePath, fileName: fileName)
         let toURL = absoluteURL(baseURL: toBaseURL, reletivePath: reletivePath, fileName: fileName)
@@ -264,7 +266,7 @@ public class LocalStorage: NSObject {
     
     :returns: `true` if the data is moved correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func moveFromCachesToDocuments(#reletivePath: String, fileName: String) -> Bool {
+    public class func moveFromCachesToDocuments(#reletivePath: String, fileName: String? = nil) -> Bool {
         return move(fromBaseURL: cachesURL(), toBaseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName)
     }
     
@@ -276,7 +278,7 @@ public class LocalStorage: NSObject {
     
     :returns: `true` if the data is moved correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func moveFromDocumentsToCaches(#reletivePath: String, fileName: String) -> Bool {
+    public class func moveFromDocumentsToCaches(#reletivePath: String, fileName: String? = nil) -> Bool {
         return move(fromBaseURL: documentsURL(), toBaseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName)
     }
     
@@ -291,7 +293,7 @@ public class LocalStorage: NSObject {
     
     :returns: The object to be loaded or `nil` if it isn't found.
     */
-    private class func load(#baseURL: NSURL, reletivePath: String, fileName: String) -> AnyObject? {
+    private class func load(#baseURL: NSURL, reletivePath: String, fileName: String? = nil) -> AnyObject? {
         
         let url = absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName)
         
@@ -310,7 +312,7 @@ public class LocalStorage: NSObject {
     
     :returns: The file requested to be loaded or `nil` if it isn't found.
     */
-    public class func loadFromDocuments(#reletivePath: String, fileName: String) -> AnyObject? {
+    public class func loadFromDocuments(#reletivePath: String, fileName: String? = nil) -> AnyObject? {
         return load(baseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName)
     }
     
@@ -322,7 +324,7 @@ public class LocalStorage: NSObject {
     
     :returns: The file requested to be loaded or `nil` if it isn't found.
     */
-    public class func loadFromCaches(#reletivePath: String, fileName: String) -> AnyObject? {
+    public class func loadFromCaches(#reletivePath: String, fileName: String? = nil) -> AnyObject? {
         return load(baseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName)
     }
     
@@ -334,7 +336,7 @@ public class LocalStorage: NSObject {
     
     :returns: The image requested to be loaded or `nil` if it isn't found.
     */
-    public class func loadImageFromDocuments(#reletivePath: String, fileName: String) -> UIImage? {
+    public class func loadImageFromDocuments(#reletivePath: String, fileName: String? = nil) -> UIImage? {
         return loadFromDocuments(reletivePath: reletivePath, fileName: fileName) as? UIImage
     }
     
@@ -346,7 +348,7 @@ public class LocalStorage: NSObject {
     
     :returns: The image requested to be loaded or `nil` if it isn't found.
     */
-    public class func loadImageFromCaches(#reletivePath: String, fileName: String) -> UIImage? {
+    public class func loadImageFromCaches(#reletivePath: String, fileName: String? = nil) -> UIImage? {
         return loadFromCaches(reletivePath: reletivePath, fileName: fileName) as? UIImage
     }
     
@@ -441,7 +443,7 @@ public class LocalStorage: NSObject {
     
     :returns: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func removeDocumentsObject(#reletivePath: String, fileName: String) -> Bool {
+    public class func removeDocumentsObject(#reletivePath: String, fileName: String? = nil) -> Bool {
         return remove(baseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName)
     }
     
@@ -453,7 +455,7 @@ public class LocalStorage: NSObject {
     
     :returns: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func removeCachesObject(#reletivePath: String, fileName: String) -> Bool {
+    public class func removeCachesObject(#reletivePath: String, fileName: String? = nil) -> Bool {
         return remove(baseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName)
     }
     

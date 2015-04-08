@@ -8,8 +8,20 @@
 
 import UIKit
 
+///
 /// The data store delegate provides callback for when a item or page will be accessed. This can be used to work out if a item or page needs to be updated with the API or service.
+///
 @objc public protocol DataStoreDelegate {
+    /**
+    This function is called when the data store's data is first loaded or created.
+    
+    Note you can create a data store object without adding data to it and this function will not be called. Only when data is first added to the data store will this function be called.
+    i.e. When object.count > 0
+    
+    :param: dataStore The data store loaded.
+    */
+    optional func dataStoreInitialLoad(dataStore: DataStore)
+    
     /**
     This function is called when an item will be accessed at an index.
     
@@ -254,22 +266,31 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     */
     public func setObjects(newObjects: NSArray, page: Int, totalCount: Int? = nil) -> Bool {
         var hasChanged = false
-        let objects = self.objects.mutableCopy() as! NSMutableDictionary
-        if newObjects.count > 0 {
-            // Update the total count
-            if let newTotalCount = totalCount where count != newTotalCount {
+        let objects = self.objects.mutableCopy() as NSMutableDictionary
+        // Update the total count
+        if let newTotalCount = totalCount {
+            if count != newTotalCount {
                 count = newTotalCount
                 hasChanged = true
             }
-            
-            // Update paged items
-            objects[page] = newObjects
         }
         
+        // Update paged items
+        objects[page] = newObjects
+        
         // If current instance of object is not equal to the stores, then update
-        if self.objects.isEqualToDictionary(objects as [NSObject : AnyObject]) == false {
+        if self.objects.isEqualToDictionary(objects) == false {
+            var wasEmpty = false
+            if self.objects.count < 1 {
+                wasEmpty = true
+            }
+            
             self.objects = objects
             hasChanged = true
+            
+            if wasEmpty == true && objects.count > 0 {
+                delegate?.dataStoreInitialLoad?(self)
+            }
         }
         
         if accessedAfterFirstLoad == false {
@@ -441,13 +462,19 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     */
     public func indexOfObject(anObject: AnyObject) -> Int {
         var index = NSNotFound
+        var foundOnPage = 0
         for (page, value) in objects {
             if let pageObjects = value as? NSArray {
                 index = pageObjects.indexOfObject(anObject)
                 if index != NSNotFound {
+                    foundOnPage = page as Int
                     break
                 }
             }
+        }
+        
+        if index != NSNotFound {
+            return (objectsPerPage * (foundOnPage - 1)) + index
         }
         return index
     }
@@ -497,6 +524,30 @@ public class DataStore: NSObject, NSCoding, NSCopying {
         } else {
             return Int(floor(Double(index) / Double(objectsPerPage)))
         }
+    }
+    
+    /**
+    Search the store for an object to contains the key-value passed in.
+    
+    :param: key   A key to search for.
+    :param: value A value to check the key-value against.
+    
+    :returns: The object that contains the matching key-value.
+    */
+    public func searchForObjectWith(#key: String, value: NSObject) -> AnyObject? {
+        var object: AnyObject?
+        for (page, pageArray) in objects {
+            if let array = pageArray as? NSArray {
+                if array.count > 0 {
+                    if let filter = NSPredicate(format: "%K == %@", key, value) {
+                        let filteredArray = array.filteredArrayUsingPredicate(filter)
+                        object = filteredArray.first
+                        break
+                    }
+                }
+            }
+        }
+        return object
     }
     
 }

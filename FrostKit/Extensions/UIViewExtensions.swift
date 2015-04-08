@@ -35,4 +35,22 @@ extension UIView {
         return image
     }
     
+    /**
+    Returns the parent view of a certain tpye.
+    
+    :param: type The type of parent view to match against.
+    
+    :returns: The parent view of the type passed in.
+    */
+    public func parentViewOfType<T>(type: T.Type) -> T? {
+        var currentView = self
+        while currentView.superview != nil {
+            if currentView is T {
+                return currentView as? T
+            }
+            currentView = currentView.superview!
+        }
+        return nil
+    }
+    
 }

@@ -29,6 +29,8 @@ public class UserStore: NSObject, NSCoding {
     private lazy var contentData = Dictionary<String, DataStore>()
     /// If set to `true` then content data is manged the same as downloaded images or documents. If `false` then content data is kept indefinitely. The default is `false`.
     public var shouldManageContentData = false
+    /// A dictionary of custom data to be stored in the user store. This will be saved and stored with the user object.
+    public var customDataStore = Dictionary<String, AnyObject>()
     /// Returns `true` is the user is logged in and `false` if not. A user is assumed as logged in if the UserStore has a username set and details can be retrieved from the keychain wit that username.
     public var isLoggedIn: Bool {
         if let username = self.username, let details = KeychainHelper.details(username: username) as? OAuthToken {
@@ -78,6 +80,10 @@ public class UserStore: NSObject, NSCoding {
         if let contentData = aDecoder.decodeObjectForKey("contentData") as? [String: DataStore] {
             self.contentData = contentData
         }
+        
+        if let customDataStore = aDecoder.decodeObjectForKey("customDataStore") as? [String: AnyObject] {
+            self.customDataStore = customDataStore
+        }
     }
     
     public func encodeWithCoder(aCoder: NSCoder) {
@@ -85,6 +91,7 @@ public class UserStore: NSObject, NSCoding {
         aCoder.encodeObject(username, forKey: "username")
         aCoder.encodeObject(sections, forKey: "sections")
         aCoder.encodeObject(contentData, forKey: "contentData")
+        aCoder.encodeObject(customDataStore, forKey: "customDataStore")
     }
     
     // MARK: - NSNotificationCenter Methods
@@ -115,7 +122,7 @@ public class UserStore: NSObject, NSCoding {
     
     :returns: `true` if the save completed successfully, `false` if it failed.
     */
-    class func saveUser() -> Bool {
+    public class func saveUser() -> Bool {
         return LocalStorage.saveUserData(UserStore.current)
     }
     
@@ -149,6 +156,7 @@ public class UserStore: NSObject, NSCoding {
         oAuthToken = nil
         sections.removeAll(keepCapacity: true)
         contentData.removeAll(keepCapacity: true)
+        customDataStore.removeAll(keepCapacity: true)
     }
     
     // MARK: - Content Data Methods
