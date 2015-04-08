@@ -341,7 +341,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
             beginRefreshing()
         }
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
             if let sectionDictionary = self.sectionDictionary {
                 let urlString = sectionDictionary["url"] as String
                 let page = self.lastRequestedPage
@@ -388,7 +388,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     :param: page The page the JSON is related to, or `nil` if the JSON is a non-paged response.
     */
     private func loadJSON(json: AnyObject, router: Router) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
             var shouldUpdate = false
             if let dataStore = self.dataStore {
                 shouldUpdate = dataStore.setFrom(object: json, page: router.page)

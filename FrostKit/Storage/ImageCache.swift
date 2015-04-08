@@ -44,8 +44,8 @@ public class ImageCache: NSObject {
     
     :returns: The image requested or `nil`.
     */
-    public class func loadLocalImage(urlString: String, size: CGSize? = nil, completed: (image: UIImage?) -> ()) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), { () -> Void in
+    public class func loadLocalImage(urlString: String, size: CGSize? = nil, completed: (image: UIImage?, saveString: String) -> ()) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
             
             let router = Router.ImageGET(urlString, size)
             let saveString = router.saveString
@@ -53,21 +53,23 @@ public class ImageCache: NSObject {
             // Check for cached image and if found, return
             if let cachedImage = ImageCache.shared.cache.objectForKey(saveString) as? UIImage {
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    completed(image: cachedImage)
+                    completed(image: cachedImage, saveString: router.saveString)
                 })
+                return
             } else {
                 // If no cached image found, try and load from local storage
                 if let localStorageImage = LocalStorage.loadImageFromDocuments(reletivePath: router.saveString, fileName: nil) {
                     ImageCache.shared.cache.setObject(localStorageImage, forKey: saveString)
                     ContentManager.saveContentMetadata(absolutePath: router.saveString)
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        completed(image: localStorageImage)
+                        completed(image: localStorageImage, saveString: router.saveString)
                     })
+                    return
                 }
             }
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                completed(image: nil)
+                completed(image: nil, saveString: router.saveString)
             })
         })
     }
@@ -80,38 +82,42 @@ public class ImageCache: NSObject {
     :param: progress  A closure of the progress of the download.
     :param: completed A closure of the completion of the download.
     */
-    public class func loadImage(urlString: String, size: CGSize? = nil, progress: ((percentComplete: CGFloat) -> ())?, completed: (image: UIImage?, error: NSError?) -> ()) {
+    public class func loadImage(urlString: String, size: CGSize? = nil, progress: ((percentComplete: CGFloat) -> ())?, completed: (image: UIImage?, saveString: String, error: NSError?) -> ()) {
         
         // Check for local image and return if found.
-        loadLocalImage(urlString, size: size) { (image) -> () in
+        loadLocalImage(urlString, size: size) { (image, saveURL) -> () in
             if let localImage = image {
-                completed(image: localImage, error: nil)
-                return
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    completed(image: localImage, saveString: saveURL, error: nil)
+                })
+                
+            } else {
+                
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+                    // If no local image found then try and download.
+                    let sharedImageCache = ImageCache.shared
+                    let router = Router.ImageGET(urlString, size)
+                    
+                    if sharedImageCache.imageRequestStore.containsRequestWithRouter(router) == false {
+                        let request = FUSServiceClient.imageRequest(router, progress: progress, completed: { (image, error) -> () in
+                            sharedImageCache.imageRequestStore.removeRequestFor(router: router)
+                            if let anError = error {
+                                NSLog("Error downloading image with error: \(anError.localizedDescription)")
+                            } else if let downloadedImage = image {
+                                let saveString = router.saveString
+                                sharedImageCache.cache.setObject(downloadedImage, forKey: saveString)
+                                ContentManager.saveContentMetadata(absolutePath: saveString)
+                                LocalStorage.saveToDocuments(data: downloadedImage, reletivePath: saveString.stringByDeletingLastPathComponent, fileName: saveString.lastPathComponent)
+                            }
+                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                completed(image: image, saveString: router.saveString, error: error)
+                            })
+                        })
+                        sharedImageCache.imageRequestStore.addRequest(request, router: router)
+                    }
+                })
             }
         }
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), { () -> Void in
-            // If no local image found then try and download.
-            let sharedImageCache = ImageCache.shared
-            let router = Router.ImageGET(urlString, size)
-            if sharedImageCache.imageRequestStore.containsRequestWithRouter(router) == false {
-                let request = FUSServiceClient.imageRequest(router, progress: progress, completed: { (image, error) -> () in
-                    sharedImageCache.imageRequestStore.removeRequestFor(router: router)
-                    if let anError = error {
-                        NSLog("Error downloading image at url: \(router.absoluteString) with error: \(anError)")
-                    } else if let downloadedImage = image {
-                        let saveString = router.saveString
-                        sharedImageCache.cache.setObject(downloadedImage, forKey: saveString)
-                        ContentManager.saveContentMetadata(absolutePath: saveString)
-                        LocalStorage.saveToDocuments(data: downloadedImage, reletivePath: saveString.stringByDeletingLastPathComponent, fileName: saveString.lastPathComponent)
-                    }
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        completed(image: image, error: error)
-                    })
-                })
-                sharedImageCache.imageRequestStore.addRequest(request, router: router)
-            }
-        })
     }
     
     /**

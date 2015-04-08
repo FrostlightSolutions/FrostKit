@@ -90,7 +90,7 @@ public enum Router: URLRequestConvertible {
         }
     }
     
-    private func removeHTTPPrefix(urlString: String) -> String {
+    public func removeHTTPPrefix(urlString: String) -> String {
         let saveStringComponents = urlString.componentsSeparatedByString("://")
         if let path = saveStringComponents.last {
             return path
@@ -136,7 +136,7 @@ public enum Router: URLRequestConvertible {
     }
     
     /// A reference string to save the call under.
-    var saveString: String {
+    public var saveString: String {
         switch self {
         case .CustomGET(let urlString, _, let parameters):
             var saveString = urlString
@@ -151,7 +151,9 @@ public enum Router: URLRequestConvertible {
             return saveString
         case .ImageGET(let urlString, let size):
             if let frameSize = size {
-                return path.stringByAppendingPathComponent(String(format: "%dx%d", frameSize.width, frameSize.height)) + urlString.lastPathComponent
+                let sizeString = "\(Int(frameSize.width))x\(Int(frameSize.height))"
+                var saveString = path.stringByAppendingPathComponent(sizeString + "_" + urlString.lastPathComponent)
+                return saveString
             }
             return removeHTTPPrefix(absoluteString)
         default:
@@ -213,7 +215,7 @@ public enum Router: URLRequestConvertible {
         case .ImageGET(let urlString, let size):
             if let frameSize = size {
                 let parameters = [
-                    "resize": String(format: "%dx%d", frameSize.width, frameSize.height),
+                    "resize": "\(Int(frameSize.width))x\(Int(frameSize.height))",
                     "source": urlString
                 ]
                 return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
@@ -389,8 +391,12 @@ public class FUSServiceClient: NSObject {
     public class func imageRequest(router: Router, progress: ((percentComplete: CGFloat) -> ())?, completed: (image: UIImage?, error: NSError?) -> ()) -> Alamofire.Request {
         
         NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
-        return Alamofire.request(router).validate().progress(closure: { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) -> Void in
-            progress?(percentComplete: CGFloat(totalBytesWritten) / CGFloat(totalBytesExpectedToWrite))
+        return Alamofire.request(router).validate().progress(closure: { (bytesRead, totalBytesRead, totalBytesExpectedToRead) -> Void in
+            var percent: CGFloat = -1
+            if totalBytesExpectedToRead >= 0 {
+                percent = CGFloat(totalBytesRead) / CGFloat(totalBytesExpectedToRead)
+            }
+            progress?(percentComplete: percent)
             return
         }).responseImage { (request, response, image, error) -> Void in
             NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
