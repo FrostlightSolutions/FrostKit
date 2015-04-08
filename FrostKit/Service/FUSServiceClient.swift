@@ -24,10 +24,11 @@ public enum Router: URLRequestConvertible {
     case Root
     case Token([String: AnyObject])
     case Sections
-    case Custom(String, Int?, [String: AnyObject]?)
+    case CustomGET(String, Int?, [String: AnyObject]?)
     case CustomPOST(String, [String: AnyObject]?)
     case CustomPUT(String, [String: AnyObject]?)
     case CustomDELETE(String)
+    case ImageGET(String, CGSize?)
     
     // MARK: URLRequestConvertible
     
@@ -36,7 +37,7 @@ public enum Router: URLRequestConvertible {
         switch self {
         case .Token:
             return .POST
-        case .Sections, .Custom:
+        case .Sections, .CustomGET, .ImageGET:
             return .GET
         case .CustomPOST:
             return .POST
@@ -63,12 +64,24 @@ public enum Router: URLRequestConvertible {
                 NSLog("Error: Project name not set in FrostKit setup!")
                 return ""
             }
+        case .ImageGET:
+            let path = removeHTTPPrefix(absoluteString.stringByDeletingLastPathComponent)
+            var pathComponents = path.componentsSeparatedByString("/")
+            pathComponents.removeAtIndex(0)
+            return (pathComponents as NSArray).componentsJoinedByString("/")
         default:
             return ""
         }
     }
     
-    func absoluteURLFromString(urlString: String) -> NSURL {
+    /**
+    Returns the absolute URL for the `urlString` passed in. It checks for the prefix `http://` or `https://` and if found then it reutrns the `urlString` as an NSURL. If these prefixes aren't found then the `urlString` is assumed to be reletive and is appended to the end of the `baseURL`.
+    
+    :param: urlString The urlString to turn into the absoluteURL.
+    
+    :returns: The absoluteURL created the the absolute or reletive `urlString` passed in.
+    */
+    private func absoluteURLFromString(urlString: String) -> NSURL {
         if urlString.hasPrefix("http://") || urlString.hasPrefix("https://") {
             return NSURL(string: urlString)!
         } else {
@@ -77,10 +90,23 @@ public enum Router: URLRequestConvertible {
         }
     }
     
+    private func removeHTTPPrefix(urlString: String) -> String {
+        let saveStringComponents = urlString.componentsSeparatedByString("://")
+        if let path = saveStringComponents.last {
+            return path
+        }
+        return urlString
+    }
+    
+    private func resizeURL() -> NSURL {
+        let URL = NSURL(string: Router.baseURLString)!
+        return URL.URLByAppendingPathComponent("resize")
+    }
+    
     /// The absolute URL of the case.
     var URL: NSURL {
         switch self {
-        case .Custom(let urlString, _, _):
+        case .CustomGET(let urlString, _, _):
             return absoluteURLFromString(urlString)
         case .CustomPOST(let urlString, _):
             return absoluteURLFromString(urlString)
@@ -88,6 +114,12 @@ public enum Router: URLRequestConvertible {
             return absoluteURLFromString(urlString)
         case .CustomDELETE(let urlString):
             return absoluteURLFromString(urlString)
+        case .ImageGET(let urlString, let size):
+            if size != nil {
+                return resizeURL()
+            } else {
+                return absoluteURLFromString(urlString)
+            }
         default:
             return absoluteURLFromString(path)
         }
@@ -95,13 +127,18 @@ public enum Router: URLRequestConvertible {
     
     /// The absolute string of the case.
     var absoluteString: String {
-        return URL.absoluteString!
+        switch self {
+        case .ImageGET(let urlString, _):
+            return absoluteURLFromString(urlString).absoluteString!
+        default:
+            return URL.absoluteString!
+        }
     }
     
     /// A reference string to save the call under.
     var saveString: String {
         switch self {
-        case .Custom(let urlString, _, let parameters):
+        case .CustomGET(let urlString, _, let parameters):
             var saveString = urlString
             
             if let someParameters = parameters {
@@ -111,16 +148,27 @@ public enum Router: URLRequestConvertible {
                     saveString = saveString.stringByAppendingPathComponent(someParameters[key] as String)
                 }
             }
-            
             return saveString
+        case .ImageGET(let urlString, let size):
+            if let frameSize = size {
+                return path.stringByAppendingPathComponent(String(format: "%dx%d", frameSize.width, frameSize.height)) + urlString.lastPathComponent
+            }
+            return removeHTTPPrefix(absoluteString)
         default:
             return absoluteString
         }
     }
     
+    /// Returns the `absoluteString` without the `baseURL` if it is found in the `absoluteString`.
+    var reletiveString: String {
+        let absoluteString = self.absoluteString
+        return absoluteString.stringByReplacingOccurrencesOfString(absoluteString, withString: "", options: nil, range: nil)
+    }
+    
+    /// The page number of the request if passed in. Only available with `.CustonGET`.
     var page: Int? {
         switch self {
-        case .Custom(_, let page, _):
+        case .CustomGET(_, let page, _):
             return page
         default:
             return nil
@@ -135,7 +183,7 @@ public enum Router: URLRequestConvertible {
         mutableURLRequest.cachePolicy = .ReloadIgnoringLocalCacheData
         
         switch self {
-        case .Token:
+        case .Token, .ImageGET:
             break
         default:
             if let oAuthToken = UserStore.current.oAuthToken {
@@ -146,7 +194,7 @@ public enum Router: URLRequestConvertible {
         switch self {
         case .Token(let parameters):
             return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
-        case .Custom(_, let page, var parameters):
+        case .CustomGET(_, let page, var parameters):
             if parameters == nil {
                 parameters = Dictionary<String, AnyObject>()
             }
@@ -162,6 +210,16 @@ public enum Router: URLRequestConvertible {
             return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
         case .CustomDELETE(_):
             return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0
+        case .ImageGET(let urlString, let size):
+            if let frameSize = size {
+                let parameters = [
+                    "resize": String(format: "%dx%d", frameSize.width, frameSize.height),
+                    "source": urlString
+                ]
+                return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
+            } else {
+                return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0
+            }
         default:
             return mutableURLRequest
         }
@@ -305,17 +363,38 @@ public class FUSServiceClient: NSObject {
     /**
     A generic request method for calling .Sections for .Custom from the Router.
     
-    :param: URLRequest The URL request either manually created or generated by the Router.
+    :param: router The URL request either manually created or generated by the Router.
     :param: completed  The completed callback that returns the response JSON and/or an error.
     
     :returns: An Alamofire request.
     */
-    public class func request(URLRequest: Router, completed: (json: AnyObject?, error: NSError?) -> ()) -> Alamofire.Request {
+    public class func request(router: Router, completed: (json: AnyObject?, error: NSError?) -> ()) -> Alamofire.Request {
         
         NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
-        return Alamofire.request(URLRequest).validate().responseJSON { (requestObject, responseObject, responseJSON, responseError) -> Void in
+        return Alamofire.request(router).validate().responseJSON { (requestObject, responseObject, responseJSON, responseError) -> Void in
             completed(json: responseJSON, error: self.errorForResponse(responseObject, json: responseJSON, origError: responseError))
             NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
+        }
+    }
+    
+    /**
+    A request for downloading an image using .ImageGET from the Router.
+    
+    :param: router   The URL request either manually created or generated by the Router.
+    :param: progress The progress call back that returns the progress from 0.0 to 1.0.
+    :param: completed  The completed callback that returns the response UIImage and/or an error.
+    
+    :returns: An Alamofire request.
+    */
+    public class func imageRequest(router: Router, progress: ((percentComplete: CGFloat) -> ())?, completed: (image: UIImage?, error: NSError?) -> ()) -> Alamofire.Request {
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
+        return Alamofire.request(router).validate().progress(closure: { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) -> Void in
+            progress?(percentComplete: CGFloat(totalBytesWritten) / CGFloat(totalBytesExpectedToWrite))
+            return
+        }).responseImage { (request, response, image, error) -> Void in
+            NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
+            completed(image: image, error: error)
         }
     }
     
@@ -371,4 +450,22 @@ public class FUSServiceClient: NSObject {
         return nil
     }
 
+}
+
+extension Alamofire.Request {
+    class func imageResponseSerializer() -> Serializer {
+        return { request, response, data in
+            if data == nil {
+                return (nil, nil)
+            }
+            
+            return (UIImage(data: data!, scale: UIScreen.mainScreen().scale), nil)
+        }
+    }
+    
+    func responseImage(completionHandler: (NSURLRequest, NSHTTPURLResponse?, UIImage?, NSError?) -> Void) -> Self {
+        return response(serializer: Request.imageResponseSerializer(), completionHandler: { (request, response, image, error) in
+            completionHandler(request, response, image as? UIImage, error)
+        })
+    }
 }

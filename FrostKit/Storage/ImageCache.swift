@@ -18,6 +18,10 @@ public class ImageCache: NSObject {
     
     /// The cache store for the images.
     private let cache = NSCache()
+    /// The request store for image requests.
+    private let imageRequestStore = RequestStore()
+    /// The image to return if no image can be found.
+    public var placeholderImage: UIImage?
     
     // MARK: - Singleton
     
@@ -34,115 +38,101 @@ public class ImageCache: NSObject {
     }
     
     /**
-    Load an image from cache. If the image is not available in cache then it will be attempted to be loaded from the local store.
-    This is a private method. Use the public class method from outside this class.
+    Attempts to load the local image from cache or from loacl storage. If not found in either of these it will return `nil`.
     
-    :param: directory       The search path directory to use.
-    :param: reletivePath    The reletive path to of the file or directory.
-    :param: fileName        The name of the file (including the extension).
+    :param: router The router for the image to be requested.
     
-    :returns: The image at the absolute path made from the passed in argments or `nil` if not found.
+    :returns: The image requested or `nil`.
     */
-    private func loadImage(#directory: NSSearchPathDirectory, reletivePath: String, fileName: String) -> UIImage? {
+    public class func loadLocalImage(urlString: String, size: CGSize? = nil, completed: (image: UIImage?) -> ()) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), { () -> Void in
+            
+            let router = Router.ImageGET(urlString, size)
+            let saveString = router.saveString
+            
+            // Check for cached image and if found, return
+            if let cachedImage = ImageCache.shared.cache.objectForKey(saveString) as? UIImage {
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    completed(image: cachedImage)
+                })
+            } else {
+                // If no cached image found, try and load from local storage
+                if let localStorageImage = LocalStorage.loadImageFromDocuments(reletivePath: router.saveString, fileName: nil) {
+                    ImageCache.shared.cache.setObject(localStorageImage, forKey: saveString)
+                    ContentManager.saveContentMetadata(absolutePath: router.saveString)
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        completed(image: localStorageImage)
+                    })
+                }
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                completed(image: nil)
+            })
+        })
+    }
+    
+    /**
+    Attempts to load an image from cache and then local store, if no image is found then it will attempt to download it.
+    
+    :param: urlString The url string of the image.
+    :param: size      The max rect the image should be.
+    :param: progress  A closure of the progress of the download.
+    :param: completed A closure of the completion of the download.
+    */
+    public class func loadImage(urlString: String, size: CGSize? = nil, progress: ((percentComplete: CGFloat) -> ())?, completed: (image: UIImage?, error: NSError?) -> ()) {
         
-        let absoluteURL = LocalStorage.absoluteURL(directory: directory, reletivePath: reletivePath, fileName: fileName)
-        if let absolutePath = absoluteURL?.path {
-            
-            var image = cache.objectForKey(absolutePath) as? UIImage
-            
-            if image == nil {
-                
-                switch directory {
-                case .DocumentDirectory:
-                    image = LocalStorage.loadImageFromDocuments(reletivePath: reletivePath, fileName: fileName)
-                case .CachesDirectory:
-                    image = LocalStorage.loadImageFromCaches(reletivePath: reletivePath, fileName: fileName)
-                default:
-                    NSLog("Error: Directory \"\(directory)\" requested for loading \(fileName) is not supported!")
-                }
-                
-                if let anImage = image {
-                    cache.setObject(anImage, forKey: absolutePath)
-                }
+        // Check for local image and return if found.
+        loadLocalImage(urlString, size: size) { (image) -> () in
+            if let localImage = image {
+                completed(image: localImage, error: nil)
+                return
             }
-            
-            if let anImage = image {
-                ContentManager.saveContentMetadata(absolutePath: absolutePath)
-            }
-            
-            return image
-        } else {
-            NSLog("Error: Could not get path from absolute URL \(absoluteURL) when loading image!")
         }
         
-        return nil
-    }
-    
-    /**
-    Load an image from cache. If the image is not available in cache then it will be attempted to be loaded from the local store.
-    
-    :param: directory       The search path directory to use.
-    :param: reletivePath    The reletive path to of the file or directory.
-    :param: fileName        The name of the file (including the extension).
-    :param: complete        A closure that returns the image at the absolute path made from the passed in argments or `nil` if not found.
-    */
-    public func loadImage(#directory: NSSearchPathDirectory, reletivePath: String, fileName: String, complete: (UIImage?) -> ()) {
-        complete(loadImage(directory: directory, reletivePath: reletivePath, fileName: fileName))
-    }
-    
-    /**
-    Load a thumbnail image from cache. If the image is not available in cache then it will be attempted to be loaded from the local store.
-    This is a private method. Use the public class method from outside this class.
-    
-    :param: directory       The search path directory to use.
-    :param: reletivePath    The reletive path to of the file or directory.
-    :param: fileName        The name of the file (including the extension).
-    
-    :returns: The thumbnail image at the absolute path made from the passed in argments or `nil` if not found.
-    */
-    private func loadTumbnailImage(#directory: NSSearchPathDirectory, reletivePath: String, fileName: String, size: CGSize) -> UIImage? {
-        
-        let absoluteURL = LocalStorage.absoluteURL(directory: directory, reletivePath: reletivePath, fileName: fileName)
-        if let absolutePath = absoluteURL?.path {
-            
-            var thumbnailImage = cache.objectForKey(absolutePath) as? UIImage
-            
-            if thumbnailImage == nil {
-                
-                var image = loadImage(directory: directory, reletivePath: reletivePath, fileName: fileName)
-                if let anImage = image {
-                    
-                    if CGSizeEqualToSize(size, CGSizeZero) == false {
-                        
-                        thumbnailImage = anImage.imageWithMaxSize(size)
-                        if let aThumbnailImage = thumbnailImage {
-                            cache.setObject(aThumbnailImage, forKey: absolutePath)
-                        }
-                        
-                    } else {
-                        thumbnailImage = anImage
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), { () -> Void in
+            // If no local image found then try and download.
+            let sharedImageCache = ImageCache.shared
+            let router = Router.ImageGET(urlString, size)
+            if sharedImageCache.imageRequestStore.containsRequestWithRouter(router) == false {
+                let request = FUSServiceClient.imageRequest(router, progress: progress, completed: { (image, error) -> () in
+                    sharedImageCache.imageRequestStore.removeRequestFor(router: router)
+                    if let anError = error {
+                        NSLog("Error downloading image at url: \(router.absoluteString) with error: \(anError)")
+                    } else if let downloadedImage = image {
+                        let saveString = router.saveString
+                        sharedImageCache.cache.setObject(downloadedImage, forKey: saveString)
+                        ContentManager.saveContentMetadata(absolutePath: saveString)
+                        LocalStorage.saveToDocuments(data: downloadedImage, reletivePath: saveString.stringByDeletingLastPathComponent, fileName: saveString.lastPathComponent)
                     }
-                }
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        completed(image: image, error: error)
+                    })
+                })
+                sharedImageCache.imageRequestStore.addRequest(request, router: router)
             }
-            
-            return thumbnailImage
-        } else {
-            NSLog("Error: Could not get path from absolute URL \(absoluteURL) when loading thumbnail!")
-        }
-        
-        return nil
+        })
     }
     
     /**
-    Load a thumbnail image from cache. If the image is not available in cache then it will be attempted to be loaded from the local store.
+    A placeholder image from placekitten.com represented by the integer passed in.
     
-    :param: directory       The search path directory to use.
-    :param: reletivePath    The reletive path to of the file or directory.
-    :param: fileName        The name of the file (including the extension).
-    :param: complete        A closure that returns the image at the absolute path made from the passed in argments or `nil` if not found.
+    :param: size An integer representing the place kitten back.
+    
+    :returns: The url for a place kitten placeholder.
     */
-    public func loadTumbnailImage(#directory: NSSearchPathDirectory, reletivePath: String, fileName: String, size: CGSize, complete: (UIImage?) -> ()) {
-        complete(loadTumbnailImage(directory: directory, reletivePath: reletivePath, fileName: fileName, size: size))
+    public class func placeKittenURLString(size: Int) -> String {
+        let baseURL = String("http://placekitten.com")
+        return baseURL + "/\(size)"
+    }
+    
+    /**
+    A placegolder image from placekitten.com with a random number from 1000 to 2000
+    
+    :returns: The url for a place kitten placeholder.
+    */
+    public class func randomPlaceKittenURLString() -> String {
+        return placeKittenURLString(Int(arc4random_uniform(2000)+1000))
     }
     
     /**

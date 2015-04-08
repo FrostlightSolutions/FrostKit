@@ -271,7 +271,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
             
             if let sectionDictionary = self.sectionDictionary {
                 let urlString = sectionDictionary["url"] as String
-                let saveString = Router.Custom(urlString, nil, self.updateParameters).saveString
+                let saveString = Router.CustomGET(urlString, nil, self.updateParameters).saveString
                 if let localDataStore = UserStore.current.dataStoreForURL(saveString) {
                     coreDataStore = localDataStore
                     coreDataStore?.delegate = self
@@ -345,7 +345,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
             if let sectionDictionary = self.sectionDictionary {
                 let urlString = sectionDictionary["url"] as String
                 let page = self.lastRequestedPage
-                let urlRouter = Router.Custom(urlString, page, self.updateParameters)
+                let urlRouter = Router.CustomGET(urlString, page, self.updateParameters)
                 if self.requestStore.containsRequestWithRouter(urlRouter) == false {
                     let request = FUSServiceClient.request(urlRouter, completed: { (json, error) -> () in
                         self.requestStore.removeRequestFor(router: urlRouter)
