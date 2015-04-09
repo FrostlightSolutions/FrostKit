@@ -91,7 +91,7 @@ public class RequestStore: NSObject {
     :returns: If a matching request is found then `true` is returned, otherwise `false` is returned.
     */
     func containsRequestWithRouter(router: Router) -> Bool {
-        return containsRequestWithURL(router.URLRequest.URL.absoluteString!)
+        return containsRequestWithURL(router.URLRequest.URL!.absoluteString!)
     }
     
     /**

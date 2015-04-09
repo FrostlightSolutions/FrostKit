@@ -68,7 +68,7 @@ extension NSDate {
         
         let calendar = NSCalendar.gregorianCalendar()
         let components = calendar.components(NSCalendarUnit.CalendarUnitWeekday, fromDate: self)
-        let range = calendar.maximumRangeOfUnit(NSCalendarUnit.WeekdayCalendarUnit)
+        let range = calendar.maximumRangeOfUnit(NSCalendarUnit.CalendarUnitWeekday)
         if components.weekday == range.location || components.weekday == range.length {
             return false
         } else {
@@ -117,7 +117,7 @@ extension NSDate {
         
         let calendar = NSCalendar.gregorianCalendar()
         let components = calendar.components(NSCalendarUnit.CalendarUnitDay, fromDate: self)
-        let range = calendar.rangeOfUnit(NSCalendarUnit.DayCalendarUnit, inUnit: NSCalendarUnit.MonthCalendarUnit, forDate: self)
+        let range = calendar.rangeOfUnit(NSCalendarUnit.CalendarUnitDay, inUnit: NSCalendarUnit.CalendarUnitMonth, forDate: self)
         if components.day == range.length {
             return true
         } else {
@@ -191,10 +191,10 @@ extension NSDate {
         var duration: NSTimeInterval = 0
         
         let calendar = NSCalendar.gregorianCalendar()
-        calendar.rangeOfUnit(NSCalendarUnit.DayCalendarUnit, startDate: &dateFrom, interval: &duration, forDate: toDate)
-        calendar.rangeOfUnit(NSCalendarUnit.DayCalendarUnit, startDate: &dateTo, interval: &duration, forDate: fromDate)
+        calendar.rangeOfUnit(NSCalendarUnit.CalendarUnitDay, startDate: &dateFrom, interval: &duration, forDate: toDate)
+        calendar.rangeOfUnit(NSCalendarUnit.CalendarUnitDay, startDate: &dateTo, interval: &duration, forDate: fromDate)
         
-        let components = calendar.components(NSCalendarUnit.DayCalendarUnit, fromDate: dateFrom!, toDate: dateTo!, options: NSCalendarOptions.WrapComponents)
+        let components = calendar.components(NSCalendarUnit.CalendarUnitDay, fromDate: dateFrom!, toDate: dateTo!, options: NSCalendarOptions.WrapComponents)
         return components.day
     }
     
@@ -224,7 +224,7 @@ extension NSDate {
     public func daysInMonth() -> Int {
         
         let calendar = NSCalendar.gregorianCalendar()
-        let range = calendar.rangeOfUnit(NSCalendarUnit.DayCalendarUnit, inUnit: NSCalendarUnit.MonthCalendarUnit, forDate: self)
+        let range = calendar.rangeOfUnit(NSCalendarUnit.CalendarUnitDay, inUnit: NSCalendarUnit.CalendarUnitMonth, forDate: self)
         return range.length
     }
     

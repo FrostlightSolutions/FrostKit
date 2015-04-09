@@ -20,7 +20,7 @@ extension UIColor {
     
     :returns: A color object from the hex string.
     */
-    public convenience init(hexString: String, alpha: CGFloat = 1) {
+    public convenience init?(hexString: String, alpha: CGFloat = 1) {
         let color = UIColor.colorWithHex(hexString, alpha: alpha)
         self.init(CGColor: color.CGColor)
     }

@@ -266,7 +266,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     */
     public func setObjects(newObjects: NSArray, page: Int, totalCount: Int? = nil) -> Bool {
         var hasChanged = false
-        let objects = self.objects.mutableCopy() as NSMutableDictionary
+        let objects = self.objects.mutableCopy() as! NSMutableDictionary
         // Update the total count
         if let newTotalCount = totalCount {
             if count != newTotalCount {
@@ -279,7 +279,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
         objects[page] = newObjects
         
         // If current instance of object is not equal to the stores, then update
-        if self.objects.isEqualToDictionary(objects) == false {
+        if self.objects.isEqualToDictionary(objects as [NSObject : AnyObject]) == false {
             var wasEmpty = false
             if self.objects.count < 1 {
                 wasEmpty = true
@@ -467,7 +467,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
             if let pageObjects = value as? NSArray {
                 index = pageObjects.indexOfObject(anObject)
                 if index != NSNotFound {
-                    foundOnPage = page as Int
+                    foundOnPage = page as! Int
                     break
                 }
             }
@@ -539,11 +539,10 @@ public class DataStore: NSObject, NSCoding, NSCopying {
         for (page, pageArray) in objects {
             if let array = pageArray as? NSArray {
                 if array.count > 0 {
-                    if let filter = NSPredicate(format: "%K == %@", key, value) {
-                        let filteredArray = array.filteredArrayUsingPredicate(filter)
-                        object = filteredArray.first
-                        break
-                    }
+                    let filter = NSPredicate(format: "%K == %@", key, value)
+                    let filteredArray = array.filteredArrayUsingPredicate(filter)
+                    object = filteredArray.first
+                    break
                 }
             }
         }

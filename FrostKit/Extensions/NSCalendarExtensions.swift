@@ -19,7 +19,7 @@ extension NSCalendar {
     :returns: A gregorian calendar object.
     */
     public class func gregorianCalendar() -> NSCalendar {
-        return NSCalendar(calendarIdentifier: NSGregorianCalendar)!
+        return NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
     }
     
 }
