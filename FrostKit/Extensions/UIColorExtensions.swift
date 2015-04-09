@@ -20,7 +20,7 @@ extension UIColor {
     
     :returns: A color object from the hex string.
     */
-    public convenience init(hexString: String, alpha: CGFloat = 1) {
+    public convenience init?(hexString: String, alpha: CGFloat = 1) {
         let color = UIColor.colorWithHex(hexString, alpha: alpha)
         self.init(CGColor: color.CGColor)
     }
@@ -44,7 +44,7 @@ extension UIColor {
         scanner.scanLocation = scanLocation
         scanner.scanHexInt(&rgbValue)
         
-        switch countElements(hexString) - scanLocation {
+        switch count(hexString) - scanLocation {
         case 3:
             // Normalize
             rgbValue = (rgbValue << 8) & 0x0F0000 | (rgbValue << 4) & 0x000F00 | rgbValue & 0x00000F

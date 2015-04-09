@@ -232,7 +232,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     
     :param: viewController The view controller to set.
     */
-    public func setViewController(viewController: UIViewController) {
+    public func setUpdaterViewController(viewController: UIViewController) {
         self.viewController = viewController
         if viewController.respondsToSelector("updateSection") == true {
             NSNotificationCenter.defaultCenter().addObserver(viewController, selector: "updateSection", name: FUSServiceClientUpdateSections, object: nil)
@@ -245,7 +245,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     
     :param: tableView The table view to set.
     */
-    public func setTableView(tableView: UITableView) {
+    public func setUpdaterTableView(tableView: UITableView) {
         self.tableView = tableView
         setupTableView()
     }
@@ -255,7 +255,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     
     :param: tableView The collection view to set.
     */
-    public func setCollectionView(collectionView: UICollectionView) {
+    public func setUpdaterCollectionView(collectionView: UICollectionView) {
         self.collectionView = collectionView
         setupCollectionView()
     }
@@ -266,11 +266,11 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     :param: sectionDictionary The section dictionary returned from FUS.
     */
     public func setSectionDictionary(sectionDictionary: NSDictionary, updateData: Bool = true) {
-        if self.sectionDictionary == nil || self.sectionDictionary?.isEqualToDictionary(sectionDictionary) == false {
+        if self.sectionDictionary == nil || self.sectionDictionary?.isEqualToDictionary(sectionDictionary as [NSObject : AnyObject]) == false {
             self.sectionDictionary = sectionDictionary
             
             if let sectionDictionary = self.sectionDictionary {
-                let urlString = sectionDictionary["url"] as String
+                let urlString = sectionDictionary["url"] as! String
                 let saveString = Router.CustomGET(urlString, nil, self.updateParameters).saveString
                 if let localDataStore = UserStore.current.dataStoreForURL(saveString) {
                     coreDataStore = localDataStore
@@ -343,7 +343,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
             if let sectionDictionary = self.sectionDictionary {
-                let urlString = sectionDictionary["url"] as String
+                let urlString = sectionDictionary["url"] as! String
                 let page = self.lastRequestedPage
                 let urlRouter = Router.CustomGET(urlString, page, self.updateParameters)
                 if self.requestStore.containsRequestWithRouter(urlRouter) == false {
@@ -392,14 +392,12 @@ public class DataUpdater: NSObject, DataStoreDelegate {
             var shouldUpdate = false
             if let dataStore = self.dataStore {
                 shouldUpdate = dataStore.setFrom(object: json, page: router.page)
+            } else if router.page == nil || router.page! == 1 {
+                self.dataStore = DataStore(object: json)
+                self.dataStore?.delegate = self
+                shouldUpdate = true
             } else {
-                if router.page == nil || router.page! == 1 {
-                    self.dataStore = DataStore(object: json)
-                    self.dataStore?.delegate = self
-                    shouldUpdate = true
-                } else {
-                    NSLog("Can't create a data store for a non-page 1 object!")
-                }
+                NSLog("Can't create a data store for a non-page 1 object!")
             }
             
             // Only save if should update and it's not a search

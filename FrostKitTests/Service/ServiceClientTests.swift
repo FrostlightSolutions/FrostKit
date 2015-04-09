@@ -104,13 +104,13 @@ class ServiceClientTests: XCTestCase {
     }
     
     func refresh(complete: (NSError?) -> ()) {
-        FUSServiceClient.refreshOAuthToken() { (error) -> () in
+        FUSServiceClient.refreshOAuthToken(force: true, completed: { (error) -> () in
             complete(error)
-        }
+        })
     }
     
     func getNotificationsRequest(complete: (NSError?) -> ()) {
-        FUSServiceClient.request(Router.Custom("/api/fus/push/notifications/", 1, nil), completed: { (json, error) -> () in
+        FUSServiceClient.request(Router.CustomGET("/api/fus/push/notifications/", 1, nil), completed: { (json, error) -> () in
             complete(error)
         })
     }

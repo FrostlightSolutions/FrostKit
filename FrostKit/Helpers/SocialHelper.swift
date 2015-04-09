@@ -119,8 +119,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             parsedNumber = "+".stringByAppendingString(parsedNumber)
         }
         
-        let urlString = NSString(format: "telprompt://%@", parsedNumber)
-        return NSURL(string: urlString)
+        return NSURL(string: "telprompt://\(parsedNumber)")
     }
     
     /**

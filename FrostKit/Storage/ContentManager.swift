@@ -54,7 +54,7 @@ public class ContentManager: NSObject {
             
             for (key, object) in shared.contentMetadata {
                 
-                let refDate = object as NSDate
+                let refDate = object as! NSDate
                 let refTimeInterval = refDate.timeIntervalSinceReferenceDate
                 let timeInterval = NSDate().timeIntervalSinceReferenceDate
                 

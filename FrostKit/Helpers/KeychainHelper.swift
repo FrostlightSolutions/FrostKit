@@ -40,9 +40,8 @@ public class KeychainHelper: NSObject {
         let status = SecItemCopyMatching(secDict, &foundDict);
         
         if status == noErr {
-            let opaque = foundDict?.toOpaque()
-            if let op = opaque? {
-                return Unmanaged<NSData>.fromOpaque(op).takeUnretainedValue()
+            if let opaque = foundDict?.toOpaque() {
+                return Unmanaged<NSData>.fromOpaque(opaque).takeUnretainedValue()
             }
         } else {
             let error = NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)

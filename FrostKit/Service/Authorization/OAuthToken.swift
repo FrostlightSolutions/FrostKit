@@ -88,11 +88,11 @@ public class OAuthToken: NSObject, NSCoding, NSCopying {
     public required convenience init(coder aDecoder: NSCoder) {
         self.init()
         
-        accessToken = aDecoder.decodeObjectForKey("access_token") as String
-        refreshToken = aDecoder.decodeObjectForKey("refresh_token") as String
+        accessToken = aDecoder.decodeObjectForKey("access_token") as! String
+        refreshToken = aDecoder.decodeObjectForKey("refresh_token") as! String
         expiresAt = aDecoder.decodeDoubleForKey("expires_at")
-        tokenType = aDecoder.decodeObjectForKey("token_type") as String
-        scope = aDecoder.decodeObjectForKey("scope") as String
+        tokenType = aDecoder.decodeObjectForKey("token_type") as! String
+        scope = aDecoder.decodeObjectForKey("scope") as! String
     }
     
     public func encodeWithCoder(aCoder: NSCoder) {

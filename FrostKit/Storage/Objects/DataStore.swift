@@ -111,7 +111,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
         
         count = store.count
         _objectsPerPage = store._objectsPerPage
-        objects = store.objects.copy() as NSDictionary
+        objects = store.objects.copy() as! NSDictionary
     }
     
     /**
@@ -226,7 +226,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
             
             let haveEqualCounts = self.count == dataStore.count
             let haveEqualObjectsPerPage = self.objectsPerPage == dataStore.objectsPerPage
-            let haveEqualObjects = self.objects.isEqualToDictionary(dataStore.objects)
+            let haveEqualObjects = self.objects.isEqualToDictionary(dataStore.objects as [NSObject : AnyObject])
             
             return haveEqualCounts && haveEqualObjectsPerPage && haveEqualObjects
         }
@@ -266,7 +266,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     */
     public func setObjects(newObjects: NSArray, page: Int, totalCount: Int? = nil) -> Bool {
         var hasChanged = false
-        let objects = self.objects.mutableCopy() as NSMutableDictionary
+        let objects = self.objects.mutableCopy() as! NSMutableDictionary
         // Update the total count
         if let newTotalCount = totalCount {
             if count != newTotalCount {
@@ -279,7 +279,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
         objects[page] = newObjects
         
         // If current instance of object is not equal to the stores, then update
-        if self.objects.isEqualToDictionary(objects) == false {
+        if self.objects.isEqualToDictionary(objects as [NSObject : AnyObject]) == false {
             var wasEmpty = false
             if self.objects.count < 1 {
                 wasEmpty = true
@@ -318,10 +318,8 @@ public class DataStore: NSObject, NSCoding, NSCopying {
             objects = results
         }
         
-        if let perPage = json["per_page"] as? Int {
-            if objectsPerPage != perPage {
-                _objectsPerPage = perPage
-            }
+        if let perPage = json["per_page"] as? Int where objectsPerPage != perPage {
+            _objectsPerPage = perPage
         }
         
         return setObjects(objects, page: page, totalCount: totalCount)
@@ -336,7 +334,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     */
     public func setDictionary(dictionary: NSDictionary) -> Bool {
         var hasChanged = false
-        if objects.isEqualToDictionary(dictionary) {
+        if objects.isEqualToDictionary(dictionary as [NSObject : AnyObject]) {
             hasChanged = false
         } else {
             objects = dictionary
@@ -469,7 +467,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
             if let pageObjects = value as? NSArray {
                 index = pageObjects.indexOfObject(anObject)
                 if index != NSNotFound {
-                    foundOnPage = page as Int
+                    foundOnPage = page as! Int
                     break
                 }
             }
@@ -541,11 +539,10 @@ public class DataStore: NSObject, NSCoding, NSCopying {
         for (page, pageArray) in objects {
             if let array = pageArray as? NSArray {
                 if array.count > 0 {
-                    if let filter = NSPredicate(format: "%K == %@", key, value) {
-                        let filteredArray = array.filteredArrayUsingPredicate(filter)
-                        object = filteredArray.first
-                        break
-                    }
+                    let filter = NSPredicate(format: "%K == %@", key, value)
+                    let filteredArray = array.filteredArrayUsingPredicate(filter)
+                    object = filteredArray.first
+                    break
                 }
             }
         }

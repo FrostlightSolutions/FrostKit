@@ -95,9 +95,7 @@ public class BaseWebViewController: UIViewController {
     public override func viewWillDisappear(animated: Bool) {
         stopLoading()
         
-        if let navController = navigationController {
-            navController.setToolbarHidden(true, animated: true)
-        }
+        navigationController?.setToolbarHidden(true, animated: true)
     }
     
     public override func viewDidDisappear(animated: Bool) {
@@ -160,12 +158,12 @@ public class BaseWebViewController: UIViewController {
     :param: sender The bar button item pressed.
     */
     func actionButtonPressed(sender: AnyObject?) {
-        var urlString = ""
+        var activityItems = Array<AnyObject>()
         if let url = URL?.absoluteString {
-            urlString = url
+            activityItems.append(url)
         }
         
-        let activityViewController = UIActivityViewController(activityItems: [urlString], applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
         activityViewController.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeAirDrop]
         presentViewController(activityViewController, animated: true, completion: nil)
     }

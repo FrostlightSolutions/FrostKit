@@ -32,34 +32,34 @@ class ImageCacheTests: XCTestCase {
         super.tearDown()
     }
 
-    func testLoadCachedImage() {
-        ImageCache.shared.loadImage(directory: .DocumentDirectory, reletivePath: "", fileName: "Logo.png") { (image) -> () in
-        }
-        
-        measureBlock { () -> Void in
-            ImageCache.shared.loadImage(directory: .DocumentDirectory, reletivePath: "", fileName: "Logo.png") { (image) -> () in
-                if let anImage = image {
-                    XCTAssert(true, "Success!")
-                } else {
-                    XCTAssert(false, "Failed! No image loaded from cache")
-                }
-            }
-        }
-    }
-    
-    func testLoadCachedThumbnailImage() {
-        ImageCache.shared.loadTumbnailImage(directory: .DocumentDirectory, reletivePath: "", fileName: "Logo.png", size: CGSize(width: 100, height: 100)) { (image) -> () in
-        }
-        
-        measureBlock { () -> Void in
-            ImageCache.shared.loadTumbnailImage(directory: .DocumentDirectory, reletivePath: "", fileName: "Logo.png", size: CGSize(width: 100, height: 100)) { (image) -> () in
-                if let anImage = image {
-                    XCTAssert(true, "Success!")
-                } else {
-                    XCTAssert(false, "Failed! No thumbnail image loaded from cache")
-                }
-            }
-        }
-    }
+//    func testLoadCachedImage() {
+//        ImageCache.shared.loadImage(directory: .DocumentDirectory, reletivePath: "", fileName: "Logo.png") { (image) -> () in
+//        }
+//        
+//        measureBlock { () -> Void in
+//            ImageCache.shared.loadImage(directory: .DocumentDirectory, reletivePath: "", fileName: "Logo.png") { (image) -> () in
+//                if let anImage = image {
+//                    XCTAssert(true, "Success!")
+//                } else {
+//                    XCTAssert(false, "Failed! No image loaded from cache")
+//                }
+//            }
+//        }
+//    }
+//    
+//    func testLoadCachedThumbnailImage() {
+//        ImageCache.shared.loadTumbnailImage(directory: .DocumentDirectory, reletivePath: "", fileName: "Logo.png", size: CGSize(width: 100, height: 100)) { (image) -> () in
+//        }
+//        
+//        measureBlock { () -> Void in
+//            ImageCache.shared.loadTumbnailImage(directory: .DocumentDirectory, reletivePath: "", fileName: "Logo.png", size: CGSize(width: 100, height: 100)) { (image) -> () in
+//                if let anImage = image {
+//                    XCTAssert(true, "Success!")
+//                } else {
+//                    XCTAssert(false, "Failed! No thumbnail image loaded from cache")
+//                }
+//            }
+//        }
+//    }
 
 }

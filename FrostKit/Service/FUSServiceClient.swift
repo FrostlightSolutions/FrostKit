@@ -143,9 +143,9 @@ public enum Router: URLRequestConvertible {
             
             if let someParameters = parameters {
                 let keysArray = (someParameters as NSDictionary).allKeys as NSArray
-                let sortedKeys = keysArray.sortedArrayUsingSelector("compare:") as [String]
+                let sortedKeys = keysArray.sortedArrayUsingSelector("compare:") as! [String]
                 for key in sortedKeys {
-                    saveString = saveString.stringByAppendingPathComponent(someParameters[key] as String)
+                    saveString = saveString.stringByAppendingPathComponent(someParameters[key] as! String)
                 }
             }
             return saveString
@@ -292,21 +292,19 @@ public class FUSServiceClient: NSObject {
     :param: completed Is called on completion of the request and returns an error if the process failed, otherwise it retuens `nil`.
     :param: force       Forces the OAuth token to refresh even if it hasn't expired.
     */
-    public class func refreshOAuthToken(completed: (error: NSError?) -> (), force: Bool = false) {
+    public class func refreshOAuthToken(force: Bool = false, completed: (error: NSError?) -> ()) {
         
         if let oAuthToken = UserStore.current.oAuthToken {
             
-            if force == false {
-                if oAuthToken.expired == false {
-                    FUSServiceClient.updateSections { (error) -> () in
-                        if let anError = error {
-                            completed(error: anError)
-                        } else {
-                            completed(error: nil)
-                        }
+            if force == false && oAuthToken.expired == false {
+                FUSServiceClient.updateSections { (error) -> () in
+                    if let anError = error {
+                        completed(error: anError)
+                    } else {
+                        completed(error: nil)
                     }
-                    return
                 }
+                return
             }
             
             let requestDate = NSDate()
@@ -424,10 +422,8 @@ public class FUSServiceClient: NSObject {
     :returns: Returns `true` if it is a path string or `false` if not.
     */
     public class func isItemSection(item: AnyObject) -> Bool {
-        if let path = item as? String {
-            if path.hasPrefix("http://") || path.hasPrefix("https://") {
-                return true
-            }
+        if let path = item as? String where path.hasPrefix("http://") || path.hasPrefix("https://") {
+            return true
         }
         return false
     }

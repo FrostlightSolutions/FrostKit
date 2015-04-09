@@ -88,10 +88,8 @@ public class DeveloperTools: NSObject {
     }
     
     func unregisterViewController(viewController: UIViewController) {
-        if let index = find(viewControllers, viewController) {
-            if let currentGestureRecogniser = self.currentGestureRecogniser {
-                viewController.view.removeGestureRecognizer(currentGestureRecogniser)
-            }
+        if let index = find(viewControllers, viewController), let currentGestureRecogniser = self.currentGestureRecogniser {
+            viewController.view.removeGestureRecognizer(currentGestureRecogniser)
             viewControllers.removeAtIndex(index)
             NSLog("Unregisteed \(viewController) for Developer Tools")
         }
@@ -177,7 +175,7 @@ public class DeveloperTools: NSObject {
         
         // Present Tools
         if let viewController = currentViewController {
-            let developerToolsVC = storyboard.instantiateInitialViewController() as UIViewController
+            let developerToolsVC = storyboard.instantiateInitialViewController() as! UIViewController
             if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
                 developerToolsVC.modalPresentationStyle = .PageSheet
             }

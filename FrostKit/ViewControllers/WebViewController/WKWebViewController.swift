@@ -16,42 +16,34 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     /// The URL of the current page.
     override var URL: NSURL? {
-        get {
-            if let webView = self.webView as? WKWebView {
-                return webView.URL
-            }
-            return nil
+        if let webView = self.webView as? WKWebView {
+            return webView.URL
         }
+        return nil
     }
     /// The title to show in the navigation bar if something other than the loaded page's title is required.
     override var titleOverride: String? {
         didSet {
             if titleOverride != nil {
                 navigationItem.title = titleOverride
-            } else {
-                if let webView = self.webView as? WKWebView {
-                    navigationItem.title = webView.title
-                }
+            } else if let webView = self.webView as? WKWebView {
+                navigationItem.title = webView.title
             }
         }
     }
     /// Returns `true` if the web view is currently loading, `false` if not.
     override var loading: Bool {
-        get {
-            if let webView = self.webView as? WKWebView {
-                return webView.loading
-            }
-            return false
+        if let webView = self.webView as? WKWebView {
+            return webView.loading
         }
+        return false
     }
     
     /**
     Stops the web view from being loaded any more.
     */
     override func stopLoading() {
-        if let webView = self.webView as? WKWebView {
-            return webView.stopLoading()
-        }
+        (self.webView as? WKWebView)?.stopLoading()
     }
     
     override func viewDidLoad() {
@@ -90,10 +82,8 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
             updateProgrssViewVisability()
             updateActivityViewVisability()
         case "title":
-            if titleOverride == nil {
-                if let webView = self.webView as? WKWebView {
-                    navigationItem.title = webView.title
-                }
+            if let webView = self.webView as? WKWebView where titleOverride == nil {
+                navigationItem.title = webView.title
             }
         case "canGoBack":
             updateBackButton()
@@ -159,7 +149,7 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     // MARK: - WKNavigationDelegate Methods
     
-    func webView(webView: WKWebView!, decidePolicyForNavigationAction navigationAction: WKNavigationAction!, decisionHandler: ((WKNavigationActionPolicy) -> Void)!) {
+    func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: ((WKNavigationActionPolicy) -> Void)) {
         
         // Alows links in the WKWebView to be tappable
         decisionHandler(.Allow)

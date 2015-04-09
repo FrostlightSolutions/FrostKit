@@ -19,7 +19,7 @@ extension NSBundle {
     :returns: The bundle version of the app.
     */
     public class func appVersion(bundle: NSBundle = NSBundle.mainBundle()) -> String {
-        return bundle.objectForInfoDictionaryKey("CFBundleVersion") as String
+        return bundle.objectForInfoDictionaryKey("CFBundleVersion") as! String
     }
     
     /**
@@ -28,7 +28,7 @@ extension NSBundle {
     :returns: The version of the app.
     */
     public class func appName(bundle: NSBundle = NSBundle.mainBundle()) -> String {
-        return bundle.objectForInfoDictionaryKey("CFBundleName") as String
+        return bundle.objectForInfoDictionaryKey("CFBundleName") as! String
     }
     
 }
