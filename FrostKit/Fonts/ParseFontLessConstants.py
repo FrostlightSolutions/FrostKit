@@ -41,7 +41,7 @@ def parseFontConsatnts(inputPath, outputPath):
       line = line.replace(';', '')
 
       components = line.split(':')
-      swiftLine = '\tstatic let ' + components[0] +' = \"\\u{' + components[1] + '}\"\n'
+      swiftLine = '\tpublic static let ' + components[0] +' = \"\\u{' + components[1] + '}\"\n'
       
       contents += swiftLine
 
@@ -63,6 +63,8 @@ def parseFonts(fonts):
   
   for font in fonts:
     contents += parseFontConsatnts(font, outputPath)
+  
+  contents += "\n"
 
   writeObject = open(outputPath, 'wb')
   writeObject.write(contents)
