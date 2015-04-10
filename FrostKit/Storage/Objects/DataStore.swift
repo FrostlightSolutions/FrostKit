@@ -71,9 +71,18 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     /// The objects in the store as a dictionary of paged objects.
     private var objects = NSDictionary()
     /// An array of page numbers sorted numerically. This might not return all pages if a page was skipped.
-    private var sortedPages: NSArray {
+    private var sortedPages: [Int] {
         let keysArray = objects.allKeys as NSArray
-        return keysArray.sortedArrayUsingSelector("compare:")
+        return keysArray.sortedArrayUsingSelector("compare:") as! [Int]
+    }
+    /// Returns an array of all the pages loaded
+    private var combinedPages: NSArray {
+        var combinedPageObjects = NSMutableArray()
+        for page in sortedPages {
+            let page = objects[page] as! [AnyObject]
+            combinedPageObjects.addObjectsFromArray(page)
+        }
+        return combinedPageObjects
     }
     /// The first object in the store.
     public var firstObject: AnyObject? {
@@ -527,19 +536,28 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     }
     
     /**
-    Search the store for an object to contains the key-value passed in.
+    Search the store for an object to contains the keys and value passed in.
     
-    :param: key   A key to search for.
+    :param: keys   An array of keys to search for.
     :param: value A value to check the key-value against.
     
-    :returns: The object that contains the matching key-value.
+    :returns: The object that contains the matching keys and value passed in.
     */
-    public func searchForObjectWith(#key: String, value: NSObject) -> AnyObject? {
+    public func searchForObjectWith(#keys: [String], value: NSObject) -> AnyObject? {
         var object: AnyObject?
         for (page, pageArray) in objects {
             if let array = pageArray as? NSArray {
                 if array.count > 0 {
-                    let filter = NSPredicate(format: "%K == %@", key, value)
+                    var formatArray = NSMutableArray()
+                    var argumentArray = Array<AnyObject>()
+                    for key in keys {
+                        formatArray.addObject("(%K == %@)")
+                        argumentArray.append(key)
+                        argumentArray.append(value)
+                    }
+                    let format = formatArray.componentsJoinedByString(" || ")
+                    
+                    let filter = NSPredicate(format: format, argumentArray: argumentArray)
                     let filteredArray = array.filteredArrayUsingPredicate(filter)
                     object = filteredArray.first
                     break
@@ -547,6 +565,33 @@ public class DataStore: NSObject, NSCoding, NSCopying {
             }
         }
         return object
+    }
+    
+    /**
+    Search the store for objects conforming with the keys and value passed in.
+    
+    :param: keys   An array of keys to search for.
+    :param: value A value to check the key-value against.
+    
+    :returns: The objects that contains the matching keys and value passed in.
+    */
+    public func searchForObjectsWith(#keys: [String], value: NSObject) -> [AnyObject] {
+        let objects = combinedPages
+        if objects.count > 0 {
+            var formatArray = NSMutableArray()
+            var argumentArray = Array<AnyObject>()
+            for key in keys {
+                formatArray.addObject("(%K == %@)")
+                argumentArray.append(key)
+                argumentArray.append(value)
+            }
+            let format = formatArray.componentsJoinedByString(" || ")
+            
+            let filter = NSPredicate(format: format, argumentArray: argumentArray)
+            let filteredArray = objects.filteredArrayUsingPredicate(filter)
+            return filteredArray
+        }
+        return Array<AnyObject>()
     }
     
 }
