@@ -85,26 +85,18 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     private var lastRequestedPage: Int = 1
     /// An array of loaded pages.
     private var loadingPages = NSMutableSet()
+    /// Allows a search of to be performed with just filer parameters in `searchUpdateParameters` without any text in `searchString`.
+    public var allowFilterSearchWithoutSearchString = false
     /// A string to search the current API call with, if `nil` then no search is performed
     public var searchString: String? {
-        didSet {
-            if let searchString = self.searchString {
-                updateParameters["search"] = searchString
-                for (key, value) in searchUpdateParameters {
-                    updateParameters[key] = value
-                }
-            } else {
-                updateParameters.removeValueForKey("search")
-                for (key, _) in searchUpdateParameters {
-                    updateParameters.removeValueForKey(key)
-                }
-                searchDataStore = nil
-            }
-            lastRequestedPage = 1
-        }
+        didSet { updateSearchParameters() }
     }
+    /// The keys to search for when performing a local search
+    public var searchKeys = Array<String>()
     /// Extra paramiters to pass to the updater when searching.
-    public var searchUpdateParameters = Dictionary<String, AnyObject>()
+    public var searchUpdateParameters = Dictionary<String, AnyObject>() {
+        didSet { updateSearchParameters() }
+    }
     /// Saved the UserStore object on data change. This is set to `true` by default.
     @IBInspectable var saveUserStroeOnDataChange: Bool = true
     
@@ -327,6 +319,29 @@ public class DataUpdater: NSObject, DataStoreDelegate {
         lastRequestedPage = 1
         loadingPages.removeAllObjects()
         updateData()
+    }
+    
+    private func updateSearchParameters() {
+        var performSearch = false
+        if allowFilterSearchWithoutSearchString == true || searchString != nil {
+            performSearch = true
+        }
+        
+        if performSearch == true {
+            if let searchString = self.searchString where searchString != "" {
+                updateParameters["search"] = searchString
+            }
+            for (key, value) in searchUpdateParameters {
+                updateParameters[key] = value
+            }
+        } else {
+            updateParameters.removeValueForKey("search")
+            for (key, _) in searchUpdateParameters {
+                updateParameters.removeValueForKey(key)
+            }
+            searchDataStore = nil
+        }
+        lastRequestedPage = 1
     }
     
     /**
