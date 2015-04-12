@@ -342,6 +342,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
             searchDataStore = nil
         }
         lastRequestedPage = 1
+        reloadData()
     }
     
     /**
