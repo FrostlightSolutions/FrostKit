@@ -194,6 +194,10 @@ public enum Router: URLRequestConvertible {
         mutableURLRequest.HTTPMethod = method.rawValue
         mutableURLRequest.cachePolicy = .ReloadIgnoringLocalCacheData
         
+        if let langCode = NSLocale.preferredLanguages().first as? String {
+            mutableURLRequest.setValue(langCode, forHTTPHeaderField: "Accept-Language")
+        }
+        
         switch self {
         case .Token, .ImageGET:
             break
