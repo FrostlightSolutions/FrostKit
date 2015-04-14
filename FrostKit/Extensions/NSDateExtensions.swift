@@ -37,8 +37,13 @@ extension NSDate {
     :returns: The NSDate created from the passed in string or `nil` if it could not be created.
     */
     public class func fusDate(fusDateString: String) -> NSDate? {
+        var format = "yyyy'-'MM'-'dd"
+        if count(fusDateString) > 10 {
+            format += "'T'HH':'mm':'ss'.'SSSSSS'Z'"
+        }
+        
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSSSSS'Z'"
+        dateFormatter.dateFormat = format
         dateFormatter.timeZone = NSTimeZone.utc()
         dateFormatter.locale = NSLocale.systemLocale()
         return dateFormatter.dateFromString(fusDateString)
