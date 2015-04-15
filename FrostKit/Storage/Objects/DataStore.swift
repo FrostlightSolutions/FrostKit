@@ -100,7 +100,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     }
     /// Returns a dictionary object if it is the first item in the array. This is used as a convenience method for getting a single dictionary object in the store.
     public var dictionary: NSDictionary? {
-        return objects
+        return objects["1"] as? NSDictionary
     }
     /// A string that represents the contents of the stores array, formatted as a property list.
     override public var description: String {
