@@ -247,6 +247,17 @@ public enum Router: URLRequestConvertible {
 ///
 public class FUSServiceClient: NSObject {
     
+    // MARK: - URL Methods
+    
+    public class func imageResizeURLFromURLString(urlString: String, size: CGSize) -> NSURL? {
+        
+        let sizeString = "\(Int(size.width))x\(Int(size.height))"
+        var path = "resize?resize=" + sizeString + "&source=" + urlString
+        
+        let imageURL = NSURL(string: Router.baseURLString)
+        return NSURL(string: path, relativeToURL: imageURL)
+    }
+    
     // MARK: - Static Methods
     
     /**
