@@ -257,7 +257,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     
     :param: sectionDictionary The section dictionary returned from FUS.
     */
-    public func setSectionDictionary(sectionDictionary: NSDictionary, updateData: Bool = true) {
+    public func setSectionDictionary(sectionDictionary: NSDictionary, updateData: Bool = false) {
         if self.sectionDictionary == nil || self.sectionDictionary?.isEqualToDictionary(sectionDictionary as [NSObject : AnyObject]) == false {
             self.sectionDictionary = sectionDictionary
             
