@@ -298,7 +298,9 @@ public class DataStore: NSObject, NSCoding, NSCopying {
             hasChanged = true
             
             if wasEmpty == true && objects.count > 0 {
-                delegate?.dataStoreInitialLoad?(self)
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.delegate?.dataStoreInitialLoad?(self)
+                })
             }
         }
         
@@ -403,7 +405,9 @@ public class DataStore: NSObject, NSCoding, NSCopying {
         let page = pageForIndex(index)
         if page != lastAccessedPage {
             lastAccessedPage = page
-            delegate?.dataStore?(self, willAccessPage: page)
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.delegate?.dataStore?(self, willAccessPage: page)
+            })
         }
         
         var object: AnyObject?
@@ -415,7 +419,9 @@ public class DataStore: NSObject, NSCoding, NSCopying {
         }
         
         if object != nil {
-            delegate?.dataStore?(self, willAccessIndex: index, returnObject: object!)
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.delegate?.dataStore?(self, willAccessIndex: index, returnObject: object!)
+            })
         }
         
         return object

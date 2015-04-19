@@ -369,9 +369,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
                         if let anError = error {
                             NSLog("Data Updater Failure for page \(page): \(anError.localizedDescription)")
                         } else {
-                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                                self.updatedData()
-                            })
+                            self.updatedData()
                             
                             if let object: AnyObject = json {
                                 self.loadJSON(object, router: urlRouter)
@@ -392,7 +390,9 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     Calls the hasUpdatedDataStore delegate call.
     */
     private func updatedData() {
-        delegate?.dataUpdater?(self, hasUpdatedDataStore: dataStore)
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            delegate?.dataUpdater?(self, hasUpdatedDataStore: dataStore)
+        })
     }
     
     /**
@@ -429,14 +429,9 @@ public class DataUpdater: NSObject, DataStoreDelegate {
                         }
                     }
                 }
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.reloadData()
-                })
+                self.reloadData()
             }
-            
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.loadedData()
-            })
+            self.loadedData()
         })
     }
     
@@ -444,22 +439,26 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     Calls the hasLoadedDataStore delegate call.
     */
     private func loadedData() {
-        if let dataStore = self.dataStore {
-            updateTableFooter(count: dataStore.count)
-        }
-        
-        delegate?.dataUpdater?(self, hasLoadedDataStore: dataStore)
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            if let dataStore = self.dataStore {
+                self.updateTableFooter(count: dataStore.count)
+            }
+            
+            self.delegate?.dataUpdater?(self, hasLoadedDataStore: self.dataStore)
+        })
     }
     
     /**
     Calls the reloadData function is the releated table view or collection view.
     */
     public func reloadData() {
-        if let tableView = self.tableView {
-            tableView.reloadData()
-        } else if let collectionView = self.collectionView {
-            collectionView.reloadData()
-        }
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            if let tableView = self.tableView {
+                tableView.reloadData()
+            } else if let collectionView = self.collectionView {
+                collectionView.reloadData()
+            }
+        })
     }
     
     /**
