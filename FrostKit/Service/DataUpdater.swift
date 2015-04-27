@@ -95,7 +95,15 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     public var searchKeys = Array<String>()
     /// Extra paramiters to pass to the updater when searching.
     public var searchUpdateParameters = Dictionary<String, AnyObject>() {
-        didSet { updateSearchParameters() }
+        didSet {
+            var removedKeys = Array<String>()
+            for key in oldValue.keys {
+                if find(searchUpdateParameters.keys, key) == nil {
+                    removedKeys.append(key)
+                }
+            }
+            updateSearchParameters(removedKeys: removedKeys)
+        }
     }
     /// Saved the UserStore object on data change. This is set to `true` by default.
     @IBInspectable var saveUserStroeOnDataChange: Bool = true
@@ -321,7 +329,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
         updateData()
     }
     
-    private func updateSearchParameters() {
+    private func updateSearchParameters(removedKeys: [String]? = nil) {
         var performSearch = false
         if allowFilterSearchWithoutSearchString == true || searchString != nil {
             performSearch = true
@@ -341,6 +349,14 @@ public class DataUpdater: NSObject, DataStoreDelegate {
             }
             searchDataStore = nil
         }
+        
+        // Remove any left removed keys
+        if let keys = removedKeys {
+            for key in keys {
+                updateParameters.removeValueForKey(key)
+            }
+        }
+        
         lastRequestedPage = 1
         reloadData()
     }
