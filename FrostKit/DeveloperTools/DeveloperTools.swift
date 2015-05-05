@@ -49,7 +49,9 @@ public class DeveloperTools: NSObject {
         #endif
         
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        urlIndex = userDefaults.integerForKey("DeveloperToolsURLIndex")
+        if userDefaults.objectForKey("DeveloperToolsURLIndex") != nil {
+            urlIndex = userDefaults.integerForKey("DeveloperToolsURLIndex")
+        }
         if let customURL = NSUserDefaults.standardUserDefaults().objectForKey("DeveloperToolsCustomURL") as? String {
             baseURLs[baseURLs.count-1] = customURL
         }
