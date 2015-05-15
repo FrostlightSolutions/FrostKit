@@ -39,6 +39,9 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "ImageCacheTests">
+               </Test>
+               <Test
                   Identifier = "ServiceClientTests">
                </Test>
             </SkippedTests>
