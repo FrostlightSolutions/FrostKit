@@ -6,6 +6,8 @@
 //  Copyright (c) 2014-2015 James Barrow - Frostlight Solutions. All rights reserved.
 //
 
+#if Alamofire
+
 import UIKit
 
 ///
@@ -146,6 +148,6 @@ public class ImageCache: NSObject {
         return placeKittenURLString(Int(arc4random_uniform(2000)+1000))
     }
     
-    
-    
 }
+
+#endif

@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Frostlight Solutions. All rights reserved.
 //
 
+#if Alamofire
+
 import UIKit
 import Alamofire
 
@@ -496,3 +498,5 @@ extension Alamofire.Request {
         })
     }
 }
+
+#endif
