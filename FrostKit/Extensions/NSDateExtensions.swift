@@ -389,6 +389,24 @@ extension NSDate {
     }
     
     /**
+    A helpter method for getting a formatted string of the date in the FUS set format.
+    
+    :returns: A string formatted for a date in FUS. `yyyy'-'MM'-'dd`
+    */
+    public func fusDateString() -> String {
+        return dateStringFromFormat("yyyy'-'MM'-'dd")
+    }
+    
+    /**
+    A helpter method for getting a formatted string of the date and time in the FUS set format.
+    
+    :returns: A string formatted for a date with time in FUS. `yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSSSSS'Z'`
+    */
+    public func fusDateTimeString() -> String {
+        return dateStringFromFormat("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSSSSS'Z'")
+    }
+    
+    /**
     Takes the format of a date and returns a formatted string of the date.
     
     :param: format The format of the date string to return.
