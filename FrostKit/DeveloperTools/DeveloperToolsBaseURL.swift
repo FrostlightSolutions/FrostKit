@@ -95,7 +95,7 @@ class DeveloperToolsBaseURL: UITableViewController, UITextFieldDelegate {
     func textFieldDidBeginEditing(textField: UITextField) {
         
         var section = 0
-        if let currentIndexPath = tableView.indexPathForSelectedRow() {
+        if let currentIndexPath = tableView.indexPathForSelectedRow {
             section = currentIndexPath.section
             tableView.deselectRowAtIndexPath(currentIndexPath, animated: true)
             tableView(tableView, didDeselectRowAtIndexPath: currentIndexPath)

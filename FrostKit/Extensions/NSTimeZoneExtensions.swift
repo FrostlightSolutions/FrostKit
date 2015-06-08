@@ -16,7 +16,7 @@ extension NSTimeZone {
     /**
     A helper method to get the UTC time zone.
     
-    :returns: A UTC time zone object.
+    - returns: A UTC time zone object.
     */
     public class func utc() -> NSTimeZone {
         return NSTimeZone(name: "UTC")!

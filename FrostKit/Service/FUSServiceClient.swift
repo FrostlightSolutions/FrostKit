@@ -77,9 +77,9 @@ public enum Router: URLRequestConvertible {
     /**
     Returns the absolute URL for the `urlString` passed in. It checks for the prefix `http://` or `https://` and if found then it reutrns the `urlString` as an NSURL. If these prefixes aren't found then the `urlString` is assumed to be reletive and is appended to the end of the `baseURL`.
     
-    :param: urlString The urlString to turn into the absoluteURL.
+    - parameter urlString: The urlString to turn into the absoluteURL.
     
-    :returns: The absoluteURL created the the absolute or reletive `urlString` passed in.
+    - returns: The absoluteURL created the the absolute or reletive `urlString` passed in.
     */
     private func absoluteURLFromString(urlString: String) -> NSURL {
         if urlString.hasPrefix("http://") || urlString.hasPrefix("https://") {
@@ -129,9 +129,9 @@ public enum Router: URLRequestConvertible {
     var absoluteString: String {
         switch self {
         case .ImageGET(let urlString, _):
-            return absoluteURLFromString(urlString).absoluteString!
+            return absoluteURLFromString(urlString).absoluteString
         default:
-            return URL.absoluteString!
+            return URL.absoluteString
         }
     }
     
@@ -152,7 +152,7 @@ public enum Router: URLRequestConvertible {
         case .ImageGET(let urlString, let size):
             if let frameSize = size {
                 let sizeString = "\(Int(frameSize.width))x\(Int(frameSize.height))"
-                var saveString = path.stringByAppendingPathComponent(sizeString + "_" + urlString.lastPathComponent)
+                let saveString = path.stringByAppendingPathComponent(sizeString + "_" + urlString.lastPathComponent)
                 return saveString
             }
             return removeHTTPPrefix(absoluteString)
@@ -164,7 +164,7 @@ public enum Router: URLRequestConvertible {
     /// Returns the `absoluteString` without the `baseURL` if it is found in the `absoluteString`.
     var reletiveString: String {
         let absoluteString = self.absoluteString
-        return absoluteString.stringByReplacingOccurrencesOfString(absoluteString, withString: "", options: nil, range: nil)
+        return absoluteString.stringByReplacingOccurrencesOfString(absoluteString, withString: "", options: [], range: nil)
     }
     
     /// The page number of the request if passed in. Only available with `.CustonGET`.
@@ -252,7 +252,7 @@ public class FUSServiceClient: NSObject {
     public class func imageResizeURLFromURLString(urlString: String, size: CGSize) -> NSURL? {
         
         let sizeString = "\(Int(size.width))x\(Int(size.height))"
-        var path = "resize?resize=" + sizeString + "&source=" + urlString
+        let path = "resize?resize=" + sizeString + "&source=" + urlString
         
         let imageURL = NSURL(string: Router.baseURLString)
         return NSURL(string: path, relativeToURL: imageURL)
@@ -263,11 +263,11 @@ public class FUSServiceClient: NSObject {
     /**
     Login the the specified FUS server with username, password and a completed closure. This method does not return anything but store an `OAuthToken` object in the `UserStore`.
     
-    :param: username  The username of the user to login.
-    :param: password  The password of the user to login.
-    :param: completed Is called on completion of the request and returns an error if the process failed, otherwise it retuens `nil`.
+    - parameter username:  The username of the user to login.
+    - parameter password:  The password of the user to login.
+    - parameter completed: Is called on completion of the request and returns an error if the process failed, otherwise it retuens `nil`.
     */
-    public class func loginUser(#username: String, password: String, completed: (error: NSError?) -> ()) {
+    public class func loginUser(username username: String, password: String, completed: (error: NSError?) -> ()) {
         
         let requestDate = NSDate()
         var parameters = ["grant_type": "password", "username": username, "password": password]
@@ -304,8 +304,8 @@ public class FUSServiceClient: NSObject {
     /**
     Refresh an `OAuthToken` if it has expired.
     
-    :param: completed Is called on completion of the request and returns an error if the process failed, otherwise it retuens `nil`.
-    :param: force       Forces the OAuth token to refresh even if it hasn't expired.
+    - parameter completed: Is called on completion of the request and returns an error if the process failed, otherwise it retuens `nil`.
+    - parameter force:       Forces the OAuth token to refresh even if it hasn't expired.
     */
     public class func refreshOAuthToken(force: Bool = false, completed: (error: NSError?) -> ()) {
         
@@ -359,7 +359,7 @@ public class FUSServiceClient: NSObject {
     /**
     Updates the current users sections from a FUS based system and stores them in the user store.
     
-    :param: completed Is called on completion of the request and returns an error if the process failed, otherwise it retuens `nil`.
+    - parameter completed: Is called on completion of the request and returns an error if the process failed, otherwise it retuens `nil`.
     */
     public class func updateSections(completed: (error: NSError?) -> ()) {
         
@@ -388,10 +388,10 @@ public class FUSServiceClient: NSObject {
     /**
     A generic request method for calling .Sections for .Custom from the Router.
     
-    :param: router The URL request either manually created or generated by the Router.
-    :param: completed  The completed callback that returns the response JSON and/or an error.
+    - parameter router: The URL request either manually created or generated by the Router.
+    - parameter completed:  The completed callback that returns the response JSON and/or an error.
     
-    :returns: An Alamofire request.
+    - returns: An Alamofire request.
     */
     public class func request(router: Router, completed: (json: AnyObject?, error: NSError?) -> ()) -> Alamofire.Request {
         
@@ -405,11 +405,11 @@ public class FUSServiceClient: NSObject {
     /**
     A request for downloading an image using .ImageGET from the Router.
     
-    :param: router   The URL request either manually created or generated by the Router.
-    :param: progress The progress call back that returns the progress from 0.0 to 1.0.
-    :param: completed  The completed callback that returns the response UIImage and/or an error.
+    - parameter router:   The URL request either manually created or generated by the Router.
+    - parameter progress: The progress call back that returns the progress from 0.0 to 1.0.
+    - parameter completed:  The completed callback that returns the response UIImage and/or an error.
     
-    :returns: An Alamofire request.
+    - returns: An Alamofire request.
     */
     public class func imageRequest(router: Router, progress: ((percentComplete: CGFloat) -> ())?, completed: (image: UIImage?, error: NSError?) -> ()) -> Alamofire.Request {
         
@@ -432,9 +432,9 @@ public class FUSServiceClient: NSObject {
     /**
     Checks if an object is a URL path with a prefix of `http://` or `https://`.
     
-    :param: item The item to check.
+    - parameter item: The item to check.
     
-    :returns: Returns `true` if it is a path string or `false` if not.
+    - returns: Returns `true` if it is a path string or `false` if not.
     */
     public class func isItemSection(item: AnyObject) -> Bool {
         if let path = item as? String where path.hasPrefix("http://") || path.hasPrefix("https://") {
@@ -448,11 +448,11 @@ public class FUSServiceClient: NSObject {
     /**
     Creates an error object that joins the original error description, the response status code and the JSON error dictionary where available.
     
-    :param: response  The response that had the error, or `nil` if it doesn't exist.
-    :param: json      The JSON response, or `nil` if there wasn't any.
-    :param: origError The original error returned by Alamofire, or `nil` if there isn't any.
+    - parameter response:  The response that had the error, or `nil` if it doesn't exist.
+    - parameter json:      The JSON response, or `nil` if there wasn't any.
+    - parameter origError: The original error returned by Alamofire, or `nil` if there isn't any.
     
-    :returns: An arror with a localized description of all the information passed in.
+    - returns: An arror with a localized description of all the information passed in.
     */
     private class func errorForResponse(response: NSHTTPURLResponse?, json: AnyObject?, origError: NSError?) -> NSError? {
         if let anError = origError {

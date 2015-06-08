@@ -21,9 +21,9 @@ public enum WebViewType {
 /**
 Returns a WebViewController dependant on the variable or automatically
 
-:param: viewType    The type of view to use in the controller. By default this is done automatically.
+- parameter viewType:    The type of view to use in the controller. By default this is done automatically.
 
-:returns: A base web view controller with the designated web view.
+- returns: A base web view controller with the designated web view.
 */
 public func WebViewController(viewType: WebViewType = .Automatic) -> BaseWebViewController {
     

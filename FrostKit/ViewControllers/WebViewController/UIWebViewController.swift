@@ -48,7 +48,7 @@ class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     /**
     Refrshes the web view when the refresh button is pressed in the toolbar.
     
-    :param: sender The bar button item pressed.
+    - parameter sender: The bar button item pressed.
     */
     override func refreshButtonPressed(sender: AnyObject?) {
         
@@ -64,7 +64,7 @@ class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     /**
     Requests the web view go back a page.
     
-    :param: sender The bar button item pressed.
+    - parameter sender: The bar button item pressed.
     */
     override func backButtonPressed(sender: AnyObject?) {
         
@@ -81,7 +81,7 @@ class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     /**
     Requests the web view go forward a page.
     
-    :param: sender The bar button item pressed.
+    - parameter sender: The bar button item pressed.
     */
     override func forwardButtonPressed(sender: AnyObject?) {
         
@@ -109,7 +109,7 @@ class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
         updateBackForwardButtons()
     }
     
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
+    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
         
         updateActivityViewVisability()
         updateBackForwardButtons()
@@ -120,11 +120,11 @@ class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     /**
     Creates a URL string, appending `http://` if the URL string does not already have it as a prefix and then loads the page in the web view.
     
-    :returns: The base URL string.
+    - returns: The base URL string.
     */
     override func loadBaseURL() -> String {
         
-        var urlString = super.loadBaseURL()
+        let urlString = super.loadBaseURL()
         
         if let webView = self.webView as? UIWebView {
             let request = NSURLRequest(URL: NSURL(string: urlString)!, cachePolicy: .ReloadIgnoringLocalCacheData, timeoutInterval: 60.0)

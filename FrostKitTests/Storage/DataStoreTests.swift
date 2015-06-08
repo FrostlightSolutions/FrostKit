@@ -22,7 +22,7 @@ class DataStoreTests: XCTestCase {
     var pagedJSON: [String: AnyObject] {
         if  let filePath = NSBundle(forClass: self.dynamicType).pathForResource("Notifications", ofType: "json"),
             let fileData = NSData(contentsOfFile: filePath),
-            let jsonDict = NSJSONSerialization.JSONObjectWithData(fileData, options: nil, error: nil) as? [String: AnyObject] {
+            let jsonDict = NSJSONSerialization.JSONObjectWithData(fileData, options: []) as? [String: AnyObject] {
                 return jsonDict
         }
         return Dictionary<String,AnyObject>()

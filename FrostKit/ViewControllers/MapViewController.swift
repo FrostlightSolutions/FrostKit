@@ -28,7 +28,7 @@ public class MapViewController: UIViewController, UIActionSheetDelegate {
         super.viewDidLoad()
         
         navigationItem.title = FKLocalizedString("MAP", comment: "Map")
-        updateNavigationButtons(animated: false)
+        updateNavigationButtons(false)
         
         if NSClassFromString("UISearchController") == nil {
             // iOS 7
@@ -63,7 +63,7 @@ public class MapViewController: UIViewController, UIActionSheetDelegate {
     /**
     Updates the navigation bar buttons.
     
-    :param: animated If the buttons should animate when they update.
+    - parameter animated: If the buttons should animate when they update.
     */
     internal func updateNavigationButtons(animated: Bool = true) {
         var barButtonItems = Array<UIBarButtonItem>()
@@ -99,7 +99,7 @@ public class MapViewController: UIViewController, UIActionSheetDelegate {
     /**
     Show the options for the map view controller when the location button is pressed.
     
-    :param: sender The location button pressed.
+    - parameter sender: The location button pressed.
     */
     @IBAction public func locationButtonPressed(sender: UIBarButtonItem) {
         if NSClassFromString("UIAlertController") == nil {
@@ -133,7 +133,7 @@ public class MapViewController: UIViewController, UIActionSheetDelegate {
     /**
     Shows the map search view controller.
     
-    :param: sender The search button pressed.
+    - parameter sender: The search button pressed.
     */
     @IBAction public func searchButtonPressed(sender: UIBarButtonItem) {
         if let searchController = self.searchController {

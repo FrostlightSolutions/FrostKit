@@ -59,9 +59,9 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
     /**
     The object at an index path of the selected array (plotted if segment 0 or location if segment 1).
     
-    :param: indexPath The index path of the object.
+    - parameter indexPath: The index path of the object.
     
-    :returns: The object at the index path.
+    - returns: The object at the index path.
     */
     public func objectAtIndexPath(indexPath: NSIndexPath) -> AnyObject? {
         if let searchBar = self.searchBar {

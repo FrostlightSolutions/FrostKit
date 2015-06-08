@@ -28,7 +28,7 @@ public class ContentManager: NSObject {
     /**
     Returns the shared content manager object.
     
-    :returns: The shared content manager object.
+    - returns: The shared content manager object.
     */
     public class var shared: ContentManager {
         struct Singleton {
@@ -81,9 +81,9 @@ public class ContentManager: NSObject {
     /**
     Creates or updates metadata for an object at an absolute URL.
     
-    :param: absoluteURL    The absolute URL of the item.
+    - parameter absoluteURL:    The absolute URL of the item.
     */
-    public class func saveContentMetadata(#absoluteURL: NSURL) {
+    public class func saveContentMetadata(absoluteURL absoluteURL: NSURL) {
         if let absolutePath = absoluteURL.path {
             saveContentMetadata(absolutePath: absolutePath)
         }
@@ -92,18 +92,18 @@ public class ContentManager: NSObject {
     /**
     Creates or updates metadata for an object at an absolute path.
     
-    :param: absolutePath    The absolute path of the item.
+    - parameter absolutePath:    The absolute path of the item.
     */
-    public class func saveContentMetadata(#absolutePath: String) {
+    public class func saveContentMetadata(absolutePath absolutePath: String) {
         shared.contentMetadata.setObject(NSDate().copy(), forKey: absolutePath)
     }
     
     /**
     Removed metadata for an object at an absolute URL.
     
-    :param: absoluteURL    The absolute URL of the item.
+    - parameter absoluteURL:    The absolute URL of the item.
     */
-    public class func removeContentMetadata(#absoluteURL: NSURL) {
+    public class func removeContentMetadata(absoluteURL absoluteURL: NSURL) {
         if let absolutePath = absoluteURL.path {
             removeContentMetadata(absolutePath: absolutePath)
         }
@@ -112,9 +112,9 @@ public class ContentManager: NSObject {
     /**
     Removed metadata for an object at an absolute path.
     
-    :param: absolutePath    The absolute path of the item.
+    - parameter absolutePath:    The absolute path of the item.
     */
-    public class func removeContentMetadata(#absolutePath: String) {
+    public class func removeContentMetadata(absolutePath absolutePath: String) {
         shared.contentMetadata.removeObjectForKey(absolutePath)
     }
     

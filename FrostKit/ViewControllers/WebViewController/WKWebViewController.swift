@@ -54,10 +54,10 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
             
             webView.allowsBackForwardNavigationGestures = true
             
-            webView.addObserver(self, forKeyPath: "estimatedProgress", options: nil, context: nil)
-            webView.addObserver(self, forKeyPath: "title", options: nil, context: nil)
-            webView.addObserver(self, forKeyPath: "canGoBack", options: nil, context: nil)
-            webView.addObserver(self, forKeyPath: "canGoForward", options: nil, context: nil)
+            webView.addObserver(self, forKeyPath: "estimatedProgress", options: [], context: nil)
+            webView.addObserver(self, forKeyPath: "title", options: [], context: nil)
+            webView.addObserver(self, forKeyPath: "canGoBack", options: [], context: nil)
+            webView.addObserver(self, forKeyPath: "canGoForward", options: [], context: nil)
         }
         
         super.viewDidLoad()
@@ -74,7 +74,7 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     // MARK: - KVO Methods
     
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [NSObject : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         
         switch keyPath {
         case "estimatedProgress":
@@ -99,7 +99,7 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     /**
     Refrshes the web view when the refresh button is pressed in the toolbar.
     
-    :param: sender The bar button item pressed.
+    - parameter sender: The bar button item pressed.
     */
     override func refreshButtonPressed(sender: AnyObject?) {
         
@@ -116,7 +116,7 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     /**
     Requests the web view go back a page.
     
-    :param: sender The bar button item pressed.
+    - parameter sender: The bar button item pressed.
     */
     override func backButtonPressed(sender: AnyObject?) {
         
@@ -133,7 +133,7 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     /**
     Requests the web view go forward a page.
     
-    :param: sender The bar button item pressed.
+    - parameter sender: The bar button item pressed.
     */
     override func forwardButtonPressed(sender: AnyObject?) {
         
@@ -160,11 +160,11 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     /**
     Creates a URL string, appending `http://` if the URL string does not already have it as a prefix and then loads the page in the web view.
     
-    :returns: The base URL string.
+    - returns: The base URL string.
     */
     override func loadBaseURL() -> String {
         
-        var urlString = super.loadBaseURL()
+        let urlString = super.loadBaseURL()
         
         if let webView = self.webView as? WKWebView {
             let request = NSURLRequest(URL: NSURL(string: urlString)!, cachePolicy: .ReloadIgnoringLocalCacheData, timeoutInterval: 60.0)

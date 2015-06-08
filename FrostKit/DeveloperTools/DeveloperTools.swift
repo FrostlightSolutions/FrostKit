@@ -69,12 +69,12 @@ public class DeveloperTools: NSObject {
     }
     
     func registerViewController(viewController: UIViewController) {
-        if contains(viewControllers, viewController) == false {
+        if viewControllers.contains(viewController) == false {
             viewControllers.append(viewController)
             NSLog("Registeed \(viewController) for Developer Tools")
         }
         
-        if let index = find(viewControllers, viewController) {
+        if let index = viewControllers.indexOf(viewController) {
             currentViewControllerIndex = index
         } else {
             currentViewControllerIndex = NSNotFound
@@ -90,7 +90,7 @@ public class DeveloperTools: NSObject {
     }
     
     func unregisterViewController(viewController: UIViewController) {
-        if let index = find(viewControllers, viewController), let currentGestureRecogniser = self.currentGestureRecogniser {
+        if let index = viewControllers.indexOf(viewController), let currentGestureRecogniser = self.currentGestureRecogniser {
             viewController.view.removeGestureRecognizer(currentGestureRecogniser)
             viewControllers.removeAtIndex(index)
             NSLog("Unregisteed \(viewController) for Developer Tools")

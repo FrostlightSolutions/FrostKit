@@ -16,10 +16,10 @@ extension NSData {
     /**
     Returns a string of the hex data object.
     
-    :returns: Hex string of the data.
+    - returns: Hex string of the data.
     */
     public func hexString() -> NSString {
-        var string = NSMutableString(capacity: self.length)
+        let string = NSMutableString(capacity: self.length)
         let bytes = UnsafeBufferPointer<UInt8>(start: UnsafePointer(self.bytes), count:self.length)
         for byte in bytes {
             string.appendFormat("%02hhx", byte)
@@ -30,9 +30,9 @@ extension NSData {
     /**
     Creates a formatted string from the `size` passed in in bytes.
     
-    :param: size The size of the item in bytes.
+    - parameter size: The size of the item in bytes.
     
-    :returns: A formatted string of the size passed in. E.g. 1024 bytes returns 1MB.
+    - returns: A formatted string of the size passed in. E.g. 1024 bytes returns 1MB.
     */
     public class func sizeFormattedString(size: Int) -> String {
         
@@ -53,7 +53,7 @@ extension NSData {
         numberFormatter.maximumFractionDigits = 2
         
         if let stringSize = numberFormatter.stringFromNumber(NSNumber(double: bytes)) {
-            return NSString(format: "%@ %@B", stringSize, sUnits[exponent]) as! String
+            return NSString(format: "%@ %@B", stringSize, sUnits[exponent]) as String
         } else {
             return "Unknown"
         }

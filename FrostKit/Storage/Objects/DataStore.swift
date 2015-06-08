@@ -18,24 +18,24 @@ import UIKit
     Note you can create a data store object without adding data to it and this function will not be called. Only when data is first added to the data store will this function be called.
     i.e. When object.count > 0
     
-    :param: dataStore The data store loaded.
+    - parameter dataStore: The data store loaded.
     */
     optional func dataStoreInitialLoad(dataStore: DataStore)
     
     /**
     This function is called when an item will be accessed at an index.
     
-    :param: dataStore The data store the item resides in.
-    :param: index     The index of the item being accessed.
-    :param: object    The item being accessed.
+    - parameter dataStore: The data store the item resides in.
+    - parameter index:     The index of the item being accessed.
+    - parameter object:    The item being accessed.
     */
     optional func dataStore(dataStore: DataStore, willAccessIndex index: Int, returnObject object: AnyObject)
     
     /**
     This function is called when a page will be accessed.
     
-    :param: dataStore The data store the item resides in.
-    :param: page      The page being accessed.
+    - parameter dataStore: The data store the item resides in.
+    - parameter page:      The page being accessed.
     */
     optional func dataStore(dataStore: DataStore, willAccessPage page: Int)
 }
@@ -77,7 +77,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     }
     /// Returns an array of all the pages loaded
     private var combinedPages: NSArray {
-        var combinedPageObjects = NSMutableArray()
+        let combinedPageObjects = NSMutableArray()
         for page in sortedPages {
             let page = objects[page] as! [AnyObject]
             combinedPageObjects.addObjectsFromArray(page)
@@ -113,7 +113,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     /**
     Initializes a store from anouther store.
     
-    :param: store The store object to base the new one from.
+    - parameter store: The store object to base the new one from.
     */
     init(store: DataStore) {
         super.init()
@@ -126,8 +126,8 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     /**
     Initializes a store object from the total count and the number of objects per page.
     
-    :param: totalCount     The total count of the store.
-    :param: objectsPerPage The total objects per page. This should be the same for all pages (though it is excepted the last page may not furfil this value).
+    - parameter totalCount:     The total count of the store.
+    - parameter objectsPerPage: The total objects per page. This should be the same for all pages (though it is excepted the last page may not furfil this value).
     */
     public init(totalCount: Int, objectsPerPage: Int) {
         super.init()
@@ -139,8 +139,8 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     /**
     Initializes a store object from a JSON dictionary returned from FUS. It is assumed that the values returned in the dictionary will always be from page 1 (the first page).
     
-    :param: json           The JSON dictionary returned from FUS.
-    :param: objectsPerPage The total objects per page. This should be the same for all pages (though it is excepted the last page may not furfil this value).
+    - parameter json:           The JSON dictionary returned from FUS.
+    - parameter objectsPerPage: The total objects per page. This should be the same for all pages (though it is excepted the last page may not furfil this value).
     */
     convenience public init(json: NSDictionary) {
         var totalCount = 0
@@ -164,7 +164,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     /**
     Initializes a store object for a non-paged array of objects returned from FUS. This creates a normal paged store but takes the whole array of objects as page 1 (the first page).
     
-    :param: nonPagedObjects An array of objects to store.
+    - parameter nonPagedObjects: An array of objects to store.
     */
     convenience public init(nonPagedObjects: NSArray) {
         self.init(totalCount: nonPagedObjects.count, objectsPerPage: nonPagedObjects.count)
@@ -174,7 +174,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     /**
     Initializes a store object for a non-paged single NSDictionary object returned from FUS. This creates a normal paged store but only sets it with 1 object. To access this object you should use the `dictionary` variable on the store object.
     
-    :param: dictionary The dictionary to store.
+    - parameter dictionary: The dictionary to store.
     */
     convenience public init(dictionary: NSDictionary) {
         self.init(totalCount: 1, objectsPerPage: 0)
@@ -184,7 +184,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     /**
     Initializes a store object from a paged, non-paged or single object. This init will work out what type of store needs to be made and call the correct init method. If none of the expected type are passed in it just creates an empty object.
     
-    :param: object A NSDictionary or NSArray representing a paged, non-paged or single object.
+    - parameter object: A NSDictionary or NSArray representing a paged, non-paged or single object.
     */
     convenience public init(object: AnyObject) {
         if let dict = object as? NSDictionary {
@@ -206,7 +206,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     
     // MARK: - NSCoding Methods
     
-    required public init(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init()
         
         count = aDecoder.decodeIntegerForKey("count")
@@ -267,11 +267,11 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     /**
     Sets object into the store for a current page. This will either replace palceholder objects with data or update previous stored objects with the new values. If `totalCount` is returned and if it is different from the previous number then the store will add or remove the relevaent placeholders or objects in the store respectively.
     
-    :param: newObjects The new objects to add or update into the store.
-    :param: page       The page the objects have come from in FUS.
-    :param: totalCount The updated total objects count.
+    - parameter newObjects: The new objects to add or update into the store.
+    - parameter page:       The page the objects have come from in FUS.
+    - parameter totalCount: The updated total objects count.
     
-    :returns: `true` if updated store is different from previous store, `false` if nothing changed.
+    - returns: `true` if updated store is different from previous store, `false` if nothing changed.
     */
     public func setObjects(newObjects: NSArray, page: Int, totalCount: Int? = nil) -> Bool {
         var hasChanged = false
@@ -315,11 +315,11 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     /**
     Helper method to set or update a page's data from a JSON response.
     
-    :param: json The JSON dictionary to parse.
+    - parameter json: The JSON dictionary to parse.
     
-    :returns: `true` if updated store is different from previous store, `false` if nothing changed.
+    - returns: `true` if updated store is different from previous store, `false` if nothing changed.
     */
-    public func setObjectFrom(#json: NSDictionary, page: Int) -> Bool {
+    public func setObjectFrom(json json: NSDictionary, page: Int) -> Bool {
         var totalCount = 0
         if let count = json["count"] as? Int {
             totalCount = count
@@ -339,9 +339,9 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     /**
     A helper method for setting or updating the dictionary object.
     
-    :param: dictionary The dictionary object to set or update in the store.
+    - parameter dictionary: The dictionary object to set or update in the store.
     
-    :returns: `true` if updated store is different from previous store, `false` if nothing changed.
+    - returns: `true` if updated store is different from previous store, `false` if nothing changed.
     */
     public func setDictionary(dictionary: NSDictionary) -> Bool {
         var hasChanged = false
@@ -363,11 +363,11 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     /**
     A helper method to set or update the store from a paged, non-paged or single object. This setter will work out what type of store needs to be made and call the correct set method. If none of the expected type are passed in it does nothing.
     
-    :param: object A NSDictionary or NSArray representing a paged, non-paged or single object.
+    - parameter object: A NSDictionary or NSArray representing a paged, non-paged or single object.
     
-    :returns: `true` if updated store is different from previous store, `false` if nothing changed.
+    - returns: `true` if updated store is different from previous store, `false` if nothing changed.
     */
-    public func setFrom(#object: AnyObject, page: Int?) -> Bool {
+    public func setFrom(object object: AnyObject, page: Int?) -> Bool {
         var hasChanged = false
         if let dict = object as? NSDictionary {
             if dict["results"] != nil && dict["count"] != nil {
@@ -397,9 +397,9 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     /**
     Returns the object located at the specified index in the store.
     
-    :param: index An index within the bounds of the store.
+    - parameter index: An index within the bounds of the store.
     
-    :returns: The object located at index.
+    - returns: The object located at index.
     */
     public func objectAtIndex(index: Int) -> AnyObject? {
         let page = pageForIndex(index)
@@ -434,9 +434,9 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     /**
     Returns the objects for a given page.
     
-    :param: page The page of the objects.
+    - parameter page: The page of the objects.
     
-    :returns: The objects of the page.
+    - returns: The objects of the page.
     */
     public func pageObjects(page: Int) -> NSArray? {
         return objects[page] as? NSArray
@@ -445,9 +445,9 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     /**
     Returns the page number of the specified index in the store.
     
-    :param: index An index with the bounds of the store.
+    - parameter index: An index with the bounds of the store.
     
-    :returns: The page number the index is located in.
+    - returns: The page number the index is located in.
     */
     public func pageForIndex(index: Int) -> Int {
         return (index / objectsPerPage) + 1
@@ -458,9 +458,9 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     
     For example, if a store has 3 items per page and 4 pages, getting the index of 10 would return 1, as it is the second item on the fourth page.
     
-    :param: index The index of the object.
+    - parameter index: The index of the object.
     
-    :returns: The reletive paged index of the item.
+    - returns: The reletive paged index of the item.
     */
     private func indexRelativeToPage(index: Int) -> Int {
         let page = pageForIndex(index)
@@ -471,9 +471,9 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     /**
     Returns the lowest index whose corresponding store value is equal to a given object.
     
-    :param: anObject The object to find in the store.
+    - parameter anObject: The object to find in the store.
     
-    :returns: The lowest index whose corresponding store value is equal to anObject. If none of the objects in the store is equal to anObject, returns NSNotFound.
+    - returns: The lowest index whose corresponding store value is equal to anObject. If none of the objects in the store is equal to anObject, returns NSNotFound.
     */
     public func indexOfObject(anObject: AnyObject) -> Int {
         var index = NSNotFound
@@ -497,9 +497,9 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     /**
     Returns the index set of the objects in the page requested.
     
-    :param: page The page of the residing index sets.
+    - parameter page: The page of the residing index sets.
     
-    :returns: An index set of the indexes on the given page.
+    - returns: An index set of the indexes on the given page.
     */
     public func indexSetForPage(page: Int) -> NSIndexSet {
         var rangeLength = objectsPerPage
@@ -512,9 +512,9 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     /**
     Retirns the index paths for the object in the page requested.
     
-    :param: page The page of the residing index sets.
+    - parameter page: The page of the residing index sets.
     
-    :returns: An array of index paths on the given page.
+    - returns: An array of index paths on the given page.
     */
     public func indexPathsForPage(page: Int) -> [NSIndexPath] {
         let indexSet = indexSetForPage(page)
@@ -528,9 +528,9 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     /**
     Returns the first page number whose corresponding store value is equal to a given object.
     
-    :param: anObject The object to find in the store.
+    - parameter anObject: The object to find in the store.
     
-    :returns: The lowest page number whose corresponding store value is equal to anObject. If none of the objects in the store is equal to anObject, returns NSNotFound.
+    - returns: The lowest page number whose corresponding store value is equal to anObject. If none of the objects in the store is equal to anObject, returns NSNotFound.
     */
     public func pageForObject(anObject: AnyObject) -> Int {
         let index = indexOfObject(anObject)
@@ -544,17 +544,17 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     /**
     Search the store for an object to contains the keys and value passed in.
     
-    :param: keys   An array of keys to search for.
-    :param: value A value to check the key-value against.
+    - parameter keys:   An array of keys to search for.
+    - parameter value: A value to check the key-value against.
     
-    :returns: The object that contains the matching keys and value passed in.
+    - returns: The object that contains the matching keys and value passed in.
     */
-    public func searchForObjectWith(#keys: [String], value: NSObject) -> AnyObject? {
+    public func searchForObjectWith(keys keys: [String], value: NSObject) -> AnyObject? {
         var object: AnyObject?
         for (page, pageArray) in objects {
             if let array = pageArray as? NSArray {
                 if array.count > 0 {
-                    var formatArray = NSMutableArray()
+                    let formatArray = NSMutableArray()
                     var argumentArray = Array<AnyObject>()
                     for key in keys {
                         formatArray.addObject("(%K == %@)")
@@ -576,15 +576,15 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     /**
     Search the store for objects conforming with the keys and value passed in.
     
-    :param: keys   An array of keys to search for.
-    :param: value A value to check the key-value against.
+    - parameter keys:   An array of keys to search for.
+    - parameter value: A value to check the key-value against.
     
-    :returns: The objects that contains the matching keys and value passed in.
+    - returns: The objects that contains the matching keys and value passed in.
     */
-    public func searchForObjectsWith(#keys: [String], value: NSObject) -> [AnyObject] {
+    public func searchForObjectsWith(keys keys: [String], value: NSObject) -> [AnyObject] {
         let objects = combinedPages
         if objects.count > 0 {
-            var formatArray = NSMutableArray()
+            let formatArray = NSMutableArray()
             var argumentArray = Array<AnyObject>()
             for key in keys {
                 formatArray.addObject("(%K == %@)")

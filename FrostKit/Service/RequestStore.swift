@@ -24,8 +24,8 @@ public class RequestStore: NSObject {
     /**
     Add a rquest to the store with a router object to ditermine the key.
     
-    :param: request The request to store and manage.
-    :param: router  The router to determine the key.
+    - parameter request: The request to store and manage.
+    - parameter router:  The router to determine the key.
     */
     public func addRequest(request: Request, router: Router) {
         addRequest(request, urlString: router.URLRequest.URL!.absoluteString!)
@@ -34,8 +34,8 @@ public class RequestStore: NSObject {
     /**
     Add a rquest to the store with a url string (normally absolute is sugested) to use as the key to store the request under in the store.
     
-    :param: request The request to store and manage.
-    :param: urlString The url string to use as the key.
+    - parameter request: The request to store and manage.
+    - parameter urlString: The url string to use as the key.
     */
     public func addRequest(request: Request, urlString: String) {
         if locked == true {
@@ -52,18 +52,18 @@ public class RequestStore: NSObject {
     /**
     Remove a request using a router object to ditermine the key.
     
-    :param: router The router to determine the key of the request to remove.
+    - parameter router: The router to determine the key of the request to remove.
     */
-    public func removeRequestFor(#router: Router) {
-        removeRequestFor(urlString: router.URLRequest.URL!.absoluteString!)
+    public func removeRequestFor(router router: Router) {
+        removeRequestFor(urlString: router.URLRequest.URL!.absoluteString)
     }
     
     /**
     Remove a request using a url string (normally absolute is sugested) as the key.
     
-    :param: router The url string to use as the key of the request to remove.
+    - parameter router: The url string to use as the key of the request to remove.
     */
-    public func removeRequestFor(#urlString: String) {
+    public func removeRequestFor(urlString urlString: String) {
         if let storedRequest = store[urlString] {
             storedRequest.cancel()
             store.removeValueForKey(urlString)
@@ -86,20 +86,20 @@ public class RequestStore: NSObject {
     
     The routers are compared by their absoluteURL.
     
-    :param: router The router to check for.
+    - parameter router: The router to check for.
     
-    :returns: If a matching request is found then `true` is returned, otherwise `false` is returned.
+    - returns: If a matching request is found then `true` is returned, otherwise `false` is returned.
     */
     func containsRequestWithRouter(router: Router) -> Bool {
-        return containsRequestWithURL(router.URLRequest.URL!.absoluteString!)
+        return containsRequestWithURL(router.URLRequest.URL!.absoluteString)
     }
     
     /**
     Checks to see if there is a rquest in the store that matches the passed in url string.
     
-    :param: urlString The url string to check for.
+    - parameter urlString: The url string to check for.
     
-    :returns: If a matching request is found then `true` is returned, otherwise `false` is returned.
+    - returns: If a matching request is found then `true` is returned, otherwise `false` is returned.
     */
     func containsRequestWithURL(urlString: String) -> Bool {
         let containsRequest = store[urlString] != nil
