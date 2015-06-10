@@ -551,7 +551,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     */
     public func searchForObjectWith(keys keys: [String], value: NSObject) -> AnyObject? {
         var object: AnyObject?
-        for (page, pageArray) in objects {
+        for (_, pageArray) in objects {
             if let array = pageArray as? NSArray {
                 if array.count > 0 {
                     let formatArray = NSMutableArray()

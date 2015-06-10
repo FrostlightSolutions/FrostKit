@@ -25,7 +25,8 @@ Returns a WebViewController dependant on the variable or automatically
 
 - returns: A base web view controller with the designated web view.
 */
-public func WebViewController(viewType: WebViewType = .Automatic) -> BaseWebViewController {
+@available(iOS, deprecated=9.0, message="This is no longer needed as of iOS 9. Use SFSafariViewController instead.")
+public func WebViewController(viewType viewType: WebViewType = .Automatic) -> BaseWebViewController {
     
     switch viewType {
     case .UIWebView:

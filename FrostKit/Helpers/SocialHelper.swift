@@ -286,7 +286,11 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         case MFMailComposeResultSent.rawValue:
             NSLog("Email sent")
         case MFMailComposeResultFailed.rawValue:
-            NSLog("Email sent failure: \(error.localizedDescription)")
+            if let anError = error {
+                NSLog("Email send failed: \(anError.localizedDescription)\n\(error)")
+            } else {
+                NSLog("Email send failed!")
+            }
         default:
             break
         }

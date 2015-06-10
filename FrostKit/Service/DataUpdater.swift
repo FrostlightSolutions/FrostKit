@@ -98,7 +98,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
         didSet {
             var removedKeys = Array<String>()
             for key in oldValue.keys {
-                if searchUpdateParameters.keys.indexOf(key.characters) == nil {
+                if searchUpdateParameters.keys.indexOf(key) == nil {
                     removedKeys.append(key)
                 }
             }
@@ -195,9 +195,10 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     Sets up the collection view with some default values and settings.
     */
     private func setupCollectionView() {
-        if let collectionView = self.collectionView {
-            // TODO: Setup and update a "No Content" footer.
-        }
+        // TODO: Setup and update a "No Content" footer.
+//        if let collectionView = self.collectionView {
+//            
+//        }
     }
     
     /**
@@ -436,7 +437,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
             if shouldUpdate == true {
                 if self.searchString == nil {
                     if let dataStore = self.coreDataStore {
-                        if let sectionDictionary = self.sectionDictionary {
+                        if self.sectionDictionary != nil {
                             let saveString = router.saveString
                             UserStore.current.setDataStore(dataStore, urlString: saveString)
                             if self.saveUserStroeOnDataChange == true {
@@ -482,7 +483,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     
     - parameter indexPaths: An array of the index paths to reload.
     */
-    public func reloadRowsAtIndexPaths(indexPaths: [AnyObject]) {
+    public func reloadRowsAtIndexPaths(indexPaths: [NSIndexPath]) {
         if let tableView = self.tableView {
             tableView.reloadRowsAtIndexPaths(indexPaths, withRowAnimation: .Fade)
         } else if let collectionView = self.collectionView {

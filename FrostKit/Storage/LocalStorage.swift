@@ -142,26 +142,13 @@ public class LocalStorage: NSObject {
     
     - returns: `true` if the directory is created. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    internal class func createDirectory(url url: NSURL) -> Bool {
+    internal class func createDirectory(url url: NSURL) {
         
-        var error: NSError?
-        let success: Bool
         do {
             try NSFileManager.defaultManager().createDirectoryAtURL(url, withIntermediateDirectories: true, attributes: nil)
-            success = true
-        } catch var error1 as NSError {
-            error = error1
-            success = false
+        } catch let error as NSError {
+            NSLog("Error: Directory not able to be created at URL \(url)\nWith error: \(error.localizedDescription)\n\(error)")
         }
-        if success == false {
-            if let anError = error {
-                NSLog(anError.localizedDescription)
-            } else {
-                NSLog("Error: Directory not able to be created at URL \(url)")
-            }
-        }
-        
-        return success
     }
     
     // MARK: - Save Methods
@@ -247,29 +234,11 @@ public class LocalStorage: NSObject {
     
     - returns: `true` if the data is moved correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    private class func move(fromBaseURL fromBaseURL: NSURL, toBaseURL: NSURL, reletivePath: String, fileName: String? = nil) -> Bool {
+    private class func move(fromBaseURL fromBaseURL: NSURL, toBaseURL: NSURL, reletivePath: String, fileName: String? = nil) throws {
         
         let fromURL = absoluteURL(baseURL: fromBaseURL, reletivePath: reletivePath, fileName: fileName)
         let toURL = absoluteURL(baseURL: toBaseURL, reletivePath: reletivePath, fileName: fileName)
-        
-        var error: NSError?
-        let success: Bool
-        do {
-            try NSFileManager.defaultManager().moveItemAtURL(fromURL, toURL: toURL)
-            success = true
-        } catch var error1 as NSError {
-            error = error1
-            success = false
-        }
-        if success == false {
-            if let anError = error {
-                NSLog(anError.localizedDescription)
-            } else {
-                NSLog("Error: Can't move item from \(fromURL) to \(toURL)")
-            }
-        }
-        
-        return success
+        try NSFileManager.defaultManager().moveItemAtURL(fromURL, toURL: toURL)
     }
     
     /**
@@ -280,8 +249,8 @@ public class LocalStorage: NSObject {
     
     - returns: `true` if the data is moved correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func moveFromCachesToDocuments(reletivePath reletivePath: String, fileName: String? = nil) -> Bool {
-        return move(fromBaseURL: cachesURL(), toBaseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName)
+    public class func moveFromCachesToDocuments(reletivePath reletivePath: String, fileName: String? = nil) throws {
+        try move(fromBaseURL: cachesURL(), toBaseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName)
     }
     
     /**
@@ -292,8 +261,8 @@ public class LocalStorage: NSObject {
     
     - returns: `true` if the data is moved correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func moveFromDocumentsToCaches(reletivePath reletivePath: String, fileName: String? = nil) -> Bool {
-        return move(fromBaseURL: documentsURL(), toBaseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName)
+    public class func moveFromDocumentsToCaches(reletivePath reletivePath: String, fileName: String? = nil) throws {
+        try move(fromBaseURL: documentsURL(), toBaseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName)
     }
     
     // MARK: - Load Methods
@@ -384,27 +353,10 @@ public class LocalStorage: NSObject {
     
     - returns: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    class func remove(absoluteURL absoluteURL: NSURL) -> Bool {
-        var error: NSError?
-        let success: Bool
-        do {
-            try NSFileManager.defaultManager().removeItemAtURL(absoluteURL)
-            success = true
-        } catch var error1 as NSError {
-            error = error1
-            success = false
-        }
-        if success == false {
-            if let anError = error {
-                NSLog(anError.localizedDescription)
-            } else {
-                NSLog("Error: Directory or data not able to be deleted at URL \(absoluteURL)")
-            }
-        } else {
-            ContentManager.removeContentMetadata(absoluteURL: absoluteURL)
-        }
+    class func remove(absoluteURL absoluteURL: NSURL) throws {
         
-        return success
+        try NSFileManager.defaultManager().removeItemAtURL(absoluteURL)
+        ContentManager.removeContentMetadata(absoluteURL: absoluteURL)
     }
     
     /**
@@ -416,8 +368,8 @@ public class LocalStorage: NSObject {
     
     - returns: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    private class func remove(baseURL baseURL: NSURL, reletivePath: String, fileName: String? = nil) -> Bool {
-        return remove(absoluteURL: absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName))
+    private class func remove(baseURL baseURL: NSURL, reletivePath: String, fileName: String? = nil) throws {
+        try remove(absoluteURL: absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName))
     }
     
     /**
@@ -425,8 +377,8 @@ public class LocalStorage: NSObject {
     
     - returns: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func removeDocumentsImagesDirectory() -> Bool {
-        return remove(baseURL: documentsURL(), reletivePath: imagesReletivePath())
+    public class func removeDocumentsImagesDirectory() throws {
+        try remove(baseURL: documentsURL(), reletivePath: imagesReletivePath())
     }
     
     /**
@@ -434,8 +386,8 @@ public class LocalStorage: NSObject {
     
     - returns: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func removeDocumentsDataDirectory() -> Bool {
-        return remove(baseURL: documentsURL(), reletivePath: dataReletivePath())
+    public class func removeDocumentsDataDirectory() throws {
+        try remove(baseURL: documentsURL(), reletivePath: dataReletivePath())
     }
     
     /**
@@ -443,8 +395,8 @@ public class LocalStorage: NSObject {
     
     - returns: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func removeCachesImagesDirectory() -> Bool {
-        return remove(baseURL: cachesURL(), reletivePath: imagesReletivePath())
+    public class func removeCachesImagesDirectory() throws {
+        try remove(baseURL: cachesURL(), reletivePath: imagesReletivePath())
     }
     
     /**
@@ -452,8 +404,8 @@ public class LocalStorage: NSObject {
     
     - returns: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func removeCachesDataDirectory() -> Bool {
-        return remove(baseURL: cachesURL(), reletivePath: dataReletivePath())
+    public class func removeCachesDataDirectory() throws {
+        try remove(baseURL: cachesURL(), reletivePath: dataReletivePath())
     }
     
     /**
@@ -464,8 +416,8 @@ public class LocalStorage: NSObject {
     
     - returns: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func removeDocumentsObject(reletivePath reletivePath: String, fileName: String? = nil) -> Bool {
-        return remove(baseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName)
+    public class func removeDocumentsObject(reletivePath reletivePath: String, fileName: String? = nil) throws {
+        try remove(baseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName)
     }
     
     /**
@@ -476,8 +428,8 @@ public class LocalStorage: NSObject {
     
     - returns: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func removeCachesObject(reletivePath reletivePath: String, fileName: String? = nil) -> Bool {
-        return remove(baseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName)
+    public class func removeCachesObject(reletivePath reletivePath: String, fileName: String? = nil) throws {
+        try remove(baseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName)
     }
     
 }

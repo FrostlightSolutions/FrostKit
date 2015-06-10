@@ -33,7 +33,7 @@ public class UserStore: NSObject, NSCoding {
     public var customDataStore = Dictionary<String, AnyObject>()
     /// Returns `true` is the user is logged in and `false` if not. A user is assumed as logged in if the UserStore has a username set and details can be retrieved from the keychain wit that username.
     public var isLoggedIn: Bool {
-        if let username = self.username, let details = KeychainHelper.details(username: username) as? OAuthToken {
+        if let username = self.username where KeychainHelper.details(username: username) != nil {
             return true
         }
         return false

@@ -66,7 +66,11 @@ public class ContentManager: NSObject {
             if metadataToRemove.count > 0 {
                 for object in metadataToRemove {
                     if let absoluteURL = object as? NSURL {
-                        LocalStorage.remove(absoluteURL: absoluteURL)
+                        do {
+                            try LocalStorage.remove(absoluteURL: absoluteURL)
+                        } catch let error as NSError {
+                            NSLog("Error: Unable to remove managed item at URL \(absoluteURL)\nWith error: \(error.localizedDescription)\n\(error)")
+                        }
                     }
                 }
             }

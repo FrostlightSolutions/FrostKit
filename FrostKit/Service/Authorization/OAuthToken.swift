@@ -16,9 +16,9 @@ import UIKit
 public class OAuthToken: NSObject, NSCoding, NSCopying {
     
     /// The `access_token` returned from FUS.
-    lazy var accessToken = ""
+    lazy var accessToken: String = ""
     /// The `refresh_token` returned from FUS.
-    lazy var refreshToken = ""
+    lazy var refreshToken: String = ""
     /// The timestamp the token will expire atcalculated from the `expires_in` number added to the timestamp of the date-time the request was sent.
     lazy var expiresAt: NSTimeInterval = 0
     /// A date value created from `expiresAt`.
@@ -30,9 +30,9 @@ public class OAuthToken: NSObject, NSCoding, NSCopying {
         return NSDate.timeIntervalSinceReferenceDate() > expiresAt
     }
     /// The `token_type` returned from FUS.
-    lazy var tokenType = ""
+    lazy var tokenType: String = ""
     /// The `scope` returned from FUS.
-    lazy var scope = ""
+    lazy var scope: String = ""
     
     override init() {
         super.init()

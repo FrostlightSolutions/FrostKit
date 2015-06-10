@@ -194,7 +194,7 @@ public enum Router: URLRequestConvertible {
         mutableURLRequest.HTTPMethod = method.rawValue
         mutableURLRequest.cachePolicy = .ReloadIgnoringLocalCacheData
         
-        if let langCode = NSLocale.preferredLanguages().first as? String {
+        if let langCode = NSLocale.preferredLanguages().first {
             mutableURLRequest.setValue(langCode, forHTTPHeaderField: "Accept-Language")
         }
         
@@ -414,17 +414,16 @@ public class FUSServiceClient: NSObject {
     public class func imageRequest(router: Router, progress: ((percentComplete: CGFloat) -> ())?, completed: (image: UIImage?, error: NSError?) -> ()) -> Alamofire.Request {
         
         NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
-        return Alamofire.request(router).validate().progress(closure: { (bytesRead, totalBytesRead, totalBytesExpectedToRead) -> Void in
+        return Alamofire.request(router).validate().progress({ (_, totalBytesRead, totalBytesExpectedToRead) -> Void in
             var percent: CGFloat = -1
             if totalBytesExpectedToRead >= 0 {
                 percent = CGFloat(totalBytesRead) / CGFloat(totalBytesExpectedToRead)
             }
             progress?(percentComplete: percent)
-            return
-        }).responseImage { (request, response, image, error) -> Void in
+        }).responseImage({ (_, _, image, error) -> Void in
             NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
             completed(image: image, error: error)
-        }
+        })
     }
     
     // MARK: - Helper Methods
@@ -466,10 +465,7 @@ public class FUSServiceClient: NSObject {
                 errorString += "\(errorDictionary)"
             }
             
-            var userInfo = Dictionary<NSObject, AnyObject>()
-            if let errorUserInfo = anError.userInfo {
-                userInfo = errorUserInfo
-            }
+            var userInfo = anError.userInfo
             userInfo[NSLocalizedDescriptionKey] = errorString
             
             return NSError(domain: anError.domain, code: anError.code, userInfo: userInfo)
@@ -490,7 +486,7 @@ extension Alamofire.Request {
         }
     }
     
-    func responseImage(completionHandler: (NSURLRequest, NSHTTPURLResponse?, UIImage?, NSError?) -> Void) -> Self {
+    func responseImage(completionHandler: (NSURLRequest?, NSHTTPURLResponse?, UIImage?, NSError?) -> Void) -> Self {
         return response(serializer: Request.imageResponseSerializer(), completionHandler: { (request, response, image, error) in
             completionHandler(request, response, image as? UIImage, error)
         })

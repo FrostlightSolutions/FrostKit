@@ -28,7 +28,7 @@ public class RequestStore: NSObject {
     - parameter router:  The router to determine the key.
     */
     public func addRequest(request: Request, router: Router) {
-        addRequest(request, urlString: router.URLRequest.URL!.absoluteString!)
+        addRequest(request, urlString: router.URLRequest.URL!.absoluteString)
     }
     
     /**
@@ -75,7 +75,7 @@ public class RequestStore: NSObject {
     */
     public func cancelAllTasks() {
         locked = true
-        for (key, request) in store {
+        for (_, request) in store {
             request.cancel()
         }
         locked = false

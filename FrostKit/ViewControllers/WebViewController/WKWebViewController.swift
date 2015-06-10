@@ -12,6 +12,7 @@ import WebKit
 ///
 /// A subclass of BaseWebViewController that wraps a WKWebView in a view controller.
 ///
+@available(iOS, deprecated=9.0, message="This is no longer needed as of iOS 9. Use SFSafariViewController instead.")
 class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     /// The URL of the current page.
@@ -75,21 +76,24 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     // MARK: - KVO Methods
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [NSObject : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        
-        switch keyPath {
-        case "estimatedProgress":
-            self.progrssView.setProgress(Float(webView!.estimatedProgress), animated: true)
-            updateProgrssViewVisability()
-            updateActivityViewVisability()
-        case "title":
-            if let webView = self.webView as? WKWebView where titleOverride == nil {
-                navigationItem.title = webView.title
+        if let aKeyPath = keyPath {
+            switch aKeyPath {
+            case "estimatedProgress":
+                self.progrssView.setProgress(Float(webView!.estimatedProgress), animated: true)
+                updateProgrssViewVisability()
+                updateActivityViewVisability()
+            case "title":
+                if let webView = self.webView as? WKWebView where titleOverride == nil {
+                    navigationItem.title = webView.title
+                }
+            case "canGoBack":
+                updateBackButton()
+            case "canGoForward":
+                updateForwardButton()
+            default:
+                super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
             }
-        case "canGoBack":
-            updateBackButton()
-        case "canGoForward":
-            updateForwardButton()
-        default:
+        } else {
             super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
         }
     }

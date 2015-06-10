@@ -23,7 +23,7 @@ public class FrostKit {
     
     private var FUSName: String?
     private var tintColor: UIColor?
-    private var baseURLs: [String]!
+    private lazy var baseURLs = Array<String>()
     private var defaultDebugIndex = 0
     private var defaultProductionIndex = 0
     private var OAuthClientID: String?
@@ -37,7 +37,7 @@ public class FrostKit {
     public class var tintColor: UIColor? {
         return FrostKit.shared.tintColor
     }
-    public class var baseURLs: [String]! {
+    public class var baseURLs: [String] {
         return FrostKit.shared.baseURLs
     }
     public class var defaultDebugIndex: Int {

@@ -133,10 +133,8 @@ public class CarouselViewController: UIViewController, UICollectionViewDelegate,
         let pageNumber = Int(scrollView.contentOffset.x / scrollView.bounds.width)
         pageControl.currentPage = pageNumber
         
-        if let cell = collectionView?.cellForItemAtIndexPath(NSIndexPath(forRow: pageNumber, inSection: 0)) {
-            let transformation = CATransform3DIdentity
-            view.layer.transform = CATransform3DIdentity
-        }
+        // Reset the transform to the default
+        view.layer.transform = CATransform3DIdentity
     }
     
     // MARK: - Animation Methods

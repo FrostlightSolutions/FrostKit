@@ -176,8 +176,7 @@ public class DeveloperTools: NSObject {
         resetGestureRecogniser()
         
         // Present Tools
-        if let viewController = currentViewController {
-            let developerToolsVC = storyboard.instantiateInitialViewController() as! UIViewController
+        if let viewController = currentViewController, developerToolsVC = storyboard.instantiateInitialViewController() {
             if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
                 developerToolsVC.modalPresentationStyle = .PageSheet
             }

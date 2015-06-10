@@ -151,7 +151,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         
         if let currentAnnotation = annotation {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.mapView.addAnnotation(annotation)
+                self.mapView.addAnnotation(currentAnnotation)
             })
         }
     }
@@ -304,11 +304,9 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     Removes all the polylines plotted on the map view.
     */
     public func removeAllPolylines() {
-        if let overlays = mapView.overlays {
-            for overlay in overlays {
-                if let polyline = overlay as? MKPolyline {
-                    mapView.removeOverlay(polyline)
-                }
+        for overlay in mapView.overlays {
+            if let polyline = overlay as? MKPolyline {
+                mapView.removeOverlay(polyline)
             }
         }
     }
@@ -327,8 +325,8 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         
         if inApp == true {
             let directionsRequest = MKDirectionsRequest()
-            directionsRequest.setSource = currentLocationItem
-            directionsRequest.setDestination = destinationItem
+            directionsRequest.source = currentLocationItem
+            directionsRequest.destination = destinationItem
             directionsRequest.transportType = .Automobile
             directionsRequest.requestsAlternateRoutes = false
             
@@ -336,8 +334,8 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
             NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
             directions.calculateDirectionsWithCompletionHandler { (directionsResponse, error) -> Void in
                 if let anError = error {
-                    NSLog("Error getting directions: \(error.localizedDescription)")
-                } else if let route = directionsResponse.routes.first as? MKRoute {
+                    NSLog("Error getting directions: \(anError.localizedDescription)\n\(anError)")
+                } else if let route = directionsResponse?.routes.first {
                     self.plotRoute(route)
                 }
                 NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
@@ -386,21 +384,21 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     
     // MARK: - MKMapViewDelegate Methods
     
-    public func mapView(mapView: MKMapView, viewForAnnotation anno: MKAnnotation) -> MKAnnotationView! {
+    public func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         var annotationPinView: MKPinAnnotationView?
-        if let annotation = anno as? Annotation {
+        if let myAnnotation = annotation as? Annotation {
             if let annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView {
-                annotationView.annotation = annotation
+                annotationView.annotation = myAnnotation
                 annotationPinView = annotationView
             } else {
-                let pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                let pinView = MKPinAnnotationView(annotation: myAnnotation, reuseIdentifier: identifier)
                 pinView.pinColor = .Red
                 pinView.animatesDrop = true
                 pinView.hidden = false
                 pinView.enabled = true
                 pinView.canShowCallout = true
                 pinView.draggable = false
-                pinView.rightCalloutAccessoryView = UIButton.buttonWithType(.DetailDisclosure) as UIView
+                pinView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
                 annotationPinView = pinView
             }
         }
@@ -412,7 +410,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         if let annotation = view.annotation as? Annotation {
             if NSClassFromString("UIAlertController") == nil {
                 // iOS 7
-                let title = [annotation.title, annotation.subtitle].componentsJoinedByString("\n")
+                let title = "\n".join([annotation.title!, annotation.subtitle!])
                 let actionSheet = UIActionSheet(title: title, delegate: self, cancelButtonTitle: FKLocalizedString("CANCEL", comment: "Cancel"), destructiveButtonTitle: nil, otherButtonTitles: FKLocalizedString("ZOOM_TO_", comment: "Zoom to..."), FKLocalizedString("DIRECTIONS", comment: "Directions"), FKLocalizedString("OPEN_IN_MAPS", comment: "Open in Maps"))
                 actionSheet.showFromRect(control.frame, inView: view, animated: true)
             } else {
@@ -439,7 +437,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         }
     }
     
-    public func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer! {
+    public func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
         if let polyline = overlay as? MKPolyline {
             let polylineRenderer = MKPolylineRenderer(polyline: polyline)
             polylineRenderer.strokeColor = UIColor.blueColor()
@@ -449,7 +447,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
             polylineRenderer.alpha = 0.6
             return polylineRenderer
         }
-        return nil
+        return MKOverlayRenderer()
     }
     
     public func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
