@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		18270FA51A858565009A2390 /* ExampleMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18270FA41A858565009A2390 /* ExampleMapViewController.swift */; };
+		1828C5421B29909B004EFDA9 /* PlaceholderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1828C5411B29909A004EFDA9 /* PlaceholderDetailVC.swift */; };
 		18455EE71A8423B8001EFCE5 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18455EDE1A8423A9001EFCE5 /* Alamofire.framework */; };
 		18455EE81A8423B8001EFCE5 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 18455EDE1A8423A9001EFCE5 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18772BEF19DD61E200F67CE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772BEE19DD61E200F67CE7 /* AppDelegate.swift */; };
@@ -98,6 +99,7 @@
 
 /* Begin PBXFileReference section */
 		18270FA41A858565009A2390 /* ExampleMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleMapViewController.swift; sourceTree = "<group>"; };
+		1828C5411B29909A004EFDA9 /* PlaceholderDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderDetailVC.swift; sourceTree = "<group>"; };
 		18455ED61A8423A9001EFCE5 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		18772BE919DD61E200F67CE7 /* iOS Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18772BED19DD61E200F67CE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				18772C2319DD67A900F67CE7 /* MainMenuVC.swift */,
+				1828C5411B29909A004EFDA9 /* PlaceholderDetailVC.swift */,
 				18772C2419DD67A900F67CE7 /* SocialHelperVC.swift */,
 				18E3F21E19DDDBD00032ABB7 /* WebViewControllerVC.swift */,
 				18270FA41A858565009A2390 /* ExampleMapViewController.swift */,
@@ -329,6 +332,7 @@
 				18E3F21F19DDDBD00032ABB7 /* WebViewControllerVC.swift in Sources */,
 				18772BEF19DD61E200F67CE7 /* AppDelegate.swift in Sources */,
 				18772C2619DD67A900F67CE7 /* SocialHelperVC.swift in Sources */,
+				1828C5421B29909B004EFDA9 /* PlaceholderDetailVC.swift in Sources */,
 				18270FA51A858565009A2390 /* ExampleMapViewController.swift in Sources */,
 				18772C2519DD67A900F67CE7 /* MainMenuVC.swift in Sources */,
 			);
@@ -456,6 +460,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Frostlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -468,6 +473,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Frostlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
