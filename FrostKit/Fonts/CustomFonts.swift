@@ -57,8 +57,7 @@ public class CustomFonts: NSObject {
             let fontData = NSData(contentsOfURL: url)
             var error: Unmanaged<CFErrorRef>?
             let provider = CGDataProviderCreateWithCFData(fontData)
-            let font = CGFontCreateWithDataProvider(provider)
-            if CTFontManagerRegisterGraphicsFont(font, &error) == false {
+            if let font = CGFontCreateWithDataProvider(provider) where CTFontManagerRegisterGraphicsFont(font, &error) == false {
                 if let anError = error {
                     let errorCode = CFErrorGetCode(anError.takeRetainedValue())
                     if errorCode == CTFontManagerError.AlreadyRegistered.rawValue {
