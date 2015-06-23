@@ -39,12 +39,10 @@ public func WebViewController(viewType viewType: WebViewType = .Automatic) -> Ba
             return UIWebViewController()
         }
     default:
-        break
+        if NSClassFromString("WKWebView") != nil {
+            return WKWebViewController()
+        } else {
+            return UIWebViewController()
+        }
     }
-    
-    if NSClassFromString("WKWebView") != nil {
-        return WKWebViewController()
-    }
-    
-    return UIWebViewController()
 }
