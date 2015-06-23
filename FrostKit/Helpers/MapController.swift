@@ -442,8 +442,8 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
             let polylineRenderer = MKPolylineRenderer(polyline: polyline)
             polylineRenderer.strokeColor = UIColor.blueColor()
             polylineRenderer.lineWidth = 4
-            polylineRenderer.lineCap = kCGLineCapRound
-            polylineRenderer.lineJoin = kCGLineJoinRound
+            polylineRenderer.lineCap = .Round
+            polylineRenderer.lineJoin = .Round
             polylineRenderer.alpha = 0.6
             return polylineRenderer
         }
