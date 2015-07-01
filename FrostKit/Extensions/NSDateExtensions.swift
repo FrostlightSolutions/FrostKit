@@ -338,6 +338,10 @@ extension NSDate {
     */
     public func dateByAddingDays(days: Int) -> NSDate {
         
+        if days == 0 {
+            return self
+        }
+        
         let components = NSDateComponents()
         components.day = days
         
