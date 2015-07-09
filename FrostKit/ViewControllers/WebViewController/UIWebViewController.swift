@@ -12,17 +12,17 @@ import UIKit
 /// A subclass of BaseWebViewController that wraps a UIWebView in a view controller.
 ///
 @available(iOS, deprecated=9.0, message="This is no longer needed as of iOS 9. Use SFSafariViewController instead.")
-class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
+public class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     
     /// The URL of the current page.
-    override var URL: NSURL? {
+    public override var URL: NSURL? {
         if let urlString = self.urlString {
             return  NSURL(string: urlString)
         }
         return nil
     }
     /// Returns `true` if the web view is currently loading, `false` if not.
-    override var loading: Bool {
+    public override var loading: Bool {
         if let webView = self.webView as? UIWebView {
             return webView.loading
         }
@@ -32,11 +32,11 @@ class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     /**
     Stops the web view from being loaded any more.
     */
-    override func stopLoading() {
+    public override func stopLoading() {
         (self.webView as? UIWebView)?.stopLoading()
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         
         webView = UIWebView(frame: view.bounds)
         (self.webView as? UIWebView)?.delegate = self
@@ -98,19 +98,19 @@ class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     
     // MARK: - UIWebViewDelegate Methods
     
-    func webViewDidStartLoad(webView: UIWebView) {
+    public func webViewDidStartLoad(webView: UIWebView) {
         
         updateActivityViewVisability()
         updateBackForwardButtons()
     }
     
-    func webViewDidFinishLoad(webView: UIWebView) {
+    public func webViewDidFinishLoad(webView: UIWebView) {
         
         updateActivityViewVisability()
         updateBackForwardButtons()
     }
     
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
+    public func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
         
         updateActivityViewVisability()
         updateBackForwardButtons()

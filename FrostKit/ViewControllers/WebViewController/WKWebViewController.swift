@@ -13,17 +13,17 @@ import WebKit
 /// A subclass of BaseWebViewController that wraps a WKWebView in a view controller.
 ///
 @available(iOS, deprecated=9.0, message="This is no longer needed as of iOS 9. Use SFSafariViewController instead.")
-class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
+public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     /// The URL of the current page.
-    override var URL: NSURL? {
+    public override var URL: NSURL? {
         if let webView = self.webView as? WKWebView {
             return webView.URL
         }
         return nil
     }
     /// The title to show in the navigation bar if something other than the loaded page's title is required.
-    override var titleOverride: String? {
+    public override var titleOverride: String? {
         didSet {
             if titleOverride != nil {
                 navigationItem.title = titleOverride
@@ -33,7 +33,7 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
         }
     }
     /// Returns `true` if the web view is currently loading, `false` if not.
-    override var loading: Bool {
+    public override var loading: Bool {
         if let webView = self.webView as? WKWebView {
             return webView.loading
         }
@@ -43,11 +43,11 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     /**
     Stops the web view from being loaded any more.
     */
-    override func stopLoading() {
+    public override func stopLoading() {
         (self.webView as? WKWebView)?.stopLoading()
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         
         webView = WKWebView(frame: view.bounds)
         
@@ -75,7 +75,8 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     // MARK: - KVO Methods
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [NSObject : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    public override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        
         if let aKeyPath = keyPath {
             switch aKeyPath {
             case "estimatedProgress":
@@ -153,7 +154,7 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     // MARK: - WKNavigationDelegate Methods
     
-    func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: ((WKNavigationActionPolicy) -> Void)) {
+    public func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: ((WKNavigationActionPolicy) -> Void)) {
         
         // Alows links in the WKWebView to be tappable
         decisionHandler(.Allow)
