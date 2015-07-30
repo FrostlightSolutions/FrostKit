@@ -22,6 +22,9 @@ public enum DateCompareType {
     case AfterOrEqualTo
 }
 
+/// Most common component flags
+private let componentFlags: NSCalendarUnit = (.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitWeekOfMonth |  .CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond | .CalendarUnitWeekday | .CalendarUnitWeekdayOrdinal)
+
 ///
 /// Extention functions for NSDate
 ///
@@ -352,6 +355,36 @@ extension NSDate {
             NSLog("Error: Failed to add \(days) days to date \(self)")
             return self
         }
+    }
+    
+    /**
+    Returns a date with the time at the start of the day, while preserving the time zone.
+    
+    :returns: The date at the start of the day.
+    */
+    public func dateAtStartOfDay() -> NSDate {
+        
+        let calendar = NSCalendar.gregorianCalendar()
+        let components = calendar.components(componentFlags, fromDate: self)
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        return calendar.dateFromComponents(components)!
+    }
+    
+    /**
+    Returns a date with the time at the end of the day, while preserving the time zone.
+    
+    :returns: The date at the end of the day.
+    */
+    public func dateAtEndOfDay() -> NSDate {
+        
+        let calendar = NSCalendar.gregorianCalendar()
+        let components = calendar.components(componentFlags, fromDate: self)
+        components.hour = 23
+        components.minute = 59
+        components.second = 59
+        return calendar.dateFromComponents(components)!
     }
     
     // MARK: - Date Strings
