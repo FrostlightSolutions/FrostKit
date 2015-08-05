@@ -109,14 +109,15 @@ public class LocalStorage: NSObject {
     
     :param: directory       The search path directory to use.
     :param: reletivePath    The reletive path to of the file or directory.
-    :param: fileName        The name of the file (including the extension) with a default of `nil` if a directory is being requested.
+    :param: fileName        The name of the file with a default of `nil` if a directory is being requested.
+    :param: fileExtension   The name of the file extension.
     
     :returns: A URL comprised of the passed in parameters
     */
-    class func absoluteURL(#directory: NSSearchPathDirectory, reletivePath: String, fileName: String? = nil) -> NSURL? {
+    class func absoluteURL(#directory: NSSearchPathDirectory, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> NSURL? {
         
         if let baseURL = baseURL(directory: directory) {
-            return absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName)
+            return absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
         }
         return nil
     }
@@ -124,14 +125,25 @@ public class LocalStorage: NSObject {
     /**
     A private class for the public class function.
     
+    :param: baseURL         The base URL of the absolute to be created.
+    :param: reletivePath    The reletive path to of the file or directory.
+    :param: fileName        The name of the file with a default of `nil` if a directory is being requested.
+    :param: fileExtension   The name of the file extension.
+    
     :returns: A non-optional version of the public class function.
     */
-    private class func absoluteURL(#baseURL: NSURL, reletivePath: String, fileName: String? = nil) -> NSURL {
+    private class func absoluteURL(#baseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> NSURL {
         
         var url = baseURL.URLByAppendingPathComponent(reletivePath)
+        
         if let name = fileName {
             url = url.URLByAppendingPathComponent(name)
         }
+        
+        if let anExtension = fileExtension {
+            url = url.URLByAppendingPathExtension(anExtension)
+        }
+        
         return url
     }
     
@@ -139,6 +151,8 @@ public class LocalStorage: NSObject {
     
     /**
     Creates a directory at a paticular URL.
+    
+    :param: url             The url of the directory to be created.
     
     :returns: `true` if the directory is created. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
@@ -202,12 +216,13 @@ public class LocalStorage: NSObject {
     
     :param: data            The data to be saved.
     :param: reletivePath    The reletive path to of the file or directory.
-    :param: fileName        The name of the file (including the extension).
+    :param: fileName        The name of the file.
+    :param: fileExtension   The name of the file extension.
     
     :returns: `true` if the data saves correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func saveToDocuments(#data: AnyObject, reletivePath: String, fileName: String? = nil) -> Bool {
-        return save(data: data, baseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName)
+    public class func saveToDocuments(#data: AnyObject, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
+        return save(data: data, baseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
     }
     
     /**
@@ -215,12 +230,13 @@ public class LocalStorage: NSObject {
     
     :param: data            The data to be saved.
     :param: reletivePath    The reletive path to of the file or directory.
-    :param: fileName        The name of the file (including the extension).
+    :param: fileName        The name of the file.
+    :param: fileExtension   The name of the file extension.
     
     :returns: `true` if the data saves correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func saveToCaches(#data: AnyObject, reletivePath: String, fileName: String? = nil) -> Bool {
-        return save(data: data, baseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName)
+    public class func saveToCaches(#data: AnyObject, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
+        return save(data: data, baseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
     }
     
     /**
@@ -242,14 +258,15 @@ public class LocalStorage: NSObject {
     :param: fromeBaseURL    The original search path directory.
     :param: toBaseURL       The new search path directory.
     :param: reletivePath    The reletive path to of the file or directory.
-    :param: fileName        The name of the file (including the extension).
+    :param: fileName        The name of the file.
+    :param: fileExtension   The name of the file extension.
     
     :returns: `true` if the data is moved correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    private class func move(#fromBaseURL: NSURL, toBaseURL: NSURL, reletivePath: String, fileName: String? = nil) -> Bool {
+    private class func move(#fromBaseURL: NSURL, toBaseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
         
-        let fromURL = absoluteURL(baseURL: fromBaseURL, reletivePath: reletivePath, fileName: fileName)
-        let toURL = absoluteURL(baseURL: toBaseURL, reletivePath: reletivePath, fileName: fileName)
+        let fromURL = absoluteURL(baseURL: fromBaseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
+        let toURL = absoluteURL(baseURL: toBaseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
         
         var error: NSError?
         let success = NSFileManager.defaultManager().moveItemAtURL(fromURL, toURL: toURL, error: &error)
@@ -268,24 +285,26 @@ public class LocalStorage: NSObject {
     Moves files from cache to the documents directory in relation to the reletive path and file name.
     
     :param: reletivePath    The reletive path to of the file or directory.
-    :param: fileName        The name of the file (including the extension).
+    :param: fileName        The name of the file.
+    :param: fileExtension   The name of the file extension.
     
     :returns: `true` if the data is moved correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func moveFromCachesToDocuments(#reletivePath: String, fileName: String? = nil) -> Bool {
-        return move(fromBaseURL: cachesURL(), toBaseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName)
+    public class func moveFromCachesToDocuments(#reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
+        return move(fromBaseURL: cachesURL(), toBaseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
     }
     
     /**
     Moves files from documents to the caches directory in relation to the reletive path and file name.
     
     :param: reletivePath    The reletive path to of the file or directory.
-    :param: fileName        The name of the file (including the extension).
+    :param: fileName        The name of the file.
+    :param: fileExtension   The name of the file extension.
     
     :returns: `true` if the data is moved correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func moveFromDocumentsToCaches(#reletivePath: String, fileName: String? = nil) -> Bool {
-        return move(fromBaseURL: documentsURL(), toBaseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName)
+    public class func moveFromDocumentsToCaches(#reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
+        return move(fromBaseURL: documentsURL(), toBaseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
     }
     
     // MARK: - Load Methods
@@ -295,13 +314,14 @@ public class LocalStorage: NSObject {
     
     :param: baseURL         The search path directory to use.
     :param: reletivePath    The reletive path to of the file or directory.
-    :param: fileName        The name of the file (including the extension).
+    :param: fileName        The name of the file.
+    :param: fileExtension   The name of the file extension.
     
     :returns: The object to be loaded or `nil` if it isn't found.
     */
-    private class func load(#baseURL: NSURL, reletivePath: String, fileName: String? = nil) -> AnyObject? {
+    public class func load(#baseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> AnyObject? {
         
-        let url = absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName)
+        let url = absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
         
         if let path = url.path {
             return NSKeyedUnarchiver.unarchiveObjectWithFile(path)
@@ -314,48 +334,52 @@ public class LocalStorage: NSObject {
     Loads files based in the documents directory.
     
     :param: reletivePath    The reletive path to of the file or directory.
-    :param: fileName        The name of the file (including the extension).
+    :param: fileName        The name of the file.
+    :param: fileExtension   The name of the file extension.
     
     :returns: The file requested to be loaded or `nil` if it isn't found.
     */
-    public class func loadFromDocuments(#reletivePath: String, fileName: String? = nil) -> AnyObject? {
-        return load(baseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName)
+    public class func loadFromDocuments(#reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> AnyObject? {
+        return load(baseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
     }
     
     /**
     Loads files based in the caches directory.
     
     :param: reletivePath    The reletive path to of the file or directory.
-    :param: fileName        The name of the file (including the extension).
+    :param: fileName        The name of the file.
+    :param: fileExtension   The name of the file extension.
     
     :returns: The file requested to be loaded or `nil` if it isn't found.
     */
-    public class func loadFromCaches(#reletivePath: String, fileName: String? = nil) -> AnyObject? {
-        return load(baseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName)
+    public class func loadFromCaches(#reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> AnyObject? {
+        return load(baseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
     }
     
     /**
     Loads images based in the documents directory.
     
     :param: reletivePath    The reletive path to of the file or directory.
-    :param: fileName        The name of the file (including the extension).
+    :param: fileName        The name of the file.
+    :param: fileExtension   The name of the file extension.
     
     :returns: The image requested to be loaded or `nil` if it isn't found.
     */
-    public class func loadImageFromDocuments(#reletivePath: String, fileName: String? = nil) -> UIImage? {
-        return loadFromDocuments(reletivePath: reletivePath, fileName: fileName) as? UIImage
+    public class func loadImageFromDocuments(#reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> UIImage? {
+        return loadFromDocuments(reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) as? UIImage
     }
     
     /**
     Loads images based in the caches directory.
     
     :param: reletivePath    The reletive path to of the file or directory.
-    :param: fileName        The name of the file (including the extension).
+    :param: fileName        The name of the file.
+    :param: fileExtension   The name of the file extension.
     
     :returns: The image requested to be loaded or `nil` if it isn't found.
     */
-    public class func loadImageFromCaches(#reletivePath: String, fileName: String? = nil) -> UIImage? {
-        return loadFromCaches(reletivePath: reletivePath, fileName: fileName) as? UIImage
+    public class func loadImageFromCaches(#reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> UIImage? {
+        return loadFromCaches(reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) as? UIImage
     }
     
     /**
@@ -397,12 +421,13 @@ public class LocalStorage: NSObject {
     
     :param: baseURL         The search path directory to use.
     :param: reletivePath    The reletive path to of the file or directory.
-    :param: fileName        The name of the file (including the extension) with a default of `nil` if a directory is being requested.
+    :param: fileName        The name of the file.
+    :param: fileExtension   The name of the file extension.
     
     :returns: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    private class func remove(#baseURL: NSURL, reletivePath: String, fileName: String? = nil) -> Bool {
-        return remove(absoluteURL: absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName))
+    private class func remove(#baseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
+        return remove(absoluteURL: absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension))
     }
     
     /**
@@ -445,24 +470,26 @@ public class LocalStorage: NSObject {
     Removes a file or directory in the documents root directory in relation to the reletive path and file name.
     
     :param: reletivePath    The reletive path to of the file or directory.
-    :param: fileName        The name of the file (including the extension).
+    :param: fileName        The name of the file.
+    :param: fileExtension   The name of the file extension.
     
     :returns: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func removeDocumentsObject(#reletivePath: String, fileName: String? = nil) -> Bool {
-        return remove(baseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName)
+    public class func removeDocumentsObject(#reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
+        return remove(baseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
     }
     
     /**
     Removes a file or directory in the caches root directory in relation to the reletive path and file name.
     
     :param: reletivePath    The reletive path to of the file or directory.
-    :param: fileName        The name of the file (including the extension).
+    :param: fileName        The name of the file.
+    :param: fileExtension   The name of the file extension.
     
     :returns: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func removeCachesObject(#reletivePath: String, fileName: String? = nil) -> Bool {
-        return remove(baseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName)
+    public class func removeCachesObject(#reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
+        return remove(baseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
     }
     
 }
