@@ -165,16 +165,22 @@ public class LocalStorage: NSObject {
     :param: data            The data to be saved.
     :param: baseURL         The search path directory to use.
     :param: reletivePath    The reletive path to of the file or directory.
-    :param: fileName        The name of the file (including the extension).
+    :param: fileName        The name of the file.
+    :param: fileExtension   The name of the file extension.
     
     :returns: `true` if the data saves correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    private class func save(#data: AnyObject, baseURL: NSURL, reletivePath: String, fileName: String? = nil) -> Bool {
+    public class func save(#data: AnyObject, baseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
         
         var url = baseURL.URLByAppendingPathComponent(reletivePath)
         createDirectory(url: url)
+        
         if let aFileName = fileName {
             url = url.URLByAppendingPathComponent(aFileName)
+        }
+        
+        if let aFileExtension = fileExtension {
+            url = url.URLByAppendingPathExtension(aFileExtension)
         }
         
         if let path = url.path {
