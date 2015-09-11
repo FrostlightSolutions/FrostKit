@@ -6,36 +6,48 @@
 //  Copyright (c) 2014-2015 James Barrow - Frostlight Solutions. All rights reserved.
 //
 
+import Foundation
+
+#if os(iOS)
 import UIKit
+#elseif os(watchOS)
+import WatchKit
+#endif
+
 
 public let FUSServiceClientUpdateSections = "com.FrostKit.FUSServiceClient.updateSections"
 public let UserStoreLogoutClearData = "com.FrostKit.UserStore.logout.clearData"
 public let NetworkRequestDidBeginNotification = "com.FrostKit.activityIndicator.request.begin"
 public let NetworkRequestDidCompleteNotification = "com.FrostKit.activityIndicator.request.complete"
 
+#if os(iOS)
 internal func FKLocalizedString(key: String, comment: String = "") -> String {
     return NSLocalizedString(key, bundle: NSBundle(forClass: FrostKit.self), comment: comment)
 }
+#endif
 
 public class FrostKit {
     
     // MARK: - Private Variables
     
-    private var FUSName: String?
     private var tintColor: UIColor?
+#if os(iOS)
+    private var FUSName: String?
     private lazy var baseURLs = Array<String>()
     private var defaultDebugIndex = 0
     private var defaultProductionIndex = 0
     private var OAuthClientID: String?
     private var OAuthClientSecret: String?
+#endif
     
     // MARK: - Public Class Variables
     
-    public class var FUSName: String? {
-        return FrostKit.shared.FUSName
-    }
     public class var tintColor: UIColor? {
         return FrostKit.shared.tintColor
+    }
+#if os(iOS)
+    public class var FUSName: String? {
+        return FrostKit.shared.FUSName
     }
     public class var baseURLs: [String] {
         return FrostKit.shared.baseURLs
@@ -52,6 +64,7 @@ public class FrostKit {
     public class var OAuthClientSecret: String? {
         return FrostKit.shared.OAuthClientSecret
     }
+#endif
     
     // MARK: - Singleton
     
@@ -63,8 +76,10 @@ public class FrostKit {
     }
     
     init() {
+#if os(iOS)
         CustomFonts.loadCustomFonts()
         UserStore.current
+#endif
     }
     
     // MARK: - Setup Methods
@@ -73,20 +88,22 @@ public class FrostKit {
         FrostKit.shared
     }
     
-    public class func setup(FUSName FUSName: String) {
-        FrostKit.shared.FUSName = FUSName
-    }
-    
-    public class func setup(tintColor tintColor: UIColor) {
+    public class func setup(tintColor: UIColor) {
         FrostKit.shared.tintColor = tintColor
     }
     
-    public class func setup(baseURLs baseURLs: [String], defaultDebugIndex: Int = 0, defaultProductionIndex: Int = 0, OAuthClientID: String? = nil, OAuthClientSecret: String? = nil) {
+#if os(iOS)
+    public class func setupFUSName(FUSName: String) {
+        FrostKit.shared.FUSName = FUSName
+    }
+    
+    public class func setupURLs(baseURLs: [String], defaultDebugIndex: Int = 0, defaultProductionIndex: Int = 0, OAuthClientID: String? = nil, OAuthClientSecret: String? = nil) {
         FrostKit.shared.baseURLs = baseURLs
         FrostKit.shared.defaultDebugIndex = defaultDebugIndex
         FrostKit.shared.defaultProductionIndex = defaultProductionIndex
         FrostKit.shared.OAuthClientID = OAuthClientID
         FrostKit.shared.OAuthClientSecret = OAuthClientSecret
     }
+#endif
     
 }

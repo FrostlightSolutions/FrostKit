@@ -149,6 +149,7 @@
 		18E028471BA2D30100852022 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066D19DB76C900811755 /* UIImageExtensions.swift */; settings = {ASSET_TAGS = (); }; };
 		18E0284A1BA2D31800852022 /* UIScreenExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C7B6A1AD2F4A400CAE1A5 /* UIScreenExtensions.swift */; settings = {ASSET_TAGS = (); }; };
 		18E0284B1BA2D33700852022 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18748B2019DF5661003942A3 /* Localizable.strings */; settings = {ASSET_TAGS = (); }; };
+		18E028731BA2DA2A00852022 /* FrostKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23119DE07670032ABB7 /* FrostKit.swift */; settings = {ASSET_TAGS = (); }; };
 		18E3F23219DE07670032ABB7 /* FrostKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23119DE07670032ABB7 /* FrostKit.swift */; };
 		18E3F23A19DE15600032ABB7 /* UIBarButtonItemExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23919DE15600032ABB7 /* UIBarButtonItemExtensions.swift */; };
 		18EA123F19DC79F100FD858D /* NSDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA123E19DC79F100FD858D /* NSDataExtensions.swift */; };
@@ -841,6 +842,7 @@
 				18E028431BA2D2E900852022 /* KeychainHelper.swift in Sources */,
 				18E028421BA2D2E400852022 /* NSBundleExtensions.swift in Sources */,
 				18E028471BA2D30100852022 /* UIImageExtensions.swift in Sources */,
+				18E028731BA2DA2A00852022 /* FrostKit.swift in Sources */,
 				18E028441BA2D2F600852022 /* UIFontExtensions.swift in Sources */,
 				18E0283D1BA2D2D300852022 /* NSErrorExtensions.swift in Sources */,
 			);
