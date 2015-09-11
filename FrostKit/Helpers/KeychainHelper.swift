@@ -36,13 +36,11 @@ public class KeychainHelper: NSObject {
         secDict.setObject(NSNumber(bool: true), forKey: String(kSecReturnData))
         // kCFBooleanTrue
         
-        var foundDict: Unmanaged<AnyObject>?
+        var foundDict: AnyObject?
         let status = SecItemCopyMatching(secDict, &foundDict);
         
         if status == noErr {
-            if let opaque = foundDict?.toOpaque() {
-                return Unmanaged<NSData>.fromOpaque(opaque).takeUnretainedValue()
-            }
+            return foundDict as? NSData
         } else {
             let error = NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
             NSLog("ERROR: Search Keychain for Data: \(error.localizedDescription)")
