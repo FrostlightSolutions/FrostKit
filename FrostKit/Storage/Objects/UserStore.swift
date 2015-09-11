@@ -33,7 +33,7 @@ public class UserStore: NSObject, NSCoding {
     public var customDataStore = Dictionary<String, AnyObject>()
     /// Returns `true` is the user is logged in and `false` if not. A user is assumed as logged in if the UserStore has a username set and details can be retrieved from the keychain wit that username.
     public var isLoggedIn: Bool {
-        if let username = self.username, let details = KeychainHelper.details(username: username) as? OAuthToken {
+        if let username = self.username where KeychainHelper.details(username: username) != nil {
             return true
         }
         return false
@@ -44,7 +44,7 @@ public class UserStore: NSObject, NSCoding {
     /**
     Returns the shared user store object.
     
-    :returns: The currnet user store object.
+    - returns: The currnet user store object.
     */
     public class var current: UserStore {
         struct Singleton {
@@ -67,7 +67,7 @@ public class UserStore: NSObject, NSCoding {
     
     // MARK: - NSCoding Methods
     
-    public required convenience init(coder aDecoder: NSCoder) {
+    public required convenience init?(coder aDecoder: NSCoder) {
         self.init()
         
         if let username = aDecoder.decodeObjectForKey("username") as? String {
@@ -120,7 +120,7 @@ public class UserStore: NSObject, NSCoding {
     /**
     Saves the current UserStore shared instance.
     
-    :returns: `true` if the save completed successfully, `false` if it failed.
+    - returns: `true` if the save completed successfully, `false` if it failed.
     */
     public class func saveUser() -> Bool {
         return LocalStorage.saveUserData(UserStore.current)
@@ -129,7 +129,7 @@ public class UserStore: NSObject, NSCoding {
     /**
     Loads the UserStore object from local storage if available. If there is no previously saved item, it creates a new one.
     
-    :returns: A loaded or newly created UserStore object.
+    - returns: A loaded or newly created UserStore object.
     */
     internal class func loadUser() -> UserStore {
         if let userStore = LocalStorage.loadUserData() as? UserStore {
@@ -165,9 +165,9 @@ public class UserStore: NSObject, NSCoding {
     /**
     Gets the data store located in the user object for a paticular url string (usually an absolute path).
     
-    :param: urlString The url string to use as a key.
+    - parameter urlString: The url string to use as a key.
     
-    :returns: The data store or `nil` if none if found.
+    - returns: The data store or `nil` if none if found.
     */
     public func dataStoreForURL(urlString: String) -> DataStore? {
         if shouldManageContentData == true {
@@ -179,8 +179,8 @@ public class UserStore: NSObject, NSCoding {
     /**
     Sets the data store in the user object for a paticular url string (usually an absolute path).
     
-    :param: dataStore The data store to set.
-    :param: urlString The url string to use as a key.
+    - parameter dataStore: The data store to set.
+    - parameter urlString: The url string to use as a key.
     */
     public func setDataStore(dataStore: DataStore, urlString: String) {
         contentData[urlString] = dataStore
@@ -194,9 +194,9 @@ public class UserStore: NSObject, NSCoding {
     /**
     Searches the sections array for a section dictionary with a certain key. Return `nil` if no section dictionary is found.
     
-    :param: key The key of the section dictionary to search for.
+    - parameter key: The key of the section dictionary to search for.
     
-    :returns: A section dictionary or `nil` if none is found.
+    - returns: A section dictionary or `nil` if none is found.
     */
     public func searchForSectionWithKey(key:String) -> [String: String]? {
         if sections.count > 0 {

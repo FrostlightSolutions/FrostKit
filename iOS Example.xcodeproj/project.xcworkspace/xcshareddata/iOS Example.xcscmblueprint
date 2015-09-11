@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "ABE320C52EBAFEA333AE1C7CD0B7ED96508F5D03",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "ABE320C52EBAFEA333AE1C7CD0B7ED96508F5D03" : 0,
+    "67620B5EFA902936DF04070AF595B76AB0333747" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "2DF10664-DF23-4609-82EB-63413EF48636",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "ABE320C52EBAFEA333AE1C7CD0B7ED96508F5D03" : "FrostKit",
+    "67620B5EFA902936DF04070AF595B76AB0333747" : "FrostKit\/Alamofire"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "iOS Example",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 203,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "iOS Example.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Alamofire\/Alamofire.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "67620B5EFA902936DF04070AF595B76AB0333747"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/FrostlightSolutions\/FrostKit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "ABE320C52EBAFEA333AE1C7CD0B7ED96508F5D03"
+    }
+  ]
+}

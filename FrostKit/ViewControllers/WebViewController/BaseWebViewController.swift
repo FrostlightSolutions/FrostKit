@@ -81,10 +81,10 @@ public class BaseWebViewController: UIViewController {
             
             view.addSubview(webView)
             
-            webView.setTranslatesAutoresizingMaskIntoConstraints(false)
+            webView.translatesAutoresizingMaskIntoConstraints = false
             let viewsDict = ["webView": webView]
-            let constraintV = NSLayoutConstraint.constraintsWithVisualFormat("V:|[webView]|", options: nil, metrics: nil, views: viewsDict)
-            let constraintH = NSLayoutConstraint.constraintsWithVisualFormat("H:|[webView]|", options: nil, metrics: nil, views: viewsDict)
+            let constraintV = NSLayoutConstraint.constraintsWithVisualFormat("V:|[webView]|", options: [], metrics: nil, views: viewsDict)
+            let constraintH = NSLayoutConstraint.constraintsWithVisualFormat("H:|[webView]|", options: [], metrics: nil, views: viewsDict)
             view.addConstraints(constraintV)
             view.addConstraints(constraintH)
             
@@ -121,7 +121,7 @@ public class BaseWebViewController: UIViewController {
     /**
     Dismissed the current view if presented modally.
     
-    :param: sender The bar button item pressed.
+    - parameter sender: The bar button item pressed.
     */
     func doneButtonPressed(sender: AnyObject?) {
         dismissViewControllerAnimated(true, completion: nil)
@@ -130,7 +130,7 @@ public class BaseWebViewController: UIViewController {
     /**
     Refrshes the web view when the refresh button is pressed in the toolbar.
     
-    :param: sender The bar button item pressed.
+    - parameter sender: The bar button item pressed.
     */
     func refreshButtonPressed(sender: AnyObject?) {
         // Functionality overriden in subclasses
@@ -139,7 +139,7 @@ public class BaseWebViewController: UIViewController {
     /**
     Requests the web view go back a page.
     
-    :param: sender The bar button item pressed.
+    - parameter sender: The bar button item pressed.
     */
     func backButtonPressed(sender: AnyObject?) {
         // Functionality overriden in subclasses
@@ -148,7 +148,7 @@ public class BaseWebViewController: UIViewController {
     /**
     Requests the web view go forward a page.
     
-    :param: sender The bar button item pressed.
+    - parameter sender: The bar button item pressed.
     */
     func forwardButtonPressed(sender: AnyObject?) {
         // Functionality overriden in subclasses
@@ -157,7 +157,7 @@ public class BaseWebViewController: UIViewController {
     /**
     Calls and presents a UIActivityViewController.
     
-    :param: sender The bar button item pressed.
+    - parameter sender: The bar button item pressed.
     */
     func actionButtonPressed(sender: AnyObject?) {
         var activityItems = Array<AnyObject>()
@@ -288,7 +288,7 @@ public class BaseWebViewController: UIViewController {
     /**
     Creates a URL string, appending `http://` if the URL string does not already have it as a prefix.
     
-    :returns: The base URL string.
+    - returns: The base URL string.
     */
     func loadBaseURL() -> String {
         if var urlString = self.urlString {

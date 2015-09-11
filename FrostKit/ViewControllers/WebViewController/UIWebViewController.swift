@@ -11,17 +11,18 @@ import UIKit
 /// 
 /// A subclass of BaseWebViewController that wraps a UIWebView in a view controller.
 ///
-class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
+@available(iOS, deprecated=9.0, message="This is no longer needed as of iOS 9. Use SFSafariViewController instead.")
+public class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     
     /// The URL of the current page.
-    override var URL: NSURL? {
+    public override var URL: NSURL? {
         if let urlString = self.urlString {
             return  NSURL(string: urlString)
         }
         return nil
     }
     /// Returns `true` if the web view is currently loading, `false` if not.
-    override var loading: Bool {
+    public override var loading: Bool {
         if let webView = self.webView as? UIWebView {
             return webView.loading
         }
@@ -31,11 +32,11 @@ class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     /**
     Stops the web view from being loaded any more.
     */
-    override func stopLoading() {
+    public override func stopLoading() {
         (self.webView as? UIWebView)?.stopLoading()
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         
         webView = UIWebView(frame: view.bounds)
         (self.webView as? UIWebView)?.delegate = self
@@ -48,7 +49,7 @@ class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     /**
     Refrshes the web view when the refresh button is pressed in the toolbar.
     
-    :param: sender The bar button item pressed.
+    - parameter sender: The bar button item pressed.
     */
     override func refreshButtonPressed(sender: AnyObject?) {
         
@@ -64,7 +65,7 @@ class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     /**
     Requests the web view go back a page.
     
-    :param: sender The bar button item pressed.
+    - parameter sender: The bar button item pressed.
     */
     override func backButtonPressed(sender: AnyObject?) {
         
@@ -81,7 +82,7 @@ class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     /**
     Requests the web view go forward a page.
     
-    :param: sender The bar button item pressed.
+    - parameter sender: The bar button item pressed.
     */
     override func forwardButtonPressed(sender: AnyObject?) {
         
@@ -97,19 +98,19 @@ class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     
     // MARK: - UIWebViewDelegate Methods
     
-    func webViewDidStartLoad(webView: UIWebView) {
+    public func webViewDidStartLoad(webView: UIWebView) {
         
         updateActivityViewVisability()
         updateBackForwardButtons()
     }
     
-    func webViewDidFinishLoad(webView: UIWebView) {
+    public func webViewDidFinishLoad(webView: UIWebView) {
         
         updateActivityViewVisability()
         updateBackForwardButtons()
     }
     
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
+    public func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
         
         updateActivityViewVisability()
         updateBackForwardButtons()
@@ -120,11 +121,11 @@ class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     /**
     Creates a URL string, appending `http://` if the URL string does not already have it as a prefix and then loads the page in the web view.
     
-    :returns: The base URL string.
+    - returns: The base URL string.
     */
     override func loadBaseURL() -> String {
         
-        var urlString = super.loadBaseURL()
+        let urlString = super.loadBaseURL()
         
         if let webView = self.webView as? UIWebView {
             let request = NSURLRequest(URL: NSURL(string: urlString)!, cachePolicy: .ReloadIgnoringLocalCacheData, timeoutInterval: 60.0)

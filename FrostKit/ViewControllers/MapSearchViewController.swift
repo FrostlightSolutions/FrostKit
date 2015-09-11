@@ -33,7 +33,7 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
     /// A helper to access the results array from a local search response.
     private var locationSearchResults: [MKMapItem]? {
         if let locationSeatchResponse = self.locationSeatchResponse {
-            return locationSeatchResponse.mapItems as? [MKMapItem]
+            return locationSeatchResponse.mapItems
         } else {
             return nil
         }
@@ -59,9 +59,9 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
     /**
     The object at an index path of the selected array (plotted if segment 0 or location if segment 1).
     
-    :param: indexPath The index path of the object.
+    - parameter indexPath: The index path of the object.
     
-    :returns: The object at the index path.
+    - returns: The object at the index path.
     */
     public func objectAtIndexPath(indexPath: NSIndexPath) -> AnyObject? {
         if let searchBar = self.searchBar {
@@ -108,7 +108,7 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
     }
 
     override public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier(identifier) as? UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier(identifier)
         if cell == nil {
             cell = UITableViewCell(style: .Subtitle, reuseIdentifier: identifier)
         }
@@ -194,8 +194,8 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
             let localSearch = MKLocalSearch(request: searchRequest)
             NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
             localSearch.startWithCompletionHandler { (searchResponse, error) -> Void in
-                if error != nil {
-                    NSLog("Error performing local search: \(error.localizedDescription)")
+                if let anError = error {
+                    NSLog("Error performing local search: \(anError.localizedDescription)\n\(anError)")
                 } else {
                     self.locationSeatchResponse = searchResponse
                 }

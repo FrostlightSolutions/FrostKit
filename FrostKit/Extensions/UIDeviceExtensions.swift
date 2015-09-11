@@ -35,7 +35,7 @@ extension UIDevice {
     }
     
     private class func systemVersionAtIndex(index: Int, components: [String]) -> Int {
-        if let version = components[index].toInt() where components.count > index {
+        if let version = Int(components[index]) where components.count > index {
             return version
         }
         return NSNotFound

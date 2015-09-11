@@ -39,7 +39,7 @@ public class CarouselViewController: UIViewController, UICollectionViewDelegate,
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: flowLayout)
-        collectionView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        collectionView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         collectionView.backgroundColor = UIColor.clearColor()
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator = false
@@ -52,7 +52,7 @@ public class CarouselViewController: UIViewController, UICollectionViewDelegate,
         
         let pageControlHeight: CGFloat = 20
         let pageControl = UIPageControl(frame: CGRect(x: 0, y: view.bounds.height - pageControlHeight, width: view.bounds.width, height: pageControlHeight))
-        pageControl.autoresizingMask = .FlexibleWidth | .FlexibleTopMargin
+        pageControl.autoresizingMask = [.FlexibleWidth, .FlexibleTopMargin]
         pageControl.numberOfPages = numberOfPages
         pageControl.addTarget(self, action: "pageControlDidChange:", forControlEvents: .ValueChanged)
         pageControl.hidden = !showPageControl
@@ -77,7 +77,7 @@ public class CarouselViewController: UIViewController, UICollectionViewDelegate,
     }
     
     public func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCellWithReuseIdentifier("CarouselCell", forIndexPath: indexPath) as! UICollectionViewCell
+        return collectionView.dequeueReusableCellWithReuseIdentifier("CarouselCell", forIndexPath: indexPath) as UICollectionViewCell
     }
     
     // MARK: - UICollectionViewDelegate
@@ -133,10 +133,8 @@ public class CarouselViewController: UIViewController, UICollectionViewDelegate,
         let pageNumber = Int(scrollView.contentOffset.x / scrollView.bounds.width)
         pageControl.currentPage = pageNumber
         
-        if let cell = collectionView?.cellForItemAtIndexPath(NSIndexPath(forRow: pageNumber, inSection: 0)) {
-            let transformation = CATransform3DIdentity
-            view.layer.transform = CATransform3DIdentity
-        }
+        // Reset the transform to the default
+        view.layer.transform = CATransform3DIdentity
     }
     
     // MARK: - Animation Methods

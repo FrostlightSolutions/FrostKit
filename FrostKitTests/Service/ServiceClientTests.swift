@@ -104,7 +104,7 @@ class ServiceClientTests: XCTestCase {
     }
     
     func refresh(complete: (NSError?) -> ()) {
-        FUSServiceClient.refreshOAuthToken(force: true, completed: { (error) -> () in
+        FUSServiceClient.refreshOAuthToken(true, completed: { (error) -> () in
             complete(error)
         })
     }

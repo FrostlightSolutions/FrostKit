@@ -21,11 +21,12 @@ public enum WebViewType {
 /**
 Returns a WebViewController dependant on the variable or automatically
 
-:param: viewType    The type of view to use in the controller. By default this is done automatically.
+- parameter viewType:    The type of view to use in the controller. By default this is done automatically.
 
-:returns: A base web view controller with the designated web view.
+- returns: A base web view controller with the designated web view.
 */
-public func WebViewController(viewType: WebViewType = .Automatic) -> BaseWebViewController {
+@available(iOS, deprecated=9.0, message="This is no longer needed as of iOS 9. Use SFSafariViewController instead.")
+public func WebViewController(viewType viewType: WebViewType = .Automatic) -> BaseWebViewController {
     
     switch viewType {
     case .UIWebView:
@@ -38,12 +39,10 @@ public func WebViewController(viewType: WebViewType = .Automatic) -> BaseWebView
             return UIWebViewController()
         }
     default:
-        break
+        if NSClassFromString("WKWebView") != nil {
+            return WKWebViewController()
+        } else {
+            return UIWebViewController()
+        }
     }
-    
-    if NSClassFromString("WKWebView") != nil {
-        return WKWebViewController()
-    }
-    
-    return UIWebViewController()
 }
