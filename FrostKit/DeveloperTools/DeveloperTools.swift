@@ -40,9 +40,7 @@ public class DeveloperTools: NSObject {
     override init() {
         super.init()
         
-        if let baseURLs = FrostKit.baseURLs {
-            self.baseURLs = FrostKit.baseURLs + self.baseURLs
-        }
+        baseURLs = FrostKit.baseURLs + baseURLs
         
         #if DEBUG
             urlIndex = FrostKit.defaultDebugIndex

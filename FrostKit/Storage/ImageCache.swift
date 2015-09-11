@@ -101,9 +101,9 @@ public class ImageCache: NSObject {
                             if let anError = error {
                                 NSLog("Error downloading image with error: \(anError.localizedDescription)")
                             } else if let downloadedImage = image {
-                                let saveString = router.saveString
+                                let saveString = router.saveString as NSString
                                 sharedImageCache.cache.setObject(downloadedImage, forKey: saveString)
-                                ContentManager.saveContentMetadata(absolutePath: saveString)
+                                ContentManager.saveContentMetadata(absolutePath: saveString as String)
                                 LocalStorage.saveToDocuments(data: downloadedImage, reletivePath: saveString.stringByDeletingLastPathComponent, fileName: saveString.lastPathComponent)
                             }
                             dispatch_async(dispatch_get_main_queue(), { () -> Void in

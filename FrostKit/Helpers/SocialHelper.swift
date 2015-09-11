@@ -113,7 +113,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         
         let characterSet = NSCharacterSet.decimalDigitCharacterSet().invertedSet
         let componentsArray = number.componentsSeparatedByCharactersInSet(characterSet)
-        var parsedNumber = "".join(componentsArray)
+        var parsedNumber = componentsArray.joinWithSeparator("")
         
         if hasPlusPrefix != nil {
             parsedNumber = "+".stringByAppendingString(parsedNumber)
@@ -139,7 +139,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         
         if MFMailComposeViewController.canSendMail() {
             
-            let emailsString = ", ".join(toRecipients)
+            let emailsString = toRecipients.joinWithSeparator(", ")
             
             if NSClassFromString("UIAlertController") != nil {
                 
@@ -213,7 +213,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         
         if MFMessageComposeViewController.canSendText() {
             
-            let recipientsString = ", ".join(recipients)
+            let recipientsString = recipients.joinWithSeparator(", ")
             
             if NSClassFromString("UIAlertController") != nil {
                 

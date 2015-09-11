@@ -410,7 +410,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         if let annotation = view.annotation as? Annotation {
             if NSClassFromString("UIAlertController") == nil {
                 // iOS 7
-                let title = "\n".join([annotation.title!, annotation.subtitle!])
+                let title = [annotation.title!, annotation.subtitle!].joinWithSeparator("\n")
                 let actionSheet = UIActionSheet(title: title, delegate: self, cancelButtonTitle: FKLocalizedString("CANCEL", comment: "Cancel"), destructiveButtonTitle: nil, otherButtonTitles: FKLocalizedString("ZOOM_TO_", comment: "Zoom to..."), FKLocalizedString("DIRECTIONS", comment: "Directions"), FKLocalizedString("OPEN_IN_MAPS", comment: "Open in Maps"))
                 actionSheet.showFromRect(control.frame, inView: view, animated: true)
             } else {
