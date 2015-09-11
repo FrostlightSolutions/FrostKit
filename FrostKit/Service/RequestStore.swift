@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Frostlight Solutions. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import Alamofire
 
 /// 
@@ -21,6 +21,7 @@ public class RequestStore: NSObject {
     /// Describes if the store is locked `true` or not `false`. This is set to `false` by default and is only locked when canceling all tasks.
     private var locked = false
     
+#if os(iOS)
     /**
     Add a rquest to the store with a router object to ditermine the key.
     
@@ -30,6 +31,7 @@ public class RequestStore: NSObject {
     public func addRequest(request: Request, router: Router) {
         addRequest(request, urlString: router.URLRequest.URL!.absoluteString)
     }
+#endif
     
     /**
     Add a rquest to the store with a url string (normally absolute is sugested) to use as the key to store the request under in the store.
@@ -49,6 +51,7 @@ public class RequestStore: NSObject {
         }
     }
     
+#if os(iOS)
     /**
     Remove a request using a router object to ditermine the key.
     
@@ -57,6 +60,7 @@ public class RequestStore: NSObject {
     public func removeRequestFor(router router: Router) {
         removeRequestFor(urlString: router.URLRequest.URL!.absoluteString)
     }
+#endif
     
     /**
     Remove a request using a url string (normally absolute is sugested) as the key.
@@ -81,6 +85,7 @@ public class RequestStore: NSObject {
         locked = false
     }
     
+#if os(iOS)
     /**
     Checks to see if there is a rquest in the store that matches the passed in router.
     
@@ -93,6 +98,7 @@ public class RequestStore: NSObject {
     public func containsRequestWithRouter(router: Router) -> Bool {
         return containsRequestWithURL(router.URLRequest.URL!.absoluteString)
     }
+#endif
     
     /**
     Checks to see if there is a rquest in the store that matches the passed in url string.

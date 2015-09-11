@@ -6,7 +6,7 @@
 //  Copyright (c) 2014-2015 James Barrow - Frostlight Solutions. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 ///
 /// The Content Manager is a class that checks all content saved into local storage. It tracks when they were added/accessed from LocalStorage or ImageCache.
@@ -46,9 +46,9 @@ public class ContentManager: NSObject {
         
         if shared.contentMetadata.count > 0 {
             
-            #if DEBUG
-                let start = NSDate.timeIntervalSinceReferenceDate
-            #endif
+#if DEBUG
+            let start = NSDate.timeIntervalSinceReferenceDate
+#endif
             
             let metadataToRemove = NSMutableArray()
             
@@ -75,10 +75,10 @@ public class ContentManager: NSObject {
                 }
             }
             
-            #if DEBUG
-                let finish = NSDate.timeIntervalSinceReferenceDate
-                NSLog("Check of \(shared.contentMetadata.count) content metadata items complete in \(finish()-start()) seconds. Removed \(metadataToRemove.count) items.")
-            #endif
+#if DEBUG
+            let finish = NSDate.timeIntervalSinceReferenceDate
+            NSLog("Check of \(shared.contentMetadata.count) content metadata items complete in \(finish()-start()) seconds. Removed \(metadataToRemove.count) items.")
+#endif
         }
     }
     

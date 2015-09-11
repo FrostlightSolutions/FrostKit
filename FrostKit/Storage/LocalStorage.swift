@@ -6,7 +6,13 @@
 //  Copyright (c) 2014-2015 James Barrow - Frostlight Solutions. All rights reserved.
 //
 
+import Foundation
+
+#if os(iOS)
 import UIKit
+#elseif os(watchOS)
+import WatchKit
+#endif
 
 /// Describes the location of the directory for saving files.
 public enum DirectoryLocation: UInt {
