@@ -55,7 +55,7 @@ public class ActivityIndicatorManager: NSObject {
     /**
     Returns the shared manager object.
     
-    :returns: The shared manager object.
+    - returns: The shared manager object.
     */
     public class var sharedManager: ActivityIndicatorManager {
         struct Singleton {
