@@ -105,6 +105,33 @@
 		18839B2719D9FA8C00760157 /* FrostKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B2619D9FA8C00760157 /* FrostKitTests.swift */; };
 		18839B4719DA27AE00760157 /* SocialHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B4519DA27AE00760157 /* SocialHelper.swift */; };
 		188B227D1BA366CB00EB87A2 /* FrostKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 18E0282E1BA2D17300852022 /* FrostKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		188B22991BA36A0600EB87A2 /* FrostKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23119DE07670032ABB7 /* FrostKit.swift */; };
+		188B229A1BA36A1800EB87A2 /* RequestStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* RequestStore.swift */; };
+		188B229B1BA36A3900EB87A2 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066019DB5BF000811755 /* LocalStorage.swift */; };
+		188B229C1BA36A5500EB87A2 /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066F19DB7EDB00811755 /* ContentManager.swift */; };
+		188B229D1BA36AAD00EB87A2 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DD79081A8CA74E00379FB5 /* View.swift */; };
+		188B229E1BA36AAD00EB87A2 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DD78FD1A8CA70F00379FB5 /* Button.swift */; };
+		188B229F1BA36AAD00EB87A2 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1818F6D91A8CF39B000255A2 /* ImageView.swift */; };
+		188B22A01BA36AAD00EB87A2 /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DD78FE1A8CA70F00379FB5 /* VisualEffectView.swift */; };
+		188B22A11BA36AAD00EB87A2 /* InitialsImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188D62971A8D56FE0098D976 /* InitialsImageView.swift */; };
+		188B22A21BA36AB700EB87A2 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124219DC8A8C00FD858D /* KeychainHelper.swift */; };
+		188B22A31BA36B3B00EB87A2 /* NSErrorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066719DB762600811755 /* NSErrorExtensions.swift */; };
+		188B22A41BA36BDA00EB87A2 /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066B19DB769B00811755 /* NSDateExtensions.swift */; };
+		188B22A51BA36BDE00EB87A2 /* NSCalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BB7C7419DC383900F21A64 /* NSCalendarExtensions.swift */; };
+		188B22A61BA36BE100EB87A2 /* NSTimeZoneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFF9FD19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift */; };
+		188B22A71BA36C6C00EB87A2 /* NSDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA123E19DC79F100FD858D /* NSDataExtensions.swift */; };
+		188B22A81BA36C6F00EB87A2 /* NSBundleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124419DC8B5E00FD858D /* NSBundleExtensions.swift */; };
+		188B22A91BA36C8400EB87A2 /* UIFontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EC19DCBB5B008A1506 /* UIFontExtensions.swift */; };
+		188B22AA1BA36C8400EB87A2 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066919DB767A00811755 /* UIColorExtensions.swift */; };
+		188B22AB1BA36C8400EB87A2 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066D19DB76C900811755 /* UIImageExtensions.swift */; };
+		188B22AC1BA36C8A00EB87A2 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB51791A7655ED005064C8 /* UIDeviceExtensions.swift */; };
+		188B22AD1BA36CA300EB87A2 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124019DC7D9000FD858D /* UIViewExtensions.swift */; };
+		188B22AE1BA36D9600EB87A2 /* UIBarButtonItemExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23919DE15600032ABB7 /* UIBarButtonItemExtensions.swift */; };
+		188B22AF1BA36D9A00EB87A2 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC212A19DEA21000FEB57E /* UIViewControllerExtensions.swift */; };
+		188B22B01BA36D9F00EB87A2 /* UICollectionViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A786CC1A77B39A006EADB9 /* UICollectionViewControllerExtensions.swift */; };
+		188B22B11BA36DA300EB87A2 /* UIScreenExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C7B6A1AD2F4A400CAE1A5 /* UIScreenExtensions.swift */; };
+		188B22B21BA36DAC00EB87A2 /* FontConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1836A21B1A84F38A00E57F86 /* FontConstants.swift */; };
+		188B22B31BA36DB000EB87A2 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EE19DCBC28008A1506 /* CustomFonts.swift */; };
 		188D62981A8D56FE0098D976 /* InitialsImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188D62971A8D56FE0098D976 /* InitialsImageView.swift */; };
 		188D62991A8D56FE0098D976 /* InitialsImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188D62971A8D56FE0098D976 /* InitialsImageView.swift */; };
 		1899C4FB1A6D152C001638CF /* FUSServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1899C4FA1A6D152C001638CF /* FUSServiceClient.swift */; };
@@ -1005,6 +1032,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				188B229B1BA36A3900EB87A2 /* LocalStorage.swift in Sources */,
+				188B22AD1BA36CA300EB87A2 /* UIViewExtensions.swift in Sources */,
+				188B22A91BA36C8400EB87A2 /* UIFontExtensions.swift in Sources */,
+				188B22B31BA36DB000EB87A2 /* CustomFonts.swift in Sources */,
+				188B22AB1BA36C8400EB87A2 /* UIImageExtensions.swift in Sources */,
+				188B229E1BA36AAD00EB87A2 /* Button.swift in Sources */,
+				188B22A11BA36AAD00EB87A2 /* InitialsImageView.swift in Sources */,
+				188B22B01BA36D9F00EB87A2 /* UICollectionViewControllerExtensions.swift in Sources */,
+				188B22A21BA36AB700EB87A2 /* KeychainHelper.swift in Sources */,
+				188B22A51BA36BDE00EB87A2 /* NSCalendarExtensions.swift in Sources */,
+				188B22A31BA36B3B00EB87A2 /* NSErrorExtensions.swift in Sources */,
+				188B229C1BA36A5500EB87A2 /* ContentManager.swift in Sources */,
+				188B22AC1BA36C8A00EB87A2 /* UIDeviceExtensions.swift in Sources */,
+				188B22B11BA36DA300EB87A2 /* UIScreenExtensions.swift in Sources */,
+				188B22A61BA36BE100EB87A2 /* NSTimeZoneExtensions.swift in Sources */,
+				188B22AA1BA36C8400EB87A2 /* UIColorExtensions.swift in Sources */,
+				188B229D1BA36AAD00EB87A2 /* View.swift in Sources */,
+				188B22991BA36A0600EB87A2 /* FrostKit.swift in Sources */,
+				188B22A41BA36BDA00EB87A2 /* NSDateExtensions.swift in Sources */,
+				188B22B21BA36DAC00EB87A2 /* FontConstants.swift in Sources */,
+				188B22A71BA36C6C00EB87A2 /* NSDataExtensions.swift in Sources */,
+				188B22A01BA36AAD00EB87A2 /* VisualEffectView.swift in Sources */,
+				188B22AE1BA36D9600EB87A2 /* UIBarButtonItemExtensions.swift in Sources */,
+				188B22AF1BA36D9A00EB87A2 /* UIViewControllerExtensions.swift in Sources */,
+				188B229F1BA36AAD00EB87A2 /* ImageView.swift in Sources */,
+				188B22A81BA36C6F00EB87A2 /* NSBundleExtensions.swift in Sources */,
+				188B229A1BA36A1800EB87A2 /* RequestStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
