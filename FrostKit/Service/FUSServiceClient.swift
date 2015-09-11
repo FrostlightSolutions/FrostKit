@@ -65,7 +65,7 @@ public enum Router: URLRequestConvertible {
                 return ""
             }
         case .ImageGET:
-            let path = removeHTTPPrefix(absoluteString.stringByDeletingLastPathComponent)
+            let path = removeHTTPPrefix((absoluteString as NSString).stringByDeletingLastPathComponent)
             var pathComponents = path.componentsSeparatedByString("/")
             pathComponents.removeAtIndex(0)
             return (pathComponents as NSArray).componentsJoinedByString("/")
@@ -145,14 +145,14 @@ public enum Router: URLRequestConvertible {
                 let keysArray = (someParameters as NSDictionary).allKeys as NSArray
                 let sortedKeys = keysArray.sortedArrayUsingSelector("compare:") as! [String]
                 for key in sortedKeys {
-                    saveString = saveString.stringByAppendingPathComponent(someParameters[key] as! String)
+                    saveString = (saveString as NSString).stringByAppendingPathComponent(someParameters[key] as! String)
                 }
             }
             return saveString
         case .ImageGET(let urlString, let size):
             if let frameSize = size {
                 let sizeString = "\(Int(frameSize.width))x\(Int(frameSize.height))"
-                let saveString = path.stringByAppendingPathComponent(sizeString + "_" + urlString.lastPathComponent)
+                let saveString = (path as NSString).stringByAppendingPathComponent(sizeString + "_" + (urlString as NSString).lastPathComponent)
                 return saveString
             }
             return removeHTTPPrefix(absoluteString)
@@ -188,7 +188,7 @@ public enum Router: URLRequestConvertible {
     }
     
     /// The URL request of the case. Token requests to not include an Authorization HTTP header field, as that is what it is requesting.
-    public var URLRequest: NSURLRequest {
+    public var URLRequest: NSMutableURLRequest {
         
         let mutableURLRequest = NSMutableURLRequest(URL: URL)
         mutableURLRequest.HTTPMethod = method.rawValue
@@ -279,23 +279,30 @@ public class FUSServiceClient: NSObject {
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
-        Alamofire.request(Router.Token(parameters)).validate().responseJSON { (request, response, responseJSON, responseError) -> Void in
-            if let anError = responseError {
-                completed(error: self.errorForResponse(response, json: responseJSON, origError: anError))
-            } else if let jsonDict = responseJSON as? NSDictionary {
+        Alamofire.request(Router.Token(parameters)).validate().responseJSON { (_, response, result) -> Void in
+            
+            if let error = result.error as? NSError {
+                
+                completed(error: self.errorForResponse(response, json: result.value, origError: error))
+                
+            } else if let jsonDict = result.value as? NSDictionary {
+                
                 UserStore.current.username = username
                 UserStore.current.oAuthToken = OAuthToken(json: jsonDict, requestDate: requestDate)
                 UserStore.saveUser()
                 
                 FUSServiceClient.updateSections { (error) -> () in
+                    
                     if let anError = error {
                         completed(error: anError)
                     } else {
-                        completed(error: self.errorForResponse(response, json: responseJSON, origError: responseError))
+                        completed(error: self.errorForResponse(response, json: result.value, origError: result.error as? NSError))
                     }
                 }
+                
             } else {
-                completed(error: NSError.errorWithMessage("Returned JSON is not a NSDictionary: \(responseJSON)"))
+                
+                completed(error: NSError.errorWithMessage("Returned JSON is not a NSDictionary: \(result.value)"))
             }
             NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
         }
@@ -332,22 +339,29 @@ public class FUSServiceClient: NSObject {
             }
             
             NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
-            Alamofire.request(Router.Token(parameters)).validate().responseJSON { (request, response, responseJSON, responseError) -> Void in
-                if let anError = responseError {
-                    completed(error: self.errorForResponse(response, json: responseJSON, origError: anError))
-                } else if let jsonDict = responseJSON as? NSDictionary {
+            Alamofire.request(Router.Token(parameters)).validate().responseJSON { (_, response, result) -> Void in
+                
+                if let anError = result.error as? NSError {
+                    
+                    completed(error: self.errorForResponse(response, json: result.value, origError: anError))
+                    
+                } else if let jsonDict = result.value as? NSDictionary {
+                    
                     UserStore.current.oAuthToken = OAuthToken(json: jsonDict, requestDate: requestDate)
                     UserStore.saveUser()
                     
                     FUSServiceClient.updateSections { (error) -> () in
+                        
                         if let anError = error {
                             completed(error: anError)
                         } else {
-                            completed(error: self.errorForResponse(response, json: responseJSON, origError: responseError))
+                            completed(error: self.errorForResponse(response, json: result.value, origError: result.error as? NSError))
                         }
                     }
+                    
                 } else {
-                    completed(error: NSError.errorWithMessage("Returned JSON is not a NSDictionary: \(responseJSON)"))
+                    
+                    completed(error: NSError.errorWithMessage("Returned JSON is not a NSDictionary: \(result.value)"))
                 }
                 NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
             }
@@ -364,20 +378,29 @@ public class FUSServiceClient: NSObject {
     public class func updateSections(completed: (error: NSError?) -> ()) {
         
         NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
-        Alamofire.request(Router.Sections).validate().responseJSON { (requestObject, responseObject, responseJSON, responseError) -> Void in
-            if let anError = responseError {
-                completed(error: self.errorForResponse(responseObject, json: responseJSON, origError: anError))
-            } else if let jsonDictionary = responseJSON as? [String: AnyObject] {
+        Alamofire.request(Router.Sections).validate().responseJSON { (_, response, result) -> Void in
+            
+            if let anError = result.error as? NSError {
+                
+                completed(error: self.errorForResponse(response, json: result.value, origError: anError))
+                
+            } else if let jsonDictionary = result.value as? [String: AnyObject] {
+                
                 if let jsonArray = jsonDictionary["sections"] as? [[String: String]] {
+                    
                     UserStore.current.sections = jsonArray
                     UserStore.saveUser()
                     NSNotificationCenter.defaultCenter().postNotificationName(FUSServiceClientUpdateSections, object: nil)
-                    completed(error: self.errorForResponse(responseObject, json: responseJSON, origError: responseError))
+                    completed(error: self.errorForResponse(response, json: result.value, origError: result.error as? NSError))
+                    
                 } else {
-                    completed(error: NSError.errorWithMessage("Returned JSON is not an Array: \(responseJSON)"))
+                    
+                    completed(error: NSError.errorWithMessage("Returned JSON is not an Array: \(result.value)"))
                 }
+                
             } else {
-                completed(error: NSError.errorWithMessage("Returned JSON is not a Dictionary: \(responseJSON)"))
+                
+                completed(error: NSError.errorWithMessage("Returned JSON is not a Dictionary: \(result.value)"))
             }
             NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
         }
@@ -396,8 +419,9 @@ public class FUSServiceClient: NSObject {
     public class func request(router: Router, completed: (json: AnyObject?, error: NSError?) -> ()) -> Alamofire.Request {
         
         NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
-        return Alamofire.request(router).validate().responseJSON { (requestObject, responseObject, responseJSON, responseError) -> Void in
-            completed(json: responseJSON, error: self.errorForResponse(responseObject, json: responseJSON, origError: responseError))
+        return Alamofire.request(router).validate().responseJSON { (_, response, result) -> Void in
+            
+            completed(json: result.value, error: self.errorForResponse(response, json: result.value, origError: result.error as? NSError))
             NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
         }
     }
@@ -415,14 +439,17 @@ public class FUSServiceClient: NSObject {
         
         NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
         return Alamofire.request(router).validate().progress({ (_, totalBytesRead, totalBytesExpectedToRead) -> Void in
+            
             var percent: CGFloat = -1
             if totalBytesExpectedToRead >= 0 {
                 percent = CGFloat(totalBytesRead) / CGFloat(totalBytesExpectedToRead)
             }
             progress?(percentComplete: percent)
-        }).responseImage({ (_, _, image, error) -> Void in
+            
+        }).responseImage({ (_, _, result) -> Void in
+            
             NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
-            completed(image: image, error: error)
+            completed(image: result.value, error: result.error as? NSError)
         })
     }
     
@@ -476,21 +503,33 @@ public class FUSServiceClient: NSObject {
 }
 
 extension Alamofire.Request {
-    class func imageResponseSerializer() -> GenericResponseSerializer<UIImage> {
-        return GenericResponseSerializer { request, response, data in
-            if data == nil || data?.length == 0 {
-                return (nil, nil)
-            }
+    
+    public static func imageResponseSerializer() -> GenericResponseSerializer<UIImage> {
+        
+        return GenericResponseSerializer { _, _, data in
             
-            return (UIImage(data: data!, scale: UIScreen.mainScreen().scale), nil)
+            if let imageData = data where imageData.length > 0 {
+                
+                if let image = UIImage(data: data!, scale: UIScreen.mainScreen().scale) {
+                    
+                    return .Success(image)
+                    
+                } else {
+                    
+                    let error = Error.errorWithCode(0, failureReason: "Could not create UIImage from data.")
+                    return .Failure(data, error)
+                }
+                
+            } else {
+                
+                let error = Error.errorWithCode(0, failureReason: "No data or zero length.")
+                return .Failure(data, error)
+            }
         }
     }
     
-    func responseImage(completionHandler: (NSURLRequest, NSHTTPURLResponse?, UIImage?, NSError?) -> Void) -> Self {
+    public func responseImage(completionHandler: (NSURLRequest?, NSHTTPURLResponse?, Result<UIImage>) -> Void) -> Self {
         
-        return response(
-            responseSerializer: Request.imageResponseSerializer(),
-            completionHandler: completionHandler
-        )
+        return response(responseSerializer: Request.imageResponseSerializer(), completionHandler: completionHandler)
     }
 }
