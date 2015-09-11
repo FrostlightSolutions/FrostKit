@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 import FrostKit
 
 class WebViewControllerVC: UITableViewController {
@@ -25,9 +26,15 @@ class WebViewControllerVC: UITableViewController {
         
         switch indexPath {
         case NSIndexPath(forRow: 0, inSection: 0):
-            let webVC = WebViewController()
-            webVC.urlString = "frostlight.se"
-            presentViewController(UINavigationController(rootViewController: webVC), animated: true, completion: nil)
+            if #available(iOS 9, *) {
+                let url = NSURL(string: "http://frostlight.se")!
+                let safariVC = SFSafariViewController(URL: url)
+                presentViewController(UINavigationController(rootViewController: safariVC), animated: true, completion: nil)
+            } else {
+                let webVC = WebViewController()
+                webVC.urlString = "frostlight.se"
+                presentViewController(UINavigationController(rootViewController: webVC), animated: true, completion: nil)
+            }
         case NSIndexPath(forRow: 1, inSection: 0):
             let webVC = WebViewController(viewType: .UIWebView)
             webVC.urlString = "frostlight.se"
@@ -39,9 +46,15 @@ class WebViewControllerVC: UITableViewController {
             webVC.titleOverride = "UIWebViewController"
             presentViewController(UINavigationController(rootViewController: webVC), animated: true, completion: nil)
         case NSIndexPath(forRow: 0, inSection: 1):
-            let webVC = WebViewController()
-            webVC.urlString = "frostlight.se"
-            navigationController?.pushViewController(webVC, animated: true)
+            if #available(iOS 9, *) {
+                let url = NSURL(string: "http://frostlight.se")!
+                let safariVC = SFSafariViewController(URL: url)
+                navigationController?.pushViewController(safariVC, animated: true)
+            } else {
+                let webVC = WebViewController()
+                webVC.urlString = "frostlight.se"
+                navigationController?.pushViewController(webVC, animated: true)
+            }
         case NSIndexPath(forRow: 1, inSection: 1):
             let webVC = WebViewController(viewType: .UIWebView)
             webVC.urlString = "frostlight.se"

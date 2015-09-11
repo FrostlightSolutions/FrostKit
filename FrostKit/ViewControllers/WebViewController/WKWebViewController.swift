@@ -12,17 +12,18 @@ import WebKit
 ///
 /// A subclass of BaseWebViewController that wraps a WKWebView in a view controller.
 ///
-class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
+@available(iOS, deprecated=9.0, message="This is no longer needed as of iOS 9. Use SFSafariViewController instead.")
+public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     /// The URL of the current page.
-    override var URL: NSURL? {
+    public override var URL: NSURL? {
         if let webView = self.webView as? WKWebView {
             return webView.URL
         }
         return nil
     }
     /// The title to show in the navigation bar if something other than the loaded page's title is required.
-    override var titleOverride: String? {
+    public override var titleOverride: String? {
         didSet {
             if titleOverride != nil {
                 navigationItem.title = titleOverride
@@ -32,7 +33,7 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
         }
     }
     /// Returns `true` if the web view is currently loading, `false` if not.
-    override var loading: Bool {
+    public override var loading: Bool {
         if let webView = self.webView as? WKWebView {
             return webView.loading
         }
@@ -42,11 +43,11 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     /**
     Stops the web view from being loaded any more.
     */
-    override func stopLoading() {
+    public override func stopLoading() {
         (self.webView as? WKWebView)?.stopLoading()
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         
         webView = WKWebView(frame: view.bounds)
         
@@ -54,10 +55,10 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
             
             webView.allowsBackForwardNavigationGestures = true
             
-            webView.addObserver(self, forKeyPath: "estimatedProgress", options: nil, context: nil)
-            webView.addObserver(self, forKeyPath: "title", options: nil, context: nil)
-            webView.addObserver(self, forKeyPath: "canGoBack", options: nil, context: nil)
-            webView.addObserver(self, forKeyPath: "canGoForward", options: nil, context: nil)
+            webView.addObserver(self, forKeyPath: "estimatedProgress", options: [], context: nil)
+            webView.addObserver(self, forKeyPath: "title", options: [], context: nil)
+            webView.addObserver(self, forKeyPath: "canGoBack", options: [], context: nil)
+            webView.addObserver(self, forKeyPath: "canGoForward", options: [], context: nil)
         }
         
         super.viewDidLoad()
@@ -74,22 +75,26 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     // MARK: - KVO Methods
     
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    public override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         
-        switch keyPath {
-        case "estimatedProgress":
-            self.progrssView.setProgress(Float(webView!.estimatedProgress), animated: true)
-            updateProgrssViewVisability()
-            updateActivityViewVisability()
-        case "title":
-            if let webView = self.webView as? WKWebView where titleOverride == nil {
-                navigationItem.title = webView.title
+        if let aKeyPath = keyPath {
+            switch aKeyPath {
+            case "estimatedProgress":
+                self.progrssView.setProgress(Float(webView!.estimatedProgress), animated: true)
+                updateProgrssViewVisability()
+                updateActivityViewVisability()
+            case "title":
+                if let webView = self.webView as? WKWebView where titleOverride == nil {
+                    navigationItem.title = webView.title
+                }
+            case "canGoBack":
+                updateBackButton()
+            case "canGoForward":
+                updateForwardButton()
+            default:
+                super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
             }
-        case "canGoBack":
-            updateBackButton()
-        case "canGoForward":
-            updateForwardButton()
-        default:
+        } else {
             super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
         }
     }
@@ -99,7 +104,7 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     /**
     Refrshes the web view when the refresh button is pressed in the toolbar.
     
-    :param: sender The bar button item pressed.
+    - parameter sender: The bar button item pressed.
     */
     override func refreshButtonPressed(sender: AnyObject?) {
         
@@ -116,7 +121,7 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     /**
     Requests the web view go back a page.
     
-    :param: sender The bar button item pressed.
+    - parameter sender: The bar button item pressed.
     */
     override func backButtonPressed(sender: AnyObject?) {
         
@@ -133,7 +138,7 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     /**
     Requests the web view go forward a page.
     
-    :param: sender The bar button item pressed.
+    - parameter sender: The bar button item pressed.
     */
     override func forwardButtonPressed(sender: AnyObject?) {
         
@@ -149,7 +154,7 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     // MARK: - WKNavigationDelegate Methods
     
-    func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: ((WKNavigationActionPolicy) -> Void)) {
+    public func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: ((WKNavigationActionPolicy) -> Void)) {
         
         // Alows links in the WKWebView to be tappable
         decisionHandler(.Allow)
@@ -160,11 +165,11 @@ class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     /**
     Creates a URL string, appending `http://` if the URL string does not already have it as a prefix and then loads the page in the web view.
     
-    :returns: The base URL string.
+    - returns: The base URL string.
     */
     override func loadBaseURL() -> String {
         
-        var urlString = super.loadBaseURL()
+        let urlString = super.loadBaseURL()
         
         if let webView = self.webView as? WKWebView {
             let request = NSURLRequest(URL: NSURL(string: urlString)!, cachePolicy: .ReloadIgnoringLocalCacheData, timeoutInterval: 60.0)

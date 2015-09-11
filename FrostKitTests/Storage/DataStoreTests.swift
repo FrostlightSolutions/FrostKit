@@ -21,9 +21,13 @@ class DataStoreTests: XCTestCase {
     }
     var pagedJSON: [String: AnyObject] {
         if  let filePath = NSBundle(forClass: self.dynamicType).pathForResource("Notifications", ofType: "json"),
-            let fileData = NSData(contentsOfFile: filePath),
-            let jsonDict = NSJSONSerialization.JSONObjectWithData(fileData, options: nil, error: nil) as? [String: AnyObject] {
-                return jsonDict
+            let fileData = NSData(contentsOfFile: filePath) {
+                do {
+                    let jsonDict = try NSJSONSerialization.JSONObjectWithData(fileData, options: .MutableContainers) as! [String: AnyObject]
+                    return jsonDict
+                } catch let error as NSError {
+                    NSLog("Error serializing paged JSON: \(error.localizedDescription)\n\(error)")
+                }
         }
         return Dictionary<String,AnyObject>()
     }

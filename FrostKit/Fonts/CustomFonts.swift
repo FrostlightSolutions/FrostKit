@@ -28,15 +28,15 @@ public class CustomFonts: NSObject {
     /**
     Load custom fonts with names including the file name and extension.
     
-    :param: fontNames An array of strings of the font file names.
-    :param: bundle    The bundle to look for the file names in. By default this uses the main app bundle.
+    - parameter fontNames: An array of strings of the font file names.
+    - parameter bundle:    The bundle to look for the file names in. By default this uses the main app bundle.
     */
-    public class func loadCustomFonts(fontNames: [String], bundle: NSBundle = NSBundle.mainBundle()) {
+    public class func loadCustomFonts(fontNames: [NSString], bundle: NSBundle = NSBundle.mainBundle()) {
         for fontName in fontNames {
             let filename = fontName.componentsSeparatedByString(".").first
             let ext = fontName.pathExtension
             
-            if let name = filename where count(name) > 0 && count(ext) > 0 {
+            if let name = filename where name.characters.count > 0 && ext.characters.count > 0 {
                 loadCustomFont(name, withExtension: ext, bundle: bundle)
             } else {
                 NSLog("ERROR: Failed to load '\(fontName)' font as the name or extension are invalid!")
@@ -47,9 +47,9 @@ public class CustomFonts: NSObject {
     /**
         Load a custom font from it's name and extention from within the bundle without having to declare it in the `Info.plist`.
         
-        :param: name    The name of the font file name.
-        :param: ext     The extention of the file.
-        :param: bundle  The bundle the files are located in. By default this uses the main app bundle.
+        - parameter name:    The name of the font file name.
+        - parameter ext:     The extention of the file.
+        - parameter bundle:  The bundle the files are located in. By default this uses the main app bundle.
     */
     public class func loadCustomFont(name: String, withExtension ext: String, bundle: NSBundle = NSBundle.mainBundle()) {
         
@@ -57,8 +57,7 @@ public class CustomFonts: NSObject {
             let fontData = NSData(contentsOfURL: url)
             var error: Unmanaged<CFErrorRef>?
             let provider = CGDataProviderCreateWithCFData(fontData)
-            let font = CGFontCreateWithDataProvider(provider)
-            if CTFontManagerRegisterGraphicsFont(font, &error) == false {
+            if let font = CGFontCreateWithDataProvider(provider) where CTFontManagerRegisterGraphicsFont(font, &error) == false {
                 if let anError = error {
                     let errorCode = CFErrorGetCode(anError.takeRetainedValue())
                     if errorCode == CTFontManagerError.AlreadyRegistered.rawValue {
@@ -81,7 +80,7 @@ public class CustomFonts: NSObject {
         
         for fontFamily in UIFont.familyNames() {
             
-            let name = fontFamily as! String
+            let name = fontFamily as String
             NSLog("\(name): \(UIFont.fontNamesForFamilyName(name))")
         }
     }

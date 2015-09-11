@@ -63,12 +63,12 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     /**
     Presents a compose view controller with the details passed in.
     
-    :param: serviceType    The type of service type to present. For a list of possible values, see Service Type Constants.
-    :param: initialText    The initial text to show in the `SLComposeViewController`.
-    :param: urls           The URLs to attach to the `SLComposeViewController`.
-    :param: images         The images to attach to the `SLComposeViewController`.
-    :param: viewController The view controller to present the `SLComposeViewController` in.
-    :param: animated       If the presentation should be animated or not.
+    - parameter serviceType:    The type of service type to present. For a list of possible values, see Service Type Constants.
+    - parameter initialText:    The initial text to show in the `SLComposeViewController`.
+    - parameter urls:           The URLs to attach to the `SLComposeViewController`.
+    - parameter images:         The images to attach to the `SLComposeViewController`.
+    - parameter viewController: The view controller to present the `SLComposeViewController` in.
+    - parameter animated:       If the presentation should be animated or not.
     */
     public class func presentComposeViewController(serviceType: String, initialText: String? = nil, urls: [NSURL]? = nil, images: [UIImage]? = nil, inViewController viewController: UIViewController, animated: Bool = true) {
         
@@ -104,16 +104,16 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     
     Note: `openURL(_:)` can not be called directly within a Framework so that has to be done manually inside the main application.
     
-    :param: number The number to parse in to create the URL.
+    - parameter number: The number to parse in to create the URL.
     
-    :returns: The URL of the parsed phone number, prefixed with `telprompt://`.
+    - returns: The URL of the parsed phone number, prefixed with `telprompt://`.
     */
-    public class func phonePromptFormattedURL(#number: String) -> NSURL? {
+    public class func phonePromptFormattedURL(number number: String) -> NSURL? {
         let hasPlusPrefix = number.rangeOfString("+")
         
         let characterSet = NSCharacterSet.decimalDigitCharacterSet().invertedSet
         let componentsArray = number.componentsSeparatedByCharactersInSet(characterSet)
-        var parsedNumber = join("", componentsArray)
+        var parsedNumber = componentsArray.joinWithSeparator("")
         
         if hasPlusPrefix != nil {
             parsedNumber = "+".stringByAppendingString(parsedNumber)
@@ -125,21 +125,21 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     /**
     Creates a prompt for an email with the following parameters to pass into the `MFMailComposeViewController`.
     
-    :param: toRecipients   The email addresses of the recipients of the email.
-    :param: ccRecipients   The email addresses of the CC recipients of the email.
-    :param: bccRecipients  The email addresses of the BCC recipients of the email.
-    :param: subject        The subject of the email.
-    :param: messageBody    The main body of the email.
-    :param: isBodyHTML     Tells the `MFMailComposeViewController` if the message body is HTML.
-    :param: attachments    The attachments to add to the email, passed in as a tuple of data, mime type and the file name.
-    :param: viewController The view controller to present the `MFMailComposeViewController` in.
-    :param: animated       If the presentation should be animated or not.
+    - parameter toRecipients:   The email addresses of the recipients of the email.
+    - parameter ccRecipients:   The email addresses of the CC recipients of the email.
+    - parameter bccRecipients:  The email addresses of the BCC recipients of the email.
+    - parameter subject:        The subject of the email.
+    - parameter messageBody:    The main body of the email.
+    - parameter isBodyHTML:     Tells the `MFMailComposeViewController` if the message body is HTML.
+    - parameter attachments:    The attachments to add to the email, passed in as a tuple of data, mime type and the file name.
+    - parameter viewController: The view controller to present the `MFMailComposeViewController` in.
+    - parameter animated:       If the presentation should be animated or not.
     */
-    public class func emailPrompt(#toRecipients: [String], ccRecipients: [String] = [], bccRecipients: [String] = [], subject: String = "", messageBody: String = "", isBodyHTML: Bool = false, attachments: [(data: NSData, mimeType: String, fileName: String)] = [], viewController: UIViewController, animated: Bool = true) {
+    public class func emailPrompt(toRecipients toRecipients: [String], ccRecipients: [String] = [], bccRecipients: [String] = [], subject: String = "", messageBody: String = "", isBodyHTML: Bool = false, attachments: [(data: NSData, mimeType: String, fileName: String)] = [], viewController: UIViewController, animated: Bool = true) {
         
         if MFMailComposeViewController.canSendMail() {
             
-            let emailsString = join(", ", toRecipients)
+            let emailsString = toRecipients.joinWithSeparator(", ")
             
             if NSClassFromString("UIAlertController") != nil {
                 
@@ -182,7 +182,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         }
     }
     
-    private class func presentMailComposeViewController(#toRecipients: [String], ccRecipients: [String], bccRecipients: [String], subject: String, messageBody: String, isBodyHTML: Bool, attachments: [(data: NSData, mimeType: String, fileName: String)], viewController: UIViewController, animated: Bool) {
+    private class func presentMailComposeViewController(toRecipients toRecipients: [String], ccRecipients: [String], bccRecipients: [String], subject: String, messageBody: String, isBodyHTML: Bool, attachments: [(data: NSData, mimeType: String, fileName: String)], viewController: UIViewController, animated: Bool) {
         
         let mailVC = MFMailComposeViewController()
         mailVC.mailComposeDelegate = SocialHelper.shared
@@ -202,18 +202,18 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     /**
     Creates a prompt for a message with the following parameters to pass into the `MFMessageComposeViewController`.
     
-    :param: recipients     The recipients of the message.
-    :param: subject        The subject of the message.
-    :param: body           The main body of the message.
-    :param: attachments    The attachments to add to the message, passed in as a tuple of attachment URL and alternate filename.
-    :param: viewController The view controller to present the `MFMailComposeViewController` in.
-    :param: animated       If the presentation should be animated or not.
+    - parameter recipients:     The recipients of the message.
+    - parameter subject:        The subject of the message.
+    - parameter body:           The main body of the message.
+    - parameter attachments:    The attachments to add to the message, passed in as a tuple of attachment URL and alternate filename.
+    - parameter viewController: The view controller to present the `MFMailComposeViewController` in.
+    - parameter animated:       If the presentation should be animated or not.
     */
-    public class func messagePrompt(#recipients: [String], subject: String = "", body: String = "", attachments: [(attachmentURL: NSURL, alternateFilename: String)] = [], viewController: UIViewController, animated: Bool = true) {
+    public class func messagePrompt(recipients recipients: [String], subject: String = "", body: String = "", attachments: [(attachmentURL: NSURL, alternateFilename: String)] = [], viewController: UIViewController, animated: Bool = true) {
         
         if MFMessageComposeViewController.canSendText() {
             
-            let recipientsString = join(", ", recipients)
+            let recipientsString = recipients.joinWithSeparator(", ")
             
             if NSClassFromString("UIAlertController") != nil {
                 
@@ -253,7 +253,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         }
     }
     
-    private class func presentMessageComposeViewController(#recipients: [String], subject: String, body: String, attachments: [(attachmentURL: NSURL, alternateFilename: String)], viewController: UIViewController, animated: Bool) {
+    private class func presentMessageComposeViewController(recipients recipients: [String], subject: String, body: String, attachments: [(attachmentURL: NSURL, alternateFilename: String)], viewController: UIViewController, animated: Bool) {
         
         let messageVC = MFMessageComposeViewController()
         messageVC.messageComposeDelegate = SocialHelper.shared
@@ -276,17 +276,21 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     
     // MARK: - MFMailComposeViewControllerDelegate Methods
     
-    public func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+    public func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         
-        switch result.value {
-        case MFMailComposeResultCancelled.value:
+        switch result.rawValue {
+        case MFMailComposeResultCancelled.rawValue:
             NSLog("Email cancelled")
-        case MFMailComposeResultSaved.value:
+        case MFMailComposeResultSaved.rawValue:
             NSLog("Email saved")
-        case MFMailComposeResultSent.value:
+        case MFMailComposeResultSent.rawValue:
             NSLog("Email sent")
-        case MFMailComposeResultFailed.value:
-            NSLog("Email sent failure: \(error.localizedDescription)")
+        case MFMailComposeResultFailed.rawValue:
+            if let anError = error {
+                NSLog("Email send failed: \(anError.localizedDescription)\n\(error)")
+            } else {
+                NSLog("Email send failed!")
+            }
         default:
             break
         }
@@ -297,14 +301,14 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     
     // MARK: - MFMessageComposeViewControllerDelegate Methods
     
-    public func messageComposeViewController(controller: MFMessageComposeViewController!, didFinishWithResult result: MessageComposeResult) {
+    public func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
         
-        switch result.value {
-        case MessageComposeResultCancelled.value:
+        switch result.rawValue {
+        case MessageComposeResultCancelled.rawValue:
             NSLog("Message cancelled")
-        case MessageComposeResultSent.value:
+        case MessageComposeResultSent.rawValue:
             NSLog("Message sent")
-        case MessageComposeResultFailed.value:
+        case MessageComposeResultFailed.rawValue:
             NSLog("Message failed")
         default:
             break

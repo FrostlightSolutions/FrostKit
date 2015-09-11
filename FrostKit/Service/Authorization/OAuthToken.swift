@@ -16,9 +16,9 @@ import UIKit
 public class OAuthToken: NSObject, NSCoding, NSCopying {
     
     /// The `access_token` returned from FUS.
-    lazy var accessToken = ""
+    lazy var accessToken: String = ""
     /// The `refresh_token` returned from FUS.
-    lazy var refreshToken = ""
+    lazy var refreshToken: String = ""
     /// The timestamp the token will expire atcalculated from the `expires_in` number added to the timestamp of the date-time the request was sent.
     lazy var expiresAt: NSTimeInterval = 0
     /// A date value created from `expiresAt`.
@@ -30,9 +30,9 @@ public class OAuthToken: NSObject, NSCoding, NSCopying {
         return NSDate.timeIntervalSinceReferenceDate() > expiresAt
     }
     /// The `token_type` returned from FUS.
-    lazy var tokenType = ""
+    lazy var tokenType: String = ""
     /// The `scope` returned from FUS.
-    lazy var scope = ""
+    lazy var scope: String = ""
     
     override init() {
         super.init()
@@ -41,7 +41,7 @@ public class OAuthToken: NSObject, NSCoding, NSCopying {
     /**
     Convenience init to allow creating a `OAuthToken` from anouther `OAuthToken`.
     
-    :param: oAuthToken The `OAuthToken` to take values from.
+    - parameter oAuthToken: The `OAuthToken` to take values from.
     */
     private convenience init(oAuthToken: OAuthToken) {
         self.init()
@@ -56,8 +56,8 @@ public class OAuthToken: NSObject, NSCoding, NSCopying {
     /**
     Convenience init to allow creating a `OAuthToken` from an `NSDictionary` JSON.
     
-    :param: json        `NSDictionary` of the JSON to parse into the `OAuthToken`.
-    :param: requestDate The date the token was requested.
+    - parameter json:        `NSDictionary` of the JSON to parse into the `OAuthToken`.
+    - parameter requestDate: The date the token was requested.
     */
     convenience init(json: NSDictionary, requestDate: NSDate = NSDate()) {
         self.init()
@@ -85,7 +85,7 @@ public class OAuthToken: NSObject, NSCoding, NSCopying {
     
     // MARK: - NSCoding Methods
     
-    public required convenience init(coder aDecoder: NSCoder) {
+    public required convenience init?(coder aDecoder: NSCoder) {
         self.init()
         
         accessToken = aDecoder.decodeObjectForKey("access_token") as! String

@@ -51,7 +51,7 @@ class DeveloperToolsBaseURL: UITableViewController, UITextFieldDelegate {
         var cell: UITableViewCell?
         if indexPath.row == tableView.numberOfRowsInSection(0) - 1 {
             
-            cell = tableView.dequeueReusableCellWithIdentifier("DeveloperToolsBaseURLCustomCell", forIndexPath: indexPath) as? UITableViewCell
+            cell = tableView.dequeueReusableCellWithIdentifier("DeveloperToolsBaseURLCustomCell", forIndexPath: indexPath)
             if let textField = cell?.viewWithTag(852) as? UITextField {
                 textField.text = DeveloperTools.shared.baseURLFromIndex(indexPath.row)
                 customURLTextField = textField
@@ -59,7 +59,7 @@ class DeveloperToolsBaseURL: UITableViewController, UITextFieldDelegate {
             
         } else {
             
-            cell = tableView.dequeueReusableCellWithIdentifier("DeveloperToolsBaseURLStandardCell", forIndexPath: indexPath) as? UITableViewCell
+            cell = tableView.dequeueReusableCellWithIdentifier("DeveloperToolsBaseURLStandardCell", forIndexPath: indexPath)
             cell?.textLabel?.text = DeveloperTools.shared.baseURLFromIndex(indexPath.row)
         }
         
@@ -95,7 +95,7 @@ class DeveloperToolsBaseURL: UITableViewController, UITextFieldDelegate {
     func textFieldDidBeginEditing(textField: UITextField) {
         
         var section = 0
-        if let currentIndexPath = tableView.indexPathForSelectedRow() {
+        if let currentIndexPath = tableView.indexPathForSelectedRow {
             section = currentIndexPath.section
             tableView.deselectRowAtIndexPath(currentIndexPath, animated: true)
             tableView(tableView, didDeselectRowAtIndexPath: currentIndexPath)
@@ -107,7 +107,7 @@ class DeveloperToolsBaseURL: UITableViewController, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        DeveloperTools.shared.setCustomURL(textField.text)
+        DeveloperTools.shared.setCustomURL(textField.text ?? "")
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {

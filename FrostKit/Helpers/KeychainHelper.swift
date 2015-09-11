@@ -15,7 +15,7 @@ public class KeychainHelper: NSObject {
     
     private class func setupSearchDirectory() -> NSMutableDictionary {
         
-        let appName = NSBundle.appName(bundle: NSBundle(forClass: KeychainHelper.self))
+        let appName = NSBundle.appName(NSBundle(forClass: KeychainHelper.self))
         
         let secDict = NSMutableDictionary()
         secDict.setObject(String(kSecClassGenericPassword), forKey: String(kSecClass))
@@ -36,13 +36,11 @@ public class KeychainHelper: NSObject {
         secDict.setObject(NSNumber(bool: true), forKey: String(kSecReturnData))
         // kCFBooleanTrue
         
-        var foundDict: Unmanaged<AnyObject>?
+        var foundDict: AnyObject?
         let status = SecItemCopyMatching(secDict, &foundDict);
         
         if status == noErr {
-            if let opaque = foundDict?.toOpaque() {
-                return Unmanaged<NSData>.fromOpaque(opaque).takeUnretainedValue()
-            }
+            return foundDict as? NSData
         } else {
             let error = NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
             NSLog("ERROR: Search Keychain for Data: \(error.localizedDescription)")
@@ -54,11 +52,11 @@ public class KeychainHelper: NSObject {
     /**
     Gets the details saved for a paticular username.
     
-    :param: username The username of the details to return.
+    - parameter username: The username of the details to return.
     
-    :returns: The details saved with the username if found, otherwise `nil`.
+    - returns: The details saved with the username if found, otherwise `nil`.
     */
-    public class func details(#username: String) -> AnyObject? {
+    public class func details(username username: String) -> AnyObject? {
         
         let valueData = searchKeychainForMatchingData()
         if let data = valueData {
@@ -75,12 +73,12 @@ public class KeychainHelper: NSObject {
     /**
     Set details for a username to the keychain.
     
-    :param: details  The details to save.
-    :param: username The username to reference the details with.
+    - parameter details:  The details to save.
+    - parameter username: The username to reference the details with.
     
-    :returns: Returns `true` if the details were successfully saved, `false` if not.
+    - returns: Returns `true` if the details were successfully saved, `false` if not.
     */
-    public class func setDetails(#details: AnyObject, username: String) -> Bool {
+    public class func setDetails(details details: AnyObject, username: String) -> Bool {
         
         let valueDict = [username: details]
         let secDict = setupSearchDirectory()
@@ -124,7 +122,7 @@ public class KeychainHelper: NSObject {
     /**
     Deletes the currently saved keychain.
     
-    :returns: Returns `true` if deletion has succeeded or `false` if it failed.
+    - returns: Returns `true` if deletion has succeeded or `false` if it failed.
     */
     public class func deleteKeychain() -> Bool {
         

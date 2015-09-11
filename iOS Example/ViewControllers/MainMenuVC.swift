@@ -20,6 +20,14 @@ class MainMenuVC: UITableViewController {
         self.clearsSelectionOnViewWillAppear = true
     }
     
+    // MARK: - Segues
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let controller = (segue.destinationViewController as! UINavigationController).topViewController
+        controller?.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
+        controller?.navigationItem.leftItemsSupplementBackButton = true
+    }
+    
     // MARK: - Table view data source
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

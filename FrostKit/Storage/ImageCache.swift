@@ -28,7 +28,7 @@ public class ImageCache: NSObject {
     /**
     Returns the shared image cache object.
     
-    :returns: The shared image cache object.
+    - returns: The shared image cache object.
     */
     public class var shared: ImageCache {
         struct Singleton {
@@ -40,9 +40,9 @@ public class ImageCache: NSObject {
     /**
     Attempts to load the local image from cache or from loacl storage. If not found in either of these it will return `nil`.
     
-    :param: router The router for the image to be requested.
+    - parameter router: The router for the image to be requested.
     
-    :returns: The image requested or `nil`.
+    - returns: The image requested or `nil`.
     */
     public class func loadLocalImage(router: Router, completed: (image: UIImage?, router: Router) -> ()) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
@@ -75,10 +75,10 @@ public class ImageCache: NSObject {
     /**
     Attempts to load an image from cache and then local store, if no image is found then it will attempt to download it.
     
-    :param: urlString The url string of the image.
-    :param: size      The max rect the image should be.
-    :param: progress  A closure of the progress of the download.
-    :param: completed A closure of the completion of the download.
+    - parameter urlString: The url string of the image.
+    - parameter size:      The max rect the image should be.
+    - parameter progress:  A closure of the progress of the download.
+    - parameter completed: A closure of the completion of the download.
     */
     public class func loadImage(router: Router, progress: ((percentComplete: CGFloat) -> ())?, completed: (image: UIImage?, router: Router, error: NSError?) -> ()) {
         
@@ -101,9 +101,9 @@ public class ImageCache: NSObject {
                             if let anError = error {
                                 NSLog("Error downloading image with error: \(anError.localizedDescription)")
                             } else if let downloadedImage = image {
-                                let saveString = router.saveString
+                                let saveString = router.saveString as NSString
                                 sharedImageCache.cache.setObject(downloadedImage, forKey: saveString)
-                                ContentManager.saveContentMetadata(absolutePath: saveString)
+                                ContentManager.saveContentMetadata(absolutePath: saveString as String)
                                 LocalStorage.saveToDocuments(data: downloadedImage, reletivePath: saveString.stringByDeletingLastPathComponent, fileName: saveString.lastPathComponent)
                             }
                             dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -128,9 +128,9 @@ public class ImageCache: NSObject {
     /**
     A placeholder image from placekitten.com represented by the integer passed in.
     
-    :param: size An integer representing the place kitten back.
+    - parameter size: An integer representing the place kitten back.
     
-    :returns: The url for a place kitten placeholder.
+    - returns: The url for a place kitten placeholder.
     */
     public class func placeKittenURLString(size: Int) -> String {
         let baseURL = String("http://placekitten.com")
@@ -140,7 +140,7 @@ public class ImageCache: NSObject {
     /**
     A placegolder image from placekitten.com with a random number from 1000 to 2000
     
-    :returns: The url for a place kitten placeholder.
+    - returns: The url for a place kitten placeholder.
     */
     public class func randomPlaceKittenURLString() -> String {
         return placeKittenURLString(Int(arc4random_uniform(2000)+1000))

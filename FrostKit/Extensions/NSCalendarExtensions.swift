@@ -16,7 +16,7 @@ extension NSCalendar {
     /**
     A helper method to get the gregorian calendar.
     
-    :returns: A gregorian calendar object.
+    - returns: A gregorian calendar object.
     */
     public class func gregorianCalendar() -> NSCalendar {
         return NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!

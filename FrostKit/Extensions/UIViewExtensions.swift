@@ -16,7 +16,7 @@ extension UIView {
     /**
     Returns a screen shot of the view.
     
-    :returns: A screen shot of the view.
+    - returns: A screen shot of the view.
     */
     public func screenshot() -> UIImage {
         
@@ -38,9 +38,9 @@ extension UIView {
     /**
     Returns the parent view of a certain tpye.
     
-    :param: type The type of parent view to match against.
+    - parameter type: The type of parent view to match against.
     
-    :returns: The parent view of the type passed in.
+    - returns: The parent view of the type passed in.
     */
     public func parentViewOfType<T>(type: T.Type) -> T? {
         var currentView = self

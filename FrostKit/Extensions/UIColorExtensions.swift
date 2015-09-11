@@ -16,9 +16,9 @@ extension UIColor {
     /**
     A convenience init for creating a color object from a hex string.
     
-    :param: hexString   A hex string to turn into a color object.
+    - parameter hexString:   A hex string to turn into a color object.
     
-    :returns: A color object from the hex string.
+    - returns: A color object from the hex string.
     */
     public convenience init?(hexString: String, alpha: CGFloat = 1) {
         let color = UIColor.colorWithHex(hexString, alpha: alpha)
@@ -28,9 +28,9 @@ extension UIColor {
     /**
     Creates a color object from a hex string.
     
-    :param: hexString   A hex string to turn into a color object.
+    - parameter hexString:   A hex string to turn into a color object.
     
-    :returns: A color object from the hex string.
+    - returns: A color object from the hex string.
     */
     public class func colorWithHex(hexString: String, alpha: CGFloat = 1) -> UIColor {
         
@@ -44,7 +44,7 @@ extension UIColor {
         scanner.scanLocation = scanLocation
         scanner.scanHexInt(&rgbValue)
         
-        switch count(hexString) - scanLocation {
+        switch hexString.characters.count - scanLocation {
         case 3:
             // Normalize
             rgbValue = (rgbValue << 8) & 0x0F0000 | (rgbValue << 4) & 0x000F00 | rgbValue & 0x00000F
