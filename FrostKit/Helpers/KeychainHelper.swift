@@ -6,7 +6,7 @@
 //  Copyright (c) 2014-2015 James Barrow - Frostlight Solutions. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 ///
 /// The keychain helper allows access to the keychain for saving passwords safely.
