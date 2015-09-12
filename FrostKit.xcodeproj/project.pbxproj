@@ -128,7 +128,6 @@
 		188B22AD1BA36CA300EB87A2 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124019DC7D9000FD858D /* UIViewExtensions.swift */; };
 		188B22AE1BA36D9600EB87A2 /* UIBarButtonItemExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23919DE15600032ABB7 /* UIBarButtonItemExtensions.swift */; };
 		188B22AF1BA36D9A00EB87A2 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC212A19DEA21000FEB57E /* UIViewControllerExtensions.swift */; };
-		188B22B01BA36D9F00EB87A2 /* UICollectionViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A786CC1A77B39A006EADB9 /* UICollectionViewControllerExtensions.swift */; };
 		188B22B11BA36DA300EB87A2 /* UIScreenExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C7B6A1AD2F4A400CAE1A5 /* UIScreenExtensions.swift */; };
 		188B22B21BA36DAC00EB87A2 /* FontConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1836A21B1A84F38A00E57F86 /* FontConstants.swift */; };
 		188B22B31BA36DB000EB87A2 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EE19DCBC28008A1506 /* CustomFonts.swift */; };
@@ -151,6 +150,7 @@
 		18C0067519DC001000811755 /* NSDateExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0067419DC001000811755 /* NSDateExtensionsTests.swift */; };
 		18C0067619DC00C000811755 /* FrostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18839B1719D9FA8C00760157 /* FrostKit.framework */; };
 		18C0067819DC23A100811755 /* UIColorExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0067719DC23A100811755 /* UIColorExtensionsTest.swift */; };
+		18C008F81BA4EC720062B893 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C008F71BA4EC720062B893 /* Alamofire.framework */; };
 		18C0DBB11A6D18AB00307EAA /* ServiceClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0DBB01A6D18AB00307EAA /* ServiceClientTests.swift */; };
 		18CB51701A76454A005064C8 /* RequestStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* RequestStore.swift */; };
 		18CB51751A765335005064C8 /* DataUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB51741A765335005064C8 /* DataUpdater.swift */; };
@@ -224,6 +224,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = E4202FE01B667AA100C997FB;
 			remoteInfo = "Alamofire watchOS";
+		};
+		18C008F61BA4EC720062B893 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18213B271A7C143F002AD63C /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 18C008D31BA4E6300062B893;
+			remoteInfo = "Alamofire tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -334,6 +341,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18C008F81BA4EC720062B893 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +374,7 @@
 				18213B2F1A7C143F002AD63C /* Alamofire.framework */,
 				18213B311A7C143F002AD63C /* Alamofire.framework */,
 				1829A7A21BA257610017E4EE /* Alamofire.framework */,
+				18C008F71BA4EC720062B893 /* Alamofire.framework */,
 				18213B331A7C143F002AD63C /* Alamofire iOS Tests.xctest */,
 				18213B351A7C143F002AD63C /* Alamofire OSX Tests.xctest */,
 			);
@@ -821,6 +830,13 @@
 			remoteRef = 1829A7A11BA257610017E4EE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		18C008F71BA4EC720062B893 /* Alamofire.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Alamofire.framework;
+			remoteRef = 18C008F61BA4EC720062B893 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1039,7 +1055,6 @@
 				188B22AB1BA36C8400EB87A2 /* UIImageExtensions.swift in Sources */,
 				188B229E1BA36AAD00EB87A2 /* Button.swift in Sources */,
 				188B22A11BA36AAD00EB87A2 /* InitialsImageView.swift in Sources */,
-				188B22B01BA36D9F00EB87A2 /* UICollectionViewControllerExtensions.swift in Sources */,
 				188B22A21BA36AB700EB87A2 /* KeychainHelper.swift in Sources */,
 				188B22A51BA36BDE00EB87A2 /* NSCalendarExtensions.swift in Sources */,
 				188B22A31BA36B3B00EB87A2 /* NSErrorExtensions.swift in Sources */,
@@ -1416,6 +1431,7 @@
 				188B22761BA365D200EB87A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

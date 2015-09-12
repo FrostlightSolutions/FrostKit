@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "188B226F1BA365D200EB87A2"
-               BuildableName = "FrostKit tvOS.framework"
+               BuildableName = "FrostKit.framework"
                BlueprintName = "FrostKit tvOS"
                ReferencedContainer = "container:FrostKit.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "188B226F1BA365D200EB87A2"
-            BuildableName = "FrostKit tvOS.framework"
+            BuildableName = "FrostKit.framework"
             BlueprintName = "FrostKit tvOS"
             ReferencedContainer = "container:FrostKit.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "188B226F1BA365D200EB87A2"
-            BuildableName = "FrostKit tvOS.framework"
+            BuildableName = "FrostKit.framework"
             BlueprintName = "FrostKit tvOS"
             ReferencedContainer = "container:FrostKit.xcodeproj">
          </BuildableReference>
