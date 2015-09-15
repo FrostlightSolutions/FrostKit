@@ -8,7 +8,7 @@
 
 import Alamofire
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
 import UIKit
 #elseif os(watchOS)
 import WatchKit
@@ -22,7 +22,7 @@ public extension Alamofire.Request {
             
             if let imageData = data where imageData.length > 0 {
                 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
                 let scale = UIScreen.mainScreen().scale
 #elseif os(watchOS)
                 let scale = WKInterfaceDevice.currentDevice().screenScale

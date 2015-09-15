@@ -42,6 +42,7 @@
 		1818F6DA1A8CF39B000255A2 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1818F6D91A8CF39B000255A2 /* ImageView.swift */; };
 		1818F6DB1A8CF39B000255A2 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1818F6D91A8CF39B000255A2 /* ImageView.swift */; };
 		181BCC3619DF60810056C8F8 /* KeychainHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181BCC3519DF60810056C8F8 /* KeychainHelperTests.swift */; };
+		1820CA471BA84319001B1803 /* AlamofireExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E853CD1BA8418300581FEF /* AlamofireExtensions.swift */; };
 		182290521BA2E60200C1CF1D /* RequestStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* RequestStore.swift */; };
 		182290531BA2E66C00C1CF1D /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066019DB5BF000811755 /* LocalStorage.swift */; };
 		182290541BA2E66F00C1CF1D /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066F19DB7EDB00811755 /* ContentManager.swift */; };
@@ -183,8 +184,8 @@
 		18E028731BA2DA2A00852022 /* FrostKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23119DE07670032ABB7 /* FrostKit.swift */; };
 		18E3F23219DE07670032ABB7 /* FrostKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23119DE07670032ABB7 /* FrostKit.swift */; };
 		18E3F23A19DE15600032ABB7 /* UIBarButtonItemExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23919DE15600032ABB7 /* UIBarButtonItemExtensions.swift */; };
-		18E853CE1BA8418300581FEF /* AlamofireExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E853CD1BA8418300581FEF /* AlamofireExtensions.swift */; settings = {ASSET_TAGS = (); }; };
-		18E853CF1BA8418300581FEF /* AlamofireExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E853CD1BA8418300581FEF /* AlamofireExtensions.swift */; settings = {ASSET_TAGS = (); }; };
+		18E853CE1BA8418300581FEF /* AlamofireExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E853CD1BA8418300581FEF /* AlamofireExtensions.swift */; };
+		18E853CF1BA8418300581FEF /* AlamofireExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E853CD1BA8418300581FEF /* AlamofireExtensions.swift */; };
 		18EA123F19DC79F100FD858D /* NSDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA123E19DC79F100FD858D /* NSDataExtensions.swift */; };
 		18EA124119DC7D9000FD858D /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124019DC7D9000FD858D /* UIViewExtensions.swift */; };
 		18EA124319DC8A8C00FD858D /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124219DC8A8C00FD858D /* KeychainHelper.swift */; };
@@ -192,6 +193,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1820CA4F1BA84319001B1803 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18213B271A7C143F002AD63C /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4CF626F81BA7CB3E0011A099;
+			remoteInfo = "Alamofire tvOS Tests";
+		};
 		18213B2E1A7C143F002AD63C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 18213B271A7C143F002AD63C /* Alamofire.xcodeproj */;
@@ -375,11 +383,12 @@
 			isa = PBXGroup;
 			children = (
 				18213B2F1A7C143F002AD63C /* Alamofire.framework */,
-				18213B311A7C143F002AD63C /* Alamofire.framework */,
-				1829A7A21BA257610017E4EE /* Alamofire.framework */,
-				18C008F71BA4EC720062B893 /* Alamofire.framework */,
 				18213B331A7C143F002AD63C /* Alamofire iOS Tests.xctest */,
+				18213B311A7C143F002AD63C /* Alamofire.framework */,
 				18213B351A7C143F002AD63C /* Alamofire OSX Tests.xctest */,
+				18C008F71BA4EC720062B893 /* Alamofire.framework */,
+				1820CA501BA84319001B1803 /* Alamofire tvOS Tests.xctest */,
+				1829A7A21BA257610017E4EE /* Alamofire.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -799,6 +808,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		1820CA501BA84319001B1803 /* Alamofire tvOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Alamofire tvOS Tests.xctest";
+			remoteRef = 1820CA4F1BA84319001B1803 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		18213B2F1A7C143F002AD63C /* Alamofire.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1059,6 +1075,7 @@
 				188B22A91BA36C8400EB87A2 /* UIFontExtensions.swift in Sources */,
 				188B22B31BA36DB000EB87A2 /* CustomFonts.swift in Sources */,
 				188B22AB1BA36C8400EB87A2 /* UIImageExtensions.swift in Sources */,
+				1820CA471BA84319001B1803 /* AlamofireExtensions.swift in Sources */,
 				188B229E1BA36AAD00EB87A2 /* Button.swift in Sources */,
 				188B22A11BA36AAD00EB87A2 /* InitialsImageView.swift in Sources */,
 				188B22A21BA36AB700EB87A2 /* KeychainHelper.swift in Sources */,
