@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import AlamofireImage
 
 ///
 /// Contains all static paths for API calls to FUS in a type-safe mannor.
@@ -446,7 +447,7 @@ public class FUSServiceClient: NSObject {
             }
             progress?(percentComplete: percent)
             
-        }).responseImage({ (_, _, result) -> Void in
+        }).responseImage(completionHandler: { (_, _, result) -> Void in
             
             NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
             completed(image: result.value, error: result.error as? NSError)
