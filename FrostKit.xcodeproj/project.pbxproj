@@ -42,7 +42,6 @@
 		1818F6DA1A8CF39B000255A2 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1818F6D91A8CF39B000255A2 /* ImageView.swift */; };
 		1818F6DB1A8CF39B000255A2 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1818F6D91A8CF39B000255A2 /* ImageView.swift */; };
 		181BCC3619DF60810056C8F8 /* KeychainHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181BCC3519DF60810056C8F8 /* KeychainHelperTests.swift */; };
-		1820CA471BA84319001B1803 /* AlamofireExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E853CD1BA8418300581FEF /* AlamofireExtensions.swift */; };
 		182290521BA2E60200C1CF1D /* RequestStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* RequestStore.swift */; };
 		182290531BA2E66C00C1CF1D /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066019DB5BF000811755 /* LocalStorage.swift */; };
 		182290541BA2E66F00C1CF1D /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066F19DB7EDB00811755 /* ContentManager.swift */; };
@@ -140,6 +139,7 @@
 		1899C4FD1A6D154A001638CF /* FUSServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1899C4FA1A6D152C001638CF /* FUSServiceClient.swift */; };
 		189B4C651A8663730055CEA3 /* MapSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189B4C641A8663730055CEA3 /* MapSearchViewController.swift */; };
 		189B4C661A8663730055CEA3 /* MapSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189B4C641A8663730055CEA3 /* MapSearchViewController.swift */; };
+		18A30F531BA966B700512EE8 /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A30F501BA966B700512EE8 /* AlamofireImage.framework */; };
 		18A786CD1A77B39A006EADB9 /* UICollectionViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A786CC1A77B39A006EADB9 /* UICollectionViewControllerExtensions.swift */; };
 		18BB7C7519DC383900F21A64 /* NSCalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BB7C7419DC383900F21A64 /* NSCalendarExtensions.swift */; };
 		18BFF7571A7B01F0002612F9 /* Notifications.json in Resources */ = {isa = PBXBuildFile; fileRef = 18BFF7561A7B01F0002612F9 /* Notifications.json */; };
@@ -186,8 +186,6 @@
 		18E028731BA2DA2A00852022 /* FrostKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23119DE07670032ABB7 /* FrostKit.swift */; };
 		18E3F23219DE07670032ABB7 /* FrostKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23119DE07670032ABB7 /* FrostKit.swift */; };
 		18E3F23A19DE15600032ABB7 /* UIBarButtonItemExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23919DE15600032ABB7 /* UIBarButtonItemExtensions.swift */; };
-		18E853CE1BA8418300581FEF /* AlamofireExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E853CD1BA8418300581FEF /* AlamofireExtensions.swift */; };
-		18E853CF1BA8418300581FEF /* AlamofireExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E853CD1BA8418300581FEF /* AlamofireExtensions.swift */; };
 		18EA123F19DC79F100FD858D /* NSDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA123E19DC79F100FD858D /* NSDataExtensions.swift */; };
 		18EA124119DC7D9000FD858D /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124019DC7D9000FD858D /* UIViewExtensions.swift */; };
 		18EA124319DC8A8C00FD858D /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124219DC8A8C00FD858D /* KeychainHelper.swift */; };
@@ -237,13 +235,6 @@
 			remoteGlobalIDString = E4202FE01B667AA100C997FB;
 			remoteInfo = "Alamofire watchOS";
 		};
-		18C008F61BA4EC720062B893 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 18213B271A7C143F002AD63C /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 18C008D31BA4E6300062B893;
-			remoteInfo = "Alamofire tvOS";
-		};
 		187BC4D91BA9623F00F5929C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 187BC4CB1BA9623F00F5929C /* AlamofireImage.xcodeproj */;
@@ -278,6 +269,27 @@
 			proxyType = 2;
 			remoteGlobalIDString = 4CE611471AABC5C900D35044;
 			remoteInfo = "AlamofireImage OSX Tests";
+		};
+		18A30F4F1BA966B700512EE8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 187BC4CB1BA9623F00F5929C /* AlamofireImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C16B37D1BA9399500A66EF0;
+			remoteInfo = "AlamofireImage tvOS";
+		};
+		18A30F511BA966B700512EE8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 187BC4CB1BA9623F00F5929C /* AlamofireImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C16B3861BA9399500A66EF0;
+			remoteInfo = "AlamofireImage tvOS Tests";
+		};
+		18C008F61BA4EC720062B893 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18213B271A7C143F002AD63C /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 18C008D31BA4E6300062B893;
+			remoteInfo = "Alamofire tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -392,6 +404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18C008F81BA4EC720062B893 /* Alamofire.framework in Frameworks */,
+				18A30F531BA966B700512EE8 /* AlamofireImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,10 +506,12 @@
 			isa = PBXGroup;
 			children = (
 				187BC4DA1BA9623F00F5929C /* AlamofireImage.framework */,
-				187BC4DC1BA9623F00F5929C /* AlamofireImage.framework */,
-				187BC4DE1BA9623F00F5929C /* AlamofireImage.framework */,
 				187BC4E01BA9623F00F5929C /* AlamofireImage iOS Tests.xctest */,
+				187BC4DC1BA9623F00F5929C /* AlamofireImage.framework */,
 				187BC4E21BA9623F00F5929C /* AlamofireImage OSX Tests.xctest */,
+				18A30F501BA966B700512EE8 /* AlamofireImage.framework */,
+				18A30F521BA966B700512EE8 /* AlamofireImage tvOS Tests.xctest */,
+				187BC4DE1BA9623F00F5929C /* AlamofireImage.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -905,13 +920,6 @@
 			remoteRef = 1829A7A11BA257610017E4EE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		18C008F71BA4EC720062B893 /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = 18C008F61BA4EC720062B893 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		187BC4DA1BA9623F00F5929C /* AlamofireImage.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -945,6 +953,27 @@
 			fileType = wrapper.cfbundle;
 			path = "AlamofireImage OSX Tests.xctest";
 			remoteRef = 187BC4E11BA9623F00F5929C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		18A30F501BA966B700512EE8 /* AlamofireImage.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AlamofireImage.framework;
+			remoteRef = 18A30F4F1BA966B700512EE8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		18A30F521BA966B700512EE8 /* AlamofireImage tvOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "AlamofireImage tvOS Tests.xctest";
+			remoteRef = 18A30F511BA966B700512EE8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		18C008F71BA4EC720062B893 /* Alamofire.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Alamofire.framework;
+			remoteRef = 18C008F61BA4EC720062B893 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1163,7 +1192,6 @@
 				188B22A91BA36C8400EB87A2 /* UIFontExtensions.swift in Sources */,
 				188B22B31BA36DB000EB87A2 /* CustomFonts.swift in Sources */,
 				188B22AB1BA36C8400EB87A2 /* UIImageExtensions.swift in Sources */,
-				1820CA471BA84319001B1803 /* AlamofireExtensions.swift in Sources */,
 				188B229E1BA36AAD00EB87A2 /* Button.swift in Sources */,
 				188B22A11BA36AAD00EB87A2 /* InitialsImageView.swift in Sources */,
 				188B22A21BA36AB700EB87A2 /* KeychainHelper.swift in Sources */,
