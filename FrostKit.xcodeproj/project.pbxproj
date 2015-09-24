@@ -70,8 +70,6 @@
 		183F85F91A7B0E1C00885F56 /* SmallLogoBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 183F85F81A7B0E1C00885F56 /* SmallLogoBlue.png */; };
 		185959261BB46E15004C6632 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 185959241BB46E15004C6632 /* Alamofire.framework */; };
 		185959271BB46E15004C6632 /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 185959251BB46E15004C6632 /* AlamofireImage.framework */; };
-		1859592A1BB46E21004C6632 /* Alamofire.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 185959281BB46E21004C6632 /* Alamofire.framework.dSYM */; };
-		1859592B1BB46E21004C6632 /* AlamofireImage.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 185959291BB46E21004C6632 /* AlamofireImage.framework.dSYM */; };
 		1859592E1BB46E62004C6632 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1859592C1BB46E62004C6632 /* Alamofire.framework */; };
 		1859592F1BB46E62004C6632 /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1859592D1BB46E62004C6632 /* AlamofireImage.framework */; };
 		185959321BB46E67004C6632 /* Alamofire.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 185959301BB46E67004C6632 /* Alamofire.framework.dSYM */; };
@@ -109,6 +107,8 @@
 		186B080B1A6D5F6F00CAF920 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EE19DCBC28008A1506 /* CustomFonts.swift */; };
 		186CFCEA1A29FA40002739A5 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186CFCE91A29FA40002739A5 /* MapController.swift */; };
 		18748B2219DF5661003942A3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18748B2019DF5661003942A3 /* Localizable.strings */; };
+		18775C2C1BB4AE3700A60FD1 /* Alamofire.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 185959281BB46E21004C6632 /* Alamofire.framework.dSYM */; };
+		18775C2D1BB4AE3700A60FD1 /* AlamofireImage.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 185959291BB46E21004C6632 /* AlamofireImage.framework.dSYM */; };
 		18839B2719D9FA8C00760157 /* FrostKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B2619D9FA8C00760157 /* FrostKitTests.swift */; };
 		18839B4719DA27AE00760157 /* SocialHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B4519DA27AE00760157 /* SocialHelper.swift */; };
 		188D62981A8D56FE0098D976 /* InitialsImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188D62971A8D56FE0098D976 /* InitialsImageView.swift */; };
@@ -275,8 +275,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				1859592A1BB46E21004C6632 /* Alamofire.framework.dSYM in CopyFiles */,
-				1859592B1BB46E21004C6632 /* AlamofireImage.framework.dSYM in CopyFiles */,
+				18775C2C1BB4AE3700A60FD1 /* Alamofire.framework.dSYM in CopyFiles */,
+				18775C2D1BB4AE3700A60FD1 /* AlamofireImage.framework.dSYM in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1399,7 +1399,6 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/watchOS",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = FrostKit/Info.plist;
@@ -1424,7 +1423,6 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/watchOS",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = FrostKit/Info.plist;
