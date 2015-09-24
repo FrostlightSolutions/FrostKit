@@ -408,7 +408,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     */
     private func updatedData() {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            delegate?.dataUpdater?(self, hasUpdatedDataStore: dataStore)
+            self.delegate?.dataUpdater?(self, hasUpdatedDataStore: self.dataStore)
         })
     }
     
