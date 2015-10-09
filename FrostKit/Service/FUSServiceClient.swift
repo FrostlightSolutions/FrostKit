@@ -280,13 +280,13 @@ public class FUSServiceClient: NSObject {
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
-        Alamofire.request(Router.Token(parameters)).validate().responseJSON { (_, response, result) -> Void in
+        Alamofire.request(Router.Token(parameters)).validate().responseJSON { response in
             
-            if let error = result.error as? NSError {
+            if let error = response.result.error {
                 
-                completed(error: self.errorForResponse(response, json: result.value, origError: error))
+                completed(error: self.errorForResponse(response.response, json: response.result.value, origError: error))
                 
-            } else if let jsonDict = result.value as? NSDictionary {
+            } else if let jsonDict = response.result.value as? NSDictionary {
                 
                 UserStore.current.username = username
                 UserStore.current.oAuthToken = OAuthToken(json: jsonDict, requestDate: requestDate)
@@ -297,13 +297,13 @@ public class FUSServiceClient: NSObject {
                     if let anError = error {
                         completed(error: anError)
                     } else {
-                        completed(error: self.errorForResponse(response, json: result.value, origError: result.error as? NSError))
+                        completed(error: self.errorForResponse(response.response, json: response.result.value, origError: response.result.error))
                     }
                 }
                 
             } else {
                 
-                completed(error: NSError.errorWithMessage("Returned JSON is not a NSDictionary: \(result.value)"))
+                completed(error: NSError.errorWithMessage("Returned JSON is not a NSDictionary: \(response.result.value)"))
             }
             NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
         }
@@ -340,13 +340,13 @@ public class FUSServiceClient: NSObject {
             }
             
             NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
-            Alamofire.request(Router.Token(parameters)).validate().responseJSON { (_, response, result) -> Void in
+            Alamofire.request(Router.Token(parameters)).validate().responseJSON { response in
                 
-                if let anError = result.error as? NSError {
+                if let anError = response.result.error {
                     
-                    completed(error: self.errorForResponse(response, json: result.value, origError: anError))
+                    completed(error: self.errorForResponse(response.response, json: response.result.value, origError: anError))
                     
-                } else if let jsonDict = result.value as? NSDictionary {
+                } else if let jsonDict = response.result.value as? NSDictionary {
                     
                     UserStore.current.oAuthToken = OAuthToken(json: jsonDict, requestDate: requestDate)
                     UserStore.saveUser()
@@ -356,13 +356,13 @@ public class FUSServiceClient: NSObject {
                         if let anError = error {
                             completed(error: anError)
                         } else {
-                            completed(error: self.errorForResponse(response, json: result.value, origError: result.error as? NSError))
+                            completed(error: self.errorForResponse(response.response, json: response.result.value, origError: response.result.error))
                         }
                     }
                     
                 } else {
                     
-                    completed(error: NSError.errorWithMessage("Returned JSON is not a NSDictionary: \(result.value)"))
+                    completed(error: NSError.errorWithMessage("Returned JSON is not a NSDictionary: \(response.result.value)"))
                 }
                 NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
             }
@@ -379,29 +379,29 @@ public class FUSServiceClient: NSObject {
     public class func updateSections(completed: (error: NSError?) -> ()) {
         
         NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
-        Alamofire.request(Router.Sections).validate().responseJSON { (_, response, result) -> Void in
+        Alamofire.request(Router.Sections).validate().responseJSON { response in
             
-            if let anError = result.error as? NSError {
+            if let anError = response.result.error {
                 
-                completed(error: self.errorForResponse(response, json: result.value, origError: anError))
+                completed(error: self.errorForResponse(response.response, json: response.result.value, origError: anError))
                 
-            } else if let jsonDictionary = result.value as? [String: AnyObject] {
+            } else if let jsonDictionary = response.result.value as? [String: AnyObject] {
                 
                 if let jsonArray = jsonDictionary["sections"] as? [[String: String]] {
                     
                     UserStore.current.sections = jsonArray
                     UserStore.saveUser()
                     NSNotificationCenter.defaultCenter().postNotificationName(FUSServiceClientUpdateSections, object: nil)
-                    completed(error: self.errorForResponse(response, json: result.value, origError: result.error as? NSError))
+                    completed(error: self.errorForResponse(response.response, json: response.result.value, origError: response.result.error))
                     
                 } else {
                     
-                    completed(error: NSError.errorWithMessage("Returned JSON is not an Array: \(result.value)"))
+                    completed(error: NSError.errorWithMessage("Returned JSON is not an Array: \(response.result.value)"))
                 }
                 
             } else {
                 
-                completed(error: NSError.errorWithMessage("Returned JSON is not a Dictionary: \(result.value)"))
+                completed(error: NSError.errorWithMessage("Returned JSON is not a Dictionary: \(response.result.value)"))
             }
             NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
         }
@@ -420,9 +420,9 @@ public class FUSServiceClient: NSObject {
     public class func request(router: Router, completed: (json: AnyObject?, error: NSError?) -> ()) -> Alamofire.Request {
         
         NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
-        return Alamofire.request(router).validate().responseJSON { (_, response, result) -> Void in
+        return Alamofire.request(router).validate().responseJSON { response in
             
-            completed(json: result.value, error: self.errorForResponse(response, json: result.value, origError: result.error as? NSError))
+            completed(json: response.result.value, error: self.errorForResponse(response.response, json: response.result.value, origError: response.result.error))
             NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
         }
     }
@@ -447,10 +447,10 @@ public class FUSServiceClient: NSObject {
             }
             progress?(percentComplete: percent)
             
-        }).responseImage(completionHandler: { (_, _, result) -> Void in
+        }).responseImage(completionHandler: { (response) -> Void in
             
             NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
-            completed(image: result.value, error: result.error as? NSError)
+            completed(image: response.result.value, error: response.result.error)
         })
     }
     
