@@ -366,6 +366,7 @@ extension NSDate {
         
         let calendar = NSCalendar.gregorianCalendar()
         let components = calendar.components(componentFlags, fromDate: self)
+        components.timeZone = NSTimeZone.utc()
         components.hour = 0
         components.minute = 0
         components.second = 0
@@ -381,6 +382,7 @@ extension NSDate {
         
         let calendar = NSCalendar.gregorianCalendar()
         let components = calendar.components(componentFlags, fromDate: self)
+        components.timeZone = NSTimeZone.utc()
         components.hour = 23
         components.minute = 59
         components.second = 59
