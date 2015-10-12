@@ -410,6 +410,15 @@ extension NSDate {
     }
     
     /**
+    A helper method for getting a formatted string of the date in `MediumStyle`
+    
+    :retuerns: A string of formatted date in `MediumStyle`
+    */
+    public func dateMediumString() -> String {
+        return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .MediumStyle, timeStyle: .NoStyle)
+    }
+    
+    /**
     A helper method for getting a formatted string of the date in `FullStyle`
     
     :retuerns: A string of formatted date in `FullStyle`
