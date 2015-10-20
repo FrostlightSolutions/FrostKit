@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class CarouselViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
+public class CarouselViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
     
     enum Direction: Int {
         case None = 0
@@ -16,78 +16,85 @@ public class CarouselViewController: UIViewController, UICollectionViewDelegate,
         case RightToLeft = 1
     }
     
-    public var collectionView: UICollectionView?
-    public lazy var pageControl = UIPageControl()
-    @IBInspectable public var numberOfPages: Int = 0 {
+    @IBOutlet public weak var collectionView: UICollectionView! {
         didSet {
-            pageControl.numberOfPages = numberOfPages
+            
+            collectionView.backgroundColor = .whiteColor()
+            collectionView.showsHorizontalScrollIndicator = false
+            collectionView.showsVerticalScrollIndicator = false
+            collectionView.pagingEnabled = true
+            collectionView.scrollsToTop = false
+            collectionView.dataSource = self
+            collectionView.delegate = self
+            
+            if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+                
+                flowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
+                flowLayout.minimumInteritemSpacing = 0
+                flowLayout.minimumLineSpacing = 0
+                flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            }
+            
+            collectionView.reloadData()
         }
     }
-    @IBInspectable public var showPageControl: Bool = true {
+    @IBOutlet public weak var pageControl: UIPageControl? {
         didSet {
-            pageControl.hidden = !showPageControl
+            
+            pageControl?.numberOfPages = numberOfPages
+            pageControl?.addTarget(self, action: "pageControlDidChange:", forControlEvents: .ValueChanged)
+        }
+    }
+    public var numberOfPages: Int {
+        
+        if collectionView.numberOfSections() > 0 {
+            return collectionView.numberOfItemsInSection(0)
+        } else {
+            return 0
         }
     }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
-        flowLayout.minimumInteritemSpacing = 0
-        flowLayout.minimumLineSpacing = 0
-        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        
-        let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: flowLayout)
-        collectionView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        collectionView.backgroundColor = UIColor.clearColor()
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.pagingEnabled = true
-        collectionView.scrollsToTop = false
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        view.addSubview(collectionView)
-        self.collectionView = collectionView
-        
         let pageControlHeight: CGFloat = 20
         let pageControl = UIPageControl(frame: CGRect(x: 0, y: view.bounds.height - pageControlHeight, width: view.bounds.width, height: pageControlHeight))
         pageControl.autoresizingMask = [.FlexibleWidth, .FlexibleTopMargin]
-        pageControl.numberOfPages = numberOfPages
-        pageControl.addTarget(self, action: "pageControlDidChange:", forControlEvents: .ValueChanged)
-        pageControl.hidden = !showPageControl
-        view.addSubview(pageControl)
-        self.pageControl = pageControl
+        
     }
     
     public override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
-        collectionView?.performBatchUpdates(nil, completion: { (completed) -> Void in
-                self.pageControlDidChange(self.pageControl)
+        
+        if let pageControl = self.pageControl {
+            
+            collectionView?.performBatchUpdates(nil, completion: { (completed) -> Void in
+                self.pageControlDidChange(pageControl)
             })
+        }
     }
     
-    // MARK: - UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource and UICollectionViewDelegate
     
     public func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
     
     public func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return numberOfPages
+        return 0
     }
     
     public func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCellWithReuseIdentifier("CarouselCell", forIndexPath: indexPath) as UICollectionViewCell
+        return collectionView.dequeueReusableCellWithReuseIdentifier("CarouselCell", forIndexPath: indexPath)
     }
-    
-    // MARK: - UICollectionViewDelegate
-    
-    
     
     // MARK: - UICollectionViewDelegateFlowLayout
     
     public func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return collectionView.bounds.size
+        return collectionView.frame.size
+    }
+    
+    public override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        collectionView?.collectionViewLayout.invalidateLayout()
     }
     
     // MARK: - UIPageControl Methods
@@ -102,8 +109,11 @@ public class CarouselViewController: UIViewController, UICollectionViewDelegate,
         
         // Update Page number
         let pageNumber = Int((scrollView.contentOffset.x / scrollView.bounds.width) + 0.5)
-        if pageNumber != pageControl.currentPage && pageNumber >= 0 && scrollView.dragging == true {
-            pageControl.currentPage = pageNumber
+        if let pageControl = self.pageControl {
+            
+            if pageNumber != pageControl.currentPage && pageNumber >= 0 && scrollView.dragging == true {
+                pageControl.currentPage = pageNumber
+            }
         }
         
         let xOffset = scrollView.contentOffset.x - (CGFloat(pageNumber) * scrollView.frame.width)
@@ -130,8 +140,11 @@ public class CarouselViewController: UIViewController, UICollectionViewDelegate,
     
     public func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         // Update Page number
-        let pageNumber = Int(scrollView.contentOffset.x / scrollView.bounds.width)
-        pageControl.currentPage = pageNumber
+        if let pageControl = self.pageControl {
+            
+            let pageNumber = Int(scrollView.contentOffset.x / scrollView.bounds.width)
+            pageControl.currentPage = pageNumber
+        }
         
         // Reset the transform to the default
         view.layer.transform = CATransform3DIdentity
