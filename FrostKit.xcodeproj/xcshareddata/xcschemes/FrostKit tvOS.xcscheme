@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "188B226F1BA365D200EB87A2"
+               BlueprintIdentifier = "1826B0251BD9047900DA1669"
                BuildableName = "FrostKit.framework"
                BlueprintName = "FrostKit tvOS"
                ReferencedContainer = "container:FrostKit.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "188B226F1BA365D200EB87A2"
+            BlueprintIdentifier = "1826B0251BD9047900DA1669"
             BuildableName = "FrostKit.framework"
             BlueprintName = "FrostKit tvOS"
             ReferencedContainer = "container:FrostKit.xcodeproj">
@@ -63,7 +63,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "188B226F1BA365D200EB87A2"
+            BlueprintIdentifier = "1826B0251BD9047900DA1669"
             BuildableName = "FrostKit.framework"
             BlueprintName = "FrostKit tvOS"
             ReferencedContainer = "container:FrostKit.xcodeproj">
