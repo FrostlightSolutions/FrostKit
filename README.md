@@ -3,12 +3,18 @@ FrostKit
 
 ## Roadmap
 
+#### Platforms
+- [x] iOS
+- [x] watchOS
+- [x] tvOS
+
 ####Storage and Service
 - [x] LocalStorage
-- [x] ImageCache
+- [x] ImageCache        - It is recomended to use AlamofireImage
 - [x] ContentManager
 - [x] UserObject
 - [x] FUSServiceClient
+- [ ] CoreDataManager
 
 #### Helpers
 - [x] SocialHelper
@@ -16,9 +22,9 @@ FrostKit
 - [x] MapController
 
 #### View Controllers
-- [x] WebViewController
-- [x] UIWebViewController
-- [x] WKWebViewController
+- [x] WebViewController   - Included for iOS 8, in iOS 9 SFSafariViewController shuold be used.
+- [x] UIWebViewController - Included for iOS 8, in iOS 9 SFSafariViewController shuold be used.
+- [x] WKWebViewController - Included for iOS 8, in iOS 9 SFSafariViewController shuold be used.
 - [x] MapViewController
 
 #### General
@@ -30,13 +36,12 @@ FrostKit
 
 #### Submodules
 - [x] Alamofire
+- [x] AlamofireImage
 
 ## Requirements
 
 - iOS 8.0+
-- Xcode 6.1
-
-> The plan is to make this iOS 7 backwards compatible as well, but no later.
+- Xcode 7
 
 * * *
 
