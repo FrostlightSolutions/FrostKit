@@ -8,7 +8,7 @@
 
 import Foundation
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
 import UIKit
 #elseif os(watchOS)
 import WatchKit
@@ -20,7 +20,7 @@ public let UserStoreLogoutClearData = "com.FrostKit.UserStore.logout.clearData"
 public let NetworkRequestDidBeginNotification = "com.FrostKit.activityIndicator.request.begin"
 public let NetworkRequestDidCompleteNotification = "com.FrostKit.activityIndicator.request.complete"
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
 internal func FKLocalizedString(key: String, comment: String = "") -> String {
     return NSLocalizedString(key, bundle: NSBundle(forClass: FrostKit.self), comment: comment)
 }
@@ -76,8 +76,11 @@ public class FrostKit {
     }
     
     init() {
-#if os(iOS)
+#if os(iOS) || os(tvOS)
         CustomFonts.loadCustomFonts()
+#endif
+
+#if os(iOS)
         UserStore.current
 #endif
     }
