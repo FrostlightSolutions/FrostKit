@@ -45,6 +45,9 @@ public class FrostKit {
     public class var tintColor: UIColor? {
         return FrostKit.shared.tintColor
     }
+    public class func tintColor(alpha alpha: CGFloat) -> UIColor? {
+        return tintColor?.colorWithAlpha(alpha)
+    }
 #if os(iOS)
     public class var FUSName: String? {
         return FrostKit.shared.FUSName

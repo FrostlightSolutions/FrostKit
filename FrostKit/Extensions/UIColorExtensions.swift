@@ -20,7 +20,7 @@ extension UIColor {
     
     - returns: A color object from the hex string.
     */
-    public convenience init?(hexString: String, alpha: CGFloat = 1) {
+    public convenience init(hexString: String, alpha: CGFloat = 1) {
         let color = UIColor.colorWithHex(hexString, alpha: alpha)
         self.init(CGColor: color.CGColor)
     }
@@ -59,5 +59,22 @@ extension UIColor {
         }
         
         return UIColor(red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0, green: CGFloat((rgbValue & 0x00FF00) >> 8)  / 255.0, blue: CGFloat(rgbValue & 0x0000FF) / 255.0, alpha: alpha)
+    }
+    
+    /**
+     Created a new UIColor object from the object called from with a new alpha value.
+     
+     - parameter alpha: The alpha value of the new UIColor object created.
+     
+     - returns: The new UIColor object created with the passed in alpha value.
+     */
+    public func colorWithAlpha(alpha: CGFloat) -> UIColor {
+        
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        getRed(&red, green: &green, blue: &blue, alpha: nil)
+        
+        return UIColor(red: red, green: green, blue: blue, alpha: alpha)
     }
 }
