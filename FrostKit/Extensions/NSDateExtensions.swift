@@ -503,4 +503,13 @@ extension NSDate {
         return dateStringFromFormat("MMM")
     }
     
+    /**
+     Returns the date's year string. i.e. 2015
+     
+     - returns: The year string.
+     */
+    public func yearString() -> String {
+        return dateStringFromFormat("Y")
+    }
+    
 }
