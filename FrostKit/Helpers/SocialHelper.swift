@@ -20,14 +20,14 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         case MessagePrompt
     }
     
-    private var toRecipients: [String] = []
-    private var ccRecipients: [String] = []
-    private var bccRecipients: [String] = []
+    private var toRecipients: [String]? = nil
+    private var ccRecipients: [String]? = nil
+    private var bccRecipients: [String]? = nil
     private var subject: String = ""
     private var messageBody: String = ""
     private var isBodyHTML: Bool = false
-    private var emailAttachments: [(data: NSData, mimeType: String, fileName: String)] = []
-    private var messgaeAttachments: [(attachmentURL: NSURL, alternateFilename: String)] = []
+    private var emailAttachments: [(data: NSData, mimeType: String, fileName: String)]? = nil
+    private var messgaeAttachments: [(attachmentURL: NSURL, alternateFilename: String)]? = nil
     private var viewController: UIViewController?
     private var animated: Bool = true
     
@@ -135,7 +135,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     - parameter viewController: The view controller to present the `MFMailComposeViewController` in.
     - parameter animated:       If the presentation should be animated or not.
     */
-    public class func emailPrompt(toRecipients toRecipients: [String], ccRecipients: [String] = [], bccRecipients: [String] = [], subject: String = "", messageBody: String = "", isBodyHTML: Bool = false, attachments: [(data: NSData, mimeType: String, fileName: String)] = [], viewController: UIViewController, animated: Bool = true) {
+    public class func emailPrompt(toRecipients toRecipients: [String], ccRecipients: [String]? = nil, bccRecipients: [String]? = nil, subject: String = "", messageBody: String = "", isBodyHTML: Bool = false, attachments: [(data: NSData, mimeType: String, fileName: String)]? = nil, viewController: UIViewController, animated: Bool = true) {
         
         if MFMailComposeViewController.canSendMail() {
             
@@ -182,9 +182,10 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         }
     }
     
-    private class func presentMailComposeViewController(toRecipients toRecipients: [String], ccRecipients: [String], bccRecipients: [String], subject: String, messageBody: String, isBodyHTML: Bool, attachments: [(data: NSData, mimeType: String, fileName: String)], viewController: UIViewController, animated: Bool) {
+    public class func presentMailComposeViewController(toRecipients toRecipients: [String]? = nil, ccRecipients: [String]? = nil, bccRecipients: [String]? = nil, subject: String = "", messageBody: String = "", isBodyHTML: Bool = false, attachments: [(data: NSData, mimeType: String, fileName: String)]? = nil, viewController: UIViewController, animated: Bool) {
         
         let mailVC = MFMailComposeViewController()
+        mailVC.view.tintColor = FrostKit.tintColor
         mailVC.mailComposeDelegate = SocialHelper.shared
         mailVC.setSubject(subject)
         mailVC.setToRecipients(toRecipients)
@@ -192,8 +193,10 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         mailVC.setBccRecipients(bccRecipients)
         mailVC.setMessageBody(messageBody, isHTML: isBodyHTML)
         
-        for (data, mimeType, fileName) in attachments {
-            mailVC.addAttachmentData(data, mimeType: mimeType, fileName: fileName)
+        if attachments != nil {
+            for (data, mimeType, fileName) in attachments! {
+                mailVC.addAttachmentData(data, mimeType: mimeType, fileName: fileName)
+            }
         }
         
         viewController.presentViewController(mailVC, animated: animated, completion: nil)
@@ -253,7 +256,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         }
     }
     
-    private class func presentMessageComposeViewController(recipients recipients: [String], subject: String, body: String, attachments: [(attachmentURL: NSURL, alternateFilename: String)], viewController: UIViewController, animated: Bool) {
+    private class func presentMessageComposeViewController(recipients recipients: [String]? = nil, subject: String? = nil, body: String? = nil, attachments: [(attachmentURL: NSURL, alternateFilename: String)]? = nil, viewController: UIViewController, animated: Bool) {
         
         let messageVC = MFMessageComposeViewController()
         messageVC.messageComposeDelegate = SocialHelper.shared
@@ -263,8 +266,8 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             messageVC.subject = subject
         }
         
-        if MFMessageComposeViewController.canSendAttachments() {
-            for (attachmentURL, alternateFilename) in attachments {
+        if MFMessageComposeViewController.canSendAttachments() && attachments != nil {
+            for (attachmentURL, alternateFilename) in attachments! {
                 messageVC.addAttachmentURL(attachmentURL, withAlternateFilename: alternateFilename)
             }
         }
