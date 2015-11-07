@@ -40,6 +40,10 @@ public class FrostKit {
     private var OAuthClientSecret: String?
 #endif
     
+#if os(iOS) || os(tvOS)
+    private var appStoreID: String?
+#endif
+    
     // MARK: - Public Class Variables
     
     public class var tintColor: UIColor? {
@@ -66,6 +70,12 @@ public class FrostKit {
     }
     public class var OAuthClientSecret: String? {
         return FrostKit.shared.OAuthClientSecret
+    }
+#endif
+    
+#if os(iOS) || os(tvOS)
+    public class var appStoreID: String? {
+        return FrostKit.shared.appStoreID
     }
 #endif
     
@@ -97,6 +107,12 @@ public class FrostKit {
     public class func setup(tintColor: UIColor) {
         FrostKit.shared.tintColor = tintColor
     }
+    
+#if os(iOS) || os(tvOS)
+    public class func setupAppStoreID(appStoreID: String) {
+        FrostKit.shared.appStoreID = appStoreID
+    }
+#endif
     
 #if os(iOS)
     public class func setupFUSName(FUSName: String) {

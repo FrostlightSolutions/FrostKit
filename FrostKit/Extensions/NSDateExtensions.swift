@@ -48,8 +48,17 @@ extension NSDate {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = format
         dateFormatter.timeZone = NSTimeZone.utc()
-        dateFormatter.locale = NSLocale.systemLocale()
+        dateFormatter.locale = NSLocale.autoupdatingCurrentLocale()
         return dateFormatter.dateFromString(fusDateString)
+    }
+    
+    public class func iso8601Date(iso8601String: String) -> NSDate? {
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        dateFormatter.timeZone = NSTimeZone.utc()
+        dateFormatter.locale = NSLocale.autoupdatingCurrentLocale()
+        return dateFormatter.dateFromString(iso8601String)
     }
     
     // MARK: - Date Checks
