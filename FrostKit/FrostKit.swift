@@ -111,6 +111,7 @@ public class FrostKit {
 #if os(iOS) || os(tvOS)
     public class func setupAppStoreID(appStoreID: String) {
         FrostKit.shared.appStoreID = appStoreID
+        AppStoreHelper.shared.updateAppStoreData()
     }
 #endif
     

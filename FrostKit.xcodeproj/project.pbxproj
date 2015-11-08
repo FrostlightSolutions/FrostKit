@@ -160,6 +160,7 @@
 		18CB51751A765335005064C8 /* DataUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB51741A765335005064C8 /* DataUpdater.swift */; };
 		18CB517A1A7655ED005064C8 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB51791A7655ED005064C8 /* UIDeviceExtensions.swift */; };
 		18CBAA051A6D315F009CBCA0 /* OAuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CBAA041A6D315F009CBCA0 /* OAuthToken.swift */; };
+		18CD393C1BEEC850003A6988 /* AppStoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187661781BEEA0C900C82769 /* AppStoreHelper.swift */; };
 		18CFF9FE19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFF9FD19DC45AB00DF6BB8 /* NSTimeZoneExtensions.swift */; };
 		18DC212B19DEA21000FEB57E /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC212A19DEA21000FEB57E /* UIViewControllerExtensions.swift */; };
 		18DD78FF1A8CA70F00379FB5 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DD78FD1A8CA70F00379FB5 /* Button.swift */; };
@@ -1310,6 +1311,7 @@
 				186B07FE1A6D5F2700CAF920 /* UIImageExtensions.swift in Sources */,
 				186B080A1A6D5F6200CAF920 /* FrostKit.swift in Sources */,
 				182E61B11A85726100887002 /* MapController.swift in Sources */,
+				18CD393C1BEEC850003A6988 /* AppStoreHelper.swift in Sources */,
 				18697C491A841C8D00E8B1CE /* DeveloperTools.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
