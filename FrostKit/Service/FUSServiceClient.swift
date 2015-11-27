@@ -290,16 +290,15 @@ public class FUSServiceClient: NSObject {
                 
                 UserStore.current.username = username
                 UserStore.current.oAuthToken = OAuthToken(json: jsonDict, requestDate: requestDate)
-                UserStore.saveUser()
-                
-                FUSServiceClient.updateSections { (error) -> () in
-                    
-                    if let anError = error {
-                        completed(error: anError)
-                    } else {
-                        completed(error: self.errorForResponse(response.response, json: response.result.value, origError: response.result.error))
+                UserStore.saveUser({ (success) -> Void in
+                    FUSServiceClient.updateSections { (error) -> () in
+                        if let anError = error {
+                            completed(error: anError)
+                        } else {
+                            completed(error: self.errorForResponse(response.response, json: response.result.value, origError: response.result.error))
+                        }
                     }
-                }
+                })
                 
             } else {
                 
@@ -349,16 +348,15 @@ public class FUSServiceClient: NSObject {
                 } else if let jsonDict = response.result.value as? NSDictionary {
                     
                     UserStore.current.oAuthToken = OAuthToken(json: jsonDict, requestDate: requestDate)
-                    UserStore.saveUser()
-                    
-                    FUSServiceClient.updateSections { (error) -> () in
-                        
-                        if let anError = error {
-                            completed(error: anError)
-                        } else {
-                            completed(error: self.errorForResponse(response.response, json: response.result.value, origError: response.result.error))
+                    UserStore.saveUser({ (success) -> Void in
+                        FUSServiceClient.updateSections { (error) -> () in
+                            if let anError = error {
+                                completed(error: anError)
+                            } else {
+                                completed(error: self.errorForResponse(response.response, json: response.result.value, origError: response.result.error))
+                            }
                         }
-                    }
+                    })
                     
                 } else {
                     
@@ -390,9 +388,10 @@ public class FUSServiceClient: NSObject {
                 if let jsonArray = jsonDictionary["sections"] as? [[String: String]] {
                     
                     UserStore.current.sections = jsonArray
-                    UserStore.saveUser()
-                    NSNotificationCenter.defaultCenter().postNotificationName(FUSServiceClientUpdateSections, object: nil)
-                    completed(error: self.errorForResponse(response.response, json: response.result.value, origError: response.result.error))
+                    UserStore.saveUser({ (success) -> Void in
+                        NSNotificationCenter.defaultCenter().postNotificationName(FUSServiceClientUpdateSections, object: nil)
+                        completed(error: self.errorForResponse(response.response, json: response.result.value, origError: response.result.error))
+                    })
                     
                 } else {
                     

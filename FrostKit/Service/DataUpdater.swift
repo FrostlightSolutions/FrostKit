@@ -105,8 +105,8 @@ public class DataUpdater: NSObject, DataStoreDelegate {
             updateSearchParameters(removedKeys)
         }
     }
-    /// Saved the UserStore object on data change. This is set to `true` by default.
-    @IBInspectable var saveUserStroeOnDataChange: Bool = true
+    /// Saved the UserStore object on data change. This is set to `false` by default. Warning, if you turn this on you may see performance issues with large stores.
+    @IBInspectable var saveUserStroeOnDataChange: Bool = false
     
     public override init() {
         super.init()

@@ -38,6 +38,7 @@ public class UserStore: NSObject, NSCoding {
         }
         return false
     }
+    private var saving = false
     
     // MARK: - Singleton
     
@@ -122,8 +123,18 @@ public class UserStore: NSObject, NSCoding {
     
     - returns: `true` if the save completed successfully, `false` if it failed.
     */
-    public class func saveUser() -> Bool {
-        return LocalStorage.saveUserData(UserStore.current)
+    public class func saveUser(completed: ((Bool) -> Void)? = nil) {
+        
+        if UserStore.current.saving == false {
+            UserStore.current.saving = true
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+                let success = LocalStorage.saveUserData(UserStore.current)
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    UserStore.current.saving = false
+                    completed?(success)
+                })
+            })
+        }
     }
     
     /**
@@ -145,8 +156,9 @@ public class UserStore: NSObject, NSCoding {
     */
     public class func logoutCurrentUser() {
         UserStore.current.resetUser()
-        UserStore.saveUser()
-        NSNotificationCenter.defaultCenter().postNotificationName(UserStoreLogoutClearData, object: nil)
+        UserStore.saveUser { (success) -> Void in
+            NSNotificationCenter.defaultCenter().postNotificationName(UserStoreLogoutClearData, object: nil)
+        }
     }
     
     /**
