@@ -44,42 +44,47 @@ public class ContentManager: NSObject {
     */
     public class func checkContentMetadata() {
         
-        if shared.contentMetadata.count > 0 {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
             
-#if DEBUG
-            let start = NSDate.timeIntervalSinceReferenceDate
-#endif
-            
-            let metadataToRemove = NSMutableArray()
-            
-            for (key, object) in shared.contentMetadata {
+            if shared.contentMetadata.count > 0 {
                 
-                let refDate = object as! NSDate
-                let refTimeInterval = refDate.timeIntervalSinceReferenceDate
-                let timeInterval = NSDate().timeIntervalSinceReferenceDate
+                #if DEBUG
+                    let start = NSDate.timeIntervalSinceReferenceDate
+                #endif
                 
-                if (timeInterval - refTimeInterval) > maxSavedTimeInSeconds() {
-                    metadataToRemove.addObject(key)
+                let metadataToRemove = NSMutableArray()
+                
+                for (key, object) in shared.contentMetadata {
+                    
+                    let refDate = object as! NSDate
+                    let refTimeInterval = refDate.timeIntervalSinceReferenceDate
+                    let timeInterval = NSDate().timeIntervalSinceReferenceDate
+                    
+                    if (timeInterval - refTimeInterval) > maxSavedTimeInSeconds() {
+                        metadataToRemove.addObject(key)
+                    }
                 }
-            }
-            
-            if metadataToRemove.count > 0 {
-                for object in metadataToRemove {
-                    if let absoluteURL = object as? NSURL {
-                        do {
-                            try LocalStorage.remove(absoluteURL: absoluteURL)
-                        } catch let error as NSError {
-                            NSLog("Error: Unable to remove managed item at URL \(absoluteURL)\nWith error: \(error.localizedDescription)\n\(error)")
+                
+                if metadataToRemove.count > 0 {
+                    for object in metadataToRemove {
+                        if let absoluteURL = object as? NSURL {
+                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                do {
+                                    try LocalStorage.remove(absoluteURL: absoluteURL)
+                                } catch let error as NSError {
+                                    NSLog("Error: Unable to remove managed item at URL \(absoluteURL)\nWith error: \(error.localizedDescription)\n\(error)")
+                                }
+                            })
                         }
                     }
                 }
+                
+                #if DEBUG
+                    let finish = NSDate.timeIntervalSinceReferenceDate
+                    NSLog("Check of \(shared.contentMetadata.count) content metadata items complete in \(finish()-start()) seconds. Removed \(metadataToRemove.count) items.")
+                #endif
             }
-            
-#if DEBUG
-            let finish = NSDate.timeIntervalSinceReferenceDate
-            NSLog("Check of \(shared.contentMetadata.count) content metadata items complete in \(finish()-start()) seconds. Removed \(metadataToRemove.count) items.")
-#endif
-        }
+        })
     }
     
     /**

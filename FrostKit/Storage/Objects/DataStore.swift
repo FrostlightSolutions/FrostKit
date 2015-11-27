@@ -574,6 +574,22 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     }
     
     /**
+     Search the store for an object to contains the keys and value passed in, in background.
+     
+     - parameter keys:   An array of keys to search for.
+     - parameter value: A value to check the key-value against.
+     - parameter completed: Returned when the function has completed in the background, returns the object that contains the matching keys and value passed in.
+     */
+    public func searchForObjectWithInBackground(keys keys: [String], value: NSObject, completed: (AnyObject?) -> Void) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+            let object = self.searchForObjectWith(keys: keys, value: value)
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                completed(object)
+            })
+        })
+    }
+    
+    /**
     Search the store for objects conforming with the keys and value passed in.
     
     - parameter keys:   An array of keys to search for.
@@ -598,6 +614,22 @@ public class DataStore: NSObject, NSCoding, NSCopying {
             return filteredArray
         }
         return Array<AnyObject>()
+    }
+    
+    /**
+     Search the store for objects conforming with the keys and value passed in.
+     
+     - parameter keys:   An array of keys to search for.
+     - parameter value: A value to check the key-value against.
+     - parameter completed: Returned when the function has completed in the background, returns the objects that contains the matching keys and value passed in.
+     */
+    public func searchForObjectsWith(keys keys: [String], value: NSObject, completed: ([AnyObject]) -> Void) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+            let objects = self.searchForObjectsWith(keys: keys, value: value)
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                completed(objects)
+            })
+        })
     }
     
 }
