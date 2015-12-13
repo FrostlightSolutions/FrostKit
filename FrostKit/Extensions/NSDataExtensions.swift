@@ -46,7 +46,7 @@ extension NSData {
         
         while bytes >= multiplier && exponent < sMaxUnits {
             bytes /= multiplier
-            exponent++
+            exponent += 1
         }
         
         let numberFormatter = NSNumberFormatter()
