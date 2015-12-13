@@ -37,7 +37,7 @@ public class KeychainHelper: NSObject {
         // kCFBooleanTrue
         
         var foundDict: AnyObject?
-        let status = SecItemCopyMatching(secDict, &foundDict);
+        let status = SecItemCopyMatching(secDict, &foundDict)
         
         if status == noErr {
             return foundDict as? NSData
