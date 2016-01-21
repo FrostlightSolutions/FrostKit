@@ -39,8 +39,14 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
             }
             
             if let locationManager = self.locationManager {
-                if locationManager.respondsToSelector("requestWhenInUseAuthorization") {
-                    locationManager.requestWhenInUseAuthorization()
+                
+                if let infoDictionary = NSBundle.mainBundle().infoDictionary {
+                    
+                    if infoDictionary["NSLocationAlwaysUsageDescription"] != nil {
+                        locationManager.requestAlwaysAuthorization()
+                    } else if infoDictionary["NSLocationWhenInUseUsageDescription"] != nil {
+                        locationManager.requestWhenInUseAuthorization()
+                    }
                 }
                 
                 locationManager.startUpdatingLocation()
