@@ -15,7 +15,7 @@ import CoreLocation
 ///
 /// This class is designed to be subclassed if more specific actions, such a refining the standard search or customising the annotations plotted.
 ///
-public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
+public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate, UIActionSheetDelegate {
     
     private let minimumZoomArc = 0.007  //approximately 1/2 mile (1 degree of arc ~= 69 miles)
     private let maximumDegreesArc: Double = 360
@@ -34,7 +34,15 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
                 mapView?.delegate = self
             }
             
-            MapController.requestAccessToLocationServices(shouldRequestLocationServices)
+            if shouldRequestLocationServices {
+                
+                if locationManager == nil {
+                    locationManager = CLLocationManager()
+                    locationManager?.delegate = self
+                }
+                
+                MapController.requestAccessToLocationServices(locationManager!)
+            }
         }
     }
     /// Refers to if the map controller should auto assign itself to the map view as a delegate.
@@ -61,6 +69,8 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     }
     /// Determins if the location manager should request access to location services on setup. By default this is set to `false`.
     @IBInspectable public var shouldRequestLocationServices: Bool = false
+    /// The location manager automatically created when assigning the map view to the map controller. It's only use if for getting the user's access to location services.
+    private var locationManager: CLLocationManager?
     /// An array of addresses plotted on the map view.
     public var addresses = Array<Address>()
     /// A dictionary of annotations plotted to the map view with the address object as the key.
@@ -96,18 +106,14 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     
     // MARK: - Location Services
     
-    public class func requestAccessToLocationServices(shouldRequestLocationServices: Bool = true) {
+    public class func requestAccessToLocationServices(locationManager: CLLocationManager) {
         
-        if shouldRequestLocationServices {
+        if let infoDictionary = NSBundle.mainBundle().infoDictionary {
             
-            let locationManager = CLLocationManager()
-            if let infoDictionary = NSBundle.mainBundle().infoDictionary {
-                
-                if infoDictionary["NSLocationAlwaysUsageDescription"] != nil {
-                    locationManager.requestAlwaysAuthorization()
-                } else if infoDictionary["NSLocationWhenInUseUsageDescription"] != nil {
-                    locationManager.requestWhenInUseAuthorization()
-                }
+            if infoDictionary["NSLocationAlwaysUsageDescription"] != nil {
+                locationManager.requestAlwaysAuthorization()
+            } else if infoDictionary["NSLocationWhenInUseUsageDescription"] != nil {
+                locationManager.requestWhenInUseAuthorization()
             }
         }
     }
@@ -488,6 +494,16 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
             break
         default:
             break
+        }
+    }
+    
+    // MARL: - CLLocationManagerDelegate Methods
+    
+    public func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        
+        // Set the location manager to nil if not `NotDetermined`. If `NotDetermined` then it is possible the delegate was called before the user has answered.
+        if status != .NotDetermined {
+            self.locationManager = nil
         }
     }
     
