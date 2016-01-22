@@ -38,18 +38,18 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
                 locationManager = CLLocationManager()
             }
             
-            if let locationManager = self.locationManager {
+            if shouldRequestLocationServices {
                 
-                if let infoDictionary = NSBundle.mainBundle().infoDictionary {
+                if let locationManager = self.locationManager,  infoDictionary = NSBundle.mainBundle().infoDictionary {
                     
                     if infoDictionary["NSLocationAlwaysUsageDescription"] != nil {
                         locationManager.requestAlwaysAuthorization()
                     } else if infoDictionary["NSLocationWhenInUseUsageDescription"] != nil {
                         locationManager.requestWhenInUseAuthorization()
                     }
+                    
+                    locationManager.startUpdatingLocation()
                 }
-                
-                locationManager.startUpdatingLocation()
             }
         }
     }
@@ -75,6 +75,8 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
             }
         }
     }
+    /// Determins if the location manager should request access to location services on setup. By default this is set to `false`.
+    @IBInspectable public var shouldRequestLocationServices: Bool = false
     /// The location manager automatically created when assigning the map view to the map controller.
     public var locationManager: CLLocationManager?
     /// An array of addresses plotted on the map view.
