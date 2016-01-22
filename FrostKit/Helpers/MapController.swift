@@ -34,18 +34,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
                 mapView?.delegate = self
             }
             
-            if shouldRequestLocationServices {
-                
-                let locationManager = CLLocationManager()
-                if let infoDictionary = NSBundle.mainBundle().infoDictionary {
-                    
-                    if infoDictionary["NSLocationAlwaysUsageDescription"] != nil {
-                        locationManager.requestAlwaysAuthorization()
-                    } else if infoDictionary["NSLocationWhenInUseUsageDescription"] != nil {
-                        locationManager.requestWhenInUseAuthorization()
-                    }
-                }
-            }
+            MapController.requestAccessToLocationServices(shouldRequestLocationServices)
         }
     }
     /// Refers to if the map controller should auto assign itself to the map view as a delegate.
@@ -103,6 +92,24 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         mapView?.showsUserLocation = true
         mapView?.mapType = .Standard
         mapView?.delegate = nil
+    }
+    
+    // MARK: - Location Services
+    
+    public class func requestAccessToLocationServices(shouldRequestLocationServices: Bool = true) {
+        
+        if shouldRequestLocationServices {
+            
+            let locationManager = CLLocationManager()
+            if let infoDictionary = NSBundle.mainBundle().infoDictionary {
+                
+                if infoDictionary["NSLocationAlwaysUsageDescription"] != nil {
+                    locationManager.requestAlwaysAuthorization()
+                } else if infoDictionary["NSLocationWhenInUseUsageDescription"] != nil {
+                    locationManager.requestWhenInUseAuthorization()
+                }
+            }
+        }
     }
     
     // MARK: - Plot/Remove Annotations Methods
