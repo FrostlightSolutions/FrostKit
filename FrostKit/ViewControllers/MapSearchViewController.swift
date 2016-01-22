@@ -188,8 +188,8 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
             refreshControl?.beginRefreshing()
             let searchRequest = MKLocalSearchRequest()
             searchRequest.naturalLanguageQuery = searchBar.text
-            if let mapController = self.mapController {
-                searchRequest.region = mapController.mapView.region
+            if let mapController = self.mapController, mapView = mapController.mapView {
+                searchRequest.region = mapView.region
             }
             let localSearch = MKLocalSearch(request: searchRequest)
             NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)

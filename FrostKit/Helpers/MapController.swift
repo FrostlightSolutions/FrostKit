@@ -26,12 +26,12 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     /// The view controller related to the map controller.
     @IBOutlet public weak var viewController: UIViewController!
     /// The map view related to the map controller.
-    @IBOutlet public weak var mapView: MKMapView! {
+    @IBOutlet public weak var mapView: MKMapView? {
         didSet {
-            mapView.userTrackingMode = .Follow
-            mapView.showsUserLocation = true
+            mapView?.userTrackingMode = .Follow
+            mapView?.showsUserLocation = true
             if autoAssingDelegate == true {
-                mapView.delegate = self
+                mapView?.delegate = self
             }
             
             if locationManager == nil {
@@ -65,9 +65,9 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     public var trackingUser: Bool = false {
         didSet {
             if trackingUser == true {
-                mapView.userTrackingMode = .Follow
+                mapView?.userTrackingMode = .Follow
             } else {
-                mapView.userTrackingMode = .None
+                mapView?.userTrackingMode = .None
             }
             
             if let mapViewController = viewController as? MapViewController {
@@ -108,10 +108,10 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
             self.locationManager = nil
         }
         
-        mapView.userTrackingMode = .None
-        mapView.showsUserLocation = true
-        mapView.mapType = .Standard
-        mapView.delegate = nil
+        mapView?.userTrackingMode = .None
+        mapView?.showsUserLocation = true
+        mapView?.mapType = .Standard
+        mapView?.delegate = nil
     }
     
     // MARK: - Plot/Remove Annotations Methods
@@ -157,7 +157,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
         
         if let currentAnnotation = annotation {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.mapView.addAnnotation(currentAnnotation)
+                self.mapView?.addAnnotation(currentAnnotation)
             })
         }
     }
@@ -169,7 +169,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     */
     public func removeAllAnnotations(includingCached: Bool = false) {
         let annotations = Array(self.annotations.values)
-        mapView.removeAnnotations(annotations)
+        mapView?.removeAnnotations(annotations)
         
         if includingCached == true {
             self.annotations.removeAll(keepCapacity: false)
@@ -258,7 +258,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     */
     public func zoomToRegion(var region: MKCoordinateRegion) {
         region.span = normalizeRegionSpan(region.span)
-        mapView.setRegion(region, animated: true)
+        mapView?.setRegion(region, animated: true)
     }
     
     /**
@@ -266,7 +266,9 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     */
     public func zoomToCurrentLocation() {
         trackingUser = true
-        zoomToCoordinate(mapView.userLocation.coordinate)
+        if let mapView = self.mapView {
+            zoomToCoordinate(mapView.userLocation.coordinate)
+        }
     }
     
     /**
@@ -276,7 +278,9 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     */
     public func zoomToShowAll(includingUser: Bool = true) {
         if includingUser == true {
-            zoomToAnnotations(mapView.annotations as [MKAnnotation])
+            if let mapView = self.mapView {
+                zoomToAnnotations(mapView.annotations as [MKAnnotation])
+            }
         } else {
             let annotations = Array(self.annotations.values)
             zoomToAnnotations(annotations)
@@ -310,9 +314,12 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     Removes all the polylines plotted on the map view.
     */
     public func removeAllPolylines() {
-        for overlay in mapView.overlays {
-            if let polyline = overlay as? MKPolyline {
-                mapView.removeOverlay(polyline)
+        
+        if let mapView = self.mapView {
+            for overlay in mapView.overlays {
+                if let polyline = overlay as? MKPolyline {
+                    mapView.removeOverlay(polyline)
+                }
             }
         }
     }
@@ -359,7 +366,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     */
     public func plotRoute(route: MKRoute) {
         removeAllPolylines()
-        mapView.addOverlay(route.polyline, level: .AboveRoads)
+        mapView?.addOverlay(route.polyline, level: .AboveRoads)
         zoomToPolyline(route.polyline)
     }
     
@@ -489,7 +496,7 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     // MARK: - UIActionSheetDelegate Methods
     
     public func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
-        if let annotation = mapView.selectedAnnotations.first as? Annotation {
+        if let mapView = self.mapView, annotation = mapView.selectedAnnotations.first as? Annotation {
             switch buttonIndex {
             case 0:
                 zoomToAnnotation(annotation)
