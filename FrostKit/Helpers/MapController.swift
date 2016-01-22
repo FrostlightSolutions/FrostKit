@@ -34,21 +34,16 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
                 mapView?.delegate = self
             }
             
-            if locationManager == nil {
-                locationManager = CLLocationManager()
-            }
-            
             if shouldRequestLocationServices {
                 
-                if let locationManager = self.locationManager,  infoDictionary = NSBundle.mainBundle().infoDictionary {
+                let locationManager = CLLocationManager()
+                if let infoDictionary = NSBundle.mainBundle().infoDictionary {
                     
                     if infoDictionary["NSLocationAlwaysUsageDescription"] != nil {
                         locationManager.requestAlwaysAuthorization()
                     } else if infoDictionary["NSLocationWhenInUseUsageDescription"] != nil {
                         locationManager.requestWhenInUseAuthorization()
                     }
-                    
-                    locationManager.startUpdatingLocation()
                 }
             }
         }
@@ -77,8 +72,6 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     }
     /// Determins if the location manager should request access to location services on setup. By default this is set to `false`.
     @IBInspectable public var shouldRequestLocationServices: Bool = false
-    /// The location manager automatically created when assigning the map view to the map controller.
-    public var locationManager: CLLocationManager?
     /// An array of addresses plotted on the map view.
     public var addresses = Array<Address>()
     /// A dictionary of annotations plotted to the map view with the address object as the key.
@@ -105,10 +98,6 @@ public class MapController: NSObject, MKMapViewDelegate, UIActionSheetDelegate {
     Attempt to purge the map view to free up some memory.
     */
     private func purgeMap() {
-        if let locationManager = self.locationManager {
-            locationManager.stopUpdatingLocation()
-            self.locationManager = nil
-        }
         
         mapView?.userTrackingMode = .None
         mapView?.showsUserLocation = true
