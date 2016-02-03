@@ -21,7 +21,9 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     private let maximumDegreesArc: Double = 360
     private let annotationRegionPadFactor: Double = 1.15
     /// The reuse identifier for the annotations for the map view. This should be overriden when subclassing.
-    public let identifier = "FrostKitAnnotation"
+    public var identifier: String {
+        return "FrostKitAnnotation"
+    }
     private var hasPlottedInitUsersLocation = false
     /// The view controller related to the map controller.
     @IBOutlet public weak var viewController: UIViewController!
