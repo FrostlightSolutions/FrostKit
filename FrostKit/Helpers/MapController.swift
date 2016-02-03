@@ -72,9 +72,9 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     /// The location manager automatically created when assigning the map view to the map controller. It's only use if for getting the user's access to location services.
     private var locationManager: CLLocationManager?
     /// An array of addresses plotted on the map view.
-    public var addresses = Array<Address>()
+    public var addresses = [Address]()
     /// A dictionary of annotations plotted to the map view with the address object as the key.
-    public var annotations = Dictionary<NSObject, MKAnnotation>()
+    public var annotations = [NSObject: MKAnnotation]()
     
     deinit {
         resetMap()
@@ -217,7 +217,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     public func zoomToAnnotations(annotations: [MKAnnotation]) {
         let count = annotations.count
         if count > 0 {
-            var points = Array<MKMapPoint>()
+            var points = [MKMapPoint]()
             for annotation in annotations {
                 points.append(MKMapPointForCoordinate(annotation.coordinate))
             }
@@ -627,7 +627,7 @@ public class Address: NSObject {
     - returns: An array of address objects.
     */
     public class func addressesFromArrayOfDictionaries(array: [NSDictionary]) -> [Address] {
-        var adresses = Array<Address>()
+        var adresses = [Address]()
         for dictionary in array {
             adresses.append(Address(dictionary: dictionary))
         }
