@@ -332,34 +332,67 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     /**
+     Gets a route between a source and destination.
+     
+     - parameter source:        The coordinate of the source location.
+     - parameter destination:   The coordinate of the destination location.
+     - parameter transportType: The transportation type to create the route.
+     - parameter complete:      Returns an optional route and error.
+     */
+    public func routeBetweenCoordinates(source: CLLocationCoordinate2D, destination: CLLocationCoordinate2D, transportType: MKDirectionsTransportType = .Automobile, complete: (route: MKRoute?, error: NSError?) -> Void) {
+        
+        let sourcePlacemark = MKPlacemark(coordinate: source, addressDictionary: nil)
+        let sourceItem = MKMapItem(placemark: sourcePlacemark)
+        let destinationPlacemark = MKPlacemark(coordinate: destination, addressDictionary: nil)
+        let destinationItem = MKMapItem(placemark: destinationPlacemark)
+        
+        routeBetweenMapItems(sourceItem, destination: destinationItem, transportType: transportType, complete: complete)
+    }
+    
+    /**
+     Gets a route between a source and destination.
+     
+     - parameter source:        The map item of the source location.
+     - parameter destination:   The map item of the destination location.
+     - parameter transportType: The transportation type to create the route.
+     - parameter complete:      Returns an optional route and error.
+     */
+    public func routeBetweenMapItems(source: MKMapItem, destination: MKMapItem, transportType: MKDirectionsTransportType = .Automobile, complete: (route: MKRoute?, error: NSError?) -> Void) {
+        
+        let directionsRequest = MKDirectionsRequest()
+        directionsRequest.source = source
+        directionsRequest.destination = destination
+        directionsRequest.transportType = transportType
+        directionsRequest.requestsAlternateRoutes = false
+        
+        let directions = MKDirections(request: directionsRequest)
+        NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
+        directions.calculateDirectionsWithCompletionHandler { (directionsResponse, error) -> Void in
+            NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
+            complete(route: directionsResponse?.routes.first, error: error)
+        }
+    }
+    
+    /**
     Gets directions to a coordinate from the users current location.
     
     - parameter coordinate: The coordinate to get directions to.
     - parameter inApp:      If `true` diretions are plotted in-app on the map view. If `false` then the Maps.app is opened with the directions requested.
     */
     public func directionsToCurrentLocationFrom(coordinate coordinate: CLLocationCoordinate2D, inApp: Bool = true) {
-        let currentLocationItem = MKMapItem.mapItemForCurrentLocation()
         
+        let currentLocationItem = MKMapItem.mapItemForCurrentLocation()
         let destinationPlacemark = MKPlacemark(coordinate: coordinate, addressDictionary: nil)
         let destinationItem = MKMapItem(placemark: destinationPlacemark)
         
         if inApp == true {
-            let directionsRequest = MKDirectionsRequest()
-            directionsRequest.source = currentLocationItem
-            directionsRequest.destination = destinationItem
-            directionsRequest.transportType = .Automobile
-            directionsRequest.requestsAlternateRoutes = false
-            
-            let directions = MKDirections(request: directionsRequest)
-            NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
-            directions.calculateDirectionsWithCompletionHandler { (directionsResponse, error) -> Void in
+            routeBetweenMapItems(currentLocationItem, destination: destinationItem, complete: { (route, error) -> Void in
                 if let anError = error {
                     NSLog("Error getting directions: \(anError.localizedDescription)\n\(anError)")
-                } else if let route = directionsResponse?.routes.first {
-                    self.plotRoute(route)
+                } else if let aRoute = route {
+                    self.plotRoute(aRoute)
                 }
-                NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
-            }
+            })
         } else {
             let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
             MKMapItem.openMapsWithItems([currentLocationItem, destinationItem], launchOptions: launchOptions)
@@ -372,9 +405,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     - parameter route: The route to plot.
     */
     public func plotRoute(route: MKRoute) {
-        removeAllPolylines()
         mapView?.addOverlay(route.polyline, level: .AboveRoads)
-        zoomToPolyline(route.polyline)
     }
     
     // MARK: - Helper Methods
