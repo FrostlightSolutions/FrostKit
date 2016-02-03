@@ -402,7 +402,21 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     
     // MARK: - MKMapViewDelegate Methods
     
-    public func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    final public func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        return configureAnnotationView(mapView, viewForAnnotation: annotation)
+    }
+    
+    /**
+     Called by `mapView:viewForAnnotation:` in the map controller.
+     
+     - note: Subclass this method to override the default behaviour.
+     
+     - parameter mapView:    The map view that requested the annotation view.
+     - parameter annotation: The object representing the annotation that is about to be displayed. In addition to your custom annotations, this object could be an `MKUserLocation` object representing the user’s current location.
+     
+     - returns: The annotation view to display for the specified annotation or nil if you want to display a standard annotation view.
+     */
+    public func configureAnnotationView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         var annotationPinView: MKPinAnnotationView?
         if let myAnnotation = annotation as? Annotation {
             if let annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView {
@@ -424,7 +438,20 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         return annotationPinView
     }
     
-    public func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    final public func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        return calloutAccessoryControlTapped(mapView, annotationView: view, controlTapped: control)
+    }
+    
+    /**
+     Called by `mapView:annotationView:calloutAccessoryControlTapped:` in the map controller.
+     
+     - note: Subclass this method to override the default behaviour.
+     
+     - parameter mapView: The map view containing the specified annotation view.
+     - parameter view:    The annotation view whose button was tapped.
+     - parameter control: The control that was tapped.
+     */
+    public func calloutAccessoryControlTapped(mapView: MKMapView, annotationView view: MKAnnotationView, controlTapped control: UIControl) {
         if let annotation = view.annotation as? Annotation {
             if NSClassFromString("UIAlertController") == nil {
                 // iOS 7
@@ -455,7 +482,21 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         }
     }
     
-    public func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+    final public func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+        return configureOverlayRenderer(mapView, overlay: overlay)
+    }
+    
+    /**
+     Called by `mapView:rendererForOverlay:` in the map controller.
+     
+     - note: Subclass this method to override the default behaviour.
+     
+     - parameter mapView: The map view that requested the renderer object.
+     - parameter overlay: The overlay object that is about to be displayed.
+     
+     - returns: The renderer to use when presenting the specified overlay on the map. If you return `nil`, no content is drawn for the specified overlay object.
+     */
+    public func configureOverlayRenderer(mapView: MKMapView, overlay: MKOverlay) -> MKOverlayRenderer {
         if let polyline = overlay as? MKPolyline {
             let polylineRenderer = MKPolylineRenderer(polyline: polyline)
             polylineRenderer.strokeColor = UIColor.blueColor()
