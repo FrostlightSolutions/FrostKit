@@ -74,7 +74,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     /// An array of addresses plotted on the map view.
     public var addresses = Array<Address>()
     /// A dictionary of annotations plotted to the map view with the address object as the key.
-    public var annotations = Dictionary<Address, Annotation>()
+    public var annotations = Dictionary<NSObject, MKAnnotation>()
     
     deinit {
         resetMap()
@@ -148,7 +148,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         }
         
         var annotation: Annotation?
-        if let currentAnnotation = annotations[address] {
+        if let currentAnnotation = annotations[address] as? Annotation {
             // Annotation already exists, update the address
             currentAnnotation.updateAddress(address)
             annotation = currentAnnotation
@@ -299,8 +299,9 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     public func zoomToAddress(address: Address) {
         plotAddress(address)
         
-        let annotation = annotations[address] as! MKAnnotation
-        zoomToAnnotations([annotation])
+        if let annotation = annotations[address] {
+            zoomToAnnotations([annotation])
+        }
     }
     
     /**
