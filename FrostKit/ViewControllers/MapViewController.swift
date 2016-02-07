@@ -44,12 +44,13 @@ public class MapViewController: UIViewController, UIActionSheetDelegate {
             searchController.delegate = searchTableViewController
             searchTableViewController.searchController = searchController
         }
+        
+        updateAddresses()
     }
     
     override public func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        updateAddresses()
         mapController.zoomToShowAll()
     }
     
