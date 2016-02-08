@@ -21,7 +21,9 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     private let maximumDegreesArc: Double = 360
     private let annotationRegionPadFactor: Double = 1.15
     /// The reuse identifier for the annotations for the map view. This should be overriden when subclassing.
-    public let identifier = "FrostKitAnnotation"
+    public var identifier: String {
+        return "FrostKitAnnotation"
+    }
     private var hasPlottedInitUsersLocation = false
     /// The view controller related to the map controller.
     @IBOutlet public weak var viewController: UIViewController!
@@ -72,9 +74,9 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     /// The location manager automatically created when assigning the map view to the map controller. It's only use if for getting the user's access to location services.
     private var locationManager: CLLocationManager?
     /// An array of addresses plotted on the map view.
-    public var addresses = Array<Address>()
+    public var addresses = [Address]()
     /// A dictionary of annotations plotted to the map view with the address object as the key.
-    public var annotations = Dictionary<Address, Annotation>()
+    public var annotations = [NSObject: MKAnnotation]()
     
     deinit {
         resetMap()
@@ -148,7 +150,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         }
         
         var annotation: Annotation?
-        if let currentAnnotation = annotations[address] {
+        if let currentAnnotation = annotations[address] as? Annotation {
             // Annotation already exists, update the address
             currentAnnotation.updateAddress(address)
             annotation = currentAnnotation
@@ -217,7 +219,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     public func zoomToAnnotations(annotations: [MKAnnotation]) {
         let count = annotations.count
         if count > 0 {
-            var points = Array<MKMapPoint>()
+            var points = [MKMapPoint]()
             for annotation in annotations {
                 points.append(MKMapPointForCoordinate(annotation.coordinate))
             }
@@ -299,8 +301,9 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     public func zoomToAddress(address: Address) {
         plotAddress(address)
         
-        let annotation = annotations[address] as! MKAnnotation
-        zoomToAnnotations([annotation])
+        if let annotation = annotations[address] {
+            zoomToAnnotations([annotation])
+        }
     }
     
     /**
@@ -329,34 +332,67 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     /**
+     Gets a route between a source and destination.
+     
+     - parameter source:        The coordinate of the source location.
+     - parameter destination:   The coordinate of the destination location.
+     - parameter transportType: The transportation type to create the route.
+     - parameter complete:      Returns an optional route and error.
+     */
+    public func routeBetweenCoordinates(source: CLLocationCoordinate2D, destination: CLLocationCoordinate2D, transportType: MKDirectionsTransportType = .Automobile, complete: (route: MKRoute?, error: NSError?) -> Void) {
+        
+        let sourcePlacemark = MKPlacemark(coordinate: source, addressDictionary: nil)
+        let sourceItem = MKMapItem(placemark: sourcePlacemark)
+        let destinationPlacemark = MKPlacemark(coordinate: destination, addressDictionary: nil)
+        let destinationItem = MKMapItem(placemark: destinationPlacemark)
+        
+        routeBetweenMapItems(sourceItem, destination: destinationItem, transportType: transportType, complete: complete)
+    }
+    
+    /**
+     Gets a route between a source and destination.
+     
+     - parameter source:        The map item of the source location.
+     - parameter destination:   The map item of the destination location.
+     - parameter transportType: The transportation type to create the route.
+     - parameter complete:      Returns an optional route and error.
+     */
+    public func routeBetweenMapItems(source: MKMapItem, destination: MKMapItem, transportType: MKDirectionsTransportType = .Automobile, complete: (route: MKRoute?, error: NSError?) -> Void) {
+        
+        let directionsRequest = MKDirectionsRequest()
+        directionsRequest.source = source
+        directionsRequest.destination = destination
+        directionsRequest.transportType = transportType
+        directionsRequest.requestsAlternateRoutes = false
+        
+        let directions = MKDirections(request: directionsRequest)
+        NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
+        directions.calculateDirectionsWithCompletionHandler { (directionsResponse, error) -> Void in
+            NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
+            complete(route: directionsResponse?.routes.first, error: error)
+        }
+    }
+    
+    /**
     Gets directions to a coordinate from the users current location.
     
     - parameter coordinate: The coordinate to get directions to.
     - parameter inApp:      If `true` diretions are plotted in-app on the map view. If `false` then the Maps.app is opened with the directions requested.
     */
     public func directionsToCurrentLocationFrom(coordinate coordinate: CLLocationCoordinate2D, inApp: Bool = true) {
-        let currentLocationItem = MKMapItem.mapItemForCurrentLocation()
         
+        let currentLocationItem = MKMapItem.mapItemForCurrentLocation()
         let destinationPlacemark = MKPlacemark(coordinate: coordinate, addressDictionary: nil)
         let destinationItem = MKMapItem(placemark: destinationPlacemark)
         
         if inApp == true {
-            let directionsRequest = MKDirectionsRequest()
-            directionsRequest.source = currentLocationItem
-            directionsRequest.destination = destinationItem
-            directionsRequest.transportType = .Automobile
-            directionsRequest.requestsAlternateRoutes = false
-            
-            let directions = MKDirections(request: directionsRequest)
-            NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
-            directions.calculateDirectionsWithCompletionHandler { (directionsResponse, error) -> Void in
+            routeBetweenMapItems(currentLocationItem, destination: destinationItem, complete: { (route, error) -> Void in
                 if let anError = error {
                     NSLog("Error getting directions: \(anError.localizedDescription)\n\(anError)")
-                } else if let route = directionsResponse?.routes.first {
-                    self.plotRoute(route)
+                } else if let aRoute = route {
+                    self.plotRoute(aRoute)
                 }
-                NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
-            }
+            })
         } else {
             let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
             MKMapItem.openMapsWithItems([currentLocationItem, destinationItem], launchOptions: launchOptions)
@@ -369,9 +405,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     - parameter route: The route to plot.
     */
     public func plotRoute(route: MKRoute) {
-        removeAllPolylines()
         mapView?.addOverlay(route.polyline, level: .AboveRoads)
-        zoomToPolyline(route.polyline)
     }
     
     // MARK: - Helper Methods
@@ -401,7 +435,21 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     
     // MARK: - MKMapViewDelegate Methods
     
-    public func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    final public func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        return configureAnnotationView(mapView, viewForAnnotation: annotation)
+    }
+    
+    /**
+     Called by `mapView:viewForAnnotation:` in the map controller.
+     
+     - note: Subclass this method to override the default behaviour.
+     
+     - parameter mapView:    The map view that requested the annotation view.
+     - parameter annotation: The object representing the annotation that is about to be displayed. In addition to your custom annotations, this object could be an `MKUserLocation` object representing the user’s current location.
+     
+     - returns: The annotation view to display for the specified annotation or nil if you want to display a standard annotation view.
+     */
+    public func configureAnnotationView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         var annotationPinView: MKPinAnnotationView?
         if let myAnnotation = annotation as? Annotation {
             if let annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView {
@@ -423,7 +471,20 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         return annotationPinView
     }
     
-    public func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    final public func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        return calloutAccessoryControlTapped(mapView, annotationView: view, controlTapped: control)
+    }
+    
+    /**
+     Called by `mapView:annotationView:calloutAccessoryControlTapped:` in the map controller.
+     
+     - note: Subclass this method to override the default behaviour.
+     
+     - parameter mapView: The map view containing the specified annotation view.
+     - parameter view:    The annotation view whose button was tapped.
+     - parameter control: The control that was tapped.
+     */
+    public func calloutAccessoryControlTapped(mapView: MKMapView, annotationView view: MKAnnotationView, controlTapped control: UIControl) {
         if let annotation = view.annotation as? Annotation {
             if NSClassFromString("UIAlertController") == nil {
                 // iOS 7
@@ -454,7 +515,21 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         }
     }
     
-    public func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+    final public func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+        return configureOverlayRenderer(mapView, overlay: overlay)
+    }
+    
+    /**
+     Called by `mapView:rendererForOverlay:` in the map controller.
+     
+     - note: Subclass this method to override the default behaviour.
+     
+     - parameter mapView: The map view that requested the renderer object.
+     - parameter overlay: The overlay object that is about to be displayed.
+     
+     - returns: The renderer to use when presenting the specified overlay on the map. If you return `nil`, no content is drawn for the specified overlay object.
+     */
+    public func configureOverlayRenderer(mapView: MKMapView, overlay: MKOverlay) -> MKOverlayRenderer {
         if let polyline = overlay as? MKPolyline {
             let polylineRenderer = MKPolylineRenderer(polyline: polyline)
             polylineRenderer.strokeColor = UIColor.blueColor()
@@ -626,7 +701,7 @@ public class Address: NSObject {
     - returns: An array of address objects.
     */
     public class func addressesFromArrayOfDictionaries(array: [NSDictionary]) -> [Address] {
-        var adresses = Array<Address>()
+        var adresses = [Address]()
         for dictionary in array {
             adresses.append(Address(dictionary: dictionary))
         }
