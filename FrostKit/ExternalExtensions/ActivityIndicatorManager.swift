@@ -24,6 +24,7 @@ private let ActivityIndicatorLockQueue = "com.FrostKit.activityIndicator.lockque
 /// `NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)`
 /// `NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)`
 ///
+@available(iOS, deprecated=8.0, message="This is no longer needed as of Alamofire 3.2, since AlamofireNetworkActivityIndicator was released. https://github.com/Alamofire/AlamofireNetworkActivityIndicator")
 public class ActivityIndicatorManager: NSObject {
     
     /// Determins if the activity indicator manager should be enabled or not.
