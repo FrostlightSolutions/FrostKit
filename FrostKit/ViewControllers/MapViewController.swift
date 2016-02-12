@@ -69,9 +69,9 @@ public class MapViewController: UIViewController, UIActionSheetDelegate {
     internal func updateNavigationButtons(animated: Bool = true) {
         var barButtonItems = Array<UIBarButtonItem>()
         if locationButton == true {
-            var title = IonIcons._ios_navigate_outline
+            var title = IonIcons.ios_navigate_outline
             if mapController.trackingUser == true {
-                title = IonIcons._ios_navigate
+                title = IonIcons.ios_navigate
             }
             
             let locationButton = UIBarButtonItem(title: title, font: UIFont.ionicons(size: 24), verticalOffset: -1, target: self, action: "locationButtonPressed:")
