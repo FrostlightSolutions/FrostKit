@@ -23,6 +23,14 @@ public class MapViewController: UIViewController, UIActionSheetDelegate {
     @IBInspectable public var searchButton: Bool = true
     /// The search controller for using in iOS 8+ projects.
     public var searchController: UISearchController!
+    /// Overridden by a subclass to define the icon to use in thenavgation bar button item when the `locationButton` is active. Both this and the `inactiveLocationIcon` need to be overriden for the default icon to be overridden.
+    public var activeLocationIcon: UIImage? {
+        return nil
+    }
+    /// Overridden by a subclass to define the icon to use in thenavgation bar button item when the `locationButton` is inactive. Both this and the `activeLocationIcon` need to be overriden for the default icon to be overridden.
+    public var inactiveLocationIcon: UIImage? {
+        return nil
+    }
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -69,12 +77,31 @@ public class MapViewController: UIViewController, UIActionSheetDelegate {
     internal func updateNavigationButtons(animated: Bool = true) {
         var barButtonItems = Array<UIBarButtonItem>()
         if locationButton == true {
-            var title = IonIcons.ios_navigate_outline
-            if mapController.trackingUser == true {
-                title = IonIcons.ios_navigate
+            
+            let locationButton: UIBarButtonItem
+            if let activeLocationIcon = self.activeLocationIcon, inactiveLocationIcon = self.inactiveLocationIcon {
+                
+                let icon: UIImage
+                if mapController.trackingUser == true {
+                    icon = activeLocationIcon
+                } else {
+                    icon = inactiveLocationIcon
+                }
+                
+                locationButton = UIBarButtonItem(image: icon, style: .Plain, target: self, action: "locationButtonPressed:")
+                
+            } else {
+                
+                let title: String
+                if mapController.trackingUser == true {
+                    title = IonIcons.ios_navigate
+                } else {
+                    title = IonIcons.ios_navigate_outline
+                }
+                
+                locationButton = UIBarButtonItem(title: title, font: UIFont.ionicons(size: 24), verticalOffset: -1, target: self, action: "locationButtonPressed:")
             }
             
-            let locationButton = UIBarButtonItem(title: title, font: UIFont.ionicons(size: 24), verticalOffset: -1, target: self, action: "locationButtonPressed:")
             barButtonItems.append(locationButton)
         }
         
