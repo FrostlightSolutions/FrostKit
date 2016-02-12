@@ -4,7 +4,7 @@
 //
 //  Created by James Barrow on 06/02/2015.
 //  Copyright (c) 2015 Frostlight Solutions. All rights reserved.
-//  Last updated on 12/02/2016 11:10:01.
+//  Last updated on 12/02/2016 11:13:16.
 //
 
 /*
@@ -14,7 +14,7 @@ FontAwesome
 */
 
 public struct FontAwesome {
-	public static let 500px = "\u{f26e}"
+	public static let _500px = "\u{f26e}"
 	public static let adjust = "\u{f042}"
 	public static let adn = "\u{f170}"
 	public static let align_center = "\u{f037}"

@@ -46,6 +46,9 @@ def parseFontConsatnts(inputPath, outputPath):
       if components[0] in ['repeat', 'subscript', 'try']:
         components[0] = components[0] + "_"
 
+      if components[0][0] in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+        components[0] = "_" + components[0]
+
       swiftLine = '\tpublic static let ' + components[0] +' = \"\\u{' + components[1] + '}\"\n'
 
       contents += swiftLine
