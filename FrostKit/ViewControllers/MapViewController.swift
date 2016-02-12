@@ -31,6 +31,7 @@ public class MapViewController: UIViewController, UIActionSheetDelegate {
     public var inactiveLocationIcon: UIImage? {
         return nil
     }
+    private var zoomedToShowAll = false
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +60,10 @@ public class MapViewController: UIViewController, UIActionSheetDelegate {
     override public func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        mapController.zoomToShowAll()
+        if zoomedToShowAll == false {
+            zoomedToShowAll = true
+            mapController.zoomToShowAll()
+        }
     }
     
     override public func didReceiveMemoryWarning() {
