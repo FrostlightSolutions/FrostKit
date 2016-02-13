@@ -78,7 +78,7 @@ public class MapViewController: UIViewController, UIActionSheetDelegate {
     
     - parameter animated: If the buttons should animate when they update.
     */
-    internal func updateNavigationButtons(animated: Bool = true) {
+    public func updateNavigationButtons(animated: Bool = true) {
         var barButtonItems = Array<UIBarButtonItem>()
         if locationButton == true {
             
