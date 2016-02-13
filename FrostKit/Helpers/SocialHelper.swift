@@ -69,8 +69,10 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     - parameter images:         The images to attach to the `SLComposeViewController`.
     - parameter viewController: The view controller to present the `SLComposeViewController` in.
     - parameter animated:       If the presentation should be animated or not.
+    
+    - returns: Returns `false` if there is an issue or the service is unavailable, otherwise `true`.
     */
-    public class func presentComposeViewController(serviceType: String, initialText: String? = nil, urls: [NSURL]? = nil, images: [UIImage]? = nil, inViewController viewController: UIViewController, animated: Bool = true) {
+    public class func presentComposeViewController(serviceType: String, initialText: String? = nil, urls: [NSURL]? = nil, images: [UIImage]? = nil, inViewController viewController: UIViewController, animated: Bool = true) -> Bool {
         
         if SLComposeViewController.isAvailableForServiceType(serviceType) {
             
@@ -94,7 +96,10 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         } else {
             // TODO: Handle social service unavailability
             NSLog("Error: Social Service Unavailable!")
+            return false
         }
+        
+        return true
     }
     
     // MARK: - Prompt Methods
