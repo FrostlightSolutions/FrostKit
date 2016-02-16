@@ -77,6 +77,10 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     public var addresses = [Address]()
     /// A dictionary of annotations plotted to the map view with the address object as the key.
     public var annotations = [NSObject: MKAnnotation]()
+    /// When the map automatically zooms to show all, if this value is set to true, then the users annoation is automatically included in that.
+    public var zoomToShowAllIncludesUser: Bool {
+        return true
+    }
     
     deinit {
         resetMap()
@@ -283,13 +287,14 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     - parameter includingUser: If `true` then the users annotation is also included in the points. If `false` then only plotted points are zoomed to.
     */
     public func zoomToShowAll(includingUser: Bool = true) {
-        if includingUser == true {
+        
+        if includingUser == false || zoomToShowAllIncludesUser == false {
+            let annotations = Array(self.annotations.values)
+            zoomToAnnotations(annotations)
+        } else {
             if let mapView = self.mapView {
                 zoomToAnnotations(mapView.annotations as [MKAnnotation])
             }
-        } else {
-            let annotations = Array(self.annotations.values)
-            zoomToAnnotations(annotations)
         }
     }
     
