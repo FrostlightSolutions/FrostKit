@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Alamofire
+//import Alamofire
 
 public class AppStoreHelper: NSObject {
     
@@ -64,44 +64,44 @@ public class AppStoreHelper: NSObject {
     */
     public func updateAppStoreData(completed: ((NSError?) -> Void)? = nil) {
         
-        if let appStoreID = FrostKit.appStoreID {
-            
-            var url = "https://itunes.apple.com"
-            if let code = NSLocale.autoupdatingCurrentLocale().objectForKey(NSLocaleCountryCode) as? String {
-                url += "/\(code.lowercaseString)"
-            }
-            url += "/lookup"
-            
-            Alamofire.request(.GET, url, parameters: ["id": appStoreID], encoding: .URL, headers: nil).responseJSON { (response) -> Void in
-                
-                if  let json = response.result.value as? [String: AnyObject],
-                    let results = json["results"] as? [[String: AnyObject]],
-                    let appDetails = results.first {
-                        
-                        self.version = appDetails["version"] as? String
-                        self.name = appDetails["trackName"] as? String
-                        self.seller = appDetails["sellerName"] as? String
-                        self.appDescription = appDetails["description"] as? String
-                        self.price = appDetails["price"] as? Double
-                        self.currency = appDetails["currency"] as? String
-                        self.formattedPrice = appDetails["formattedPrice"] as? String
-                        self.fileSize = appDetails["fileSizeBytes"] as? String
-                        
-                        if let releaseDateString = appDetails["releaseDate"] as? String {
-                            self.releaseDate = NSDate.iso8601Date(releaseDateString)
-                        } else {
-                            self.releaseDate = nil
-                        }
-                        
-                        self.bundleId = appDetails["bundleId"] as? String
-                }
-                
-                completed?(response.result.error)
-            }
-            
-        } else {
-            completed?(NSError.errorWithMessage("No app store ID set."))
-        }
+//        if let appStoreID = FrostKit.appStoreID {
+//            
+//            var url = "https://itunes.apple.com"
+//            if let code = NSLocale.autoupdatingCurrentLocale().objectForKey(NSLocaleCountryCode) as? String {
+//                url += "/\(code.lowercaseString)"
+//            }
+//            url += "/lookup"
+//            
+//            Alamofire.request(.GET, url, parameters: ["id": appStoreID], encoding: .URL, headers: nil).responseJSON { (response) -> Void in
+//                
+//                if  let json = response.result.value as? [String: AnyObject],
+//                    let results = json["results"] as? [[String: AnyObject]],
+//                    let appDetails = results.first {
+//                        
+//                        self.version = appDetails["version"] as? String
+//                        self.name = appDetails["trackName"] as? String
+//                        self.seller = appDetails["sellerName"] as? String
+//                        self.appDescription = appDetails["description"] as? String
+//                        self.price = appDetails["price"] as? Double
+//                        self.currency = appDetails["currency"] as? String
+//                        self.formattedPrice = appDetails["formattedPrice"] as? String
+//                        self.fileSize = appDetails["fileSizeBytes"] as? String
+//                        
+//                        if let releaseDateString = appDetails["releaseDate"] as? String {
+//                            self.releaseDate = NSDate.iso8601Date(releaseDateString)
+//                        } else {
+//                            self.releaseDate = nil
+//                        }
+//                        
+//                        self.bundleId = appDetails["bundleId"] as? String
+//                }
+//                
+//                completed?(response.result.error)
+//            }
+//            
+//        } else {
+//            completed?(NSError.errorWithMessage("No app store ID set."))
+//        }
     }
     
     /**
