@@ -7,7 +7,7 @@
 //
 
 import Foundation
-//import Alamofire
+import Alamofire
 
 /// 
 /// The request store keeps track of all requests passed into it. It stops duplicate requests being called by canceling any already running requests passed to it, until they are done and removed.
@@ -17,7 +17,7 @@ import Foundation
 public class RequestStore: NSObject {
     
     /// The store to hold references to the requests being managed.
-//    private lazy var store = Dictionary<String, Request>()
+    private lazy var store = Dictionary<String, Request>()
     /// Describes if the store is locked `true` or not `false`. This is set to `false` by default and is only locked when canceling all tasks.
     private var locked = false
     
@@ -27,40 +27,40 @@ public class RequestStore: NSObject {
     - parameter request: The request to store and manage.
     - parameter urlString: The url string to use as the key.
     */
-//    public func addRequest(request: Request, urlString: String) {
-//        if locked == true {
-//            return
-//        }
-//        
-//        if store[urlString] != nil {
-//            request.cancel()
-//        } else {
-//            store[urlString] = request
-//        }
-//    }
+    public func addRequest(request: Request, urlString: String) {
+        if locked == true {
+            return
+        }
+        
+        if store[urlString] != nil {
+            request.cancel()
+        } else {
+            store[urlString] = request
+        }
+    }
     
     /**
     Remove a request using a url string (normally absolute is sugested) as the key.
     
     - parameter router: The url string to use as the key of the request to remove.
     */
-//    public func removeRequestFor(urlString urlString: String) {
-//        if let storedRequest = store[urlString] {
-//            storedRequest.cancel()
-//            store.removeValueForKey(urlString)
-//        }
-//    }
+    public func removeRequestFor(urlString urlString: String) {
+        if let storedRequest = store[urlString] {
+            storedRequest.cancel()
+            store.removeValueForKey(urlString)
+        }
+    }
     
     /**
     Cancel all tasks currently in the store. This function will lock the store as it cancels all it's content, stopping any new requests to be added.
     */
-//    public func cancelAllTasks() {
-//        locked = true
-//        for (_, request) in store {
-//            request.cancel()
-//        }
-//        locked = false
-//    }
+    public func cancelAllTasks() {
+        locked = true
+        for (_, request) in store {
+            request.cancel()
+        }
+        locked = false
+    }
     
     /**
     Checks to see if there is a rquest in the store that matches the passed in url string.
@@ -69,9 +69,9 @@ public class RequestStore: NSObject {
     
     - returns: If a matching request is found then `true` is returned, otherwise `false` is returned.
     */
-//    public func containsRequestWithURL(urlString: String) -> Bool {
-//        let containsRequest = store[urlString] != nil
-//        return containsRequest
-//    }
+    public func containsRequestWithURL(urlString: String) -> Bool {
+        let containsRequest = store[urlString] != nil
+        return containsRequest
+    }
     
 }
