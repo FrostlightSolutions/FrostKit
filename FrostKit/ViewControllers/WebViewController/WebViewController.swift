@@ -32,17 +32,8 @@ public func WebViewController(viewType viewType: WebViewType = .Automatic) -> Ba
     case .UIWebView:
         return UIWebViewController()
     case .WKWebView:
-        if NSClassFromString("WKWebView") != nil {
-            return WKWebViewController()
-        } else {
-            NSLog("Warning: WKWebViewController is not available on the running version of iOS. Using UIWebViewController instead.")
-            return UIWebViewController()
-        }
+        return WKWebViewController()
     default:
-        if NSClassFromString("WKWebView") != nil {
-            return WKWebViewController()
-        } else {
-            return UIWebViewController()
-        }
+        return WKWebViewController()
     }
 }
