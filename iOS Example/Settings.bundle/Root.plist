@@ -18,35 +18,21 @@
 			<key>File</key>
 			<string>Alamofire</string>
 		</dict>
-        <dict>
-            <key>Type</key>
-            <string>PSChildPaneSpecifier</string>
-            <key>Title</key>
-            <string>FontAwesome</string>
-            <key>File</key>
-            <string>FontAwesome</string>
-        </dict>
-        <dict>
-            <key>Type</key>
-            <string>PSChildPaneSpecifier</string>
-            <key>Title</key>
-            <string>Ionicons</string>
-            <key>File</key>
-            <string>Ionicons</string>
-        </dict>
 		<dict>
 			<key>Type</key>
-			<string>PSGroupSpecifier</string>
+			<string>PSChildPaneSpecifier</string>
 			<key>Title</key>
-			<string>Developer</string>
+			<string>FontAwesome</string>
+			<key>File</key>
+			<string>FontAwesome</string>
 		</dict>
 		<dict>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 			<key>Title</key>
-			<string>Developer Tools</string>
+			<string>Ionicons</string>
 			<key>File</key>
-			<string>DeveloperTools</string>
+			<string>Ionicons</string>
 		</dict>
 	</array>
 	<key>StringsTable</key>
