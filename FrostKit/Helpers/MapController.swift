@@ -15,7 +15,7 @@ import CoreLocation
 ///
 /// This class is designed to be subclassed if more specific actions, such a refining the standard search or customising the annotations plotted.
 ///
-public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate, UIActionSheetDelegate {
+public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
     
     private let minimumZoomArc = 0.007  //approximately 1/2 mile (1 degree of arc ~= 69 miles)
     private let maximumDegreesArc: Double = 360
@@ -491,32 +491,25 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      */
     public func calloutAccessoryControlTapped(mapView: MKMapView, annotationView view: MKAnnotationView, controlTapped control: UIControl) {
         if let annotation = view.annotation as? Annotation {
-            if NSClassFromString("UIAlertController") == nil {
-                // iOS 7
-                let title = [annotation.title!, annotation.subtitle!].joinWithSeparator("\n")
-                let actionSheet = UIActionSheet(title: title, delegate: self, cancelButtonTitle: FKLocalizedString("CANCEL", comment: "Cancel"), destructiveButtonTitle: nil, otherButtonTitles: FKLocalizedString("ZOOM_TO_", comment: "Zoom to..."), FKLocalizedString("DIRECTIONS", comment: "Directions"), FKLocalizedString("OPEN_IN_MAPS", comment: "Open in Maps"))
-                actionSheet.showFromRect(control.frame, inView: view, animated: true)
-            } else {
-                // iOS 8+
-                let alertController = UIAlertController(title: annotation.title, message: annotation.subtitle, preferredStyle: .ActionSheet)
-                let zoomToAlertAction = UIAlertAction(title: FKLocalizedString("ZOOM_TO_", comment: "Zoom to..."), style: .Default, handler: { (action) -> Void in
-                    self.zoomToAnnotation(annotation)
-                })
-                alertController.addAction(zoomToAlertAction)
-                let directionsAlertAction = UIAlertAction(title: FKLocalizedString("DIRECTIONS", comment: "Directions"), style: .Default, handler: { (action) -> Void in
-                    self.directionsToCurrentLocationFrom(coordinate: annotation.coordinate)
-                })
-                alertController.addAction(directionsAlertAction)
-                let openInMapsAlertAction = UIAlertAction(title: FKLocalizedString("OPEN_IN_MAPS", comment: "Open in Maps"), style: .Default, handler: { (action) -> Void in
-                    self.directionsToCurrentLocationFrom(coordinate: annotation.coordinate, inApp: false)
-                })
-                alertController.addAction(openInMapsAlertAction)
-                let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL", comment: "Cancel"), style: .Cancel, handler: { (action) -> Void in
-                    alertController.dismissViewControllerAnimated(true, completion: nil)
-                })
-                alertController.addAction(cancelAlertAction)
-                viewController.presentViewController(alertController, animated: true, completion: nil)
-            }
+            
+            let alertController = UIAlertController(title: annotation.title, message: annotation.subtitle, preferredStyle: .ActionSheet)
+            let zoomToAlertAction = UIAlertAction(title: FKLocalizedString("ZOOM_TO_", comment: "Zoom to..."), style: .Default, handler: { (action) -> Void in
+                self.zoomToAnnotation(annotation)
+            })
+            alertController.addAction(zoomToAlertAction)
+            let directionsAlertAction = UIAlertAction(title: FKLocalizedString("DIRECTIONS", comment: "Directions"), style: .Default, handler: { (action) -> Void in
+                self.directionsToCurrentLocationFrom(coordinate: annotation.coordinate)
+            })
+            alertController.addAction(directionsAlertAction)
+            let openInMapsAlertAction = UIAlertAction(title: FKLocalizedString("OPEN_IN_MAPS", comment: "Open in Maps"), style: .Default, handler: { (action) -> Void in
+                self.directionsToCurrentLocationFrom(coordinate: annotation.coordinate, inApp: false)
+            })
+            alertController.addAction(openInMapsAlertAction)
+            let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL", comment: "Cancel"), style: .Cancel, handler: { (action) -> Void in
+                alertController.dismissViewControllerAnimated(true, completion: nil)
+            })
+            alertController.addAction(cancelAlertAction)
+            viewController.presentViewController(alertController, animated: true, completion: nil)
         }
     }
     
@@ -584,23 +577,6 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         // Set the location manager to nil if not `NotDetermined`. If `NotDetermined` then it is possible the delegate was called before the user has answered.
         if status != .NotDetermined {
             self.locationManager = nil
-        }
-    }
-    
-    // MARK: - UIActionSheetDelegate Methods
-    
-    public func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
-        if let mapView = self.mapView, annotation = mapView.selectedAnnotations.first as? Annotation {
-            switch buttonIndex {
-            case 0:
-                zoomToAnnotation(annotation)
-            case 1:
-                directionsToCurrentLocationFrom(coordinate: annotation.coordinate)
-            case 2:
-                directionsToCurrentLocationFrom(coordinate: annotation.coordinate, inApp: false)
-            default:
-                break
-            }
         }
     }
     
