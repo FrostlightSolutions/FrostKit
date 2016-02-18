@@ -31,14 +31,6 @@ public class FrostKit {
     // MARK: - Private Variables
     
     private var tintColor: UIColor?
-#if os(iOS)
-    private var FUSName: String?
-    private lazy var baseURLs = Array<String>()
-    private var defaultDebugIndex = 0
-    private var defaultProductionIndex = 0
-    private var OAuthClientID: String?
-    private var OAuthClientSecret: String?
-#endif
     
 #if os(iOS) || os(tvOS)
     private var appStoreID: String?
@@ -52,26 +44,6 @@ public class FrostKit {
     public class func tintColor(alpha alpha: CGFloat) -> UIColor? {
         return tintColor?.colorWithAlpha(alpha)
     }
-#if os(iOS)
-    public class var FUSName: String? {
-        return FrostKit.shared.FUSName
-    }
-    public class var baseURLs: [String] {
-        return FrostKit.shared.baseURLs
-    }
-    public class var defaultDebugIndex: Int {
-        return FrostKit.shared.defaultDebugIndex
-    }
-    public class var defaultProductionIndex: Int {
-        return FrostKit.shared.defaultProductionIndex
-    }
-    public class var OAuthClientID: String? {
-        return FrostKit.shared.OAuthClientID
-    }
-    public class var OAuthClientSecret: String? {
-        return FrostKit.shared.OAuthClientSecret
-    }
-#endif
     
 #if os(iOS) || os(tvOS)
     public class var appStoreID: String? {
@@ -92,10 +64,6 @@ public class FrostKit {
 #if os(iOS) || os(tvOS)
         CustomFonts.loadCustomFonts()
 #endif
-
-#if os(iOS)
-        UserStore.current
-#endif
     }
     
     // MARK: - Setup Methods
@@ -112,20 +80,6 @@ public class FrostKit {
     public class func setupAppStoreID(appStoreID: String) {
         FrostKit.shared.appStoreID = appStoreID
         AppStoreHelper.shared.updateAppStoreData()
-    }
-#endif
-    
-#if os(iOS)
-    public class func setupFUSName(FUSName: String) {
-        FrostKit.shared.FUSName = FUSName
-    }
-    
-    public class func setupURLs(baseURLs: [String], defaultDebugIndex: Int = 0, defaultProductionIndex: Int = 0, OAuthClientID: String? = nil, OAuthClientSecret: String? = nil) {
-        FrostKit.shared.baseURLs = baseURLs
-        FrostKit.shared.defaultDebugIndex = defaultDebugIndex
-        FrostKit.shared.defaultProductionIndex = defaultProductionIndex
-        FrostKit.shared.OAuthClientID = OAuthClientID
-        FrostKit.shared.OAuthClientSecret = OAuthClientSecret
     }
 #endif
     
