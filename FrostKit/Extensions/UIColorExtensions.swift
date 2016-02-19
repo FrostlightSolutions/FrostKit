@@ -28,7 +28,8 @@ extension UIColor {
     /**
     Creates a color object from a hex string.
     
-    - parameter hexString:   A hex string to turn into a color object.
+    - parameter hexString:  A hex string to turn into a color object.
+    - parameter alpha:      The alpha value of the color.
     
     - returns: A color object from the hex string.
     */

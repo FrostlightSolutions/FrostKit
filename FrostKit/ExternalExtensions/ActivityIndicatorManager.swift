@@ -9,7 +9,9 @@
 import UIKit
 import FrostKit
 
+// swiftlint:disable variable_name
 private let ActivityIndicatorLockQueue = "com.FrostKit.activityIndicator.lockqueue"
+// swiftlint:enable variable_name
 
 ///
 /// Tracks the network requests using NSNotificationCenter to work out if the activity indicator should be showing.

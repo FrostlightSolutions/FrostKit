@@ -15,7 +15,7 @@ public class InitialsImageView: ImageView {
             var initials = ""
             if let aName = name {
                 for word in aName.componentsSeparatedByString(" ") {
-                    initials += ((word as NSString).substringWithRange(NSMakeRange(0, 1)) as String).uppercaseString
+                    initials += ((word as NSString).substringToIndex(1) as String).uppercaseString
                 }
             }
             self.initials = initials

@@ -21,10 +21,12 @@ extension Address {
     /**
     A convenience method that allows creating an address object using PFGeoPoint and PFObject as reference.
     
-    :param: geoPoint         The PFGeoPoint to get the locational data from.
-    :param: object           The PFObject to get the main data from.
-    :param: nameKey          The key for the name string in the PFObject.
-    :param: addressStringKey The key for the simple address string in the PFObject.
+    - param: geoPoint         The PFGeoPoint to get the locational data from.
+    - param: object           The PFObject to get the main data from.
+    - param: nameKey          The key for the name string in the PFObject.
+    - param: addressStringKey The key for the simple address string in the PFObject.
+    
+    - returns: An Address object created from the passed in paramiters.
     */
     public convenience init(geoPoint: PFGeoPoint, object: PFObject, nameKey: String? = nil, addressStringKey: String? = nil) {
         self.init()

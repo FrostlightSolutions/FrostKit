@@ -42,7 +42,7 @@ public class RequestStore: NSObject {
     /**
     Remove a request using a url string (normally absolute is sugested) as the key.
     
-    - parameter router: The url string to use as the key of the request to remove.
+    - parameter urlString: The url string to use as the key of the request to remove.
     */
     public func removeRequestFor(urlString urlString: String) {
         if let storedRequest = store[urlString] {

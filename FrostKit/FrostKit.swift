@@ -14,11 +14,12 @@ import UIKit
 import WatchKit
 #endif
 
-
+// swiftlint:disable variable_name
 public let FUSServiceClientUpdateSections = "com.FrostKit.FUSServiceClient.updateSections"
 public let UserStoreLogoutClearData = "com.FrostKit.UserStore.logout.clearData"
 public let NetworkRequestDidBeginNotification = "com.FrostKit.activityIndicator.request.begin"
 public let NetworkRequestDidCompleteNotification = "com.FrostKit.activityIndicator.request.complete"
+// swiftlint:enable variable_name
 
 #if os(iOS) || os(tvOS)
 internal func FKLocalizedString(key: String, comment: String = "") -> String {

@@ -403,7 +403,7 @@ extension NSDate {
     /**
     A helper method for getting a formatted string of the date and time in `ShortStyle`
     
-    :retuerns: A string of formatted date time in `ShortStyle`
+    - retuerns: A string of formatted date time in `ShortStyle`
     */
     public func dateTimeShortString() -> String {
         return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
@@ -412,7 +412,7 @@ extension NSDate {
     /**
     A helper method for getting a formatted string of the date in `ShortStyle`
     
-    :retuerns: A string of formatted date in `ShortStyle`
+    - retuerns: A string of formatted date in `ShortStyle`
     */
     public func dateShortString() -> String {
         return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .ShortStyle, timeStyle: .NoStyle)
@@ -421,7 +421,7 @@ extension NSDate {
     /**
     A helper method for getting a formatted string of the date in `MediumStyle`
     
-    :retuerns: A string of formatted date in `MediumStyle`
+    - retuerns: A string of formatted date in `MediumStyle`
     */
     public func dateMediumString() -> String {
         return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .MediumStyle, timeStyle: .NoStyle)
@@ -430,7 +430,7 @@ extension NSDate {
     /**
     A helper method for getting a formatted string of the date in `FullStyle`
     
-    :retuerns: A string of formatted date in `FullStyle`
+    - retuerns: A string of formatted date in `FullStyle`
     */
     public func dateFullString() -> String {
         return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .FullStyle, timeStyle: .NoStyle)
@@ -439,7 +439,7 @@ extension NSDate {
     /**
     A helper method for getting a formatted string of the time in `ShortStyle`
     
-    :retuerns: A string of formatted time in `ShortStyle`
+    - retuerns: A string of formatted time in `ShortStyle`
     */
     public func timeShortString() -> String {
         return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .NoStyle, timeStyle: .ShortStyle)
