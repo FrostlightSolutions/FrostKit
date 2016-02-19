@@ -53,12 +53,7 @@ public class FrostKit {
     
     // MARK: - Singleton
     
-    internal class var shared: FrostKit {
-        struct Singleton {
-            static let instance : FrostKit = FrostKit()
-        }
-        return Singleton.instance
-    }
+    internal static let shared = FrostKit()
     
     init() {
 #if os(iOS) || os(tvOS)

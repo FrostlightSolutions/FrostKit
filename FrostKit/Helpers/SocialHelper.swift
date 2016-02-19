@@ -20,15 +20,10 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         case MessagePrompt
     }
     
-    // MARK: - Singleton
+    // MARK: - Singleton & Init
     
     // For use with delegate methods only, hence private NOT public
-    private class var shared: SocialHelper {
-        struct Singleton {
-            static let instance : SocialHelper = SocialHelper()
-        }
-        return Singleton.instance
-    }
+    private static let shared = SocialHelper()
     
     override private init() {
         super.init()

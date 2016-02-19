@@ -51,19 +51,10 @@ public class ActivityIndicatorManager: NSObject {
     private lazy var activityIndicatorVisibilityTimer = NSTimer()
     private let activityIndicatorInvisibilityDelay = 0.17
     
-    // MARK: - Singleton
+    // MARK: - Singleton & Init
     
-    /**
-    Returns the shared manager object.
-    
-    - returns: The shared manager object.
-    */
-    public class var sharedManager: ActivityIndicatorManager {
-        struct Singleton {
-            static let instance: ActivityIndicatorManager = ActivityIndicatorManager()
-        }
-        return Singleton.instance
-    }
+    /// The shared manager object.
+    public static let sharedManager = ActivityIndicatorManager()
     
     private override init() {
         super.init()
