@@ -16,9 +16,8 @@ extension UIColor {
     /**
     A convenience init for creating a color object from a hex string.
     
-    - parameter hexString:   A hex string to turn into a color object.
-    
-    - returns: A color object from the hex string.
+    - parameter hexString:  A hex string to turn into a color object.
+    - parameter alpha:      The alpha value of the color.
     */
     public convenience init(hexString: String, alpha: CGFloat = 1) {
         let color = UIColor.colorWithHex(hexString, alpha: alpha)
