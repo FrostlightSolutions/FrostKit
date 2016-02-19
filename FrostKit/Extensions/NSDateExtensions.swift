@@ -215,12 +215,8 @@ extension NSDate {
         return components.day
     }
     
-    /**
-    Returns the number of days left in the current week assuming Monday is the start of the week and inclusive of today
-    
-    - returns: The number of days left in the current week
-    */
-    public func daysRemainingInWeek() -> Int {
+    /// Returns the number of days left in the current week assuming Monday is the start of the week and inclusive of today
+    public var daysRemainingInWeek: Int {
         
         let calendar = NSCalendar.gregorianCalendar()
         let components = calendar.components(NSCalendarUnit.Weekday, fromDate: self)
@@ -233,28 +229,20 @@ extension NSDate {
         return (7 - weekdayOfDate) + 1
     }
     
-    /**
-    Returns the number of days in the current month
-    
-    - returns: The number of days in the current month
-    */
-    public func daysInMonth() -> Int {
+    /// Returns the number of days in the current month
+    public var daysInMonth: Int {
         
         let calendar = NSCalendar.gregorianCalendar()
         let range = calendar.rangeOfUnit(NSCalendarUnit.Day, inUnit: NSCalendarUnit.Month, forDate: self)
         return range.length
     }
     
-    /**
-    Returns the number of days left in the month, inclusive of today
-    
-    - returns: The number of days left in the current month
-    */
-    public func daysRemainingInMonth() -> Int {
+    /// Returns the number of days left in the month, inclusive of today
+    public var daysRemainingInMonth: Int {
         
         let calendar = NSCalendar.gregorianCalendar()
         let components = calendar.components(NSCalendarUnit.Weekday, fromDate: self)
-        return (daysInMonth() - components.day) + 1
+        return (daysInMonth - components.day) + 1
     }
     
     // MARK: - Date Comparison
@@ -274,7 +262,7 @@ extension NSDate {
         
         var compare: NSComparisonResult = .OrderedSame
         if stripTime == true {
-            compare = self.stripTime().compare(date.stripTime())
+            compare = self.stripTime.compare(date.stripTime)
         } else {
             compare = self.compare(date)
         }
@@ -323,12 +311,8 @@ extension NSDate {
     
     // MARK: -
     
-    /**
-    Creates a new object which is a copy of the current date but with time stripped out (set to midnight)
-    
-    - returns: A copy of the current date with no time
-    */
-    public func stripTime() -> NSDate {
+    /// Creates a new object which is a copy of the current date but with time stripped out (set to midnight)
+    public var stripTime: NSDate {
         
         let calendar = NSCalendar.gregorianCalendar()
         let components = calendar.components(([NSCalendarUnit.Day, NSCalendarUnit.Month, NSCalendarUnit.Year]), fromDate: self)
@@ -366,12 +350,8 @@ extension NSDate {
         }
     }
     
-    /**
-    Returns a date with the time at the start of the day, while preserving the time zone.
-    
-    - returns: The date at the start of the day.
-    */
-    public func dateAtStartOfDay() -> NSDate {
+    /// Returns a date with the time at the start of the day, while preserving the time zone.
+    public var dateAtStartOfDay: NSDate {
         
         let calendar = NSCalendar.gregorianCalendar()
         let components = calendar.components(componentFlags, fromDate: self)
@@ -382,12 +362,8 @@ extension NSDate {
         return calendar.dateFromComponents(components)!
     }
     
-    /**
-    Returns a date with the time at the end of the day, while preserving the time zone.
-    
-    - returns: The date at the end of the day.
-    */
-    public func dateAtEndOfDay() -> NSDate {
+    /// Returns a date with the time at the end of the day, while preserving the time zone.
+    public var dateAtEndOfDay: NSDate {
         
         let calendar = NSCalendar.gregorianCalendar()
         let components = calendar.components(componentFlags, fromDate: self)
@@ -400,66 +376,38 @@ extension NSDate {
     
     // MARK: - Date Strings
     
-    /**
-    A helper method for getting a formatted string of the date and time in `ShortStyle`
-    
-    - retuerns: A string of formatted date time in `ShortStyle`
-    */
-    public func dateTimeShortString() -> String {
+    /// A helper method for getting a formatted string of the date and time in `ShortStyle`
+    public var dateTimeShortString: String {
         return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
     }
     
-    /**
-    A helper method for getting a formatted string of the date in `ShortStyle`
-    
-    - retuerns: A string of formatted date in `ShortStyle`
-    */
-    public func dateShortString() -> String {
+    /// A helper method for getting a formatted string of the date in `ShortStyle`
+    public var dateShortString: String {
         return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .ShortStyle, timeStyle: .NoStyle)
     }
     
-    /**
-    A helper method for getting a formatted string of the date in `MediumStyle`
-    
-    - retuerns: A string of formatted date in `MediumStyle`
-    */
-    public func dateMediumString() -> String {
+    /// A helper method for getting a formatted string of the date in `MediumStyle`
+    public var dateMediumString: String {
         return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .MediumStyle, timeStyle: .NoStyle)
     }
     
-    /**
-    A helper method for getting a formatted string of the date in `FullStyle`
-    
-    - retuerns: A string of formatted date in `FullStyle`
-    */
-    public func dateFullString() -> String {
+    /// A helper method for getting a formatted string of the date in `FullStyle`
+    public var dateFullString: String {
         return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .FullStyle, timeStyle: .NoStyle)
     }
     
-    /**
-    A helper method for getting a formatted string of the time in `ShortStyle`
-    
-    - retuerns: A string of formatted time in `ShortStyle`
-    */
-    public func timeShortString() -> String {
+    /// A helper method for getting a formatted string of the time in `ShortStyle`
+    public var timeShortString: String {
         return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .NoStyle, timeStyle: .ShortStyle)
     }
     
-    /**
-    A helpter method for getting a formatted string of the date in the FUS set format.
-    
-    - returns: A string formatted for a date in FUS. `yyyy'-'MM'-'dd`
-    */
-    public func fusDateString() -> String {
+    /// A helpter method for getting a formatted string of the date in the FUS set format.
+    public var fusDateString: String {
         return dateStringFromFormat("yyyy'-'MM'-'dd")
     }
     
-    /**
-    A helpter method for getting a formatted string of the date and time in the FUS set format.
-    
-    - returns: A string formatted for a date with time in FUS. `yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSSSSS'Z'`
-    */
-    public func fusDateTimeString() -> String {
+    /// A helpter method for getting a formatted string of the date and time in the FUS set format.
+    public var fusDateTimeString: String {
         return dateStringFromFormat("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSSSSS'Z'")
     }
     
@@ -476,48 +424,28 @@ extension NSDate {
         return formatter.stringFromDate(self)
     }
     
-    /**
-    Returns the date's day of the week string. i.e. Monday
-    
-    - returns: The weekday string.
-    */
-    public func dayString() -> String {
+    /// Returns the date's day of the week string. i.e. Monday
+    public var dayString: String {
         return dateStringFromFormat("EEEE")
     }
     
-    /**
-    Returns the date's day of the week as a short string. i.e. Mon
-    
-    - returns: The short weekday string.
-    */
-    public func dayShortString() -> String {
+    /// Returns the date's day of the week as a short string. i.e. Mon
+    public var dayShortString: String {
         return dateStringFromFormat("EEE")
     }
     
-    /**
-    Returns the date's month string. i.e. September
-    
-    - returns: The month string.
-    */
-    public func monthString() -> String {
+    /// Returns the date's month string. i.e. September
+    public var monthString: String {
         return dateStringFromFormat("MMMM")
     }
     
-    /**
-    Returns the date's month short string. i.e. Sept
-    
-    - returns: The month short string.
-    */
-    public func monthShortString() -> String {
+    /// Returns the date's month short string. i.e. Sept
+    public var monthShortString: String {
         return dateStringFromFormat("MMM")
     }
     
-    /**
-     Returns the date's year string. i.e. 2015
-     
-     - returns: The year string.
-     */
-    public func yearString() -> String {
+    /// Returns the date's year string. i.e. 2015
+    public var yearString: String {
         return dateStringFromFormat("Y")
     }
     
