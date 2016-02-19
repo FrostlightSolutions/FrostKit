@@ -13,18 +13,14 @@ import Foundation
 ///
 extension NSData {
     
-    /**
-    Returns a string of the hex data object.
-    
-    - returns: Hex string of the data.
-    */
-    public func hexString() -> NSString {
+    /// Returns a string of the hex data object.
+    public var hexString: String {
         let string = NSMutableString(capacity: self.length)
         let bytes = UnsafeBufferPointer<UInt8>(start: UnsafePointer(self.bytes), count:self.length)
         for byte in bytes {
             string.appendFormat("%02hhx", byte)
         }
-        return string
+        return (string as String)
     }
     
     /**
