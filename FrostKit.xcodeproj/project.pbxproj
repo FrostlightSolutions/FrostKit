@@ -594,6 +594,7 @@
 				1826B0231BD9047900DA1669 /* Headers */,
 				1826B0241BD9047900DA1669 /* Resources */,
 				1838F1B71C761E1800F1233D /* Carthage Run Script */,
+				18E5457B1C77E2B900637E85 /* SwiftLint Run Script */,
 			);
 			buildRules = (
 			);
@@ -613,6 +614,7 @@
 				1829A8091BA2CD380017E4EE /* Headers */,
 				1829A80A1BA2CD380017E4EE /* Resources */,
 				1838F1B61C761E0F00F1233D /* Carthage Run Script */,
+				18E5457A1C77E28600637E85 /* SwiftLint Run Script */,
 			);
 			buildRules = (
 			);
@@ -841,6 +843,34 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "cd \"${SRCROOT}\"\nls -l\njazzy -x -project,\"${SRCROOT}/FrostKit.xcodeproj\",-scheme,FrostKit -c -m FrostKit -a James\\ Barrow -g https:\\/\\/github.com/FrostlightSolutions/FrostKit -o ../FrostKitDocs\n";
+		};
+		18E5457A1C77E28600637E85 /* SwiftLint Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftLint Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		18E5457B1C77E2B900637E85 /* SwiftLint Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftLint Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
