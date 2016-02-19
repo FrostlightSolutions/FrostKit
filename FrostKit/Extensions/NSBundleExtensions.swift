@@ -15,7 +15,9 @@ extension NSBundle {
     
     /**
     Returns the bundle version of the app as a string.
-    
+     
+    - parameter bundle: The bundle to get the app version from. Defaults to `mainBundle()`.
+     
     - returns: The bundle version of the app.
     */
     public class func appVersion(bundle: NSBundle = NSBundle.mainBundle()) -> String {
@@ -24,6 +26,8 @@ extension NSBundle {
     
     /**
     Returns the version of the app as a string.
+    
+    - parameter bundle: The bundle to get the app name from. Defaults to `mainBundle()`.
     
     - returns: The version of the app.
     */

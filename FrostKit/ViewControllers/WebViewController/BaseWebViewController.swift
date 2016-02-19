@@ -63,7 +63,7 @@ public class BaseWebViewController: UIViewController {
             activityIndicatorView.color = FrostKit.tintColor ?? navigationController?.navigationBar.tintColor
             
             let barSize = navController.navigationBar.bounds.size
-            progrssView.frame = CGRectMake(0, barSize.height - progrssView.bounds.size.height, barSize.width, progrssView.bounds.size.height)
+            progrssView.frame = CGRect(x: 0, y: barSize.height - progrssView.bounds.size.height, width: barSize.width, height: progrssView.bounds.size.height)
             progrssView.autoresizingMask = .FlexibleTopMargin
             navController.navigationBar.addSubview(progrssView)
             updateProgrssViewVisability()

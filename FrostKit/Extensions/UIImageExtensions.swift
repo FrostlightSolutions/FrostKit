@@ -40,7 +40,7 @@ extension UIImage {
         }
         
         UIGraphicsBeginImageContextWithOptions(scaledSize, !hasAlpha, 0.0)
-        self.drawInRect(CGRect(origin: CGPointZero, size: scaledSize))
+        self.drawInRect(CGRect(origin: CGPoint(), size: scaledSize))
         let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         

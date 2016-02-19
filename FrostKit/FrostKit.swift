@@ -14,11 +14,12 @@ import UIKit
 import WatchKit
 #endif
 
-
+// swiftlint:disable variable_name
 public let FUSServiceClientUpdateSections = "com.FrostKit.FUSServiceClient.updateSections"
 public let UserStoreLogoutClearData = "com.FrostKit.UserStore.logout.clearData"
 public let NetworkRequestDidBeginNotification = "com.FrostKit.activityIndicator.request.begin"
 public let NetworkRequestDidCompleteNotification = "com.FrostKit.activityIndicator.request.complete"
+// swiftlint:enable variable_name
 
 #if os(iOS) || os(tvOS)
 internal func FKLocalizedString(key: String, comment: String = "") -> String {
@@ -53,12 +54,7 @@ public class FrostKit {
     
     // MARK: - Singleton
     
-    internal class var shared: FrostKit {
-        struct Singleton {
-            static let instance : FrostKit = FrostKit()
-        }
-        return Singleton.instance
-    }
+    internal static let shared = FrostKit()
     
     init() {
 #if os(iOS) || os(tvOS)

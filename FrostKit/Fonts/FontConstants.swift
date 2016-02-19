@@ -4,8 +4,12 @@
 //
 //  Created by James Barrow on 06/02/2015.
 //  Copyright (c) 2015 Frostlight Solutions. All rights reserved.
-//  Last updated on 12/02/2016 11:13:16.
+//  Last updated on 19/02/2016 23:48:45.
 //
+
+// swiftlint:disable variable_name
+// swiftlint:disable type_body_length
+// swiftlint:disable file_length
 
 /*
 ------------------------------
@@ -1451,3 +1455,7 @@ public struct IonIcons {
 	public static let wrench = "\u{f2ba}"
 	public static let xbox = "\u{f30c}"
 }
+
+// swiftlint:enable variable_name
+// swiftlint:enable type_body_length
+// swiftlint:enable file_length

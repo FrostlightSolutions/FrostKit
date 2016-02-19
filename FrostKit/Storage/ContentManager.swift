@@ -26,16 +26,9 @@ public class ContentManager: NSObject {
     // MARK: - Singleton
     
     /**
-    Returns the shared content manager object.
-    
-    - returns: The shared content manager object.
+    The shared content manager object.
     */
-    public class var shared: ContentManager {
-        struct Singleton {
-            static let instance : ContentManager = ContentManager()
-        }
-        return Singleton.instance
-    }
+    public static let shared = ContentManager()
     
     // MARK: - Content Management Methods
     

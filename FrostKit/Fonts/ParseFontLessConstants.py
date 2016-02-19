@@ -69,8 +69,12 @@ def parseFonts(fonts):
 //
 """ %(todaysFormattedDate())
   
+  contents += '\n// swiftlint:disable variable_name\n// swiftlint:disable type_body_length\n// swiftlint:disable file_length\n'
+  
   for font in fonts:
     contents += parseFontConsatnts(font, outputPath)
+
+  contents += '\n// swiftlint:enable variable_name\n// swiftlint:enable type_body_length\n// swiftlint:enable file_length\n'
 
   writeObject = open(outputPath, 'wb')
   writeObject.write(contents)
