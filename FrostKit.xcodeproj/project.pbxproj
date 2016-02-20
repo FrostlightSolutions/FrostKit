@@ -143,6 +143,8 @@
 		189D8C9D1C77E9AB00261DF5 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EE19DCBC28008A1506 /* CustomFonts.swift */; };
 		189D8C9E1C77EC5A00261DF5 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066919DB767A00811755 /* UIColorExtensions.swift */; };
 		189D8C9F1C77EC5B00261DF5 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066919DB767A00811755 /* UIColorExtensions.swift */; };
+		189D8CA61C77EE7800261DF5 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1838F1B31C761CCC00F1233D /* Alamofire.framework */; };
+		189D8CA71C77EE7F00261DF5 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E545B41C77E5AF00637E85 /* Alamofire.framework */; };
 		18A786CD1A77B39A006EADB9 /* UICollectionViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A786CC1A77B39A006EADB9 /* UICollectionViewControllerExtensions.swift */; };
 		18BB7C7519DC383900F21A64 /* NSCalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BB7C7419DC383900F21A64 /* NSCalendarExtensions.swift */; };
 		18BFF7571A7B01F0002612F9 /* Notifications.json in Resources */ = {isa = PBXBuildFile; fileRef = 18BFF7561A7B01F0002612F9 /* Notifications.json */; };
@@ -194,8 +196,6 @@
 		18EA124119DC7D9000FD858D /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124019DC7D9000FD858D /* UIViewExtensions.swift */; };
 		18EA124319DC8A8C00FD858D /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124219DC8A8C00FD858D /* KeychainHelper.swift */; };
 		18EA124519DC8B5E00FD858D /* NSBundleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124419DC8B5E00FD858D /* NSBundleExtensions.swift */; };
-		18FD62021BC7FC71001CDA32 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FD61FE1BC7FBD2001CDA32 /* Alamofire.framework */; };
-		18FD62031BC7FC71001CDA32 /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FD61FF1BC7FBD2001CDA32 /* AlamofireImage.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -289,10 +289,6 @@
 		18EA124019DC7D9000FD858D /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		18EA124219DC8A8C00FD858D /* KeychainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		18EA124419DC8B5E00FD858D /* NSBundleExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSBundleExtensions.swift; sourceTree = "<group>"; };
-		18FD61F81BC7FB91001CDA32 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/FrostKit-eyzskzynvapcfcaoklanacrqrgxj/Build/Products/Debug-watchos/Alamofire.framework"; sourceTree = "<group>"; };
-		18FD61FA1BC7FBAB001CDA32 /* AlamofireImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireImage.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/FrostKit-eyzskzynvapcfcaoklanacrqrgxj/Build/Products/Debug-watchos/AlamofireImage.framework"; sourceTree = "<group>"; };
-		18FD61FE1BC7FBD2001CDA32 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/FrostKit-eyzskzynvapcfcaoklanacrqrgxj/Build/Products/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
-		18FD61FF1BC7FBD2001CDA32 /* AlamofireImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireImage.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/FrostKit-eyzskzynvapcfcaoklanacrqrgxj/Build/Products/Debug-iphoneos/AlamofireImage.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,9 +320,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18FD62031BC7FC71001CDA32 /* AlamofireImage.framework in Frameworks */,
 				18C0067619DC00C000811755 /* FrostKit.framework in Frameworks */,
-				18FD62021BC7FC71001CDA32 /* Alamofire.framework in Frameworks */,
+				189D8CA61C77EE7800261DF5 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +338,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18E545A71C77E54000637E85 /* FrostKit.framework in Frameworks */,
+				189D8CA71C77EE7F00261DF5 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,13 +397,11 @@
 		186CFCE81A29F7BE002739A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				18E545B41C77E5AF00637E85 /* Alamofire.framework */,
-				1838F1BA1C761E4800F1233D /* Alamofire.framework */,
-				1838F1B81C761E3B00F1233D /* Alamofire.framework */,
-				1838F1B31C761CCC00F1233D /* Alamofire.framework */,
+				189D8CA21C77EE2C00261DF5 /* iOS */,
+				189D8CA31C77EE3500261DF5 /* watchOS */,
+				189D8CA41C77EE4B00261DF5 /* tvOS */,
+				189D8CA51C77EE5F00261DF5 /* OSX */,
 				1811D76A1A0ACAED00E8B873 /* WebKit.framework */,
-				189E12D11BB413F9009A9F27 /* iOS */,
-				189E12D71BB41458009A9F27 /* watchOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -513,22 +507,36 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
-		189E12D11BB413F9009A9F27 /* iOS */ = {
+		189D8CA21C77EE2C00261DF5 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				18FD61FE1BC7FBD2001CDA32 /* Alamofire.framework */,
-				18FD61FF1BC7FBD2001CDA32 /* AlamofireImage.framework */,
+				1838F1B31C761CCC00F1233D /* Alamofire.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		189E12D71BB41458009A9F27 /* watchOS */ = {
+		189D8CA31C77EE3500261DF5 /* watchOS */ = {
 			isa = PBXGroup;
 			children = (
-				18FD61F81BC7FB91001CDA32 /* Alamofire.framework */,
-				18FD61FA1BC7FBAB001CDA32 /* AlamofireImage.framework */,
+				1838F1B81C761E3B00F1233D /* Alamofire.framework */,
 			);
 			name = watchOS;
+			sourceTree = "<group>";
+		};
+		189D8CA41C77EE4B00261DF5 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				1838F1BA1C761E4800F1233D /* Alamofire.framework */,
+			);
+			name = tvOS;
+			sourceTree = "<group>";
+		};
+		189D8CA51C77EE5F00261DF5 /* OSX */ = {
+			isa = PBXGroup;
+			children = (
+				18E545B41C77E5AF00637E85 /* Alamofire.framework */,
+			);
+			name = OSX;
 			sourceTree = "<group>";
 		};
 		18C0065F19DB5BDD00811755 /* Storage */ = {
@@ -828,9 +836,9 @@
 			projectRoot = "";
 			targets = (
 				18839B1619D9FA8C00760157 /* FrostKit iOS */,
+				18839B2119D9FA8C00760157 /* FrostKitTests */,
 				1829A80B1BA2CD380017E4EE /* FrostKit watchOS */,
 				1826B0251BD9047900DA1669 /* FrostKit tvOS */,
-				18839B2119D9FA8C00760157 /* FrostKitTests */,
 				18E5459C1C77E53F00637E85 /* FrostKit OS X */,
 				18E545A51C77E54000637E85 /* FrostKit OS X Tests */,
 				1845E6F61A66DA03005B377D /* FrostKitDocs */,
@@ -1529,7 +1537,10 @@
 		18839B2E19D9FA8C00760157 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1544,7 +1555,10 @@
 		18839B2F19D9FA8C00760157 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = FrostKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Frostlight.$(PRODUCT_NAME:rfc1034identifier)";
@@ -1615,11 +1629,15 @@
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "FrostKit OSXTests/Info.plist";
+				INFOPLIST_FILE = "FrostKit OS X Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.PigonaHill.FrostKit-OSXTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.PigonaHill.FrostKitOSXTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -1632,11 +1650,15 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "FrostKit OSXTests/Info.plist";
+				INFOPLIST_FILE = "FrostKit OS X Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.PigonaHill.FrostKit-OSXTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.PigonaHill.FrostKitOSXTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import FrostKit_OSX
+@testable import FrostKit
 
 class FrostKit_OSXTests: XCTestCase {
     
