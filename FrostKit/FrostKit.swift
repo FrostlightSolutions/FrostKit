@@ -12,6 +12,14 @@ import Foundation
 import UIKit
 #elseif os(watchOS)
 import WatchKit
+#elseif os(OSX)
+import AppKit
+#endif
+
+#if os(OSX)
+public typealias Color = NSColor
+#else
+public typealias Color = UIColor
 #endif
 
 // swiftlint:disable variable_name
@@ -21,7 +29,7 @@ public let NetworkRequestDidBeginNotification = "com.FrostKit.activityIndicator.
 public let NetworkRequestDidCompleteNotification = "com.FrostKit.activityIndicator.request.complete"
 // swiftlint:enable variable_name
 
-#if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(OSX)
 internal func FKLocalizedString(key: String, comment: String = "") -> String {
     return NSLocalizedString(key, bundle: NSBundle(forClass: FrostKit.self), comment: comment)
 }
@@ -30,23 +38,22 @@ internal func FKLocalizedString(key: String, comment: String = "") -> String {
 public class FrostKit {
     
     // MARK: - Private Variables
+    private var tintColor: Color?
     
-    private var tintColor: UIColor?
-    
-#if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(OSX)
     private var appStoreID: String?
 #endif
     
     // MARK: - Public Class Variables
     
-    public class var tintColor: UIColor? {
+    public class var tintColor: Color? {
         return FrostKit.shared.tintColor
     }
-    public class func tintColor(alpha alpha: CGFloat) -> UIColor? {
+    public class func tintColor(alpha alpha: CGFloat) -> Color? {
         return tintColor?.colorWithAlpha(alpha)
     }
     
-#if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(OSX)
     public class var appStoreID: String? {
         return FrostKit.shared.appStoreID
     }
@@ -57,7 +64,7 @@ public class FrostKit {
     internal static let shared = FrostKit()
     
     init() {
-#if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(OSX)
         CustomFonts.loadCustomFonts()
 #endif
     }
@@ -68,11 +75,11 @@ public class FrostKit {
         FrostKit.shared
     }
     
-    public class func setup(tintColor: UIColor) {
+    public class func setup(tintColor: Color) {
         FrostKit.shared.tintColor = tintColor
     }
     
-#if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(OSX)
     public class func setupAppStoreID(appStoreID: String) {
         FrostKit.shared.appStoreID = appStoreID
         AppStoreHelper.shared.updateAppStoreData()
