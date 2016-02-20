@@ -34,8 +34,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "18839B2119D9FA8C00760157"
-               BuildableName = "FrostKitTests.xctest"
-               BlueprintName = "FrostKitTests"
+               BuildableName = "FrostKit iOS Tests.xctest"
+               BlueprintName = "FrostKit iOS Tests"
                ReferencedContainer = "container:FrostKit.xcodeproj">
             </BuildableReference>
             <SkippedTests>
