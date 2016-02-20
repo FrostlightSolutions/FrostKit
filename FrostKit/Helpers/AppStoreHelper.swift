@@ -6,7 +6,11 @@
 //  Copyright © 2015 James Barrow - Frostlight Solutions. All rights reserved.
 //
 
+#if os(OSX)
+import AppKit
+#else
 import UIKit
+#endif
 import Alamofire
 
 public class AppStoreHelper: NSObject {
@@ -17,12 +21,7 @@ public class AppStoreHelper: NSObject {
         case UpToDate
     }
     
-    public class var shared: AppStoreHelper {
-        struct Singleton {
-            static let instance : AppStoreHelper = AppStoreHelper()
-        }
-        return Singleton.instance
-    }
+    public static let shared = AppStoreHelper()
     
     // MARK: - Properties
     

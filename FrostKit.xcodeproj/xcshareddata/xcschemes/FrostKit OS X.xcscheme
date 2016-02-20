@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0720"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -11,13 +11,12 @@
             buildForRunning = "YES"
             buildForProfiling = "YES"
             buildForArchiving = "YES"
-            buildForAnalyzing = "YES"
-            hideIssues = "NO">
+            buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "18839B1619D9FA8C00760157"
+               BlueprintIdentifier = "18E5459C1C77E53F00637E85"
                BuildableName = "FrostKit.framework"
-               BlueprintName = "FrostKit iOS"
+               BlueprintName = "FrostKit OS X"
                ReferencedContainer = "container:FrostKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "18839B2119D9FA8C00760157"
-               BuildableName = "FrostKit iOS Tests.xctest"
-               BlueprintName = "FrostKit iOS Tests"
+               BlueprintIdentifier = "18E545A51C77E54000637E85"
+               BuildableName = "FrostKit OS X Tests.xctest"
+               BlueprintName = "FrostKit OS X Tests"
                ReferencedContainer = "container:FrostKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -43,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "18839B1619D9FA8C00760157"
+            BlueprintIdentifier = "18E5459C1C77E53F00637E85"
             BuildableName = "FrostKit.framework"
-            BlueprintName = "FrostKit iOS"
+            BlueprintName = "FrostKit OS X"
             ReferencedContainer = "container:FrostKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -65,9 +64,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "18839B1619D9FA8C00760157"
+            BlueprintIdentifier = "18E5459C1C77E53F00637E85"
             BuildableName = "FrostKit.framework"
-            BlueprintName = "FrostKit iOS"
+            BlueprintName = "FrostKit OS X"
             ReferencedContainer = "container:FrostKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -83,9 +82,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "18839B1619D9FA8C00760157"
+            BlueprintIdentifier = "18E5459C1C77E53F00637E85"
             BuildableName = "FrostKit.framework"
-            BlueprintName = "FrostKit iOS"
+            BlueprintName = "FrostKit OS X"
             ReferencedContainer = "container:FrostKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

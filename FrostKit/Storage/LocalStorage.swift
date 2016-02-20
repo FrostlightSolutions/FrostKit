@@ -158,9 +158,7 @@ public class LocalStorage: NSObject {
     /**
     Creates a directory at a paticular URL.
     
-    - parameter url:            The url of the directory to be created.
-    
-    - returns: `true` if the directory is created. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
+    - parameter url: The url of the directory to be created.
     */
     internal class func createDirectory(url url: NSURL) {
         
@@ -255,13 +253,13 @@ public class LocalStorage: NSObject {
     /**
     Moves files from a base URL to anouther with the same reletive path and file name. This is to be mainly used to move items from documents to the caches directories and vice versa.
     
-    - parameter fromeBaseURL:   The original search path directory.
-    - parameter toBaseURL:      The new search path directory.
-    - parameter reletivePath:   The reletive path to of the file or directory.
-    - parameter fileName:       The name of the file.
-    - parameter fileExtension:  The name of the file extension.
+    - parameter fromBaseURL:   The original search path directory.
+    - parameter toBaseURL:     The new search path directory.
+    - parameter reletivePath:  The reletive path to of the file or directory.
+    - parameter fileName:      The name of the file.
+    - parameter fileExtension: The name of the file extension.
     
-    - returns: `true` if the data is moved correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
+    - throws: `true` if the data is moved correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     private class func move(fromBaseURL fromBaseURL: NSURL, toBaseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
         
@@ -277,7 +275,7 @@ public class LocalStorage: NSObject {
     - parameter fileName:       The name of the file.
     - parameter fileExtension:  The name of the file extension.
     
-    - returns: `true` if the data is moved correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
+    - throws: `true` if the data is moved correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     public class func moveFromCachesToDocuments(reletivePath reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
         try move(fromBaseURL: cachesURL(), toBaseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
@@ -290,7 +288,7 @@ public class LocalStorage: NSObject {
     - parameter fileName:       The name of the file.
     - parameter fileExtension:  The name of the file extension.
     
-    - returns: `true` if the data is moved correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
+    - throws: `true` if the data is moved correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     public class func moveFromDocumentsToCaches(reletivePath reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
         try move(fromBaseURL: documentsURL(), toBaseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
@@ -387,7 +385,7 @@ public class LocalStorage: NSObject {
     
     - parameter absoluteURL:     Absolute path of the item to remove.
     
-    - returns: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
+    - throws: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     class func remove(absoluteURL absoluteURL: NSURL) throws {
         
@@ -403,7 +401,7 @@ public class LocalStorage: NSObject {
     - parameter fileName:       The name of the file.
     - parameter fileExtension:  The name of the file extension.
     
-    - returns: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
+    - throws: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     private class func remove(baseURL baseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
         try remove(absoluteURL: absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension))
@@ -412,7 +410,7 @@ public class LocalStorage: NSObject {
     /**
     Removes the images directory in the documents root directory.
     
-    - returns: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
+    - throws: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     public class func removeDocumentsImagesDirectory() throws {
         try remove(baseURL: documentsURL(), reletivePath: imagesReletivePath())
@@ -421,7 +419,7 @@ public class LocalStorage: NSObject {
     /**
     Removes the data directory in the documents root directory.
     
-    - returns: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
+    - throws: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     public class func removeDocumentsDataDirectory() throws {
         try remove(baseURL: documentsURL(), reletivePath: dataReletivePath())
@@ -430,7 +428,7 @@ public class LocalStorage: NSObject {
     /**
     Removes the images directory in the caches root directory.
     
-    - returns: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
+    - throws: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     public class func removeCachesImagesDirectory() throws {
         try remove(baseURL: cachesURL(), reletivePath: imagesReletivePath())
@@ -439,7 +437,7 @@ public class LocalStorage: NSObject {
     /**
     Removes the data directory in the caches root directory.
     
-    - returns: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
+    - throws: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     public class func removeCachesDataDirectory() throws {
         try remove(baseURL: cachesURL(), reletivePath: dataReletivePath())
@@ -452,7 +450,7 @@ public class LocalStorage: NSObject {
     - parameter fileName:       The name of the file.
     - parameter fileExtension:  The name of the file extension.
     
-    - returns: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
+    - throws: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     public class func removeDocumentsObject(reletivePath reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
         try remove(baseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
@@ -465,7 +463,7 @@ public class LocalStorage: NSObject {
     - parameter fileName:       The name of the file.
     - parameter fileExtension:  The name of the file extension.
     
-    - returns: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
+    - throws: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     public class func removeCachesObject(reletivePath reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
         try remove(baseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)

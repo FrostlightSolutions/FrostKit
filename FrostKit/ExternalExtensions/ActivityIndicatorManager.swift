@@ -9,7 +9,9 @@
 import UIKit
 import FrostKit
 
+// swiftlint:disable variable_name
 private let ActivityIndicatorLockQueue = "com.FrostKit.activityIndicator.lockqueue"
+// swiftlint:enable variable_name
 
 ///
 /// Tracks the network requests using NSNotificationCenter to work out if the activity indicator should be showing.
@@ -24,6 +26,7 @@ private let ActivityIndicatorLockQueue = "com.FrostKit.activityIndicator.lockque
 /// `NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)`
 /// `NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)`
 ///
+@available(iOS, deprecated=8.0, message="This is no longer needed as of Alamofire 3.2, since AlamofireNetworkActivityIndicator was released. https://github.com/Alamofire/AlamofireNetworkActivityIndicator")
 public class ActivityIndicatorManager: NSObject {
     
     /// Determins if the activity indicator manager should be enabled or not.
@@ -50,19 +53,10 @@ public class ActivityIndicatorManager: NSObject {
     private lazy var activityIndicatorVisibilityTimer = NSTimer()
     private let activityIndicatorInvisibilityDelay = 0.17
     
-    // MARK: - Singleton
+    // MARK: - Singleton & Init
     
-    /**
-    Returns the shared manager object.
-    
-    - returns: The shared manager object.
-    */
-    public class var sharedManager: ActivityIndicatorManager {
-        struct Singleton {
-            static let instance: ActivityIndicatorManager = ActivityIndicatorManager()
-        }
-        return Singleton.instance
-    }
+    /// The shared manager object.
+    public static let sharedManager = ActivityIndicatorManager()
     
     private override init() {
         super.init()

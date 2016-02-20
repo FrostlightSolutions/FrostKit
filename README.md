@@ -1,19 +1,19 @@
 FrostKit
 ========
 
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
 ## Roadmap
 
 #### Platforms
 - [x] iOS
 - [x] watchOS
 - [x] tvOS
+- [ ] OS X
 
 ####Storage and Service
 - [x] LocalStorage
-- [x] ImageCache        - It is recomended to use AlamofireImage
 - [x] ContentManager
-- [x] UserObject
-- [x] FUSServiceClient
 - [ ] CoreDataManager
 
 #### Helpers
@@ -36,7 +36,6 @@ FrostKit
 
 #### Submodules
 - [x] Alamofire
-- [x] AlamofireImage
 
 ## Requirements
 

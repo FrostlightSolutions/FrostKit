@@ -21,18 +21,6 @@ public class RequestStore: NSObject {
     /// Describes if the store is locked `true` or not `false`. This is set to `false` by default and is only locked when canceling all tasks.
     private var locked = false
     
-#if os(iOS)
-    /**
-    Add a rquest to the store with a router object to ditermine the key.
-    
-    - parameter request: The request to store and manage.
-    - parameter router:  The router to determine the key.
-    */
-    public func addRequest(request: Request, router: Router) {
-        addRequest(request, urlString: router.URLRequest.URL!.absoluteString)
-    }
-#endif
-    
     /**
     Add a rquest to the store with a url string (normally absolute is sugested) to use as the key to store the request under in the store.
     
@@ -51,21 +39,10 @@ public class RequestStore: NSObject {
         }
     }
     
-#if os(iOS)
-    /**
-    Remove a request using a router object to ditermine the key.
-    
-    - parameter router: The router to determine the key of the request to remove.
-    */
-    public func removeRequestFor(router router: Router) {
-        removeRequestFor(urlString: router.URLRequest.URL!.absoluteString)
-    }
-#endif
-    
     /**
     Remove a request using a url string (normally absolute is sugested) as the key.
     
-    - parameter router: The url string to use as the key of the request to remove.
+    - parameter urlString: The url string to use as the key of the request to remove.
     */
     public func removeRequestFor(urlString urlString: String) {
         if let storedRequest = store[urlString] {
@@ -84,21 +61,6 @@ public class RequestStore: NSObject {
         }
         locked = false
     }
-    
-#if os(iOS)
-    /**
-    Checks to see if there is a rquest in the store that matches the passed in router.
-    
-    The routers are compared by their absoluteURL.
-    
-    - parameter router: The router to check for.
-    
-    - returns: If a matching request is found then `true` is returned, otherwise `false` is returned.
-    */
-    public func containsRequestWithRouter(router: Router) -> Bool {
-        return containsRequestWithURL(router.URLRequest.URL!.absoluteString)
-    }
-#endif
     
     /**
     Checks to see if there is a rquest in the store that matches the passed in url string.

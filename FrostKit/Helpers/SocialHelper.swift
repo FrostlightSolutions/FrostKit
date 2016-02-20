@@ -6,56 +6,31 @@
 //  Copyright (c) 2014-2015 James Barrow - Frostlight Solutions. All rights reserved.
 //
 
+#if os(OSX)
+import AppKit
+#else
 import UIKit
+#endif
 import Social
 import MessageUI
 
 /// 
 /// The social helper class allows quick access to some social aspects, such as presenting an email/message. This class has a private singleton it used for dleegate methods, so that every presenting view controller does not have to impliment them seperately.
 ///
-public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate {
+public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate {
     
     private enum AlertViewTags: Int {
         case EmailPrompt
         case MessagePrompt
     }
     
-    private var toRecipients: [String]? = nil
-    private var ccRecipients: [String]? = nil
-    private var bccRecipients: [String]? = nil
-    private var subject: String = ""
-    private var messageBody: String = ""
-    private var isBodyHTML: Bool = false
-    private var emailAttachments: [(data: NSData, mimeType: String, fileName: String)]? = nil
-    private var messgaeAttachments: [(attachmentURL: NSURL, alternateFilename: String)]? = nil
-    private var viewController: UIViewController?
-    private var animated: Bool = true
-    
-    // MARK: - Singleton
+    // MARK: - Singleton & Init
     
     // For use with delegate methods only, hence private NOT public
-    private class var shared: SocialHelper {
-        struct Singleton {
-            static let instance : SocialHelper = SocialHelper()
-        }
-        return Singleton.instance
-    }
+    private static let shared = SocialHelper()
     
     override private init() {
         super.init()
-    }
-    
-    private func clear() {
-        toRecipients = []
-        ccRecipients = []
-        bccRecipients = []
-        subject = ""
-        messageBody = ""
-        isBodyHTML = false
-        emailAttachments = []
-        messgaeAttachments = []
-        viewController = nil
-        animated = true
     }
     
     // MARK: - Scocial Methods
@@ -69,8 +44,10 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     - parameter images:         The images to attach to the `SLComposeViewController`.
     - parameter viewController: The view controller to present the `SLComposeViewController` in.
     - parameter animated:       If the presentation should be animated or not.
+    
+    - returns: Returns `false` if there is an issue or the service is unavailable, otherwise `true`.
     */
-    public class func presentComposeViewController(serviceType: String, initialText: String? = nil, urls: [NSURL]? = nil, images: [UIImage]? = nil, inViewController viewController: UIViewController, animated: Bool = true) {
+    public class func presentComposeViewController(serviceType: String, initialText: String? = nil, urls: [NSURL]? = nil, images: [UIImage]? = nil, inViewController viewController: UIViewController, animated: Bool = true) -> Bool {
         
         if SLComposeViewController.isAvailableForServiceType(serviceType) {
             
@@ -94,7 +71,10 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         } else {
             // TODO: Handle social service unavailability
             NSLog("Error: Social Service Unavailable!")
+            return false
         }
+        
+        return true
     }
     
     // MARK: - Prompt Methods
@@ -141,40 +121,19 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             
             let emailsString = toRecipients.joinWithSeparator(", ")
             
-            if NSClassFromString("UIAlertController") != nil {
-                
-                let alertController = UIAlertController(title: emailsString, message: nil, preferredStyle: .Alert)
-                alertController.view.tintColor = FrostKit.tintColor
-                let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL"), style: .Cancel) { (action) -> Void in
-                    alertController.dismissViewControllerAnimated(true, completion: nil)
-                }
-                alertController.addAction(cancelAlertAction)
-                let openAlertAction = UIAlertAction(title: FKLocalizedString("EMAIL"), style: .Default) { (action) -> Void in
-                    
-                    SocialHelper.presentMailComposeViewController(toRecipients: toRecipients, ccRecipients: ccRecipients, bccRecipients: bccRecipients, subject: subject, messageBody: messageBody, isBodyHTML: isBodyHTML, attachments: attachments, viewController: viewController, animated: animated)
-                }
-                
-                alertController.addAction(openAlertAction)
-                viewController.presentViewController(alertController, animated: true, completion: nil)
-
-            } else {
-            
-                shared.toRecipients = toRecipients
-                shared.ccRecipients = ccRecipients
-                shared.bccRecipients = bccRecipients
-                shared.subject = subject
-                shared.messageBody = messageBody
-                shared.isBodyHTML = isBodyHTML
-                shared.emailAttachments = attachments
-                shared.viewController = viewController
-                shared.animated = animated
-                
-                let alertView = UIAlertView(title: emailsString, message: "", delegate: SocialHelper.shared, cancelButtonTitle: FKLocalizedString("CANCEL"), otherButtonTitles: FKLocalizedString("EMAIL"))
-                alertView.tintColor = FrostKit.tintColor
-                alertView.tag = AlertViewTags.EmailPrompt.rawValue
-                alertView.show()
-                
+            let alertController = UIAlertController(title: emailsString, message: nil, preferredStyle: .Alert)
+            alertController.view.tintColor = FrostKit.tintColor
+            let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL"), style: .Cancel) { (action) -> Void in
+                alertController.dismissViewControllerAnimated(true, completion: nil)
             }
+            alertController.addAction(cancelAlertAction)
+            let openAlertAction = UIAlertAction(title: FKLocalizedString("EMAIL"), style: .Default) { (action) -> Void in
+                
+                SocialHelper.presentMailComposeViewController(toRecipients: toRecipients, ccRecipients: ccRecipients, bccRecipients: bccRecipients, subject: subject, messageBody: messageBody, isBodyHTML: isBodyHTML, attachments: attachments, viewController: viewController, animated: animated)
+            }
+            
+            alertController.addAction(openAlertAction)
+            viewController.presentViewController(alertController, animated: true, completion: nil)
             
         } else {
             // TODO: Handle eamil service unavailability
@@ -218,37 +177,19 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             
             let recipientsString = recipients.joinWithSeparator(", ")
             
-            if NSClassFromString("UIAlertController") != nil {
-                
-                let alertController = UIAlertController(title: recipientsString, message: nil, preferredStyle: .Alert)
-                alertController.view.tintColor = FrostKit.tintColor
-                let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL"), style: .Cancel) { (action) -> Void in
-                    alertController.dismissViewControllerAnimated(true, completion: nil)
-                }
-                alertController.addAction(cancelAlertAction)
-                let openAlertAction = UIAlertAction(title: FKLocalizedString("MESSAGE"), style: .Default) { (action) -> Void in
-                    
-                    SocialHelper.presentMessageComposeViewController(recipients: recipients, subject: subject, body: body, attachments: attachments, viewController: viewController, animated: animated)
-                }
-                
-                alertController.addAction(openAlertAction)
-                viewController.presentViewController(alertController, animated: true, completion: nil)
-                
-            } else {
-                
-                shared.toRecipients = recipients
-                shared.subject = subject
-                shared.messageBody = body
-                shared.messgaeAttachments = attachments
-                shared.viewController = viewController
-                shared.animated = animated
-                
-                let alertView = UIAlertView(title: recipientsString, message: "", delegate: SocialHelper.shared, cancelButtonTitle: FKLocalizedString("CANCEL"), otherButtonTitles: FKLocalizedString("MESSAGE"))
-                alertView.tintColor = FrostKit.tintColor
-                alertView.tag = AlertViewTags.EmailPrompt.rawValue
-                alertView.show()
-                
+            let alertController = UIAlertController(title: recipientsString, message: nil, preferredStyle: .Alert)
+            alertController.view.tintColor = FrostKit.tintColor
+            let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL"), style: .Cancel) { (action) -> Void in
+                alertController.dismissViewControllerAnimated(true, completion: nil)
             }
+            alertController.addAction(cancelAlertAction)
+            let openAlertAction = UIAlertAction(title: FKLocalizedString("MESSAGE"), style: .Default) { (action) -> Void in
+                
+                SocialHelper.presentMessageComposeViewController(recipients: recipients, subject: subject, body: body, attachments: attachments, viewController: viewController, animated: animated)
+            }
+            
+            alertController.addAction(openAlertAction)
+            viewController.presentViewController(alertController, animated: true, completion: nil)
             
         } else {
             // TODO: Handle message service unavailability
@@ -298,7 +239,6 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             break
         }
         
-        clear()
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -317,22 +257,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             break
         }
         
-        clear()
         controller.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    // MARK: - UIAlerViewDelegate Methods
-    
-    public func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-        
-        switch (alertView.tag, buttonIndex) {
-        case (AlertViewTags.EmailPrompt.rawValue, 1):
-            SocialHelper.presentMailComposeViewController(toRecipients: toRecipients, ccRecipients: ccRecipients, bccRecipients: bccRecipients, subject: subject, messageBody: messageBody, isBodyHTML: isBodyHTML, attachments: emailAttachments, viewController: viewController!, animated: animated)
-        case (AlertViewTags.MessagePrompt.rawValue, 1):
-            SocialHelper.presentMessageComposeViewController(recipients: toRecipients, subject: subject, body: messageBody, attachments: messgaeAttachments, viewController: viewController!, animated: animated)
-        default:
-            break
-        }
     }
     
 }

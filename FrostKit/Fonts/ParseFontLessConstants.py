@@ -33,7 +33,7 @@ def parseFontConsatnts(inputPath, outputPath):
   
   for line in openFile.splitlines():
     if 'var' in line:
-      line = line.split('-var')[1]
+      line = line.split('-var-')[1]
       line = line.replace('-', '_')
       line = line.replace(' ', '')
       line = line.replace('\"', '')
@@ -41,11 +41,19 @@ def parseFontConsatnts(inputPath, outputPath):
       line = line.replace(';', '')
 
       components = line.split(':')
+
+      # Fix Pre-Swift 2.2 phrases
+      if components[0] in ['repeat', 'subscript', 'try']:
+        components[0] = components[0] + "_"
+
+      if components[0][0] in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+        components[0] = "_" + components[0]
+
       swiftLine = '\tpublic static let ' + components[0] +' = \"\\u{' + components[1] + '}\"\n'
-      
+
       contents += swiftLine
 
-  contents += '}'
+  contents += '}\n'
 
   return contents
 
@@ -61,10 +69,12 @@ def parseFonts(fonts):
 //
 """ %(todaysFormattedDate())
   
+  contents += '\n// swiftlint:disable variable_name\n// swiftlint:disable type_body_length\n// swiftlint:disable file_length\n'
+  
   for font in fonts:
     contents += parseFontConsatnts(font, outputPath)
-  
-  contents += "\n"
+
+  contents += '\n// swiftlint:enable variable_name\n// swiftlint:enable type_body_length\n// swiftlint:enable file_length\n'
 
   writeObject = open(outputPath, 'wb')
   writeObject.write(contents)

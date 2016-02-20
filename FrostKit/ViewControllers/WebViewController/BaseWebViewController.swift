@@ -63,7 +63,7 @@ public class BaseWebViewController: UIViewController {
             activityIndicatorView.color = FrostKit.tintColor ?? navigationController?.navigationBar.tintColor
             
             let barSize = navController.navigationBar.bounds.size
-            progrssView.frame = CGRectMake(0, barSize.height - progrssView.bounds.size.height, barSize.width, progrssView.bounds.size.height)
+            progrssView.frame = CGRect(x: 0, y: barSize.height - progrssView.bounds.size.height, width: barSize.width, height: progrssView.bounds.size.height)
             progrssView.autoresizingMask = .FlexibleTopMargin
             navController.navigationBar.addSubview(progrssView)
             updateProgrssViewVisability()
@@ -179,9 +179,9 @@ public class BaseWebViewController: UIViewController {
         
         if let navController = navigationController {
             
-            let backButton = UIBarButtonItem(title: IonIcons._ios_arrow_left, font: UIFont.ionicons(size: 29), target: self, action: "backButtonPressed:")
-            let forwardButton = UIBarButtonItem(title: IonIcons._ios_arrow_right, font: UIFont.ionicons(size: 29), target: self, action: "forwardButtonPressed:")
-            let refreshButton = UIBarButtonItem(title: IonIcons._ios_refresh_empty, font: UIFont.ionicons(size: 34), target: self, action: "refreshButtonPressed:")
+            let backButton = UIBarButtonItem(title: IonIcons.ios_arrow_left, font: UIFont.ionicons(size: 29), target: self, action: "backButtonPressed:")
+            let forwardButton = UIBarButtonItem(title: IonIcons.ios_arrow_right, font: UIFont.ionicons(size: 29), target: self, action: "forwardButtonPressed:")
+            let refreshButton = UIBarButtonItem(title: IonIcons.ios_refresh_empty, font: UIFont.ionicons(size: 34), target: self, action: "refreshButtonPressed:")
             let actionButton = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: "actionButtonPressed:")
             let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
             
