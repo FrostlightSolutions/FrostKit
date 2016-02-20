@@ -6,7 +6,11 @@
 //  Copyright (c) 2014-2015 James Barrow - Frostlight Solutions. All rights reserved.
 //
 
+#if os(OSX)
+import AppKit
+#else
 import UIKit
+#endif
 
 ///
 /// :FontAwesome Links:
@@ -75,14 +79,15 @@ public class CustomFonts: NSObject {
         }
     }
     
+#if os(iOS) || os(watchOS) || os(tvOS)
     /// Loops though all the fonts families loaded onto the device and prints them to the console.
     public class func printAllFontFamilies() {
         
         for fontFamily in UIFont.familyNames() {
-            
             let name = fontFamily as String
             NSLog("\(name): \(UIFont.fontNamesForFamilyName(name))")
         }
     }
+#endif
     
 }
