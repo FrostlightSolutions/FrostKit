@@ -10,7 +10,7 @@ import UIKit
 import XCTest
 import FrostKit
 
-class UIColorExtensionsTest: XCTestCase {
+class ColorExtensionsTest: XCTestCase {
     
     override func setUp() {
         super.setUp()

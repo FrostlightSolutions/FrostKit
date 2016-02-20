@@ -1,5 +1,5 @@
 //
-//  UIDeviceExtensions.swift
+//  DeviceExtensions.swift
 //  FrostKit
 //
 //  Created by James Barrow on 26/01/2015.

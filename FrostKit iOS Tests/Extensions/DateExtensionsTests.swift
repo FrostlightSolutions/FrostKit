@@ -10,7 +10,7 @@ import UIKit
 import XCTest
 import FrostKit
 
-class NSDateExtensionsTests: XCTestCase {
+class DateExtensionsTests: XCTestCase {
    
     override func setUp() {
         super.setUp()

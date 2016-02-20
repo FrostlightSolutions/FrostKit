@@ -1,5 +1,5 @@
 //
-//  UIScreenExtensions.swift
+//  ScreenExtensions.swift
 //  FrostKit
 //
 //  Created by James Barrow on 06/04/2015.

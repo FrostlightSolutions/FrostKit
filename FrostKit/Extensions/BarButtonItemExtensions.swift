@@ -1,5 +1,5 @@
 //
-//  UIBarButtonItemExtensions.swift
+//  BarButtonItemExtensions.swift
 //  FrostKit
 //
 //  Created by James Barrow on 03/10/2014.

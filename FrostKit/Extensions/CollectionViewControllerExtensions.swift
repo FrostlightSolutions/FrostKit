@@ -1,5 +1,5 @@
 //
-//  UICollectionViewControllerExtensions.swift
+//  CollectionViewControllerExtensions.swift
 //  FrostKit
 //
 //  Created by James Barrow on 27/01/2015.
