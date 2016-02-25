@@ -70,7 +70,7 @@ public class BaseWebViewController: UIViewController {
             updateActivityViewVisability()
             
             if self.isRoot == true {
-                let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "doneButtonPressed:")
+                let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(BaseWebViewController.doneButtonPressed(_:)))
                 navigationItem.setLeftBarButtonItem(doneButton, animated: false)
             }
         }
@@ -179,10 +179,10 @@ public class BaseWebViewController: UIViewController {
         
         if let navController = navigationController {
             
-            let backButton = UIBarButtonItem(title: IonIcons.ios_arrow_left, font: UIFont.ionicons(size: 29), target: self, action: "backButtonPressed:")
-            let forwardButton = UIBarButtonItem(title: IonIcons.ios_arrow_right, font: UIFont.ionicons(size: 29), target: self, action: "forwardButtonPressed:")
-            let refreshButton = UIBarButtonItem(title: IonIcons.ios_refresh_empty, font: UIFont.ionicons(size: 34), target: self, action: "refreshButtonPressed:")
-            let actionButton = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: "actionButtonPressed:")
+            let backButton = UIBarButtonItem(title: IonIcons.ios_arrow_left, font: UIFont.ionicons(size: 29), target: self, action: #selector(BaseWebViewController.backButtonPressed(_:)))
+            let forwardButton = UIBarButtonItem(title: IonIcons.ios_arrow_right, font: UIFont.ionicons(size: 29), target: self, action: #selector(BaseWebViewController.forwardButtonPressed(_:)))
+            let refreshButton = UIBarButtonItem(title: IonIcons.ios_refresh_empty, font: UIFont.ionicons(size: 34), target: self, action: #selector(BaseWebViewController.refreshButtonPressed(_:)))
+            let actionButton = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: #selector(BaseWebViewController.actionButtonPressed(_:)))
             let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
             
             backButton.enabled = false
