@@ -962,7 +962,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"${SRCROOT}\"\nls -l\njazzy -x -project,\"${SRCROOT}/FrostKit.xcodeproj\",-scheme,FrostKit -c -m FrostKit -a James\\ Barrow -g https:\\/\\/github.com/FrostlightSolutions/FrostKit -o ../FrostKitDocs\n";
+			shellScript = "cd \"${SRCROOT}\"\njazzy \\\n--clean \\\n--author \"James Barrow\" \\\n--github_url \"https://github.com/FrostlightSolutions/FrostKit\" \\\n--xcodebuild-arguments -project,\"FrostKit.xcodeproj\",-scheme,\"FrostKit iOS\" \\\n--module \"FrostKit\" \\\n--output \"../FrostKitDocs\" \\\n";
 		};
 		18E5457A1C77E28600637E85 /* SwiftLint Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
