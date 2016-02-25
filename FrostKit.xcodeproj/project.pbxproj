@@ -136,7 +136,6 @@
 		189D8C9D1C77E9AB00261DF5 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EE19DCBC28008A1506 /* CustomFonts.swift */; };
 		189D8C9E1C77EC5A00261DF5 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066919DB767A00811755 /* ColorExtensions.swift */; };
 		189D8C9F1C77EC5B00261DF5 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066919DB767A00811755 /* ColorExtensions.swift */; };
-		189D8CA61C77EE7800261DF5 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1838F1B31C761CCC00F1233D /* Alamofire.framework */; };
 		189D8CA71C77EE7F00261DF5 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E545B41C77E5AF00637E85 /* Alamofire.framework */; };
 		189D8CB91C77EF0900261DF5 /* FrostKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D8CAC1C77EEFC00261DF5 /* FrostKitTests.swift */; };
 		189D8CBF1C77EF5800261DF5 /* KeychainHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D8CAF1C77EEFC00261DF5 /* KeychainHelperTests.swift */; };
@@ -153,6 +152,9 @@
 		18C0066E19DB76C900811755 /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066D19DB76C900811755 /* ImageExtensions.swift */; };
 		18C0067019DB7EDB00811755 /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066F19DB7EDB00811755 /* ContentManager.swift */; };
 		18C0067619DC00C000811755 /* FrostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18839B1719D9FA8C00760157 /* FrostKit.framework */; };
+		18C41B071C7FBF9900B1F57D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1838F1B31C761CCC00F1233D /* Alamofire.framework */; };
+		18C41B091C7FC05200B1F57D /* Alamofire.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 1838F1B31C761CCC00F1233D /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		18C41B0B1C7FC09900B1F57D /* Alamofire.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 18E545B41C77E5AF00637E85 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18CB51701A76454A005064C8 /* RequestStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* RequestStore.swift */; };
 		18CB517A1A7655ED005064C8 /* DeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB51791A7655ED005064C8 /* DeviceExtensions.swift */; };
 		18CD393C1BEEC850003A6988 /* AppStoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187661781BEEA0C900C82769 /* AppStoreHelper.swift */; };
@@ -209,6 +211,31 @@
 			remoteInfo = "FrostKit iOS";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		18C41B081C7FC04A00B1F57D /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				18C41B091C7FC05200B1F57D /* Alamofire.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18C41B0A1C7FC08E00B1F57D /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				18C41B0B1C7FC09900B1F57D /* Alamofire.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		180664F91A93737200887B9D /* ActivityIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorManager.swift; sourceTree = "<group>"; };
@@ -311,7 +338,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18C0067619DC00C000811755 /* FrostKit.framework in Frameworks */,
-				189D8CA61C77EE7800261DF5 /* Alamofire.framework in Frameworks */,
+				18C41B071C7FBF9900B1F57D /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -714,6 +741,7 @@
 				18839B1E19D9FA8C00760157 /* Sources */,
 				18839B1F19D9FA8C00760157 /* Frameworks */,
 				18839B2019D9FA8C00760157 /* Resources */,
+				18C41B081C7FC04A00B1F57D /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -752,6 +780,7 @@
 				18E545A21C77E54000637E85 /* Sources */,
 				18E545A31C77E54000637E85 /* Frameworks */,
 				18E545A41C77E54000637E85 /* Resources */,
+				18C41B0A1C7FC08E00B1F57D /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
