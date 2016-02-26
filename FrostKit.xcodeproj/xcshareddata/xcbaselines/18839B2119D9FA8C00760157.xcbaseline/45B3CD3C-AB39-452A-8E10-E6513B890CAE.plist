@@ -4,6 +4,29 @@
 <dict>
 	<key>classNames</key>
 	<dict>
+		<key>BundleExtensionTests</key>
+		<dict>
+			<key>testBundleAppName()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>1.82e-05</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>26 Feb 2016, 11:45:13 pm</string>
+				</dict>
+			</dict>
+			<key>testBundleAppVersion()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>1.5274e-05</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>26 Feb 2016, 11:45:13 pm</string>
+				</dict>
+			</dict>
+		</dict>
 		<key>ColorExtensionsTest</key>
 		<dict>
 			<key>testHexHashtag()</key>

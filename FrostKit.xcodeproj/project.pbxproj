@@ -75,6 +75,7 @@
 		1838F1BB1C761E4800F1233D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1838F1BA1C761E4800F1233D /* Alamofire.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		183C7B6B1AD2F4A400CAE1A5 /* ScreenExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C7B6A1AD2F4A400CAE1A5 /* ScreenExtensions.swift */; };
 		18410C2E1C81092500D2B308 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C2D1C81092500D2B308 /* FontExtensions.swift */; };
+		18410C301C810A6900D2B308 /* BundleExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C2F1C810A6900D2B308 /* BundleExtensionTests.swift */; };
 		186CFCEA1A29FA40002739A5 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186CFCE91A29FA40002739A5 /* MapController.swift */; };
 		18748B2219DF5661003942A3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18748B2019DF5661003942A3 /* Localizable.strings */; };
 		187661791BEEA0C900C82769 /* AppStoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187661781BEEA0C900C82769 /* AppStoreHelper.swift */; };
@@ -213,6 +214,7 @@
 		1838F1BA1C761E4800F1233D /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/tvOS/Alamofire.framework; sourceTree = "<group>"; };
 		183C7B6A1AD2F4A400CAE1A5 /* ScreenExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenExtensions.swift; sourceTree = "<group>"; };
 		18410C2D1C81092500D2B308 /* FontExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
+		18410C2F1C810A6900D2B308 /* BundleExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleExtensionTests.swift; sourceTree = "<group>"; };
 		184E07921A8901A10074FD25 /* MBProgressHUDExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBProgressHUDExtensions.swift; sourceTree = "<group>"; };
 		184E07931A8901A10074FD25 /* ParseAddressExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseAddressExtensions.swift; sourceTree = "<group>"; };
 		186CFCE91A29FA40002739A5 /* MapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
@@ -487,6 +489,7 @@
 			children = (
 				18E9FF911C80AA5700AC5230 /* ErrorExtensionsTests.swift */,
 				18AC87E91C77F48200426776 /* DateExtensionsTests.swift */,
+				18410C2F1C810A6900D2B308 /* BundleExtensionTests.swift */,
 				18410C2D1C81092500D2B308 /* FontExtensions.swift */,
 				18AC87E81C77F48200426776 /* ColorExtensionsTest.swift */,
 			);
@@ -1105,6 +1108,7 @@
 				18E9FF951C80AC6F00AC5230 /* MapControllerTests.swift in Sources */,
 				18410C2E1C81092500D2B308 /* FontExtensions.swift in Sources */,
 				18E9FF971C80AC6F00AC5230 /* DateExtensionsTests.swift in Sources */,
+				18410C301C810A6900D2B308 /* BundleExtensionTests.swift in Sources */,
 				18E9FF991C80AC6F00AC5230 /* ErrorExtensionsTests.swift in Sources */,
 				18E9FF981C80AC6F00AC5230 /* ColorExtensionsTest.swift in Sources */,
 				18E9FF961C80AC6F00AC5230 /* AppStoreHelperTests.swift in Sources */,
