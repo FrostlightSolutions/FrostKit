@@ -22,20 +22,26 @@ extension UIDevice {
         private static let versionComponents = version.componentsSeparatedByString(".")
         /// The major system version.
         static var majorVersion: Int {
-            return UIDevice.systemVersionAtIndex(0, components: versionComponents)
+            return UIDevice.systemVersionAtIndex(.Major, components: versionComponents)
         }
         /// The minor system version.
         static var minorVersion: Int {
-            return UIDevice.systemVersionAtIndex(1, components: versionComponents)
+            return UIDevice.systemVersionAtIndex(.Minor, components: versionComponents)
         }
         /// The minor path version.
         static var pathVersion: Int {
-            return UIDevice.systemVersionAtIndex(2, components: versionComponents)
+            return UIDevice.systemVersionAtIndex(.Bug, components: versionComponents)
         }
     }
     
-    private class func systemVersionAtIndex(index: Int, components: [String]) -> Int {
-        if let version = Int(components[index]) where components.count > index {
+    private enum VersionIndex: Int {
+        case Major = 0
+        case Minor
+        case Bug
+    }
+    
+    private class func systemVersionAtIndex(index: VersionIndex, components: [String]) -> Int {
+        if let version = Int(components[index.rawValue]) where components.count > index.rawValue {
             return version
         }
         return NSNotFound
