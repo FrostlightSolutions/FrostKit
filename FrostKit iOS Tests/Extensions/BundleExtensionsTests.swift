@@ -1,5 +1,5 @@
 //
-//  BundleExtensionTests.swift
+//  BundleExtensionsTests.swift
 //  FrostKit
 //
 //  Created by James Barrow on 26/02/2016.
@@ -9,7 +9,7 @@
 import XCTest
 import FrostKit
 
-class BundleExtensionTests: XCTestCase {
+class BundleExtensionsTests: XCTestCase {
     
     let bundle = NSBundle(identifier: "com.Frostlight.FrostKit")!
     

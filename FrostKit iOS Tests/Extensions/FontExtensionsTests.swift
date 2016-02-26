@@ -1,5 +1,5 @@
 //
-//  FontExtensions.swift
+//  FontExtensionsTests.swift
 //  FrostKit
 //
 //  Created by James Barrow on 26/02/2016.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class FontExtensions: XCTestCase {
+class FontExtensionsTests: XCTestCase {
 
     override func setUp() {
         super.setUp()

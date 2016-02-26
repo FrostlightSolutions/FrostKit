@@ -1,5 +1,5 @@
 //
-//  UIColorExtensionsTest.swift
+//  ColorExtensionsTest.swift
 //  FrostKit
 //
 //  Created by Niels Lemmens on 01/10/2014.
