@@ -313,6 +313,19 @@
 				</dict>
 			</dict>
 		</dict>
+		<key>FontExtensions</key>
+		<dict>
+			<key>testCustomFonts()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>0.00018687</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>26 Feb 2016, 11:33:08 pm</string>
+				</dict>
+			</dict>
+		</dict>
 		<key>KeychainHelperTests</key>
 		<dict>
 			<key>testKeychainWorkflow()</key>
