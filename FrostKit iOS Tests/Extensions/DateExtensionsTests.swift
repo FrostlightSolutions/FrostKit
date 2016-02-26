@@ -6,7 +6,6 @@
 //  Copyright (c) 2014-2015 James Barrow - Frostlight Solutions. All rights reserved.
 //
 
-import UIKit
 import XCTest
 import FrostKit
 
@@ -23,19 +22,30 @@ class DateExtensionsTests: XCTestCase {
     }
     
     func testIsYesterday() {
-        let date = NSDate(timeIntervalSinceNow: -24*60*60)
-        XCTAssert(date.isYesterday, "Pass")
+        
+        measureBlock { () -> Void in
+            
+            let date = NSDate(timeIntervalSinceNow: -24*60*60)
+            XCTAssert(date.isYesterday, "Pass")
+        }
     }
     
     func testIsToday() {
         
-        let date = NSDate()
-        XCTAssert(date.isToday, "Pass")
+        measureBlock { () -> Void in
+            
+            let date = NSDate()
+            XCTAssert(date.isToday, "Pass")
+        }
     }
     
     func testIsTomorrow() {
-        let date = NSDate(timeIntervalSinceNow: 24*60*60)
-        XCTAssert(date.isTomorrow, "Pass")
+        
+        measureBlock { () -> Void in
+            
+            let date = NSDate(timeIntervalSinceNow: 24*60*60)
+            XCTAssert(date.isTomorrow, "Pass")
+        }
     }
     
 }

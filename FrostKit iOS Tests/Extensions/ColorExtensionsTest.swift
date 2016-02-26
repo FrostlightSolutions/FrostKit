@@ -6,7 +6,6 @@
 //  Copyright (c) 2014-2015 James Barrow - Frostlight Solutions. All rights reserved.
 //
 
-import UIKit
 import XCTest
 import FrostKit
 
@@ -23,27 +22,43 @@ class ColorExtensionsTest: XCTestCase {
     }
     
     func testSimpleHexColors() {
-        XCTAssert(UIColor.colorWithHex("#ffffff") == UIColor(red: 1, green: 1, blue: 1, alpha: 1), "Pass")
-        XCTAssert(UIColor.colorWithHex("#123456") == UIColor(red: 18.0/255, green: 52.0/255, blue: 86.0/255, alpha: 1), "Pass")
+        
+        measureBlock { () -> Void in
+            
+            XCTAssert(UIColor.colorWithHex("#ffffff") == UIColor(red: 1, green: 1, blue: 1, alpha: 1), "Pass")
+            XCTAssert(UIColor.colorWithHex("#123456") == UIColor(red: 18.0/255, green: 52.0/255, blue: 86.0/255, alpha: 1), "Pass")
+        }
     }
     
     func testHexHashtag() {
-        // With or without #
-        XCTAssert(UIColor.colorWithHex("#479123") == UIColor.colorWithHex("479123"), "Pass")
+        
+        measureBlock { () -> Void in
+            
+            // With or without #
+            XCTAssert(UIColor.colorWithHex("#479123") == UIColor.colorWithHex("479123"), "Pass")
+        }
     }
     
     func testShortHex() {
-        // 3 chars work as well as 6
-        XCTAssert(UIColor.colorWithHex("#123") == UIColor.colorWithHex("#112233"), "Pass")
-        // Regardless of #
-        XCTAssert(UIColor.colorWithHex("123") == UIColor.colorWithHex("#112233"), "Pass")
+        
+        measureBlock { () -> Void in
+            
+            // 3 chars work as well as 6
+            XCTAssert(UIColor.colorWithHex("#123") == UIColor.colorWithHex("#112233"), "Pass")
+            // Regardless of #
+            XCTAssert(UIColor.colorWithHex("123") == UIColor.colorWithHex("#112233"), "Pass")
+        }
     }
     
     func testUnsuposedHexFormat() {
-        // 4 char hex should not parse and return default clearColor()
-        XCTAssert(UIColor.colorWithHex("#1234") == UIColor.clearColor(), "Pass")
-        // Regardless of #
-        XCTAssert(UIColor.colorWithHex("1234") == UIColor.clearColor(), "Pass")
+        
+        measureBlock { () -> Void in
+            
+            // 4 char hex should not parse and return default clearColor()
+            XCTAssert(UIColor.colorWithHex("#1234") == UIColor.clearColor(), "Pass")
+            // Regardless of #
+            XCTAssert(UIColor.colorWithHex("1234") == UIColor.clearColor(), "Pass")
+        }
     }
     
 }
