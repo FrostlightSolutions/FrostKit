@@ -29,15 +29,15 @@ extension UIDevice {
             return UIDevice.systemVersionAtIndex(.Minor, components: versionComponents)
         }
         /// The minor path version.
-        static var pathVersion: Int {
-            return UIDevice.systemVersionAtIndex(.Bug, components: versionComponents)
+        static var bugFixVersion: Int {
+            return UIDevice.systemVersionAtIndex(.BugFix, components: versionComponents)
         }
     }
     
     private enum VersionIndex: Int {
         case Major = 0
         case Minor
-        case Bug
+        case BugFix
     }
     
     private class func systemVersionAtIndex(index: VersionIndex, components: [String]) -> Int {
