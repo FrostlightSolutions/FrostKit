@@ -76,6 +76,7 @@
 		183C7B6B1AD2F4A400CAE1A5 /* ScreenExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C7B6A1AD2F4A400CAE1A5 /* ScreenExtensions.swift */; };
 		18410C2E1C81092500D2B308 /* FontExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C2D1C81092500D2B308 /* FontExtensionsTests.swift */; };
 		18410C301C810A6900D2B308 /* BundleExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C2F1C810A6900D2B308 /* BundleExtensionsTests.swift */; };
+		18410C321C810EB300D2B308 /* DataExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C311C810EB300D2B308 /* DataExtensionsTests.swift */; };
 		186CFCEA1A29FA40002739A5 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186CFCE91A29FA40002739A5 /* MapController.swift */; };
 		18748B2219DF5661003942A3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18748B2019DF5661003942A3 /* Localizable.strings */; };
 		187661791BEEA0C900C82769 /* AppStoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187661781BEEA0C900C82769 /* AppStoreHelper.swift */; };
@@ -215,6 +216,7 @@
 		183C7B6A1AD2F4A400CAE1A5 /* ScreenExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenExtensions.swift; sourceTree = "<group>"; };
 		18410C2D1C81092500D2B308 /* FontExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontExtensionsTests.swift; sourceTree = "<group>"; };
 		18410C2F1C810A6900D2B308 /* BundleExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleExtensionsTests.swift; sourceTree = "<group>"; };
+		18410C311C810EB300D2B308 /* DataExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtensionsTests.swift; sourceTree = "<group>"; };
 		184E07921A8901A10074FD25 /* MBProgressHUDExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBProgressHUDExtensions.swift; sourceTree = "<group>"; };
 		184E07931A8901A10074FD25 /* ParseAddressExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseAddressExtensions.swift; sourceTree = "<group>"; };
 		186CFCE91A29FA40002739A5 /* MapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
@@ -489,6 +491,7 @@
 			children = (
 				18E9FF911C80AA5700AC5230 /* ErrorExtensionsTests.swift */,
 				18AC87E91C77F48200426776 /* DateExtensionsTests.swift */,
+				18410C311C810EB300D2B308 /* DataExtensionsTests.swift */,
 				18410C2F1C810A6900D2B308 /* BundleExtensionsTests.swift */,
 				18410C2D1C81092500D2B308 /* FontExtensionsTests.swift */,
 				18AC87E81C77F48200426776 /* ColorExtensionsTest.swift */,
@@ -1109,6 +1112,7 @@
 				18410C2E1C81092500D2B308 /* FontExtensionsTests.swift in Sources */,
 				18E9FF971C80AC6F00AC5230 /* DateExtensionsTests.swift in Sources */,
 				18410C301C810A6900D2B308 /* BundleExtensionsTests.swift in Sources */,
+				18410C321C810EB300D2B308 /* DataExtensionsTests.swift in Sources */,
 				18E9FF991C80AC6F00AC5230 /* ErrorExtensionsTests.swift in Sources */,
 				18E9FF981C80AC6F00AC5230 /* ColorExtensionsTest.swift in Sources */,
 				18E9FF961C80AC6F00AC5230 /* AppStoreHelperTests.swift in Sources */,
