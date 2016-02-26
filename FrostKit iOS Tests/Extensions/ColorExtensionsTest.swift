@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import FrostKit
 
 class ColorExtensionsTest: XCTestCase {
     
