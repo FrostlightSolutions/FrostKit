@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import FrostKit
 
 class FontExtensionsTests: XCTestCase {
 
@@ -24,9 +25,9 @@ class FontExtensionsTests: XCTestCase {
         
         measureBlock { () -> Void in
             
-            let fontAwesome = UIFont.fontAwesome(size: 12)
+            let fontAwesome = Font.fontAwesome(size: 12)
             XCTAssert(fontAwesome.fontName == "FontAwesome")
-            let ionicons = UIFont.ionicons(size: 12)
+            let ionicons = Font.ionicons(size: 12)
             XCTAssert(ionicons.fontName == "Ionicons")
         }
     }

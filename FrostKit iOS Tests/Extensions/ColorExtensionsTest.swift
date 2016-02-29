@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import FrostKit
 
 class ColorExtensionsTest: XCTestCase {
     
@@ -24,8 +25,8 @@ class ColorExtensionsTest: XCTestCase {
         
         measureBlock { () -> Void in
             
-            XCTAssert(UIColor.colorWithHex("#ffffff") == UIColor(red: 1, green: 1, blue: 1, alpha: 1), "Pass")
-            XCTAssert(UIColor.colorWithHex("#123456") == UIColor(red: 18.0/255, green: 52.0/255, blue: 86.0/255, alpha: 1), "Pass")
+            XCTAssert(Color.colorWithHex("#ffffff") == Color(red: 1, green: 1, blue: 1, alpha: 1), "Pass")
+            XCTAssert(Color.colorWithHex("#123456") == Color(red: 18.0/255, green: 52.0/255, blue: 86.0/255, alpha: 1), "Pass")
         }
     }
     
@@ -34,7 +35,7 @@ class ColorExtensionsTest: XCTestCase {
         measureBlock { () -> Void in
             
             // With or without #
-            XCTAssert(UIColor.colorWithHex("#479123") == UIColor.colorWithHex("479123"), "Pass")
+            XCTAssert(Color.colorWithHex("#479123") == Color.colorWithHex("479123"), "Pass")
         }
     }
     
@@ -43,9 +44,9 @@ class ColorExtensionsTest: XCTestCase {
         measureBlock { () -> Void in
             
             // 3 chars work as well as 6
-            XCTAssert(UIColor.colorWithHex("#123") == UIColor.colorWithHex("#112233"), "Pass")
+            XCTAssert(Color.colorWithHex("#123") == Color.colorWithHex("#112233"), "Pass")
             // Regardless of #
-            XCTAssert(UIColor.colorWithHex("123") == UIColor.colorWithHex("#112233"), "Pass")
+            XCTAssert(Color.colorWithHex("123") == Color.colorWithHex("#112233"), "Pass")
         }
     }
     
@@ -54,9 +55,9 @@ class ColorExtensionsTest: XCTestCase {
         measureBlock { () -> Void in
             
             // 4 char hex should not parse and return default clearColor()
-            XCTAssert(UIColor.colorWithHex("#1234") == UIColor.clearColor(), "Pass")
+            XCTAssert(Color.colorWithHex("#1234") == Color.clearColor(), "Pass")
             // Regardless of #
-            XCTAssert(UIColor.colorWithHex("1234") == UIColor.clearColor(), "Pass")
+            XCTAssert(Color.colorWithHex("1234") == Color.clearColor(), "Pass")
         }
     }
     

@@ -22,6 +22,12 @@ public typealias Color = NSColor
 public typealias Color = UIColor
 #endif
 
+#if os(OSX)
+public typealias Font = NSFont
+#else
+public typealias Font = UIFont
+#endif
+
 // swiftlint:disable variable_name
 public let FUSServiceClientUpdateSections = "com.FrostKit.FUSServiceClient.updateSections"
 public let UserStoreLogoutClearData = "com.FrostKit.UserStore.logout.clearData"

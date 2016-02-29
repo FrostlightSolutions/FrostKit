@@ -77,6 +77,11 @@
 		18410C2E1C81092500D2B308 /* FontExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C2D1C81092500D2B308 /* FontExtensionsTests.swift */; };
 		18410C301C810A6900D2B308 /* BundleExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C2F1C810A6900D2B308 /* BundleExtensionsTests.swift */; };
 		18410C321C810EB300D2B308 /* DataExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C311C810EB300D2B308 /* DataExtensionsTests.swift */; };
+		184625051C84CFB00098E969 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EC19DCBB5B008A1506 /* FontExtensions.swift */; };
+		184625061C84CFE90098E969 /* FontExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C2D1C81092500D2B308 /* FontExtensionsTests.swift */; };
+		184625071C84D1390098E969 /* ColorExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AC87E81C77F48200426776 /* ColorExtensionsTest.swift */; };
+		184625091C84D1A00098E969 /* FrostKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 18E5459D1C77E53F00637E85 /* FrostKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1846250A1C84D2FC0098E969 /* FrostKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 18839B1719D9FA8C00760157 /* FrostKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		186CFCEA1A29FA40002739A5 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186CFCE91A29FA40002739A5 /* MapController.swift */; };
 		18748B2219DF5661003942A3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18748B2019DF5661003942A3 /* Localizable.strings */; };
 		187661791BEEA0C900C82769 /* AppStoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187661781BEEA0C900C82769 /* AppStoreHelper.swift */; };
@@ -174,6 +179,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				1846250A1C84D2FC0098E969 /* FrostKit.framework in Copy Frameworks */,
 				18C41B091C7FC05200B1F57D /* Alamofire.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -185,6 +191,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				184625091C84D1A00098E969 /* FrostKit.framework in Copy Frameworks */,
 				18C41B0B1C7FC09900B1F57D /* Alamofire.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -1131,6 +1138,7 @@
 				189D8C8F1C77E94B00261DF5 /* ErrorExtensions.swift in Sources */,
 				189D8C981C77E96200261DF5 /* BundleExtensions.swift in Sources */,
 				189D8C971C77E95C00261DF5 /* DataExtensions.swift in Sources */,
+				184625051C84CFB00098E969 /* FontExtensions.swift in Sources */,
 				189D8C9B1C77E99C00261DF5 /* FontConstants.swift in Sources */,
 				189D8C8A1C77E8F100261DF5 /* AppStoreHelper.swift in Sources */,
 				189D8C9C1C77E9AB00261DF5 /* CustomFonts.swift in Sources */,
@@ -1144,7 +1152,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				18B01EF01C80A8CE00914FF5 /* DateExtensionsTests.swift in Sources */,
+				184625061C84CFE90098E969 /* FontExtensionsTests.swift in Sources */,
 				18E9FF931C80AA5700AC5230 /* ErrorExtensionsTests.swift in Sources */,
+				184625071C84D1390098E969 /* ColorExtensionsTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
