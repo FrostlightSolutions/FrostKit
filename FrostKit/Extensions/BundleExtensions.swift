@@ -21,7 +21,7 @@ extension NSBundle {
      - returns: The bundle version of the app.
      */
     public class func appVersion(bundle: NSBundle = NSBundle.mainBundle()) -> String {
-        return bundle.objectForInfoDictionaryKey("CFBundleVersion") as! String
+        return bundle.objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
     }
     
     /**
@@ -32,7 +32,7 @@ extension NSBundle {
      - returns: The build number of the app.
      */
     public class func appBuildNumber(bundle: NSBundle = NSBundle.mainBundle()) -> String {
-        return bundle.objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
+        return bundle.objectForInfoDictionaryKey("CFBundleVersion") as! String
     }
     
     /**
