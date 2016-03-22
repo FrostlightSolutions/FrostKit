@@ -35,7 +35,7 @@ extension NSDate {
     /**
     Creates an NSDate from the FUS standard date format.
     
-    - parameter fusDateString: The date string to make into an NSDate.
+    - parameter fusDateString: The date string to make into an NSDate in the format of `yyyy-MM-dd` or `yyyy-MM-ddTHH:mm:ss.SSSSSSZ`.
     
     - returns: The NSDate created from the passed in string or `nil` if it could not be created.
     */
@@ -52,10 +52,17 @@ extension NSDate {
         return dateFormatter.dateFromString(fusDateString)
     }
     
+    /**
+     Creates an NSDate from the iso8601 standard date format.
+     
+     - parameter iso8601String: The date string to make into an NSDate in the format of `yyyy-MM-ddTHH:mm:ssZ`.
+     
+     - returns: The NSDate created from the passed in string or `nil` if it could not be created.
+     */
     public class func iso8601Date(iso8601String: String) -> NSDate? {
         
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
         dateFormatter.timeZone = NSTimeZone.utc()
         dateFormatter.locale = NSLocale.autoupdatingCurrentLocale()
         return dateFormatter.dateFromString(iso8601String)
@@ -83,63 +90,47 @@ extension NSDate {
     /// `true` if the date is a weekday, `false` if it isn't.
     public var isWeekday: Bool {
         
-        let calendar = NSCalendar.gregorianCalendar()
-        let components = calendar.components(NSCalendarUnit.Weekday, fromDate: self)
-        let range = calendar.maximumRangeOfUnit(NSCalendarUnit.Weekday)
+        let calendar = NSCalendar.iso8601Calendar()
+        let components = calendar.components(.Weekday, fromDate: self)
+        let range = calendar.maximumRangeOfUnit(.Weekday)
+        
         if components.weekday == range.location || components.weekday == range.length {
             return false
-        } else {
-            return true
         }
+        return true
     }
     
-    /// `true` if the date is the begining of the week, `false` if it isn't.
+    /// `true` if the date is the begining of the week, `false` if it isn't. Begining of week is Monday.
     public var isBeginingOfWeek: Bool {
         
-        let calendar = NSCalendar.gregorianCalendar()
-        let components = calendar.components(NSCalendarUnit.Weekday, fromDate: self)
-        if components.weekday == 2 { // Begining of week is Monday == 2
-            return true
-        } else {
-            return false
-        }
+        let calendar = NSCalendar.iso8601Calendar()
+        let components = calendar.components(.Weekday, fromDate: self)
+        return components.weekday == 2 // Begining of week is Monday == 2
     }
     
-    /// `true` if the date is the end of the week, `false` if it isn't.
+    /// `true` if the date is the end of the week, `false` if it isn't. End of week is Sunday.
     public var isEndOfWeek: Bool {
         
-        let calendar = NSCalendar.gregorianCalendar()
-        let components = calendar.components(NSCalendarUnit.Weekday, fromDate: self)
-        if components.weekday == 1 { // End of week is Sunday == 1
-            return false
-        } else {
-            return false
-        }
+        let calendar = NSCalendar.iso8601Calendar()
+        let components = calendar.components(.Weekday, fromDate: self)
+        return components.weekday == 1 // End of week is Sunday == 1
     }
     
     /// `true` if the date is the begining of the month, `false` if it isn't.
     public var isBeginingOfMonth: Bool {
         
-        let calendar = NSCalendar.gregorianCalendar()
-        let components = calendar.components(NSCalendarUnit.Day, fromDate: self)
-        if components.day == 1 {
-            return true
-        } else {
-            return false
-        }
+        let calendar = NSCalendar.iso8601Calendar()
+        let components = calendar.components(.Day, fromDate: self)
+        return components.day == 1
     }
     
     /// `true` if the date is the end of the month, `false` if it isn't.
     public var isEndOfMonth: Bool {
         
-        let calendar = NSCalendar.gregorianCalendar()
-        let components = calendar.components(NSCalendarUnit.Day, fromDate: self)
-        let range = calendar.rangeOfUnit(NSCalendarUnit.Day, inUnit: NSCalendarUnit.Month, forDate: self)
-        if components.day == range.length {
-            return true
-        } else {
-            return false
-        }
+        let calendar = NSCalendar.iso8601Calendar()
+        let components = calendar.components(.Day, fromDate: self)
+        let range = calendar.rangeOfUnit(.Day, inUnit: .Month, forDate: self)
+        return components.day == range.length
     }
     
     // MARK: - Duration
@@ -147,50 +138,50 @@ extension NSDate {
     /// Returns the day of the date
     public var day: Int {
         
-        let calendar = NSCalendar.gregorianCalendar()
-            let components = calendar.components(NSCalendarUnit.Day, fromDate: self)
-            return components.day
+        let calendar = NSCalendar.iso8601Calendar()
+        let components = calendar.components(.Day, fromDate: self)
+        return components.day
     }
     
     /// Returns the hour of the date
     public var hour: Int {
         
-        let calendar = NSCalendar.gregorianCalendar()
-            let components = calendar.components(NSCalendarUnit.Hour, fromDate: self)
-            return components.hour
+        let calendar = NSCalendar.iso8601Calendar()
+        let components = calendar.components(.Hour, fromDate: self)
+        return components.hour
     }
     
     /// Returns the minute of the date
     public var minute: Int {
         
-        let calendar = NSCalendar.gregorianCalendar()
-            let components = calendar.components(NSCalendarUnit.Minute, fromDate: self)
-            return components.minute
+        let calendar = NSCalendar.iso8601Calendar()
+        let components = calendar.components(.Minute, fromDate: self)
+        return components.minute
     }
     
     /// Returns the time of the date in hours
     public var timeInHours: NSTimeInterval {
-        return NSTimeInterval(hour) + (NSTimeInterval(minute) / NSDate.minuteInSeconds())
+        return NSTimeInterval(hour) + (NSTimeInterval(minute) / 60)
     }
     
     /// Returns 1 minute in seconds `60`
     public class func minuteInSeconds() -> NSTimeInterval {
-        return 60.0
+        return 60
     }
     
     /// Returns 1 hour in seconds `3600`
     public class func hourInSeconds() -> NSTimeInterval {
-        return minuteInSeconds() * 60.0
+        return minuteInSeconds() * 60
     }
     
     /// Returns 1 day in seconds `86400`
     public class func dayInSeconds() -> NSTimeInterval {
-        return hourInSeconds() * 24.0
+        return hourInSeconds() * 24
     }
     
     /// Returns 1 week in seconds `604800`
     public class func weekInSeconds() -> NSTimeInterval {
-        return dayInSeconds() * 7.0
+        return dayInSeconds() * 7
     }
     
     /**
@@ -201,25 +192,24 @@ extension NSDate {
     
     - returns: The number of days beteen `fromDate` and `toDate`
     */
-    public class func daysBetweenDates(fromDate fromDate: NSDate, toDate: NSDate) -> Int {
+    public class func daysBetweenDates(fromDate: NSDate, toDate: NSDate) -> Int {
         
-        var dateTo: NSDate?
         var dateFrom: NSDate?
-        var duration: NSTimeInterval = 0
+        var dateTo: NSDate?
         
-        let calendar = NSCalendar.gregorianCalendar()
-        calendar.rangeOfUnit(NSCalendarUnit.Day, startDate: &dateFrom, interval: &duration, forDate: toDate)
-        calendar.rangeOfUnit(NSCalendarUnit.Day, startDate: &dateTo, interval: &duration, forDate: fromDate)
+        let calendar = NSCalendar.iso8601Calendar()
+        calendar.rangeOfUnit(.Day, startDate: &dateTo, interval: nil, forDate: toDate)
+        calendar.rangeOfUnit(.Day, startDate: &dateFrom, interval: nil, forDate: fromDate)
         
-        let components = calendar.components(NSCalendarUnit.Day, fromDate: dateFrom!, toDate: dateTo!, options: NSCalendarOptions.WrapComponents)
+        let components = calendar.components(.Day, fromDate: dateFrom!, toDate: dateTo!, options: .WrapComponents)
         return components.day
     }
     
     /// Returns the number of days left in the current week assuming Monday is the start of the week and inclusive of today
     public var daysRemainingInWeek: Int {
         
-        let calendar = NSCalendar.gregorianCalendar()
-        let components = calendar.components(NSCalendarUnit.Weekday, fromDate: self)
+        let calendar = NSCalendar.iso8601Calendar()
+        let components = calendar.components(.Weekday, fromDate: self)
         var weekdayOfDate = components.weekday
         // To make Monday == 1
         weekdayOfDate -= 1
@@ -232,17 +222,17 @@ extension NSDate {
     /// Returns the number of days in the current month
     public var daysInMonth: Int {
         
-        let calendar = NSCalendar.gregorianCalendar()
-        let range = calendar.rangeOfUnit(NSCalendarUnit.Day, inUnit: NSCalendarUnit.Month, forDate: self)
+        let calendar = NSCalendar.iso8601Calendar()
+        let range = calendar.rangeOfUnit(.Day, inUnit: .Month, forDate: self)
         return range.length
     }
     
     /// Returns the number of days left in the month, inclusive of today
     public var daysRemainingInMonth: Int {
         
-        let calendar = NSCalendar.gregorianCalendar()
-        let components = calendar.components(NSCalendarUnit.Weekday, fromDate: self)
-        return (daysInMonth - components.day) + 1
+        let calendar = NSCalendar.iso8601Calendar()
+        let components = calendar.components(.Day, fromDate: self)
+        return (daysInMonth - components.day)
     }
     
     // MARK: - Date Comparison
@@ -294,8 +284,8 @@ extension NSDate {
     
     - returns: `true` if the comparison date is before date, `false` if not
     */
-    public func isBefore(date date: NSDate) -> Bool {
-        return compareToDate(date, option: DateCompareType.Before)
+    public func isBefore(date: NSDate) -> Bool {
+        return compareToDate(date, option: .Before)
     }
     
     /**
@@ -305,8 +295,8 @@ extension NSDate {
     
     - returns: `true` if the comparison date is after date, `false` if not
     */
-    public func isAfter(date date: NSDate) -> Bool {
-        return compareToDate(date, option: DateCompareType.After)
+    public func isAfter(date: NSDate) -> Bool {
+        return compareToDate(date, option: .After)
     }
     
     // MARK: -
@@ -314,15 +304,10 @@ extension NSDate {
     /// Creates a new object which is a copy of the current date but with time stripped out (set to midnight)
     public var stripTime: NSDate {
         
-        let calendar = NSCalendar.gregorianCalendar()
-        let components = calendar.components(([NSCalendarUnit.Day, NSCalendarUnit.Month, NSCalendarUnit.Year]), fromDate: self)
+        let calendar = NSCalendar.iso8601Calendar()
+        let components = calendar.components(([.Day, .Month, .Year]), fromDate: self)
         components.timeZone = NSTimeZone.utc()
-        if let date = calendar.dateFromComponents(components) {
-            return date
-        } else {
-            NSLog("Error: Failed to strip time from date \(self)")
-            return self
-        }
+        return calendar.dateFromComponents(components)!
     }
     
     /**
@@ -341,19 +326,14 @@ extension NSDate {
         let components = NSDateComponents()
         components.day = days
         
-        let calendar = NSCalendar.gregorianCalendar()
-        if let date = calendar.dateByAddingComponents(components, toDate: self, options: NSCalendarOptions.SearchBackwards) {
-            return date
-        } else {
-            NSLog("Error: Failed to add \(days) days to date \(self)")
-            return self
-        }
+        let calendar = NSCalendar.iso8601Calendar()
+        return calendar.dateByAddingComponents(components, toDate: self, options: .SearchBackwards)!
     }
     
     /// Returns a date with the time at the start of the day, while preserving the time zone.
     public var dateAtStartOfDay: NSDate {
         
-        let calendar = NSCalendar.gregorianCalendar()
+        let calendar = NSCalendar.iso8601Calendar()
         let components = calendar.components(componentFlags, fromDate: self)
         components.timeZone = NSTimeZone.utc()
         components.hour = 0
@@ -365,7 +345,7 @@ extension NSDate {
     /// Returns a date with the time at the end of the day, while preserving the time zone.
     public var dateAtEndOfDay: NSDate {
         
-        let calendar = NSCalendar.gregorianCalendar()
+        let calendar = NSCalendar.iso8601Calendar()
         let components = calendar.components(componentFlags, fromDate: self)
         components.timeZone = NSTimeZone.utc()
         components.hour = 23

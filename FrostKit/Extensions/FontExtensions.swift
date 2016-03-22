@@ -6,12 +6,16 @@
 //  Copyright (c) 2014-2015 James Barrow - Frostlight Solutions. All rights reserved.
 //
 
+#if os(OSX)
+import AppKit
+#else
 import UIKit
+#endif
 
 ///
 /// Extention functions for UIFont
 ///
-extension UIFont {
+extension Font {
     
     /**
     Helper method for getting font awesome font of a size.
@@ -20,12 +24,12 @@ extension UIFont {
     
     - returns: The font object for font awesome.
     */
-    public class func fontAwesome(size size: CGFloat) -> UIFont {
-        if let font = UIFont(name: "FontAwesome", size: size) {
+    public class func fontAwesome(size size: CGFloat) -> Font {
+        if let font = Font(name: "FontAwesome", size: size) {
             return font
         } else {
             NSLog("ERROR: Unable to load FontAwesome font.")
-            return UIFont.systemFontOfSize(size)
+            return Font.systemFontOfSize(size)
         }
     }
     
@@ -36,12 +40,12 @@ extension UIFont {
     
     - returns: The font object for ionicons.
     */
-    public class func ionicons(size size: CGFloat) -> UIFont {
-        if let font = UIFont(name: "Ionicons", size: size) {
+    public class func ionicons(size size: CGFloat) -> Font {
+        if let font = Font(name: "Ionicons", size: size) {
             return font
         } else {
             NSLog("ERROR: Unable to load Ionicons font.")
-            return UIFont.systemFontOfSize(size)
+            return Font.systemFontOfSize(size)
         }
     }
     

@@ -114,9 +114,9 @@ public class AppStoreHelper: NSObject {
         
         if  let appStoreVersion = self.version,
             let bundleId = self.bundleId,
-            let bundle = NSBundle(identifier: bundleId),
-            let localVersion = bundle.objectForInfoDictionaryKey("CFBundleShortVersionString") as? String {
+            let bundle = NSBundle(identifier: bundleId) {
                 
+                let localVersion = NSBundle.appVersion(bundle)
                 let comparisonResult = localVersion.compare(appStoreVersion, options: .NumericSearch)
                 if comparisonResult == .OrderedAscending {
                     return .UpdateNeeded

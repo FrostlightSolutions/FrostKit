@@ -37,7 +37,7 @@ class AppStoreHelperTests: XCTestCase {
             expectation.fulfill()
         }
         
-        self.waitForExpectationsWithTimeout(expectationTimeout, handler: { (completionHandler) -> Void in })
+        self.waitForExpectationsWithTimeout(120, handler: { (completionHandler) -> Void in })
     }
     
 }

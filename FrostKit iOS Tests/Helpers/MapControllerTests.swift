@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Frostlight Solutions. All rights reserved.
 //
 
-import UIKit
 import XCTest
 import FrostKit
 import CoreLocation
@@ -37,70 +36,102 @@ class MapControllerTests: XCTestCase {
     // MARK: - Address Tests
     
     func testAddressIsValid() {
-        if address.isValid == true {
-            XCTAssert(true, "Pass")
-        } else {
-            XCTAssert(false, "Failed! Address is invalid but should be valid.")
+        
+        measureBlock { () -> Void in
+            
+            if self.address.isValid == true {
+                XCTAssert(true, "Pass")
+            } else {
+                XCTAssert(false, "Failed! Address is invalid but should be valid.")
+            }
         }
     }
     
     func testAddressCoordinate() {
-        if address.coordinate.latitude == coordinate.latitude && address.coordinate.longitude == coordinate.longitude {
-            XCTAssert(true, "Pass")
-        } else {
-            XCTAssert(false, "Failed! Address coordinates do not match.")
+        
+        measureBlock { () -> Void in
+            
+            if self.address.coordinate.latitude == self.coordinate.latitude && self.address.coordinate.longitude == self.coordinate.longitude {
+                XCTAssert(true, "Pass")
+            } else {
+                XCTAssert(false, "Failed! Address coordinates do not match.")
+            }
         }
     }
     
     func testAddressLatitude() {
-        if address.latitude == coordinate.latitude {
-            XCTAssert(true, "Pass")
-        } else {
-            XCTAssert(false, "Failed! Address latitude is '\(address.latitude)' but should be '\(coordinate.latitude)'.")
+        
+        measureBlock { () -> Void in
+            
+            if self.address.latitude == self.coordinate.latitude {
+                XCTAssert(true, "Pass")
+            } else {
+                XCTAssert(false, "Failed! Address latitude is '\(self.address.latitude)' but should be '\(self.coordinate.latitude)'.")
+            }
         }
     }
     
     func testAddressLongitude() {
-        if address.longitude == coordinate.longitude {
-            XCTAssert(true, "Pass")
-        } else {
-            XCTAssert(false, "Failed! Address longitude is '\(address.longitude)' but should be '\(coordinate.longitude)'.")
+        
+        measureBlock { () -> Void in
+            
+            if self.address.longitude == self.coordinate.longitude {
+                XCTAssert(true, "Pass")
+            } else {
+                XCTAssert(false, "Failed! Address longitude is '\(self.address.longitude)' but should be '\(self.coordinate.longitude)'.")
+            }
         }
     }
     
     func testAddressName() {
-        if address.name == addressName {
-            XCTAssert(true, "Pass")
-        } else {
-            XCTAssert(false, "Failed! Address name is '\(address.name)' but should be '\(addressName)'.")
+        
+        measureBlock { () -> Void in
+            
+            if self.address.name == self.addressName {
+                XCTAssert(true, "Pass")
+            } else {
+                XCTAssert(false, "Failed! Address name is '\(self.address.name)' but should be '\(self.addressName)'.")
+            }
         }
     }
     
     func testAddressStringAddress() {
-        if address.addressString == addressString {
-            XCTAssert(true, "Pass")
-        } else {
-            XCTAssert(false, "Failed! Address simple address is '\(address.addressString)' but should be '\(addressString)'.")
+        
+        measureBlock { () -> Void in
+            
+            if self.address.addressString == self.addressString {
+                XCTAssert(true, "Pass")
+            } else {
+                XCTAssert(false, "Failed! Address simple address is '\(self.address.addressString)' but should be '\(self.addressString)'.")
+            }
         }
     }
     
     // MARK: - Annotation Tests
     
     func testAnnotationAddress() {
-        if annotation.address.isEqualToAddress(address) {
-            XCTAssert(true, "Pass")
-        } else {
-            XCTAssert(false, "Failed! Annotation address is '\(address.description)' but should be '\(address.description)'.")
+        
+        measureBlock { () -> Void in
+            
+            if self.annotation.address.isEqualToAddress(self.address) {
+                XCTAssert(true, "Pass")
+            } else {
+                XCTAssert(false, "Failed! Annotation address is '\(self.address.description)' but should be '\(self.address.description)'.")
+            }
         }
     }
     
     func testAnnotationUpdateAddress() {
-        let annotation = Annotation()
-        annotation.updateAddress(address)
-        if annotation.address.isEqualToAddress(address) {
-            XCTAssert(true, "Pass")
-        } else {
-            XCTAssert(false, "Failed! Annotation address is '\(address.description)' but should be '\(address.description)'.")
+        
+        measureBlock { () -> Void in
+            
+            let annotation = Annotation()
+            annotation.updateAddress(self.address)
+            if annotation.address.isEqualToAddress(self.address) {
+                XCTAssert(true, "Pass")
+            } else {
+                XCTAssert(false, "Failed! Annotation address is '\(self.address.description)' but should be '\(self.address.description)'.")
+            }
         }
     }
     

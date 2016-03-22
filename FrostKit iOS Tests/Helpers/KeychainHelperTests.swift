@@ -23,18 +23,21 @@ class KeychainHelperTests: XCTestCase {
     
     func testKeychainWorkflow() {
         
-        let username = "myName"
-        let password = "qwerty1234567890!_<>,.!@#$%^&*()_+-=/?"
-        
-        let setDetailsComplete = KeychainHelper.setDetails(details: password, username: username)
-        let updateDetailsComplete = KeychainHelper.setDetails(details: password, username: username)
-        let getDetailsComplete = (password == KeychainHelper.details(username: username) as! String)
-        let deleteDetailsComplete = KeychainHelper.deleteKeychain()
-        
-        XCTAssert(setDetailsComplete, "Pass")
-        XCTAssert(updateDetailsComplete, "Pass")
-        XCTAssert(getDetailsComplete, "Pass")
-        XCTAssert(deleteDetailsComplete, "Pass")
+        measureBlock { () -> Void in
+            
+            let username = "myName"
+            let password = "qwerty1234567890!_<>,.!@#$%^&*()_+-=/?"
+            
+            let setDetailsComplete = KeychainHelper.setDetails(details: password, username: username)
+            let updateDetailsComplete = KeychainHelper.setDetails(details: password, username: username)
+            let getDetailsComplete = (password == KeychainHelper.details(username: username) as! String)
+            let deleteDetailsComplete = KeychainHelper.deleteKeychain()
+            
+            XCTAssert(setDetailsComplete, "Pass")
+            XCTAssert(updateDetailsComplete, "Pass")
+            XCTAssert(getDetailsComplete, "Pass")
+            XCTAssert(deleteDetailsComplete, "Pass")
+        }
     }
     
 }

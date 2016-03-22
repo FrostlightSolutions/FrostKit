@@ -32,6 +32,14 @@ public class MapViewController: UIViewController {
         return nil
     }
     private var zoomedToShowAll = false
+    /// Overridden by a subclass to define actual scope titles for the search bar. If an empty array is returned then the scope selector is not shown. By default this is set to `Markers` and `Locations`.
+    public var searchScopeButtonTitles: [String] {
+        return [FKLocalizedString("MARKERS", comment: "Markers"), FKLocalizedString("LOCATIONS", comment: "Locations")]
+    }
+    // Defines if the search scope should show.
+    @IBInspectable public var showsSearchScopeBar: Bool = true
+    // Defines the search search view controller for the search controller to use. If `nil` is found on setup then a default `MapSearchViewController` is used.
+    public var searchTableViewController: MapSearchViewController?
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -39,11 +47,18 @@ public class MapViewController: UIViewController {
         navigationItem.title = FKLocalizedString("MAP", comment: "Map")
         updateNavigationButtons(false)
         
-        let searchTableViewController = MapSearchViewController(style: .Plain)
+        let searchTableViewController: MapSearchViewController
+        if let userDefinedSearchTableViewController = self.searchTableViewController {
+            searchTableViewController = userDefinedSearchTableViewController
+        } else {
+            searchTableViewController = MapSearchViewController(style: .Plain)
+        }
+        
         searchTableViewController.mapController = mapController
         searchController = UISearchController(searchResultsController: searchTableViewController)
         searchController.searchBar.sizeToFit()
-        searchController.searchBar.scopeButtonTitles = [FKLocalizedString("MARKERS", comment: "Markers"), FKLocalizedString("LOCATIONS", comment: "Locations")]
+        searchController.searchBar.scopeButtonTitles = searchScopeButtonTitles
+        searchController.searchBar.showsScopeBar = showsSearchScopeBar && searchScopeButtonTitles.count > 0
         searchController.searchBar.delegate = searchTableViewController
         searchController.delegate = searchTableViewController
         searchTableViewController.searchController = searchController
