@@ -124,19 +124,19 @@ public class DeveloperTools: NSObject {
     // MARK: - Unlock Developer Tools Methods
     
     private func tapGestureRecogniser() -> UIGestureRecognizer {
-        let tapGesture = UITapGestureRecognizer(target: self, action: "unlockPhaseOne:")
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(DeveloperTools.unlockPhaseOne(_:)))
         tapGesture.numberOfTapsRequired = 6
         return tapGesture
     }
     
     private func swipeLeftGestureRecogniser() -> UIGestureRecognizer {
-        let swipeGesture = UISwipeGestureRecognizer(target: self, action: "unlockPhaseTwo:")
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(DeveloperTools.unlockPhaseTwo(_:)))
         swipeGesture.direction = .Left
         return swipeGesture
     }
     
     private func swipeRightGestureRecogniser() -> UIGestureRecognizer {
-        let swipeGesture = UISwipeGestureRecognizer(target: self, action: "unlockPhaseThree:")
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(DeveloperTools.unlockPhaseThree(_:)))
         swipeGesture.direction = .Right
         return swipeGesture
     }
@@ -206,7 +206,7 @@ public class DeveloperTools: NSObject {
     
     private func startTimer() {
         stopTimer()
-        timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "reset", userInfo: nil, repeats: false)
+        timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(DeveloperTools.reset), userInfo: nil, repeats: false)
     }
     
     private func stopTimer() {

@@ -42,7 +42,7 @@ public class CarouselViewController: UIViewController, UICollectionViewDataSourc
         didSet {
             
             pageControl?.numberOfPages = numberOfPages
-            pageControl?.addTarget(self, action: "pageControlDidChange:", forControlEvents: .ValueChanged)
+            pageControl?.addTarget(self, action: #selector(CarouselViewController.pageControlDidChange(_:)), forControlEvents: .ValueChanged)
         }
     }
     public var numberOfPages: Int {

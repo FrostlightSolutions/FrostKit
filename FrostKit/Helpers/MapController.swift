@@ -266,9 +266,11 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     
     - parameter region: The region to zoom the map to.
     */
-    public func zoomToRegion(var region: MKCoordinateRegion) {
-        region.span = normalizeRegionSpan(region.span)
-        mapView?.setRegion(region, animated: true)
+    public func zoomToRegion(region: MKCoordinateRegion) {
+        
+        var zoomRegion = region
+        zoomRegion.span = normalizeRegionSpan(region.span)
+        mapView?.setRegion(zoomRegion, animated: true)
     }
     
     /**
@@ -422,20 +424,21 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     
     - returns: The normalized span.
     */
-    public func normalizeRegionSpan(var span: MKCoordinateSpan) -> MKCoordinateSpan {
-        span = MKCoordinateSpanMake(span.latitudeDelta * annotationRegionPadFactor, span.longitudeDelta * annotationRegionPadFactor)
-        if span.latitudeDelta > maximumDegreesArc {
-            span.latitudeDelta = maximumDegreesArc
-        } else if span.latitudeDelta < minimumZoomArc {
-            span.latitudeDelta = minimumZoomArc
+    public func normalizeRegionSpan(span: MKCoordinateSpan) -> MKCoordinateSpan {
+        
+        var normalizedSpan = MKCoordinateSpanMake(span.latitudeDelta * annotationRegionPadFactor, span.longitudeDelta * annotationRegionPadFactor)
+        if normalizedSpan.latitudeDelta > maximumDegreesArc {
+            normalizedSpan.latitudeDelta = maximumDegreesArc
+        } else if normalizedSpan.latitudeDelta < minimumZoomArc {
+            normalizedSpan.latitudeDelta = minimumZoomArc
         }
         
-        if span.longitudeDelta > maximumDegreesArc {
-            span.longitudeDelta = maximumDegreesArc
-        } else if span.longitudeDelta < minimumZoomArc {
-            span.longitudeDelta = minimumZoomArc
+        if normalizedSpan.longitudeDelta > maximumDegreesArc {
+            normalizedSpan.longitudeDelta = maximumDegreesArc
+        } else if normalizedSpan.longitudeDelta < minimumZoomArc {
+            normalizedSpan.longitudeDelta = minimumZoomArc
         }
-        return span
+        return normalizedSpan
     }
     
     // MARK: - MKMapViewDelegate Methods

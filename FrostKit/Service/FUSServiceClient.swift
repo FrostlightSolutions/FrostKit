@@ -144,7 +144,7 @@ public enum Router: URLRequestConvertible {
             
             if let someParameters = parameters {
                 let keysArray = (someParameters as NSDictionary).allKeys as NSArray
-                let sortedKeys = keysArray.sortedArrayUsingSelector("compare:") as! [String]
+                let sortedKeys = keysArray.sortedArrayUsingSelector(#selector(NSNumber.compare(_:))) as! [String]
                 for key in sortedKeys {
                     saveString = (saveString as NSString).stringByAppendingPathComponent(someParameters[key] as! String)
                 }

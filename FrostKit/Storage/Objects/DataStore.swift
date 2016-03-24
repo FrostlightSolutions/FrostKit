@@ -73,7 +73,7 @@ public class DataStore: NSObject, NSCoding, NSCopying {
     /// An array of page numbers sorted numerically. This might not return all pages if a page was skipped.
     private var sortedPages: [Int] {
         let keysArray = objects.allKeys as NSArray
-        return keysArray.sortedArrayUsingSelector("compare:") as! [Int]
+        return keysArray.sortedArrayUsingSelector(#selector(NSNumber.compare(_:))) as! [Int]
     }
     /// Returns an array of all the pages loaded
     private var combinedPages: NSArray {

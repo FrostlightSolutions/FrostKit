@@ -8,6 +8,13 @@
 
 import UIKit
 
+public extension UIViewController {
+    
+    public func updateSection() {
+        // Do something
+    }
+}
+
 ///
 /// The data updater delegate provides callback for when a updating or loading or data is complete.
 ///
@@ -111,7 +118,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     public override init() {
         super.init()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "clearData", name: UserStoreLogoutClearData, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DataUpdater.clearData), name: UserStoreLogoutClearData, object: nil)
     }
     
     /**
@@ -235,9 +242,12 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     */
     public func setUpdaterViewController(viewController: UIViewController) {
         self.viewController = viewController
-        if viewController.respondsToSelector("updateSection") == true {
-            NSNotificationCenter.defaultCenter().addObserver(viewController, selector: "updateSection", name: FUSServiceClientUpdateSections, object: nil)
+        
+        let updateSectionSelector = #selector(UIViewController.updateSection)
+        if viewController.respondsToSelector(updateSectionSelector) == true {
+            NSNotificationCenter.defaultCenter().addObserver(viewController, selector: updateSectionSelector, name: FUSServiceClientUpdateSections, object: nil)
         }
+        
         setRefreshControlForViewController(self.viewController)
     }
     
@@ -293,7 +303,7 @@ public class DataUpdater: NSObject, DataStoreDelegate {
     */
     private func setRefreshControlForViewController(viewController: UIViewController) {
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: "refreshControlTriggered:", forControlEvents: .ValueChanged)
+        refreshControl.addTarget(self, action: #selector(DataUpdater.refreshControlTriggered(_:)), forControlEvents: .ValueChanged)
         refreshControl.tintColor = FrostKit.tintColor
         
         if let tableViewController = viewController as? UITableViewController {
