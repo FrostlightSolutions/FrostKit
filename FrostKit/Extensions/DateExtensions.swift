@@ -212,7 +212,7 @@ extension NSDate {
         let components = calendar.components(.Weekday, fromDate: self)
         var weekdayOfDate = components.weekday
         // To make Monday == 1
-        weekdayOfDate--
+        weekdayOfDate -= 1
         if weekdayOfDate < 1 {
             weekdayOfDate = 7 + weekdayOfDate
         }
