@@ -878,7 +878,7 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/watchOS/Alamofire.framework",
 			);
 			name = "Carthage Run Script";
 			outputPaths = (
@@ -893,7 +893,7 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/Alamofire.framework",
 			);
 			name = "Carthage Run Script";
 			outputPaths = (
