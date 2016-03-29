@@ -648,7 +648,6 @@
 				1826B0221BD9047900DA1669 /* Frameworks */,
 				1826B0231BD9047900DA1669 /* Headers */,
 				1826B0241BD9047900DA1669 /* Resources */,
-				1838F1B71C761E1800F1233D /* Carthage Run Script */,
 				18E5457B1C77E2B900637E85 /* SwiftLint Run Script */,
 			);
 			buildRules = (
@@ -668,7 +667,6 @@
 				1829A8081BA2CD380017E4EE /* Frameworks */,
 				1829A8091BA2CD380017E4EE /* Headers */,
 				1829A80A1BA2CD380017E4EE /* Resources */,
-				1838F1B61C761E0F00F1233D /* Carthage Run Script */,
 				18E5457A1C77E28600637E85 /* SwiftLint Run Script */,
 			);
 			buildRules = (
@@ -688,7 +686,6 @@
 				18839B1319D9FA8C00760157 /* Frameworks */,
 				18839B1419D9FA8C00760157 /* Headers */,
 				18839B1519D9FA8C00760157 /* Resources */,
-				1838F1B51C761D3800F1233D /* Carthage Run Script */,
 				1807E5D81C77CD5A00BEBAFE /* SwiftLint Run Script */,
 			);
 			buildRules = (
@@ -727,7 +724,6 @@
 				18E545991C77E53F00637E85 /* Frameworks */,
 				18E5459A1C77E53F00637E85 /* Headers */,
 				18E5459B1C77E53F00637E85 /* Resources */,
-				18E545B61C77E5BF00637E85 /* Carthage Run Script */,
 				18E545B71C77E5E800637E85 /* SwiftLint Run Script */,
 			);
 			buildRules = (
@@ -901,51 +897,6 @@
 			shellPath = /bin/sh;
 			shellScript = "# cd into the Fonts directory\ncd \"${SRCROOT}/${PROJECT_NAME}/Fonts/\"\n\n# cd into the directory with the less constants files\ncd \"LessConstantsFiles\"\n\n# A list of file names\nFILE_NAMES=\nINDEX=0\nfor FILE in * ; do\n    if [ -e \"${FILE}\" ] ; then\n        FILE_NAMES[\"${INDEX}\"]=\"${FILE}\"\n    fi\n    let \"INDEX++\"\ndone\n\n# cd back to the Fonts directory\ncd ../\n\n# Run Python script to parse less file into a single Swift constants file\n./ParseFontLessConstants.py \"${FILE_NAMES[*]}\"\n";
 		};
-		1838F1B51C761D3800F1233D /* Carthage Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
-			);
-			name = "Carthage Run Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-		1838F1B61C761E0F00F1233D /* Carthage Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/watchOS/Alamofire.framework",
-			);
-			name = "Carthage Run Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-		1838F1B71C761E1800F1233D /* Carthage Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/tvOS/Alamofire.framework",
-			);
-			name = "Carthage Run Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
 		1845E6FA1A66DA0F005B377D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -986,21 +937,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		18E545B61C77E5BF00637E85 /* Carthage Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/Mac/Alamofire.framework",
-			);
-			name = "Carthage Run Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 		18E545B71C77E5E800637E85 /* SwiftLint Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
