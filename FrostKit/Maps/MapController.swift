@@ -49,6 +49,26 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     }
     /// Used for plotting all annotations to ditermine annotation clustering.
     public let offscreenMapView = MKMapView(frame: CGRect())
+    /**
+     This value controls the number of off screen annotations displayed.
+     
+     A bigger number means more annotations, less change of seeing annotation views pop in, but decreaced performance.
+     
+     A smaller number means fewer annotations, more chance of seeing annotation views pop in, but better performance.
+    */
+    public var marginFactor: Double {
+        return 2
+    }
+    /**
+     Adjust this based on the deimensions of your annotation views.
+     
+     Bigger number more aggressively coalesce annotations (fewer annotations displayed, but better performance).
+     
+     Numbers too small result in overlapping annotation views and too many annotations on screen.
+    */
+    public var bucketSize: Double {
+        return 60
+    }
     /// Refers to if the map controller should auto assign itself to the map view as a delegate.
     @IBInspectable var autoAssingDelegate: Bool = true {
         didSet {
@@ -205,15 +225,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
             return
         }
         
-        // This value controls the number of off screen annotations displayed.
-        // A bigger number means more annotations, less change of seeing annotation views pop in, but decreaced performance.
-        // A smaller number means fewer annotations, more chance of seeing annotation views pop in, but better performance.
-        let marginFactor: Double = 2
-        
-        // Adjust this based on the deimensions of your annotation views.
-        // Bigger number more aggressively coalesce annotations (fewer annotations displayed, but better performance).
-        // Numbers too small result in overlapping annotation views and too many annotations on screen.
-        let bucketSize: Double = 60
+        let marginFactor = self.marginFactor
+        let bucketSize = self.bucketSize
         
         // Fill all the annotations in the viaable area + a wide margin to avoid poppoing annotation views ina dn out while panning the map.
         let visableMapRect = mapView.visibleMapRect
