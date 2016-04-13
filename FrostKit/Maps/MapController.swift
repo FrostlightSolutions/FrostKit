@@ -69,6 +69,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     public var bucketSize: Double {
         return 60
     }
+    private var currentlyUpdatingVisableAnnotations = false
+    private var shouldTryToUpdateVisableAnnotationsWhenFinished = false
     /// Refers to if the map controller should auto assign itself to the map view as a delegate.
     @IBInspectable var autoAssingDelegate: Bool = true {
         didSet {
@@ -189,7 +191,10 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         
         if let currentAnnotation = annotation {
             offscreenMapView.addAnnotation(currentAnnotation)
-            updateVisableAnnotations()
+            
+            if plottingAsBulk == false {
+                updateVisableAnnotations()
+            }
         }
     }
     
@@ -225,6 +230,14 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      If you have customised plotting of map points, this should be called, but should not be overriden.
      */
     public final func updateVisableAnnotations() {
+        
+        if currentlyUpdatingVisableAnnotations == true {
+            shouldTryToUpdateVisableAnnotationsWhenFinished = true
+            return
+        }
+        
+        currentlyUpdatingVisableAnnotations = true
+        shouldTryToUpdateVisableAnnotationsWhenFinished = false
         
         guard let mapView = self.mapView else {
             return
