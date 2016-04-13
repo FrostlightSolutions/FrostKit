@@ -47,6 +47,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
             }
         }
     }
+    /// Used for plotting all annotations to ditermine annotation clustering.
+    public let offscreenMapView = MKMapView(frame: CGRect())
     /// Refers to if the map controller should auto assign itself to the map view as a delegate.
     @IBInspectable var autoAssingDelegate: Bool = true {
         didSet {
@@ -166,9 +168,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         }
         
         if let currentAnnotation = annotation {
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.mapView?.addAnnotation(currentAnnotation)
-            })
+            offscreenMapView.addAnnotation(currentAnnotation)
+            updateVisableAnnotations()
         }
     }
     
@@ -179,11 +180,13 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     */
     public func removeAllAnnotations(includingCached: Bool = false) {
         let annotations = Array(self.annotations.values)
-        mapView?.removeAnnotations(annotations)
+        offscreenMapView.removeAnnotations(annotations)
         
         if includingCached == true {
             self.annotations.removeAll(keepCapacity: false)
         }
+        
+        updateVisableAnnotations()
     }
     
     /**
@@ -192,6 +195,125 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     public func clearData() {
         removeAllAnnotations(true)
         addresses.removeAll(keepCapacity: false)
+    }
+    
+    // MARK: - Annotation Clustering
+    
+    public func updateVisableAnnotations() {
+        
+        guard let mapView = self.mapView else {
+            return
+        }
+        
+        // This value controls the number of off screen annotations displayed.
+        // A bigger number means more annotations, less change of seeing annotation views pop in, but decreaced performance.
+        // A smaller number means fewer annotations, more chance of seeing annotation views pop in, but better performance.
+        let marginFactor: Double = 2
+        
+        // Adjust this based on the deimensions of your annotation views.
+        // Bigger number more aggressively coalesce annotations (fewer annotations displayed, but better performance).
+        // Numbers too small result in overlapping annotation views and too many annotations on screen.
+        let bucketSize: Double = 60
+        
+        // Fill all the annotations in the viaable area + a wide margin to avoid poppoing annotation views ina dn out while panning the map.
+        let visableMapRect = mapView.visibleMapRect
+        let adjustedVisableMapRect = MKMapRectInset(visableMapRect, -marginFactor * visableMapRect.size.width, -marginFactor * visableMapRect.size.height)
+        
+        // Determine how wide each bucket will be, as a MKMapRect square
+        let leftCoordinate = mapView.convertPoint(CGPoint(), toCoordinateFromView: viewController.view)
+        let rightCoordinate = mapView.convertPoint(CGPoint(x: bucketSize, y: 0), toCoordinateFromView: viewController.view)
+        let gridSize = MKMapPointForCoordinate(rightCoordinate).x - MKMapPointForCoordinate(leftCoordinate).x
+        var gridMapRect = MKMapRect(origin: MKMapPoint(x: 0, y: 0), size: MKMapSize(width: gridSize, height: gridSize))
+        
+        // Condense annotations. with a padding of two squares, around the viableMapRect
+        let startX = floor(MKMapRectGetMinX(adjustedVisableMapRect) / gridSize) * gridSize
+        let startY = floor(MKMapRectGetMinY(adjustedVisableMapRect) / gridSize) * gridSize
+        let endX = floor(MKMapRectGetMaxX(adjustedVisableMapRect) / gridSize) * gridSize
+        let endY = floor(MKMapRectGetMaxY(adjustedVisableMapRect) / gridSize) * gridSize
+        
+        // For each square in the grid, pick one annotation to show
+        gridMapRect.origin.y = startY
+        while MKMapRectGetMinY(gridMapRect) <= endY {
+            
+            gridMapRect.origin.x = startX
+            while MKMapRectGetMinX(gridMapRect) <= endX {
+                
+                guard let visableAnnotationsInBucket = mapView.annotationsInMapRect(gridMapRect) as? Set<Annotation> else {
+                    continue
+                }
+                
+                // TODO: Limit to only the used Annotation class
+                let allAnnotationsInBucket = offscreenMapView.annotationsInMapRect(gridMapRect)
+                guard var filteredAllAnnotationsInBucket = (allAnnotationsInBucket as NSSet).objectsPassingTest({ (object, stop) -> Bool in
+                    return object.isKindOfClass(Annotation)
+                }) as? Set<Annotation> else {
+                    continue
+                }
+                
+                if filteredAllAnnotationsInBucket.count > 0 {
+                    
+                    guard let annotationForGrid = calculatedAnnotationInGrid(mapView, gridMapRect: gridMapRect, allAnnotations: filteredAllAnnotationsInBucket, visableAnnotations: visableAnnotationsInBucket) else {
+                        continue
+                    }
+                    
+                    filteredAllAnnotationsInBucket.remove(annotationForGrid)
+                    
+                    // Give the annotationForGrid a reference to all the annotations it will represent
+                    annotationForGrid.containdedAnnotations = (filteredAllAnnotationsInBucket as NSSet).allObjects as? [Annotation]
+                    
+                    mapView.addAnnotation(annotationForGrid)
+                    
+                    // Cleanup other annotations that might be being viewed
+                    for annotation in filteredAllAnnotationsInBucket {
+                        
+                        // Give all the other annotations a reference to the one which is representing then.
+                        annotation.clusterAnnotation = annotationForGrid
+                        
+                        if visableAnnotationsInBucket.contains(annotation) {
+                            mapView.removeAnnotation(annotation)
+                        }
+                    }
+                }
+                
+                gridMapRect.origin.x += gridSize
+            }
+            
+            gridMapRect.origin.y += gridSize
+        }
+    }
+    
+    private func calculatedAnnotationInGrid(mapView: MKMapView, gridMapRect: MKMapRect, allAnnotations: Set<Annotation>, visableAnnotations: Set<Annotation>) -> Annotation? {
+        
+        // First, see if one of the annotations we were already showing is in this mapRect
+        let annotationsForGridSet = (visableAnnotations as NSSet).objectsPassingTest({ (object, stop) -> Bool in
+            
+            let returnValue = visableAnnotations.contains(object as! Annotation)
+            if returnValue {
+                stop.memory = true
+            }
+            return returnValue
+            
+        }) as? Set<Annotation>
+        
+        if let annotations = annotationsForGridSet where annotations.count != 0 {
+            return annotations.first
+        }
+        
+        // Otherwise, sort the annotations based on their  distance from the center of the grid square,
+        // then choose the one closest to the center to show.
+        let centerMapPoint = MKMapPoint(x: MKMapRectGetMidX(gridMapRect), y: MKMapRectGetMidY(gridMapRect))
+        let sortedAnnotations = allAnnotations.sort { (object1, object2) -> Bool in
+            
+            let mapPoint1 = MKMapPointForCoordinate(object1.coordinate)
+            let mapPoint2 = MKMapPointForCoordinate(object2.coordinate)
+            
+            let distance1 = MKMetersBetweenMapPoints(mapPoint1, centerMapPoint)
+            let distance2 = MKMetersBetweenMapPoints(mapPoint2, centerMapPoint)
+            
+            return distance1 < distance2
+        }
+        
+        return sortedAnnotations.first
     }
     
     // MARK: - Zoom Map Methods
@@ -329,11 +451,13 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     */
     public func removeAllPolylines() {
         
-        if let mapView = self.mapView {
-            for overlay in mapView.overlays {
-                if let polyline = overlay as? MKPolyline {
-                    mapView.removeOverlay(polyline)
-                }
+        guard let mapView = self.mapView else {
+            return
+        }
+        
+        for overlay in mapView.overlays {
+            if let polyline = overlay as? MKPolyline {
+                mapView.removeOverlay(polyline)
             }
         }
     }
@@ -543,6 +667,10 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         return MKOverlayRenderer()
     }
     
+    public func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        updateVisableAnnotations()
+    }
+    
     public func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
         if hasPlottedInitUsersLocation == false {
             hasPlottedInitUsersLocation = true
@@ -736,6 +864,22 @@ public class Annotation: NSObject, MKAnnotation {
     /// The address string of the address.
     public var subtitle: String? {
         return address.addressString
+    }
+    // If the annotation is a clustered annotation, this value holds all the annotations it represents.
+    public var containdedAnnotations: [Annotation]? {
+        didSet {
+            if containdedAnnotations != nil {
+                clusterAnnotation = nil
+            }
+        }
+    }
+    // If the annotation is part of a clustered annotation, this represent the visable annotation.
+    public var clusterAnnotation: Annotation? {
+        didSet {
+            if clusterAnnotation != nil {
+                containdedAnnotations = nil
+            }
+        }
     }
     
     public override init() {
