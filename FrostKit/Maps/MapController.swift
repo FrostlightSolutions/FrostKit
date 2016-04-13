@@ -313,6 +313,13 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
             
             gridMapRect.origin.y += gridSize
         }
+        
+        currentlyUpdatingVisableAnnotations = false
+        NSLog("Completed \(#function).")
+        if shouldTryToUpdateVisableAnnotationsWhenFinished == true {
+            NSLog("Re-trying to update visable annotations...")
+            updateVisableAnnotations()
+        }
     }
     
     private func calculatedAnnotationInGrid(mapView: MKMapView, gridMapRect: MKMapRect, allAnnotations: Set<Annotation>, visableAnnotations: Set<Annotation>) -> Annotation? {
