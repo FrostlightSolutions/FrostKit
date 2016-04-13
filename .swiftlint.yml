@@ -11,8 +11,8 @@ file_length:
   warning: 800
   error: 1400
 type_body_length:
-  warning: 300
-  error: 400
+  warning: 500
+  error: 600
 function_body_length:
   warning: 80
   error: 120
