@@ -157,16 +157,18 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     */
     public func plotAddresses(addresses: [Address]) {
         for address in addresses {
-            plotAddress(address)
+            plotAddress(address, plottingAsBulk: true)
         }
+        updateVisableAnnotations()
     }
     
     /**
-    Plot an address to the map view.
-    
-    - parameter address: An address to plot.
-    */
-    public func plotAddress(address: Address) {
+     Plot an address to the map view.
+     
+     - parameter address:        An address to plot.
+     - parameter plottingAsBulk: Tells the controller if this is part of a bulk command. Leave to `false` for better performance.
+     */
+    public func plotAddress(address: Address, plottingAsBulk: Bool = false) {
         if address.isValid == false {
             return
         }
