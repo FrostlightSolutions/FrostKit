@@ -219,7 +219,12 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     
     // MARK: - Annotation Clustering
     
-    public func updateVisableAnnotations() {
+    /**
+     This function is automatically called when an address is added or the map region changes.
+     
+     If you have customised plotting of map points, this should be called, but should not be overriden.
+     */
+    public final func updateVisableAnnotations() {
         
         guard let mapView = self.mapView else {
             return
