@@ -589,8 +589,12 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                 annotationPinView = annotationView
             } else {
                 let pinView = MKPinAnnotationView(annotation: myAnnotation, reuseIdentifier: identifier)
-                pinView.pinColor = .Red
-                pinView.animatesDrop = true
+                if #available(iOSApplicationExtension 9.0, *) {
+                    pinView.pinTintColor = MKPinAnnotationView.redPinColor()
+                } else {
+                    pinView.pinColor = .Red
+                }
+                pinView.animatesDrop = false
                 pinView.hidden = false
                 pinView.enabled = true
                 pinView.canShowCallout = true
