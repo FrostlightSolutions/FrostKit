@@ -243,7 +243,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         
         NSLog("Started \(#function)...")
         
-        calculateAndUpdateClusterAnnotations { 
+        calculateAndUpdateClusterAnnotations {
             
             self.currentlyUpdatingVisableAnnotations = false
             NSLog("Completed \(#function)")
@@ -256,9 +256,33 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     
     private func calculateAndUpdateClusterAnnotations(complete: () -> Void) {
         
+        guard let mapView = self.mapView else {
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                complete()
+            })
+            return
+        }
+        
+        let visableMapRect = mapView.visibleMapRect
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
             
-            guard let mapView = self.mapView else {
+            let marginFactor = self.marginFactor
+            let bucketSize = self.bucketSize
+            
+            // Fill all the annotations in the viaable area + a wide margin to avoid poppoing annotation views ina dn out while panning the map.
+            let adjustedVisableMapRect = MKMapRectInset(visableMapRect, -marginFactor * visableMapRect.size.width, -marginFactor * visableMapRect.size.height)
+            
+            // Determine how wide each bucket will be, as a MKMapRect square
+            var leftCoordinate: CLLocationCoordinate2D?
+            var rightCoordinate: CLLocationCoordinate2D?
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                leftCoordinate = mapView.convertPoint(CGPoint(), toCoordinateFromView: self.viewController.view)
+                rightCoordinate = mapView.convertPoint(CGPoint(x: bucketSize, y: 0), toCoordinateFromView: self.viewController.view)
+            })
+            
+            if leftCoordinate == nil || rightCoordinate == nil {
                 
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     complete()
@@ -266,17 +290,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                 return
             }
             
-            let marginFactor = self.marginFactor
-            let bucketSize = self.bucketSize
-            
-            // Fill all the annotations in the viaable area + a wide margin to avoid poppoing annotation views ina dn out while panning the map.
-            let visableMapRect = mapView.visibleMapRect
-            let adjustedVisableMapRect = MKMapRectInset(visableMapRect, -marginFactor * visableMapRect.size.width, -marginFactor * visableMapRect.size.height)
-            
-            // Determine how wide each bucket will be, as a MKMapRect square
-            let leftCoordinate = mapView.convertPoint(CGPoint(), toCoordinateFromView: self.viewController.view)
-            let rightCoordinate = mapView.convertPoint(CGPoint(x: bucketSize, y: 0), toCoordinateFromView: self.viewController.view)
-            let gridSize = MKMapPointForCoordinate(rightCoordinate).x - MKMapPointForCoordinate(leftCoordinate).x
+            let gridSize = MKMapPointForCoordinate(rightCoordinate!).x - MKMapPointForCoordinate(leftCoordinate!).x
             var gridMapRect = MKMapRect(origin: MKMapPoint(x: 0, y: 0), size: MKMapSize(width: gridSize, height: gridSize))
             
             // Condense annotations. with a padding of two squares, around the viableMapRect
@@ -292,7 +306,11 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                 gridMapRect.origin.x = startX
                 while MKMapRectGetMinX(gridMapRect) <= endX {
                     
-                    guard let visableAnnotationsInBucket = mapView.annotationsInMapRect(gridMapRect) as? Set<Annotation> else {
+                    var visableAnnotationsInBucket: Set<Annotation>?
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        visableAnnotationsInBucket = mapView.annotationsInMapRect(gridMapRect) as? Set<Annotation>
+                    })
+                    if visableAnnotationsInBucket == nil {
                         continue
                     }
                     
@@ -306,7 +324,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                     
                     if filteredAllAnnotationsInBucket.count > 0 {
                         
-                        guard let annotationForGrid = self.calculatedAnnotationInGrid(mapView, gridMapRect: gridMapRect, allAnnotations: filteredAllAnnotationsInBucket, visableAnnotations: visableAnnotationsInBucket) else {
+                        guard let annotationForGrid = self.calculatedAnnotationInGrid(mapView, gridMapRect: gridMapRect, allAnnotations: filteredAllAnnotationsInBucket, visableAnnotations: visableAnnotationsInBucket!) else {
                             continue
                         }
                         
@@ -325,7 +343,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                             // Give all the other annotations a reference to the one which is representing then.
                             annotation.clusterAnnotation = annotationForGrid
                             
-                            if visableAnnotationsInBucket.contains(annotation) {
+                            if visableAnnotationsInBucket!.contains(annotation) {
                                 
                                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                                     mapView.removeAnnotation(annotation)
@@ -383,29 +401,29 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     // MARK: - Zoom Map Methods
     
     /**
-    Zoom the map view to a coordinate.
-    
-    - parameter coordinare: The coordinate to zoom to.
-    */
+     Zoom the map view to a coordinate.
+     
+     - parameter coordinare: The coordinate to zoom to.
+     */
     public func zoomToCoordinate(coordinare: CLLocationCoordinate2D) {
         let point = MKMapPointForCoordinate(coordinare)
         zoomToMapPoints([point])
     }
     
     /**
-    Zoom the map view to an annotation.
-    
-    - parameter annotation: The annotation to zoom to.
-    */
+     Zoom the map view to an annotation.
+     
+     - parameter annotation: The annotation to zoom to.
+     */
     public func zoomToAnnotation(annotation: MKAnnotation) {
         zoomToAnnotations([annotation])
     }
     
     /**
-    Zoom the map to show multiple annotations.
-    
-    - parameter annotations: The annotations to zoom to.
-    */
+     Zoom the map to show multiple annotations.
+     
+     - parameter annotations: The annotations to zoom to.
+     */
     public func zoomToAnnotations(annotations: [MKAnnotation]) {
         let count = annotations.count
         if count > 0 {
@@ -418,10 +436,10 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     /**
-    Zoom the map to show multiple map points.
-    
-    - parameter points: Swift array of `MKMapPoints` to zoom to.
-    */
+     Zoom the map to show multiple map points.
+     
+     - parameter points: Swift array of `MKMapPoints` to zoom to.
+     */
     public func zoomToMapPoints(points: [MKMapPoint]) {
         let count = points.count
         let cPoints: UnsafeMutablePointer<MKMapPoint> = UnsafeMutablePointer<MKMapPoint>.alloc(count)
@@ -431,11 +449,11 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     /**
-    Zoom the map to show multiple map points.
-    
-    - parameter points: C array array of `MKMapPoints` to zoom to.
-    - parameter count:  The number of points in the C array.
-    */
+     Zoom the map to show multiple map points.
+     
+     - parameter points: C array array of `MKMapPoints` to zoom to.
+     - parameter count:  The number of points in the C array.
+     */
     public func zoomToMapPoints(points: UnsafeMutablePointer<MKMapPoint>, count: Int) {
         let mapRect = MKPolygon(points: points, count: count).boundingMapRect
         var region: MKCoordinateRegion = MKCoordinateRegionForMapRect(mapRect)
@@ -448,10 +466,10 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     /**
-    Zoom the map to show a region.
-    
-    - parameter region: The region to zoom the map to.
-    */
+     Zoom the map to show a region.
+     
+     - parameter region: The region to zoom the map to.
+     */
     public func zoomToRegion(region: MKCoordinateRegion) {
         
         var zoomRegion = region
@@ -460,8 +478,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     /**
-    Zoom the map to show the users current location.
-    */
+     Zoom the map to show the users current location.
+     */
     public func zoomToCurrentLocation() {
         trackingUser = true
         if let mapView = self.mapView {
@@ -470,10 +488,10 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     /**
-    Zoom the map to show all points plotted on the map.
-    
-    - parameter includingUser: If `true` then the users annotation is also included in the points. If `false` then only plotted points are zoomed to.
-    */
+     Zoom the map to show all points plotted on the map.
+     
+     - parameter includingUser: If `true` then the users annotation is also included in the points. If `false` then only plotted points are zoomed to.
+     */
     public func zoomToShowAll(includingUser: Bool = true) {
         
         if includingUser == false || zoomToShowAllIncludesUser == false {
@@ -485,10 +503,10 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     /**
-    Zooms the map to an address object.
-    
-    - parameter address: The address object to zoom to.
-    */
+     Zooms the map to an address object.
+     
+     - parameter address: The address object to zoom to.
+     */
     public func zoomToAddress(address: Address) {
         plotAddress(address)
         
@@ -498,10 +516,10 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     /**
-    Zooms the map to a polyline.
-    
-    - parameter polyline: The polyline to zoom to.
-    */
+     Zooms the map to a polyline.
+     
+     - parameter polyline: The polyline to zoom to.
+     */
     public func zoomToPolyline(polyline: MKPolyline) {
         zoomToMapPoints(polyline.points(), count: polyline.pointCount)
     }
@@ -509,8 +527,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     // MARK: - Polyline and Route Methods
     
     /**
-    Removes all the polylines plotted on the map view.
-    */
+     Removes all the polylines plotted on the map view.
+     */
     public func removeAllPolylines() {
         
         guard let mapView = self.mapView else {
@@ -567,11 +585,11 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     /**
-    Gets directions to a coordinate from the users current location.
-    
-    - parameter coordinate: The coordinate to get directions to.
-    - parameter inApp:      If `true` diretions are plotted in-app on the map view. If `false` then the Maps.app is opened with the directions requested.
-    */
+     Gets directions to a coordinate from the users current location.
+     
+     - parameter coordinate: The coordinate to get directions to.
+     - parameter inApp:      If `true` diretions are plotted in-app on the map view. If `false` then the Maps.app is opened with the directions requested.
+     */
     public func directionsToCurrentLocationFrom(coordinate coordinate: CLLocationCoordinate2D, inApp: Bool = true) {
         
         let currentLocationItem = MKMapItem.mapItemForCurrentLocation()
@@ -593,10 +611,10 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     /**
-    Plots a route as a polyline after removing all previous reotes, and then zoom to display the new route.
-    
-    - parameter route: The route to plot.
-    */
+     Plots a route as a polyline after removing all previous reotes, and then zoom to display the new route.
+     
+     - parameter route: The route to plot.
+     */
     public func plotRoute(route: MKRoute) {
         mapView?.addOverlay(route.polyline, level: .AboveRoads)
     }
@@ -604,12 +622,12 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     // MARK: - Helper Methods
     
     /**
-    Normalizes a regions space with the constants preset.
-    
-    - parameter span: The span to normalize.
-    
-    - returns: The normalized span.
-    */
+     Normalizes a regions space with the constants preset.
+     
+     - parameter span: The span to normalize.
+     
+     - returns: The normalized span.
+     */
     public func normalizeRegionSpan(span: MKCoordinateSpan) -> MKCoordinateSpan {
         
         var normalizedSpan = MKCoordinateSpanMake(span.latitudeDelta * annotationRegionPadFactor, span.longitudeDelta * annotationRegionPadFactor)
@@ -780,12 +798,12 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     // MARK: - Search Methods
     
     /**
-    Performs a predicate search on the addresses dictionary that begins with the search string.
-    
-    - parameter searchString: The string to search the addresses by name or simple address.
-    
-    - returns: An array of addresses that meet the predicate search criteria.
-    */
+     Performs a predicate search on the addresses dictionary that begins with the search string.
+     
+     - parameter searchString: The string to search the addresses by name or simple address.
+     
+     - returns: An array of addresses that meet the predicate search criteria.
+     */
     public func searchAddresses(searchString: String) -> [Address] {
         let predicate = NSPredicate(format: "name beginswith[cd] %@ || addressString beginswith[cd] %@", searchString, searchString)
         return (addresses as NSArray).filteredArrayUsingPredicate(predicate) as! [Address]

@@ -8,8 +8,8 @@ excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
   - fastlane
 file_length:
-  warning: 800
-  error: 1400
+  warning: 1000
+  error: 1600
 type_body_length:
   warning: 500
   error: 600
