@@ -260,7 +260,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                     continue
                 }
                 
-                // TODO: Limit to only the used Annotation class
+                // Limited to only the use Annotation classes or subclasses
                 let allAnnotationsInBucket = offscreenMapView.annotationsInMapRect(gridMapRect)
                 guard var filteredAllAnnotationsInBucket = (allAnnotationsInBucket as NSSet).objectsPassingTest({ (object, stop) -> Bool in
                     return object.isKindOfClass(Annotation)
