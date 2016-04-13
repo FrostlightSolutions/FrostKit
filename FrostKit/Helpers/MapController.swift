@@ -417,7 +417,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
             zoomToAnnotations(annotations)
         } else {
             if let mapView = self.mapView {
-                zoomToAnnotations(mapView.annotations as [MKAnnotation])
+                zoomToAnnotations(offscreenMapView.annotations as [MKAnnotation])
             }
         }
     }
