@@ -275,22 +275,9 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
             let adjustedVisableMapRect = MKMapRectInset(visableMapRect, -marginFactor * visableMapRect.size.width, -marginFactor * visableMapRect.size.height)
             
             // Determine how wide each bucket will be, as a MKMapRect square
-            var leftCoordinate: CLLocationCoordinate2D?
-            var rightCoordinate: CLLocationCoordinate2D?
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                leftCoordinate = mapView.convertPoint(CGPoint(), toCoordinateFromView: self.viewController.view)
-                rightCoordinate = mapView.convertPoint(CGPoint(x: bucketSize, y: 0), toCoordinateFromView: self.viewController.view)
-            })
-            
-            if leftCoordinate == nil || rightCoordinate == nil {
-                
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    complete()
-                })
-                return
-            }
-            
-            let gridSize = MKMapPointForCoordinate(rightCoordinate!).x - MKMapPointForCoordinate(leftCoordinate!).x
+            let leftCoordinate = mapView.convertPoint(CGPoint(), toCoordinateFromView: self.viewController.view)
+            let rightCoordinate = mapView.convertPoint(CGPoint(x: bucketSize, y: 0), toCoordinateFromView: self.viewController.view)
+            let gridSize = MKMapPointForCoordinate(rightCoordinate).x - MKMapPointForCoordinate(leftCoordinate).x
             var gridMapRect = MKMapRect(origin: MKMapPoint(x: 0, y: 0), size: MKMapSize(width: gridSize, height: gridSize))
             
             // Condense annotations. with a padding of two squares, around the viableMapRect
@@ -306,15 +293,10 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                 gridMapRect.origin.x = startX
                 while MKMapRectGetMinX(gridMapRect) <= endX {
                     
-                    var visableAnnotationsInBucket: Set<Annotation>?
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        visableAnnotationsInBucket = mapView.annotationsInMapRect(gridMapRect) as? Set<Annotation>
-                    })
-                    if visableAnnotationsInBucket == nil {
+                    // Limited to only the use Annotation classes or subclasses
+                    guard let visableAnnotationsInBucket = mapView.annotationsInMapRect(gridMapRect) as? Set<Annotation> else {
                         continue
                     }
-                    
-                    // Limited to only the use Annotation classes or subclasses
                     let allAnnotationsInBucket = self.offscreenMapView.annotationsInMapRect(gridMapRect)
                     var filteredAllAnnotationsInBucket = Set<Annotation>()
                     for object in allAnnotationsInBucket {
@@ -325,14 +307,14 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                     
                     if filteredAllAnnotationsInBucket.count > 0 {
                         
-                        guard let annotationForGrid = self.calculatedAnnotationInGrid(mapView, gridMapRect: gridMapRect, allAnnotations: filteredAllAnnotationsInBucket, visableAnnotations: visableAnnotationsInBucket!) else {
+                        guard let annotationForGrid = self.calculatedAnnotationInGrid(mapView, gridMapRect: gridMapRect, allAnnotations: filteredAllAnnotationsInBucket, visableAnnotations: visableAnnotationsInBucket) else {
                             continue
                         }
                         
                         filteredAllAnnotationsInBucket.remove(annotationForGrid)
                         
                         // Give the annotationForGrid a reference to all the annotations it will represent
-                        annotationForGrid.containdedAnnotations = (filteredAllAnnotationsInBucket as NSSet).allObjects as? [Annotation]
+                        annotationForGrid.containdedAnnotations = Array<Annotation>(filteredAllAnnotationsInBucket)
                         
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
                             mapView.addAnnotation(annotationForGrid)
@@ -344,7 +326,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                             // Give all the other annotations a reference to the one which is representing then.
                             annotation.clusterAnnotation = annotationForGrid
                             
-                            if visableAnnotationsInBucket!.contains(annotation) {
+                            if visableAnnotationsInBucket.contains(annotation) {
                                 
                                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                                     mapView.removeAnnotation(annotation)
