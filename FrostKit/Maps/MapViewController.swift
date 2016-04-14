@@ -32,6 +32,10 @@ public class MapViewController: UIViewController {
         return nil
     }
     private var zoomedToShowAll = false
+    /// Ditermines if the map view should zoom to show all on the first view did appear.
+    @IBInspectable var shouldZoomToShowAllOnViewDidAppear: Bool {
+        return true
+    }
     /// Overridden by a subclass to define actual scope titles for the search bar. If an empty array is returned then the scope selector is not shown. By default this is set to `Markers` and `Locations`.
     public var searchScopeButtonTitles: [String] {
         return [FKLocalizedString("MARKERS", comment: "Markers"), FKLocalizedString("LOCATIONS", comment: "Locations")]
@@ -69,7 +73,7 @@ public class MapViewController: UIViewController {
     override public func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        if zoomedToShowAll == false {
+        if shouldZoomToShowAllOnViewDidAppear == true && zoomedToShowAll == false {
             zoomedToShowAll = true
             mapController.zoomToShowAll()
         }
