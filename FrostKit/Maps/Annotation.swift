@@ -22,19 +22,23 @@ public class Annotation: NSObject, MKAnnotation {
     }
     /// The name of the address.
     public var title: String? {
-        if containdedAnnotations == nil || containdedAnnotations?.count <= 0 {
-            return address.name
-        } else {
-            return nil
+        if let containdedAnnotations = self.containdedAnnotations where containdedAnnotations.count > 0 {
+            let tense: String
+            if containdedAnnotations.count == 1 {
+                tense = FKLocalizedString("ITEM", comment: "Item")
+            } else {
+                tense = FKLocalizedString("ITEMS", comment: "Items")
+            }
+            return "\(containdedAnnotations.count) \(tense)"
         }
+        return address.name
     }
     /// The address string of the address.
     public var subtitle: String? {
-        if containdedAnnotations == nil || containdedAnnotations?.count <= 0 {
-            return address.addressString
-        } else {
-            return nil
+        if let containdedAnnotations = self.containdedAnnotations where containdedAnnotations.count > 0 {
+            return ""
         }
+        return address.addressString
     }
     // If the annotation is a clustered annotation, this value holds all the annotations it represents.
     public var containdedAnnotations: [Annotation]? {

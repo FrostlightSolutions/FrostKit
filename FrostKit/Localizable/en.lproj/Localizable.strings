@@ -29,6 +29,8 @@
 "ZOOM_TO_" = "Zoom to...";
 "DIRECTIONS" = "Directions";
 "OPEN_IN_MAPS" = "Open in Maps";
+"ITEM" = "Item";        // Singular
+"ITEMS" = "Items";      // Plural
 
 /* MapViewController */
 

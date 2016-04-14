@@ -679,7 +679,13 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                 pinView.enabled = true
                 pinView.canShowCallout = true
                 pinView.draggable = false
-                pinView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+                
+                if let anno = annotation as? Annotation {
+                    if anno.containdedAnnotations == nil || anno.containdedAnnotations?.count <= 0 {
+                        pinView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+                    }
+                }
+                
                 annotationPinView = pinView
             }
         }
