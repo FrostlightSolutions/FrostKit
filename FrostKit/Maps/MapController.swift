@@ -241,14 +241,10 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         currentlyUpdatingVisableAnnotations = true
         shouldTryToUpdateVisableAnnotationsAgain = false
         
-        NSLog("Started \(#function)...")
-        
         calculateAndUpdateClusterAnnotations {
             
             self.currentlyUpdatingVisableAnnotations = false
-            NSLog("Completed \(#function)")
             if self.shouldTryToUpdateVisableAnnotationsAgain == true {
-                NSLog("Re-trying to update visable annotations...")
                 self.updateVisableAnnotations()
             }
         }
