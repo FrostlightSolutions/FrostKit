@@ -321,9 +321,20 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     private func calculateClusterInGrid(mapView: MKMapView, offscreenMapView: MKMapView, gridMapRect: MKMapRect) {
         
         // Limited to only the use Annotation classes or subclasses
-        guard let visableAnnotationsInBucket = mapView.annotationsInMapRect(gridMapRect) as? Set<Annotation> else {
+        let semaphore = dispatch_semaphore_create(0)    // Create semaphore
+        var visableAnnotationsInBucket: Set<Annotation>!
+        
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            
+            visableAnnotationsInBucket = mapView.annotationsInMapRect(gridMapRect) as? Set<Annotation>
+            dispatch_semaphore_signal(semaphore)    // Signal that semaphore should complete
+        })
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)   // Wait for semaphore
+        
+        if visableAnnotationsInBucket == nil {
             return
         }
+        
         let allAnnotationsInBucket = offscreenMapView.annotationsInMapRect(gridMapRect)
         var filteredAllAnnotationsInBucket = Set<Annotation>()
         for object in allAnnotationsInBucket {
