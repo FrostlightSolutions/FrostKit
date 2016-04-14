@@ -265,7 +265,10 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         let adjustedVisableMapRect = MKMapRectInset(visableMapRect, -marginFactor * visableMapRect.size.width, -marginFactor * visableMapRect.size.height)
         
         // Determine how wide each bucket will be, as a MKMapRect square
-        let viewController = self.viewController
+        guard let viewController = self.viewController else {
+            complete()
+            return
+        }
         let leftCoordinate = mapView.convertPoint(CGPoint(), toCoordinateFromView: viewController.view)
         let rightCoordinate = mapView.convertPoint(CGPoint(x: bucketSize, y: 0), toCoordinateFromView: viewController.view)
         let gridSize = MKMapPointForCoordinate(rightCoordinate).x - MKMapPointForCoordinate(leftCoordinate).x
