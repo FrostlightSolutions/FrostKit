@@ -105,6 +105,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     public var zoomToShowAllIncludesUser: Bool {
         return true
     }
+    private var regionSpanBeforeChange: MKCoordinateSpan?
     
     deinit {
         resetMap()
@@ -629,6 +630,21 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         return normalizedSpan
     }
     
+    /**
+     Deselects any showing annotation view callout on the map.
+     */
+    public func deselectAllAnnotations() {
+        
+        guard let mapView = self.mapView else {
+            return
+        }
+        
+        let selectedAnnotations = mapView.selectedAnnotations
+        for selectedAnnotation in selectedAnnotations {
+            mapView.deselectAnnotation(selectedAnnotation, animated: true)
+        }
+    }
+    
     // MARK: - MKMapViewDelegate Methods
     
     final public func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
@@ -735,7 +751,20 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         return MKOverlayRenderer()
     }
     
+    public func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        regionSpanBeforeChange = mapView.region.span
+    }
+    
     public func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        
+        if let regionSpanBeforeChange = self.regionSpanBeforeChange {
+            
+            let hasZoomed = !(fabs(mapView.region.span.longitudeDelta - regionSpanBeforeChange.longitudeDelta) < 1.19209290e-7)
+            if hasZoomed {
+                deselectAllAnnotations()
+            }
+        }
+        
         updateVisableAnnotations()
     }
     
