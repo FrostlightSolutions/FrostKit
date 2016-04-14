@@ -56,7 +56,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      
      A smaller number means fewer annotations, more chance of seeing annotation views pop in, but better performance.
     */
-    public var marginFactor: Double {
+    @IBInspectable public var marginFactor: Double {
         return 2
     }
     /**
@@ -66,7 +66,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      
      Numbers too small result in overlapping annotation views and too many annotations on screen.
     */
-    public var bucketSize: Double {
+    @IBInspectable public var bucketSize: Double {
         return 60
     }
     private var currentlyUpdatingVisableAnnotations = false
