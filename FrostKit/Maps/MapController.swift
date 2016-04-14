@@ -102,9 +102,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     /// A dictionary of annotations plotted to the map view with the address object as the key.
     public var annotations = [NSObject: MKAnnotation]()
     /// When the map automatically zooms to show all, if this value is set to true, then the users annoation is automatically included in that.
-    @IBInspectable public var zoomToShowAllIncludesUser: Bool {
-        return true
-    }
+    @IBInspectable public var zoomToShowAllIncludesUser: Bool = true
     private var regionSpanBeforeChange: MKCoordinateSpan?
     let clusterCalculationsQueue: dispatch_queue_t = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)
     var cancelClusterCalculations = false
