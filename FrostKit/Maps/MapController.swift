@@ -257,94 +257,97 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     private func calculateAndUpdateClusterAnnotations(complete: () -> Void) {
         
         guard let mapView = self.mapView else {
-            
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                complete()
-            })
+            complete()
             return
         }
         
-        let visableMapRect = mapView.visibleMapRect
+        let marginFactor = self.marginFactor
+        let bucketSize = self.bucketSize
         
+        // Fill all the annotations in the viaable area + a wide margin to avoid poppoing annotation views ina dn out while panning the map.
+        let visableMapRect = mapView.visibleMapRect
+        let adjustedVisableMapRect = MKMapRectInset(visableMapRect, -marginFactor * visableMapRect.size.width, -marginFactor * visableMapRect.size.height)
+        
+        // Determine how wide each bucket will be, as a MKMapRect square
+        let viewController = self.viewController
+        let leftCoordinate = mapView.convertPoint(CGPoint(), toCoordinateFromView: viewController.view)
+        let rightCoordinate = mapView.convertPoint(CGPoint(x: bucketSize, y: 0), toCoordinateFromView: viewController.view)
+        let gridSize = MKMapPointForCoordinate(rightCoordinate).x - MKMapPointForCoordinate(leftCoordinate).x
+        var gridMapRect = MKMapRect(origin: MKMapPoint(x: 0, y: 0), size: MKMapSize(width: gridSize, height: gridSize))
+        
+        // Condense annotations. with a padding of two squares, around the viableMapRect
+        let startX = floor(MKMapRectGetMinX(adjustedVisableMapRect) / gridSize) * gridSize
+        let startY = floor(MKMapRectGetMinY(adjustedVisableMapRect) / gridSize) * gridSize
+        let endX = floor(MKMapRectGetMaxX(adjustedVisableMapRect) / gridSize) * gridSize
+        let endY = floor(MKMapRectGetMaxY(adjustedVisableMapRect) / gridSize) * gridSize
+        
+        // For each square in the grid, pick one annotation to show
+        let offscreenMapView = self.offscreenMapView
+        gridMapRect.origin.y = startY
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
             
-            let marginFactor = self.marginFactor
-            let bucketSize = self.bucketSize
-            
-            // Fill all the annotations in the viaable area + a wide margin to avoid poppoing annotation views ina dn out while panning the map.
-            let adjustedVisableMapRect = MKMapRectInset(visableMapRect, -marginFactor * visableMapRect.size.width, -marginFactor * visableMapRect.size.height)
-            
-            // Determine how wide each bucket will be, as a MKMapRect square
-            let leftCoordinate = mapView.convertPoint(CGPoint(), toCoordinateFromView: self.viewController.view)
-            let rightCoordinate = mapView.convertPoint(CGPoint(x: bucketSize, y: 0), toCoordinateFromView: self.viewController.view)
-            let gridSize = MKMapPointForCoordinate(rightCoordinate).x - MKMapPointForCoordinate(leftCoordinate).x
-            var gridMapRect = MKMapRect(origin: MKMapPoint(x: 0, y: 0), size: MKMapSize(width: gridSize, height: gridSize))
-            
-            // Condense annotations. with a padding of two squares, around the viableMapRect
-            let startX = floor(MKMapRectGetMinX(adjustedVisableMapRect) / gridSize) * gridSize
-            let startY = floor(MKMapRectGetMinY(adjustedVisableMapRect) / gridSize) * gridSize
-            let endX = floor(MKMapRectGetMaxX(adjustedVisableMapRect) / gridSize) * gridSize
-            let endY = floor(MKMapRectGetMaxY(adjustedVisableMapRect) / gridSize) * gridSize
-            
-            // For each square in the grid, pick one annotation to show
-            gridMapRect.origin.y = startY
             while MKMapRectGetMinY(gridMapRect) <= endY {
                 
                 gridMapRect.origin.x = startX
                 while MKMapRectGetMinX(gridMapRect) <= endX {
                     
-                    // Limited to only the use Annotation classes or subclasses
-                    guard let visableAnnotationsInBucket = mapView.annotationsInMapRect(gridMapRect) as? Set<Annotation> else {
-                        continue
-                    }
-                    let allAnnotationsInBucket = self.offscreenMapView.annotationsInMapRect(gridMapRect)
-                    var filteredAllAnnotationsInBucket = Set<Annotation>()
-                    for object in allAnnotationsInBucket {
-                        if let annotation = object as? Annotation {
-                            filteredAllAnnotationsInBucket.insert(annotation)
-                        }
-                    }
-                    
-                    if filteredAllAnnotationsInBucket.count > 0 {
-                        
-                        guard let annotationForGrid = self.calculatedAnnotationInGrid(mapView, gridMapRect: gridMapRect, allAnnotations: filteredAllAnnotationsInBucket, visableAnnotations: visableAnnotationsInBucket) else {
-                            continue
-                        }
-                        
-                        filteredAllAnnotationsInBucket.remove(annotationForGrid)
-                        
-                        // Give the annotationForGrid a reference to all the annotations it will represent
-                        annotationForGrid.containdedAnnotations = Array<Annotation>(filteredAllAnnotationsInBucket)
-                        
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            mapView.addAnnotation(annotationForGrid)
-                        })
-                        
-                        // Cleanup other annotations that might be being viewed
-                        for annotation in filteredAllAnnotationsInBucket {
-                            
-                            // Give all the other annotations a reference to the one which is representing then.
-                            annotation.clusterAnnotation = annotationForGrid
-                            
-                            if visableAnnotationsInBucket.contains(annotation) {
-                                
-                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                                    mapView.removeAnnotation(annotation)
-                                })
-                            }
-                        }
-                    }
+                    self.calculateClusterInGrid(mapView, offscreenMapView: offscreenMapView, gridMapRect: gridMapRect)
                     
                     gridMapRect.origin.x += gridSize
                 }
                 
                 gridMapRect.origin.y += gridSize
             }
+        })
+        
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            complete()
+        })
+    }
+    
+    private func calculateClusterInGrid(mapView: MKMapView, offscreenMapView: MKMapView, gridMapRect: MKMapRect) {
+        
+        // Limited to only the use Annotation classes or subclasses
+        guard let visableAnnotationsInBucket = mapView.annotationsInMapRect(gridMapRect) as? Set<Annotation> else {
+            return
+        }
+        let allAnnotationsInBucket = offscreenMapView.annotationsInMapRect(gridMapRect)
+        var filteredAllAnnotationsInBucket = Set<Annotation>()
+        for object in allAnnotationsInBucket {
+            if let annotation = object as? Annotation {
+                filteredAllAnnotationsInBucket.insert(annotation)
+            }
+        }
+        
+        if filteredAllAnnotationsInBucket.count > 0 {
+            
+            guard let annotationForGrid = self.calculatedAnnotationInGrid(mapView, gridMapRect: gridMapRect, allAnnotations: filteredAllAnnotationsInBucket, visableAnnotations: visableAnnotationsInBucket) else {
+                return
+            }
+            
+            filteredAllAnnotationsInBucket.remove(annotationForGrid)
+            
+            // Give the annotationForGrid a reference to all the annotations it will represent
+            annotationForGrid.containdedAnnotations = Array<Annotation>(filteredAllAnnotationsInBucket)
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                complete()
+                mapView.addAnnotation(annotationForGrid)
             })
-        })
+            
+            // Cleanup other annotations that might be being viewed
+            for annotation in filteredAllAnnotationsInBucket {
+                
+                // Give all the other annotations a reference to the one which is representing then.
+                annotation.clusterAnnotation = annotationForGrid
+                
+                if visableAnnotationsInBucket.contains(annotation) {
+                    
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        mapView.removeAnnotation(annotation)
+                    })
+                }
+            }
+        }
     }
     
     private func calculatedAnnotationInGrid(mapView: MKMapView, gridMapRect: MKMapRect, allAnnotations: Set<Annotation>, visableAnnotations: Set<Annotation>) -> Annotation? {
