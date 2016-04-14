@@ -316,10 +316,11 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                     
                     // Limited to only the use Annotation classes or subclasses
                     let allAnnotationsInBucket = self.offscreenMapView.annotationsInMapRect(gridMapRect)
-                    guard var filteredAllAnnotationsInBucket = (allAnnotationsInBucket as NSSet).objectsPassingTest({ (object, stop) -> Bool in
-                        return object.isKindOfClass(Annotation)
-                    }) as? Set<Annotation> else {
-                        continue
+                    var filteredAllAnnotationsInBucket = Set<Annotation>()
+                    for object in allAnnotationsInBucket {
+                        if let annotation = object as? Annotation {
+                            filteredAllAnnotationsInBucket.insert(annotation)
+                        }
                     }
                     
                     if filteredAllAnnotationsInBucket.count > 0 {
@@ -367,18 +368,17 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     private func calculatedAnnotationInGrid(mapView: MKMapView, gridMapRect: MKMapRect, allAnnotations: Set<Annotation>, visableAnnotations: Set<Annotation>) -> Annotation? {
         
         // First, see if one of the annotations we were already showing is in this mapRect
-        let annotationsForGridSet = (visableAnnotations as NSSet).objectsPassingTest({ (object, stop) -> Bool in
+        var annotationForGridSet: Annotation?
+        for annotation in visableAnnotations {
             
-            let returnValue = visableAnnotations.contains(object as! Annotation)
-            if returnValue {
-                stop.memory = true
+            if visableAnnotations.contains(annotation) {
+                annotationForGridSet = annotation
+                break
             }
-            return returnValue
-            
-        }) as? Set<Annotation>
+        }
         
-        if let annotations = annotationsForGridSet where annotations.count != 0 {
-            return annotations.first
+        if annotationForGridSet != nil {
+            return annotationForGridSet
         }
         
         // Otherwise, sort the annotations based on their  distance from the center of the grid square,
