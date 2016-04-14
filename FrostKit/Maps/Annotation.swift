@@ -15,25 +15,32 @@ import MapKit
 public class Annotation: NSObject, MKAnnotation {
     
     /// The address object for the annotation.
-    public var address: Address?
+    public lazy var address = Address()
     /// The coordinate of the address.
     public var coordinate: CLLocationCoordinate2D {
-        return address?.coordinate ?? CLLocationCoordinate2D()
+        return address.coordinate
     }
     /// The name of the address.
     public var title: String? {
-        return address?.name
+        if containdedAnnotations == nil || containdedAnnotations?.count <= 0 {
+            return address.name
+        } else {
+            return nil
+        }
     }
     /// The address string of the address.
     public var subtitle: String? {
-        return address?.addressString
+        if containdedAnnotations == nil || containdedAnnotations?.count <= 0 {
+            return address.addressString
+        } else {
+            return nil
+        }
     }
     // If the annotation is a clustered annotation, this value holds all the annotations it represents.
     public var containdedAnnotations: [Annotation]? {
         didSet {
             if containdedAnnotations != nil {
                 clusterAnnotation = nil
-                address = nil
             }
         }
     }
@@ -67,7 +74,7 @@ public class Annotation: NSObject, MKAnnotation {
      - parameter address: The address to update the annotation with.
      */
     public func updateAddress(address: Address) {
-        if self.address?.isEqualToAddress(address) == false {
+        if self.address.isEqualToAddress(address) == false {
             self.address = address
         }
     }
