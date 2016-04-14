@@ -106,6 +106,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         return true
     }
     private var regionSpanBeforeChange: MKCoordinateSpan?
+    let clusterCalculationsQueue: dispatch_queue_t = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)
+    var cancelClusterCalculations = false
     
     deinit {
         resetMap()
@@ -116,6 +118,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     Resets the map controller, clearing the addresses, annotations and removing all annotations and polylines on the map view.
     */
     public func resetMap() {
+        
+        cancelClusterCalculations = true
         
         addresses.removeAll(keepCapacity: false)
         annotations.removeAll(keepCapacity: false)
@@ -284,7 +288,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         // For each square in the grid, pick one annotation to show
         let offscreenMapView = self.offscreenMapView
         gridMapRect.origin.y = startY
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+        dispatch_async(clusterCalculationsQueue, { () -> Void in
             
             while MKMapRectGetMinY(gridMapRect) <= endY {
                 
@@ -293,13 +297,22 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                     
                     self.calculateClusterInGrid(mapView, offscreenMapView: offscreenMapView, gridMapRect: gridMapRect)
                     
+                    if self.cancelClusterCalculations == true {
+                        break
+                    }
+                    
                     gridMapRect.origin.x += gridSize
+                }
+                
+                if self.cancelClusterCalculations == true {
+                    break
                 }
                 
                 gridMapRect.origin.y += gridSize
             }
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.cancelClusterCalculations = false
                 complete()
             })
         })
@@ -314,8 +327,13 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         let allAnnotationsInBucket = offscreenMapView.annotationsInMapRect(gridMapRect)
         var filteredAllAnnotationsInBucket = Set<Annotation>()
         for object in allAnnotationsInBucket {
+            
             if let annotation = object as? Annotation {
                 filteredAllAnnotationsInBucket.insert(annotation)
+            }
+            
+            if self.cancelClusterCalculations == true {
+                return
             }
         }
         
@@ -345,6 +363,10 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
                         mapView.removeAnnotation(annotation)
                     })
+                }
+                
+                if self.cancelClusterCalculations == true {
+                    return
                 }
             }
         }
