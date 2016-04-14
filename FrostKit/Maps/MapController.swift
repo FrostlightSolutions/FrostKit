@@ -294,10 +294,10 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                 
                 gridMapRect.origin.y += gridSize
             }
-        })
-        
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            complete()
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                complete()
+            })
         })
     }
     
