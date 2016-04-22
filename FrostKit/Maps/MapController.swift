@@ -855,7 +855,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      - returns: An array of addresses that meet the predicate search criteria.
      */
     public func searchAddresses(searchString: String) -> [Address] {
-        let predicate = NSPredicate(format: "name beginswith[cd] %@ || addressString beginswith[cd] %@", searchString, searchString)
+        let predicate = NSPredicate(format: "name CONTAINS[cd] %@ || addressString CONTAINS[cd] %@", searchString, searchString)
         return (addresses as NSArray).filteredArrayUsingPredicate(predicate) as! [Address]
     }
     
