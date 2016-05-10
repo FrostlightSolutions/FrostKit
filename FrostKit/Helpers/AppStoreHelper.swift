@@ -73,26 +73,24 @@ public class AppStoreHelper: NSObject {
             
             Alamofire.request(.GET, url, parameters: ["id": appStoreID], encoding: .URL, headers: nil).responseJSON { (response) -> Void in
                 
-                if  let json = response.result.value as? [String: AnyObject],
-                    let results = json["results"] as? [[String: AnyObject]],
-                    let appDetails = results.first {
-                        
-                        self.version = appDetails["version"] as? String
-                        self.name = appDetails["trackName"] as? String
-                        self.seller = appDetails["sellerName"] as? String
-                        self.appDescription = appDetails["description"] as? String
-                        self.price = appDetails["price"] as? Double
-                        self.currency = appDetails["currency"] as? String
-                        self.formattedPrice = appDetails["formattedPrice"] as? String
-                        self.fileSize = appDetails["fileSizeBytes"] as? String
-                        
-                        if let releaseDateString = appDetails["releaseDate"] as? String {
-                            self.releaseDate = NSDate.iso8601Date(releaseDateString)
-                        } else {
-                            self.releaseDate = nil
-                        }
-                        
-                        self.bundleId = appDetails["bundleId"] as? String
+                if let json = response.result.value as? [String: AnyObject], results = json["results"] as? [[String: AnyObject]], appDetails = results.first {
+                    
+                    self.version = appDetails["version"] as? String
+                    self.name = appDetails["trackName"] as? String
+                    self.seller = appDetails["sellerName"] as? String
+                    self.appDescription = appDetails["description"] as? String
+                    self.price = appDetails["price"] as? Double
+                    self.currency = appDetails["currency"] as? String
+                    self.formattedPrice = appDetails["formattedPrice"] as? String
+                    self.fileSize = appDetails["fileSizeBytes"] as? String
+                    
+                    if let releaseDateString = appDetails["releaseDate"] as? String {
+                        self.releaseDate = NSDate.iso8601Date(releaseDateString)
+                    } else {
+                        self.releaseDate = nil
+                    }
+                    
+                    self.bundleId = appDetails["bundleId"] as? String
                 }
                 
                 completed?(response.result.error)
@@ -112,17 +110,15 @@ public class AppStoreHelper: NSObject {
      */
     public func appUpdateNeeded() -> UpdateStatus {
         
-        if  let appStoreVersion = self.version,
-            let bundleId = self.bundleId,
-            let bundle = NSBundle(identifier: bundleId) {
-                
-                let localVersion = NSBundle.appVersion(bundle)
-                let comparisonResult = localVersion.compare(appStoreVersion, options: .NumericSearch)
-                if comparisonResult == .OrderedAscending {
-                    return .UpdateNeeded
-                } else {
-                    return .UpToDate
-                }
+        if let appStoreVersion = self.version, bundleId = self.bundleId, bundle = NSBundle(identifier: bundleId) {
+            
+            let localVersion = NSBundle.appVersion(bundle)
+            let comparisonResult = localVersion.compare(appStoreVersion, options: .NumericSearch)
+            if comparisonResult == .OrderedAscending {
+                return .UpdateNeeded
+            } else {
+                return .UpToDate
+            }
         }
         
         return .Unknown
