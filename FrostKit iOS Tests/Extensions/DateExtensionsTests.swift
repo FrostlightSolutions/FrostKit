@@ -536,11 +536,11 @@ class DateExtensionsTests: XCTestCase {
         components.second = 43
         let date = components.date!
         
-        XCTAssert(date.dateTimeShortString == "2/26/16, 8:12 PM")
-        XCTAssert(date.dateShortString == "2/26/16")
-        XCTAssert(date.dateMediumString == "Feb 26, 2016")
-        XCTAssert(date.dateFullString == "Friday, February 26, 2016")
-        XCTAssert(date.timeShortString == "8:12 PM")
+        XCTAssert(date.dateTimeShortString == NSDateFormatter.localizedStringFromDate(date, dateStyle: .ShortStyle, timeStyle: .ShortStyle))
+        XCTAssert(date.dateShortString == NSDateFormatter.localizedStringFromDate(date, dateStyle: .ShortStyle, timeStyle: .NoStyle))
+        XCTAssert(date.dateMediumString == NSDateFormatter.localizedStringFromDate(date, dateStyle: .MediumStyle, timeStyle: .NoStyle))
+        XCTAssert(date.dateFullString == NSDateFormatter.localizedStringFromDate(date, dateStyle: .FullStyle, timeStyle: .NoStyle))
+        XCTAssert(date.timeShortString == NSDateFormatter.localizedStringFromDate(date, dateStyle: .NoStyle, timeStyle: .ShortStyle))
         XCTAssert(date.fusDateString == "2016-02-26")
         XCTAssert(date.fusDateTimeString == "2016-02-26T20:12:43.000000Z")
         XCTAssert(date.dayString == "Friday")
