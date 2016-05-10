@@ -34,7 +34,9 @@ extension NSData {
     
     - returns: A formatted string of the size passed in. E.g. 1024 bytes returns 1MB.
     */
-    public class func sizeFormattedString(size: Int) -> String {
+    
+    // TODO: Change to using generics rahter than just `Int64`.
+    public class func sizeFormattedString(size: Int64) -> String {
         
         let sUnits = ["", "K", "M", "G", "T", "P", "E"]
         let sMaxUnits = sUnits.count - 1
@@ -57,7 +59,7 @@ extension NSData {
     
     /// Created a formatted string from the objects length value
     public var lengthFormattedString: String {
-        return NSData.sizeFormattedString(self.length)
+        return NSData.sizeFormattedString(Int64(self.length))
     }
     
 }
