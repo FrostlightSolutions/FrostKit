@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>classNames</key>
+	<dict>
+		<key>BundleExtensionsTests</key>
+		<dict>
+			<key>testBundleAppBuildNumber()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>2.9537e-05</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>FrostKit iOS Bot – Integration 2</string>
+				</dict>
+			</dict>
+			<key>testBundleAppName()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>4.496e-05</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>FrostKit iOS Bot – Integration 2</string>
+				</dict>
+			</dict>
+			<key>testBundleAppVersion()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>2.3746e-05</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>FrostKit iOS Bot – Integration 2</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>ColorExtensionsTest</key>
+		<dict>
+			<key>testHexHashtag()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>6.1714e-05</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>FrostKit iOS Bot – Integration 2</string>
+				</dict>
+			</dict>
+			<key>testShortHex()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>6.202e-05</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>FrostKit iOS Bot – Integration 2</string>
+				</dict>
+			</dict>
+			<key>testSimpleHexColors()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>3.8223e-05</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>FrostKit iOS Bot – Integration 2</string>
+				</dict>
+			</dict>
+			<key>testUnsuposedHexFormat()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>0.00063729</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>FrostKit iOS Bot – Integration 2</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>DataExtensionTests</key>
+		<dict>
+			<key>testHexString()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>0.00012906</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>FrostKit iOS Bot – Integration 2</string>
+				</dict>
+			</dict>
+			<key>testSizeFormattedString()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>0.0011139</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>FrostKit iOS Bot – Integration 2</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>DateExtensionsTests</key>
+		<dict>
+			<key>testDateAt()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>0.00023421</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>FrostKit iOS Bot – Integration 2</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>ErrorExtensionsTests</key>
+		<dict>
+			<key>testErrorWithMessage()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>4.5878e-05</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>FrostKit iOS Bot – Integration 2</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>FontExtensionsTests</key>
+		<dict>
+			<key>testCustomFonts()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>0.00031097</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>FrostKit iOS Bot – Integration 2</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>KeychainHelperTests</key>
+		<dict>
+			<key>testKeychainWorkflow()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>0.01131</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>FrostKit iOS Bot – Integration 2</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>MapControllerTests</key>
+		<dict>
+			<key>testAddressCoordinate()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>1.1293e-05</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>FrostKit iOS Bot – Integration 2</string>
+				</dict>
+			</dict>
+			<key>testAddressIsValid()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>6.2024e-06</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>FrostKit iOS Bot – Integration 2</string>
+				</dict>
+			</dict>
+			<key>testAddressLatitude()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>5.7939e-06</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>FrostKit iOS Bot – Integration 2</string>
+				</dict>
+			</dict>
+			<key>testAddressLongitude()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>9.0002e-06</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>FrostKit iOS Bot – Integration 2</string>
+				</dict>
+			</dict>
+			<key>testAddressName()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>4.6136e-06</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>FrostKit iOS Bot – Integration 2</string>
+				</dict>
+			</dict>
+			<key>testAddressStringAddress()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>8.2726e-06</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>FrostKit iOS Bot – Integration 2</string>
+				</dict>
+			</dict>
+			<key>testAnnotationAddress()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>2.2831e-05</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>FrostKit iOS Bot – Integration 2</string>
+				</dict>
+			</dict>
+			<key>testAnnotationUpdateAddress()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>1.8235e-05</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>FrostKit iOS Bot – Integration 2</string>
+				</dict>
+			</dict>
+		</dict>
+	</dict>
+</dict>
+</plist>
