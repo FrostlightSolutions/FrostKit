@@ -26,9 +26,11 @@ class FontExtensionsTests: XCTestCase {
         measureBlock { () -> Void in
             
             let fontAwesome = Font.fontAwesome(size: 12)
-            XCTAssert(fontAwesome.fontName == "FontAwesome")
+            let fontAwesomeName = fontAwesome.fontName
+            XCTAssert(fontAwesomeName == "FontAwesome", "Font name is: \(fontAwesomeName)")
             let ionicons = Font.ionicons(size: 12)
-            XCTAssert(ionicons.fontName == "Ionicons")
+            let ioniconsName = ionicons.fontName
+            XCTAssert(ioniconsName == "Ionicons", "Font name is: \(ioniconsName)")
         }
     }
     
