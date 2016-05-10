@@ -48,7 +48,7 @@ extension NSDate {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = format
         dateFormatter.timeZone = NSTimeZone.utc()
-        dateFormatter.locale = NSLocale.autoupdatingCurrentLocale()
+        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
         return dateFormatter.dateFromString(fusDateString)
     }
     
@@ -388,19 +388,22 @@ extension NSDate {
     
     /// A helpter method for getting a formatted string of the date and time in the FUS set format.
     public var fusDateTimeString: String {
-        return dateStringFromFormat("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSSSSS'Z'")
+        let locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        return dateStringFromFormat("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSSSSS'Z'", locale: locale)
     }
     
     /**
     Takes the format of a date and returns a formatted string of the date.
     
     - parameter format: The format of the date string to return.
+    - parameter locale: The locale to set to the date formatter (optional).
     
     - returns: The formatted date string.
     */
-    public func dateStringFromFormat(format: String) -> String {
+    public func dateStringFromFormat(format: String, locale: NSLocale? = nil) -> String {
         let formatter = NSDateFormatter()
         formatter.dateFormat = format
+        formatter.locale = locale
         return formatter.stringFromDate(self)
     }
     
