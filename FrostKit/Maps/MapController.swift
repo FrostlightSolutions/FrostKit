@@ -49,6 +49,16 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     }
     /// Used for plotting all annotations to ditermine annotation clustering.
     public let offscreenMapView = MKMapView(frame: CGRect())
+    /// Private instance of map view, that returns the offscreen map view only if clustering is on.
+    private var _mapView: MKMapView? {
+        if shouldUseAnnotationClustering {
+            return offscreenMapView
+        } else {
+            return mapView
+        }
+    }
+    /// Determins if the map controller should cluster the annotations on the map, or plot them all directly. THe default is `true`.
+    @IBInspectable public var shouldUseAnnotationClustering: Bool = true
     /**
      This value controls the number of off screen annotations displayed.
      
@@ -195,7 +205,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         }
         
         if let currentAnnotation = annotation {
-            offscreenMapView.addAnnotation(currentAnnotation)
+            _mapView?.addAnnotation(currentAnnotation)
             
             if plottingAsBulk == false {
                 updateVisableAnnotations()
@@ -210,7 +220,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     */
     public func removeAllAnnotations(includingCached: Bool = false) {
         let annotations = Array(self.annotations.values)
-        offscreenMapView.removeAnnotations(annotations)
+        _mapView?.removeAnnotations(annotations)
         
         if includingCached == true {
             self.annotations.removeAll(keepCapacity: false)
@@ -244,11 +254,14 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         currentlyUpdatingVisableAnnotations = true
         shouldTryToUpdateVisableAnnotationsAgain = false
         
-        calculateAndUpdateClusterAnnotations {
+        if shouldUseAnnotationClustering {
             
-            self.currentlyUpdatingVisableAnnotations = false
-            if self.shouldTryToUpdateVisableAnnotationsAgain == true {
-                self.updateVisableAnnotations()
+            calculateAndUpdateClusterAnnotations {
+                
+                self.currentlyUpdatingVisableAnnotations = false
+                if self.shouldTryToUpdateVisableAnnotationsAgain == true {
+                    self.updateVisableAnnotations()
+                }
             }
         }
     }
@@ -513,8 +526,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         if includingUser == false || zoomToShowAllIncludesUser == false {
             let annotations = Array(self.annotations.values)
             zoomToAnnotations(annotations)
-        } else {
-            zoomToAnnotations(offscreenMapView.annotations as [MKAnnotation])
+        } else if let mapView = _mapView {
+            zoomToAnnotations(mapView.annotations as [MKAnnotation])
         }
     }
     
