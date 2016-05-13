@@ -118,6 +118,18 @@
 		18CB51701A76454A005064C8 /* RequestStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* RequestStore.swift */; };
 		18CB517A1A7655ED005064C8 /* DeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB51791A7655ED005064C8 /* DeviceExtensions.swift */; };
 		18CFF9FE19DC45AB00DF6BB8 /* TimeZoneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFF9FD19DC45AB00DF6BB8 /* TimeZoneExtensions.swift */; };
+		18D54BEE1CE6439300D365C6 /* FrostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1826B0261BD9047900DA1669 /* FrostKit.framework */; };
+		18D54BF41CE6439F00D365C6 /* ErrorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E9FF911C80AA5700AC5230 /* ErrorExtensionsTests.swift */; };
+		18D54BF51CE643AB00D365C6 /* DataExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C311C810EB300D2B308 /* DataExtensionsTests.swift */; };
+		18D54BF61CE643AE00D365C6 /* DateExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AC87E91C77F48200426776 /* DateExtensionsTests.swift */; };
+		18D54BF71CE643B100D365C6 /* BundleExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C2F1C810A6900D2B308 /* BundleExtensionsTests.swift */; };
+		18D54BF81CE643B400D365C6 /* FontExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C2D1C81092500D2B308 /* FontExtensionsTests.swift */; };
+		18D54BF91CE643B700D365C6 /* ColorExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AC87E81C77F48200426776 /* ColorExtensionsTest.swift */; };
+		18D54BFA1CE643C700D365C6 /* KeychainHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D8CAF1C77EEFC00261DF5 /* KeychainHelperTests.swift */; };
+		18D54BFC1CE643D200D365C6 /* AppStoreHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D8CAE1C77EEFC00261DF5 /* AppStoreHelperTests.swift */; };
+		18D54C011CE6452000D365C6 /* Alamofire.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 1838F1BA1C761E4800F1233D /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		18D54C021CE6452700D365C6 /* FrostKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 1826B0261BD9047900DA1669 /* FrostKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		18D54C031CE6455C00D365C6 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1838F1BA1C761E4800F1233D /* Alamofire.framework */; };
 		18DC212B19DEA21000FEB57E /* ViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC212A19DEA21000FEB57E /* ViewControllerExtensions.swift */; };
 		18DD78FF1A8CA70F00379FB5 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DD78FD1A8CA70F00379FB5 /* Button.swift */; };
 		18DD79011A8CA70F00379FB5 /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DD78FE1A8CA70F00379FB5 /* VisualEffectView.swift */; };
@@ -160,6 +172,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		18D54BEF1CE6439300D365C6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18839B0E19D9FA8C00760157 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1826B0251BD9047900DA1669;
+			remoteInfo = "FrostKit tvOS";
+		};
 		18E545A81C77E54000637E85 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 18839B0E19D9FA8C00760157 /* Project object */;
@@ -197,6 +216,18 @@
 			files = (
 				184625091C84D1A00098E969 /* FrostKit.framework in Copy Frameworks */,
 				18C41B0B1C7FC09900B1F57D /* Alamofire.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18D54BFE1CE644F600D365C6 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				18D54C021CE6452700D365C6 /* FrostKit.framework in Copy Frameworks */,
+				18D54C011CE6452000D365C6 /* Alamofire.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,6 +288,8 @@
 		18CB516F1A76454A005064C8 /* RequestStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestStore.swift; sourceTree = "<group>"; };
 		18CB51791A7655ED005064C8 /* DeviceExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceExtensions.swift; sourceTree = "<group>"; };
 		18CFF9FD19DC45AB00DF6BB8 /* TimeZoneExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZoneExtensions.swift; sourceTree = "<group>"; };
+		18D54BE91CE6439300D365C6 /* FrostKit tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FrostKit tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		18D54BED1CE6439300D365C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18DC212A19DEA21000FEB57E /* ViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtensions.swift; sourceTree = "<group>"; };
 		18DD78FD1A8CA70F00379FB5 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		18DD78FE1A8CA70F00379FB5 /* VisualEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
@@ -309,6 +342,15 @@
 			files = (
 				18C0067619DC00C000811755 /* FrostKit.framework in Frameworks */,
 				18C41B071C7FBF9900B1F57D /* Alamofire.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18D54BE61CE6439300D365C6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18D54BEE1CE6439300D365C6 /* FrostKit.framework in Frameworks */,
+				18D54C031CE6455C00D365C6 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +442,7 @@
 			children = (
 				18839B1919D9FA8C00760157 /* FrostKit */,
 				189D8CA81C77EEFC00261DF5 /* FrostKit iOS Tests */,
+				18D54BEA1CE6439300D365C6 /* FrostKit tvOS Tests */,
 				18E545B81C77E6C700637E85 /* FrostKit OS X Tests */,
 				186CFCE81A29F7BE002739A5 /* Frameworks */,
 				18839B1819D9FA8C00760157 /* Products */,
@@ -415,6 +458,7 @@
 				1826B0261BD9047900DA1669 /* FrostKit.framework */,
 				18E5459D1C77E53F00637E85 /* FrostKit.framework */,
 				18E545A61C77E54000637E85 /* FrostKit OS X Tests.xctest */,
+				18D54BE91CE6439300D365C6 /* FrostKit tvOS Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -577,6 +621,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		18D54BEA1CE6439300D365C6 /* FrostKit tvOS Tests */ = {
+			isa = PBXGroup;
+			children = (
+				18D54BED1CE6439300D365C6 /* Info.plist */,
+			);
+			path = "FrostKit tvOS Tests";
+			sourceTree = "<group>";
+		};
 		18DD78F81A8CA6DF00379FB5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -732,6 +784,25 @@
 			productReference = 18839B2219D9FA8C00760157 /* FrostKit iOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		18D54BE81CE6439300D365C6 /* FrostKit tvOS Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18D54BF31CE6439300D365C6 /* Build configuration list for PBXNativeTarget "FrostKit tvOS Tests" */;
+			buildPhases = (
+				18D54BE51CE6439300D365C6 /* Sources */,
+				18D54BE61CE6439300D365C6 /* Frameworks */,
+				18D54BE71CE6439300D365C6 /* Resources */,
+				18D54BFE1CE644F600D365C6 /* Copy Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				18D54BF01CE6439300D365C6 /* PBXTargetDependency */,
+			);
+			name = "FrostKit tvOS Tests";
+			productName = "FrostKit tvOS Tests";
+			productReference = 18D54BE91CE6439300D365C6 /* FrostKit tvOS Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		18E5459C1C77E53F00637E85 /* FrostKit OS X */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 18E545B21C77E54000637E85 /* Build configuration list for PBXNativeTarget "FrostKit OS X" */;
@@ -777,7 +848,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "James Barrow - Frostlight Solutions";
 				TargetAttributes = {
@@ -798,6 +869,9 @@
 					};
 					18839B2119D9FA8C00760157 = {
 						CreatedOnToolsVersion = 6.0.1;
+					};
+					18D54BE81CE6439300D365C6 = {
+						CreatedOnToolsVersion = 7.3.1;
 					};
 					18E5459C1C77E53F00637E85 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -824,6 +898,7 @@
 				1826B0251BD9047900DA1669 /* FrostKit tvOS */,
 				18E5459C1C77E53F00637E85 /* FrostKit OS X */,
 				18839B2119D9FA8C00760157 /* FrostKit iOS Tests */,
+				18D54BE81CE6439300D365C6 /* FrostKit tvOS Tests */,
 				18E545A51C77E54000637E85 /* FrostKit OS X Tests */,
 				1845E6F61A66DA03005B377D /* FrostKitDocs */,
 				1836A20B1A84414D00E57F86 /* FontConstantsBuilder */,
@@ -864,6 +939,13 @@
 			files = (
 				18E0284B1BA2D33700852022 /* Localizable.strings in Resources */,
 				1836A2221A84F3BE00E57F86 /* fontawesome-webfont.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18D54BE71CE6439300D365C6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1083,6 +1165,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		18D54BE51CE6439300D365C6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18D54BF91CE643B700D365C6 /* ColorExtensionsTest.swift in Sources */,
+				18D54BF41CE6439F00D365C6 /* ErrorExtensionsTests.swift in Sources */,
+				18D54BF61CE643AE00D365C6 /* DateExtensionsTests.swift in Sources */,
+				18D54BFA1CE643C700D365C6 /* KeychainHelperTests.swift in Sources */,
+				18D54BF71CE643B100D365C6 /* BundleExtensionsTests.swift in Sources */,
+				18D54BF51CE643AB00D365C6 /* DataExtensionsTests.swift in Sources */,
+				18D54BF81CE643B400D365C6 /* FontExtensionsTests.swift in Sources */,
+				18D54BFC1CE643D200D365C6 /* AppStoreHelperTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		18E545981C77E53F00637E85 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1117,6 +1214,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		18D54BF01CE6439300D365C6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1826B0251BD9047900DA1669 /* FrostKit tvOS */;
+			targetProxy = 18D54BEF1CE6439300D365C6 /* PBXContainerItemProxy */;
+		};
 		18E545A91C77E54000637E85 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 18E5459C1C77E53F00637E85 /* FrostKit OS X */;
@@ -1447,6 +1549,45 @@
 			};
 			name = Release;
 		};
+		18D54BF11CE6439300D365C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "FrostKit tvOS Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.PigonaHill.FrostKit-tvOS-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Debug;
+		};
+		18D54BF21CE6439300D365C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "FrostKit tvOS Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.PigonaHill.FrostKit-tvOS-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Release;
+		};
 		18E545AE1C77E54000637E85 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1610,6 +1751,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		18D54BF31CE6439300D365C6 /* Build configuration list for PBXNativeTarget "FrostKit tvOS Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18D54BF11CE6439300D365C6 /* Debug */,
+				18D54BF21CE6439300D365C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		18E545B21C77E54000637E85 /* Build configuration list for PBXNativeTarget "FrostKit OS X" */ = {
 			isa = XCConfigurationList;
