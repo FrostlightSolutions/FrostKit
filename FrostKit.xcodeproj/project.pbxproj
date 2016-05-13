@@ -73,7 +73,6 @@
 		1836A2211A84F3BE00E57F86 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1836A21F1A84F3BE00E57F86 /* fontawesome-webfont.ttf */; };
 		1836A2221A84F3BE00E57F86 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1836A21F1A84F3BE00E57F86 /* fontawesome-webfont.ttf */; };
 		1836A2231A84F3BE00E57F86 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1836A2201A84F3BE00E57F86 /* ionicons.ttf */; };
-		1836A2241A84F3BE00E57F86 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1836A2201A84F3BE00E57F86 /* ionicons.ttf */; };
 		1838F1B41C761CCC00F1233D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1838F1B31C761CCC00F1233D /* Alamofire.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		1838F1B91C761E3B00F1233D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1838F1B81C761E3B00F1233D /* Alamofire.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		1838F1BB1C761E4800F1233D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1838F1BA1C761E4800F1233D /* Alamofire.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -138,6 +137,9 @@
 		18E028471BA2D30100852022 /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066D19DB76C900811755 /* ImageExtensions.swift */; };
 		18E0284B1BA2D33700852022 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18748B2019DF5661003942A3 /* Localizable.strings */; };
 		18E028731BA2DA2A00852022 /* FrostKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23119DE07670032ABB7 /* FrostKit.swift */; };
+		18E2119E1CE6420E00B3DA89 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1836A21F1A84F3BE00E57F86 /* fontawesome-webfont.ttf */; };
+		18E211A01CE6420F00B3DA89 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1836A21F1A84F3BE00E57F86 /* fontawesome-webfont.ttf */; };
+		18E211A11CE6420F00B3DA89 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1836A2201A84F3BE00E57F86 /* ionicons.ttf */; };
 		18E3F23219DE07670032ABB7 /* FrostKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23119DE07670032ABB7 /* FrostKit.swift */; };
 		18E3F23A19DE15600032ABB7 /* BarButtonItemExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23919DE15600032ABB7 /* BarButtonItemExtensions.swift */; };
 		18E545A71C77E54000637E85 /* FrostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E5459D1C77E53F00637E85 /* FrostKit.framework */; };
@@ -861,7 +863,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				18E0284B1BA2D33700852022 /* Localizable.strings in Resources */,
-				1836A2241A84F3BE00E57F86 /* ionicons.ttf in Resources */,
 				1836A2221A84F3BE00E57F86 /* fontawesome-webfont.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -870,6 +871,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E211A11CE6420F00B3DA89 /* ionicons.ttf in Resources */,
+				18E211A01CE6420F00B3DA89 /* fontawesome-webfont.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -877,6 +880,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E2119E1CE6420E00B3DA89 /* fontawesome-webfont.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
