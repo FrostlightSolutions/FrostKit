@@ -17,10 +17,10 @@ import Foundation
 public class ContentManager: NSObject {
     
     // A dictioary holding the metadata for all managed objects, where the key is an absolute path and the value is the date.
-    private let contentMetadata = NSMutableDictionary()
+    private lazy var contentMetadata = [String: NSDate]()
     
     private class func maxSavedTimeInSeconds() -> NSTimeInterval {
-        return NSDate.weekInSeconds() * 2.0
+        return NSDate.weekInSeconds() * 2
     }
     
     // MARK: - Singleton
@@ -45,30 +45,30 @@ public class ContentManager: NSObject {
                     let start = NSDate.timeIntervalSinceReferenceDate
                 #endif
                 
-                let metadataToRemove = NSMutableArray()
+                var metadataToRemove = [String]()
                 
-                for (key, object) in shared.contentMetadata {
+                for (key, refDate) in shared.contentMetadata {
                     
-                    let refDate = object as! NSDate
                     let refTimeInterval = refDate.timeIntervalSinceReferenceDate
                     let timeInterval = NSDate().timeIntervalSinceReferenceDate
                     
                     if (timeInterval - refTimeInterval) > maxSavedTimeInSeconds() {
-                        metadataToRemove.addObject(key)
+                        metadataToRemove.append(key)
                     }
                 }
                 
                 if metadataToRemove.count > 0 {
-                    for object in metadataToRemove {
-                        if let absoluteURL = object as? NSURL {
-                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                                do {
-                                    try LocalStorage.remove(absoluteURL: absoluteURL)
-                                } catch let error as NSError {
-                                    NSLog("Error: Unable to remove managed item at URL \(absoluteURL)\nWith error: \(error.localizedDescription)\n\(error)")
-                                }
-                            })
-                        }
+                    
+                    for path in metadataToRemove {
+                        
+                        let url = NSURL(fileURLWithPath: path)
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            do {
+                                try LocalStorage.remove(absoluteURL: url)
+                            } catch let error as NSError {
+                                NSLog("Error: Unable to remove managed item at URL \(url)\nWith error: \(error.localizedDescription)\n\(error)")
+                            }
+                        })
                     }
                 }
                 
@@ -91,9 +91,9 @@ public class ContentManager: NSObject {
     
     - parameter absoluteURL:    The absolute URL of the item.
     */
-    public class func saveContentMetadata(absoluteURL absoluteURL: NSURL) {
-        if let absolutePath = absoluteURL.path {
-            saveContentMetadata(absolutePath: absolutePath)
+    public class func save(contentMetadataURL url: NSURL) {
+        if let path = url.path {
+            save(contentMetadataPath: path)
         }
     }
     
@@ -102,8 +102,8 @@ public class ContentManager: NSObject {
     
     - parameter absolutePath:    The absolute path of the item.
     */
-    public class func saveContentMetadata(absolutePath absolutePath: String) {
-        shared.contentMetadata.setObject(NSDate().copy(), forKey: absolutePath)
+    public class func save(contentMetadataPath path: String) {
+        shared.contentMetadata[path] = NSDate()
     }
     
     /**
@@ -111,9 +111,9 @@ public class ContentManager: NSObject {
     
     - parameter absoluteURL:    The absolute URL of the item.
     */
-    public class func removeContentMetadata(absoluteURL absoluteURL: NSURL) {
-        if let absolutePath = absoluteURL.path {
-            removeContentMetadata(absolutePath: absolutePath)
+    public class func remove(contentMetadataURL url: NSURL) {
+        if let path = url.path {
+            remove(contentMetadataPath: path)
         }
     }
     
@@ -122,8 +122,8 @@ public class ContentManager: NSObject {
     
     - parameter absolutePath:    The absolute path of the item.
     */
-    public class func removeContentMetadata(absolutePath absolutePath: String) {
-        shared.contentMetadata.removeObjectForKey(absolutePath)
+    public class func remove(contentMetadataPath path: String) {
+        shared.contentMetadata.removeValue(forKey: path)
     }
     
 }
