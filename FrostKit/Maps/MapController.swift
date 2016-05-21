@@ -30,7 +30,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     /// The map view related to the map controller.
     @IBOutlet public weak var mapView: MKMapView? {
         didSet {
-            mapView?.userTrackingMode = .Follow
+            mapView?.userTrackingMode = .follow
             mapView?.showsUserLocation = true
             if autoAssingDelegate == true {
                 mapView?.delegate = self
@@ -43,7 +43,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                     locationManager?.delegate = self
                 }
                 
-                MapController.requestAccessToLocationServices(locationManager!)
+                MapController.requestAccessToLocationServices(locationManager: locationManager!)
             }
         }
     }
@@ -93,9 +93,9 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     public var trackingUser: Bool = false {
         didSet {
             if trackingUser == true {
-                mapView?.userTrackingMode = .Follow
+                mapView?.userTrackingMode = .follow
             } else {
-                mapView?.userTrackingMode = .None
+                mapView?.userTrackingMode = .none
             }
             
             if let mapViewController = viewController as? MapViewController {
@@ -129,8 +129,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         
         cancelClusterCalculations = true
         
-        addresses.removeAll(keepCapacity: false)
-        annotations.removeAll(keepCapacity: false)
+        addresses.removeAll(keepingCapacity: false)
+        annotations.removeAll(keepingCapacity: false)
         
         removeAllAnnotations()
         removeAllPolylines()
@@ -141,9 +141,9 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     */
     private func purgeMap() {
         
-        mapView?.userTrackingMode = .None
+        mapView?.userTrackingMode = .none
         mapView?.showsUserLocation = true
-        mapView?.mapType = .Standard
+        mapView?.mapType = .standard
         mapView?.delegate = nil
     }
     
@@ -151,7 +151,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     
     public class func requestAccessToLocationServices(locationManager: CLLocationManager) {
         
-        if let infoDictionary = NSBundle.mainBundle().infoDictionary {
+        if let infoDictionary = NSBundle.main().infoDictionary {
             
             if infoDictionary["NSLocationAlwaysUsageDescription"] != nil {
                 locationManager.requestAlwaysAuthorization()
@@ -168,9 +168,9 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     
     - parameter addresses: An array of addresses to plot.
     */
-    public func plotAddresses(addresses: [Address]) {
+    public func plot(addresses: [Address]) {
         for address in addresses {
-            plotAddress(address, plottingAsBulk: true)
+            plot(address: address, asBulk: true)
         }
         updateVisableAnnotations()
     }
@@ -181,12 +181,12 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      - parameter address:        An address to plot.
      - parameter plottingAsBulk: Tells the controller if this is part of a bulk command. Leave to `false` for better performance.
      */
-    public func plotAddress(address: Address, plottingAsBulk: Bool = false) {
+    public func plot(address: Address, asBulk: Bool = false) {
         if address.isValid == false {
             return
         }
         
-        if let index = addresses.indexOf(address) {
+        if let index = addresses.index(of: address) {
             addresses[index] = address
         } else {
             addresses.append(address)
@@ -195,7 +195,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         var annotation: Annotation?
         if let currentAnnotation = annotations[address] as? Annotation {
             // Annotation already exists, update the address
-            currentAnnotation.updateAddress(address)
+            currentAnnotation.updateAddress(address: address)
             annotation = currentAnnotation
         } else {
             // No previous annotation for this addres, create one
@@ -207,7 +207,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         if let currentAnnotation = annotation {
             _mapView?.addAnnotation(currentAnnotation)
             
-            if plottingAsBulk == false {
+            if asBulk == false {
                 updateVisableAnnotations()
             }
         }
@@ -223,7 +223,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         _mapView?.removeAnnotations(annotations)
         
         if includingCached == true {
-            self.annotations.removeAll(keepCapacity: false)
+            self.annotations.removeAll(keepingCapacity: false)
         }
         
         updateVisableAnnotations()
@@ -233,8 +233,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     Clears all of the annotations from the map, including caced, and clears the addresses array.
     */
     public func clearData() {
-        removeAllAnnotations(true)
-        addresses.removeAll(keepCapacity: false)
+        removeAllAnnotations(includingCached: true)
+        addresses.removeAll(keepingCapacity: false)
     }
     
     // MARK: - Annotation Clustering
@@ -285,8 +285,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
             complete()
             return
         }
-        let leftCoordinate = mapView.convertPoint(CGPoint(), toCoordinateFromView: viewController.view)
-        let rightCoordinate = mapView.convertPoint(CGPoint(x: bucketSize, y: 0), toCoordinateFromView: viewController.view)
+        let leftCoordinate = mapView.convert(CGPoint(), toCoordinateFrom: viewController.view)
+        let rightCoordinate = mapView.convert(CGPoint(x: bucketSize, y: 0), toCoordinateFrom: viewController.view)
         let gridSize = MKMapPointForCoordinate(rightCoordinate).x - MKMapPointForCoordinate(leftCoordinate).x
         var gridMapRect = MKMapRect(origin: MKMapPoint(x: 0, y: 0), size: MKMapSize(width: gridSize, height: gridSize))
         
@@ -306,7 +306,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                 gridMapRect.origin.x = startX
                 while MKMapRectGetMinX(gridMapRect) <= endX {
                     
-                    self.calculateClusterInGrid(mapView, offscreenMapView: offscreenMapView, gridMapRect: gridMapRect)
+                    self.calculateClusterInGrid(mapView: mapView, offscreenMapView: offscreenMapView, gridMapRect: gridMapRect)
                     
                     if self.cancelClusterCalculations == true {
                         break
@@ -337,16 +337,16 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             
-            visableAnnotationsInBucket = mapView.annotationsInMapRect(gridMapRect) as? Set<Annotation>
-            dispatch_semaphore_signal(semaphore)    // Signal that semaphore should complete
+            visableAnnotationsInBucket = mapView.annotations(in: gridMapRect) as? Set<Annotation>
+            dispatch_semaphore_signal(semaphore!)    // Signal that semaphore should complete
         })
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)   // Wait for semaphore
+        dispatch_semaphore_wait(semaphore!, DISPATCH_TIME_FOREVER)   // Wait for semaphore
         
         if visableAnnotationsInBucket == nil {
             return
         }
         
-        let allAnnotationsInBucket = offscreenMapView.annotationsInMapRect(gridMapRect)
+        let allAnnotationsInBucket = offscreenMapView.annotations(in: gridMapRect)
         var filteredAllAnnotationsInBucket = Set<Annotation>()
         for object in allAnnotationsInBucket {
             
@@ -361,7 +361,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         
         if filteredAllAnnotationsInBucket.count > 0 {
             
-            guard let annotationForGrid = self.calculatedAnnotationInGrid(mapView, gridMapRect: gridMapRect, allAnnotations: filteredAllAnnotationsInBucket, visableAnnotations: visableAnnotationsInBucket) else {
+            guard let annotationForGrid = self.calculatedAnnotationInGrid(mapView: mapView, gridMapRect: gridMapRect, allAnnotations: filteredAllAnnotationsInBucket, visableAnnotations: visableAnnotationsInBucket) else {
                 return
             }
             
@@ -434,9 +434,9 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      
      - parameter coordinare: The coordinate to zoom to.
      */
-    public func zoomToCoordinate(coordinare: CLLocationCoordinate2D) {
+    public func zoom(toCoordinate coordinare: CLLocationCoordinate2D) {
         let point = MKMapPointForCoordinate(coordinare)
-        zoomToMapPoints([point])
+        zoom(toMapPoints: [point])
     }
     
     /**
@@ -444,8 +444,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      
      - parameter annotation: The annotation to zoom to.
      */
-    public func zoomToAnnotation(annotation: MKAnnotation) {
-        zoomToAnnotations([annotation])
+    public func zoom(toAnnotation annotation: MKAnnotation) {
+        zoom(toAnnotations: [annotation])
     }
     
     /**
@@ -453,14 +453,14 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      
      - parameter annotations: The annotations to zoom to.
      */
-    public func zoomToAnnotations(annotations: [MKAnnotation]) {
+    public func zoom(toAnnotations annotations: [MKAnnotation]) {
         let count = annotations.count
         if count > 0 {
             var points = [MKMapPoint]()
             for annotation in annotations {
                 points.append(MKMapPointForCoordinate(annotation.coordinate))
             }
-            zoomToMapPoints(points)
+            zoom(toMapPoints: points)
         }
     }
     
@@ -469,12 +469,12 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      
      - parameter points: Swift array of `MKMapPoints` to zoom to.
      */
-    public func zoomToMapPoints(points: [MKMapPoint]) {
+    public func zoom(toMapPoints points: [MKMapPoint]) {
         let count = points.count
-        let cPoints: UnsafeMutablePointer<MKMapPoint> = UnsafeMutablePointer<MKMapPoint>.alloc(count)
+        let cPoints = UnsafeMutablePointer<MKMapPoint>.init(allocatingCapacity: count)
         cPoints.initializeFrom(points)
-        zoomToMapPoints(cPoints, count: count)
-        cPoints.destroy()
+        zoom(toMapPoints: cPoints, count: count)
+        cPoints.deinitialize()
     }
     
     /**
@@ -483,7 +483,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      - parameter points: C array array of `MKMapPoints` to zoom to.
      - parameter count:  The number of points in the C array.
      */
-    public func zoomToMapPoints(points: UnsafeMutablePointer<MKMapPoint>, count: Int) {
+    public func zoom(toMapPoints points: UnsafeMutablePointer<MKMapPoint>, count: Int) {
         let mapRect = MKPolygon(points: points, count: count).boundingMapRect
         var region: MKCoordinateRegion = MKCoordinateRegionForMapRect(mapRect)
         
@@ -491,7 +491,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
             region.span = MKCoordinateSpanMake(minimumZoomArc, minimumZoomArc)
         }
         
-        zoomToRegion(region)
+        zoom(toRegion: region)
     }
     
     /**
@@ -499,10 +499,10 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      
      - parameter region: The region to zoom the map to.
      */
-    public func zoomToRegion(region: MKCoordinateRegion) {
+    public func zoom(toRegion region: MKCoordinateRegion) {
         
         var zoomRegion = region
-        zoomRegion.span = normalizeRegionSpan(region.span)
+        zoomRegion.span = normalize(regionSpan: region.span)
         mapView?.setRegion(zoomRegion, animated: true)
     }
     
@@ -512,7 +512,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     public func zoomToCurrentLocation() {
         trackingUser = true
         if let mapView = self.mapView {
-            zoomToCoordinate(mapView.userLocation.coordinate)
+            zoom(toCoordinate: mapView.userLocation.coordinate)
         }
     }
     
@@ -525,9 +525,9 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         
         if includingUser == false || zoomToShowAllIncludesUser == false {
             let annotations = Array(self.annotations.values)
-            zoomToAnnotations(annotations)
+            zoom(toAnnotations: annotations)
         } else if let mapView = _mapView {
-            zoomToAnnotations(mapView.annotations as [MKAnnotation])
+            zoom(toAnnotations: mapView.annotations as [MKAnnotation])
         }
     }
     
@@ -536,11 +536,11 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      
      - parameter address: The address object to zoom to.
      */
-    public func zoomToAddress(address: Address) {
-        plotAddress(address)
+    public func zoom(toAddress address: Address) {
+        plot(address: address)
         
         if let annotation = annotations[address] {
-            zoomToAnnotations([annotation])
+            zoom(toAnnotations: [annotation])
         }
     }
     
@@ -549,8 +549,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      
      - parameter polyline: The polyline to zoom to.
      */
-    public func zoomToPolyline(polyline: MKPolyline) {
-        zoomToMapPoints(polyline.points(), count: polyline.pointCount)
+    public func zoom(toPolyline polyline: MKPolyline) {
+        zoom(toMapPoints: polyline.points(), count: polyline.pointCount)
     }
     
     // MARK: - Polyline and Route Methods
@@ -566,7 +566,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         
         for overlay in mapView.overlays {
             if let polyline = overlay as? MKPolyline {
-                mapView.removeOverlay(polyline)
+                mapView.remove(polyline)
             }
         }
     }
@@ -579,14 +579,14 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      - parameter transportType: The transportation type to create the route.
      - parameter complete:      Returns an optional route and error.
      */
-    public func routeBetweenCoordinates(source: CLLocationCoordinate2D, destination: CLLocationCoordinate2D, transportType: MKDirectionsTransportType = .Automobile, complete: (route: MKRoute?, error: NSError?) -> Void) {
+    public func routeBetween(sourceCoordinate source: CLLocationCoordinate2D, destinationCoordinate destination: CLLocationCoordinate2D, transportType: MKDirectionsTransportType = .automobile, complete: (route: MKRoute?, error: NSError?) -> Void) {
         
         let sourcePlacemark = MKPlacemark(coordinate: source, addressDictionary: nil)
         let sourceItem = MKMapItem(placemark: sourcePlacemark)
         let destinationPlacemark = MKPlacemark(coordinate: destination, addressDictionary: nil)
         let destinationItem = MKMapItem(placemark: destinationPlacemark)
         
-        routeBetweenMapItems(sourceItem, destination: destinationItem, transportType: transportType, complete: complete)
+        routeBetween(sourceMapItem: sourceItem, destinationMapItem: destinationItem, transportType: transportType, complete: complete)
     }
     
     /**
@@ -597,7 +597,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      - parameter transportType: The transportation type to create the route.
      - parameter complete:      Returns an optional route and error.
      */
-    public func routeBetweenMapItems(source: MKMapItem, destination: MKMapItem, transportType: MKDirectionsTransportType = .Automobile, complete: (route: MKRoute?, error: NSError?) -> Void) {
+    public func routeBetween(sourceMapItem source: MKMapItem, destinationMapItem destination: MKMapItem, transportType: MKDirectionsTransportType = .automobile, complete: (route: MKRoute?, error: NSError?) -> Void) {
         
         let directionsRequest = MKDirectionsRequest()
         directionsRequest.source = source
@@ -606,9 +606,9 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         directionsRequest.requestsAlternateRoutes = false
         
         let directions = MKDirections(request: directionsRequest)
-        NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
-        directions.calculateDirectionsWithCompletionHandler { (directionsResponse, error) -> Void in
-            NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
+        NSNotificationCenter.default().post(name: NetworkRequestDidBeginNotification, object: nil)
+        directions.calculate { (directionsResponse, error) in
+            NSNotificationCenter.default().post(name: NetworkRequestDidCompleteNotification, object: nil)
             complete(route: directionsResponse?.routes.first, error: error)
         }
     }
@@ -619,23 +619,23 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      - parameter coordinate: The coordinate to get directions to.
      - parameter inApp:      If `true` diretions are plotted in-app on the map view. If `false` then the Maps.app is opened with the directions requested.
      */
-    public func directionsToCurrentLocationFrom(coordinate coordinate: CLLocationCoordinate2D, inApp: Bool = true) {
+    public func directionsToCurrentLocation(fromCoordinate coordinate: CLLocationCoordinate2D, inApp: Bool = true) {
         
-        let currentLocationItem = MKMapItem.mapItemForCurrentLocation()
+        let currentLocationItem = MKMapItem.forCurrentLocation()
         let destinationPlacemark = MKPlacemark(coordinate: coordinate, addressDictionary: nil)
         let destinationItem = MKMapItem(placemark: destinationPlacemark)
         
         if inApp == true {
-            routeBetweenMapItems(currentLocationItem, destination: destinationItem, complete: { (route, error) -> Void in
+            routeBetween(sourceMapItem: currentLocationItem, destinationMapItem: destinationItem, complete: { (route, error) in
                 if let anError = error {
                     NSLog("Error getting directions: \(anError.localizedDescription)\n\(anError)")
                 } else if let aRoute = route {
-                    self.plotRoute(aRoute)
+                    self.plot(route: aRoute)
                 }
             })
         } else {
             let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
-            MKMapItem.openMapsWithItems([currentLocationItem, destinationItem], launchOptions: launchOptions)
+            MKMapItem.openMaps(with: [currentLocationItem, destinationItem], launchOptions: launchOptions)
         }
     }
     
@@ -644,8 +644,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      
      - parameter route: The route to plot.
      */
-    public func plotRoute(route: MKRoute) {
-        mapView?.addOverlay(route.polyline, level: .AboveRoads)
+    public func plot(route: MKRoute) {
+        mapView?.add(route.polyline, level: .aboveRoads)
     }
     
     // MARK: - Helper Methods
@@ -657,7 +657,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      
      - returns: The normalized span.
      */
-    public func normalizeRegionSpan(span: MKCoordinateSpan) -> MKCoordinateSpan {
+    public func normalize(regionSpan span: MKCoordinateSpan) -> MKCoordinateSpan {
         
         var normalizedSpan = MKCoordinateSpanMake(span.latitudeDelta * annotationRegionPadFactor, span.longitudeDelta * annotationRegionPadFactor)
         if normalizedSpan.latitudeDelta > maximumDegreesArc {
@@ -691,8 +691,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     
     // MARK: - MKMapViewDelegate Methods
     
-    final public func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        return configureAnnotationView(mapView, viewForAnnotation: annotation)
+    public final func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        return configureAnnotationView(mapView: mapView, viewForAnnotation: annotation)
     }
     
     /**
@@ -708,7 +708,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     public func configureAnnotationView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         var annotationPinView: MKPinAnnotationView?
         if let myAnnotation = annotation as? Annotation {
-            if let annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView {
+            if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView {
                 annotationView.annotation = myAnnotation
                 annotationPinView = annotationView
             } else {
@@ -716,17 +716,17 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                 if #available(iOSApplicationExtension 9.0, *) {
                     pinView.pinTintColor = MKPinAnnotationView.redPinColor()
                 } else {
-                    pinView.pinColor = .Red
+                    pinView.pinColor = .red
                 }
                 pinView.animatesDrop = false
-                pinView.hidden = false
-                pinView.enabled = true
+                pinView.isHidden = false
+                pinView.isEnabled = true
                 pinView.canShowCallout = true
-                pinView.draggable = false
+                pinView.isDraggable = false
                 
                 if let anno = annotation as? Annotation {
                     if anno.containdedAnnotations == nil || anno.containdedAnnotations?.count <= 0 {
-                        pinView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+                        pinView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
                     }
                 }
                 
@@ -737,8 +737,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         return annotationPinView
     }
     
-    final public func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        return calloutAccessoryControlTapped(mapView, annotationView: view, controlTapped: control)
+    public func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        return calloutAccessoryControlTapped(mapView: mapView, annotationView: view, controlTapped: control)
     }
     
     /**
@@ -753,29 +753,29 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     public func calloutAccessoryControlTapped(mapView: MKMapView, annotationView view: MKAnnotationView, controlTapped control: UIControl) {
         if let annotation = view.annotation as? Annotation {
             
-            let alertController = UIAlertController(title: annotation.title, message: annotation.subtitle, preferredStyle: .ActionSheet)
-            let zoomToAlertAction = UIAlertAction(title: FKLocalizedString("ZOOM_TO_", comment: "Zoom to..."), style: .Default, handler: { (action) -> Void in
-                self.zoomToAnnotation(annotation)
+            let alertController = UIAlertController(title: annotation.title, message: annotation.subtitle, preferredStyle: .actionSheet)
+            let zoomToAlertAction = UIAlertAction(title: FKLocalizedString(key: "ZOOM_TO_", comment: "Zoom to..."), style: .default, handler: { (action) -> Void in
+                self.zoom(toAnnotation: annotation)
             })
             alertController.addAction(zoomToAlertAction)
-            let directionsAlertAction = UIAlertAction(title: FKLocalizedString("DIRECTIONS", comment: "Directions"), style: .Default, handler: { (action) -> Void in
-                self.directionsToCurrentLocationFrom(coordinate: annotation.coordinate)
+            let directionsAlertAction = UIAlertAction(title: FKLocalizedString(key: "DIRECTIONS", comment: "Directions"), style: .default, handler: { (action) -> Void in
+                self.directionsToCurrentLocation(fromCoordinate: annotation.coordinate)
             })
             alertController.addAction(directionsAlertAction)
-            let openInMapsAlertAction = UIAlertAction(title: FKLocalizedString("OPEN_IN_MAPS", comment: "Open in Maps"), style: .Default, handler: { (action) -> Void in
-                self.directionsToCurrentLocationFrom(coordinate: annotation.coordinate, inApp: false)
+            let openInMapsAlertAction = UIAlertAction(title: FKLocalizedString(key: "OPEN_IN_MAPS", comment: "Open in Maps"), style: .default, handler: { (action) -> Void in
+                self.directionsToCurrentLocation(fromCoordinate: annotation.coordinate, inApp: false)
             })
             alertController.addAction(openInMapsAlertAction)
-            let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL", comment: "Cancel"), style: .Cancel, handler: { (action) -> Void in
-                alertController.dismissViewControllerAnimated(true, completion: nil)
+            let cancelAlertAction = UIAlertAction(title: FKLocalizedString(key: "CANCEL", comment: "Cancel"), style: .cancel, handler: { (action) -> Void in
+                alertController.dismiss(animated: true, completion: nil)
             })
             alertController.addAction(cancelAlertAction)
-            viewController.presentViewController(alertController, animated: true, completion: nil)
+            viewController.present(alertController, animated: true, completion: nil)
         }
     }
     
-    final public func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
-        return configureOverlayRenderer(mapView, overlay: overlay)
+    public func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        return configureOverlayRenderer(mapView: mapView, overlay: overlay)
     }
     
     /**
@@ -791,21 +791,21 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     public func configureOverlayRenderer(mapView: MKMapView, overlay: MKOverlay) -> MKOverlayRenderer {
         if let polyline = overlay as? MKPolyline {
             let polylineRenderer = MKPolylineRenderer(polyline: polyline)
-            polylineRenderer.strokeColor = UIColor.blueColor()
+            polylineRenderer.strokeColor = UIColor.blue()
             polylineRenderer.lineWidth = 4
-            polylineRenderer.lineCap = .Round
-            polylineRenderer.lineJoin = .Round
+            polylineRenderer.lineCap = .round
+            polylineRenderer.lineJoin = .round
             polylineRenderer.alpha = 0.6
             return polylineRenderer
         }
         return MKOverlayRenderer()
     }
     
-    public func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+    public func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         regionSpanBeforeChange = mapView.region.span
     }
     
-    public func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+    public func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         
         if let regionSpanBeforeChange = self.regionSpanBeforeChange {
             
@@ -818,14 +818,16 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         updateVisableAnnotations()
     }
     
-    public func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
+    public func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        
         if hasPlottedInitUsersLocation == false {
             hasPlottedInitUsersLocation = true
             zoomToShowAll()
         }
     }
     
-    public func mapView(mapView: MKMapView, didChangeUserTrackingMode mode: MKUserTrackingMode, animated: Bool) {
+    public func mapView(_ mapView: MKMapView, didChange mode: MKUserTrackingMode, animated: Bool) {
+        
         switch mode {
         case .None:
             trackingUser = false
@@ -834,14 +836,15 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         }
     }
     
-    public func mapView(mapView: MKMapView, didFailToLocateUserWithError error: NSError) {
+    public func mapView(_ mapView: MKMapView, didFailToLocateUserWithError error: NSError) {
+        
         hasPlottedInitUsersLocation = false
         zoomToShowAll()
         
         switch error.code {
-        case CLError.LocationUnknown.rawValue:
+        case CLError.locationUnknown.rawValue:
             break
-        case CLError.Denied.rawValue:
+        case CLError.denied.rawValue:
             break
         default:
             break
@@ -850,10 +853,10 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     
     // MARL: - CLLocationManagerDelegate Methods
     
-    public func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    public func locationManager(_ manager: CLLocationManager, didChange status: CLAuthorizationStatus) {
         
         // Set the location manager to nil if not `NotDetermined`. If `NotDetermined` then it is possible the delegate was called before the user has answered.
-        if status != .NotDetermined {
+        if status != .notDetermined {
             self.locationManager = nil
         }
     }
