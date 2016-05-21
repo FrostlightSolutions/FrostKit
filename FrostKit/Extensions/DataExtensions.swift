@@ -53,13 +53,13 @@ extension NSData {
         
         let numberFormatter = NSNumberFormatter()
         numberFormatter.maximumFractionDigits = 2
-        let stringSize = numberFormatter.stringFromNumber(NSNumber(double: bytes))!
+        let stringSize = numberFormatter.string(from: NSNumber(value: bytes))!
         return "\(stringSize) \(sUnits[exponent])B"
     }
     
     /// Created a formatted string from the objects length value
     public var lengthFormattedString: String {
-        return NSData.sizeFormattedString(Int64(self.length))
+        return NSData.sizeFormattedString(size: Int64(self.length))
     }
     
 }
