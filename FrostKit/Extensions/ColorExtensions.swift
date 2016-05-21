@@ -25,8 +25,8 @@ extension Color {
     - parameter alpha:      The alpha value of the color.
     */
     public convenience init(hexString: String, alpha: CGFloat = 1) {
-        let color = Color.colorWithHex(hexString, alpha: alpha)
-        self.init(CGColor: color.CGColor)
+        let color = Color.color(withHexString: hexString, alpha: alpha)
+        self.init(cgColor: color.cgColor)
     }
 #endif
     
@@ -38,17 +38,17 @@ extension Color {
     
     - returns: A color object from the hex string.
     */
-    public class func colorWithHex(hexString: String, alpha: CGFloat = 1) -> Color {
+    public class func color(withHexString hexString: String, alpha: CGFloat = 1) -> Color {
         
         var scanLocation = 0
         if hexString.hasPrefix("#") {
             scanLocation = 1
         }
         
-        var rgbValue: CUnsignedInt = 0
+        var rgbValue: UInt32 = 0
         let scanner = NSScanner(string: hexString)
         scanner.scanLocation = scanLocation
-        scanner.scanHexInt(&rgbValue)
+        scanner.scanHexInt32(&rgbValue)
         
         switch hexString.characters.count - scanLocation {
         case 3:
@@ -61,7 +61,7 @@ extension Color {
             break
         default:
             NSLog("Error: Can't parse color with hex: \(hexString)")
-            return Color.clearColor()
+            return Color.clear()
         }
         
         return Color(red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0, green: CGFloat((rgbValue & 0x00FF00) >> 8)  / 255.0, blue: CGFloat(rgbValue & 0x0000FF) / 255.0, alpha: alpha)
@@ -74,7 +74,7 @@ extension Color {
      
      - returns: The new UIColor/NSColor object created with the passed in alpha value.
      */
-    public func colorWithAlpha(alpha: CGFloat) -> Color {
+    public func color(withAlpha alpha: CGFloat) -> Color {
         
         var red: CGFloat = 0
         var green: CGFloat = 0
