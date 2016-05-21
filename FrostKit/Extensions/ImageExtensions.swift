@@ -20,9 +20,9 @@ extension UIImage {
     
     - returns: A scaled image.
     */
-    public func imageWithMaxSize(size: CGSize) -> UIImage {
+    public func image(withMaxSize size: CGSize) -> UIImage {
         
-        let size = CGSizeApplyAffineTransform(self.size, CGAffineTransformMakeScale(0.5, 0.5))
+        let size = self.size.apply(transform: CGAffineTransform(scaleX: 0.5, y: 0.5))
         let hasAlpha = false
         
         var scaledSize = size
@@ -40,11 +40,11 @@ extension UIImage {
         }
         
         UIGraphicsBeginImageContextWithOptions(scaledSize, !hasAlpha, 0.0)
-        self.drawInRect(CGRect(origin: CGPoint(), size: scaledSize))
+        self.draw(in: CGRect(origin: CGPoint(), size: scaledSize))
         let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return scaledImage
+        return scaledImage!
     }
 
 }
