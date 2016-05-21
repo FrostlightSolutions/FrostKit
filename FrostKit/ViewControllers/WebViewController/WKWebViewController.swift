@@ -107,7 +107,7 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     - parameter sender: The bar button item pressed.
     */
-    override func refreshButtonPressed(sender: AnyObject?) {
+    public override func refreshButtonPressed(sender: AnyObject?) {
         
         if let webView = self.webView as? WKWebView {
             
@@ -123,7 +123,7 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     - parameter sender: The bar button item pressed.
     */
-    override func backButtonPressed(sender: AnyObject?) {
+    public override func backButtonPressed(sender: AnyObject?) {
         
         if let webView = self.webView as? WKWebView {
             
@@ -140,7 +140,7 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     - parameter sender: The bar button item pressed.
     */
-    override func forwardButtonPressed(sender: AnyObject?) {
+    public override func forwardButtonPressed(sender: AnyObject?) {
         
         if let webView = self.webView as? WKWebView {
             
