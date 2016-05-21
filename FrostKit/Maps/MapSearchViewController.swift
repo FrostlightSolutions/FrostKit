@@ -63,9 +63,9 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
     
     - returns: The object at the index path.
     */
-    public func objectAtIndexPath(indexPath: NSIndexPath) -> AnyObject? {
+    public func objectAt(_ indexPath: NSIndexPath) -> AnyObject? {
         if let searchBar = self.searchBar {
-            var array: NSArray?
+            var array: [AnyObject]?
             switch searchBar.selectedScopeButtonIndex {
             case 0:
                 array = self.plottedSearchResults
@@ -85,11 +85,11 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
     
     // MARK: - Table view data source
     
-    override public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    public override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
-    override public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let searchBar = self.searchBar {
             switch searchBar.selectedScopeButtonIndex {
             case 0:
@@ -107,16 +107,16 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
         return 0
     }
 
-    override public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier(identifier)
+    override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: identifier)
         if cell == nil {
-            cell = UITableViewCell(style: .Subtitle, reuseIdentifier: identifier)
+            cell = UITableViewCell(style: .subtitle, reuseIdentifier: identifier)
         }
         
-        if let address = objectAtIndexPath(indexPath) as? Address {
+        if let address = objectAt(indexPath) as? Address {
             cell?.textLabel?.text = address.name
             cell?.detailTextLabel?.text  = address.addressString
-        } else if let item = objectAtIndexPath(indexPath) as? MKMapItem {
+        } else if let item = objectAt(indexPath) as? MKMapItem {
             cell?.textLabel?.text = item.name
             
             var addressComponents = Array<String>()
@@ -135,39 +135,39 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
             if let country = item.placemark.country {
                 addressComponents.append(country)
             }
-            cell?.detailTextLabel?.text  = (addressComponents as NSArray).componentsJoinedByString(", ")
+            cell?.detailTextLabel?.text  = (addressComponents as NSArray).componentsJoined(by: ", ")
         }
         
         return cell!
     }
     
-    public override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: NSIndexPath) {
         if let searchBar = self.searchBar {
             switch searchBar.selectedScopeButtonIndex {
             case 0:
-                if let address = objectAtIndexPath(indexPath) as? Address {
-                    mapController?.zoomToAddress(address)
+                if let address = objectAt(indexPath) as? Address {
+                    mapController?.zoom(toAddress: address)
                 }
             case 1:
-                if let item = objectAtIndexPath(indexPath) as? MKMapItem {
-                    mapController?.zoomToAnnotation(item.placemark)
+                if let item = objectAt(indexPath) as? MKMapItem {
+                    mapController?.zoom(toAnnotation: item.placemark)
                 }
             default:
                 break
             }
         }
-        dismissViewControllerAnimated(true, completion: nil)
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        dismiss(animated: true, completion: nil)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: - UISearchBarDelegate Methods
     
-    public func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         switch searchBar.selectedScopeButtonIndex {
         case 0:
             // Search address points plotted on the map
             if let mapController = self.mapController {
-                plottedSearchResults = mapController.searchAddresses(searchText)
+                plottedSearchResults = mapController.searchAddresses(searchString: searchText)
                 tableView.reloadData()
             }
         case 1:
@@ -178,7 +178,7 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
         }
     }
     
-    public func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         switch searchBar.selectedScopeButtonIndex {
         case 0:
             // Search address points plotted on the map
@@ -192,8 +192,8 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
                 searchRequest.region = mapView.region
             }
             let localSearch = MKLocalSearch(request: searchRequest)
-            NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
-            localSearch.startWithCompletionHandler { (searchResponse, error) -> Void in
+            NSNotificationCenter.default().post(name: NetworkRequestDidBeginNotification, object: nil)
+            localSearch.start(completionHandler: { (searchResponse, error) in
                 if let anError = error {
                     NSLog("Error performing local search: \(anError.localizedDescription)\n\(anError)")
                 } else {
@@ -201,14 +201,14 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
                 }
                 self.refreshControl?.endRefreshing()
                 self.tableView.reloadData()
-                NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
-            }
+                NSNotificationCenter.default().post(name: NetworkRequestDidCompleteNotification, object: nil)
+            })
         default:
             break
         }
     }
     
-    public func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+    public func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         if selectedScope == 0 {
             refreshControl?.endRefreshing()
             refreshControl = nil
