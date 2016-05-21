@@ -38,7 +38,7 @@ public class AppStoreHelper: NSObject {
             if let fileSize = self.fileSize {
                 
                 if let byteCount = Int64(fileSize) {
-                    formattedFileSize = NSByteCountFormatter.stringFromByteCount(byteCount, countStyle: .Binary)
+                    formattedFileSize = NSByteCountFormatter.string(fromByteCount: byteCount, countStyle: .binary)
                 } else {
                     formattedFileSize = nil
                 }
@@ -85,7 +85,7 @@ public class AppStoreHelper: NSObject {
                     self.fileSize = appDetails["fileSizeBytes"] as? String
                     
                     if let releaseDateString = appDetails["releaseDate"] as? String {
-                        self.releaseDate = NSDate.iso8601Date(releaseDateString)
+                        self.releaseDate = NSDate.iso8601Date(from: releaseDateString)
                     } else {
                         self.releaseDate = nil
                     }
@@ -97,7 +97,7 @@ public class AppStoreHelper: NSObject {
             }
             
         } else {
-            completed?(NSError.errorWithMessage("No app store ID set."))
+            completed?(NSError.error(withMessage: "No app store ID set."))
         }
     }
     
@@ -112,9 +112,9 @@ public class AppStoreHelper: NSObject {
         
         if let appStoreVersion = self.version, bundleId = self.bundleId, bundle = NSBundle(identifier: bundleId) {
             
-            let localVersion = NSBundle.appVersion(bundle)
-            let comparisonResult = localVersion.compare(appStoreVersion, options: .NumericSearch)
-            if comparisonResult == .OrderedAscending {
+            let localVersion = NSBundle.appVersion(bundle: bundle)
+            let comparisonResult = localVersion.compare(appStoreVersion, options: .numericSearch)
+            if comparisonResult == .orderedAscending {
                 return .UpdateNeeded
             } else {
                 return .UpToDate
