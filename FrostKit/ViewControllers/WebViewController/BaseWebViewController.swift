@@ -16,9 +16,9 @@ public class BaseWebViewController: UIViewController {
     /// The web view. This will either be UIWebView or WKWebView depending on the requested type.
     var webView: AnyObject?
     /// The activity indicator view showing if the web view is loading or not.
-    let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+    let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     /// The progress view to show the percent a web view has loaded. This will only be used in a WKWebView based controller.
-    let progrssView = UIProgressView(progressViewStyle: .Bar)
+    let progrssView = UIProgressView(progressViewStyle: .bar)
     /// The back button for the toolbar.
     var backButton: UIBarButtonItem?
     /// The forward button for the toolbar.
@@ -32,7 +32,7 @@ public class BaseWebViewController: UIViewController {
         }
     }
     /// The URL of the current page.
-    public var URL: NSURL? {
+    public var url: NSURL? {
         // Functionality overriden in subclasses
         return nil
     }
@@ -64,13 +64,13 @@ public class BaseWebViewController: UIViewController {
             
             let barSize = navController.navigationBar.bounds.size
             progrssView.frame = CGRect(x: 0, y: barSize.height - progrssView.bounds.size.height, width: barSize.width, height: progrssView.bounds.size.height)
-            progrssView.autoresizingMask = .FlexibleTopMargin
+            progrssView.autoresizingMask = .flexibleTopMargin
             navController.navigationBar.addSubview(progrssView)
             updateProgrssViewVisability()
             updateActivityViewVisability()
             
             if self.isRoot == true {
-                let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(BaseWebViewController.doneButtonPressed(_:)))
+                let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(BaseWebViewController.doneButtonPressed(_:)))
                 navigationItem.setLeftBarButtonItem(doneButton, animated: false)
             }
         }
@@ -83,8 +83,8 @@ public class BaseWebViewController: UIViewController {
             
             webView.translatesAutoresizingMaskIntoConstraints = false
             let viewsDict = ["webView": webView]
-            let constraintV = NSLayoutConstraint.constraintsWithVisualFormat("V:|[webView]|", options: [], metrics: nil, views: viewsDict)
-            let constraintH = NSLayoutConstraint.constraintsWithVisualFormat("H:|[webView]|", options: [], metrics: nil, views: viewsDict)
+            let constraintV = NSLayoutConstraint.constraints(withVisualFormat: "V:|[webView]|", options: [], metrics: nil, views: viewsDict)
+            let constraintH = NSLayoutConstraint.constraints(withVisualFormat: "H:|[webView]|", options: [], metrics: nil, views: viewsDict)
             view.addConstraints(constraintV)
             view.addConstraints(constraintH)
             
@@ -94,15 +94,15 @@ public class BaseWebViewController: UIViewController {
         }
     }
     
-    public override func viewWillDisappear(animated: Bool) {
+    public override func viewWillDisappear(_ animated: Bool) {
         stopLoading()
         
         navigationController?.setToolbarHidden(true, animated: true)
     }
     
-    public override func viewDidDisappear(animated: Bool) {
+    public override func viewDidDisappear(_ animated: Bool) {
         
-        UIView.animateWithDuration(0.25, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
+        UIView.animate(withDuration: 0.25, delay: 0.0, options: [.curveEaseIn, .curveEaseOut], animations: { () -> Void in
             
             self.progrssView.alpha = 0.5
             
@@ -123,8 +123,8 @@ public class BaseWebViewController: UIViewController {
     
     - parameter sender: The bar button item pressed.
     */
-    func doneButtonPressed(sender: AnyObject?) {
-        dismissViewControllerAnimated(true, completion: nil)
+    public func doneButtonPressed(sender: AnyObject?) {
+        dismiss(animated: true, completion: nil)
     }
     
     /**
@@ -132,7 +132,7 @@ public class BaseWebViewController: UIViewController {
     
     - parameter sender: The bar button item pressed.
     */
-    func refreshButtonPressed(sender: AnyObject?) {
+    public func refreshButtonPressed(sender: AnyObject?) {
         // Functionality overriden in subclasses
     }
     
@@ -141,7 +141,7 @@ public class BaseWebViewController: UIViewController {
     
     - parameter sender: The bar button item pressed.
     */
-    func backButtonPressed(sender: AnyObject?) {
+    public func backButtonPressed(sender: AnyObject?) {
         // Functionality overriden in subclasses
     }
     
@@ -150,7 +150,7 @@ public class BaseWebViewController: UIViewController {
     
     - parameter sender: The bar button item pressed.
     */
-    func forwardButtonPressed(sender: AnyObject?) {
+    public func forwardButtonPressed(sender: AnyObject?) {
         // Functionality overriden in subclasses
     }
     
@@ -159,15 +159,15 @@ public class BaseWebViewController: UIViewController {
     
     - parameter sender: The bar button item pressed.
     */
-    func actionButtonPressed(sender: AnyObject?) {
-        var activityItems = Array<AnyObject>()
-        if let url = URL?.absoluteString {
+    public func actionButtonPressed(sender: AnyObject?) {
+        var activityItems = [String]()
+        if let url = self.url?.absoluteString {
             activityItems.append(url)
         }
         
         let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
         activityViewController.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeAirDrop]
-        presentViewController(activityViewController, animated: true, completion: nil)
+        present(activityViewController, animated: true, completion: nil)
     }
     
     // MARK: - UI Update Methods
@@ -183,13 +183,13 @@ public class BaseWebViewController: UIViewController {
             let forwardButton = UIBarButtonItem(title: IonIcons.ios_arrow_right, font: UIFont.ionicons(size: 29), target: self, action: #selector(BaseWebViewController.forwardButtonPressed(_:)))
             let refreshButton = UIBarButtonItem(title: IonIcons.ios_refresh_empty, font: UIFont.ionicons(size: 34), target: self, action: #selector(BaseWebViewController.refreshButtonPressed(_:)))
             let actionButton = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: #selector(BaseWebViewController.actionButtonPressed(_:)))
-            let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
+            let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
             
             backButton.enabled = false
             forwardButton.enabled = false
             
             setToolbarItems([backButton, flexibleSpace, forwardButton, flexibleSpace, actionButton, flexibleSpace, refreshButton], animated: false)
-            navController.toolbarHidden = false
+            navController.isToolbarHidden = false
             
             self.backButton = backButton
             self.forwardButton = forwardButton
@@ -203,13 +203,13 @@ public class BaseWebViewController: UIViewController {
         
         if progrssView.progress >= 1.0 || progrssView.progress <= 0.0 {
             
-            UIView.animateWithDuration(0.25, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
+            UIView.animate(withDuration: 0.25, delay: 0.0, options: [.curveEaseIn, .curveEaseOut], animations: { () -> Void in
                 
                 self.progrssView.alpha = 0
                 
                 }, completion: { (completed) -> Void in
                     
-                    self.progrssView.hidden = true
+                    self.progrssView.isHidden = true
                     self.progrssView.progress = 0.0
                     
                     self.updateActivityViewVisability()
@@ -217,8 +217,8 @@ public class BaseWebViewController: UIViewController {
             
         } else {
             
-            self.progrssView.hidden = false
-            UIView.animateWithDuration(0.25, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
+            self.progrssView.isHidden = false
+            UIView.animate(withDuration: 0.25, delay: 0.0, options: [.curveEaseIn, .curveEaseOut], animations: { () -> Void in
                 
                 self.progrssView.alpha = 1
                 
@@ -234,21 +234,21 @@ public class BaseWebViewController: UIViewController {
         
         if loading == true {
             
-            NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidBeginNotification, object: nil)
+            NSNotificationCenter.default().post(name: NetworkRequestDidBeginNotification, object: nil)
             activityIndicatorView.startAnimating()
             
-            UIView.animateWithDuration(0.25, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
+            UIView.animate(withDuration: 0.25, delay: 0.0, options: [.curveEaseIn, .curveEaseOut], animations: { () -> Void in
                 
                 let loadingView = UIBarButtonItem(customView: self.activityIndicatorView)
-                self.navigationItem.setRightBarButtonItem(loadingView, animated: true)
+                self.navigationItem.setRightBarButton(loadingView, animated: true)
                 
                 }, completion: nil)
         } else {
             
-            NSNotificationCenter.defaultCenter().postNotificationName(NetworkRequestDidCompleteNotification, object: nil)
-            UIView.animateWithDuration(0.25, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
+            NSNotificationCenter.default().post(name: NetworkRequestDidCompleteNotification, object: nil)
+            UIView.animate(withDuration: 0.25, delay: 0.0, options: [.curveEaseIn, .curveEaseOut], animations: { () -> Void in
                 
-                self.navigationItem.setRightBarButtonItem(nil, animated: true)
+                self.navigationItem.setRightBarButton(nil, animated: true)
                 
                 }, completion: nil)
         }
@@ -260,7 +260,7 @@ public class BaseWebViewController: UIViewController {
     func updateBackButton() {
         
         if let webView: AnyObject = webView {
-            backButton?.enabled = webView.canGoBack
+            backButton?.isEnabled = webView.canGoBack
         }
     }
     
@@ -270,7 +270,7 @@ public class BaseWebViewController: UIViewController {
     func updateForwardButton() {
         
         if let webView: AnyObject = webView {
-            forwardButton?.enabled = webView.canGoForward
+            forwardButton?.isEnabled = webView.canGoForward
         }
     }
     
@@ -294,7 +294,7 @@ public class BaseWebViewController: UIViewController {
         if var urlString = self.urlString {
             
             if urlString.hasPrefix("http://") == false {
-                urlString = "http://".stringByAppendingString(urlString)
+                urlString = "http://".appending(urlString)
             }
             
             return urlString

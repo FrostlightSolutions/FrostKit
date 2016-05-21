@@ -12,13 +12,13 @@ import WebKit
 ///
 /// A subclass of BaseWebViewController that wraps a WKWebView in a view controller.
 ///
-@available(iOS, deprecated=9.0, message="This is no longer needed as of iOS 9. Use SFSafariViewController instead.")
+@available(iOS, deprecated: 9.0, message: "This is no longer needed as of iOS 9. Use SFSafariViewController instead.")
 public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     /// The URL of the current page.
-    public override var URL: NSURL? {
+    public override var url: NSURL? {
         if let webView = self.webView as? WKWebView {
-            return webView.URL
+            return webView.url
         }
         return nil
     }
@@ -35,7 +35,7 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     /// Returns `true` if the web view is currently loading, `false` if not.
     public override var loading: Bool {
         if let webView = self.webView as? WKWebView {
-            return webView.loading
+            return webView.isLoading
         }
         return false
     }
@@ -75,27 +75,28 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     // MARK: - KVO Methods
     
-    public override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    public override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
         
-        if let aKeyPath = keyPath {
-            switch aKeyPath {
-            case "estimatedProgress":
-                self.progrssView.setProgress(Float(webView!.estimatedProgress), animated: true)
-                updateProgrssViewVisability()
-                updateActivityViewVisability()
-            case "title":
-                if let webView = self.webView as? WKWebView where titleOverride == nil {
-                    navigationItem.title = webView.title
-                }
-            case "canGoBack":
-                updateBackButton()
-            case "canGoForward":
-                updateForwardButton()
-            default:
-                super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+        guard let aKeyPath = keyPath else {
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+            return
+        }
+        
+        switch aKeyPath {
+        case "estimatedProgress":
+            self.progrssView.setProgress(Float(webView!.estimatedProgress), animated: true)
+            updateProgrssViewVisability()
+            updateActivityViewVisability()
+        case "title":
+            if let webView = self.webView as? WKWebView where titleOverride == nil {
+                navigationItem.title = webView.title
             }
-        } else {
-            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+        case "canGoBack":
+            updateBackButton()
+        case "canGoForward":
+            updateForwardButton()
+        default:
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
     
@@ -110,8 +111,7 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
         
         if let webView = self.webView as? WKWebView {
             
-            if webView.loading == true {
-                
+            if webView.isLoading == true {
                 webView.stopLoading()
             }
             webView.reload()
@@ -154,10 +154,10 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     // MARK: - WKNavigationDelegate Methods
     
-    public func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: ((WKNavigationActionPolicy) -> Void)) {
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
         
         // Alows links in the WKWebView to be tappable
-        decisionHandler(.Allow)
+        decisionHandler(.allow)
     }
     
     // MARK: - Load Methods
@@ -170,12 +170,12 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     override func loadBaseURL() -> String {
         
         let urlString = super.loadBaseURL()
-        
-        if let webView = self.webView as? WKWebView {
-            let request = NSURLRequest(URL: NSURL(string: urlString)!, cachePolicy: .ReloadIgnoringLocalCacheData, timeoutInterval: 60.0)
-            webView.loadRequest(request)
+        guard let url = NSURL(string: urlString), webView = self.webView as? WKWebView else {
+            return urlString
         }
         
+        let request = NSURLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60)
+        webView.load(request)
         return urlString
     }
     
