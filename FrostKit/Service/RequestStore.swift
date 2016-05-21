@@ -27,7 +27,7 @@ public class RequestStore: NSObject {
     - parameter request: The request to store and manage.
     - parameter urlString: The url string to use as the key.
     */
-    public func addRequest(request: Request, urlString: String) {
+    public func add(request: Request, urlString: String) {
         if locked == true {
             return
         }
@@ -44,10 +44,10 @@ public class RequestStore: NSObject {
     
     - parameter urlString: The url string to use as the key of the request to remove.
     */
-    public func removeRequestFor(urlString urlString: String) {
+    public func remove(requestWithURL urlString: String) {
         if let storedRequest = store[urlString] {
             storedRequest.cancel()
-            store.removeValueForKey(urlString)
+            store.removeValue(forKey: urlString)
         }
     }
     
@@ -69,7 +69,7 @@ public class RequestStore: NSObject {
     
     - returns: If a matching request is found then `true` is returned, otherwise `false` is returned.
     */
-    public func containsRequestWithURL(urlString: String) -> Bool {
+    public func contains(requestWithURL urlString: String) -> Bool {
         let containsRequest = store[urlString] != nil
         return containsRequest
     }
