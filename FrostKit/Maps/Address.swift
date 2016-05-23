@@ -102,7 +102,7 @@ public class Address: NSObject {
     
     // MARK: - Comparison Methods
     
-    public func isEqualToAddress(object: Address?) -> Bool {
+    public func isEqualToAddress(_ object: Address?) -> Bool {
         if let address = object {
             
             let haveEqualLatitude = self.latitude == address.latitude
@@ -115,7 +115,7 @@ public class Address: NSObject {
         return false
     }
     
-    public override func isEqual(object: AnyObject?) -> Bool {
+    public override func isEqual(_ object: AnyObject?) -> Bool {
         if let address = object as? Address {
             return self.isEqualToAddress(address)
         }
