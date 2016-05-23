@@ -195,7 +195,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         var annotation: Annotation?
         if let currentAnnotation = annotations[address] as? Annotation {
             // Annotation already exists, update the address
-            currentAnnotation.updateAddress(address: address)
+            currentAnnotation.update(address: address)
             annotation = currentAnnotation
         } else {
             // No previous annotation for this addres, create one

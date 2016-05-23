@@ -25,9 +25,9 @@ public class Annotation: NSObject, MKAnnotation {
         if let containdedAnnotations = self.containdedAnnotations where containdedAnnotations.count > 0 {
             let tense: String
             if containdedAnnotations.count == 1 {
-                tense = FKLocalizedString("ITEM", comment: "Item")
+                tense = FKLocalizedString(key: "ITEM", comment: "Item")
             } else {
-                tense = FKLocalizedString("ITEMS", comment: "Items")
+                tense = FKLocalizedString(key: "ITEMS", comment: "Items")
             }
             return "\(containdedAnnotations.count) \(tense)"
         }
@@ -77,7 +77,7 @@ public class Annotation: NSObject, MKAnnotation {
      
      - parameter address: The address to update the annotation with.
      */
-    public func updateAddress(address: Address) {
+    public func update(address: Address) {
         if self.address.isEqualToAddress(address) == false {
             self.address = address
         }
