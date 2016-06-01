@@ -100,9 +100,9 @@ public class LocalStorage: NSObject {
     class func baseURL(directory: NSSearchPathDirectory) -> NSURL? {
         
         switch directory {
-        case .DocumentDirectory:
+        case .documentDirectory:
             return documentsURL()
-        case .CachesDirectory:
+        case .cachesDirectory:
             return cachesURL()
         default:
             NSLog("Error: Base URL for directory \"\(directory)\" requested is not supported!")
@@ -353,7 +353,9 @@ public class LocalStorage: NSObject {
     - returns: The image requested to be loaded or `nil` if it isn't found.
     */
     public class func loadImage(fromDocuments reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> UIImage? {
-        return loadFromDocuments(reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) as? UIImage
+        // TODO: Uncomment
+//        return loadFromDocuments(reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) as? UIImage
+        return nil
     }
     
     /**
@@ -366,7 +368,9 @@ public class LocalStorage: NSObject {
     - returns: The image requested to be loaded or `nil` if it isn't found.
     */
     public class func loadImage(fromCaches reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> UIImage? {
-        return loadFromCaches(reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) as? UIImage
+        // TODO: Uncomment
+//        return loadFromCaches(reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) as? UIImage
+        return nil
     }
     
     /**
@@ -389,8 +393,9 @@ public class LocalStorage: NSObject {
     */
     class func remove(absoluteURL: NSURL) throws {
         
-        try NSFileManager.default().removeItem(at: absoluteURL)
-        ContentManager.removeContentMetadata(absoluteURL: absoluteURL)
+        // TODO: Uncomment
+//        try NSFileManager.default().removeItem(at: absoluteURL)
+//        ContentManager.removeContentMetadata(absoluteURL: absoluteURL)
     }
     
     /**

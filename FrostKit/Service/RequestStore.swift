@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Alamofire
+//import Alamofire
 
 /// 
 /// The request store keeps track of all requests passed into it. It stops duplicate requests being called by canceling any already running requests passed to it, until they are done and removed.
@@ -17,7 +17,8 @@ import Alamofire
 public class RequestStore: NSObject {
     
     /// The store to hold references to the requests being managed.
-    private lazy var store = Dictionary<String, Request>()
+    // TODO: Uncomment
+    private lazy var store = Dictionary<String, AnyObject>()
     /// Describes if the store is locked `true` or not `false`. This is set to `false` by default and is only locked when canceling all tasks.
     private var locked = false
     
@@ -27,7 +28,8 @@ public class RequestStore: NSObject {
     - parameter request: The request to store and manage.
     - parameter urlString: The url string to use as the key.
     */
-    public func add(request: Request, urlString: String) {
+    // TODO: Uncomment
+    public func add(request: AnyObject, urlString: String) {
         if locked == true {
             return
         }

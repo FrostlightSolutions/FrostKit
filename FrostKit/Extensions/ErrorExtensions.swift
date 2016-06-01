@@ -21,6 +21,6 @@ extension NSError {
      - returns: An error object with the message as a localized description.
      */
     public class func error(withMessage message: String) -> NSError {
-        return NSError(domain: NSBundle.mainBundle().bundleIdentifier ?? "", code: -1, userInfo: [NSLocalizedDescriptionKey: message])
+        return NSError(domain: NSBundle.main().bundleIdentifier ?? "", code: -1, userInfo: [NSLocalizedDescriptionKey: message])
     }
 }

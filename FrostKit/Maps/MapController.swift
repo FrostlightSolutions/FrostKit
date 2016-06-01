@@ -412,19 +412,21 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         
         // Otherwise, sort the annotations based on their  distance from the center of the grid square,
         // then choose the one closest to the center to show.
-        let centerMapPoint = MKMapPoint(x: MKMapRectGetMidX(gridMapRect), y: MKMapRectGetMidY(gridMapRect))
-        let sortedAnnotations = allAnnotations.sort { (object1, object2) -> Bool in
-            
-            let mapPoint1 = MKMapPointForCoordinate(object1.coordinate)
-            let mapPoint2 = MKMapPointForCoordinate(object2.coordinate)
-            
-            let distance1 = MKMetersBetweenMapPoints(mapPoint1, centerMapPoint)
-            let distance2 = MKMetersBetweenMapPoints(mapPoint2, centerMapPoint)
-            
-            return distance1 < distance2
-        }
-        
-        return sortedAnnotations.first
+        // TODO: Uncomment
+//        let centerMapPoint = MKMapPoint(x: MKMapRectGetMidX(gridMapRect), y: MKMapRectGetMidY(gridMapRect))
+//        let sortedAnnotations = allAnnotations.sort { (object1, object2) -> Bool in
+//            
+//            let mapPoint1 = MKMapPointForCoordinate(object1.coordinate)
+//            let mapPoint2 = MKMapPointForCoordinate(object2.coordinate)
+//            
+//            let distance1 = MKMetersBetweenMapPoints(mapPoint1, centerMapPoint)
+//            let distance2 = MKMetersBetweenMapPoints(mapPoint2, centerMapPoint)
+//            
+//            return distance1 < distance2
+//        }
+//        
+//        return sortedAnnotations.first
+        return nil
     }
     
     // MARK: - Zoom Map Methods
@@ -829,9 +831,9 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     public func mapView(_ mapView: MKMapView, didChange mode: MKUserTrackingMode, animated: Bool) {
         
         switch mode {
-        case .None:
+        case .none:
             trackingUser = false
-        case .Follow, .FollowWithHeading:
+        case .follow, .followWithHeading:
             trackingUser = true
         }
     }
@@ -872,7 +874,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      */
     public func searchAddresses(searchString: String) -> [Address] {
         let predicate = NSPredicate(format: "name CONTAINS[cd] %@ || addressString CONTAINS[cd] %@", searchString, searchString)
-        return (addresses as NSArray).filteredArrayUsingPredicate(predicate) as! [Address]
+        return (addresses as NSArray).filtered(using: predicate) as! [Address]
     }
     
 }

@@ -42,7 +42,8 @@ public class CarouselViewController: UIViewController, UICollectionViewDataSourc
         didSet {
             
             pageControl?.numberOfPages = numberOfPages
-            pageControl?.addTarget(self, action: #selector(CarouselViewController.pageControlDidChange(_:)), for: UIControlEvents.valueChanged)
+            // TODO: Uncomment
+//            pageControl?.addTarget(self, action: #selector(CarouselViewController.pageControlDidChange(_:)), for: UIControlEvents.valueChanged)
         }
     }
     public var numberOfPages: Int {

@@ -15,13 +15,13 @@ public class KeychainHelper: NSObject {
     
     private class func setupSearchDirectory() -> NSMutableDictionary {
         
-        let appName = NSBundle.appName(NSBundle(forClass: KeychainHelper.self))
+        let appName = NSBundle.appName(bundle: NSBundle(for: KeychainHelper.self))
         
         let secDict = NSMutableDictionary()
         secDict.setObject(String(kSecClassGenericPassword), forKey: String(kSecClass))
         secDict.setObject(appName, forKey: String(kSecAttrService))
         
-        if let encodedIdentifier = appName.dataUsingEncoding(NSUTF8StringEncoding) {
+        if let encodedIdentifier = appName.data(using: NSUTF8StringEncoding) {
             secDict.setObject(encodedIdentifier, forKey: String(kSecAttrGeneric))
             secDict.setObject(encodedIdentifier, forKey: String(kSecAttrAccount))
         }
@@ -33,7 +33,7 @@ public class KeychainHelper: NSObject {
         
         let secDict = setupSearchDirectory()
         secDict.setObject(String(kSecMatchLimitOne), forKey: String(kSecMatchLimit))
-        secDict.setObject(NSNumber(bool: true), forKey: String(kSecReturnData))
+        secDict.setObject(NSNumber(value: true), forKey: String(kSecReturnData))
         // kCFBooleanTrue
         
         var foundDict: AnyObject?
@@ -56,14 +56,14 @@ public class KeychainHelper: NSObject {
     
     - returns: The details saved with the username if found, otherwise `nil`.
     */
-    public class func details(username username: String) -> AnyObject? {
+    public class func details(username: String) -> AnyObject? {
         
         let valueData = searchKeychainForMatchingData()
         if let data = valueData {
             
-            let valueDict = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSDictionary
+            let valueDict = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSDictionary
             if let dict = valueDict {
-                return dict.objectForKey(username)
+                return dict.object(forKey: username)
             }
         }
         
@@ -78,11 +78,11 @@ public class KeychainHelper: NSObject {
     
     - returns: Returns `true` if the details were successfully saved, `false` if not.
     */
-    public class func setDetails(details details: AnyObject, username: String) -> Bool {
+    public class func setDetails(details: AnyObject, username: String) -> Bool {
         
         let valueDict = [username: details]
         let secDict = setupSearchDirectory()
-        let valueData = NSKeyedArchiver.archivedDataWithRootObject(valueDict)
+        let valueData = NSKeyedArchiver.archivedData(withRootObject: valueDict)
         secDict.setObject(valueData, forKey: String(kSecValueData))
         secDict.setObject(String(kSecAttrAccessibleWhenUnlocked), forKey: String(kSecAttrAccessible))
         
@@ -91,7 +91,7 @@ public class KeychainHelper: NSObject {
             return true
         } else {
             if status == OSStatus(errSecDuplicateItem) {
-                return updateKeychainValue(valueDict)
+                return updateKeychainValue(valueDict: valueDict)
             } else {
                 let error = NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
                 NSLog("ERROR: Set Keychain Details: \(error.localizedDescription)")
@@ -105,7 +105,7 @@ public class KeychainHelper: NSObject {
         
         let secDict = setupSearchDirectory()
         let updateDict = NSMutableDictionary()
-        let valueData = NSKeyedArchiver.archivedDataWithRootObject(valueDict)
+        let valueData = NSKeyedArchiver.archivedData(withRootObject: valueDict)
         updateDict.setObject(valueData, forKey: String(kSecValueData))
         
         let status = SecItemUpdate(secDict, updateDict)

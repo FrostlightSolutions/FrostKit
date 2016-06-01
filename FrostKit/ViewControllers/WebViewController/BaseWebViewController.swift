@@ -27,7 +27,7 @@ public class BaseWebViewController: UIViewController {
     public var urlString: String? {
         didSet {
             if webView != nil {
-                self.loadBaseURL()
+                let _ = self.loadBaseURL()
             }
         }
     }
@@ -70,8 +70,9 @@ public class BaseWebViewController: UIViewController {
             updateActivityViewVisability()
             
             if self.isRoot == true {
-                let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(BaseWebViewController.doneButtonPressed(_:)))
-                navigationItem.setLeftBarButtonItem(doneButton, animated: false)
+                // TODO: Uncomment
+//                let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(BaseWebViewController.doneButtonPressed(_:)))
+//                navigationItem.setLeftBarButtonItem(doneButton, animated: false)
             }
         }
         
@@ -89,7 +90,7 @@ public class BaseWebViewController: UIViewController {
             view.addConstraints(constraintH)
             
             if loading == false {
-                loadBaseURL()
+                let _ = loadBaseURL()
             }
         }
     }
@@ -177,23 +178,24 @@ public class BaseWebViewController: UIViewController {
     */
     func setupToolbar() {
         
-        if let navController = navigationController {
-            
-            let backButton = UIBarButtonItem(title: IonIcons.ios_arrow_left, font: UIFont.ionicons(size: 29), target: self, action: #selector(BaseWebViewController.backButtonPressed(_:)))
-            let forwardButton = UIBarButtonItem(title: IonIcons.ios_arrow_right, font: UIFont.ionicons(size: 29), target: self, action: #selector(BaseWebViewController.forwardButtonPressed(_:)))
-            let refreshButton = UIBarButtonItem(title: IonIcons.ios_refresh_empty, font: UIFont.ionicons(size: 34), target: self, action: #selector(BaseWebViewController.refreshButtonPressed(_:)))
-            let actionButton = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: #selector(BaseWebViewController.actionButtonPressed(_:)))
-            let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-            
-            backButton.enabled = false
-            forwardButton.enabled = false
-            
-            setToolbarItems([backButton, flexibleSpace, forwardButton, flexibleSpace, actionButton, flexibleSpace, refreshButton], animated: false)
-            navController.isToolbarHidden = false
-            
-            self.backButton = backButton
-            self.forwardButton = forwardButton
-        }
+        // TODO: Uncomment
+//        if let navController = navigationController {
+//            
+//            let backButton = UIBarButtonItem(title: IonIcons.ios_arrow_left, font: UIFont.ionicons(size: 29), target: self, action: #selector(BaseWebViewController.backButtonPressed(_:)))
+//            let forwardButton = UIBarButtonItem(title: IonIcons.ios_arrow_right, font: UIFont.ionicons(size: 29), target: self, action: #selector(BaseWebViewController.forwardButtonPressed(_:)))
+//            let refreshButton = UIBarButtonItem(title: IonIcons.ios_refresh_empty, font: UIFont.ionicons(size: 34), target: self, action: #selector(BaseWebViewController.refreshButtonPressed(_:)))
+//            let actionButton = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: #selector(BaseWebViewController.actionButtonPressed(_:)))
+//            let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+//            
+//            backButton.enabled = false
+//            forwardButton.enabled = false
+//            
+//            setToolbarItems([backButton, flexibleSpace, forwardButton, flexibleSpace, actionButton, flexibleSpace, refreshButton], animated: false)
+//            navController.isToolbarHidden = false
+//            
+//            self.backButton = backButton
+//            self.forwardButton = forwardButton
+//        }
     }
     
     /**

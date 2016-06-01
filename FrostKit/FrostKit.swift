@@ -37,7 +37,7 @@ public let NetworkRequestDidCompleteNotification = "com.FrostKit.activityIndicat
 
 #if os(iOS) || os(tvOS) || os(OSX)
 internal func FKLocalizedString(key: String, comment: String = "") -> String {
-    return NSLocalizedString(key, bundle: NSBundle(forClass: FrostKit.self), comment: comment)
+    return NSLocalizedString(key, bundle: NSBundle(for: FrostKit.self), comment: comment)
 }
 #endif
 
@@ -55,8 +55,10 @@ public class FrostKit {
     public class var tintColor: Color? {
         return FrostKit.shared.tintColor
     }
-    public class func tintColor(alpha alpha: CGFloat) -> Color? {
-        return tintColor?.colorWithAlpha(alpha)
+    public class func tintColor(alpha: CGFloat) -> Color? {
+        // TODO: Uncomment
+//        return tintColor?.colorWithAlpha(alpha)
+        return nil
     }
     
 #if os(iOS) || os(tvOS) || os(OSX)
@@ -78,7 +80,7 @@ public class FrostKit {
     // MARK: - Setup Methods
     
     public class func setup() {
-        FrostKit.shared
+        let _ = FrostKit.shared
     }
     
     public class func setup(tintColor: Color) {
