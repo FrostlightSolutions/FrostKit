@@ -130,6 +130,7 @@
 		18D54C031CE6455C00D365C6 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1838F1BA1C761E4800F1233D /* Alamofire.framework */; };
 		18D54C041CE64BA900D365C6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18748B2019DF5661003942A3 /* Localizable.strings */; };
 		18D54C051CE64BB000D365C6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18748B2019DF5661003942A3 /* Localizable.strings */; };
+		18D58EA91D0CC151009BE4E5 /* MapClusterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D58EA81D0CC151009BE4E5 /* MapClusterTests.swift */; };
 		18DC212B19DEA21000FEB57E /* ViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC212A19DEA21000FEB57E /* ViewControllerExtensions.swift */; };
 		18DD78FF1A8CA70F00379FB5 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DD78FD1A8CA70F00379FB5 /* Button.swift */; };
 		18DD79011A8CA70F00379FB5 /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DD78FE1A8CA70F00379FB5 /* VisualEffectView.swift */; };
@@ -289,6 +290,7 @@
 		18CFF9FD19DC45AB00DF6BB8 /* TimeZoneExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZoneExtensions.swift; sourceTree = "<group>"; };
 		18D54BE91CE6439300D365C6 /* FrostKit tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FrostKit tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D54BED1CE6439300D365C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18D58EA81D0CC151009BE4E5 /* MapClusterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapClusterTests.swift; path = "FrostKit iOS Tests/Maps/MapClusterTests.swift"; sourceTree = SOURCE_ROOT; };
 		18DC212A19DEA21000FEB57E /* ViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtensions.swift; sourceTree = "<group>"; };
 		18DD78FD1A8CA70F00379FB5 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		18DD78FE1A8CA70F00379FB5 /* VisualEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
@@ -546,6 +548,7 @@
 				189D8CB21C77EEFC00261DF5 /* Service */,
 				189D8CB41C77EEFC00261DF5 /* Storage */,
 				189D8CAD1C77EEFC00261DF5 /* Helpers */,
+				18D58EA71D0CC122009BE4E5 /* Maps */,
 				189D8CA91C77EEFC00261DF5 /* Extensions */,
 				189D8CB11C77EEFC00261DF5 /* Info.plist */,
 			);
@@ -626,6 +629,14 @@
 				18D54BED1CE6439300D365C6 /* Info.plist */,
 			);
 			path = "FrostKit tvOS Tests";
+			sourceTree = "<group>";
+		};
+		18D58EA71D0CC122009BE4E5 /* Maps */ = {
+			isa = PBXGroup;
+			children = (
+				18D58EA81D0CC151009BE4E5 /* MapClusterTests.swift */,
+			);
+			path = Maps;
 			sourceTree = "<group>";
 		};
 		18DD78F81A8CA6DF00379FB5 /* Views */ = {
@@ -1154,6 +1165,7 @@
 			files = (
 				18E9FF951C80AC6F00AC5230 /* MapControllerTests.swift in Sources */,
 				18410C2E1C81092500D2B308 /* FontExtensionsTests.swift in Sources */,
+				18D58EA91D0CC151009BE4E5 /* MapClusterTests.swift in Sources */,
 				18E9FF971C80AC6F00AC5230 /* DateExtensionsTests.swift in Sources */,
 				18410C301C810A6900D2B308 /* BundleExtensionsTests.swift in Sources */,
 				18410C321C810EB300D2B308 /* DataExtensionsTests.swift in Sources */,
