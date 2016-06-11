@@ -855,7 +855,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     
     // MARL: - CLLocationManagerDelegate Methods
     
-    public func locationManager(_ manager: CLLocationManager, didChange status: CLAuthorizationStatus) {
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         
         // Set the location manager to nil if not `NotDetermined`. If `NotDetermined` then it is possible the delegate was called before the user has answered.
         if status != .notDetermined {
