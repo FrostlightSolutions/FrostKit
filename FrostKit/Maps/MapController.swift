@@ -266,7 +266,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         }
     }
     
-    private func calculateAndUpdateClusterAnnotations(complete: () -> Void) {
+    private final func calculateAndUpdateClusterAnnotations(complete: () -> Void) {
         
         guard let mapView = self.mapView else {
             complete()
@@ -329,7 +329,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         })
     }
     
-    private func calculateClusterInGrid(mapView: MKMapView, offscreenMapView: MKMapView, gridMapRect: MKMapRect) {
+    private final func calculateClusterInGrid(mapView: MKMapView, offscreenMapView: MKMapView, gridMapRect: MKMapRect) {
         
         // Limited to only the use Annotation classes or subclasses
         let semaphore = dispatch_semaphore_create(0)    // Create semaphore
@@ -394,7 +394,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         }
     }
     
-    private func calculatedAnnotationInGrid(mapView: MKMapView, gridMapRect: MKMapRect, allAnnotations: Set<Annotation>, visableAnnotations: Set<Annotation>) -> Annotation? {
+    private final func calculatedAnnotationInGrid(mapView: MKMapView, gridMapRect: MKMapRect, allAnnotations: Set<Annotation>, visableAnnotations: Set<Annotation>) -> Annotation? {
         
         // First, see if one of the annotations we were already showing is in this mapRect
         var annotationForGridSet: Annotation?
