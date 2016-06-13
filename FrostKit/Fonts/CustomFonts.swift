@@ -57,19 +57,20 @@ public class CustomFonts: NSObject {
     */
     public class func loadCustomFont(name: String, withExtension ext: String, bundle: Bundle = Bundle.main()) {
         
-        if let url = bundle.urlForResource(name, withExtension: ext) {
-            let fontData = NSData(contentsOf: url)
-            var error: Unmanaged<CFError>?
-            let provider = CGDataProvider(data: fontData!)
-            if let font = CGFont(provider!) where CTFontManagerRegisterGraphicsFont(font, &error) == false {
-                if let anError = error {
-                    let errorCode = CFErrorGetCode(anError.takeRetainedValue())
-                    if errorCode == CTFontManagerError.alreadyRegistered.rawValue {
-                        NSLog("Already loaded '\(name)'")
-                    } else {
-                        let errorDescription = CFErrorCopyDescription(anError.takeRetainedValue()) as NSString
-                        NSLog("ERROR: Failed to load '\(name)' font with error: \(errorDescription)!")
-                    }
+        var error: Unmanaged<CFError>?
+        if let url = bundle.urlForResource(name, withExtension: ext),
+            fontData = NSData(contentsOf: url),
+            provider = CGDataProvider(data: fontData),
+            font = CGFont(provider)
+            where CTFontManagerRegisterGraphicsFont(font, &error) == false {
+            
+            if let anError = error {
+                let errorCode = CFErrorGetCode(anError.takeRetainedValue())
+                if errorCode == CTFontManagerError.alreadyRegistered.rawValue {
+                    NSLog("Already loaded '\(name)'")
+                } else {
+                    let errorDescription = CFErrorCopyDescription(anError.takeRetainedValue()) as NSString
+                    NSLog("ERROR: Failed to load '\(name)' font with error: \(errorDescription)!")
                 }
             } else {
                 NSLog("Loaded '\(name)' successfully")

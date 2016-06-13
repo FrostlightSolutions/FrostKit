@@ -114,7 +114,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     /// When the map automatically zooms to show all, if this value is set to true, then the users annoation is automatically included in that.
     @IBInspectable public var zoomToShowAllIncludesUser: Bool = true
     private var regionSpanBeforeChange: MKCoordinateSpan?
-    let clusterCalculationsQueue: dispatch_queue_t = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)
+    let clusterCalculationsQueue = DispatchQueue.global(attributes: .qosUserInteractive)
     var cancelClusterCalculations = false
     
     deinit {
@@ -299,7 +299,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         // For each square in the grid, pick one annotation to show
         let offscreenMapView = self.offscreenMapView
         gridMapRect.origin.y = startY
-        dispatch_async(clusterCalculationsQueue, { () -> Void in
+        clusterCalculationsQueue.async {
             
             while MKMapRectGetMinY(gridMapRect) <= endY {
                 
@@ -322,11 +322,11 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                 gridMapRect.origin.y += gridSize
             }
             
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async {
                 self.cancelClusterCalculations = false
                 complete()
-            })
-        })
+            }
+        }
     }
     
     private func calculateClusterInGrid(mapView: MKMapView, offscreenMapView: MKMapView, gridMapRect: MKMapRect) {
@@ -340,7 +340,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
             semaphore.signal()    // Signal that semaphore should complete
         }
         
-        semaphore.wait(timeout: dispatch_time_t(DispatchTime.distantFuture))   // Wait for semaphore
+        let _ = semaphore.wait(timeout: DispatchTime.distantFuture)   // Wait for semaphore
         
         if visableAnnotationsInBucket == nil {
             return

@@ -47,7 +47,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     
     - returns: Returns `false` if there is an issue or the service is unavailable, otherwise `true`.
     */
-    public class func presentComposeViewController(serviceType: String, initialText: String? = nil, urls: [NSURL]? = nil, images: [UIImage]? = nil, inViewController viewController: UIViewController, animated: Bool = true) -> Bool {
+    public class func presentComposeViewController(serviceType: String, initialText: String? = nil, urls: [URL]? = nil, images: [UIImage]? = nil, inViewController viewController: UIViewController, animated: Bool = true) -> Bool {
         
         if SLComposeViewController.isAvailable(forServiceType: serviceType) {
             
@@ -226,21 +226,19 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     
     public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: NSError?) {
         
-        switch result.rawValue {
-        case MFMailComposeResultCancelled.rawValue:
+        switch result {
+        case .cancelled:
             NSLog("Email cancelled")
-        case MFMailComposeResultSaved.rawValue:
+        case .saved:
             NSLog("Email saved")
-        case MFMailComposeResultSent.rawValue:
+        case .sent:
             NSLog("Email sent")
-        case MFMailComposeResultFailed.rawValue:
+        case .failed:
             if let anError = error {
                 NSLog("Email send failed: \(anError.localizedDescription)\n\(error)")
             } else {
                 NSLog("Email send failed!")
             }
-        default:
-            break
         }
         
         controller.dismiss(animated: true, completion: nil)
@@ -250,15 +248,13 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     
     public func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         
-        switch result.rawValue {
-        case MessageComposeResultCancelled.rawValue:
+        switch result {
+        case .cancelled:
             NSLog("Message cancelled")
-        case MessageComposeResultSent.rawValue:
+        case .sent:
             NSLog("Message sent")
-        case MessageComposeResultFailed.rawValue:
+        case .failed:
             NSLog("Message failed")
-        default:
-            break
         }
         
         controller.dismiss(animated: true, completion: nil)

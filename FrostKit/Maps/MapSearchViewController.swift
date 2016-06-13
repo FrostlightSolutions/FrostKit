@@ -63,7 +63,7 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
     
     - returns: The object at the index path.
     */
-    public func objectAt(_ indexPath: NSIndexPath) -> AnyObject? {
+    public func objectAt(_ indexPath: IndexPath) -> AnyObject? {
         if let searchBar = self.searchBar {
             var array: [AnyObject]?
             switch searchBar.selectedScopeButtonIndex {
@@ -107,7 +107,7 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
         return 0
     }
 
-    override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: NSIndexPath) -> UITableViewCell {
+    override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: identifier)
         if cell == nil {
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: identifier)
@@ -141,7 +141,8 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
         return cell!
     }
     
-    public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: NSIndexPath) {
+    public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         if let searchBar = self.searchBar {
             switch searchBar.selectedScopeButtonIndex {
             case 0:

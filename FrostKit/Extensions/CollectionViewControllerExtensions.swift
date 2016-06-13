@@ -16,13 +16,13 @@ public extension UICollectionViewController {
     /// Allows easy access to a collection view controller's refrsh control the same way as in a table view controller.
     public var refreshControl: UIRefreshControl? {
         get {
-            return collectionView?.withTag(1404120146) as? UIRefreshControl
+            return collectionView?.viewWithTag(1404120146) as? UIRefreshControl
         }
         set {
             
             if let collectionView = self.collectionView {
                 
-                if let oldRefreshControl = collectionView.withTag(1404120146) as? UIRefreshControl {
+                if let oldRefreshControl = collectionView.viewWithTag(1404120146) as? UIRefreshControl {
                     oldRefreshControl.removeFromSuperview()
                     collectionView.alwaysBounceVertical = false
                 }

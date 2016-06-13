@@ -21,7 +21,7 @@ public class KeychainHelper: NSObject {
         secDict.setObject(String(kSecClassGenericPassword), forKey: String(kSecClass))
         secDict.setObject(appName, forKey: String(kSecAttrService))
         
-        if let encodedIdentifier = appName.data(using: NSUTF8StringEncoding) {
+        if let encodedIdentifier = appName.data(using: String.Encoding.utf8) {
             secDict.setObject(encodedIdentifier, forKey: String(kSecAttrGeneric))
             secDict.setObject(encodedIdentifier, forKey: String(kSecAttrAccount))
         }

@@ -20,7 +20,7 @@ public class ContentManager: NSObject {
     private lazy var contentMetadata = [String: NSDate]()
     
     private class func maxSavedTimeInSeconds() -> TimeInterval {
-        return NSDate.weekInSeconds() * 2
+        return Date.weekInSeconds() * 2
     }
     
     // MARK: - Singleton

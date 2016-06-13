@@ -84,13 +84,13 @@ public class CarouselViewController: UIViewController, UICollectionViewDataSourc
         return 0
     }
     
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: NSIndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return collectionView.dequeueReusableCell(withReuseIdentifier: "CarouselCell", for: indexPath as IndexPath)
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
     
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: NSIndexPath) -> CGSize {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return collectionView.frame.size
     }
     
@@ -101,7 +101,7 @@ public class CarouselViewController: UIViewController, UICollectionViewDataSourc
     // MARK: - UIPageControl Methods
     
     final public func pageControlDidChange(sender: UIPageControl) {
-        collectionView?.scrollToItem(at: NSIndexPath(forRow: sender.currentPage, inSection: 0), at: [], animated: true)
+        collectionView?.scrollToItem(at: IndexPath(row: sender.currentPage, section: 0), at: [], animated: true)
     }
     
     // MARK: - UIScrollViewDelegate Methods
@@ -130,11 +130,11 @@ public class CarouselViewController: UIViewController, UICollectionViewDataSourc
             otherPercent = (1 + percent) * -1
         }
         
-        if let cell = collectionView?.cellForItem(at: NSIndexPath(forRow: pageNumber, inSection: 0)) {
+        if let cell = collectionView?.cellForItem(at: IndexPath(row: pageNumber, section: 0)) {
             animate(view: cell, percent: percent * -1, pageNumber: pageNumber)
         }
         
-        if let cell = collectionView?.cellForItem(at: NSIndexPath(forRow: pageNumber + direction.rawValue, inSection: 0)) {
+        if let cell = collectionView?.cellForItem(at: IndexPath(row: pageNumber + direction.rawValue, section: 0)) {
             animate(view: cell, percent: otherPercent, pageNumber: pageNumber + direction.rawValue)
         }
     }
