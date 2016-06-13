@@ -37,7 +37,7 @@ public let NetworkRequestDidCompleteNotification = "com.FrostKit.activityIndicat
 
 #if os(iOS) || os(tvOS) || os(OSX)
 internal func FKLocalizedString(key: String, comment: String = "") -> String {
-    return NSLocalizedString(key, bundle: NSBundle(for: FrostKit.self), comment: comment)
+    return NSLocalizedString(key, bundle: Bundle(for: FrostKit.self), comment: comment)
 }
 #endif
 

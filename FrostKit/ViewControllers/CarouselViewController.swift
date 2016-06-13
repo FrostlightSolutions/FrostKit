@@ -64,7 +64,7 @@ public class CarouselViewController: UIViewController, UICollectionViewDataSourc
         
     }
     
-    public override func willAnimateRotation(to toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+    public override func willAnimateRotation(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
         
         if let pageControl = self.pageControl {
             
@@ -85,7 +85,7 @@ public class CarouselViewController: UIViewController, UICollectionViewDataSourc
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: NSIndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: "CarouselCell", for: indexPath)
+        return collectionView.dequeueReusableCell(withReuseIdentifier: "CarouselCell", for: indexPath as IndexPath)
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout

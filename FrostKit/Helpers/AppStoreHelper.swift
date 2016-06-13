@@ -38,7 +38,7 @@ public class AppStoreHelper: NSObject {
             if let fileSize = self.fileSize {
                 
                 if let byteCount = Int64(fileSize) {
-                    formattedFileSize = NSByteCountFormatter.string(fromByteCount: byteCount, countStyle: .binary)
+                    formattedFileSize = ByteCountFormatter.string(fromByteCount: byteCount, countStyle: .binary)
                 } else {
                     formattedFileSize = nil
                 }
@@ -111,9 +111,9 @@ public class AppStoreHelper: NSObject {
      */
     public func appUpdateNeeded() -> UpdateStatus {
         
-        if let appStoreVersion = self.version, bundleId = self.bundleId, bundle = NSBundle(identifier: bundleId) {
+        if let appStoreVersion = self.version, bundleId = self.bundleId, bundle = Bundle(identifier: bundleId) {
             
-            let localVersion = NSBundle.appVersion(bundle: bundle)
+            let localVersion = Bundle.appVersion(bundle: bundle)
             let comparisonResult = localVersion.compare(appStoreVersion, options: .numericSearch)
             if comparisonResult == .orderedAscending {
                 return .UpdateNeeded

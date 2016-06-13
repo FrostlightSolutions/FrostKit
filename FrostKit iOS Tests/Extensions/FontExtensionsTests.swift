@@ -23,7 +23,7 @@ class FontExtensionsTests: XCTestCase {
 
     func testCustomFonts() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
             let fontAwesome = Font.fontAwesome(size: 12)
             let fontAwesomeName = fontAwesome.fontName

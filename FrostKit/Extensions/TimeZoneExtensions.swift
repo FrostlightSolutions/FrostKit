@@ -11,15 +11,15 @@ import Foundation
 ///
 /// Extention functions for NSTimeZone
 ///
-extension NSTimeZone {
+extension TimeZone {
     
     /**
     A helper method to get the UTC time zone.
     
     - returns: A UTC time zone object.
     */
-    public class func utc() -> NSTimeZone {
-        return NSTimeZone(name: "UTC")!
+    public class func utc() -> TimeZone {
+        return TimeZone(name: "UTC")!
     }
     
 }

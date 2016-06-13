@@ -37,7 +37,7 @@ class MapControllerTests: XCTestCase {
     
     func testAddressIsValid() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
             if self.address.isValid == true {
                 XCTAssert(true, "Pass")
@@ -49,7 +49,7 @@ class MapControllerTests: XCTestCase {
     
     func testAddressCoordinate() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
             if self.address.coordinate.latitude == self.coordinate.latitude && self.address.coordinate.longitude == self.coordinate.longitude {
                 XCTAssert(true, "Pass")
@@ -61,7 +61,7 @@ class MapControllerTests: XCTestCase {
     
     func testAddressLatitude() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
             if self.address.latitude == self.coordinate.latitude {
                 XCTAssert(true, "Pass")
@@ -73,7 +73,7 @@ class MapControllerTests: XCTestCase {
     
     func testAddressLongitude() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
             if self.address.longitude == self.coordinate.longitude {
                 XCTAssert(true, "Pass")
@@ -85,7 +85,7 @@ class MapControllerTests: XCTestCase {
     
     func testAddressName() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
             if self.address.name == self.addressName {
                 XCTAssert(true, "Pass")
@@ -97,7 +97,7 @@ class MapControllerTests: XCTestCase {
     
     func testAddressStringAddress() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
             if self.address.addressString == self.addressString {
                 XCTAssert(true, "Pass")
@@ -111,7 +111,7 @@ class MapControllerTests: XCTestCase {
     
     func testAnnotationAddress() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
             if self.annotation.address.isEqualToAddress(self.address) {
                 XCTAssert(true, "Pass")
@@ -123,7 +123,7 @@ class MapControllerTests: XCTestCase {
     
     func testAnnotationUpdateAddress() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
             let annotation = Annotation()
             annotation.updateAddress(self.address)

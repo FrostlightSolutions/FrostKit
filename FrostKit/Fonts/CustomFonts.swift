@@ -25,8 +25,8 @@ public class CustomFonts: NSObject {
     
     /// Loads custom fonts imbedded in the Framework.
     public class func loadCustomFonts() {
-        loadCustomFont(name: "fontawesome-webfont", withExtension: "ttf", bundle: NSBundle(for: CustomFonts.self))
-        loadCustomFont(name: "ionicons", withExtension: "ttf", bundle: NSBundle(for: CustomFonts.self))
+        loadCustomFont(name: "fontawesome-webfont", withExtension: "ttf", bundle: Bundle(for: CustomFonts.self))
+        loadCustomFont(name: "ionicons", withExtension: "ttf", bundle: Bundle(for: CustomFonts.self))
     }
     
     /**
@@ -35,7 +35,7 @@ public class CustomFonts: NSObject {
     - parameter fontNames: An array of strings of the font file names.
     - parameter bundle:    The bundle to look for the file names in. By default this uses the main app bundle.
     */
-    public class func loadCustomFonts(fontNames: [NSString], bundle: NSBundle = NSBundle.main()) {
+    public class func loadCustomFonts(fontNames: [NSString], bundle: Bundle = Bundle.main()) {
         for fontName in fontNames {
             let filename = fontName.components(separatedBy: ".").first
             let ext = fontName.pathExtension
@@ -55,13 +55,13 @@ public class CustomFonts: NSObject {
         - parameter ext:     The extention of the file.
         - parameter bundle:  The bundle the files are located in. By default this uses the main app bundle.
     */
-    public class func loadCustomFont(name: String, withExtension ext: String, bundle: NSBundle = NSBundle.main()) {
+    public class func loadCustomFont(name: String, withExtension ext: String, bundle: Bundle = Bundle.main()) {
         
         if let url = bundle.urlForResource(name, withExtension: ext) {
             let fontData = NSData(contentsOf: url)
             var error: Unmanaged<CFError>?
-            let provider = CGDataProvider(data: fontData)
-            if let font = CGFont(provider) where CTFontManagerRegisterGraphicsFont(font, &error) == false {
+            let provider = CGDataProvider(data: fontData!)
+            if let font = CGFont(provider!) where CTFontManagerRegisterGraphicsFont(font, &error) == false {
                 if let anError = error {
                     let errorCode = CFErrorGetCode(anError.takeRetainedValue())
                     if errorCode == CTFontManagerError.alreadyRegistered.rawValue {

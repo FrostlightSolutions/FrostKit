@@ -51,7 +51,7 @@ extension NSData {
             exponent += 1
         }
         
-        let numberFormatter = NSNumberFormatter()
+        let numberFormatter = NumberFormatter()
         numberFormatter.maximumFractionDigits = 2
         let stringSize = numberFormatter.string(from: NSNumber(value: bytes))!
         return "\(stringSize) \(sUnits[exponent])B"

@@ -15,7 +15,7 @@ public class KeychainHelper: NSObject {
     
     private class func setupSearchDirectory() -> NSMutableDictionary {
         
-        let appName = NSBundle.appName(bundle: NSBundle(for: KeychainHelper.self))
+        let appName = Bundle.appName(bundle: Bundle(for: KeychainHelper.self))
         
         let secDict = NSMutableDictionary()
         secDict.setObject(String(kSecClassGenericPassword), forKey: String(kSecClass))
@@ -59,7 +59,7 @@ public class KeychainHelper: NSObject {
     public class func details(username: String) -> AnyObject? {
         
         let valueData = searchKeychainForMatchingData()
-        if let data = valueData {
+        if let data = valueData as? Data {
             
             let valueDict = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSDictionary
             if let dict = valueDict {

@@ -158,7 +158,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         
         if attachments != nil {
             for (data, mimeType, fileName) in attachments! {
-                mailVC.addAttachmentData(data, mimeType: mimeType, fileName: fileName)
+                mailVC.addAttachmentData(data as Data, mimeType: mimeType, fileName: fileName)
             }
         }
         
@@ -213,7 +213,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         
         if MFMessageComposeViewController.canSendAttachments() && attachments != nil {
             for (attachmentURL, alternateFilename) in attachments! {
-                messageVC.addAttachmentURL(attachmentURL, withAlternateFilename: alternateFilename)
+                messageVC.addAttachmentURL(attachmentURL as URL, withAlternateFilename: alternateFilename)
             }
         }
         

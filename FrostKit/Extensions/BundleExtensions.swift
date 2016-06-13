@@ -11,7 +11,7 @@ import Foundation
 ///
 /// Extention functions for NSBundle
 ///
-extension NSBundle {
+extension Bundle {
     
     /**
      Returns the bundle version of the app as a string.
@@ -20,7 +20,7 @@ extension NSBundle {
      
      - returns: The bundle version of the app.
      */
-    public class func appVersion(bundle: NSBundle = NSBundle.main()) -> String {
+    public class func appVersion(bundle: Bundle = Bundle.main()) -> String {
         return bundle.objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
     }
     
@@ -31,7 +31,7 @@ extension NSBundle {
      
      - returns: The build number of the app.
      */
-    public class func appBuildNumber(bundle: NSBundle = NSBundle.main()) -> String {
+    public class func appBuildNumber(bundle: Bundle = Bundle.main()) -> String {
         return bundle.objectForInfoDictionaryKey("CFBundleVersion") as! String
     }
     
@@ -42,7 +42,7 @@ extension NSBundle {
      
      - returns: The version of the app.
      */
-    public class func appName(bundle: NSBundle = NSBundle.main()) -> String {
+    public class func appName(bundle: Bundle = Bundle.main()) -> String {
         return bundle.objectForInfoDictionaryKey("CFBundleName") as! String
     }
     

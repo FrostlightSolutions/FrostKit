@@ -19,9 +19,9 @@ public enum DirectoryLocation: UInt {
     /// User Data directory.
     case userData
     /// Document directory.
-    static let documentDirectory = NSSearchPathDirectory.documentDirectory
+    static let documentDirectory = FileManager.SearchPathDirectory.documentDirectory
     /// Caches Directory.
-    static let cachesDirectory = NSSearchPathDirectory.cachesDirectory
+    static let cachesDirectory = FileManager.SearchPathDirectory.cachesDirectory
 }
 
 ///
@@ -78,7 +78,7 @@ public class LocalStorage: NSObject {
     - returns: Documents directory URL.
     */
     private class func documentsURL() -> NSURL {
-        return NSFileManager.default().urlsForDirectory(.documentDirectory, inDomains: .userDomainMask)[0] as NSURL
+        return FileManager.default().urlsForDirectory(.documentDirectory, inDomains: .userDomainMask)[0] as NSURL
     }
     
     /**
@@ -87,7 +87,7 @@ public class LocalStorage: NSObject {
     - returns: Caches directory URL.
     */
     private class func cachesURL() -> NSURL {
-        return NSFileManager.default().urlsForDirectory(.cachesDirectory, inDomains: .userDomainMask)[0] as NSURL
+        return FileManager.default().urlsForDirectory(.cachesDirectory, inDomains: .userDomainMask)[0] as NSURL
     }
     
     /**
@@ -97,7 +97,7 @@ public class LocalStorage: NSObject {
     
     - returns: The correct URL for the seatch path directory.
     */
-    class func baseURL(directory: NSSearchPathDirectory) -> NSURL? {
+    class func baseURL(directory: FileManager.SearchPathDirectory) -> NSURL? {
         
         switch directory {
         case .documentDirectory:
@@ -120,7 +120,7 @@ public class LocalStorage: NSObject {
     
     - returns: A URL comprised of the passed in parameters
     */
-    class func absoluteURL(directory: NSSearchPathDirectory, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> NSURL? {
+    class func absoluteURL(directory: FileManager.SearchPathDirectory, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> NSURL? {
         
         if let baseURL = baseURL(directory: directory) {
             return absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
@@ -143,14 +143,14 @@ public class LocalStorage: NSObject {
         var url = baseURL.appendingPathComponent(reletivePath)
         
         if let name = fileName {
-            url = url.appendingPathComponent(name)
+            url = url?.appendingPathComponent(name)
         }
         
         if let anExtension = fileExtension {
-            url = url.appendingPathExtension(anExtension)
+            url = url?.appendingPathExtension(anExtension)
         }
         
-        return url
+        return url!
     }
     
     // MARK: - Directory Creation Methods
@@ -163,7 +163,7 @@ public class LocalStorage: NSObject {
     internal class func createDirectory(url: NSURL) {
         
         do {
-            try NSFileManager.default().createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+            try FileManager.default().createDirectory(at: url as URL, withIntermediateDirectories: true, attributes: nil)
         } catch let error as NSError {
             NSLog("Error: Directory not able to be created at URL \(url)\nWith error: \(error.localizedDescription)\n\(error)")
         }
@@ -185,17 +185,17 @@ public class LocalStorage: NSObject {
     public class func save(data: AnyObject, baseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
         
         var url = baseURL.appendingPathComponent(reletivePath)
-        createDirectory(url: url)
+        createDirectory(url: url!)
         
         if let aFileName = fileName {
-            url = url.appendingPathComponent(aFileName)
+            url = url?.appendingPathComponent(aFileName)
         }
         
         if let aFileExtension = fileExtension {
-            url = url.appendingPathExtension(aFileExtension)
+            url = url?.appendingPathExtension(aFileExtension)
         }
         
-        if let path = url.path {
+        if let path = url?.path {
             
             let success = NSKeyedArchiver.archiveRootObject(data, toFile: path)
             
@@ -265,7 +265,7 @@ public class LocalStorage: NSObject {
         
         let fromURL = absoluteURL(baseURL: fromBaseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
         let toURL = absoluteURL(baseURL: toBaseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
-        try NSFileManager.default().moveItem(at: fromURL, to: toURL)
+        try FileManager.default().moveItem(at: fromURL as URL, to: toURL as URL)
     }
     
     /**

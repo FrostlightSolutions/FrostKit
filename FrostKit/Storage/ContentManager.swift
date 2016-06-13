@@ -19,7 +19,7 @@ public class ContentManager: NSObject {
     // A dictioary holding the metadata for all managed objects, where the key is an absolute path and the value is the date.
     private lazy var contentMetadata = [String: NSDate]()
     
-    private class func maxSavedTimeInSeconds() -> NSTimeInterval {
+    private class func maxSavedTimeInSeconds() -> TimeInterval {
         return NSDate.weekInSeconds() * 2
     }
     

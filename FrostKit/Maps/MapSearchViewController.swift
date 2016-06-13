@@ -157,7 +157,7 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
             }
         }
         dismiss(animated: true, completion: nil)
-        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
     
     // MARK: - UISearchBarDelegate Methods
@@ -192,7 +192,7 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
                 searchRequest.region = mapView.region
             }
             let localSearch = MKLocalSearch(request: searchRequest)
-            NSNotificationCenter.default().post(name: NetworkRequestDidBeginNotification, object: nil)
+            NotificationCenter.default().post(name: NSNotification.Name(rawValue: NetworkRequestDidBeginNotification), object: nil)
             localSearch.start(completionHandler: { (searchResponse, error) in
                 if let anError = error {
                     NSLog("Error performing local search: \(anError.localizedDescription)\n\(anError)")
@@ -201,7 +201,7 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
                 }
                 self.refreshControl?.endRefreshing()
                 self.tableView.reloadData()
-                NSNotificationCenter.default().post(name: NetworkRequestDidCompleteNotification, object: nil)
+                NotificationCenter.default().post(name: NSNotification.Name(rawValue: NetworkRequestDidCompleteNotification), object: nil)
             })
         default:
             break

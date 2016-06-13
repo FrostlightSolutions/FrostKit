@@ -23,7 +23,7 @@ class KeychainHelperTests: XCTestCase {
     
     func testKeychainWorkflow() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
             let username = "myName"
             let password = "qwerty1234567890!_<>,.!@#$%^&*()_+-=/?"

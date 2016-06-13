@@ -11,7 +11,7 @@ import FrostKit
 
 class BundleExtensionsTests: XCTestCase {
     
-    let bundle = NSBundle(identifier: "com.Frostlight.FrostKit")!
+    let bundle = Bundle(identifier: "com.Frostlight.FrostKit")!
     
     override func setUp() {
         super.setUp()
@@ -27,7 +27,7 @@ class BundleExtensionsTests: XCTestCase {
         
         let version = bundle.objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
         measureBlock { () -> Void in
-            XCTAssert(NSBundle.appVersion(self.bundle) == version)
+            XCTAssert(Bundle.appVersion(self.bundle) == version)
         }
     }
     
@@ -35,14 +35,14 @@ class BundleExtensionsTests: XCTestCase {
         
         let buildNumber = bundle.objectForInfoDictionaryKey("CFBundleVersion") as! String
         measureBlock { () -> Void in
-            XCTAssert(NSBundle.appBuildNumber(self.bundle) == buildNumber)
+            XCTAssert(Bundle.appBuildNumber(self.bundle) == buildNumber)
         }
     }
     
     func testBundleAppName() {
         
         measureBlock { () -> Void in
-            XCTAssert(NSBundle.appName(self.bundle) == "FrostKit")
+            XCTAssert(Bundle.appName(self.bundle) == "FrostKit")
         }
     }
     

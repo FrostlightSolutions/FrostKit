@@ -22,14 +22,14 @@ class DateExtensionsTests: XCTestCase {
     
     func testFusDate() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
             let dateString = "2016-02-26"
-            let date = NSDate.fusDate(dateString)
+            let date = Date.fusDate(dateString)
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
-            components.timeZone = NSTimeZone.utc()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
+            components.timeZone = TimeZone.utc()
             components.year = 2016
             components.month = 2
             components.day = 26
@@ -40,14 +40,14 @@ class DateExtensionsTests: XCTestCase {
     
     func testFusDateAndTime() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
             let dateString = "2016-02-26T15:24:48.000000Z"
-            let date = NSDate.fusDate(dateString)
+            let date = Date.fusDate(dateString)
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
-            components.timeZone = NSTimeZone.utc()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
+            components.timeZone = TimeZone.utc()
             components.year = 2016
             components.month = 2
             components.day = 26
@@ -61,284 +61,284 @@ class DateExtensionsTests: XCTestCase {
     
     func testIsYesterday() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let date = NSDate(timeIntervalSinceNow: -24*60*60)
+            let date = Date(timeIntervalSinceNow: -24*60*60)
             XCTAssert(date.isYesterday, "Pass")
         }
     }
     
     func testIsToday() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let date = NSDate()
+            let date = Date()
             XCTAssert(date.isToday, "Pass")
         }
     }
     
     func testIsTomorrow() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let date = NSDate(timeIntervalSinceNow: 24*60*60)
+            let date = Date(timeIntervalSinceNow: 24*60*60)
             XCTAssert(date.isTomorrow, "Pass")
         }
     }
     
     func testIsWeekday() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             
             components.day = 22 // Monday
-            XCTAssert(components.date?.isWeekday == true)
+            XCTAssert((components as NSDateComponents).date?.isWeekday == true)
             components.day = 23 // Tuesday
-            XCTAssert(components.date?.isWeekday == true)
+            XCTAssert((components as NSDateComponents).date?.isWeekday == true)
             components.day = 24 // Wednesday
-            XCTAssert(components.date?.isWeekday == true)
+            XCTAssert((components as NSDateComponents).date?.isWeekday == true)
             components.day = 25 // Thursday
-            XCTAssert(components.date?.isWeekday == true)
+            XCTAssert((components as NSDateComponents).date?.isWeekday == true)
             components.day = 26 // Friday
-            XCTAssert(components.date?.isWeekday == true)
+            XCTAssert((components as NSDateComponents).date?.isWeekday == true)
             components.day = 27 // Saturday
-            XCTAssert(components.date?.isWeekday == false)
+            XCTAssert((components as NSDateComponents).date?.isWeekday == false)
             components.day = 28 // Sunday
-            XCTAssert(components.date?.isWeekday == false)
+            XCTAssert((components as NSDateComponents).date?.isWeekday == false)
         }
     }
     
     func testIsBeginingOfWeek () {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             
             components.day = 22 // Monday
-            XCTAssert(components.date?.isBeginingOfWeek == true)
+            XCTAssert((components as NSDateComponents).date?.isBeginingOfWeek == true)
             components.day = 23 // Tuesday
-            XCTAssert(components.date?.isBeginingOfWeek == false)
+            XCTAssert((components as NSDateComponents).date?.isBeginingOfWeek == false)
             components.day = 24 // Wednesday
-            XCTAssert(components.date?.isBeginingOfWeek == false)
+            XCTAssert((components as NSDateComponents).date?.isBeginingOfWeek == false)
             components.day = 25 // Thursday
-            XCTAssert(components.date?.isBeginingOfWeek == false)
+            XCTAssert((components as NSDateComponents).date?.isBeginingOfWeek == false)
             components.day = 26 // Friday
-            XCTAssert(components.date?.isBeginingOfWeek == false)
+            XCTAssert((components as NSDateComponents).date?.isBeginingOfWeek == false)
             components.day = 27 // Saturday
-            XCTAssert(components.date?.isBeginingOfWeek == false)
+            XCTAssert((components as NSDateComponents).date?.isBeginingOfWeek == false)
             components.day = 28 // Sunday
-            XCTAssert(components.date?.isBeginingOfWeek == false)
+            XCTAssert((components as NSDateComponents).date?.isBeginingOfWeek == false)
         }
     }
     
     func testIsEndOfWeek () {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             
             components.day = 22 // Monday
-            XCTAssert(components.date?.isEndOfWeek == false)
+            XCTAssert((components as NSDateComponents).date?.isEndOfWeek == false)
             components.day = 23 // Tuesday
-            XCTAssert(components.date?.isEndOfWeek == false)
+            XCTAssert((components as NSDateComponents).date?.isEndOfWeek == false)
             components.day = 24 // Wednesday
-            XCTAssert(components.date?.isEndOfWeek == false)
+            XCTAssert((components as NSDateComponents).date?.isEndOfWeek == false)
             components.day = 25 // Thursday
-            XCTAssert(components.date?.isEndOfWeek == false)
+            XCTAssert((components as NSDateComponents).date?.isEndOfWeek == false)
             components.day = 26 // Friday
-            XCTAssert(components.date?.isEndOfWeek == false)
+            XCTAssert((components as NSDateComponents).date?.isEndOfWeek == false)
             components.day = 27 // Saturday
-            XCTAssert(components.date?.isEndOfWeek == false)
+            XCTAssert((components as NSDateComponents).date?.isEndOfWeek == false)
             components.day = 28 // Sunday
-            XCTAssert(components.date?.isEndOfWeek == true)
+            XCTAssert((components as NSDateComponents).date?.isEndOfWeek == true)
         }
     }
     
     func testIsBeginingOfMonth () {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             
             components.day = 29
-            XCTAssert(components.date?.isBeginingOfMonth == false)
+            XCTAssert((components as NSDateComponents).date?.isBeginingOfMonth == false)
             components.month = 3
             components.day = 1
-            XCTAssert(components.date?.isBeginingOfMonth == true)
+            XCTAssert((components as NSDateComponents).date?.isBeginingOfMonth == true)
             components.day = 2
-            XCTAssert(components.date?.isBeginingOfMonth == false)
+            XCTAssert((components as NSDateComponents).date?.isBeginingOfMonth == false)
         }
     }
     
     func testIsEndOfMonth () {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             
             components.day = 28
-            XCTAssert(components.date?.isEndOfMonth == false)
+            XCTAssert((components as NSDateComponents).date?.isEndOfMonth == false)
             components.day = 29
-            XCTAssert(components.date?.isEndOfMonth == true)
+            XCTAssert((components as NSDateComponents).date?.isEndOfMonth == true)
             components.month = 3
             components.day = 1
-            XCTAssert(components.date?.isEndOfMonth == false)
+            XCTAssert((components as NSDateComponents).date?.isEndOfMonth == false)
         }
     }
     
     func testDay() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.day = 26
             
-            XCTAssert(components.date?.day == 26)
+            XCTAssert((components as NSDateComponents).date?.day == 26)
         }
     }
     
     func testHour() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
             let hour = 19
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.hour = hour
             
-            XCTAssert(components.date?.hour == hour)
+            XCTAssert((components as NSDateComponents).date?.hour == hour)
         }
     }
     
     func testMinute() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
             let minute = 47
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.minute = minute
             
-            XCTAssert(components.date?.minute == minute)
+            XCTAssert((components as NSDateComponents).date?.minute == minute)
         }
     }
     
     func testTimeInHours() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.hour = 15
             components.minute = 45
             
-            XCTAssert(components.date?.timeInHours == 15.75)
+            XCTAssert((components as NSDateComponents).date?.timeInHours == 15.75)
         }
     }
     
     func testSecondsComponents() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            XCTAssert(NSDate.minuteInSeconds() == 60)
-            XCTAssert(NSDate.hourInSeconds() == 3600)
-            XCTAssert(NSDate.dayInSeconds() == 86400)
-            XCTAssert(NSDate.weekInSeconds() == 604800)
+            XCTAssert(Date.minuteInSeconds() == 60)
+            XCTAssert(Date.hourInSeconds() == 3600)
+            XCTAssert(Date.dayInSeconds() == 86400)
+            XCTAssert(Date.weekInSeconds() == 604800)
         }
     }
     
     func testDaysBetweenDates() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
             let daysBetween = 3
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             components.day = 26
             
-            let fromDate = components.date
+            let fromDate = (components as NSDateComponents).date
             components.day += daysBetween
-            let toDate = components.date
+            let toDate = (components as NSDateComponents).date
             
-            XCTAssert(NSDate.daysBetweenDates(fromDate!, toDate: toDate!) == daysBetween)
+            XCTAssert(Date.daysBetweenDates(fromDate!, toDate: toDate!) == daysBetween)
         }
     }
     
     func testDaysRemainingInWeek() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             components.day = 26
             
-            XCTAssert(components.date?.daysRemainingInWeek == 3)
+            XCTAssert((components as NSDateComponents).date?.daysRemainingInWeek == 3)
             components.day = 28
-            XCTAssert(components.date?.daysRemainingInWeek == 1)
+            XCTAssert((components as NSDateComponents).date?.daysRemainingInWeek == 1)
         }
     }
     
     func testDaysInMonth() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             components.day = 26
             
-            XCTAssert(components.date?.daysInMonth == 29)
+            XCTAssert((components as NSDateComponents).date?.daysInMonth == 29)
         }
     }
     
     func testDaysRemainingInMonth() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             components.day = 26
             
-            XCTAssert(components.date?.daysRemainingInMonth == 3)
+            XCTAssert((components as NSDateComponents).date?.daysRemainingInMonth == 3)
         }
     }
     
     func testCompareDatesWithinMonth() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             components.day = 26
             
-            let date = components.date!
+            let date = (components as NSDateComponents).date!
             components.day = 28
             XCTAssert(date.isBefore(components.date!) == true)
             XCTAssert(date.isAfter(components.date!) == false)
@@ -368,15 +368,15 @@ class DateExtensionsTests: XCTestCase {
     
     func testCompareDatesBetweenMonth() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             components.day = 26
             
-            let date = components.date!
+            let date = (components as NSDateComponents).date!
             components.month = 3
             components.day = 28
             XCTAssert(date.isBefore(components.date!) == true)
@@ -412,15 +412,15 @@ class DateExtensionsTests: XCTestCase {
     
     func testCompareDatesBetweenYears() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             components.day = 26
             
-            let date = components.date!
+            let date = (components as NSDateComponents).date!
             components.year = 2017
             components.day = 28
             XCTAssert(date.isBefore(components.date!) == true)
@@ -456,10 +456,10 @@ class DateExtensionsTests: XCTestCase {
     
     func testStripTime() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             components.day = 26
@@ -467,9 +467,9 @@ class DateExtensionsTests: XCTestCase {
             components.minute = 12
             components.second = 43
             
-            let date = components.date!
+            let date = (components as NSDateComponents).date!
             let strippedDate = date.stripTime
-            components.timeZone = NSTimeZone.utc()
+            components.timeZone = TimeZone.utc()
             components.hour = 0
             components.minute = 0
             components.second = 0
@@ -479,14 +479,14 @@ class DateExtensionsTests: XCTestCase {
     
     func testDateByAddingDays() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             components.day = 26
-            let date = components.date!
+            let date = (components as NSDateComponents).date!
             
             XCTAssert(date.dateByAddingDays(0) == date)
             components.day += 3
@@ -498,19 +498,19 @@ class DateExtensionsTests: XCTestCase {
     
     func testDateAt() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             components.day = 26
             components.hour = 19
             components.minute = 12
             components.second = 43
-            let date = components.date!
+            let date = (components as NSDateComponents).date!
             
-            components.timeZone = NSTimeZone.utc()
+            components.timeZone = TimeZone.utc()
             components.hour = 0
             components.minute = 0
             components.second = 0
@@ -525,22 +525,22 @@ class DateExtensionsTests: XCTestCase {
     
     func testDateStrings() {
         
-        let components = NSDateComponents()
-        components.calendar = NSCalendar.iso8601Calendar()
-        components.timeZone = NSTimeZone.utc()
+        var components = DateComponents()
+        components.calendar = Calendar.iso8601Calendar()
+        components.timeZone = TimeZone.utc()
         components.year = 2016
         components.month = 2
         components.day = 26
         components.hour = 19
         components.minute = 12
         components.second = 43
-        let date = components.date!
+        let date = (components as NSDateComponents).date!
         
-        XCTAssert(date.dateTimeShortString == NSDateFormatter.localizedStringFromDate(date, dateStyle: .ShortStyle, timeStyle: .ShortStyle))
-        XCTAssert(date.dateShortString == NSDateFormatter.localizedStringFromDate(date, dateStyle: .ShortStyle, timeStyle: .NoStyle))
-        XCTAssert(date.dateMediumString == NSDateFormatter.localizedStringFromDate(date, dateStyle: .MediumStyle, timeStyle: .NoStyle))
-        XCTAssert(date.dateFullString == NSDateFormatter.localizedStringFromDate(date, dateStyle: .FullStyle, timeStyle: .NoStyle))
-        XCTAssert(date.timeShortString == NSDateFormatter.localizedStringFromDate(date, dateStyle: .NoStyle, timeStyle: .ShortStyle))
+        XCTAssert(date.dateTimeShortString == DateFormatter.localizedStringFromDate(date, dateStyle: .ShortStyle, timeStyle: .ShortStyle))
+        XCTAssert(date.dateShortString == DateFormatter.localizedStringFromDate(date, dateStyle: .ShortStyle, timeStyle: .NoStyle))
+        XCTAssert(date.dateMediumString == DateFormatter.localizedStringFromDate(date, dateStyle: .MediumStyle, timeStyle: .NoStyle))
+        XCTAssert(date.dateFullString == DateFormatter.localizedStringFromDate(date, dateStyle: .FullStyle, timeStyle: .NoStyle))
+        XCTAssert(date.timeShortString == DateFormatter.localizedStringFromDate(date, dateStyle: .NoStyle, timeStyle: .ShortStyle))
         XCTAssert(date.fusDateString == "2016-02-26")
         XCTAssert(date.fusDateTimeString == "2016-02-26T20:12:43.000000Z")
         XCTAssert(date.dayString == "Friday")

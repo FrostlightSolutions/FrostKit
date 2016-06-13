@@ -46,7 +46,7 @@ extension Color {
         }
         
         var rgbValue: UInt32 = 0
-        let scanner = NSScanner(string: hexString)
+        let scanner = Scanner(string: hexString)
         scanner.scanLocation = scanLocation
         scanner.scanHexInt32(&rgbValue)
         

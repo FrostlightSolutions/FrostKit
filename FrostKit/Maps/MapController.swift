@@ -151,7 +151,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     
     public class func requestAccessToLocationServices(locationManager: CLLocationManager) {
         
-        if let infoDictionary = NSBundle.main().infoDictionary {
+        if let infoDictionary = Bundle.main().infoDictionary {
             
             if infoDictionary["NSLocationAlwaysUsageDescription"] != nil {
                 locationManager.requestAlwaysAuthorization()
@@ -608,9 +608,9 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         directionsRequest.requestsAlternateRoutes = false
         
         let directions = MKDirections(request: directionsRequest)
-        NSNotificationCenter.default().post(name: NetworkRequestDidBeginNotification, object: nil)
+        NotificationCenter.default().post(name: NSNotification.Name(rawValue: NetworkRequestDidBeginNotification), object: nil)
         directions.calculate { (directionsResponse, error) in
-            NSNotificationCenter.default().post(name: NetworkRequestDidCompleteNotification, object: nil)
+            NotificationCenter.default().post(name: NSNotification.Name(rawValue: NetworkRequestDidCompleteNotification), object: nil)
             complete(route: directionsResponse?.routes.first, error: error)
         }
     }
@@ -873,7 +873,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      - returns: An array of addresses that meet the predicate search criteria.
      */
     public func searchAddresses(searchString: String) -> [Address] {
-        let predicate = NSPredicate(format: "name CONTAINS[cd] %@ || addressString CONTAINS[cd] %@", searchString, searchString)
+        let predicate = Predicate(format: "name CONTAINS[cd] %@ || addressString CONTAINS[cd] %@", searchString, searchString)
         return (addresses as NSArray).filtered(using: predicate) as! [Address]
     }
     
