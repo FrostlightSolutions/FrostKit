@@ -37,7 +37,7 @@ public class ContentManager: NSObject {
     */
     public class func checkContentMetadata() {
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+        DispatchQueue.global().async(group: nil, qos: .default, flags: []) {
             
             if shared.contentMetadata.count > 0 {
                 
@@ -62,13 +62,14 @@ public class ContentManager: NSObject {
                     for path in metadataToRemove {
                         
                         let url = NSURL(fileURLWithPath: path)
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        
+                        DispatchQueue.main.async {
                             do {
                                 try LocalStorage.remove(absoluteURL: url)
                             } catch let error as NSError {
                                 NSLog("Error: Unable to remove managed item at URL \(url)\nWith error: \(error.localizedDescription)\n\(error)")
                             }
-                        })
+                        }
                     }
                 }
                 
@@ -83,7 +84,7 @@ public class ContentManager: NSObject {
                     NSLog("Check of content metadata items not needed, as there are no items managed.")
                 #endif
             }
-        })
+        }
     }
     
     /**

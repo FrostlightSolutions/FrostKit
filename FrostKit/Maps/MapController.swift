@@ -332,15 +332,15 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     private func calculateClusterInGrid(mapView: MKMapView, offscreenMapView: MKMapView, gridMapRect: MKMapRect) {
         
         // Limited to only the use Annotation classes or subclasses
-        let semaphore = dispatch_semaphore_create(0)    // Create semaphore
+        let semaphore = DispatchSemaphore(value: 0)    // Create semaphore
         var visableAnnotationsInBucket: Set<Annotation>!
         
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            
+        DispatchQueue.main.async { 
             visableAnnotationsInBucket = mapView.annotations(in: gridMapRect) as? Set<Annotation>
-            dispatch_semaphore_signal(semaphore!)    // Signal that semaphore should complete
-        })
-        dispatch_semaphore_wait(semaphore!, DISPATCH_TIME_FOREVER)   // Wait for semaphore
+            semaphore.signal()    // Signal that semaphore should complete
+        }
+        
+        semaphore.wait(timeout: dispatch_time_t(DispatchTime.distantFuture))   // Wait for semaphore
         
         if visableAnnotationsInBucket == nil {
             return
@@ -370,9 +370,9 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
             // Give the annotationForGrid a reference to all the annotations it will represent
             annotationForGrid.containdedAnnotations = Array<Annotation>(filteredAllAnnotationsInBucket)
             
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async {
                 mapView.addAnnotation(annotationForGrid)
-            })
+            }
             
             // Cleanup other annotations that might be being viewed
             for annotation in filteredAllAnnotationsInBucket {
@@ -382,9 +382,9 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                 
                 if visableAnnotationsInBucket.contains(annotation) {
                     
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    DispatchQueue.main.async {
                         mapView.removeAnnotation(annotation)
-                    })
+                    }
                 }
                 
                 if self.cancelClusterCalculations == true {
