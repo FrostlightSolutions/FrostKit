@@ -15,9 +15,9 @@ import UIKit
 public class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     
     /// The URL of the current page.
-    public override var url: NSURL? {
+    public override var url: URL? {
         if let urlString = self.urlString {
-            return  NSURL(string: urlString)
+            return  URL(string: urlString)
         }
         return nil
     }
@@ -126,11 +126,11 @@ public class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     override func loadBaseURL() -> String {
         
         let urlString = super.loadBaseURL()
-        guard let url = NSURL(string: urlString), webView = self.webView as? UIWebView else {
+        guard let url = URL(string: urlString), webView = self.webView as? UIWebView else {
             return urlString
         }
         
-        let request = NSURLRequest(url: url as URL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60)
+        let request = URLRequest(url: url as URL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60)
         webView.loadRequest(request as URLRequest)
         return urlString
     }

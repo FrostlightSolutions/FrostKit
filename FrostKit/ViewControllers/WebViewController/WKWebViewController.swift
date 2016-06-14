@@ -16,7 +16,7 @@ import WebKit
 public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     /// The URL of the current page.
-    public override var url: NSURL? {
+    public override var url: URL? {
         if let webView = self.webView as? WKWebView {
             return webView.url
         }
@@ -55,10 +55,10 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
             
             webView.allowsBackForwardNavigationGestures = true
             
-            webView.addObserver(self, forKeyPath: "estimatedProgress", options: [], context: nil)
-            webView.addObserver(self, forKeyPath: "title", options: [], context: nil)
-            webView.addObserver(self, forKeyPath: "canGoBack", options: [], context: nil)
-            webView.addObserver(self, forKeyPath: "canGoForward", options: [], context: nil)
+            webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: [], context: nil)
+            webView.addObserver(self, forKeyPath: #keyPath(WKWebView.title), options: [], context: nil)
+            webView.addObserver(self, forKeyPath: #keyPath(WKWebView.canGoBack), options: [], context: nil)
+            webView.addObserver(self, forKeyPath: #keyPath(WKWebView.canGoForward), options: [], context: nil)
         }
         
         super.viewDidLoad()
@@ -66,16 +66,16 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     deinit {
         if let webView = self.webView as? WKWebView {
-            webView.removeObserver(self, forKeyPath: "estimatedProgress")
-            webView.removeObserver(self, forKeyPath: "title")
-            webView.removeObserver(self, forKeyPath: "canGoBack")
-            webView.removeObserver(self, forKeyPath: "canGoForward")
+            webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress))
+            webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.title))
+            webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.canGoBack))
+            webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.canGoForward))
         }
     }
     
     // MARK: - KVO Methods
     
-    public override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
+    public override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [NSKeyValueChangeKey : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
         
         guard let aKeyPath = keyPath else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
@@ -83,17 +83,17 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
         }
         
         switch aKeyPath {
-        case "estimatedProgress":
+        case #keyPath(WKWebView.estimatedProgress):
             self.progrssView.setProgress(Float(webView!.estimatedProgress), animated: true)
             updateProgrssViewVisability()
             updateActivityViewVisability()
-        case "title":
+        case #keyPath(WKWebView.title):
             if let webView = self.webView as? WKWebView where titleOverride == nil {
                 navigationItem.title = webView.title
             }
-        case "canGoBack":
+        case #keyPath(WKWebView.canGoBack):
             updateBackButton()
-        case "canGoForward":
+        case #keyPath(WKWebView.canGoForward):
             updateForwardButton()
         default:
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
@@ -170,11 +170,11 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     override func loadBaseURL() -> String {
         
         let urlString = super.loadBaseURL()
-        guard let url = NSURL(string: urlString), webView = self.webView as? WKWebView else {
+        guard let url = URL(string: urlString), webView = self.webView as? WKWebView else {
             return urlString
         }
         
-        let request = NSURLRequest(url: url as URL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60)
+        let request = URLRequest(url: url as URL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60)
         webView.load(request as URLRequest)
         return urlString
     }

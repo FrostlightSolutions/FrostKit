@@ -61,7 +61,7 @@ public class ContentManager: NSObject {
                     
                     for path in metadataToRemove {
                         
-                        let url = NSURL(fileURLWithPath: path)
+                        let url = URL(fileURLWithPath: path)
                         
                         DispatchQueue.main.async {
                             do {
@@ -92,7 +92,7 @@ public class ContentManager: NSObject {
     
     - parameter absoluteURL:    The absolute URL of the item.
     */
-    public class func save(contentMetadataURL url: NSURL) {
+    public class func save(contentMetadataURL url: URL) {
         if let path = url.path {
             save(contentMetadataPath: path)
         }
@@ -112,7 +112,7 @@ public class ContentManager: NSObject {
     
     - parameter absoluteURL:    The absolute URL of the item.
     */
-    public class func remove(contentMetadataURL url: NSURL) {
+    public class func remove(contentMetadataURL url: URL) {
         if let path = url.path {
             remove(contentMetadataPath: path)
         }

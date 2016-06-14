@@ -32,7 +32,7 @@ public class BaseWebViewController: UIViewController {
         }
     }
     /// The URL of the current page.
-    public var url: NSURL? {
+    public var url: URL? {
         // Functionality overriden in subclasses
         return nil
     }

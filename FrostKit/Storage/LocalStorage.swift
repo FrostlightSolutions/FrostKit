@@ -77,8 +77,8 @@ public class LocalStorage: NSObject {
     
     - returns: Documents directory URL.
     */
-    private class func documentsURL() -> NSURL {
-        return FileManager.default().urlsForDirectory(.documentDirectory, inDomains: .userDomainMask)[0] as NSURL
+    private class func documentsURL() -> URL {
+        return FileManager.default().urlsForDirectory(.documentDirectory, inDomains: .userDomainMask)[0]
     }
     
     /**
@@ -86,8 +86,8 @@ public class LocalStorage: NSObject {
     
     - returns: Caches directory URL.
     */
-    private class func cachesURL() -> NSURL {
-        return FileManager.default().urlsForDirectory(.cachesDirectory, inDomains: .userDomainMask)[0] as NSURL
+    private class func cachesURL() -> URL {
+        return FileManager.default().urlsForDirectory(.cachesDirectory, inDomains: .userDomainMask)[0]
     }
     
     /**
@@ -97,7 +97,7 @@ public class LocalStorage: NSObject {
     
     - returns: The correct URL for the seatch path directory.
     */
-    class func baseURL(directory: FileManager.SearchPathDirectory) -> NSURL? {
+    class func baseURL(directory: FileManager.SearchPathDirectory) -> URL? {
         
         switch directory {
         case .documentDirectory:
@@ -120,7 +120,7 @@ public class LocalStorage: NSObject {
     
     - returns: A URL comprised of the passed in parameters
     */
-    class func absoluteURL(directory: FileManager.SearchPathDirectory, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> NSURL? {
+    class func absoluteURL(directory: FileManager.SearchPathDirectory, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> URL? {
         
         if let baseURL = baseURL(directory: directory) {
             return absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
@@ -138,19 +138,13 @@ public class LocalStorage: NSObject {
     
     - returns: A non-optional version of the public class function.
     */
-    private class func absoluteURL(baseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> NSURL {
+    private class func absoluteURL(baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> URL? {
         
-        var url = baseURL.appendingPathComponent(reletivePath)
-        
-        if let name = fileName {
-            url = url?.appendingPathComponent(name)
+        guard let name = fileName, ext = fileExtension else {
+            return nil
         }
         
-        if let anExtension = fileExtension {
-            url = url?.appendingPathExtension(anExtension)
-        }
-        
-        return url!
+        return try? baseURL.appendingPathComponent(reletivePath).appendingPathComponent(name).appendingPathExtension(ext)
     }
     
     // MARK: - Directory Creation Methods
@@ -160,7 +154,7 @@ public class LocalStorage: NSObject {
     
     - parameter url: The url of the directory to be created.
     */
-    internal class func createDirectory(url: NSURL) {
+    internal class func createDirectory(url: URL) {
         
         do {
             try FileManager.default().createDirectory(at: url as URL, withIntermediateDirectories: true, attributes: nil)
@@ -182,20 +176,20 @@ public class LocalStorage: NSObject {
     
     - returns: `true` if the data saves correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func save(data: AnyObject, baseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
+    public class func save(data: AnyObject, baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
         
-        var url = baseURL.appendingPathComponent(reletivePath)
-        createDirectory(url: url!)
-        
-        if let aFileName = fileName {
-            url = url?.appendingPathComponent(aFileName)
+        guard let dirURL = try? baseURL.appendingPathComponent(reletivePath) else {
+            return false
         }
         
-        if let aFileExtension = fileExtension {
-            url = url?.appendingPathExtension(aFileExtension)
+        createDirectory(url: dirURL)
+        
+        guard let name = fileName, ext = fileExtension,
+            url = try? dirURL.appendingPathComponent(name).appendingPathExtension(ext) else {
+            return false
         }
         
-        if let path = url?.path {
+        if let path = url.path {
             
             let success = NSKeyedArchiver.archiveRootObject(data, toFile: path)
             
@@ -261,10 +255,12 @@ public class LocalStorage: NSObject {
     
     - throws: `true` if the data is moved correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    private class func move(fromBaseURL: NSURL, toBaseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
+    private class func move(fromBaseURL: URL, toBaseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
         
-        let fromURL = absoluteURL(baseURL: fromBaseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
-        let toURL = absoluteURL(baseURL: toBaseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
+        guard let fromURL = absoluteURL(baseURL: fromBaseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension),
+            toURL = absoluteURL(baseURL: toBaseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) else {
+            return
+        }
         try FileManager.default().moveItem(at: fromURL as URL, to: toURL as URL)
     }
     
@@ -306,15 +302,12 @@ public class LocalStorage: NSObject {
     
     - returns: The object to be loaded or `nil` if it isn't found.
     */
-    public class func load(baseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> AnyObject? {
+    public class func load(baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> AnyObject? {
         
-        let url = absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
-        
-        if let path = url.path {
-            return NSKeyedUnarchiver.unarchiveObject(withFile: path)
+        guard let url = absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension), path = url.path else {
+            return nil
         }
-        
-        return nil
+        return NSKeyedUnarchiver.unarchiveObject(withFile: path)
     }
     
     /**
@@ -391,7 +384,7 @@ public class LocalStorage: NSObject {
     
     - throws: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    class func remove(absoluteURL: NSURL) throws {
+    class func remove(absoluteURL: URL) throws {
         
         // TODO: Uncomment
 //        try NSFileManager.default().removeItem(at: absoluteURL)
@@ -408,8 +401,13 @@ public class LocalStorage: NSObject {
     
     - throws: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    private class func remove(baseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
-        try remove(absoluteURL: absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension))
+    private class func remove(baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
+        
+        guard let url = absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) else {
+            return
+        }
+        
+        try remove(absoluteURL: url)
     }
     
     /**

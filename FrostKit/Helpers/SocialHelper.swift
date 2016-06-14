@@ -82,7 +82,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     // MARK: - Prompt Methods
     
     /**
-    Returns a NSURL to call with `openURL(_:)` in `UIApplication` parsed from a number string.
+    Returns a URL to call with `openURL(_:)` in `UIApplication` parsed from a number string.
     
     Note: `openURL(_:)` can not be called directly within a Framework so that has to be done manually inside the main application.
     
@@ -90,7 +90,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     
     - returns: The URL of the parsed phone number, prefixed with `telprompt://`.
     */
-    public class func phonePromptFormattedURL(number: String) -> NSURL? {
+    public class func phonePromptFormattedURL(number: String) -> URL? {
         // TODO: Uncomment
 //        let hasPlusPrefix = number.rangeOfString("+")
 //        
@@ -102,7 +102,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
 //            parsedNumber = "+".stringByAppendingString(parsedNumber)
 //        }
 //        
-//        return NSURL(string: "telprompt://\(parsedNumber)")
+//        return URL(string: "telprompt://\(parsedNumber)")
         return nil
     }
     
@@ -175,7 +175,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     - parameter viewController: The view controller to present the `MFMailComposeViewController` in.
     - parameter animated:       If the presentation should be animated or not.
     */
-    public class func messagePrompt(recipients: [String], subject: String = "", body: String = "", attachments: [(attachmentURL: NSURL, alternateFilename: String)] = [], viewController: UIViewController, animated: Bool = true) {
+    public class func messagePrompt(recipients: [String], subject: String = "", body: String = "", attachments: [(attachmentURL: URL, alternateFilename: String)] = [], viewController: UIViewController, animated: Bool = true) {
         
         if MFMessageComposeViewController.canSendText() {
             
@@ -201,7 +201,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         }
     }
     
-    private class func presentMessageComposeViewController(recipients: [String]? = nil, subject: String? = nil, body: String? = nil, attachments: [(attachmentURL: NSURL, alternateFilename: String)]? = nil, viewController: UIViewController, animated: Bool) {
+    private class func presentMessageComposeViewController(recipients: [String]? = nil, subject: String? = nil, body: String? = nil, attachments: [(attachmentURL: URL, alternateFilename: String)]? = nil, viewController: UIViewController, animated: Bool) {
         
         let messageVC = MFMessageComposeViewController()
         messageVC.messageComposeDelegate = SocialHelper.shared
