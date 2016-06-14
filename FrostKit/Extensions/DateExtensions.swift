@@ -199,14 +199,16 @@ extension Date {
     */
     public static func daysBetweenDates(fromDate: Date, toDate: Date) -> Int? {
         
-        var dateFrom: Date?
-        var dateTo: Date?
+        // TODO: This might need changeing from `NSDate` to `Date` once range(of:start:interval:options:) is updated.
+        var dateFrom: NSDate?
+        var dateTo: NSDate?
         
         let calendar = Calendar.iso8601Calendar()
+        
         calendar.range(of: .day, start: &dateTo, interval: nil, for: toDate)
         calendar.range(of: .day, start: &dateFrom, interval: nil, for: fromDate)
         
-        let components = calendar.components(.day, from: dateFrom!, to: dateTo!, options: .wrapComponents)
+        let components = calendar.components(.day, from: dateFrom as! Date, to: dateTo as! Date, options: .wrapComponents)
         return components.day
     }
     
