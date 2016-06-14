@@ -346,9 +346,7 @@ public class LocalStorage: NSObject {
     - returns: The image requested to be loaded or `nil` if it isn't found.
     */
     public class func loadImage(fromDocuments reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> UIImage? {
-        // TODO: Uncomment
-//        return loadFromDocuments(reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) as? UIImage
-        return nil
+        return load(fromDocuments: reletivePath, fileName: fileName, fileExtension: fileExtension) as? UIImage
     }
     
     /**
@@ -361,9 +359,7 @@ public class LocalStorage: NSObject {
     - returns: The image requested to be loaded or `nil` if it isn't found.
     */
     public class func loadImage(fromCaches reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> UIImage? {
-        // TODO: Uncomment
-//        return loadFromCaches(reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) as? UIImage
-        return nil
+        return load(fromCaches: reletivePath, fileName: fileName, fileExtension: fileExtension) as? UIImage
     }
     
     /**
@@ -386,9 +382,8 @@ public class LocalStorage: NSObject {
     */
     class func remove(absoluteURL: URL) throws {
         
-        // TODO: Uncomment
-//        try NSFileManager.default().removeItem(at: absoluteURL)
-//        ContentManager.removeContentMetadata(absoluteURL: absoluteURL)
+        try FileManager.default().removeItem(at: absoluteURL)
+        ContentManager.remove(contentMetadataURL: absoluteURL)
     }
     
     /**

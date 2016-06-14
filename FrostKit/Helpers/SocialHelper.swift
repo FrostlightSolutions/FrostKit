@@ -91,19 +91,18 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     - returns: The URL of the parsed phone number, prefixed with `telprompt://`.
     */
     public class func phonePromptFormattedURL(number: String) -> URL? {
-        // TODO: Uncomment
-//        let hasPlusPrefix = number.rangeOfString("+")
-//        
-//        let characterSet = NSCharacterSet.decimalDigits().inverted
-//        let componentsArray = number.componentsSeparatedByCharactersInSet(characterSet)
-//        var parsedNumber = componentsArray.joinWithSeparator("")
-//        
-//        if hasPlusPrefix != nil {
-//            parsedNumber = "+".stringByAppendingString(parsedNumber)
-//        }
-//        
-//        return URL(string: "telprompt://\(parsedNumber)")
-        return nil
+        
+        let hasPlusPrefix = number.range(of: "+")
+        
+        let characterSet = NSCharacterSet.decimalDigits().inverted
+        let componentsArray = number.components(separatedBy: characterSet)
+        var parsedNumber = componentsArray.joined(separator: "")
+        
+        if hasPlusPrefix != nil {
+            parsedNumber = "+" + parsedNumber
+        }
+        
+        return URL(string: "telprompt://\(parsedNumber)")
     }
     
     /**

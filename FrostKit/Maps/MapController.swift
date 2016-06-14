@@ -412,21 +412,19 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         
         // Otherwise, sort the annotations based on their  distance from the center of the grid square,
         // then choose the one closest to the center to show.
-        // TODO: Uncomment
-//        let centerMapPoint = MKMapPoint(x: MKMapRectGetMidX(gridMapRect), y: MKMapRectGetMidY(gridMapRect))
-//        let sortedAnnotations = allAnnotations.sort { (object1, object2) -> Bool in
-//            
-//            let mapPoint1 = MKMapPointForCoordinate(object1.coordinate)
-//            let mapPoint2 = MKMapPointForCoordinate(object2.coordinate)
-//            
-//            let distance1 = MKMetersBetweenMapPoints(mapPoint1, centerMapPoint)
-//            let distance2 = MKMetersBetweenMapPoints(mapPoint2, centerMapPoint)
-//            
-//            return distance1 < distance2
-//        }
-//        
-//        return sortedAnnotations.first
-        return nil
+        let centerMapPoint = MKMapPoint(x: MKMapRectGetMidX(gridMapRect), y: MKMapRectGetMidY(gridMapRect))
+        let sortedAnnotations = allAnnotations.sorted { (object1, object2) -> Bool in
+            
+            let mapPoint1 = MKMapPointForCoordinate(object1.coordinate)
+            let mapPoint2 = MKMapPointForCoordinate(object2.coordinate)
+            
+            let distance1 = MKMetersBetweenMapPoints(mapPoint1, centerMapPoint)
+            let distance2 = MKMetersBetweenMapPoints(mapPoint2, centerMapPoint)
+            
+            return distance1 < distance2
+        }
+        
+        return sortedAnnotations.first
     }
     
     // MARK: - Zoom Map Methods

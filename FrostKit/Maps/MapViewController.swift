@@ -90,45 +90,45 @@ public class MapViewController: UIViewController {
     - parameter animated: If the buttons should animate when they update.
     */
     public func updateNavigationButtons(animated: Bool = true) {
-        // TODO: Uncomment
-//        var barButtonItems = Array<UIBarButtonItem>()
-//        if locationButton == true {
-//            
-//            let locationButton: UIBarButtonItem
-//            if let activeLocationIcon = self.activeLocationIcon, inactiveLocationIcon = self.inactiveLocationIcon {
-//                
-//                let icon: UIImage
-//                if mapController.trackingUser == true {
-//                    icon = activeLocationIcon
-//                } else {
-//                    icon = inactiveLocationIcon
-//                }
-//                
-//                locationButton = UIBarButtonItem(image: icon, style: .Plain, target: self, action: #selector(MapViewController.locationButtonPressed(_:)))
-//                
-//            } else {
-//                
-//                let title: String
-//                if mapController.trackingUser == true {
-//                    title = IonIcons.ios_navigate
-//                } else {
-//                    title = IonIcons.ios_navigate_outline
-//                }
-//                
-//                locationButton = UIBarButtonItem(title: title, font: UIFont.ionicons(size: 24), verticalOffset: -1, target: self, action: #selector(MapViewController.locationButtonPressed(_:)))
-//            }
-//            
-//            barButtonItems.append(locationButton)
-//        }
-//        
-//        // TODO: Reactivate for iOS 7 when UISearchDisplayController is implimented.
-//        if UIDevice.SystemVersion.majorVersion >= 8 {
-//            if searchButton == true {
-//                let searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: #selector(MapViewController.searchButtonPressed(_:)))
-//                barButtonItems.append(searchButton)
-//            }
-//        }
-//        navigationItem.setRightBarButtonItems(barButtonItems, animated: animated)
+        
+        var barButtonItems = Array<UIBarButtonItem>()
+        if locationButton == true {
+            
+            let locationButton: UIBarButtonItem
+            if let activeLocationIcon = self.activeLocationIcon, inactiveLocationIcon = self.inactiveLocationIcon {
+                
+                let icon: UIImage
+                if mapController.trackingUser == true {
+                    icon = activeLocationIcon
+                } else {
+                    icon = inactiveLocationIcon
+                }
+                
+                locationButton = UIBarButtonItem(image: icon, style: .plain, target: self, action: #selector(MapViewController.locationButtonPressed(sender:)))
+                
+            } else {
+                
+                let title: String
+                if mapController.trackingUser == true {
+                    title = IonIcons.ios_navigate
+                } else {
+                    title = IonIcons.ios_navigate_outline
+                }
+                
+                locationButton = UIBarButtonItem(title: title, font: .ionicons(size: 24), verticalOffset: -1, target: self, action: #selector(MapViewController.locationButtonPressed(sender:)))
+            }
+            
+            barButtonItems.append(locationButton)
+        }
+        
+        // TODO: Reactivate for iOS 7 when UISearchDisplayController is implimented.
+        if UIDevice.SystemVersion.majorVersion >= 8 {
+            if searchButton == true {
+                let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(MapViewController.searchButtonPressed(sender:)))
+                barButtonItems.append(searchButton)
+            }
+        }
+        navigationItem.setRightBarButtonItems(barButtonItems, animated: animated)
     }
     
     /**

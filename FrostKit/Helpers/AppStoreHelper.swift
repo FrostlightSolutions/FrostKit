@@ -11,6 +11,7 @@ import AppKit
 #else
 import UIKit
 #endif
+// TODO: Uncomment when building with Swift 3 version of Alamofire
 //import Alamofire
 
 public class AppStoreHelper: NSObject {
@@ -63,7 +64,7 @@ public class AppStoreHelper: NSObject {
     */
     public func updateAppStoreData(completed: ((NSError?) -> Void)? = nil) {
 
-        // TODO: Uncomment
+        // TODO: Uncomment when building with Swift 3 version of Alamofire
 //        if let appStoreID = FrostKit.appStoreID {
 //            
 //            var url = "https://itunes.apple.com"
