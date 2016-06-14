@@ -89,8 +89,7 @@ public class CustomFonts: NSObject {
     public class func printAllFontFamilies() {
         
         for fontFamily in UIFont.familyNames() {
-            let name = fontFamily as String
-            NSLog("\(name): \(UIFont.fontNames(forFamilyName: name))")
+            NSLog("\(fontFamily): \(UIFont.fontNames(forFamilyName: fontFamily))")
         }
     }
 #endif

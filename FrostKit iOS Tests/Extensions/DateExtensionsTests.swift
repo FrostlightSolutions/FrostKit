@@ -96,19 +96,19 @@ class DateExtensionsTests: XCTestCase {
             components.month = 2
             
             components.day = 22 // Monday
-            XCTAssert((components as NSDateComponents).date?.isWeekday == true)
+            XCTAssert(components.date?.isWeekday == true)
             components.day = 23 // Tuesday
-            XCTAssert((components as NSDateComponents).date?.isWeekday == true)
+            XCTAssert(components.date?.isWeekday == true)
             components.day = 24 // Wednesday
-            XCTAssert((components as NSDateComponents).date?.isWeekday == true)
+            XCTAssert(components.date?.isWeekday == true)
             components.day = 25 // Thursday
-            XCTAssert((components as NSDateComponents).date?.isWeekday == true)
+            XCTAssert(components.date?.isWeekday == true)
             components.day = 26 // Friday
-            XCTAssert((components as NSDateComponents).date?.isWeekday == true)
+            XCTAssert(components.date?.isWeekday == true)
             components.day = 27 // Saturday
-            XCTAssert((components as NSDateComponents).date?.isWeekday == false)
+            XCTAssert(components.date?.isWeekday == false)
             components.day = 28 // Sunday
-            XCTAssert((components as NSDateComponents).date?.isWeekday == false)
+            XCTAssert(components.date?.isWeekday == false)
         }
     }
     
@@ -122,19 +122,19 @@ class DateExtensionsTests: XCTestCase {
             components.month = 2
             
             components.day = 22 // Monday
-            XCTAssert((components as NSDateComponents).date?.isBeginingOfWeek == true)
+            XCTAssert(components.date?.isBeginingOfWeek == true)
             components.day = 23 // Tuesday
-            XCTAssert((components as NSDateComponents).date?.isBeginingOfWeek == false)
+            XCTAssert(components.date?.isBeginingOfWeek == false)
             components.day = 24 // Wednesday
-            XCTAssert((components as NSDateComponents).date?.isBeginingOfWeek == false)
+            XCTAssert(components.date?.isBeginingOfWeek == false)
             components.day = 25 // Thursday
-            XCTAssert((components as NSDateComponents).date?.isBeginingOfWeek == false)
+            XCTAssert(components.date?.isBeginingOfWeek == false)
             components.day = 26 // Friday
-            XCTAssert((components as NSDateComponents).date?.isBeginingOfWeek == false)
+            XCTAssert(components.date?.isBeginingOfWeek == false)
             components.day = 27 // Saturday
-            XCTAssert((components as NSDateComponents).date?.isBeginingOfWeek == false)
+            XCTAssert(components.date?.isBeginingOfWeek == false)
             components.day = 28 // Sunday
-            XCTAssert((components as NSDateComponents).date?.isBeginingOfWeek == false)
+            XCTAssert(components.date?.isBeginingOfWeek == false)
         }
     }
     
@@ -148,19 +148,19 @@ class DateExtensionsTests: XCTestCase {
             components.month = 2
             
             components.day = 22 // Monday
-            XCTAssert((components as NSDateComponents).date?.isEndOfWeek == false)
+            XCTAssert(components.date?.isEndOfWeek == false)
             components.day = 23 // Tuesday
-            XCTAssert((components as NSDateComponents).date?.isEndOfWeek == false)
+            XCTAssert(components.date?.isEndOfWeek == false)
             components.day = 24 // Wednesday
-            XCTAssert((components as NSDateComponents).date?.isEndOfWeek == false)
+            XCTAssert(components.date?.isEndOfWeek == false)
             components.day = 25 // Thursday
-            XCTAssert((components as NSDateComponents).date?.isEndOfWeek == false)
+            XCTAssert(components.date?.isEndOfWeek == false)
             components.day = 26 // Friday
-            XCTAssert((components as NSDateComponents).date?.isEndOfWeek == false)
+            XCTAssert(components.date?.isEndOfWeek == false)
             components.day = 27 // Saturday
-            XCTAssert((components as NSDateComponents).date?.isEndOfWeek == false)
+            XCTAssert(components.date?.isEndOfWeek == false)
             components.day = 28 // Sunday
-            XCTAssert((components as NSDateComponents).date?.isEndOfWeek == true)
+            XCTAssert(components.date?.isEndOfWeek == true)
         }
     }
     
@@ -174,12 +174,12 @@ class DateExtensionsTests: XCTestCase {
             components.month = 2
             
             components.day = 29
-            XCTAssert((components as NSDateComponents).date?.isBeginingOfMonth == false)
+            XCTAssert(components.date?.isBeginingOfMonth == false)
             components.month = 3
             components.day = 1
-            XCTAssert((components as NSDateComponents).date?.isBeginingOfMonth == true)
+            XCTAssert(components.date?.isBeginingOfMonth == true)
             components.day = 2
-            XCTAssert((components as NSDateComponents).date?.isBeginingOfMonth == false)
+            XCTAssert(components.date?.isBeginingOfMonth == false)
         }
     }
     
@@ -193,12 +193,12 @@ class DateExtensionsTests: XCTestCase {
             components.month = 2
             
             components.day = 28
-            XCTAssert((components as NSDateComponents).date?.isEndOfMonth == false)
+            XCTAssert(components.date?.isEndOfMonth == false)
             components.day = 29
-            XCTAssert((components as NSDateComponents).date?.isEndOfMonth == true)
+            XCTAssert(components.date?.isEndOfMonth == true)
             components.month = 3
             components.day = 1
-            XCTAssert((components as NSDateComponents).date?.isEndOfMonth == false)
+            XCTAssert(components.date?.isEndOfMonth == false)
         }
     }
     
@@ -210,7 +210,7 @@ class DateExtensionsTests: XCTestCase {
             components.calendar = Calendar.iso8601Calendar()
             components.day = 26
             
-            XCTAssert((components as NSDateComponents).date?.day == 26)
+            XCTAssert(components.date?.day == 26)
         }
     }
     
@@ -223,7 +223,7 @@ class DateExtensionsTests: XCTestCase {
             components.calendar = Calendar.iso8601Calendar()
             components.hour = hour
             
-            XCTAssert((components as NSDateComponents).date?.hour == hour)
+            XCTAssert(components.date?.hour == hour)
         }
     }
     
@@ -236,7 +236,7 @@ class DateExtensionsTests: XCTestCase {
             components.calendar = Calendar.iso8601Calendar()
             components.minute = minute
             
-            XCTAssert((components as NSDateComponents).date?.minute == minute)
+            XCTAssert(components.date?.minute == minute)
         }
     }
     
@@ -249,7 +249,7 @@ class DateExtensionsTests: XCTestCase {
             components.hour = 15
             components.minute = 45
             
-            XCTAssert((components as NSDateComponents).date?.timeInHours == 15.75)
+            XCTAssert(components.date?.timeInHours == 15.75)
         }
     }
     
@@ -276,9 +276,9 @@ class DateExtensionsTests: XCTestCase {
             components.month = 2
             components.day = 26
             
-            let fromDate = (components as NSDateComponents).date
+            let fromDate = components.date
             components.day += daysBetween
-            let toDate = (components as NSDateComponents).date
+            let toDate = components.date
             
             XCTAssert(Date.daysBetweenDates(fromDate!, toDate: toDate!) == daysBetween)
         }
@@ -294,9 +294,9 @@ class DateExtensionsTests: XCTestCase {
             components.month = 2
             components.day = 26
             
-            XCTAssert((components as NSDateComponents).date?.daysRemainingInWeek == 3)
+            XCTAssert(components.date?.daysRemainingInWeek == 3)
             components.day = 28
-            XCTAssert((components as NSDateComponents).date?.daysRemainingInWeek == 1)
+            XCTAssert(components.date?.daysRemainingInWeek == 1)
         }
     }
     
@@ -310,7 +310,7 @@ class DateExtensionsTests: XCTestCase {
             components.month = 2
             components.day = 26
             
-            XCTAssert((components as NSDateComponents).date?.daysInMonth == 29)
+            XCTAssert(components.date?.daysInMonth == 29)
         }
     }
     
@@ -324,7 +324,7 @@ class DateExtensionsTests: XCTestCase {
             components.month = 2
             components.day = 26
             
-            XCTAssert((components as NSDateComponents).date?.daysRemainingInMonth == 3)
+            XCTAssert(components.date?.daysRemainingInMonth == 3)
         }
     }
     
@@ -338,7 +338,7 @@ class DateExtensionsTests: XCTestCase {
             components.month = 2
             components.day = 26
             
-            let date = (components as NSDateComponents).date!
+            let date = components.date!
             components.day = 28
             XCTAssert(date.isBefore(components.date!) == true)
             XCTAssert(date.isAfter(components.date!) == false)
@@ -376,7 +376,7 @@ class DateExtensionsTests: XCTestCase {
             components.month = 2
             components.day = 26
             
-            let date = (components as NSDateComponents).date!
+            let date = components.date!
             components.month = 3
             components.day = 28
             XCTAssert(date.isBefore(components.date!) == true)
@@ -420,7 +420,7 @@ class DateExtensionsTests: XCTestCase {
             components.month = 2
             components.day = 26
             
-            let date = (components as NSDateComponents).date!
+            let date = components.date!
             components.year = 2017
             components.day = 28
             XCTAssert(date.isBefore(components.date!) == true)
@@ -467,7 +467,7 @@ class DateExtensionsTests: XCTestCase {
             components.minute = 12
             components.second = 43
             
-            let date = (components as NSDateComponents).date!
+            let date = components.date!
             let strippedDate = date.stripTime
             components.timeZone = TimeZone.utc()
             components.hour = 0
@@ -486,7 +486,7 @@ class DateExtensionsTests: XCTestCase {
             components.year = 2016
             components.month = 2
             components.day = 26
-            let date = (components as NSDateComponents).date!
+            let date = components.date!
             
             XCTAssert(date.dateByAddingDays(0) == date)
             components.day += 3
@@ -508,7 +508,7 @@ class DateExtensionsTests: XCTestCase {
             components.hour = 19
             components.minute = 12
             components.second = 43
-            let date = (components as NSDateComponents).date!
+            let date = components.date!
             
             components.timeZone = TimeZone.utc()
             components.hour = 0
@@ -534,7 +534,7 @@ class DateExtensionsTests: XCTestCase {
         components.hour = 19
         components.minute = 12
         components.second = 43
-        let date = (components as NSDateComponents).date!
+        let date = components.date!
         
         XCTAssert(date.dateTimeShortString == DateFormatter.localizedStringFromDate(date, dateStyle: .ShortStyle, timeStyle: .ShortStyle))
         XCTAssert(date.dateShortString == DateFormatter.localizedStringFromDate(date, dateStyle: .ShortStyle, timeStyle: .NoStyle))

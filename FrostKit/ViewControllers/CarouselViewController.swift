@@ -84,7 +84,7 @@ public class CarouselViewController: UIViewController, UICollectionViewDataSourc
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: "CarouselCell", for: indexPath as IndexPath)
+        return collectionView.dequeueReusableCell(withReuseIdentifier: "CarouselCell", for: indexPath)
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
