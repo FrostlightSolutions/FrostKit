@@ -56,7 +56,7 @@ public class FrostKit {
         return FrostKit.shared.tintColor
     }
     public class func tintColor(alpha: CGFloat) -> Color? {
-        return tintColor?.color(withAlpha: alpha)
+        return tintColor?.color(alpha: alpha)
     }
     
 #if os(iOS) || os(tvOS) || os(OSX)
@@ -86,7 +86,7 @@ public class FrostKit {
     }
     
 #if os(iOS) || os(tvOS) || os(OSX)
-    public class func setupAppStoreID(appStoreID: String) {
+    public class func setup(appStoreID: String) {
         FrostKit.shared.appStoreID = appStoreID
         AppStoreHelper.shared.updateAppStoreData()
     }

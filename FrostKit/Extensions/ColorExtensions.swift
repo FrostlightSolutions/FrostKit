@@ -25,7 +25,7 @@ extension Color {
     - parameter alpha:      The alpha value of the color.
     */
     public convenience init(hexString: String, alpha: CGFloat = 1) {
-        let color = Color.color(withHexString: hexString, alpha: alpha)
+        let color = Color.color(hexString: hexString, alpha: alpha)
         self.init(cgColor: color.cgColor)
     }
 #endif
@@ -38,7 +38,7 @@ extension Color {
     
     - returns: A color object from the hex string.
     */
-    public class func color(withHexString hexString: String, alpha: CGFloat = 1) -> Color {
+    public class func color(hexString: String, alpha: CGFloat = 1) -> Color {
         
         var scanLocation = 0
         if hexString.hasPrefix("#") {
@@ -74,7 +74,7 @@ extension Color {
      
      - returns: The new UIColor/NSColor object created with the passed in alpha value.
      */
-    public func color(withAlpha alpha: CGFloat) -> Color {
+    public func color(alpha: CGFloat) -> Color {
         
         var red: CGFloat = 0
         var green: CGFloat = 0

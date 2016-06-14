@@ -383,7 +383,7 @@ public class LocalStorage: NSObject {
     class func remove(absoluteURL: URL) throws {
         
         try FileManager.default().removeItem(at: absoluteURL)
-        ContentManager.remove(contentMetadataURL: absoluteURL)
+        ContentManager.remove(url: absoluteURL)
     }
     
     /**

@@ -17,9 +17,9 @@ import UIKit
 public class AppStoreHelper: NSObject {
     
     public enum UpdateStatus: Int {
-        case Unknown = -1
-        case UpdateNeeded
-        case UpToDate
+        case unknown = -1
+        case updateNeeded
+        case upToDate
     }
     
     public static let shared = AppStoreHelper()
@@ -52,6 +52,26 @@ public class AppStoreHelper: NSObject {
     public var formattedFileSize: String?
     public var releaseDate: NSDate?
     private var bundleId: String?
+    /**
+     If the app is up to date then `upToDate` is returned, `updateNeeded` if the local version is behind the app store version or `unknown` if data have not been updated and parsed from the app store.
+ 
+     This will only work if an update with the app store has been made successfully and the `version` and `bundleId` values have been parsed.
+     */
+    public var appUpdateNeeded: UpdateStatus {
+        
+        if let appStoreVersion = self.version, bundleId = self.bundleId, bundle = Bundle(identifier: bundleId) {
+            
+            let localVersion = Bundle.appVersion(bundle: bundle)
+            let comparisonResult = localVersion.compare(appStoreVersion, options: .numericSearch)
+            if comparisonResult == .orderedAscending {
+                return .updateNeeded
+            } else {
+                return .upToDate
+            }
+        }
+        
+        return .unknown
+    }
     
     // MARK: - Updates
     
@@ -102,28 +122,4 @@ public class AppStoreHelper: NSObject {
 //            completed?(NSError.error(withMessage: "No app store ID set."))
 //        }
     }
-    
-    /**
-     Retruns `true` if the needs updating comparing the local app version number with the one recived from the app store.
-     
-     This will only work if an update with the app store has been made successfully and the `version` and `bundleId` values have been parsed.
-     
-     - returns: If the app is up to date then `UpToDate` is returned, `UpdateNeeded` if the local version is behind the app store version or `Unknown` if data have not been updated and parsed from the app store.
-     */
-    public func appUpdateNeeded() -> UpdateStatus {
-        
-        if let appStoreVersion = self.version, bundleId = self.bundleId, bundle = Bundle(identifier: bundleId) {
-            
-            let localVersion = Bundle.appVersion(bundle: bundle)
-            let comparisonResult = localVersion.compare(appStoreVersion, options: .numericSearch)
-            if comparisonResult == .orderedAscending {
-                return .UpdateNeeded
-            } else {
-                return .UpToDate
-            }
-        }
-        
-        return .Unknown
-    }
-    
 }

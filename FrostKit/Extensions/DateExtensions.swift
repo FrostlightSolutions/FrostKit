@@ -197,7 +197,7 @@ extension Date {
     
     - returns: The number of days beteen `fromDate` and `toDate`
     */
-    public static func daysBetweenDates(fromDate: Date, toDate: Date) -> Int? {
+    public static func daysBetween(fromDate: Date, toDate: Date) -> Int? {
         
         // TODO: This might need changeing from `NSDate` to `Date` once range(of:start:interval:options:) is updated.
         var dateFrom: NSDate?

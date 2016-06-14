@@ -78,7 +78,7 @@ public class KeychainHelper: NSObject {
     
     - returns: Returns `true` if the details were successfully saved, `false` if not.
     */
-    public class func setDetails(details: AnyObject, username: String) -> Bool {
+    public class func set(details: AnyObject, username: String) -> Bool {
         
         let valueDict = [username: details]
         let secDict = setupSearchDirectory()
@@ -91,7 +91,7 @@ public class KeychainHelper: NSObject {
             return true
         } else {
             if status == OSStatus(errSecDuplicateItem) {
-                return updateKeychainValue(valueDict: valueDict)
+                return KeychainHelper.update(valueDict)
             } else {
                 let error = NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
                 NSLog("ERROR: Set Keychain Details: \(error.localizedDescription)")
@@ -101,7 +101,7 @@ public class KeychainHelper: NSObject {
         return false
     }
     
-    private class func updateKeychainValue(valueDict: NSDictionary) -> Bool {
+    private class func update(_ valueDict: NSDictionary) -> Bool {
         
         let secDict = setupSearchDirectory()
         let updateDict = NSMutableDictionary()

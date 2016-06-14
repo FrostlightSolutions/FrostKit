@@ -19,7 +19,7 @@ extension Calendar {
     - returns: A iso8601 calendar object.
     */
     public class func iso8601Calendar() -> Calendar {
-        return Calendar(calendarIdentifier: Calendar.Identifier.ISO8601)!
+        return Calendar(calendarIdentifier: .ISO8601)!
     }
     
 }

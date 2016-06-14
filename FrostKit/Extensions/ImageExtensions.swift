@@ -20,7 +20,7 @@ extension UIImage {
     
     - returns: A scaled image.
     */
-    public func image(withMaxSize size: CGSize) -> UIImage? {
+    public func image(maxSize size: CGSize) -> UIImage? {
         
         let size = self.size.apply(transform: CGAffineTransform(scaleX: 0.5, y: 0.5))
         let hasAlpha = false

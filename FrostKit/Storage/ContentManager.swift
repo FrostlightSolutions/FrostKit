@@ -90,40 +90,40 @@ public class ContentManager: NSObject {
     /**
     Creates or updates metadata for an object at an absolute URL.
     
-    - parameter absoluteURL:    The absolute URL of the item.
+    - parameter url:    The absolute URL of the item.
     */
-    public class func save(contentMetadataURL url: URL) {
+    public class func save(url: URL) {
         if let path = url.path {
-            save(contentMetadataPath: path)
+            save(path: path)
         }
     }
     
     /**
     Creates or updates metadata for an object at an absolute path.
     
-    - parameter absolutePath:    The absolute path of the item.
+    - parameter path:    The absolute path of the item.
     */
-    public class func save(contentMetadataPath path: String) {
+    public class func save(path: String) {
         shared.contentMetadata[path] = NSDate()
     }
     
     /**
     Removed metadata for an object at an absolute URL.
     
-    - parameter absoluteURL:    The absolute URL of the item.
+    - parameter url:    The absolute URL of the item.
     */
-    public class func remove(contentMetadataURL url: URL) {
+    public class func remove(url: URL) {
         if let path = url.path {
-            remove(contentMetadataPath: path)
+            remove(path: path)
         }
     }
     
     /**
     Removed metadata for an object at an absolute path.
     
-    - parameter absolutePath:    The absolute path of the item.
+    - parameter path:    The absolute path of the item.
     */
-    public class func remove(contentMetadataPath path: String) {
+    public class func remove(path: String) {
         shared.contentMetadata.removeValue(forKey: path)
     }
     

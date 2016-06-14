@@ -90,7 +90,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     
     - returns: The URL of the parsed phone number, prefixed with `telprompt://`.
     */
-    public class func phonePromptFormattedURL(number: String) -> URL? {
+    public class func phonePrompt(number: String) -> URL? {
         
         let hasPlusPrefix = number.range(of: "+")
         
