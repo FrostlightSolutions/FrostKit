@@ -174,8 +174,8 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
             return urlString
         }
         
-        let request = URLRequest(url: url as URL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60)
-        webView.load(request as URLRequest)
+        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60)
+        webView.load(request)
         return urlString
     }
     

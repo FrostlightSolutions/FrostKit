@@ -158,7 +158,7 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
             }
         }
         dismiss(animated: true, completion: nil)
-        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: - UISearchBarDelegate Methods

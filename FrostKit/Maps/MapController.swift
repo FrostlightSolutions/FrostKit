@@ -527,7 +527,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
             let annotations = Array(self.annotations.values)
             zoom(toAnnotations: annotations)
         } else if let mapView = _mapView {
-            zoom(toAnnotations: mapView.annotations as [MKAnnotation])
+            zoom(toAnnotations: mapView.annotations)
         }
     }
     

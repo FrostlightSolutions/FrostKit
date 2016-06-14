@@ -130,8 +130,8 @@ public class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
             return urlString
         }
         
-        let request = URLRequest(url: url as URL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60)
-        webView.loadRequest(request as URLRequest)
+        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60)
+        webView.loadRequest(request)
         return urlString
     }
     

@@ -144,7 +144,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         }
     }
     
-    public class func presentMailComposeViewController(toRecipients: [String]? = nil, ccRecipients: [String]? = nil, bccRecipients: [String]? = nil, subject: String = "", messageBody: String = "", isBodyHTML: Bool = false, attachments: [(data: NSData, mimeType: String, fileName: String)]? = nil, viewController: UIViewController, animated: Bool) {
+    public class func presentMailComposeViewController(toRecipients: [String]? = nil, ccRecipients: [String]? = nil, bccRecipients: [String]? = nil, subject: String = "", messageBody: String = "", isBodyHTML: Bool = false, attachments: [(data: Data, mimeType: String, fileName: String)]? = nil, viewController: UIViewController, animated: Bool) {
         
         let mailVC = MFMailComposeViewController()
         mailVC.view.tintColor = FrostKit.tintColor
@@ -157,7 +157,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         
         if attachments != nil {
             for (data, mimeType, fileName) in attachments! {
-                mailVC.addAttachmentData(data as Data, mimeType: mimeType, fileName: fileName)
+                mailVC.addAttachmentData(data, mimeType: mimeType, fileName: fileName)
             }
         }
         
@@ -212,7 +212,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         
         if MFMessageComposeViewController.canSendAttachments() && attachments != nil {
             for (attachmentURL, alternateFilename) in attachments! {
-                messageVC.addAttachmentURL(attachmentURL as URL, withAlternateFilename: alternateFilename)
+                messageVC.addAttachmentURL(attachmentURL, withAlternateFilename: alternateFilename)
             }
         }
         

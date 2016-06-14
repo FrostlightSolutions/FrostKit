@@ -157,7 +157,7 @@ public class LocalStorage: NSObject {
     internal class func createDirectory(url: URL) {
         
         do {
-            try FileManager.default().createDirectory(at: url as URL, withIntermediateDirectories: true, attributes: nil)
+            try FileManager.default().createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
         } catch let error as NSError {
             NSLog("Error: Directory not able to be created at URL \(url)\nWith error: \(error.localizedDescription)\n\(error)")
         }
@@ -261,7 +261,7 @@ public class LocalStorage: NSObject {
             toURL = absoluteURL(baseURL: toBaseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) else {
             return
         }
-        try FileManager.default().moveItem(at: fromURL as URL, to: toURL as URL)
+        try FileManager.default().moveItem(at: fromURL, to: toURL)
     }
     
     /**
