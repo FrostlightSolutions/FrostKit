@@ -340,7 +340,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
             semaphore.signal()    // Signal that semaphore should complete
         }
         
-        let _ = semaphore.wait(timeout: DispatchTime.distantFuture)   // Wait for semaphore
+        _ = semaphore.wait(timeout: DispatchTime.distantFuture)   // Wait for semaphore
         
         if visableAnnotationsInBucket == nil {
             return

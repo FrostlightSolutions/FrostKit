@@ -27,7 +27,7 @@ public class BaseWebViewController: UIViewController {
     public var urlString: String? {
         didSet {
             if webView != nil {
-                let _ = self.loadBaseURL()
+                _ = self.loadBaseURL()
             }
         }
     }
@@ -90,7 +90,7 @@ public class BaseWebViewController: UIViewController {
             view.addConstraints(constraintH)
             
             if loading == false {
-                let _ = loadBaseURL()
+                _ = loadBaseURL()
             }
         }
     }

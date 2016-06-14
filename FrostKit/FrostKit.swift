@@ -78,7 +78,7 @@ public class FrostKit {
     // MARK: - Setup Methods
     
     public class func setup() {
-        let _ = FrostKit.shared
+        _ = FrostKit.shared
     }
     
     public class func setup(tintColor: Color) {
