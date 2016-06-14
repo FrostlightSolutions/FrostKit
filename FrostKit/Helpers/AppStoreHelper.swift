@@ -68,7 +68,7 @@ public class AppStoreHelper: NSObject {
 //        if let appStoreID = FrostKit.appStoreID {
 //            
 //            var url = "https://itunes.apple.com"
-//            if let code = NSLocale.autoupdatingCurrent().object(forKey: NSLocaleCountryCode) as? String {
+//            if let code = Locale.autoupdatingCurrent().object(forKey: .countryCode) as? String {
 //                url += "/\(code.lowercased())"
 //            }
 //            url += "/lookup"
