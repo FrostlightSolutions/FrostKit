@@ -100,6 +100,9 @@
 		18A786CD1A77B39A006EADB9 /* CollectionViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A786CC1A77B39A006EADB9 /* CollectionViewControllerExtensions.swift */; };
 		18B01EF01C80A8CE00914FF5 /* DateExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AC87E91C77F48200426776 /* DateExtensionsTests.swift */; };
 		18B0A5D31D15D2BF00C6985E /* TableInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B0A5D21D15D2BF00C6985E /* TableInterfaceController.swift */; };
+		18B0A5D91D15DFD600C6985E /* DataProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B0A5D81D15DFD600C6985E /* DataProxy.swift */; };
+		18B0A5DA1D15DFD600C6985E /* DataProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B0A5D81D15DFD600C6985E /* DataProxy.swift */; };
+		18B0A5DB1D15DFD600C6985E /* DataProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B0A5D81D15DFD600C6985E /* DataProxy.swift */; };
 		18BB7C7519DC383900F21A64 /* CalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BB7C7419DC383900F21A64 /* CalendarExtensions.swift */; };
 		18C0066119DB5BF000811755 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066019DB5BF000811755 /* LocalStorage.swift */; };
 		18C0066819DB762600811755 /* ErrorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066719DB762600811755 /* ErrorExtensions.swift */; };
@@ -266,6 +269,7 @@
 		18AC87E81C77F48200426776 /* ColorExtensionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtensionsTest.swift; sourceTree = "<group>"; };
 		18AC87E91C77F48200426776 /* DateExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensionsTests.swift; sourceTree = "<group>"; };
 		18B0A5D21D15D2BF00C6985E /* TableInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableInterfaceController.swift; sourceTree = "<group>"; };
+		18B0A5D81D15DFD600C6985E /* DataProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProxy.swift; sourceTree = "<group>"; };
 		18BB7C7419DC383900F21A64 /* CalendarExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarExtensions.swift; sourceTree = "<group>"; };
 		18C0066019DB5BF000811755 /* LocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
 		18C0066719DB762600811755 /* ErrorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorExtensions.swift; sourceTree = "<group>"; };
@@ -551,6 +555,7 @@
 			children = (
 				18C0066019DB5BF000811755 /* LocalStorage.swift */,
 				18C0066F19DB7EDB00811755 /* ContentManager.swift */,
+				18B0A5D81D15DFD600C6985E /* DataProxy.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -1034,6 +1039,7 @@
 				1826B06F1BD906F200DA1669 /* CustomFonts.swift in Sources */,
 				1826B0631BD906B700DA1669 /* VisualEffectView.swift in Sources */,
 				1826B0591BD9066C00DA1669 /* RequestStore.swift in Sources */,
+				18B0A5DB1D15DFD600C6985E /* DataProxy.swift in Sources */,
 				1826B0661BD906E200DA1669 /* ErrorExtensions.swift in Sources */,
 				1826B0641BD906BE00DA1669 /* InitialsImageView.swift in Sources */,
 				1826B0611BD906B000DA1669 /* Button.swift in Sources */,
@@ -1056,6 +1062,7 @@
 				18E0283F1BA2D2DF00852022 /* CalendarExtensions.swift in Sources */,
 				18E028411BA2D2DF00852022 /* DataExtensions.swift in Sources */,
 				18E028401BA2D2DF00852022 /* TimeZoneExtensions.swift in Sources */,
+				18B0A5DA1D15DFD600C6985E /* DataProxy.swift in Sources */,
 				18E0283E1BA2D2D900852022 /* DateExtensions.swift in Sources */,
 				182290531BA2E66C00C1CF1D /* LocalStorage.swift in Sources */,
 				18E028431BA2D2E900852022 /* KeychainHelper.swift in Sources */,
@@ -1107,6 +1114,7 @@
 				18C0067019DB7EDB00811755 /* ContentManager.swift in Sources */,
 				18E3F23A19DE15600032ABB7 /* BarButtonItemExtensions.swift in Sources */,
 				18EA124319DC8A8C00FD858D /* KeychainHelper.swift in Sources */,
+				18B0A5D91D15DFD600C6985E /* DataProxy.swift in Sources */,
 				18BB7C7519DC383900F21A64 /* CalendarExtensions.swift in Sources */,
 				18C0066E19DB76C900811755 /* ImageExtensions.swift in Sources */,
 				18DD78FF1A8CA70F00379FB5 /* Button.swift in Sources */,
