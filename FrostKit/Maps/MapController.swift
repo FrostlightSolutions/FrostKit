@@ -266,7 +266,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         }
     }
     
-    private final func calculateAndUpdateClusterAnnotations(complete: () -> Void) {
+    internal final func calculateAndUpdateClusterAnnotations(complete: () -> Void) {
         
         guard let mapView = self.mapView else {
             complete()
