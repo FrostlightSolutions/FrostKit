@@ -11,17 +11,16 @@ import Foundation
 ///
 /// Extention functions for NSData
 ///
-extension NSData {
+extension Data {
     
     /// Returns a string of the hex data object.
     public var hexString: String {
         
         var string = ""
-        var byte: UInt8 = 0
         
-        for index in 0 ..< length {
-            getBytes(&byte, range: NSRange(location: index, length: 1))
-            string += String(format: "%02hhx", byte)
+        for index in 0 ..< count {
+            let subByte = subdata(in: index..<index+1)
+            string += String(format: "%02hhx", subByte)
         }
         
         return string
@@ -36,7 +35,7 @@ extension NSData {
     */
     
     // TODO: Change to using generics rahter than just `Int64`.
-    public class func sizeFormattedString(size: Int64) -> String {
+    public static func sizeFormattedString(size: Int64) -> String {
         
         let sUnits = ["", "K", "M", "G", "T", "P", "E"]
         let sMaxUnits = sUnits.count - 1
@@ -59,7 +58,7 @@ extension NSData {
     
     /// Created a formatted string from the objects length value
     public var lengthFormattedString: String {
-        return NSData.sizeFormattedString(size: Int64(self.length))
+        return Data.sizeFormattedString(size: Int64(count))
     }
     
 }
