@@ -12,7 +12,7 @@ import AppKit
 import UIKit
 #endif
 
-public class AppStoreHelper: NSObject {
+public class AppStoreHelper {
     
     public enum UpdateStatus: Int {
         case Unknown = -1

@@ -41,7 +41,7 @@ public enum DirectoryLocation: UInt {
 /// NOTE: Anything stored in Caches has the ability to be deleted when the app is not active (never during),
 /// so make sure only data that can be re-downloaded get stored here.
 ///
-public class LocalStorage: NSObject {
+public class LocalStorage {
     
     // MARK: - Paths and URL Methods
     

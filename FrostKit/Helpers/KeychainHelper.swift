@@ -11,7 +11,7 @@ import Foundation
 ///
 /// The keychain helper allows access to the keychain for saving passwords safely.
 ///
-public class KeychainHelper: NSObject {
+public class KeychainHelper {
     
     private class func setupSearchDirectory() -> NSMutableDictionary {
         

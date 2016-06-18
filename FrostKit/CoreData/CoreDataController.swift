@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+// Needs to be a subclass of NSObject to allow it to be used with @IBOutlet
 public class CoreDataController: NSObject {
     
     // MARK: - Properties

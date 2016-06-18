@@ -110,7 +110,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     /// An array of addresses plotted on the map view.
     public var addresses = [Address]()
     /// A dictionary of annotations plotted to the map view with the address object as the key.
-    public var annotations = [NSObject: MKAnnotation]()
+    public var annotations = [Address: MKAnnotation]()
     /// When the map automatically zooms to show all, if this value is set to true, then the users annoation is automatically included in that.
     @IBInspectable public var zoomToShowAllIncludesUser: Bool = true
     private var regionSpanBeforeChange: MKCoordinateSpan?
@@ -868,8 +868,15 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      - returns: An array of addresses that meet the predicate search criteria.
      */
     public func searchAddresses(searchString: String) -> [Address] {
-        let predicate = NSPredicate(format: "name CONTAINS[cd] %@ || addressString CONTAINS[cd] %@", searchString, searchString)
-        return (addresses as NSArray).filteredArrayUsingPredicate(predicate) as! [Address]
+        return addresses.filter { (address) -> Bool in
+            
+            let options: NSStringCompareOptions = [.CaseInsensitiveSearch, .DiacriticInsensitiveSearch]
+            
+            let nameRange = address.name.rangeOfString(searchString, options: options)
+            let addressStringRange = address.addressString.rangeOfString(searchString, options: options)
+            
+            return nameRange != nil || addressStringRange != nil
+        }
     }
     
 }

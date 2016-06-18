@@ -65,19 +65,17 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
     */
     public func objectAtIndexPath(indexPath: NSIndexPath) -> AnyObject? {
         if let searchBar = self.searchBar {
-            var array: NSArray?
             switch searchBar.selectedScopeButtonIndex {
             case 0:
-                array = self.plottedSearchResults
-            case 1:
-                array = self.locationSearchResults
-            default:
-                break
-            }
-            if let searchResults = array {
-                if indexPath.row < searchResults.count {
+                if let searchResults = self.plottedSearchResults where indexPath.row < searchResults.count {
                     return searchResults[indexPath.row]
                 }
+            case 1:
+                if let searchResults = self.locationSearchResults where indexPath.row < searchResults.count {
+                    return searchResults[indexPath.row]
+                }
+            default:
+                break
             }
         }
         return nil

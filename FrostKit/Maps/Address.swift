@@ -12,7 +12,7 @@ import MapKit
 ///
 /// An object that contains details on a address to the plot on the map view, along with other data such as name and addressString.
 ///
-public class Address: NSObject {
+public class Address {
     
     /// The ID of the addres object.
     public var objectID: String?
@@ -39,15 +39,8 @@ public class Address: NSObject {
     /// The address string of the object.
     public var addressString = ""
     /// Returns a string that represents the contents of the receiving class.
-    override public var description: String {
+    public var description: String {
         return "<Latitude: \(latitude) Longitude: \(longitude) Address: \(addressString)>"
-    }
-    override public var hash: Int {
-        return Int(latitude) ^ Int(longitude)
-    }
-    
-    public override init() {
-        super.init()
     }
     
     /**
@@ -55,8 +48,7 @@ public class Address: NSObject {
      
      - parameter dictionary: The dictionary to parse the information from.
      */
-    public convenience init(dictionary: NSDictionary) {
-        self.init()
+    public init(dictionary: NSDictionary) {
         
         objectID = dictionary["id"] as? String
         
@@ -115,11 +107,27 @@ public class Address: NSObject {
         return false
     }
     
-    public override func isEqual(object: AnyObject?) -> Bool {
+    public func isEqual(object: AnyObject?) -> Bool {
         if let address = object as? Address {
             return self.isEqualToAddress(address)
         }
         return false
     }
     
+}
+
+extension Address: Hashable {
+    
+    public var hashValue: Int {
+        return Int(latitude) ^ Int(longitude)
+    }
+}
+
+public func == (lhs: Address, rhs: Address) -> Bool {
+    
+    if lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude &&
+        lhs.name == rhs.name && lhs.addressString == rhs.addressString {
+        return true
+    }
+    return false
 }

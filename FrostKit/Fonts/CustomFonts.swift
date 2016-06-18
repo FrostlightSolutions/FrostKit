@@ -21,7 +21,7 @@ import UIKit
 /// - https://raw.githubusercontent.com/driftyco/ionicons/master/less/_ionicons-variables.less
 /// - https://github.com/driftyco/ionicons/blob/master/fonts/ionicons.ttf
 ///
-public class CustomFonts: NSObject {
+public class CustomFonts {
     
     /// Loads custom fonts imbedded in the Framework.
     public class func loadCustomFonts() {
