@@ -8,7 +8,6 @@
 
 import XCTest
 @testable import FrostKit
-import Alamofire
 
 class RequestStoreTests: XCTestCase {
     

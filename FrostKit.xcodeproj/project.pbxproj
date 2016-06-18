@@ -72,9 +72,6 @@
 		1836A21C1A84F38A00E57F86 /* FontConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1836A21B1A84F38A00E57F86 /* FontConstants.swift */; };
 		1836A2211A84F3BE00E57F86 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1836A21F1A84F3BE00E57F86 /* fontawesome-webfont.ttf */; };
 		1836A2231A84F3BE00E57F86 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1836A2201A84F3BE00E57F86 /* ionicons.ttf */; };
-		1838F1B41C761CCC00F1233D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1838F1B31C761CCC00F1233D /* Alamofire.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		1838F1B91C761E3B00F1233D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1838F1B81C761E3B00F1233D /* Alamofire.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		1838F1BB1C761E4800F1233D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1838F1BA1C761E4800F1233D /* Alamofire.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		183C7B6B1AD2F4A400CAE1A5 /* ScreenExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C7B6A1AD2F4A400CAE1A5 /* ScreenExtensions.swift */; };
 		18410C2E1C81092500D2B308 /* FontExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C2D1C81092500D2B308 /* FontExtensionsTests.swift */; };
 		18410C301C810A6900D2B308 /* BundleExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C2F1C810A6900D2B308 /* BundleExtensionsTests.swift */; };
@@ -100,7 +97,6 @@
 		189D8C9B1C77E99C00261DF5 /* FontConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1836A21B1A84F38A00E57F86 /* FontConstants.swift */; };
 		189D8C9C1C77E9AB00261DF5 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EE19DCBC28008A1506 /* CustomFonts.swift */; };
 		189D8C9F1C77EC5B00261DF5 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066919DB767A00811755 /* ColorExtensions.swift */; };
-		189D8CA71C77EE7F00261DF5 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E545B41C77E5AF00637E85 /* Alamofire.framework */; };
 		18A786CD1A77B39A006EADB9 /* CollectionViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A786CC1A77B39A006EADB9 /* CollectionViewControllerExtensions.swift */; };
 		18B01EF01C80A8CE00914FF5 /* DateExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AC87E91C77F48200426776 /* DateExtensionsTests.swift */; };
 		18BB7C7519DC383900F21A64 /* CalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BB7C7419DC383900F21A64 /* CalendarExtensions.swift */; };
@@ -111,9 +107,6 @@
 		18C0066E19DB76C900811755 /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066D19DB76C900811755 /* ImageExtensions.swift */; };
 		18C0067019DB7EDB00811755 /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066F19DB7EDB00811755 /* ContentManager.swift */; };
 		18C0067619DC00C000811755 /* FrostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18839B1719D9FA8C00760157 /* FrostKit.framework */; };
-		18C41B071C7FBF9900B1F57D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1838F1B31C761CCC00F1233D /* Alamofire.framework */; };
-		18C41B091C7FC05200B1F57D /* Alamofire.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 1838F1B31C761CCC00F1233D /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		18C41B0B1C7FC09900B1F57D /* Alamofire.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 18E545B41C77E5AF00637E85 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18CB51701A76454A005064C8 /* RequestStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* RequestStore.swift */; };
 		18CB517A1A7655ED005064C8 /* DeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB51791A7655ED005064C8 /* DeviceExtensions.swift */; };
 		18CFF9FE19DC45AB00DF6BB8 /* TimeZoneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFF9FD19DC45AB00DF6BB8 /* TimeZoneExtensions.swift */; };
@@ -126,9 +119,7 @@
 		18D54BF91CE643B700D365C6 /* ColorExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AC87E81C77F48200426776 /* ColorExtensionsTest.swift */; };
 		18D54BFA1CE643C700D365C6 /* KeychainHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D8CAF1C77EEFC00261DF5 /* KeychainHelperTests.swift */; };
 		18D54BFC1CE643D200D365C6 /* AppStoreHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D8CAE1C77EEFC00261DF5 /* AppStoreHelperTests.swift */; };
-		18D54C011CE6452000D365C6 /* Alamofire.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 1838F1BA1C761E4800F1233D /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18D54C021CE6452700D365C6 /* FrostKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 1826B0261BD9047900DA1669 /* FrostKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		18D54C031CE6455C00D365C6 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1838F1BA1C761E4800F1233D /* Alamofire.framework */; };
 		18D54C041CE64BA900D365C6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18748B2019DF5661003942A3 /* Localizable.strings */; };
 		18D54C051CE64BB000D365C6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18748B2019DF5661003942A3 /* Localizable.strings */; };
 		18D58EA91D0CC151009BE4E5 /* MapClusterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D58EA81D0CC151009BE4E5 /* MapClusterTests.swift */; };
@@ -156,7 +147,6 @@
 		18E3F23219DE07670032ABB7 /* FrostKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23119DE07670032ABB7 /* FrostKit.swift */; };
 		18E3F23A19DE15600032ABB7 /* BarButtonItemExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23919DE15600032ABB7 /* BarButtonItemExtensions.swift */; };
 		18E545A71C77E54000637E85 /* FrostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E5459D1C77E53F00637E85 /* FrostKit.framework */; };
-		18E545B51C77E5AF00637E85 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E545B41C77E5AF00637E85 /* Alamofire.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		18E545BC1C77E72E00637E85 /* FrostKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 18E0282E1BA2D17300852022 /* FrostKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		18E545BD1C77E74D00637E85 /* FrostKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23119DE07670032ABB7 /* FrostKit.swift */; };
 		18E9FF931C80AA5700AC5230 /* ErrorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E9FF911C80AA5700AC5230 /* ErrorExtensionsTests.swift */; };
@@ -204,7 +194,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				1846250A1C84D2FC0098E969 /* FrostKit.framework in Copy Frameworks */,
-				18C41B091C7FC05200B1F57D /* Alamofire.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -216,7 +205,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				184625091C84D1A00098E969 /* FrostKit.framework in Copy Frameworks */,
-				18C41B0B1C7FC09900B1F57D /* Alamofire.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -228,7 +216,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				18D54C021CE6452700D365C6 /* FrostKit.framework in Copy Frameworks */,
-				18D54C011CE6452000D365C6 /* Alamofire.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,9 +244,6 @@
 		1836A21B1A84F38A00E57F86 /* FontConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontConstants.swift; sourceTree = "<group>"; };
 		1836A21F1A84F3BE00E57F86 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		1836A2201A84F3BE00E57F86 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
-		1838F1B31C761CCC00F1233D /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		1838F1B81C761E3B00F1233D /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/watchOS/Alamofire.framework; sourceTree = "<group>"; };
-		1838F1BA1C761E4800F1233D /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/tvOS/Alamofire.framework; sourceTree = "<group>"; };
 		183C7B6A1AD2F4A400CAE1A5 /* ScreenExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenExtensions.swift; sourceTree = "<group>"; };
 		18410C2D1C81092500D2B308 /* FontExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontExtensionsTests.swift; sourceTree = "<group>"; };
 		18410C2F1C810A6900D2B308 /* BundleExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleExtensionsTests.swift; sourceTree = "<group>"; };
@@ -305,7 +289,6 @@
 		18E3F23919DE15600032ABB7 /* BarButtonItemExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarButtonItemExtensions.swift; sourceTree = "<group>"; };
 		18E5459D1C77E53F00637E85 /* FrostKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FrostKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18E545A61C77E54000637E85 /* FrostKit OS X Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FrostKit OS X Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		18E545B41C77E5AF00637E85 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/Mac/Alamofire.framework; sourceTree = "<group>"; };
 		18E545BA1C77E6C700637E85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18E9FF911C80AA5700AC5230 /* ErrorExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorExtensionsTests.swift; sourceTree = "<group>"; };
 		18EA123E19DC79F100FD858D /* DataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
@@ -319,7 +302,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1838F1BB1C761E4800F1233D /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,7 +309,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1838F1B91C761E3B00F1233D /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,7 +316,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1838F1B41C761CCC00F1233D /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,7 +324,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				18C0067619DC00C000811755 /* FrostKit.framework in Frameworks */,
-				18C41B071C7FBF9900B1F57D /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,7 +332,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				18D54BEE1CE6439300D365C6 /* FrostKit.framework in Frameworks */,
-				18D54C031CE6455C00D365C6 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,7 +339,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18E545B51C77E5AF00637E85 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,7 +347,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				18E545A71C77E54000637E85 /* FrostKit.framework in Frameworks */,
-				189D8CA71C77EE7F00261DF5 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,10 +407,6 @@
 		186CFCE81A29F7BE002739A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				189D8CA21C77EE2C00261DF5 /* iOS */,
-				189D8CA31C77EE3500261DF5 /* watchOS */,
-				189D8CA41C77EE4B00261DF5 /* tvOS */,
-				189D8CA51C77EE5F00261DF5 /* OSX */,
 				1811D76A1A0ACAED00E8B873 /* WebKit.framework */,
 			);
 			name = Frameworks;
@@ -510,38 +482,6 @@
 				18CB516F1A76454A005064C8 /* RequestStore.swift */,
 			);
 			path = Service;
-			sourceTree = "<group>";
-		};
-		189D8CA21C77EE2C00261DF5 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				1838F1B31C761CCC00F1233D /* Alamofire.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		189D8CA31C77EE3500261DF5 /* watchOS */ = {
-			isa = PBXGroup;
-			children = (
-				1838F1B81C761E3B00F1233D /* Alamofire.framework */,
-			);
-			name = watchOS;
-			sourceTree = "<group>";
-		};
-		189D8CA41C77EE4B00261DF5 /* tvOS */ = {
-			isa = PBXGroup;
-			children = (
-				1838F1BA1C761E4800F1233D /* Alamofire.framework */,
-			);
-			name = tvOS;
-			sourceTree = "<group>";
-		};
-		189D8CA51C77EE5F00261DF5 /* OSX */ = {
-			isa = PBXGroup;
-			children = (
-				18E545B41C77E5AF00637E85 /* Alamofire.framework */,
-			);
-			name = OSX;
 			sourceTree = "<group>";
 		};
 		189D8CA81C77EEFC00261DF5 /* FrostKit iOS Tests */ = {
