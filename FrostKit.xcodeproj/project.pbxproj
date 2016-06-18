@@ -79,7 +79,6 @@
 		1844D1D11D15F26E00E87EA8 /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1D01D15F26E00E87EA8 /* CoreDataTableViewController.swift */; };
 		1844D1D61D15F27D00E87EA8 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1D51D15F27D00E87EA8 /* CoreDataController.swift */; };
 		1844D1D71D15F27D00E87EA8 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1D51D15F27D00E87EA8 /* CoreDataController.swift */; };
-		1844D1D91D15F27D00E87EA8 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1D51D15F27D00E87EA8 /* CoreDataController.swift */; };
 		1844D1DB1D15F31800E87EA8 /* CoreDataCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1DA1D15F31800E87EA8 /* CoreDataCollectionViewController.swift */; };
 		184625051C84CFB00098E969 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EC19DCBB5B008A1506 /* FontExtensions.swift */; };
 		184625071C84D1390098E969 /* ColorExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AC87E81C77F48200426776 /* ColorExtensionsTest.swift */; };
@@ -1181,7 +1180,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				189D8C961C77E95C00261DF5 /* TimeZoneExtensions.swift in Sources */,
-				1844D1D91D15F27D00E87EA8 /* CoreDataController.swift in Sources */,
 				189D8C951C77E95C00261DF5 /* CalendarExtensions.swift in Sources */,
 				18E545BD1C77E74D00637E85 /* FrostKit.swift in Sources */,
 				189D8C9F1C77EC5B00261DF5 /* ColorExtensions.swift in Sources */,
