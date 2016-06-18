@@ -398,11 +398,11 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         
         // First, see if one of the annotations we were already showing is in this mapRect
         var annotationForGridSet: Annotation?
-        let _ = visableAnnotations.map { (annotation) in
+        for annotation in visableAnnotations {
             
             if visableAnnotations.contains(annotation) {
                 annotationForGridSet = annotation
-                return
+                break
             }
         }
         
