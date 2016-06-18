@@ -1,5 +1,5 @@
 //
-//  RequestStoreTests.swift
+//  TaskStoreTests.swift
 //  FrostKit
 //
 //  Created by James Barrow on 18/06/2016.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import FrostKit
 
-class RequestStoreTests: XCTestCase {
+class TaskStoreTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -21,15 +21,15 @@ class RequestStoreTests: XCTestCase {
         super.tearDown()
     }
     
-    func testRequestStoreAdd() {
+    func testTaskStoreAdd() {
         
-        let store = RequestStore()
+        let store = TaskStore()
         
         let urlString = "https://httpbin.org/get"
         let task = URLSession.shared().dataTask(with: URL(string: urlString)!)
-        store.addRequest(request: task, urlString: urlString)
+        store.add(task, urlString: urlString)
         
-        if store.containsRequestWithURL(urlString) {
+        if store.contains(taskWithURL: urlString) {
             XCTAssert(true, "Task added to the store.")
         } else {
             XCTAssert(false, "Task not added to the store.")
@@ -40,21 +40,21 @@ class RequestStoreTests: XCTestCase {
         
         let expectation = self.expectation(withDescription: "Test Request Store")
         
-        let store = RequestStore()
+        let store = TaskStore()
         
         let urlString = "https://httpbin.org/get"
         let task = URLSession.shared().dataTask(with: URL(string: urlString)!) { (_, _, _) in
             
-            store.removeRequestFor(urlString: urlString)
+            store.remove(taskWithURL: urlString)
             
-            if store.containsRequestWithURL(urlString) {
+            if store.contains(taskWithURL: urlString) {
                 XCTAssert(false, "Task not removed after completion.")
             } else {
                 XCTAssert(true, "Task removed after completion.")
             }
             expectation.fulfill()
         }
-        store.addRequest(task, urlString: urlString)
+        store.add(task, urlString: urlString)
         task.resume()
         
         waitForExpectations(withTimeout: 120, handler: { (completionHandler) -> Void in })
