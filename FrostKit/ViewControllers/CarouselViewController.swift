@@ -3,7 +3,7 @@
 //  FrostKit
 //
 //  Created by James Barrow on 14/02/2015.
-//  Copyright (c) 2015 Pig on a Hill Productions. All rights reserved.
+//  Copyright © 2015-Current James Barrow - Frostlight Solutions. All rights reserved.
 //
 
 import UIKit

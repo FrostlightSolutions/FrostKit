@@ -3,7 +3,7 @@
 //  FrostKit
 //
 //  Created by James Barrow on 01/10/2014.
-//  Copyright (c) 2014-2015 James Barrow - Frostlight Solutions. All rights reserved.
+//  Copyright © 2014-Current James Barrow - Frostlight Solutions. All rights reserved.
 //
 
 import XCTest
