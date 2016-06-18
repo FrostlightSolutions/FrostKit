@@ -26,7 +26,7 @@ class DateExtensionsTests: XCTestCase {
         measure { () -> Void in
             
             let dateString = "2016-02-26"
-            let date = Date.fusDate(dateString)
+            let date = Date.fusDate(from: dateString)
             
             var components = DateComponents()
             components.calendar = Calendar.iso8601Calendar()
@@ -44,7 +44,7 @@ class DateExtensionsTests: XCTestCase {
         measure { () -> Void in
             
             let dateString = "2016-02-26T15:24:48.000000Z"
-            let date = Date.fusDate(dateString)
+            let date = Date.fusDate(from: dateString)
             
             var components = DateComponents()
             components.calendar = Calendar.iso8601Calendar()
@@ -278,10 +278,14 @@ class DateExtensionsTests: XCTestCase {
             components.day = 26
             
             let fromDate = components.date
-            components.day += daysBetween
+            if let day = components.day {
+                components.day = day + daysBetween
+            } else {
+                components.day = daysBetween
+            }
             let toDate = components.date
             
-            XCTAssert(Date.daysBetweenDates(fromDate!, toDate: toDate!) == daysBetween)
+            XCTAssert(Date.daysBetween(fromDate: fromDate!, toDate: toDate!) == daysBetween)
         }
     }
     
@@ -341,29 +345,29 @@ class DateExtensionsTests: XCTestCase {
             
             let date = components.date!
             components.day = 28
-            XCTAssert(date.isBefore(components.date!) == true)
-            XCTAssert(date.isAfter(components.date!) == false)
+            XCTAssert(date.isBefore(date: components.date!) == true)
+            XCTAssert(date.isAfter(date: components.date!) == false)
             
-            XCTAssert(date.compareToDate(components.date!, option: .Before, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .After, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .EqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .BeforeOrEqualTo, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .AfterOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .before, stripTime: false) == true)
+            XCTAssert(date.compare(date: components.date!, option: .after, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .equalTo, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .beforeOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(date: components.date!, option: .afterOrEqualTo, stripTime: false) == false)
             
             components.day = 26
-            XCTAssert(date.compareToDate(components.date!, option: .EqualTo, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .BeforeOrEqualTo, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .AfterOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(date: components.date!, option: .equalTo, stripTime: false) == true)
+            XCTAssert(date.compare(date: components.date!, option: .beforeOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(date: components.date!, option: .afterOrEqualTo, stripTime: false) == true)
             
             components.day = 11
-            XCTAssert(date.isBefore(components.date!) == false)
-            XCTAssert(date.isAfter(components.date!) == true)
+            XCTAssert(date.isBefore(date: components.date!) == false)
+            XCTAssert(date.isAfter(date: components.date!) == true)
             
-            XCTAssert(date.compareToDate(components.date!, option: .Before, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .After, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .EqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .BeforeOrEqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .AfterOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(date: components.date!, option: .before, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .after, stripTime: false) == true)
+            XCTAssert(date.compare(date: components.date!, option: .equalTo, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .beforeOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .afterOrEqualTo, stripTime: false) == true)
         }
     }
     
@@ -380,34 +384,34 @@ class DateExtensionsTests: XCTestCase {
             let date = components.date!
             components.month = 3
             components.day = 28
-            XCTAssert(date.isBefore(components.date!) == true)
-            XCTAssert(date.isAfter(components.date!) == false)
+            XCTAssert(date.isBefore(date: components.date!) == true)
+            XCTAssert(date.isAfter(date: components.date!) == false)
             
-            XCTAssert(date.compareToDate(components.date!, option: .Before, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .After, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .EqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .BeforeOrEqualTo, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .AfterOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .before, stripTime: false) == true)
+            XCTAssert(date.compare(date: components.date!, option: .after, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .equalTo, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .beforeOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(date: components.date!, option: .afterOrEqualTo, stripTime: false) == false)
             
             components.day = 26
-            XCTAssert(date.compareToDate(components.date!, option: .EqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .BeforeOrEqualTo, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .AfterOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .equalTo, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .beforeOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(date: components.date!, option: .afterOrEqualTo, stripTime: false) == false)
             
             components.month = 1
-            XCTAssert(date.compareToDate(components.date!, option: .EqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .BeforeOrEqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .AfterOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(date: components.date!, option: .equalTo, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .beforeOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .afterOrEqualTo, stripTime: false) == true)
             
             components.day = 11
-            XCTAssert(date.isBefore(components.date!) == false)
-            XCTAssert(date.isAfter(components.date!) == true)
+            XCTAssert(date.isBefore(date: components.date!) == false)
+            XCTAssert(date.isAfter(date: components.date!) == true)
             
-            XCTAssert(date.compareToDate(components.date!, option: .Before, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .After, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .EqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .BeforeOrEqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .AfterOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(date: components.date!, option: .before, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .after, stripTime: false) == true)
+            XCTAssert(date.compare(date: components.date!, option: .equalTo, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .beforeOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .afterOrEqualTo, stripTime: false) == true)
         }
     }
     
@@ -424,34 +428,34 @@ class DateExtensionsTests: XCTestCase {
             let date = components.date!
             components.year = 2017
             components.day = 28
-            XCTAssert(date.isBefore(components.date!) == true)
-            XCTAssert(date.isAfter(components.date!) == false)
+            XCTAssert(date.isBefore(date: components.date!) == true)
+            XCTAssert(date.isAfter(date: components.date!) == false)
             
-            XCTAssert(date.compareToDate(components.date!, option: .Before, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .After, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .EqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .BeforeOrEqualTo, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .AfterOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .before, stripTime: false) == true)
+            XCTAssert(date.compare(date: components.date!, option: .after, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .equalTo, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .beforeOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(date: components.date!, option: .afterOrEqualTo, stripTime: false) == false)
             
             components.day = 26
-            XCTAssert(date.compareToDate(components.date!, option: .EqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .BeforeOrEqualTo, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .AfterOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .equalTo, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .beforeOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(date: components.date!, option: .afterOrEqualTo, stripTime: false) == false)
             
             components.year = 2015
-            XCTAssert(date.compareToDate(components.date!, option: .EqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .BeforeOrEqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .AfterOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(date: components.date!, option: .equalTo, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .beforeOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .afterOrEqualTo, stripTime: false) == true)
             
             components.day = 11
-            XCTAssert(date.isBefore(components.date!) == false)
-            XCTAssert(date.isAfter(components.date!) == true)
+            XCTAssert(date.isBefore(date: components.date!) == false)
+            XCTAssert(date.isAfter(date: components.date!) == true)
             
-            XCTAssert(date.compareToDate(components.date!, option: .Before, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .After, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .EqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .BeforeOrEqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .AfterOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(date: components.date!, option: .before, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .after, stripTime: false) == true)
+            XCTAssert(date.compare(date: components.date!, option: .equalTo, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .beforeOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(date: components.date!, option: .afterOrEqualTo, stripTime: false) == true)
         }
     }
     
@@ -489,11 +493,11 @@ class DateExtensionsTests: XCTestCase {
             components.day = 26
             let date = components.date!
             
-            XCTAssert(date.dateByAddingDays(0) == date)
-            components.day += 3
-            XCTAssert(date.dateByAddingDays(3) == components.date)
-            components.day -= 5
-            XCTAssert(date.dateByAddingDays(-2) == components.date)
+            XCTAssert(date.dateByAdding(days: 0) == date)
+            components.day! += 3
+            XCTAssert(date.dateByAdding(days: 3) == components.date)
+            components.day! -= 5
+            XCTAssert(date.dateByAdding(days: -2) == components.date)
         }
     }
     
@@ -537,11 +541,11 @@ class DateExtensionsTests: XCTestCase {
         components.second = 43
         let date = components.date!
         
-        XCTAssert(date.dateTimeShortString == DateFormatter.localizedStringFromDate(date, dateStyle: .ShortStyle, timeStyle: .ShortStyle))
-        XCTAssert(date.dateShortString == DateFormatter.localizedStringFromDate(date, dateStyle: .ShortStyle, timeStyle: .NoStyle))
-        XCTAssert(date.dateMediumString == DateFormatter.localizedStringFromDate(date, dateStyle: .MediumStyle, timeStyle: .NoStyle))
-        XCTAssert(date.dateFullString == DateFormatter.localizedStringFromDate(date, dateStyle: .FullStyle, timeStyle: .NoStyle))
-        XCTAssert(date.timeShortString == DateFormatter.localizedStringFromDate(date, dateStyle: .NoStyle, timeStyle: .ShortStyle))
+        XCTAssert(date.dateTimeShortString == DateFormatter.localizedString(from: date, dateStyle: .shortStyle, timeStyle: .shortStyle))
+        XCTAssert(date.dateShortString == DateFormatter.localizedString(from: date, dateStyle: .shortStyle, timeStyle: .noStyle))
+        XCTAssert(date.dateMediumString == DateFormatter.localizedString(from: date, dateStyle: .mediumStyle, timeStyle: .noStyle))
+        XCTAssert(date.dateFullString == DateFormatter.localizedString(from: date, dateStyle: .fullStyle, timeStyle: .noStyle))
+        XCTAssert(date.timeShortString == DateFormatter.localizedString(from: date, dateStyle: .noStyle, timeStyle: .shortStyle))
         XCTAssert(date.fusDateString == "2016-02-26")
         XCTAssert(date.fusDateTimeString == "2016-02-26T20:12:43.000000Z")
         XCTAssert(date.dayString == "Friday")

@@ -26,23 +26,23 @@ class BundleExtensionsTests: XCTestCase {
     func testBundleAppVersion() {
         
         let version = bundle.objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
-        measureBlock { () -> Void in
-            XCTAssert(Bundle.appVersion(self.bundle) == version)
+        measure { () -> Void in
+            XCTAssert(Bundle.appVersion(bundle: self.bundle) == version)
         }
     }
     
     func testBundleAppBuildNumber() {
         
         let buildNumber = bundle.objectForInfoDictionaryKey("CFBundleVersion") as! String
-        measureBlock { () -> Void in
-            XCTAssert(Bundle.appBuildNumber(self.bundle) == buildNumber)
+        measure { () -> Void in
+            XCTAssert(Bundle.appBuildNumber(bundle: self.bundle) == buildNumber)
         }
     }
     
     func testBundleAppName() {
         
-        measureBlock { () -> Void in
-            XCTAssert(Bundle.appName(self.bundle) == "FrostKit")
+        measure { () -> Void in
+            XCTAssert(Bundle.appName(bundle: self.bundle) == "FrostKit")
         }
     }
     

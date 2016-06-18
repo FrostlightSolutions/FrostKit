@@ -126,7 +126,7 @@ class MapControllerTests: XCTestCase {
         measure { () -> Void in
             
             let annotation = Annotation()
-            annotation.updateAddress(self.address)
+            annotation.update(address: self.address)
             if annotation.address == self.address {
                 XCTAssert(true, "Pass")
             } else {

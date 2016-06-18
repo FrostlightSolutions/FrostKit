@@ -27,7 +27,7 @@ class RequestStoreTests: XCTestCase {
         
         let urlString = "https://httpbin.org/get"
         let task = URLSession.shared().dataTask(with: URL(string: urlString)!)
-        store.addRequest(task, urlString: urlString)
+        store.addRequest(request: task, urlString: urlString)
         
         if store.containsRequestWithURL(urlString) {
             XCTAssert(true, "Task added to the store.")

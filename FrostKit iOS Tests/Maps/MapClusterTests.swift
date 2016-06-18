@@ -42,7 +42,7 @@ class MapClusterTests: XCTestCase {
             let address = Address(dictionary: addressDictionary)
             addresses.append(address)
         }
-        mapController.plotAddresses(addresses)
+        mapController.plot(addresses: addresses)
     }
     
     override func tearDown() {
@@ -52,7 +52,7 @@ class MapClusterTests: XCTestCase {
     
     func testClusterAnnotationsCalculations() {
         
-        self.measure {
+        measure {
             
             let expectation = self.expectation(withDescription: "calculateAndUpdateClusterAnnotations")
             
