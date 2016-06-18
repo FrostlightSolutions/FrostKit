@@ -11,7 +11,6 @@ import AppKit
 #else
 import UIKit
 #endif
-import Alamofire
 
 public class AppStoreHelper: NSObject {
     
@@ -63,42 +62,63 @@ public class AppStoreHelper: NSObject {
     */
     public func updateAppStoreData(completed: ((NSError?) -> Void)? = nil) {
         
-        if let appStoreID = FrostKit.appStoreID {
+        guard let appStoreID = FrostKit.appStoreID else {
+            completed?(NSError.errorWithMessage("No app store ID set."))
+            return
+        }
+        
+        var urlString = "https://itunes.apple.com"
+        if let code = NSLocale.autoupdatingCurrentLocale().objectForKey(NSLocaleCountryCode) as? String {
+            urlString += "/\(code.lowercaseString)"
+        }
+        urlString += "/lookup?id=\(appStoreID)"
+        
+        guard let url = NSURL(string: urlString) else {
+            completed?(NSError.errorWithMessage("URL could not be created from string: \(urlString)"))
+            return
+        }
+        
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithURL(url) { (data, _, error) in
             
-            var url = "https://itunes.apple.com"
-            if let code = NSLocale.autoupdatingCurrentLocale().objectForKey(NSLocaleCountryCode) as? String {
-                url += "/\(code.lowercaseString)"
-            }
-            url += "/lookup"
-            
-            Alamofire.request(.GET, url, parameters: ["id": appStoreID], encoding: .URL, headers: nil).responseJSON { (response) -> Void in
+            if let anError = error {
+                completed?(anError)
+            } else if let jsonData = data {
                 
-                if let json = response.result.value as? [String: AnyObject], results = json["results"] as? [[String: AnyObject]], appDetails = results.first {
-                    
-                    self.version = appDetails["version"] as? String
-                    self.name = appDetails["trackName"] as? String
-                    self.seller = appDetails["sellerName"] as? String
-                    self.appDescription = appDetails["description"] as? String
-                    self.price = appDetails["price"] as? Double
-                    self.currency = appDetails["currency"] as? String
-                    self.formattedPrice = appDetails["formattedPrice"] as? String
-                    self.fileSize = appDetails["fileSizeBytes"] as? String
-                    
-                    if let releaseDateString = appDetails["releaseDate"] as? String {
-                        self.releaseDate = NSDate.iso8601Date(releaseDateString)
-                    } else {
-                        self.releaseDate = nil
-                    }
-                    
-                    self.bundleId = appDetails["bundleId"] as? String
+                guard let json = try? NSJSONSerialization.JSONObjectWithData(jsonData, options: []) as? [String: AnyObject],
+                    results = json?["results"] as? [[String: AnyObject]],
+                    appDetails = results.first else {
+                    completed?(NSError.errorWithMessage("Could not parse JSON from data."))
+                    return
                 }
                 
-                completed?(response.result.error)
+                NSLog("JSON: \(json)")
+                NSLog("App Details: \(appDetails)")
+                
+                self.version = appDetails["version"] as? String
+                self.name = appDetails["trackName"] as? String
+                self.seller = appDetails["sellerName"] as? String
+                self.appDescription = appDetails["description"] as? String
+                self.price = appDetails["price"] as? Double
+                self.currency = appDetails["currency"] as? String
+                self.formattedPrice = appDetails["formattedPrice"] as? String
+                self.fileSize = appDetails["fileSizeBytes"] as? String
+                
+                if let releaseDateString = appDetails["releaseDate"] as? String {
+                    self.releaseDate = NSDate.iso8601Date(releaseDateString)
+                } else {
+                    self.releaseDate = nil
+                }
+                
+                self.bundleId = appDetails["bundleId"] as? String
+                
+                completed?(nil)
+                
+            } else {
+                completed?(NSError.errorWithMessage("No data returned."))
             }
-            
-        } else {
-            completed?(NSError.errorWithMessage("No app store ID set."))
         }
+        task.resume()
     }
     
     /**
