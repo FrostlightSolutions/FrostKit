@@ -3,7 +3,7 @@
 //  FrostKit
 //
 //  Created by James Barrow on 13/04/2016.
-//  Copyright © 2016 James Barrow - Frostlight Solutions. All rights reserved.
+//  Copyright © 2016-Current James Barrow - Frostlight Solutions. All rights reserved.
 //
 
 import UIKit
@@ -12,7 +12,7 @@ import MapKit
 ///
 /// An object that contains details on a address to the plot on the map view, along with other data such as name and addressString.
 ///
-public class Address: NSObject {
+public class Address {
     
     /// The ID of the addres object.
     public var objectID: String?
@@ -39,16 +39,11 @@ public class Address: NSObject {
     /// The address string of the object.
     public var addressString = ""
     /// Returns a string that represents the contents of the receiving class.
-    override public var description: String {
+    public var description: String {
         return "<Latitude: \(latitude) Longitude: \(longitude) Address: \(addressString)>"
     }
-    override public var hash: Int {
-        return Int(latitude) ^ Int(longitude)
-    }
     
-    public override init() {
-        super.init()
-    }
+    internal init() { }
     
     /**
      A convenience initialiser for creating an address object from a dictionary returned from a FUS based system.
@@ -100,26 +95,20 @@ public class Address: NSObject {
         return adresses
     }
     
-    // MARK: - Comparison Methods
+}
+
+extension Address: Hashable {
     
-    public func isEqualToAddress(_ object: Address?) -> Bool {
-        if let address = object {
-            
-            let haveEqualLatitude = self.latitude == address.latitude
-            let haveEqualLongitude = self.longitude == address.longitude
-            let haveEqualName = self.name == address.name
-            let haveEqualAddressString = self.addressString == address.addressString
-            
-            return haveEqualLatitude && haveEqualLongitude && haveEqualName && haveEqualAddressString
-        }
-        return false
+    public var hashValue: Int {
+        return Int(latitude) ^ Int(longitude)
     }
+}
+
+public func == (lhs: Address, rhs: Address) -> Bool {
     
-    public override func isEqual(_ object: AnyObject?) -> Bool {
-        if let address = object as? Address {
-            return self.isEqualToAddress(address)
-        }
-        return false
+    if lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude &&
+        lhs.name == rhs.name && lhs.addressString == rhs.addressString {
+        return true
     }
-    
+    return false
 }

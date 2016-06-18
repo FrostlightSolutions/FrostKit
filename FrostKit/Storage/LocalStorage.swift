@@ -3,7 +3,7 @@
 //  FrostKit
 //
 //  Created by James Barrow on 30/09/2014.
-//  Copyright (c) 2014-2015 James Barrow - Frostlight Solutions. All rights reserved.
+//  Copyright © 2014-Current James Barrow - Frostlight Solutions. All rights reserved.
 //
 
 import Foundation
@@ -41,7 +41,7 @@ public enum DirectoryLocation: UInt {
 /// NOTE: Anything stored in Caches has the ability to be deleted when the app is not active (never during),
 /// so make sure only data that can be re-downloaded get stored here.
 ///
-public class LocalStorage: NSObject {
+public class LocalStorage {
     
     // MARK: - Paths and URL Methods
     
@@ -77,7 +77,7 @@ public class LocalStorage: NSObject {
     
     - returns: Documents directory URL.
     */
-    private class func documentsURL() -> URL {
+    public class func documentsURL() -> URL {
         return FileManager.default().urlsForDirectory(.documentDirectory, inDomains: .userDomainMask)[0]
     }
     
@@ -86,8 +86,19 @@ public class LocalStorage: NSObject {
     
     - returns: Caches directory URL.
     */
-    private class func cachesURL() -> URL {
+    public class func cachesURL() -> URL {
         return FileManager.default().urlsForDirectory(.cachesDirectory, inDomains: .userDomainMask)[0]
+    }
+    
+    /**
+     URL for the shared container if available.
+     
+     - parameter groupIdentifier: The group identifier for the shared container.
+     
+     - returns: Shared container URL, or `nil` if not available.
+     */
+    public class func sharedContainerURL(groupIdentifier: String) -> NSURL? {
+        return NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(groupIdentifier)
     }
     
     /**

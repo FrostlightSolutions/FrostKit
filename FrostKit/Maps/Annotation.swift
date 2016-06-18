@@ -3,7 +3,7 @@
 //  FrostKit
 //
 //  Created by James Barrow on 13/04/2016.
-//  Copyright © 2016 James Barrow - Frostlight Solutions. All rights reserved.
+//  Copyright © 2016-Current James Barrow - Frostlight Solutions. All rights reserved.
 //
 
 import UIKit
@@ -15,10 +15,10 @@ import MapKit
 public class Annotation: NSObject, MKAnnotation {
     
     /// The address object for the annotation.
-    public lazy var address = Address()
+    public var address: Address?
     /// The coordinate of the address.
     public var coordinate: CLLocationCoordinate2D {
-        return address.coordinate
+        return address?.coordinate ?? CLLocationCoordinate2D()
     }
     /// The name of the address.
     public var title: String? {
@@ -31,14 +31,14 @@ public class Annotation: NSObject, MKAnnotation {
             }
             return "\(containdedAnnotations.count) \(tense)"
         }
-        return address.name
+        return address?.name
     }
     /// The address string of the address.
     public var subtitle: String? {
         if let containdedAnnotations = self.containdedAnnotations where containdedAnnotations.count > 0 {
             return ""
         }
-        return address.addressString
+        return address?.addressString
     }
     // If the annotation is a clustered annotation, this value holds all the annotations it represents.
     public var containdedAnnotations: [Annotation]? {
@@ -78,7 +78,7 @@ public class Annotation: NSObject, MKAnnotation {
      - parameter address: The address to update the annotation with.
      */
     public func update(address: Address) {
-        if self.address.isEqualToAddress(address) == false {
+        if self.address != address {
             self.address = address
         }
     }

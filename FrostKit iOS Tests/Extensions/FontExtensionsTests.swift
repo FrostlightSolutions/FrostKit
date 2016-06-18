@@ -3,11 +3,11 @@
 //  FrostKit
 //
 //  Created by James Barrow on 26/02/2016.
-//  Copyright © 2016 James Barrow - Frostlight Solutions. All rights reserved.
+//  Copyright © 2016-Current James Barrow - Frostlight Solutions. All rights reserved.
 //
 
 import XCTest
-import FrostKit
+@testable import FrostKit
 
 class FontExtensionsTests: XCTestCase {
 

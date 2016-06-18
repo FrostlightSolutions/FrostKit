@@ -3,7 +3,7 @@
 //  FrostKit
 //
 //  Created by James Barrow on 07/02/2015.
-//  Copyright (c) 2015 Frostlight Solutions. All rights reserved.
+//  Copyright © 2015-Current James Barrow - Frostlight Solutions. All rights reserved.
 //
 
 import UIKit
@@ -65,19 +65,17 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
     */
     public func objectAt(_ indexPath: IndexPath) -> AnyObject? {
         if let searchBar = self.searchBar {
-            var array: [AnyObject]?
             switch searchBar.selectedScopeButtonIndex {
             case 0:
-                array = self.plottedSearchResults
-            case 1:
-                array = self.locationSearchResults
-            default:
-                break
-            }
-            if let searchResults = array {
-                if indexPath.row < searchResults.count {
+                if let searchResults = self.plottedSearchResults where indexPath.row < searchResults.count {
                     return searchResults[indexPath.row]
                 }
+            case 1:
+                if let searchResults = self.locationSearchResults where indexPath.row < searchResults.count {
+                    return searchResults[indexPath.row]
+                }
+            default:
+                break
             }
         }
         return nil

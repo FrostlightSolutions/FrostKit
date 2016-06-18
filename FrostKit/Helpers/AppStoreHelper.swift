@@ -3,7 +3,7 @@
 //  FrostKit
 //
 //  Created by James Barrow on 07/11/2015.
-//  Copyright © 2015 James Barrow - Frostlight Solutions. All rights reserved.
+//  Copyright © 2015-Current James Barrow - Frostlight Solutions. All rights reserved.
 //
 
 #if os(OSX)
@@ -11,15 +11,13 @@ import AppKit
 #else
 import UIKit
 #endif
-// TODO: Uncomment when building with Swift 3 version of Alamofire
-//import Alamofire
 
-public class AppStoreHelper: NSObject {
+public class AppStoreHelper {
     
     public enum UpdateStatus: Int {
-        case unknown = -1
-        case updateNeeded
-        case upToDate
+        case Unknown = -1
+        case UpdateNeeded
+        case UpToDate
     }
     
     public static let shared = AppStoreHelper()
@@ -39,7 +37,7 @@ public class AppStoreHelper: NSObject {
             if let fileSize = self.fileSize {
                 
                 if let byteCount = Int64(fileSize) {
-                    formattedFileSize = ByteCountFormatter.string(fromByteCount: byteCount, countStyle: .binary)
+                    formattedFileSize = NSByteCountFormatter.stringFromByteCount(byteCount, countStyle: .Binary)
                 } else {
                     formattedFileSize = nil
                 }
@@ -52,26 +50,6 @@ public class AppStoreHelper: NSObject {
     public var formattedFileSize: String?
     public var releaseDate: NSDate?
     private var bundleId: String?
-    /**
-     If the app is up to date then `upToDate` is returned, `updateNeeded` if the local version is behind the app store version or `unknown` if data have not been updated and parsed from the app store.
- 
-     This will only work if an update with the app store has been made successfully and the `version` and `bundleId` values have been parsed.
-     */
-    public var appUpdateNeeded: UpdateStatus {
-        
-        if let appStoreVersion = self.version, bundleId = self.bundleId, bundle = Bundle(identifier: bundleId) {
-            
-            let localVersion = Bundle.appVersion(bundle: bundle)
-            let comparisonResult = localVersion.compare(appStoreVersion, options: .numericSearch)
-            if comparisonResult == .orderedAscending {
-                return .updateNeeded
-            } else {
-                return .upToDate
-            }
-        }
-        
-        return .unknown
-    }
     
     // MARK: - Updates
     
@@ -83,43 +61,87 @@ public class AppStoreHelper: NSObject {
     - parameter completed: Returned when to update request is completed and returns an error is it failed.
     */
     public func updateAppStoreData(completed: ((NSError?) -> Void)? = nil) {
-
-        // TODO: Uncomment when building with Swift 3 version of Alamofire
-//        if let appStoreID = FrostKit.appStoreID {
-//            
-//            var url = "https://itunes.apple.com"
-//            if let code = Locale.autoupdatingCurrent().object(forKey: .countryCode) as? String {
-//                url += "/\(code.lowercased())"
-//            }
-//            url += "/lookup"
-//            
-//            Alamofire.request(.GET, url, parameters: ["id": appStoreID], encoding: .URL, headers: nil).responseJSON { (response) -> Void in
-//                
-//                if let json = response.result.value as? [String: AnyObject], results = json["results"] as? [[String: AnyObject]], appDetails = results.first {
-//                    
-//                    self.version = appDetails["version"] as? String
-//                    self.name = appDetails["trackName"] as? String
-//                    self.seller = appDetails["sellerName"] as? String
-//                    self.appDescription = appDetails["description"] as? String
-//                    self.price = appDetails["price"] as? Double
-//                    self.currency = appDetails["currency"] as? String
-//                    self.formattedPrice = appDetails["formattedPrice"] as? String
-//                    self.fileSize = appDetails["fileSizeBytes"] as? String
-//                    
-//                    if let releaseDateString = appDetails["releaseDate"] as? String {
-//                        self.releaseDate = NSDate.iso8601Date(from: releaseDateString)
-//                    } else {
-//                        self.releaseDate = nil
-//                    }
-//                    
-//                    self.bundleId = appDetails["bundleId"] as? String
-//                }
-//                
-//                completed?(response.result.error)
-//            }
-//            
-//        } else {
-//            completed?(NSError.error(withMessage: "No app store ID set."))
-//        }
+        
+        guard let appStoreID = FrostKit.appStoreID else {
+            completed?(NSError.errorWithMessage("No app store ID set."))
+            return
+        }
+        
+        var urlString = "https://itunes.apple.com"
+        if let code = NSLocale.autoupdatingCurrentLocale().objectForKey(NSLocaleCountryCode) as? String {
+            urlString += "/\(code.lowercaseString)"
+        }
+        urlString += "/lookup?id=\(appStoreID)"
+        
+        guard let url = NSURL(string: urlString) else {
+            completed?(NSError.errorWithMessage("URL could not be created from string: \(urlString)"))
+            return
+        }
+        
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithURL(url) { (data, _, error) in
+            
+            if let anError = error {
+                completed?(anError)
+            } else if let jsonData = data {
+                
+                guard let json = try? NSJSONSerialization.JSONObjectWithData(jsonData, options: []) as? [String: AnyObject],
+                    results = json?["results"] as? [[String: AnyObject]],
+                    appDetails = results.first else {
+                    completed?(NSError.errorWithMessage("Could not parse JSON from data."))
+                    return
+                }
+                
+                NSLog("JSON: \(json)")
+                NSLog("App Details: \(appDetails)")
+                
+                self.version = appDetails["version"] as? String
+                self.name = appDetails["trackName"] as? String
+                self.seller = appDetails["sellerName"] as? String
+                self.appDescription = appDetails["description"] as? String
+                self.price = appDetails["price"] as? Double
+                self.currency = appDetails["currency"] as? String
+                self.formattedPrice = appDetails["formattedPrice"] as? String
+                self.fileSize = appDetails["fileSizeBytes"] as? String
+                
+                if let releaseDateString = appDetails["releaseDate"] as? String {
+                    self.releaseDate = NSDate.iso8601Date(releaseDateString)
+                } else {
+                    self.releaseDate = nil
+                }
+                
+                self.bundleId = appDetails["bundleId"] as? String
+                
+                completed?(nil)
+                
+            } else {
+                completed?(NSError.errorWithMessage("No data returned."))
+            }
+        }
+        task.resume()
     }
+    
+    /**
+     Retruns `true` if the needs updating comparing the local app version number with the one recived from the app store.
+     
+     This will only work if an update with the app store has been made successfully and the `version` and `bundleId` values have been parsed.
+     
+     - returns: If the app is up to date then `UpToDate` is returned, `UpdateNeeded` if the local version is behind the app store version or `Unknown` if data have not been updated and parsed from the app store.
+     */
+    public func appUpdateNeeded() -> UpdateStatus {
+        
+        if let appStoreVersion = self.version, bundleId = self.bundleId, bundle = NSBundle(identifier: bundleId) {
+            
+            let localVersion = NSBundle.appVersion(bundle)
+            let comparisonResult = localVersion.compare(appStoreVersion, options: .NumericSearch)
+            if comparisonResult == .OrderedAscending {
+                return .UpdateNeeded
+            } else {
+                return .UpToDate
+            }
+        }
+        
+        return .Unknown
+    }
+    
 }

@@ -3,7 +3,7 @@
 //  FrostKit
 //
 //  Created by James Barrow on 01/10/2014.
-//  Copyright (c) 2014-2015 James Barrow - Frostlight Solutions. All rights reserved.
+//  Copyright © 2014-Current James Barrow - Frostlight Solutions. All rights reserved.
 //
 
 import Foundation
@@ -14,7 +14,7 @@ import Foundation
 /// 
 /// To activate this class, call `checkContentMetadata()` in `-application:willFinishLaunchingWithOptions:` to check all the managed files.
 ///
-public class ContentManager: NSObject {
+public class ContentManager {
     
     // A dictioary holding the metadata for all managed objects, where the key is an absolute path and the value is the date.
     private lazy var contentMetadata = [String: NSDate]()

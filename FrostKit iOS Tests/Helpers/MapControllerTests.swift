@@ -3,12 +3,12 @@
 //  FrostKit
 //
 //  Created by James Barrow on 06/02/2015.
-//  Copyright (c) 2015 Frostlight Solutions. All rights reserved.
+//  Copyright © 2015-Current James Barrow - Frostlight Solutions. All rights reserved.
 //
 
 import XCTest
-import FrostKit
 import CoreLocation
+@testable import FrostKit
 
 class MapControllerTests: XCTestCase {
     
@@ -113,7 +113,7 @@ class MapControllerTests: XCTestCase {
         
         measure { () -> Void in
             
-            if self.annotation.address.isEqualToAddress(self.address) {
+            if self.annotation.address == self.address {
                 XCTAssert(true, "Pass")
             } else {
                 XCTAssert(false, "Failed! Annotation address is '\(self.address.description)' but should be '\(self.address.description)'.")
@@ -127,7 +127,7 @@ class MapControllerTests: XCTestCase {
             
             let annotation = Annotation()
             annotation.updateAddress(self.address)
-            if annotation.address.isEqualToAddress(self.address) {
+            if annotation.address == self.address {
                 XCTAssert(true, "Pass")
             } else {
                 XCTAssert(false, "Failed! Annotation address is '\(self.address.description)' but should be '\(self.address.description)'.")

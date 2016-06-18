@@ -3,7 +3,7 @@
 //  FrostKit
 //
 //  Created by James Barrow on 03/10/2014.
-//  Copyright (c) 2014-2015 James Barrow - Frostlight Solutions. All rights reserved.
+//  Copyright © 2014-Current James Barrow - Frostlight Solutions. All rights reserved.
 //
 
 import Foundation
@@ -35,11 +35,9 @@ public let NetworkRequestDidBeginNotification = "com.FrostKit.activityIndicator.
 public let NetworkRequestDidCompleteNotification = "com.FrostKit.activityIndicator.request.complete"
 // swiftlint:enable variable_name
 
-#if os(iOS) || os(tvOS) || os(OSX)
 internal func FKLocalizedString(key: String, comment: String = "") -> String {
     return NSLocalizedString(key, bundle: Bundle(for: FrostKit.self), comment: comment)
 }
-#endif
 
 public class FrostKit {
     

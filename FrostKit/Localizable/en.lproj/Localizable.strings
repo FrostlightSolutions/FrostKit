@@ -13,6 +13,13 @@
 /* DataUpdater */
 "NO_CONTENT_FOUND" = "No Content Found";
 
+/* TableInterfaceController */
+
+"NO_DATA" = "No Data";
+"MORE_" = "More...";
+"LOADING_" = "Loading...";
+"RELOAD" = "Reload";
+
 /* WebViewController */
 
 "OPEN_IN_SAFARI" = "Open in Safari";
