@@ -25,7 +25,7 @@ public class CoreDataController: NSObject {
             return _fetchedResultsController!
         }
         
-        let context = DataProxy.shared.managedObjectContextMain!
+        let context = CoreDataProxy.shared.managedObjectContextMain!
         
         let fetchRequest = NSFetchRequest()
         // Edit the entity name as appropriate.

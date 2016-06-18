@@ -1,5 +1,5 @@
 //
-//  DataProxy.swift
+//  CoreDataProxy.swift
 //  FrostKit
 //
 //  Created by James Barrow on 18/06/2016.
@@ -9,12 +9,12 @@
 import Foundation
 import CoreData
 
-public class DataProxy {
+public class CoreDataProxy {
     
     public var storeName: String! { return nil }
     public var groupIdentifier: String? { return nil }
     public var modelURL: NSURL! { return nil }
-    public static let shared = DataProxy()
+    public static let shared = CoreDataProxy()
     
     // MARK: - Core Data stack
     
