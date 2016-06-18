@@ -82,6 +82,8 @@
 		1844D1D71D15F27D00E87EA8 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1D51D15F27D00E87EA8 /* CoreDataController.swift */; };
 		1844D1D81D15F27D00E87EA8 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1D51D15F27D00E87EA8 /* CoreDataController.swift */; };
 		1844D1D91D15F27D00E87EA8 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1D51D15F27D00E87EA8 /* CoreDataController.swift */; };
+		1844D1DB1D15F31800E87EA8 /* CoreDataCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1DA1D15F31800E87EA8 /* CoreDataCollectionViewController.swift */; };
+		1844D1DC1D15F31800E87EA8 /* CoreDataCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1DA1D15F31800E87EA8 /* CoreDataCollectionViewController.swift */; };
 		184625051C84CFB00098E969 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EC19DCBB5B008A1506 /* FontExtensions.swift */; };
 		184625071C84D1390098E969 /* ColorExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AC87E81C77F48200426776 /* ColorExtensionsTest.swift */; };
 		184625091C84D1A00098E969 /* FrostKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 18E5459D1C77E53F00637E85 /* FrostKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -260,6 +262,7 @@
 		18410C311C810EB300D2B308 /* DataExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtensionsTests.swift; sourceTree = "<group>"; };
 		1844D1D01D15F26E00E87EA8 /* CoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataTableViewController.swift; sourceTree = "<group>"; };
 		1844D1D51D15F27D00E87EA8 /* CoreDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
+		1844D1DA1D15F31800E87EA8 /* CoreDataCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataCollectionViewController.swift; sourceTree = "<group>"; };
 		18497BE31D15BA28009A717F /* RequestStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestStoreTests.swift; sourceTree = "<group>"; };
 		184E07921A8901A10074FD25 /* MBProgressHUDExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBProgressHUDExtensions.swift; sourceTree = "<group>"; };
 		184E07931A8901A10074FD25 /* ParseAddressExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseAddressExtensions.swift; sourceTree = "<group>"; };
@@ -413,6 +416,7 @@
 			children = (
 				1844D1D51D15F27D00E87EA8 /* CoreDataController.swift */,
 				1844D1D01D15F26E00E87EA8 /* CoreDataTableViewController.swift */,
+				1844D1DA1D15F31800E87EA8 /* CoreDataCollectionViewController.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -1053,6 +1057,7 @@
 				1826B0701BD906F200DA1669 /* FontConstants.swift in Sources */,
 				1826B0621BD906B400DA1669 /* ImageView.swift in Sources */,
 				1826B06E1BD906E200DA1669 /* ImageExtensions.swift in Sources */,
+				1844D1DC1D15F31800E87EA8 /* CoreDataCollectionViewController.swift in Sources */,
 				1826B06A1BD906E200DA1669 /* DataExtensions.swift in Sources */,
 				1876617A1BEEA0C900C82769 /* AppStoreHelper.swift in Sources */,
 				1826B06F1BD906F200DA1669 /* CustomFonts.swift in Sources */,
@@ -1122,6 +1127,7 @@
 				18DC212B19DEA21000FEB57E /* ViewControllerExtensions.swift in Sources */,
 				18EA123F19DC79F100FD858D /* DataExtensions.swift in Sources */,
 				18839B4719DA27AE00760157 /* SocialHelper.swift in Sources */,
+				1844D1DB1D15F31800E87EA8 /* CoreDataCollectionViewController.swift in Sources */,
 				182884511CBEB12200331A54 /* MapSearchViewController.swift in Sources */,
 				1811D7BA1A0AD1CA00E8B873 /* WebViewController.swift in Sources */,
 				18C0066819DB762600811755 /* ErrorExtensions.swift in Sources */,

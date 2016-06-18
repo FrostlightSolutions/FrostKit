@@ -1,15 +1,15 @@
 //
-//  CoreDataTableViewController.swift
+//  CoreDataCollectionViewController.swift
 //  FrostKit
 //
 //  Created by James Barrow on 18/06/2016.
-//  Copyright (c) 2015-Current Pig on a Hill Productions. All rights reserved.
+//  Copyright © 2016 James Barrow - Frostlight Solutions. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-public class CoreDataTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+public class CoreDataCollectionViewController: UICollectionViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Properties
     
@@ -24,8 +24,8 @@ public class CoreDataTableViewController: UITableViewController, NSFetchedResult
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-
-        clearsSelectionOnViewWillAppear = true
+        
+        clearsSelectionOnViewWillAppear = false
     }
     
     override public func viewDidAppear(animated: Bool) {
@@ -39,13 +39,13 @@ public class CoreDataTableViewController: UITableViewController, NSFetchedResult
         }
     }
     
-    // MARK: - Table view
+    // MARK: Collection view
     
-    override public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override public func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return fetchedResultsController.sections?.count ?? 0
     }
     
-    override public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override public func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if let sections = fetchedResultsController.sections where sections.count > section {
             
@@ -60,7 +60,7 @@ public class CoreDataTableViewController: UITableViewController, NSFetchedResult
     // MARK: - Fetched results controller
     
     public func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        tableView.reloadData()
+        collectionView?.reloadData()
     }
-
+    
 }
