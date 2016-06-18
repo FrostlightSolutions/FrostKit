@@ -9,7 +9,7 @@
 import Foundation
 
 ///
-/// Extention functions for NSTimeZone
+/// Extention functions for TimeZone
 ///
 extension TimeZone {
     

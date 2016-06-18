@@ -9,7 +9,7 @@
 import Foundation
 
 ///
-/// Extention functions for NSCalendar
+/// Extention functions for Calendar
 ///
 extension Calendar {
     

@@ -13,7 +13,7 @@ import UIKit
 #endif
 
 ///
-/// Extention functions for UIFont
+/// Extention functions for UIFont & NSFont
 ///
 extension Font {
     

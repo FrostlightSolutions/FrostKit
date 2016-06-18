@@ -9,7 +9,7 @@
 import Foundation
 
 ///
-/// Extention functions for NSBundle
+/// Extention functions for Bundle
 ///
 extension Bundle {
     
