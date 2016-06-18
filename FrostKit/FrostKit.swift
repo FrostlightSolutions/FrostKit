@@ -35,11 +35,9 @@ public let NetworkRequestDidBeginNotification = "com.FrostKit.activityIndicator.
 public let NetworkRequestDidCompleteNotification = "com.FrostKit.activityIndicator.request.complete"
 // swiftlint:enable variable_name
 
-#if os(iOS) || os(tvOS) || os(OSX)
 internal func FKLocalizedString(key: String, comment: String = "") -> String {
     return NSLocalizedString(key, bundle: NSBundle(forClass: FrostKit.self), comment: comment)
 }
-#endif
 
 public class FrostKit {
     
