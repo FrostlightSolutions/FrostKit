@@ -77,7 +77,7 @@ public class LocalStorage: NSObject {
     
     - returns: Documents directory URL.
     */
-    private class func documentsURL() -> NSURL {
+    public class func documentsURL() -> NSURL {
         return NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0] as NSURL
     }
     
@@ -86,8 +86,19 @@ public class LocalStorage: NSObject {
     
     - returns: Caches directory URL.
     */
-    private class func cachesURL() -> NSURL {
+    public class func cachesURL() -> NSURL {
         return NSFileManager.defaultManager().URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask)[0] as NSURL
+    }
+    
+    /**
+     URL for the shared container if available.
+     
+     - parameter groupIdentifier: The group identifier for the shared container.
+     
+     - returns: Shared container URL, or `nil` if not available.
+     */
+    public class func sharedContainerURL(groupIdentifier: String) -> NSURL? {
+        return NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(groupIdentifier)
     }
     
     /**
