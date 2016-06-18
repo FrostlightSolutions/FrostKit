@@ -97,8 +97,8 @@ public class LocalStorage {
      
      - returns: Shared container URL, or `nil` if not available.
      */
-    public class func sharedContainerURL(groupIdentifier: String) -> NSURL? {
-        return NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(groupIdentifier)
+    public class func sharedContainerURL(groupIdentifier: String) -> URL? {
+        return FileManager.default().containerURLForSecurityApplicationGroupIdentifier(groupIdentifier)
     }
     
     /**

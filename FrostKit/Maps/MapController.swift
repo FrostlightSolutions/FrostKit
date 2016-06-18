@@ -873,10 +873,10 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     public func searchAddresses(searchString: String) -> [Address] {
         return addresses.filter { (address) -> Bool in
             
-            let options: NSStringCompareOptions = [.CaseInsensitiveSearch, .DiacriticInsensitiveSearch]
+            let options: NSString.CompareOptions = [.caseInsensitiveSearch, .diacriticInsensitiveSearch]
             
-            let nameRange = address.name.rangeOfString(searchString, options: options)
-            let addressStringRange = address.addressString.rangeOfString(searchString, options: options)
+            let nameRange = address.name.range(of: searchString, options: options)
+            let addressStringRange = address.addressString.range(of: searchString, options: options)
             
             return nameRange != nil || addressStringRange != nil
         }

@@ -17,19 +17,19 @@ public class CoreDataController: NSObject {
     public var entityName: String! { return nil }
     public var sectionNameKeyPath: String? { return nil }
     public var cacheName: String? { return nil }
-    public var sortDescriptors: [NSSortDescriptor] { return Array<NSSortDescriptor>() }
-    public var predicate: NSPredicate? { return nil }
-    private var _fetchedResultsController: NSFetchedResultsController?
-    public var fetchedResultsController: NSFetchedResultsController {
+    public var sortDescriptors: [SortDescriptor] { return Array<SortDescriptor>() }
+    public var predicate: Predicate? { return nil }
+    private var _fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
+    public var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> {
         if _fetchedResultsController != nil {
             return _fetchedResultsController!
         }
         
         let context = CoreDataProxy.shared.managedObjectContextMain!
         
-        let fetchRequest = NSFetchRequest()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         // Edit the entity name as appropriate.
-        let entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: context)
+        let entity = NSEntityDescription.entity(forEntityName: entityName, in: context)
         fetchRequest.entity = entity
         
         // Set the batch size to a suitable number.

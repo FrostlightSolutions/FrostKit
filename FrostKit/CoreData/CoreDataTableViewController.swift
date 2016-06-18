@@ -16,7 +16,7 @@ public class CoreDataTableViewController: UITableViewController, NSFetchedResult
     @IBOutlet public weak var dataController: CoreDataController! {
         didSet { dataController.fetchedResultsController.delegate = self }
     }
-    public var fetchedResultsController: NSFetchedResultsController {
+    public var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> {
         return dataController.fetchedResultsController
     }
     
@@ -28,7 +28,7 @@ public class CoreDataTableViewController: UITableViewController, NSFetchedResult
         clearsSelectionOnViewWillAppear = true
     }
     
-    override public func viewDidAppear(animated: Bool) {
+    override public func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         // Refresh data
@@ -41,11 +41,11 @@ public class CoreDataTableViewController: UITableViewController, NSFetchedResult
     
     // MARK: - Table view
     
-    override public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override public func numberOfSections(in tableView: UITableView) -> Int {
         return fetchedResultsController.sections?.count ?? 0
     }
     
-    override public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if let sections = fetchedResultsController.sections where sections.count > section {
             
@@ -59,7 +59,7 @@ public class CoreDataTableViewController: UITableViewController, NSFetchedResult
     
     // MARK: - Fetched results controller
     
-    public func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.reloadData()
     }
 

@@ -13,14 +13,14 @@ public class CoreDataProxy {
     
     public var storeName: String! { return nil }
     public var groupIdentifier: String? { return nil }
-    public var modelURL: NSURL! { return nil }
+    public var modelURL: URL! { return nil }
     public static let shared = CoreDataProxy()
     
     // MARK: - Core Data stack
     
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        return NSManagedObjectModel(contentsOfURL: self.modelURL)!
+        return NSManagedObjectModel(contentsOf: self.modelURL)!
     }()
     
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
@@ -28,16 +28,16 @@ public class CoreDataProxy {
         // Create the coordinator and store
         var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         
-        let url: NSURL
-        if let groupIdentifier = self.groupIdentifier, sharedContainerURL = LocalStorage.sharedContainerURL(groupIdentifier) {
+        let url: URL
+        if let groupIdentifier = self.groupIdentifier, sharedContainerURL = LocalStorage.sharedContainerURL(groupIdentifier: groupIdentifier) {
             url = sharedContainerURL
         } else {
-            url = LocalStorage.documentsURL().URLByAppendingPathComponent(self.storeName)
+            url = try! LocalStorage.documentsURL().appendingPathComponent(self.storeName)
         }
         
         let options = [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true]
         do {
-            try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: options)
+            try coordinator!.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
         } catch var error as NSError {
             coordinator = nil
             // Replace this with code to handle the error appropriately.
@@ -57,9 +57,9 @@ public class CoreDataProxy {
         if coordinator == nil {
             return nil
         }
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
-        managedObjectContext.mergePolicy = NSMergePolicy(mergeType: .MergeByPropertyStoreTrumpMergePolicyType)
+        managedObjectContext.mergePolicy = NSMergePolicy(merge: .mergeByPropertyStoreTrumpMergePolicyType)
         
         return managedObjectContext
     }()
@@ -71,9 +71,9 @@ public class CoreDataProxy {
             return nil
         }
         
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
-        managedObjectContext.parentContext = context
-        managedObjectContext.mergePolicy = NSMergePolicy(mergeType: .MergeByPropertyStoreTrumpMergePolicyType)
+        var managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        managedObjectContext.parent = context
+        managedObjectContext.mergePolicy = NSMergePolicy(merge: .mergeByPropertyStoreTrumpMergePolicyType)
         
         return managedObjectContext
     }()
@@ -81,23 +81,23 @@ public class CoreDataProxy {
     // MARK: - Core Data Saving support
     
     public func saveContextMain(complete: (() -> Void)?) {
-        saveContext(managedObjectContextMain, complete: complete)
+        saveContext(context: managedObjectContextMain, complete: complete)
     }
     
     public func saveContextPrivate(complete: (() -> Void)?) {
-        saveContext(managedObjectContextPrivate, complete: complete)
+        saveContext(context: managedObjectContextPrivate, complete: complete)
     }
     
     public func saveAllContexts(complete: (() -> Void)?) {
         saveContextPrivate { () -> Void in
-            self.saveContextMain({ () -> Void in
+            self.saveContextMain(complete: { () -> Void in
                 complete?()
             })
         }
     }
     
     public func saveContext(context: NSManagedObjectContext?, complete: (() -> Void)?) {
-        context?.performBlock({ () -> Void in
+        context?.perform { () -> Void in
             if context!.hasChanges {
                 do {
                     try context!.save()
@@ -110,7 +110,7 @@ public class CoreDataProxy {
                 }
             }
             complete?()
-        })
+        }
     }
     
 }

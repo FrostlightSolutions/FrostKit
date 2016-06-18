@@ -26,7 +26,7 @@ class RequestStoreTests: XCTestCase {
         let store = RequestStore()
         
         let urlString = "https://httpbin.org/get"
-        let task = NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: urlString)!)
+        let task = URLSession.shared().dataTask(with: URL(string: urlString)!)
         store.addRequest(task, urlString: urlString)
         
         if store.containsRequestWithURL(urlString) {
@@ -38,12 +38,12 @@ class RequestStoreTests: XCTestCase {
     
     func testRequestStoreRemove() {
         
-        let expectation = expectationWithDescription("Test Request Store")
+        let expectation = self.expectation(withDescription: "Test Request Store")
         
         let store = RequestStore()
         
         let urlString = "https://httpbin.org/get"
-        let task = NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: urlString)!) { (_, _, _) in
+        let task = URLSession.shared().dataTask(with: URL(string: urlString)!) { (_, _, _) in
             
             store.removeRequestFor(urlString: urlString)
             
@@ -57,7 +57,7 @@ class RequestStoreTests: XCTestCase {
         store.addRequest(task, urlString: urlString)
         task.resume()
         
-        waitForExpectationsWithTimeout(120, handler: { (completionHandler) -> Void in })
+        waitForExpectations(withTimeout: 120, handler: { (completionHandler) -> Void in })
     }
     
 }

@@ -52,9 +52,9 @@ class MapClusterTests: XCTestCase {
     
     func testClusterAnnotationsCalculations() {
         
-        self.measureBlock {
+        self.measure {
             
-            let expectation = self.expectationWithDescription("calculateAndUpdateClusterAnnotations")
+            let expectation = self.expectation(withDescription: "calculateAndUpdateClusterAnnotations")
             
             self.mapController.calculateAndUpdateClusterAnnotations {
                 
@@ -62,7 +62,7 @@ class MapClusterTests: XCTestCase {
                 expectation.fulfill()
             }
             
-            self.waitForExpectationsWithTimeout(120) { (error) in
+            self.waitForExpectations(withTimeout: 120) { (error) in
                 XCTAssertNil(error, "Error")
             }
         }

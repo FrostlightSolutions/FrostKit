@@ -118,7 +118,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     - parameter viewController: The view controller to present the `MFMailComposeViewController` in.
     - parameter animated:       If the presentation should be animated or not.
     */
-    public class func emailPrompt(toRecipients: [String], ccRecipients: [String]? = nil, bccRecipients: [String]? = nil, subject: String = "", messageBody: String = "", isBodyHTML: Bool = false, attachments: [(data: NSData, mimeType: String, fileName: String)]? = nil, viewController: UIViewController, animated: Bool = true) {
+    public class func emailPrompt(toRecipients: [String], ccRecipients: [String]? = nil, bccRecipients: [String]? = nil, subject: String = "", messageBody: String = "", isBodyHTML: Bool = false, attachments: [(data: Data, mimeType: String, fileName: String)]? = nil, viewController: UIViewController, animated: Bool = true) {
         
         if MFMailComposeViewController.canSendMail() {
             

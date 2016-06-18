@@ -16,7 +16,7 @@ import Foundation
 public class RequestStore {
     
     /// The store to hold references to the requests being managed.
-    private lazy var store = Dictionary<String, NSURLSessionTask>()
+    private lazy var store = Dictionary<String, URLSessionTask>()
     /// Describes if the store is locked `true` or not `false`. This is set to `false` by default and is only locked when canceling all tasks.
     private var locked = false
     
@@ -26,7 +26,7 @@ public class RequestStore {
     - parameter request: The request to store and manage.
     - parameter urlString: The url string to use as the key.
     */
-    public func addRequest(request: NSURLSessionTask, urlString: String) {
+    public func addRequest(request: URLSessionTask, urlString: String) {
         if locked == true {
             return
         }
