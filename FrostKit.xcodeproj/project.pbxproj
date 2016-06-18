@@ -77,13 +77,10 @@
 		18410C301C810A6900D2B308 /* BundleExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C2F1C810A6900D2B308 /* BundleExtensionsTests.swift */; };
 		18410C321C810EB300D2B308 /* DataExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C311C810EB300D2B308 /* DataExtensionsTests.swift */; };
 		1844D1D11D15F26E00E87EA8 /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1D01D15F26E00E87EA8 /* CoreDataTableViewController.swift */; };
-		1844D1D31D15F26E00E87EA8 /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1D01D15F26E00E87EA8 /* CoreDataTableViewController.swift */; };
 		1844D1D61D15F27D00E87EA8 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1D51D15F27D00E87EA8 /* CoreDataController.swift */; };
 		1844D1D71D15F27D00E87EA8 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1D51D15F27D00E87EA8 /* CoreDataController.swift */; };
-		1844D1D81D15F27D00E87EA8 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1D51D15F27D00E87EA8 /* CoreDataController.swift */; };
 		1844D1D91D15F27D00E87EA8 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1D51D15F27D00E87EA8 /* CoreDataController.swift */; };
 		1844D1DB1D15F31800E87EA8 /* CoreDataCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1DA1D15F31800E87EA8 /* CoreDataCollectionViewController.swift */; };
-		1844D1DC1D15F31800E87EA8 /* CoreDataCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1DA1D15F31800E87EA8 /* CoreDataCollectionViewController.swift */; };
 		184625051C84CFB00098E969 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EC19DCBB5B008A1506 /* FontExtensions.swift */; };
 		184625071C84D1390098E969 /* ColorExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AC87E81C77F48200426776 /* ColorExtensionsTest.swift */; };
 		184625091C84D1A00098E969 /* FrostKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 18E5459D1C77E53F00637E85 /* FrostKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -110,7 +107,6 @@
 		18B0A5D31D15D2BF00C6985E /* TableInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B0A5D21D15D2BF00C6985E /* TableInterfaceController.swift */; };
 		18B0A5D91D15DFD600C6985E /* DataProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B0A5D81D15DFD600C6985E /* DataProxy.swift */; };
 		18B0A5DA1D15DFD600C6985E /* DataProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B0A5D81D15DFD600C6985E /* DataProxy.swift */; };
-		18B0A5DB1D15DFD600C6985E /* DataProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B0A5D81D15DFD600C6985E /* DataProxy.swift */; };
 		18BB7C7519DC383900F21A64 /* CalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BB7C7419DC383900F21A64 /* CalendarExtensions.swift */; };
 		18C0066119DB5BF000811755 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066019DB5BF000811755 /* LocalStorage.swift */; };
 		18C0066819DB762600811755 /* ErrorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066719DB762600811755 /* ErrorExtensions.swift */; };
@@ -1052,21 +1048,17 @@
 			files = (
 				1826B0671BD906E200DA1669 /* DateExtensions.swift in Sources */,
 				1826B0571BD9065B00DA1669 /* FrostKit.swift in Sources */,
-				1844D1D81D15F27D00E87EA8 /* CoreDataController.swift in Sources */,
 				1826B06C1BD906E200DA1669 /* FontExtensions.swift in Sources */,
 				1826B0701BD906F200DA1669 /* FontConstants.swift in Sources */,
 				1826B0621BD906B400DA1669 /* ImageView.swift in Sources */,
 				1826B06E1BD906E200DA1669 /* ImageExtensions.swift in Sources */,
-				1844D1DC1D15F31800E87EA8 /* CoreDataCollectionViewController.swift in Sources */,
 				1826B06A1BD906E200DA1669 /* DataExtensions.swift in Sources */,
 				1876617A1BEEA0C900C82769 /* AppStoreHelper.swift in Sources */,
 				1826B06F1BD906F200DA1669 /* CustomFonts.swift in Sources */,
 				1826B0631BD906B700DA1669 /* VisualEffectView.swift in Sources */,
 				1826B0591BD9066C00DA1669 /* RequestStore.swift in Sources */,
-				18B0A5DB1D15DFD600C6985E /* DataProxy.swift in Sources */,
 				1826B0661BD906E200DA1669 /* ErrorExtensions.swift in Sources */,
 				1826B0641BD906BE00DA1669 /* InitialsImageView.swift in Sources */,
-				1844D1D31D15F26E00E87EA8 /* CoreDataTableViewController.swift in Sources */,
 				1826B0611BD906B000DA1669 /* Button.swift in Sources */,
 				1826B0601BD906AC00DA1669 /* View.swift in Sources */,
 				1826B0651BD906C500DA1669 /* KeychainHelper.swift in Sources */,
