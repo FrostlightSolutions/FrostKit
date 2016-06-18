@@ -113,7 +113,7 @@ class MapControllerTests: XCTestCase {
         
         measureBlock { () -> Void in
             
-            if self.annotation.address.isEqualToAddress(self.address) {
+            if self.annotation.address == self.address {
                 XCTAssert(true, "Pass")
             } else {
                 XCTAssert(false, "Failed! Annotation address is '\(self.address.description)' but should be '\(self.address.description)'.")
@@ -127,7 +127,7 @@ class MapControllerTests: XCTestCase {
             
             let annotation = Annotation()
             annotation.updateAddress(self.address)
-            if annotation.address.isEqualToAddress(self.address) {
+            if annotation.address == self.address {
                 XCTAssert(true, "Pass")
             } else {
                 XCTAssert(false, "Failed! Annotation address is '\(self.address.description)' but should be '\(self.address.description)'.")

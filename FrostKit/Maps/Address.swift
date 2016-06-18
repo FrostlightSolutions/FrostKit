@@ -43,12 +43,15 @@ public class Address {
         return "<Latitude: \(latitude) Longitude: \(longitude) Address: \(addressString)>"
     }
     
+    internal init() { }
+    
     /**
      A convenience initialiser for creating an address object from a dictionary returned from a FUS based system.
      
      - parameter dictionary: The dictionary to parse the information from.
      */
-    public init(dictionary: NSDictionary) {
+    public convenience init(dictionary: NSDictionary) {
+        self.init()
         
         objectID = dictionary["id"] as? String
         
@@ -90,28 +93,6 @@ public class Address {
             adresses.append(Address(dictionary: dictionary))
         }
         return adresses
-    }
-    
-    // MARK: - Comparison Methods
-    
-    public func isEqualToAddress(object: Address?) -> Bool {
-        if let address = object {
-            
-            let haveEqualLatitude = self.latitude == address.latitude
-            let haveEqualLongitude = self.longitude == address.longitude
-            let haveEqualName = self.name == address.name
-            let haveEqualAddressString = self.addressString == address.addressString
-            
-            return haveEqualLatitude && haveEqualLongitude && haveEqualName && haveEqualAddressString
-        }
-        return false
-    }
-    
-    public func isEqual(object: AnyObject?) -> Bool {
-        if let address = object as? Address {
-            return self.isEqualToAddress(address)
-        }
-        return false
     }
     
 }
