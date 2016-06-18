@@ -7,8 +7,8 @@
 //
 
 import XCTest
-@testable import FrostKit
 import MapKit
+@testable import FrostKit
 
 class MapClusterTests: XCTestCase {
     

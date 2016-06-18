@@ -7,8 +7,8 @@
 //
 
 import XCTest
-import FrostKit
 import CoreLocation
+@testable import FrostKit
 
 class MapControllerTests: XCTestCase {
     

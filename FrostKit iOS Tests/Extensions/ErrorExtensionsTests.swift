@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import FrostKit
 
 class ErrorExtensionsTests: XCTestCase {
 
