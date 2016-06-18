@@ -1,6 +1,6 @@
 //
 //  TableInterfaceController.swift
-//  TableInterfaceController
+//  FrostKit
 //
 //  Created by James Barrow on 18/06/2016.
 //  Copyright (c) 2015-Current Pig on a Hill Productions. All rights reserved.
