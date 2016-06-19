@@ -18,9 +18,8 @@ extension Data {
         
         var string = ""
         
-        for index in 0 ..< count {
-            let subByte = subdata(in: index..<index+1)
-            string += String(format: "%02hhx", subByte)
+        for byte in enumerated() {
+            string += String(format: "%02hhx", byte.element)
         }
         
         return string
