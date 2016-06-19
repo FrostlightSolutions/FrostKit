@@ -325,6 +325,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
             DispatchQueue.main.async {
                 self.cancelClusterCalculations = false
                 complete()
+                return
             }
         }
     }
