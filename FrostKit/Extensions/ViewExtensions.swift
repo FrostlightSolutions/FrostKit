@@ -14,7 +14,7 @@ import UIKit
 extension UIView {
     
     /// Returns a screen shot of the view.
-    public var screenshot: UIImage {
+    public var screenshot: UIImage? {
         
         var scale: CGFloat = 2.0
         if let window = self.window {

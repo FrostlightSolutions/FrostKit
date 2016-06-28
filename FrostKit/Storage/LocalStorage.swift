@@ -149,19 +149,13 @@ public class LocalStorage {
     
     - returns: A non-optional version of the public class function.
     */
-    private class func absoluteURL(baseURL baseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> NSURL {
+    private class func absoluteURL(baseURL baseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> NSURL? {
         
-        var url = baseURL.URLByAppendingPathComponent(reletivePath)
-        
-        if let name = fileName {
-            url = url.URLByAppendingPathComponent(name)
+        guard let name = fileName, ext = fileExtension else {
+            return nil
         }
         
-        if let anExtension = fileExtension {
-            url = url.URLByAppendingPathExtension(anExtension)
-        }
-        
-        return url
+        return baseURL.URLByAppendingPathComponent(reletivePath)?.URLByAppendingPathComponent(name)?.URLByAppendingPathExtension(ext)
     }
     
     // MARK: - Directory Creation Methods
@@ -195,15 +189,15 @@ public class LocalStorage {
     */
     public class func save(data data: AnyObject, baseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
         
-        var url = baseURL.URLByAppendingPathComponent(reletivePath)
-        createDirectory(url: url)
-        
-        if let aFileName = fileName {
-            url = url.URLByAppendingPathComponent(aFileName)
+        guard let dirURL = baseURL.URLByAppendingPathComponent(reletivePath) else {
+            return false
         }
         
-        if let aFileExtension = fileExtension {
-            url = url.URLByAppendingPathExtension(aFileExtension)
+        createDirectory(url: dirURL)
+        
+        guard let name = fileName, ext = fileExtension,
+            url = dirURL.URLByAppendingPathComponent(name)?.URLByAppendingPathExtension(ext) else {
+                return false
         }
         
         if let path = url.path {
@@ -274,8 +268,10 @@ public class LocalStorage {
     */
     private class func move(fromBaseURL fromBaseURL: NSURL, toBaseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
         
-        let fromURL = absoluteURL(baseURL: fromBaseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
-        let toURL = absoluteURL(baseURL: toBaseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
+        guard let fromURL = absoluteURL(baseURL: fromBaseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension),
+            toURL = absoluteURL(baseURL: toBaseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) else {
+                return
+        }
         try NSFileManager.defaultManager().moveItemAtURL(fromURL, toURL: toURL)
     }
     
@@ -319,13 +315,10 @@ public class LocalStorage {
     */
     public class func load(baseURL baseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> AnyObject? {
         
-        let url = absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
-        
-        if let path = url.path {
-            return NSKeyedUnarchiver.unarchiveObjectWithFile(path)
+        guard let url = absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension), path = url.path else {
+            return nil
         }
-        
-        return nil
+        return NSKeyedUnarchiver.unarchiveObjectWithFile(path)
     }
     
     /**
@@ -415,7 +408,12 @@ public class LocalStorage {
     - throws: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     private class func remove(baseURL baseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
-        try remove(absoluteURL: absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension))
+        
+        guard let url = absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) else {
+            return
+        }
+        
+        try remove(absoluteURL: url)
     }
     
     /**

@@ -32,7 +32,7 @@ public class CoreDataProxy {
         if let groupIdentifier = self.groupIdentifier, sharedContainerURL = LocalStorage.sharedContainerURL(groupIdentifier) {
             url = sharedContainerURL
         } else {
-            url = LocalStorage.documentsURL().URLByAppendingPathComponent(self.storeName)
+            url = LocalStorage.documentsURL().URLByAppendingPathComponent(self.storeName)!
         }
         
         let options = [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true]
