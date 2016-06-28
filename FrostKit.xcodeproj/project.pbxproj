@@ -300,7 +300,7 @@
 		18E3F23119DE07670032ABB7 /* FrostKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrostKit.swift; sourceTree = "<group>"; };
 		18E3F23919DE15600032ABB7 /* BarButtonItemExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarButtonItemExtensions.swift; sourceTree = "<group>"; };
 		18E5459D1C77E53F00637E85 /* FrostKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FrostKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		18E545A61C77E54000637E85 /* FrostKit OS X Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FrostKit OS X Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		18E545A61C77E54000637E85 /* FrostKit macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FrostKit macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18E545BA1C77E6C700637E85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18E9FF911C80AA5700AC5230 /* ErrorExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorExtensionsTests.swift; sourceTree = "<group>"; };
 		18EA123E19DC79F100FD858D /* DataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
@@ -441,7 +441,7 @@
 				18839B1919D9FA8C00760157 /* FrostKit */,
 				189D8CA81C77EEFC00261DF5 /* FrostKit iOS Tests */,
 				18D54BEA1CE6439300D365C6 /* FrostKit tvOS Tests */,
-				18E545B81C77E6C700637E85 /* FrostKit OS X Tests */,
+				18E545B81C77E6C700637E85 /* FrostKit macOS Tests */,
 				186CFCE81A29F7BE002739A5 /* Frameworks */,
 				18839B1819D9FA8C00760157 /* Products */,
 			);
@@ -455,7 +455,7 @@
 				1829A80C1BA2CD380017E4EE /* FrostKit.framework */,
 				1826B0261BD9047900DA1669 /* FrostKit.framework */,
 				18E5459D1C77E53F00637E85 /* FrostKit.framework */,
-				18E545A61C77E54000637E85 /* FrostKit OS X Tests.xctest */,
+				18E545A61C77E54000637E85 /* FrostKit macOS Tests.xctest */,
 				18D54BE91CE6439300D365C6 /* FrostKit tvOS Tests.xctest */,
 			);
 			name = Products;
@@ -648,12 +648,12 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		18E545B81C77E6C700637E85 /* FrostKit OS X Tests */ = {
+		18E545B81C77E6C700637E85 /* FrostKit macOS Tests */ = {
 			isa = PBXGroup;
 			children = (
 				18E545BA1C77E6C700637E85 /* Info.plist */,
 			);
-			path = "FrostKit OS X Tests";
+			path = "FrostKit macOS Tests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -789,9 +789,9 @@
 			productReference = 18D54BE91CE6439300D365C6 /* FrostKit tvOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		18E5459C1C77E53F00637E85 /* FrostKit OS X */ = {
+		18E5459C1C77E53F00637E85 /* FrostKit macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 18E545B21C77E54000637E85 /* Build configuration list for PBXNativeTarget "FrostKit OS X" */;
+			buildConfigurationList = 18E545B21C77E54000637E85 /* Build configuration list for PBXNativeTarget "FrostKit macOS" */;
 			buildPhases = (
 				18E545981C77E53F00637E85 /* Sources */,
 				18E545991C77E53F00637E85 /* Frameworks */,
@@ -803,14 +803,14 @@
 			);
 			dependencies = (
 			);
-			name = "FrostKit OS X";
+			name = "FrostKit macOS";
 			productName = "FrostKit OSX";
 			productReference = 18E5459D1C77E53F00637E85 /* FrostKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		18E545A51C77E54000637E85 /* FrostKit OS X Tests */ = {
+		18E545A51C77E54000637E85 /* FrostKit macOS Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 18E545B31C77E54000637E85 /* Build configuration list for PBXNativeTarget "FrostKit OS X Tests" */;
+			buildConfigurationList = 18E545B31C77E54000637E85 /* Build configuration list for PBXNativeTarget "FrostKit macOS Tests" */;
 			buildPhases = (
 				18E545A21C77E54000637E85 /* Sources */,
 				18E545A31C77E54000637E85 /* Frameworks */,
@@ -822,9 +822,9 @@
 			dependencies = (
 				18E545A91C77E54000637E85 /* PBXTargetDependency */,
 			);
-			name = "FrostKit OS X Tests";
+			name = "FrostKit macOS Tests";
 			productName = "FrostKit OSXTests";
-			productReference = 18E545A61C77E54000637E85 /* FrostKit OS X Tests.xctest */;
+			productReference = 18E545A61C77E54000637E85 /* FrostKit macOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -898,10 +898,10 @@
 				18839B1619D9FA8C00760157 /* FrostKit iOS */,
 				1829A80B1BA2CD380017E4EE /* FrostKit watchOS */,
 				1826B0251BD9047900DA1669 /* FrostKit tvOS */,
-				18E5459C1C77E53F00637E85 /* FrostKit OS X */,
+				18E5459C1C77E53F00637E85 /* FrostKit macOS */,
 				18839B2119D9FA8C00760157 /* FrostKit iOS Tests */,
 				18D54BE81CE6439300D365C6 /* FrostKit tvOS Tests */,
-				18E545A51C77E54000637E85 /* FrostKit OS X Tests */,
+				18E545A51C77E54000637E85 /* FrostKit macOS Tests */,
 				1845E6F61A66DA03005B377D /* FrostKitDocs */,
 				1836A20B1A84414D00E57F86 /* FontConstantsBuilder */,
 			);
@@ -1231,7 +1231,7 @@
 		};
 		18E545A91C77E54000637E85 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 18E5459C1C77E53F00637E85 /* FrostKit OS X */;
+			target = 18E5459C1C77E53F00637E85 /* FrostKit macOS */;
 			targetProxy = 18E545A81C77E54000637E85 /* PBXContainerItemProxy */;
 		};
 		18FD62071BC7FC8C001CDA32 /* PBXTargetDependency */ = {
@@ -1753,7 +1753,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		18E545B21C77E54000637E85 /* Build configuration list for PBXNativeTarget "FrostKit OS X" */ = {
+		18E545B21C77E54000637E85 /* Build configuration list for PBXNativeTarget "FrostKit macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18E545AE1C77E54000637E85 /* Debug */,
@@ -1762,7 +1762,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		18E545B31C77E54000637E85 /* Build configuration list for PBXNativeTarget "FrostKit OS X Tests" */ = {
+		18E545B31C77E54000637E85 /* Build configuration list for PBXNativeTarget "FrostKit macOS Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18E545B01C77E54000637E85 /* Debug */,
