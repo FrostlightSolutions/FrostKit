@@ -24,7 +24,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     public var identifier: String {
         return "FrostKitAnnotation"
     }
-    private var hasPlottedInitUsersLocation = false
+    /// Dictates if the users location has been initially plotted.
+    public var hasPlottedInitUsersLocation = false
     /// The view controller related to the map controller.
     @IBOutlet public weak var viewController: UIViewController!
     /// The map view related to the map controller.
