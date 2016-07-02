@@ -92,9 +92,6 @@ public class AppStoreHelper {
                     return
                 }
                 
-                NSLog("JSON: \(json)")
-                NSLog("App Details: \(appDetails)")
-                
                 self.version = appDetails["version"] as? String
                 self.name = appDetails["trackName"] as? String
                 self.seller = appDetails["sellerName"] as? String
