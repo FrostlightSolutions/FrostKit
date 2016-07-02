@@ -263,6 +263,12 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                     self.updateVisableAnnotations()
                 }
             }
+        } else {
+            
+            currentlyUpdatingVisableAnnotations = false
+            if shouldTryToUpdateVisableAnnotationsAgain == true {
+                updateVisableAnnotations()
+            }
         }
     }
     
