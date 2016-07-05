@@ -94,7 +94,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         
         let hasPlusPrefix = number.range(of: "+")
         
-        let characterSet = NSCharacterSet.decimalDigits().inverted
+        let characterSet = NSCharacterSet.decimalDigits.inverted
         let componentsArray = number.components(separatedBy: characterSet)
         var parsedNumber = componentsArray.joined(separator: "")
         

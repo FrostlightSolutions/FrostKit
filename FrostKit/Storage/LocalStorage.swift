@@ -78,7 +78,7 @@ public class LocalStorage {
     - returns: Documents directory URL.
     */
     public class func documentsURL() -> URL {
-        return FileManager.default().urlsForDirectory(.documentDirectory, inDomains: .userDomainMask)[0]
+        return FileManager.default.urlsForDirectory(.documentDirectory, inDomains: .userDomainMask)[0]
     }
     
     /**
@@ -87,7 +87,7 @@ public class LocalStorage {
     - returns: Caches directory URL.
     */
     public class func cachesURL() -> URL {
-        return FileManager.default().urlsForDirectory(.cachesDirectory, inDomains: .userDomainMask)[0]
+        return FileManager.default.urlsForDirectory(.cachesDirectory, inDomains: .userDomainMask)[0]
     }
     
     /**
@@ -98,7 +98,7 @@ public class LocalStorage {
      - returns: Shared container URL, or `nil` if not available.
      */
     public class func sharedContainerURL(groupIdentifier: String) -> URL? {
-        return FileManager.default().containerURLForSecurityApplicationGroupIdentifier(groupIdentifier)
+        return FileManager.default.containerURLForSecurityApplicationGroupIdentifier(groupIdentifier)
     }
     
     /**
@@ -168,7 +168,7 @@ public class LocalStorage {
     internal class func createDirectory(url: URL) {
         
         do {
-            try FileManager.default().createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+            try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
         } catch let error as NSError {
             NSLog("Error: Directory not able to be created at URL \(url)\nWith error: \(error.localizedDescription)\n\(error)")
         }
@@ -272,7 +272,7 @@ public class LocalStorage {
             toURL = absoluteURL(baseURL: toBaseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) else {
             return
         }
-        try FileManager.default().moveItem(at: fromURL, to: toURL)
+        try FileManager.default.moveItem(at: fromURL, to: toURL)
     }
     
     /**
@@ -393,7 +393,7 @@ public class LocalStorage {
     */
     class func remove(absoluteURL: URL) throws {
         
-        try FileManager.default().removeItem(at: absoluteURL)
+        try FileManager.default.removeItem(at: absoluteURL)
         ContentManager.remove(url: absoluteURL)
     }
     

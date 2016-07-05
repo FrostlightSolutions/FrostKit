@@ -35,7 +35,7 @@ public class CustomFonts {
     - parameter fontNames: An array of strings of the font file names.
     - parameter bundle:    The bundle to look for the file names in. By default this uses the main app bundle.
     */
-    public class func loadCustomFonts(fontNames: [NSString], bundle: Bundle = Bundle.main()) {
+    public class func loadCustomFonts(fontNames: [NSString], bundle: Bundle = Bundle.main) {
         for fontName in fontNames {
             let filename = fontName.components(separatedBy: ".").first
             let ext = fontName.pathExtension
@@ -55,7 +55,7 @@ public class CustomFonts {
         - parameter ext:     The extention of the file.
         - parameter bundle:  The bundle the files are located in. By default this uses the main app bundle.
     */
-    public class func loadCustomFont(name: String, withExtension ext: String, bundle: Bundle = Bundle.main()) {
+    public class func loadCustomFont(name: String, withExtension ext: String, bundle: Bundle = Bundle.main) {
         
         var error: Unmanaged<CFError>?
         guard let url = bundle.urlForResource(name, withExtension: ext),

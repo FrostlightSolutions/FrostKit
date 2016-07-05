@@ -151,7 +151,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     
     public class func requestAccessToLocationServices(locationManager: CLLocationManager) {
         
-        if let infoDictionary = Bundle.main().infoDictionary {
+        if let infoDictionary = Bundle.main.infoDictionary {
             
             if infoDictionary["NSLocationAlwaysUsageDescription"] != nil {
                 locationManager.requestAlwaysAuthorization()
@@ -607,9 +607,9 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         directionsRequest.requestsAlternateRoutes = false
         
         let directions = MKDirections(request: directionsRequest)
-        NotificationCenter.default().post(name: NSNotification.Name(rawValue: NetworkRequestDidBeginNotification), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NetworkRequestDidBeginNotification), object: nil)
         directions.calculate { (directionsResponse, error) in
-            NotificationCenter.default().post(name: NSNotification.Name(rawValue: NetworkRequestDidCompleteNotification), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NetworkRequestDidCompleteNotification), object: nil)
             complete(route: directionsResponse?.routes.first, error: error)
         }
     }
@@ -874,7 +874,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     public func searchAddresses(searchString: String) -> [Address] {
         return addresses.filter { (address) -> Bool in
             
-            let options: NSString.CompareOptions = [.caseInsensitiveSearch, .diacriticInsensitiveSearch]
+            let options: NSString.CompareOptions = [.caseInsensitive, .diacriticInsensitive]
             
             let nameRange = address.name.range(of: searchString, options: options)
             let addressStringRange = address.addressString.range(of: searchString, options: options)

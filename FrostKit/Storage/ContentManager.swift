@@ -75,7 +75,7 @@ public class ContentManager {
                 
                 #if DEBUG
                     let finish = NSDate.timeIntervalSinceReferenceDate
-                    NSLog("Check of \(shared.contentMetadata.count) content metadata items complete in \(finish()-start()) seconds. Removed \(metadataToRemove.count) items.")
+                    NSLog("Check of \(shared.contentMetadata.count) content metadata items complete in \(finish-start) seconds. Removed \(metadataToRemove.count) items.")
                 #endif
                 
             } else {

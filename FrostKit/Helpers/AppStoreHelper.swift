@@ -68,7 +68,7 @@ public class AppStoreHelper {
         }
         
         var urlString = "https://itunes.apple.com"
-        if let code = Locale.autoupdatingCurrent().object(forKey: .countryCode) as? String {
+        if let code = Locale.autoupdatingCurrent.object(forKey: .countryCode) as? String {
             urlString += "/\(code.lowercased())"
         }
         urlString += "/lookup?id=\(appStoreID)"
@@ -78,7 +78,7 @@ public class AppStoreHelper {
             return
         }
         
-        let session = URLSession.shared()
+        let session = URLSession.shared
         let task = session.dataTask(with: url as URL) { (data, _, error) in
             
             if let anError = error {
@@ -133,7 +133,7 @@ public class AppStoreHelper {
         if let appStoreVersion = self.version, bundleId = self.bundleId, bundle = Bundle(identifier: bundleId) {
             
             let localVersion = Bundle.appVersion(bundle: bundle)
-            let comparisonResult = localVersion.compare(appStoreVersion, options: .numericSearch)
+            let comparisonResult = localVersion.compare(appStoreVersion, options: .numeric)
             if comparisonResult == .orderedAscending {
                 return .UpdateNeeded
             } else {

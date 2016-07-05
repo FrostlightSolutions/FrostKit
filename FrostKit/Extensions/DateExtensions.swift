@@ -64,7 +64,7 @@ extension Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
         dateFormatter.timeZone = TimeZone.utc()
-        dateFormatter.locale = Locale.autoupdatingCurrent()
+        dateFormatter.locale = Locale.autoupdatingCurrent
         return dateFormatter.date(from: iso8601String)
     }
     
@@ -372,27 +372,27 @@ extension Date {
     
     /// A helper method for getting a formatted string of the date and time in `ShortStyle`
     public var dateTimeShortString: String {
-        return  DateFormatter.localizedString(from: self, dateStyle: .shortStyle, timeStyle: .shortStyle)
+        return  DateFormatter.localizedString(from: self, dateStyle: .short, timeStyle: .short)
     }
     
     /// A helper method for getting a formatted string of the date in `ShortStyle`
     public var dateShortString: String {
-        return  DateFormatter.localizedString(from: self, dateStyle: .shortStyle, timeStyle: .noStyle)
+        return  DateFormatter.localizedString(from: self, dateStyle: .short, timeStyle: .none)
     }
     
     /// A helper method for getting a formatted string of the date in `MediumStyle`
     public var dateMediumString: String {
-        return  DateFormatter.localizedString(from: self, dateStyle: .mediumStyle, timeStyle: .noStyle)
+        return  DateFormatter.localizedString(from: self, dateStyle: .medium, timeStyle: .none)
     }
     
     /// A helper method for getting a formatted string of the date in `FullStyle`
     public var dateFullString: String {
-        return  DateFormatter.localizedString(from: self, dateStyle: .fullStyle, timeStyle: .noStyle)
+        return  DateFormatter.localizedString(from: self, dateStyle: .full, timeStyle: .none)
     }
     
     /// A helper method for getting a formatted string of the time in `ShortStyle`
     public var timeShortString: String {
-        return  DateFormatter.localizedString(from: self, dateStyle: .noStyle, timeStyle: .shortStyle)
+        return  DateFormatter.localizedString(from: self, dateStyle: .none, timeStyle: .short)
     }
     
     /// A helpter method for getting a formatted string of the date in the FUS set format.
