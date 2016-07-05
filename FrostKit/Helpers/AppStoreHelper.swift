@@ -15,9 +15,9 @@ import UIKit
 public class AppStoreHelper {
     
     public enum UpdateStatus: Int {
-        case Unknown = -1
-        case UpdateNeeded
-        case UpToDate
+        case unknown = -1
+        case updateNeeded
+        case upToDate
     }
     
     public static let shared = AppStoreHelper()
@@ -135,13 +135,13 @@ public class AppStoreHelper {
             let localVersion = Bundle.appVersion(bundle: bundle)
             let comparisonResult = localVersion.compare(appStoreVersion, options: .numeric)
             if comparisonResult == .orderedAscending {
-                return .UpdateNeeded
+                return .updateNeeded
             } else {
-                return .UpToDate
+                return .upToDate
             }
         }
         
-        return .Unknown
+        return .unknown
     }
     
 }
