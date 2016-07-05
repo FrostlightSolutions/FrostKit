@@ -19,11 +19,6 @@ import MessageUI
 ///
 public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate {
     
-    private enum AlertViewTags: Int {
-        case EmailPrompt
-        case MessagePrompt
-    }
-    
     // MARK: - Singleton & Init
     
     // For use with delegate methods only, hence private NOT public
