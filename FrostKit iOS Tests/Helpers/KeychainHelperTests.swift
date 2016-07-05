@@ -30,7 +30,7 @@ class KeychainHelperTests: XCTestCase {
             
             let setDetailsComplete = KeychainHelper.set(details: password, username: username)
             let updateDetailsComplete = KeychainHelper.set(details: password, username: username)
-            let getDetailsComplete = (password == KeychainHelper.details(username: username) as! String)
+            let getDetailsComplete = (password == KeychainHelper.details(username: username) as? String)
             let deleteDetailsComplete = KeychainHelper.deleteKeychain()
             
             XCTAssert(setDetailsComplete, "Pass")

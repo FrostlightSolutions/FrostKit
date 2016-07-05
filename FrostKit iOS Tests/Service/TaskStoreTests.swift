@@ -26,7 +26,7 @@ class TaskStoreTests: XCTestCase {
         let store = TaskStore()
         
         let urlString = "https://httpbin.org/get"
-        let task = URLSession.shared().dataTask(with: URL(string: urlString)!)
+        let task = URLSession.shared.dataTask(with: URL(string: urlString)!)
         store.add(task, urlString: urlString)
         
         if store.contains(taskWithURL: urlString) {
@@ -43,7 +43,7 @@ class TaskStoreTests: XCTestCase {
         let store = TaskStore()
         
         let urlString = "https://httpbin.org/get"
-        let task = URLSession.shared().dataTask(with: URL(string: urlString)!) { (_, _, _) in
+        let task = URLSession.shared.dataTask(with: URL(string: urlString)!) { (_, _, _) in
             
             store.remove(taskWithURL: urlString)
             

@@ -541,11 +541,11 @@ class DateExtensionsTests: XCTestCase {
         components.second = 43
         let date = components.date!
         
-        XCTAssert(date.dateTimeShortString == DateFormatter.localizedString(from: date, dateStyle: .shortStyle, timeStyle: .shortStyle))
-        XCTAssert(date.dateShortString == DateFormatter.localizedString(from: date, dateStyle: .shortStyle, timeStyle: .noStyle))
-        XCTAssert(date.dateMediumString == DateFormatter.localizedString(from: date, dateStyle: .mediumStyle, timeStyle: .noStyle))
-        XCTAssert(date.dateFullString == DateFormatter.localizedString(from: date, dateStyle: .fullStyle, timeStyle: .noStyle))
-        XCTAssert(date.timeShortString == DateFormatter.localizedString(from: date, dateStyle: .noStyle, timeStyle: .shortStyle))
+        XCTAssert(date.dateTimeShortString == DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .short))
+        XCTAssert(date.dateShortString == DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none))
+        XCTAssert(date.dateMediumString == DateFormatter.localizedString(from: date, dateStyle: .medium, timeStyle: .none))
+        XCTAssert(date.dateFullString == DateFormatter.localizedString(from: date, dateStyle: .full, timeStyle: .none))
+        XCTAssert(date.timeShortString == DateFormatter.localizedString(from: date, dateStyle: .none, timeStyle: .short))
         XCTAssert(date.fusDateString == "2016-02-26")
         XCTAssert(date.fusDateTimeString == "2016-02-26T20:12:43.000000Z")
         XCTAssert(date.dayString == "Friday")
