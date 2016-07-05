@@ -16,7 +16,7 @@ public class TableInterfaceController: WKInterfaceController {
     private var skip = 0
     @IBInspectable public var resetLimitAndSkipOnReload: Bool = false
     private var updateFromStart = false
-    public var noDataString: String { return FKLocalizedString("NO_DATA", comment: "No Data") }
+    public var noDataString: String { return FKLocalizedString(key: "NO_DATA", comment: "No Data") }
     @IBOutlet public weak var table: WKInterfaceTable!
     @IBOutlet public weak var titleGroup: WKInterfaceGroup?
     @IBOutlet public weak var titleLabel: WKInterfaceLabel?
@@ -24,26 +24,26 @@ public class TableInterfaceController: WKInterfaceController {
     @IBOutlet public weak var moreButton: WKInterfaceButton?
     @IBInspectable public var showReloadMenuItem: Bool = true
     
-    override public init() {
+    public override init() {
         super.init()
         
-        moreButton?.setTitle(FKLocalizedString("MORE_", comment: "More..."))
-        statusLabel?.setText(FKLocalizedString("LOADING_", comment: "Loading..."))
+        moreButton?.setTitle(FKLocalizedString(key: "MORE_", comment: "More..."))
+        statusLabel?.setText(FKLocalizedString(key: "LOADING_", comment: "Loading..."))
         
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async() {
             self.updateTable()
         }
     }
     
-    override public func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    public override func awake(withContext context: AnyObject?) {
+        super.awake(withContext: context)
         
         if showReloadMenuItem == true {
-            addMenuItemWithItemIcon(.Resume, title: FKLocalizedString("RELOAD", comment: "Reload"), action: #selector(updateData))
+            addMenuItem(with: .resume, title: FKLocalizedString(key: "RELOAD", comment: "Reload"), action: #selector(updateData))
         }
     }
     
-    override public func willActivate() {
+    public override func willActivate() {
         super.willActivate()
         
         updateData()
@@ -72,11 +72,11 @@ public class TableInterfaceController: WKInterfaceController {
         
         // Configure the table object and get the row controllers.
         if rowCount < count {
-            let range = NSRange(location: rowCount, length: count - rowCount)
-            table.insertRowsAtIndexes(NSIndexSet(indexesInRange: range), withRowType: rowType)
+            let indexSet = IndexSet(integersIn: rowCount ..< count - rowCount)
+            table.insertRows(at: indexSet, withRowType: rowType)
         } else if rowCount > count {
-            let range = NSRange(location: count, length: rowCount - count)
-            table.removeRowsAtIndexes(NSIndexSet(indexesInRange: range))
+            let indexSet = IndexSet(integersIn: rowCount ..< count - rowCount)
+            table.removeRows(at: indexSet)
         } else {
             table.setNumberOfRows(count, withRowType: rowType)
         }
@@ -89,7 +89,7 @@ public class TableInterfaceController: WKInterfaceController {
         
         for index in 0..<rowCount {
             let dataDict = dataArray[index]
-            updateRow(table, index: index, data: dataDict)
+            update(rowIn: table, index: index, data: dataDict)
         }
         
         if rowCount == 0 {
@@ -107,7 +107,7 @@ public class TableInterfaceController: WKInterfaceController {
         }
     }
     
-    public func updateRow(table: WKInterfaceTable, index: Int, data: AnyObject) {
+    public func update(rowIn table: WKInterfaceTable, index: Int, data: AnyObject) {
         // Used to override in subclasses
     }
     
