@@ -24,7 +24,7 @@ extension UIViewController {
     }
     
     /// Returns if the view controller is currently visable using `isViewLoaded()` and `view.window` references.
-    public var isVisabile: Bool {
+    public var isVisible: Bool {
         return isViewLoaded() && view.window != nil
     }
     
