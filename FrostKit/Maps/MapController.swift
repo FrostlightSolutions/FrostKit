@@ -26,6 +26,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     }
     /// Dictates if the users location has been initially plotted.
     public var hasPlottedInitUsersLocation = false
+    /// Dictates if the users location was not able to be plotted, due permissions issues, etc.
+    public var failedToPlotUsersLocation = false
     /// The view controller related to the map controller.
     @IBOutlet public weak var viewController: UIViewController!
     /// The map view related to the map controller.
@@ -828,6 +830,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     public func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
         if hasPlottedInitUsersLocation == false {
             hasPlottedInitUsersLocation = true
+            failedToPlotUsersLocation = false
             zoomToShowAll()
         }
     }
@@ -843,6 +846,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     
     public func mapView(mapView: MKMapView, didFailToLocateUserWithError error: NSError) {
         hasPlottedInitUsersLocation = false
+        failedToPlotUsersLocation = true
         zoomToShowAll()
         
         switch error.code {
