@@ -10,11 +10,11 @@ import WatchKit
 
 public class TableInterfaceController: WKInterfaceController {
     
-    @IBInspectable public var rowType: String! = nil
+    public var rowType: String! { return nil }
     lazy var dataArray = [AnyObject]()
-    @IBInspectable public var limit: Int = 10
+    public var limit: Int { return 10 }
     private var skip = 0
-    @IBInspectable public var resetLimitAndSkipOnReload: Bool = false
+    public var resetLimitAndSkipOnReload: Bool { return false }
     private var updateFromStart = false
     public var noDataString: String { return FKLocalizedString("NO_DATA", comment: "No Data") }
     @IBOutlet public weak var table: WKInterfaceTable!
@@ -22,7 +22,7 @@ public class TableInterfaceController: WKInterfaceController {
     @IBOutlet public weak var titleLabel: WKInterfaceLabel?
     @IBOutlet public weak var statusLabel: WKInterfaceLabel?
     @IBOutlet public weak var moreButton: WKInterfaceButton?
-    @IBInspectable public var showReloadMenuItem: Bool = true
+    public var showReloadMenuItem: Bool { return true }
     
     override public init() {
         super.init()
