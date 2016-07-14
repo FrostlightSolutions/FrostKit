@@ -24,7 +24,10 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     public var identifier: String {
         return "FrostKitAnnotation"
     }
-    private var hasPlottedInitUsersLocation = false
+    /// Dictates if the users location has been initially plotted.
+    public var hasPlottedInitUsersLocation = false
+    /// Dictates if the users location was not able to be plotted, due permissions issues, etc.
+    public var failedToPlotUsersLocation = false
     /// The view controller related to the map controller.
     @IBOutlet public weak var viewController: UIViewController!
     /// The map view related to the map controller.
@@ -110,7 +113,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     /// An array of addresses plotted on the map view.
     public var addresses = [Address]()
     /// A dictionary of annotations plotted to the map view with the address object as the key.
-    public var annotations = [Address: MKAnnotation]()
+    public var annotations = [NSObject: MKAnnotation]()
     /// When the map automatically zooms to show all, if this value is set to true, then the users annoation is automatically included in that.
     @IBInspectable public var zoomToShowAllIncludesUser: Bool = true
     private var regionSpanBeforeChange: MKCoordinateSpan?
@@ -262,6 +265,12 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                 if self.shouldTryToUpdateVisableAnnotationsAgain == true {
                     self.updateVisableAnnotations()
                 }
+            }
+        } else {
+            
+            currentlyUpdatingVisableAnnotations = false
+            if shouldTryToUpdateVisableAnnotationsAgain == true {
+                updateVisableAnnotations()
             }
         }
     }
@@ -821,6 +830,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     public func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
         if hasPlottedInitUsersLocation == false {
             hasPlottedInitUsersLocation = true
+            failedToPlotUsersLocation = false
             zoomToShowAll()
         }
     }
@@ -836,6 +846,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     
     public func mapView(mapView: MKMapView, didFailToLocateUserWithError error: NSError) {
         hasPlottedInitUsersLocation = false
+        failedToPlotUsersLocation = true
         zoomToShowAll()
         
         switch error.code {

@@ -179,9 +179,9 @@ public class BaseWebViewController: UIViewController {
         
         if let navController = navigationController {
             
-            let backButton = UIBarButtonItem(title: IonIcons.ios_arrow_left, font: UIFont.ionicons(size: 29), target: self, action: #selector(BaseWebViewController.backButtonPressed(_:)))
-            let forwardButton = UIBarButtonItem(title: IonIcons.ios_arrow_right, font: UIFont.ionicons(size: 29), target: self, action: #selector(BaseWebViewController.forwardButtonPressed(_:)))
-            let refreshButton = UIBarButtonItem(title: IonIcons.ios_refresh_empty, font: UIFont.ionicons(size: 34), target: self, action: #selector(BaseWebViewController.refreshButtonPressed(_:)))
+            let backButton = UIBarButtonItem(title: IonIcons.iosArrowLeft, font: UIFont.ionicons(size: 29), target: self, action: #selector(BaseWebViewController.backButtonPressed(_:)))
+            let forwardButton = UIBarButtonItem(title: IonIcons.iosArrowRight, font: UIFont.ionicons(size: 29), target: self, action: #selector(BaseWebViewController.forwardButtonPressed(_:)))
+            let refreshButton = UIBarButtonItem(title: IonIcons.iosRefreshEmpty, font: UIFont.ionicons(size: 34), target: self, action: #selector(BaseWebViewController.refreshButtonPressed(_:)))
             let actionButton = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: #selector(BaseWebViewController.actionButtonPressed(_:)))
             let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
             

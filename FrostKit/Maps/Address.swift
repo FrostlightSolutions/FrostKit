@@ -12,7 +12,7 @@ import MapKit
 ///
 /// An object that contains details on a address to the plot on the map view, along with other data such as name and addressString.
 ///
-public class Address {
+public class Address: NSObject {
     
     /// The ID of the addres object.
     public var objectID: String?
@@ -39,11 +39,12 @@ public class Address {
     /// The address string of the object.
     public var addressString = ""
     /// Returns a string that represents the contents of the receiving class.
-    public var description: String {
+    public override var description: String {
         return "<Latitude: \(latitude) Longitude: \(longitude) Address: \(addressString)>"
     }
-    
-    internal init() { }
+    public override var hashValue: Int {
+        return Int(latitude) ^ Int(longitude)
+    }
     
     /**
      A convenience initialiser for creating an address object from a dictionary returned from a FUS based system.
@@ -95,13 +96,6 @@ public class Address {
         return adresses
     }
     
-}
-
-extension Address: Hashable {
-    
-    public var hashValue: Int {
-        return Int(latitude) ^ Int(longitude)
-    }
 }
 
 public func == (lhs: Address, rhs: Address) -> Bool {
