@@ -47,7 +47,7 @@ public class CoreDataTableViewController: UITableViewController, NSFetchedResult
     
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if let sections = fetchedResultsController.sections where sections.count > section {
+        if let sections = fetchedResultsController.sections, sections.count > section {
             
             let sectionInfo = sections[section]
             return sectionInfo.numberOfObjects

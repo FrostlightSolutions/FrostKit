@@ -47,7 +47,7 @@ public class CoreDataCollectionViewController: UICollectionViewController, NSFet
     
     override public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if let sections = fetchedResultsController.sections where sections.count > section {
+        if let sections = fetchedResultsController.sections, sections.count > section {
             
             let sectionInfo = sections[section]
             return sectionInfo.numberOfObjects

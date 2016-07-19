@@ -25,8 +25,8 @@ public class CustomFonts {
     
     /// Loads custom fonts imbedded in the Framework.
     public class func loadCustomFonts() {
-        loadCustomFont(name: "fontawesome-webfont", withExtension: "ttf", bundle: Bundle(for: CustomFonts.self))
-        loadCustomFont(name: "ionicons", withExtension: "ttf", bundle: Bundle(for: CustomFonts.self))
+        loadCustomFont("fontawesome-webfont", withExtension: "ttf", bundle: Bundle(for: CustomFonts.self))
+        loadCustomFont("ionicons", withExtension: "ttf", bundle: Bundle(for: CustomFonts.self))
     }
     
     /**
@@ -35,13 +35,13 @@ public class CustomFonts {
     - parameter fontNames: An array of strings of the font file names.
     - parameter bundle:    The bundle to look for the file names in. By default this uses the main app bundle.
     */
-    public class func loadCustomFonts(fontNames: [NSString], bundle: Bundle = Bundle.main) {
+    public class func loadCustomFonts(_ fontNames: [NSString], bundle: Bundle = Bundle.main) {
         for fontName in fontNames {
             let filename = fontName.components(separatedBy: ".").first
             let ext = fontName.pathExtension
             
-            if let name = filename where name.characters.count > 0 && ext.characters.count > 0 {
-                loadCustomFont(name: name, withExtension: ext, bundle: bundle)
+            if let name = filename, name.characters.count > 0 && ext.characters.count > 0 {
+                loadCustomFont(name, withExtension: ext, bundle: bundle)
             } else {
                 NSLog("ERROR: Failed to load '\(fontName)' font as the name or extension are invalid!")
             }
@@ -55,12 +55,10 @@ public class CustomFonts {
         - parameter ext:     The extention of the file.
         - parameter bundle:  The bundle the files are located in. By default this uses the main app bundle.
     */
-    public class func loadCustomFont(name: String, withExtension ext: String, bundle: Bundle = Bundle.main) {
+    public class func loadCustomFont(_ name: String, withExtension ext: String, bundle: Bundle = Bundle.main) {
         
         var error: Unmanaged<CFError>?
-        guard let url = bundle.urlForResource(name, withExtension: ext),
-            fontData = NSData(contentsOf: url),
-            provider = CGDataProvider(data: fontData) else {
+        guard let url = bundle.urlForResource(name, withExtension: ext), let fontData = try? Data(contentsOf: url), let provider = CGDataProvider(data: fontData) else {
             NSLog("ERROR: Failed to get URL for \"\(name)\" font!")
             return
         }

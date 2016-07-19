@@ -67,11 +67,11 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
         if let searchBar = self.searchBar {
             switch searchBar.selectedScopeButtonIndex {
             case 0:
-                if let searchResults = self.plottedSearchResults where indexPath.row < searchResults.count {
+                if let searchResults = self.plottedSearchResults, indexPath.row < searchResults.count {
                     return searchResults[indexPath.row]
                 }
             case 1:
-                if let searchResults = self.locationSearchResults where indexPath.row < searchResults.count {
+                if let searchResults = self.locationSearchResults, indexPath.row < searchResults.count {
                     return searchResults[indexPath.row]
                 }
             default:
@@ -187,7 +187,7 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
             refreshControl?.beginRefreshing()
             let searchRequest = MKLocalSearchRequest()
             searchRequest.naturalLanguageQuery = searchBar.text
-            if let mapController = self.mapController, mapView = mapController.mapView {
+            if let mapController = self.mapController, let mapView = mapController.mapView {
                 searchRequest.region = mapView.region
             }
             let localSearch = MKLocalSearch(request: searchRequest)

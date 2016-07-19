@@ -126,7 +126,7 @@ public class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     override func loadBaseURL() -> String {
         
         let urlString = super.loadBaseURL()
-        guard let url = URL(string: urlString), webView = self.webView as? UIWebView else {
+        guard let url = URL(string: urlString), let webView = self.webView as? UIWebView else {
             return urlString
         }
         

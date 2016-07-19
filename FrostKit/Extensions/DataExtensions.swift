@@ -34,7 +34,7 @@ extension Data {
     */
     
     // TODO: Change to using generics rahter than just `Int64`.
-    public static func sizeFormattedString(size: Int64) -> String {
+    public static func sizeFormattedString(_ size: Int64) -> String {
         
         let sUnits = ["", "K", "M", "G", "T", "P", "E"]
         let sMaxUnits = sUnits.count - 1
@@ -57,7 +57,7 @@ extension Data {
     
     /// Created a formatted string from the objects length value
     public var lengthFormattedString: String {
-        return Data.sizeFormattedString(size: Int64(count))
+        return Data.sizeFormattedString(Int64(count))
     }
     
 }

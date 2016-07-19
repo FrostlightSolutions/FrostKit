@@ -95,7 +95,7 @@ public class MapViewController: UIViewController {
         if locationButton == true {
             
             let locationButton: UIBarButtonItem
-            if let activeLocationIcon = self.activeLocationIcon, inactiveLocationIcon = self.inactiveLocationIcon {
+            if let activeLocationIcon = self.activeLocationIcon, let inactiveLocationIcon = self.inactiveLocationIcon {
                 
                 let icon: UIImage
                 if mapController.trackingUser == true {

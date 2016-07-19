@@ -22,7 +22,7 @@ public class Annotation: NSObject, MKAnnotation {
     }
     /// The name of the address.
     public var title: String? {
-        if let containdedAnnotations = self.containdedAnnotations where containdedAnnotations.count > 0 {
+        if let containdedAnnotations = self.containdedAnnotations, containdedAnnotations.count > 0 {
             let tense: String
             if containdedAnnotations.count == 1 {
                 tense = FKLocalizedString(key: "ITEM", comment: "Item")
@@ -35,7 +35,7 @@ public class Annotation: NSObject, MKAnnotation {
     }
     /// The address string of the address.
     public var subtitle: String? {
-        if let containdedAnnotations = self.containdedAnnotations where containdedAnnotations.count > 0 {
+        if let containdedAnnotations = self.containdedAnnotations, containdedAnnotations.count > 0 {
             return ""
         }
         return address?.addressString

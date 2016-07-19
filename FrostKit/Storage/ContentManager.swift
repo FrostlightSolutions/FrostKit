@@ -17,7 +17,7 @@ import Foundation
 public class ContentManager {
     
     // A dictioary holding the metadata for all managed objects, where the key is an absolute path and the value is the date.
-    private lazy var contentMetadata = [String: NSDate]()
+    private lazy var contentMetadata = [String: Date]()
     
     private class func maxSavedTimeInSeconds() -> TimeInterval {
         return Date.weekInSeconds() * 2
@@ -104,7 +104,7 @@ public class ContentManager {
     - parameter path:    The absolute path of the item.
     */
     public class func save(path: String) {
-        shared.contentMetadata[path] = NSDate()
+        shared.contentMetadata[path] = Date()
     }
     
     /**

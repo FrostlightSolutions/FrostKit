@@ -151,7 +151,7 @@ public class LocalStorage {
     */
     private class func absoluteURL(baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> URL? {
         
-        guard let name = fileName, ext = fileExtension else {
+        guard let name = fileName, let ext = fileExtension else {
             return nil
         }
         
@@ -195,8 +195,7 @@ public class LocalStorage {
         
         createDirectory(url: dirURL)
         
-        guard let name = fileName, ext = fileExtension,
-            url = try? dirURL.appendingPathComponent(name).appendingPathExtension(ext) else {
+        guard let name = fileName, let ext = fileExtension, let url = try? dirURL.appendingPathComponent(name).appendingPathExtension(ext) else {
             return false
         }
         
@@ -269,7 +268,7 @@ public class LocalStorage {
     private class func move(fromBaseURL: URL, toBaseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
         
         guard let fromURL = absoluteURL(baseURL: fromBaseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension),
-            toURL = absoluteURL(baseURL: toBaseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) else {
+            let toURL = absoluteURL(baseURL: toBaseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) else {
             return
         }
         try FileManager.default.moveItem(at: fromURL, to: toURL)
@@ -315,7 +314,7 @@ public class LocalStorage {
     */
     public class func load(baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> AnyObject? {
         
-        guard let url = absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension), path = url.path else {
+        guard let url = absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension), let path = url.path else {
             return nil
         }
         return NSKeyedUnarchiver.unarchiveObject(withFile: path)

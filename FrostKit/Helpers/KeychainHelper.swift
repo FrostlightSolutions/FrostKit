@@ -15,7 +15,7 @@ public class KeychainHelper {
     
     private class func setupSearchDirectory() -> NSMutableDictionary {
         
-        let appName = Bundle.appName(bundle: Bundle(for: KeychainHelper.self))
+        let appName = Bundle.appName(Bundle(for: KeychainHelper.self))
         
         let secDict = NSMutableDictionary()
         secDict.setObject(String(kSecClassGenericPassword), forKey: String(kSecClass))
@@ -29,7 +29,7 @@ public class KeychainHelper {
         return secDict
     }
     
-    private class func searchKeychainForMatchingData() -> NSData? {
+    private class func searchKeychainForMatchingData() -> Data? {
         
         let secDict = setupSearchDirectory()
         secDict.setObject(String(kSecMatchLimitOne), forKey: String(kSecMatchLimit))
@@ -40,7 +40,7 @@ public class KeychainHelper {
         let status = SecItemCopyMatching(secDict, &foundDict)
         
         if status == noErr {
-            return foundDict as? NSData
+            return foundDict as? Data
         } else {
             let error = NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
             NSLog("ERROR: Search Keychain for Data: \(error.localizedDescription)")
@@ -59,7 +59,7 @@ public class KeychainHelper {
     public class func details(username: String) -> AnyObject? {
         
         let valueData = searchKeychainForMatchingData()
-        if let data = valueData as? Data {
+        if let data = valueData {
             
             let valueDict = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSDictionary
             if let dict = valueDict {

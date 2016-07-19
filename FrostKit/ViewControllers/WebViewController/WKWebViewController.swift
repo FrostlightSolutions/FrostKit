@@ -88,7 +88,7 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
             updateProgrssViewVisability()
             updateActivityViewVisability()
         case #keyPath(WKWebView.title):
-            if let webView = self.webView as? WKWebView where titleOverride == nil {
+            if let webView = self.webView as? WKWebView, titleOverride == nil {
                 navigationItem.title = webView.title
             }
         case #keyPath(WKWebView.canGoBack):
@@ -170,7 +170,7 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     override func loadBaseURL() -> String {
         
         let urlString = super.loadBaseURL()
-        guard let url = URL(string: urlString), webView = self.webView as? WKWebView else {
+        guard let url = URL(string: urlString), let webView = self.webView as? WKWebView else {
             return urlString
         }
         

@@ -48,7 +48,7 @@ public class AppStoreHelper {
         }
     }
     public var formattedFileSize: String?
-    public var releaseDate: NSDate?
+    public var releaseDate: Date?
     private var bundleId: String?
     
     // MARK: - Updates
@@ -60,7 +60,7 @@ public class AppStoreHelper {
     
     - parameter completed: Returned when to update request is completed and returns an error is it failed.
     */
-    public func updateAppStoreData(completed: ((NSError?) -> Void)? = nil) {
+    public func updateAppStoreData(_ completed: ((NSError?) -> Void)? = nil) {
         
         guard let appStoreID = FrostKit.appStoreID else {
             completed?(NSError.error(withMessage: "No app store ID set."))
@@ -73,7 +73,7 @@ public class AppStoreHelper {
         }
         urlString += "/lookup?id=\(appStoreID)"
         
-        guard let url = NSURL(string: urlString) else {
+        guard let url = URL(string: urlString) else {
             completed?(NSError.error(withMessage: "URL could not be created from string: \(urlString)"))
             return
         }
@@ -86,8 +86,8 @@ public class AppStoreHelper {
             } else if let jsonData = data {
                 
                 guard let json = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: AnyObject],
-                    results = json?["results"] as? [[String: AnyObject]],
-                    appDetails = results.first else {
+                    let results = json?["results"] as? [[String: AnyObject]],
+                    let appDetails = results.first else {
                         completed?(NSError.error(withMessage: "Could not parse JSON from data."))
                     return
                 }
@@ -130,9 +130,9 @@ public class AppStoreHelper {
      */
     public func appUpdateNeeded() -> UpdateStatus {
         
-        if let appStoreVersion = self.version, bundleId = self.bundleId, bundle = Bundle(identifier: bundleId) {
+        if let appStoreVersion = self.version, let bundleId = self.bundleId, let bundle = Bundle(identifier: bundleId) {
             
-            let localVersion = Bundle.appVersion(bundle: bundle)
+            let localVersion = Bundle.appVersion(bundle)
             let comparisonResult = localVersion.compare(appStoreVersion, options: .numeric)
             if comparisonResult == .orderedAscending {
                 return .updateNeeded

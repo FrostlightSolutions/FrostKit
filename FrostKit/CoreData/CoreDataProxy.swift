@@ -29,7 +29,7 @@ public class CoreDataProxy {
         var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         
         let url: URL
-        if let groupIdentifier = self.groupIdentifier, sharedContainerURL = LocalStorage.sharedContainerURL(groupIdentifier: groupIdentifier) {
+        if let groupIdentifier = self.groupIdentifier, let sharedContainerURL = LocalStorage.sharedContainerURL(groupIdentifier: groupIdentifier) {
             url = sharedContainerURL
         } else {
             url = try! LocalStorage.documentsURL().appendingPathComponent(self.storeName)
@@ -80,23 +80,23 @@ public class CoreDataProxy {
     
     // MARK: - Core Data Saving support
     
-    public func saveContextMain(complete: (() -> Void)?) {
-        saveContext(context: managedObjectContextMain, complete: complete)
+    public func saveContextMain(_ complete: (() -> Void)?) {
+        save(context: managedObjectContextMain, complete: complete)
     }
     
-    public func saveContextPrivate(complete: (() -> Void)?) {
-        saveContext(context: managedObjectContextPrivate, complete: complete)
+    public func saveContextPrivate(_ complete: (() -> Void)?) {
+        save(context: managedObjectContextPrivate, complete: complete)
     }
     
-    public func saveAllContexts(complete: (() -> Void)?) {
+    public func saveAllContexts(_ complete: (() -> Void)?) {
         saveContextPrivate { () -> Void in
-            self.saveContextMain(complete: { () -> Void in
+            self.saveContextMain({ () -> Void in
                 complete?()
             })
         }
     }
     
-    public func saveContext(context: NSManagedObjectContext?, complete: (() -> Void)?) {
+    public func save(context: NSManagedObjectContext?, complete: (() -> Void)?) {
         context?.perform { () -> Void in
             if context!.hasChanges {
                 do {

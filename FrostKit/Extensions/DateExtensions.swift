@@ -72,19 +72,19 @@ extension Date {
     
     /// `true` if the date is yesterday, `false` if it isn't.
     public var isYesterday: Bool {
-        let date = Date().dateByAdding(days: -1)
-        return compare(date: date, option: .equalTo)
+        let date = Date().dateByAdding(-1)
+        return compare(date, option: .equalTo)
     }
     
     /// `true` if the date is today, `false` if it isn't.
     public var isToday: Bool {
-        return compare(date: Date(), option: .equalTo)
+        return compare(Date(), option: .equalTo)
     }
     
     /// `true` if the date is tomorrow, `false` if it isn't.
     public var isTomorrow: Bool {
-        let date = Date().dateByAdding(days: 1)
-        return compare(date: date, option: .equalTo)
+        let date = Date().dateByAdding(1)
+        return compare(date, option: .equalTo)
     }
     
     /// `true` if the date is a weekday, `false` if it isn't.
@@ -162,7 +162,7 @@ extension Date {
     /// Returns the time of the date in hours
     public var timeInHours: TimeInterval? {
         
-        guard let minute = self.minute, hour = self.hour else {
+        guard let minute = self.minute, let hour = self.hour else {
             return nil
         }
         
@@ -197,7 +197,7 @@ extension Date {
     
     - returns: The number of days beteen `fromDate` and `toDate`
     */
-    public static func daysBetween(fromDate: Date, toDate: Date) -> Int? {
+    public static func daysBetween(from fromDate: Date, to toDate: Date) -> Int? {
         
         // TODO: This might need changeing from `NSDate` to `Date` once range(of:start:interval:options:) is updated.
         var dateFrom: NSDate?
@@ -262,7 +262,7 @@ extension Date {
     
     - returns: `true` if the dates conform with the date comparison type check, `false` if not
     */
-    public func compare(date: Date, option: DateCompareType, stripTime: Bool = true) -> Bool {
+    public func compare(_ date: Date, option: DateCompareType, stripTime: Bool = true) -> Bool {
         
         var compare: ComparisonResult = .orderedSame
         if stripTime == true {
@@ -298,8 +298,8 @@ extension Date {
     
     - returns: `true` if the comparison date is before date, `false` if not
     */
-    public func isBefore(date: Date) -> Bool {
-        return compare(date: date, option: .before)
+    public func isBefore(_ date: Date) -> Bool {
+        return compare(date, option: .before)
     }
     
     /**
@@ -309,8 +309,8 @@ extension Date {
     
     - returns: `true` if the comparison date is after date, `false` if not
     */
-    public func isAfter(date: Date) -> Bool {
-        return compare(date: date, option: .after)
+    public func isAfter(_ date: Date) -> Bool {
+        return compare(date, option: .after)
     }
     
     // MARK: -
@@ -331,7 +331,7 @@ extension Date {
     
     - returns: A copy of the current date `days` added to it
     */
-    public func dateByAdding(days: Int) -> Date {
+    public func dateByAdding(_ days: Int) -> Date {
         
         if days == 0 {
             return self
