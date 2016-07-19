@@ -38,7 +38,7 @@ class TaskStoreTests: XCTestCase {
     
     func testRequestStoreRemove() {
         
-        let expectation = self.expectation(withDescription: "Test Request Store")
+        let expectation = self.expectation(description: "Test Request Store")
         
         let store = TaskStore()
         
@@ -57,7 +57,7 @@ class TaskStoreTests: XCTestCase {
         store.add(task, urlString: urlString)
         task.resume()
         
-        waitForExpectations(withTimeout: 120, handler: { (completionHandler) -> Void in })
+        waitForExpectations(timeout: 120, handler: { (completionHandler) -> Void in })
     }
     
 }

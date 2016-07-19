@@ -23,7 +23,7 @@ class AppStoreHelperTests: XCTestCase {
     
     func testAppStoreUpdate() {
         
-        let expectation = self.expectation(withDescription: "Test App Store Update")
+        let expectation = self.expectation(description: "Test App Store Update")
         
         FrostKit.setup(appStoreID: "571254467")
         
@@ -37,7 +37,7 @@ class AppStoreHelperTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectations(withTimeout: 120, handler: { (completionHandler) -> Void in })
+        waitForExpectations(timeout: 120, handler: { (completionHandler) -> Void in })
     }
     
 }
