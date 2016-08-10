@@ -110,7 +110,7 @@ public class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
         updateBackForwardButtons()
     }
     
-    public func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
+    public func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
         
         updateActivityViewVisability()
         updateBackForwardButtons()
