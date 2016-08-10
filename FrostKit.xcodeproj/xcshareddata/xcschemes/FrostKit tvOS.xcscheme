@@ -37,6 +37,11 @@
                BlueprintName = "FrostKit tvOS Tests"
                ReferencedContainer = "container:FrostKit.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "KeychainHelperTests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>
