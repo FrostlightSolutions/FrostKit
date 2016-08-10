@@ -68,7 +68,7 @@ public class AppStoreHelper {
         }
         
         var urlString = "https://itunes.apple.com"
-        if let code = Locale.autoupdatingCurrent.object(forKey: .countryCode) as? String {
+        if let code = Locale.autoupdatingCurrent.regionCode {   // Should this be `regionCode` or `languageCode`?
             urlString += "/\(code.lowercased())"
         }
         urlString += "/lookup?id=\(appStoreID)"

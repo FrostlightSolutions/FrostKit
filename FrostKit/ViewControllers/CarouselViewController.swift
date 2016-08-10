@@ -19,7 +19,7 @@ public class CarouselViewController: UIViewController, UICollectionViewDataSourc
     @IBOutlet public weak var collectionView: UICollectionView! {
         didSet {
             
-            collectionView.backgroundColor = .white()
+            collectionView.backgroundColor = .white
             collectionView.showsHorizontalScrollIndicator = false
             collectionView.showsVerticalScrollIndicator = false
             collectionView.isPagingEnabled = true
@@ -47,7 +47,7 @@ public class CarouselViewController: UIViewController, UICollectionViewDataSourc
     }
     public var numberOfPages: Int {
         
-        if collectionView.numberOfSections() > 0 {
+        if collectionView.numberOfSections > 0 {
             return collectionView.numberOfItems(inSection: 0)
         } else {
             return 0

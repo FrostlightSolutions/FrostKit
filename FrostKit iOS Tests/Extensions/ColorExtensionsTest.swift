@@ -55,9 +55,9 @@ class ColorExtensionsTest: XCTestCase {
         measure { () -> Void in
             
             // 4 char hex should not parse and return default clearColor()
-            XCTAssert(Color.color(hexString: "#1234") == Color.clear(), "Pass")
+            XCTAssert(Color.color(hexString: "#1234") == Color.clear, "Pass")
             // Regardless of #
-            XCTAssert(Color.color(hexString: "1234") == Color.clear(), "Pass")
+            XCTAssert(Color.color(hexString: "1234") == Color.clear, "Pass")
         }
     }
     

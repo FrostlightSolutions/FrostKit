@@ -22,7 +22,7 @@ extension UIImage {
     */
     public func image(maxSize size: CGSize) -> UIImage? {
         
-        let size = self.size.apply(transform: CGAffineTransform(scaleX: 0.5, y: 0.5))
+        let size = self.size.applying(CGAffineTransform(scaleX: 0.5, y: 0.5))
         let hasAlpha = false
         
         var scaledSize = size

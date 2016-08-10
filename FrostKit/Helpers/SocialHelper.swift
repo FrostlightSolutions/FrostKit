@@ -218,7 +218,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     
     // MARK: - MFMailComposeViewControllerDelegate Methods
     
-    public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: NSError?) {
+    public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         
         switch result {
         case .cancelled:

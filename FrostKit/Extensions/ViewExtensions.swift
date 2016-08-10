@@ -20,7 +20,7 @@ extension UIView {
         if let window = self.window {
             scale = window.screen.scale
         } else {
-            scale = UIScreen.main().scale
+            scale = UIScreen.main.scale
         }
         
         UIGraphicsBeginImageContextWithOptions(bounds.size, false, scale)

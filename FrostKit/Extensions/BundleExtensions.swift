@@ -21,7 +21,7 @@ extension Bundle {
      - returns: The bundle version of the app.
      */
     public class func appVersion(_ bundle: Bundle = Bundle.main) -> String {
-        return bundle.objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
+        return bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     }
     
     /**
@@ -32,7 +32,7 @@ extension Bundle {
      - returns: The build number of the app.
      */
     public class func appBuildNumber(_ bundle: Bundle = Bundle.main) -> String {
-        return bundle.objectForInfoDictionaryKey("CFBundleVersion") as! String
+        return bundle.object(forInfoDictionaryKey: "CFBundleVersion") as! String
     }
     
     /**
@@ -43,7 +43,7 @@ extension Bundle {
      - returns: The version of the app.
      */
     public class func appName(_ bundle: Bundle = Bundle.main) -> String {
-        return bundle.objectForInfoDictionaryKey("CFBundleName") as! String
+        return bundle.object(forInfoDictionaryKey: "CFBundleName") as! String
     }
     
 }

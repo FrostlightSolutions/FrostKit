@@ -17,8 +17,8 @@ public class CoreDataController: NSObject {
     public var entityName: String! { return nil }
     public var sectionNameKeyPath: String? { return nil }
     public var cacheName: String? { return nil }
-    public var sortDescriptors: [SortDescriptor] { return Array<SortDescriptor>() }
-    public var predicate: Predicate? { return nil }
+    public var sortDescriptors: [NSSortDescriptor] { return [NSSortDescriptor]() }
+    public var predicate: NSPredicate? { return nil }
     private var _fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
     public var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> {
         if _fetchedResultsController != nil {

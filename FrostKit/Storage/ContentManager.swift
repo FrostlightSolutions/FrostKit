@@ -93,9 +93,7 @@ public class ContentManager {
     - parameter url:    The absolute URL of the item.
     */
     public class func save(url: URL) {
-        if let path = url.path {
-            save(path: path)
-        }
+        save(path: url.path)
     }
     
     /**
@@ -113,9 +111,7 @@ public class ContentManager {
     - parameter url:    The absolute URL of the item.
     */
     public class func remove(url: URL) {
-        if let path = url.path {
-            remove(path: path)
-        }
+        remove(path: url.path)
     }
     
     /**

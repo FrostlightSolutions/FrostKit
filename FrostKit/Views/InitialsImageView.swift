@@ -55,7 +55,7 @@ public class InitialsImageView: ImageView {
     }
     @IBOutlet public  weak var initialsLabel: UILabel! {
         didSet {
-            initialsLabel.backgroundColor = .clear()
+            initialsLabel.backgroundColor = .clear
         }
     }
     

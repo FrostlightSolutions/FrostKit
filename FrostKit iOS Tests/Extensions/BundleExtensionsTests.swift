@@ -25,7 +25,7 @@ class BundleExtensionsTests: XCTestCase {
 
     func testBundleAppVersion() {
         
-        let version = bundle.objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
+        let version = bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
         measure { () -> Void in
             XCTAssert(Bundle.appVersion(self.bundle) == version)
         }
@@ -33,7 +33,7 @@ class BundleExtensionsTests: XCTestCase {
     
     func testBundleAppBuildNumber() {
         
-        let buildNumber = bundle.objectForInfoDictionaryKey("CFBundleVersion") as! String
+        let buildNumber = bundle.object(forInfoDictionaryKey: "CFBundleVersion") as! String
         measure { () -> Void in
             XCTAssert(Bundle.appBuildNumber(self.bundle) == buildNumber)
         }

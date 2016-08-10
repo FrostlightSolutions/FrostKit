@@ -18,7 +18,7 @@ extension UIDevice {
     */
     struct SystemVersion {
         /// The full system version.
-        static let version = UIDevice.current().systemVersion
+        static let version = UIDevice.current.systemVersion
         private static let versionComponents = version.components(separatedBy: ".")
         /// The major system version.
         static var majorVersion: Int {

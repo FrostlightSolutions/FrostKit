@@ -18,8 +18,8 @@ extension TimeZone {
     
     - returns: A UTC time zone object.
     */
-    public class func utc() -> TimeZone {
-        return TimeZone(name: "UTC")!
+    public static func utc() -> TimeZone {
+        return TimeZone(identifier: "UTC")!
     }
     
 }

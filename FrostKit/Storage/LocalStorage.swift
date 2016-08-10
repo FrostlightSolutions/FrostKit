@@ -78,7 +78,7 @@ public class LocalStorage {
     - returns: Documents directory URL.
     */
     public class func documentsURL() -> URL {
-        return FileManager.default.urlsForDirectory(.documentDirectory, inDomains: .userDomainMask)[0]
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     }
     
     /**
@@ -87,7 +87,7 @@ public class LocalStorage {
     - returns: Caches directory URL.
     */
     public class func cachesURL() -> URL {
-        return FileManager.default.urlsForDirectory(.cachesDirectory, inDomains: .userDomainMask)[0]
+        return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
     }
     
     /**
@@ -98,7 +98,7 @@ public class LocalStorage {
      - returns: Shared container URL, or `nil` if not available.
      */
     public class func sharedContainerURL(groupIdentifier: String) -> URL? {
-        return FileManager.default.containerURLForSecurityApplicationGroupIdentifier(groupIdentifier)
+        return FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupIdentifier)
     }
     
     /**
@@ -155,7 +155,7 @@ public class LocalStorage {
             return nil
         }
         
-        return try? baseURL.appendingPathComponent(reletivePath).appendingPathComponent(name).appendingPathExtension(ext)
+        return baseURL.appendingPathComponent(reletivePath).appendingPathComponent(name).appendingPathExtension(ext)
     }
     
     // MARK: - Directory Creation Methods
@@ -189,28 +189,22 @@ public class LocalStorage {
     */
     public class func save(data: AnyObject, baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
         
-        guard let dirURL = try? baseURL.appendingPathComponent(reletivePath) else {
-            return false
-        }
-        
+        let dirURL = baseURL.appendingPathComponent(reletivePath)
         createDirectory(url: dirURL)
         
-        guard let name = fileName, let ext = fileExtension, let url = try? dirURL.appendingPathComponent(name).appendingPathExtension(ext) else {
+        guard let name = fileName, let ext = fileExtension else {
             return false
         }
         
-        if let path = url.path {
-            
-            let success = NSKeyedArchiver.archiveRootObject(data, toFile: path)
-            
-            if success == false {
-                NSLog("Error: Can't save object to file at path: \(path)")
-            }
-            
-            return success
+        let url = dirURL.appendingPathComponent(name).appendingPathExtension(ext)
+        let path = url.path
+        let success = NSKeyedArchiver.archiveRootObject(data, toFile: path)
+        
+        if success == false {
+            NSLog("Error: Can't save object to file at path: \(path)")
         }
         
-        return false
+        return success
     }
     
     /**
@@ -314,10 +308,10 @@ public class LocalStorage {
     */
     public class func load(baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> AnyObject? {
         
-        guard let url = absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension), let path = url.path else {
+        guard let url = absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) else {
             return nil
         }
-        return NSKeyedUnarchiver.unarchiveObject(withFile: path)
+        return NSKeyedUnarchiver.unarchiveObject(withFile: url.path)
     }
     
     /**

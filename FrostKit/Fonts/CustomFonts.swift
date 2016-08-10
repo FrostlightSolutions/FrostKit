@@ -58,7 +58,7 @@ public class CustomFonts {
     public class func loadCustomFont(_ name: String, withExtension ext: String, bundle: Bundle = Bundle.main) {
         
         var error: Unmanaged<CFError>?
-        guard let url = bundle.urlForResource(name, withExtension: ext), let fontData = try? Data(contentsOf: url), let provider = CGDataProvider(data: fontData) else {
+        guard let url = bundle.url(forResource: name, withExtension: ext), let fontData = try? Data(contentsOf: url), let provider = CGDataProvider(data: fontData) else {
             NSLog("ERROR: Failed to get URL for \"\(name)\" font!")
             return
         }
@@ -69,14 +69,18 @@ public class CustomFonts {
             return
         }
         
-        if let anError = error {
-            let errorCode = CFErrorGetCode(anError.takeRetainedValue())
-            if errorCode == CTFontManagerError.alreadyRegistered.rawValue {
-                NSLog("Already loaded '\(name)'")
-            } else {
-                let errorDescription = CFErrorCopyDescription(anError.takeRetainedValue())
-                NSLog("ERROR: Failed to load '\(name)' font with error: \(errorDescription)!")
-            }
+        if let _ = error {
+            NSLog("Already loaded or failed to load '\(name)'")
+            
+            // TODO: Re-enable once CFFont bridgable error is fixed!
+//        if let anError = error {
+//            let errorCode = CFErrorGetCode(anError.takeRetainedValue())
+//            if errorCode == CTFontManagerError.alreadyRegistered.rawValue {
+//                NSLog("Already loaded '\(name)'")
+//            } else {
+//                let errorDescription = CFErrorCopyDescription(anError.takeRetainedValue())
+//                NSLog("ERROR: Failed to load '\(name)' font with error: \(errorDescription)!")
+//            }
         } else {
             NSLog("Loaded '\(name)' successfully")
         }
@@ -86,7 +90,7 @@ public class CustomFonts {
     /// Loops though all the fonts families loaded onto the device and prints them to the console.
     public class func printAllFontFamilies() {
         
-        for fontFamily in UIFont.familyNames() {
+        for fontFamily in UIFont.familyNames {
             NSLog("\(fontFamily): \(UIFont.fontNames(forFamilyName: fontFamily))")
         }
     }

@@ -114,7 +114,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     /// When the map automatically zooms to show all, if this value is set to true, then the users annoation is automatically included in that.
     @IBInspectable public var zoomToShowAllIncludesUser: Bool = true
     private var regionSpanBeforeChange: MKCoordinateSpan?
-    let clusterCalculationsQueue = DispatchQueue.global(attributes: .qosUserInteractive)
+    let clusterCalculationsQueue = DispatchQueue.global(qos: .userInitiated)
     var cancelClusterCalculations = false
     
     deinit {
@@ -472,8 +472,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      */
     public func zoom(toMapPoints points: [MKMapPoint]) {
         let count = points.count
-        let cPoints = UnsafeMutablePointer<MKMapPoint>.init(allocatingCapacity: count)
-        cPoints.initializeFrom(points)
+        let cPoints = UnsafeMutablePointer<MKMapPoint>.allocate(capacity: count)
+        cPoints.initialize(from: points)
         zoom(toMapPoints: cPoints, count: count)
         cPoints.deinitialize()
     }
@@ -792,7 +792,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     public func configureOverlayRenderer(mapView: MKMapView, overlay: MKOverlay) -> MKOverlayRenderer {
         if let polyline = overlay as? MKPolyline {
             let polylineRenderer = MKPolylineRenderer(polyline: polyline)
-            polylineRenderer.strokeColor = UIColor.blue()
+            polylineRenderer.strokeColor = UIColor.blue
             polylineRenderer.lineWidth = 4
             polylineRenderer.lineCap = .round
             polylineRenderer.lineJoin = .round
@@ -837,19 +837,10 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         }
     }
     
-    public func mapView(_ mapView: MKMapView, didFailToLocateUserWithError error: NSError) {
+    public func mapView(_ mapView: MKMapView, didFailToLocateUserWithError error: Error) {
         
         hasPlottedInitUsersLocation = false
         zoomToShowAll()
-        
-        switch error.code {
-        case CLError.locationUnknown.rawValue:
-            break
-        case CLError.denied.rawValue:
-            break
-        default:
-            break
-        }
     }
     
     // MARL: - CLLocationManagerDelegate Methods
