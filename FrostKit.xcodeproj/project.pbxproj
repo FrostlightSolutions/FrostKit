@@ -33,6 +33,7 @@
 
 /* Begin PBXBuildFile section */
 		18032B1B1A84F99400BEBB41 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EC19DCBB5B008A1506 /* FontExtensions.swift */; };
+		1806BD2D1D625FE800434A5D /* CloudKitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1806BD2C1D625FE800434A5D /* CloudKitTableViewController.swift */; };
 		1811D7B81A0AD1CA00E8B873 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B41A0AD1CA00E8B873 /* BaseWebViewController.swift */; };
 		1811D7B91A0AD1CA00E8B873 /* UIWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B51A0AD1CA00E8B873 /* UIWebViewController.swift */; };
 		1811D7BA1A0AD1CA00E8B873 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B61A0AD1CA00E8B873 /* WebViewController.swift */; };
@@ -231,6 +232,7 @@
 
 /* Begin PBXFileReference section */
 		180664F91A93737200887B9D /* ActivityIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorManager.swift; sourceTree = "<group>"; };
+		1806BD2C1D625FE800434A5D /* CloudKitTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitTableViewController.swift; sourceTree = "<group>"; };
 		1811D76A1A0ACAED00E8B873 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		1811D7B41A0AD1CA00E8B873 /* BaseWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
 		1811D7B51A0AD1CA00E8B873 /* UIWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIWebViewController.swift; sourceTree = "<group>"; };
@@ -365,6 +367,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1806BD2B1D625FE800434A5D /* CloudKit */ = {
+			isa = PBXGroup;
+			children = (
+				1806BD2C1D625FE800434A5D /* CloudKitTableViewController.swift */,
+			);
+			path = CloudKit;
+			sourceTree = "<group>";
+		};
 		1811D7B31A0AD1CA00E8B873 /* WebViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -469,6 +479,7 @@
 				1899C4F91A6D151A001638CF /* Service */,
 				18C0065F19DB5BDD00811755 /* Storage */,
 				1844D1CF1D15F25A00E87EA8 /* CoreData */,
+				1806BD2B1D625FE800434A5D /* CloudKit */,
 				18839B4119DA27A800760157 /* ViewControllers */,
 				18B0A5D11D15D2BF00C6985E /* InterfaceControllers */,
 				18DD78F81A8CA6DF00379FB5 /* Views */,
@@ -1118,6 +1129,7 @@
 				18DC212B19DEA21000FEB57E /* ViewControllerExtensions.swift in Sources */,
 				18EA123F19DC79F100FD858D /* DataExtensions.swift in Sources */,
 				18839B4719DA27AE00760157 /* SocialHelper.swift in Sources */,
+				1806BD2D1D625FE800434A5D /* CloudKitTableViewController.swift in Sources */,
 				1844D1DB1D15F31800E87EA8 /* CoreDataCollectionViewController.swift in Sources */,
 				182884511CBEB12200331A54 /* MapSearchViewController.swift in Sources */,
 				1811D7BA1A0AD1CA00E8B873 /* WebViewController.swift in Sources */,
