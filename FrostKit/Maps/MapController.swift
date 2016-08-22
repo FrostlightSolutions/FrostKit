@@ -111,7 +111,11 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     /// The location manager automatically created when assigning the map view to the map controller. It's only use if for getting the user's access to location services.
     private var locationManager: CLLocationManager?
     /// An array of addresses plotted on the map view.
-    public var addresses = [Address]()
+    public var addresses: [Address] {
+        return Array<Address>(addressesDict.values)
+    }
+    private var addressesDict = [NSObject: Address]()
+    
     /// A dictionary of annotations plotted to the map view with the address object as the key.
     public var annotations = [NSObject: MKAnnotation]()
     /// When the map automatically zooms to show all, if this value is set to true, then the users annoation is automatically included in that.
@@ -132,7 +136,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         
         cancelClusterCalculations = true
         
-        addresses.removeAll(keepCapacity: false)
+        addressesDict.removeAll(keepCapacity: false)
         annotations.removeAll(keepCapacity: false)
         
         removeAllAnnotations()
@@ -189,30 +193,27 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
             return
         }
         
-        if let index = addresses.indexOf(address) {
-            addresses[index] = address
-        } else {
-            addresses.append(address)
-        }
+        // Update or add the address
+        addressesDict[address.key] = address
         
-        var annotation: Annotation?
-        if let currentAnnotation = annotations[address] as? Annotation {
+        let annotation: Annotation
+        if let currentAnnotation = annotations[address.key] as? Annotation {
             // Annotation already exists, update the address
             currentAnnotation.updateAddress(address)
             annotation = currentAnnotation
         } else {
             // No previous annotation for this addres, create one
             let newAnnotation = Annotation(address: address)
-            annotations[address] = newAnnotation
             annotation = newAnnotation
         }
         
-        if let currentAnnotation = annotation {
-            _mapView?.addAnnotation(currentAnnotation)
-            
-            if plottingAsBulk == false {
-                updateVisableAnnotations()
-            }
+        // Update annotation in cache
+        annotations[address.key] = annotation
+        
+        _mapView?.addAnnotation(annotation)
+        
+        if plottingAsBulk == false {
+            updateVisableAnnotations()
         }
     }
     
@@ -237,7 +238,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     */
     public func clearData() {
         removeAllAnnotations(true)
-        addresses.removeAll(keepCapacity: false)
+        addressesDict.removeAll(keepCapacity: false)
     }
     
     // MARK: - Annotation Clustering

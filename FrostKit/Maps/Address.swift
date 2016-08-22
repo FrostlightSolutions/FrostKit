@@ -45,6 +45,9 @@ public class Address: NSObject {
     public override var hashValue: Int {
         return Int(latitude) ^ Int(longitude)
     }
+    public var key: String {
+        return "\(latitude)-\(longitude)"
+    }
     
     /**
      A convenience initialiser for creating an address object from a dictionary returned from a FUS based system.
