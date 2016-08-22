@@ -35,7 +35,7 @@ public class Annotation: NSObject, MKAnnotation {
     /// The address string of the address.
     public var subtitle: String? {
         if let containdedAnnotations = self.containdedAnnotations where containdedAnnotations.count > 0 {
-            return " "
+            return ""
         }
         return address?.addressString
     }

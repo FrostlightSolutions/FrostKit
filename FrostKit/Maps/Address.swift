@@ -35,9 +35,9 @@ public class Address: NSObject {
         }
     }
     /// The name of the address object.
-    public var name = " "
+    public var name = "N/A"
     /// The address string of the object.
-    public var addressString = " "
+    public var addressString = ""
     /// Returns a string that represents the contents of the receiving class.
     public override var description: String {
         return "<Latitude: \(latitude) Longitude: \(longitude) Address: \(addressString)>"

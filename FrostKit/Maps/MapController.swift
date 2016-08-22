@@ -376,10 +376,11 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
             
             filteredAllAnnotationsInBucket.remove(annotationForGrid)
             
-            // Give the annotationForGrid a reference to all the annotations it will represent
-            annotationForGrid.containdedAnnotations = Array<Annotation>(filteredAllAnnotationsInBucket)
-            
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+                // Give the annotationForGrid a reference to all the annotations it will represent
+                annotationForGrid.containdedAnnotations = Array<Annotation>(filteredAllAnnotationsInBucket)
+                
                 mapView.addAnnotation(annotationForGrid)
             })
             
@@ -387,7 +388,9 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
             for annotation in filteredAllAnnotationsInBucket {
                 
                 // Give all the other annotations a reference to the one which is representing then.
-                annotation.clusterAnnotation = annotationForGrid
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    annotation.clusterAnnotation = annotationForGrid
+                })
                 
                 if visableAnnotationsInBucket.contains(annotation) {
                     
