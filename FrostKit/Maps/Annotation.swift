@@ -15,7 +15,12 @@ import MapKit
 public class Annotation: NSObject, MKAnnotation {
     
     /// The address object for the annotation.
-    public var address: Address?
+    // Whenever the address is set, make sure to clear/reset the `containdedAnnotations`
+    public var address: Address? {
+        didSet {
+            containdedAnnotations = nil
+        }
+    }
     /// The coordinate of the address.
     public var coordinate: CLLocationCoordinate2D {
         return address?.coordinate ?? CLLocationCoordinate2D()
@@ -41,6 +46,7 @@ public class Annotation: NSObject, MKAnnotation {
         return address?.addressString
     }
     // If the annotation is a clustered annotation, this value holds all the annotations it represents.
+    // If `containdedAnnotations` is not nil and has more then 0 count, then it is probably being shown
     public var containdedAnnotations: [Annotation]? {
         didSet {
             if containdedAnnotations != nil {
@@ -49,6 +55,7 @@ public class Annotation: NSObject, MKAnnotation {
         }
     }
     // If the annotation is part of a clustered annotation, this represent the visable annotation.
+    // If `clusterAnnotation` is not nil, it's probably not being shown
     public var clusterAnnotation: Annotation? {
         didSet {
             if clusterAnnotation != nil {
