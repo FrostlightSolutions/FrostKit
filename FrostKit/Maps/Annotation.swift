@@ -19,6 +19,7 @@ public class Annotation: NSObject, MKAnnotation {
     public var address: Address? {
         didSet {
             containdedAnnotations = nil
+            clusterAnnotation = nil
         }
     }
     /// The coordinate of the address.

@@ -368,7 +368,20 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
             }
         }
         
-        if filteredAllAnnotationsInBucket.count > 0 {
+        // If filteredAllAnnotationsInBucket just contains a single anntation, then plot that
+        if filteredAllAnnotationsInBucket.count == 1, let annotation = filteredAllAnnotationsInBucket.first {
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+                // Give the annotationForGrid a reference to all the annotations it will represent
+                annotation.containdedAnnotations = nil
+                annotation.clusterAnnotation = nil
+                
+                mapView.addAnnotation(annotation)
+            })
+            
+        // If filteredAllAnnotationsInBucket contains more than 1 annotation, then get the annotation to show and set relevent details
+        } else if filteredAllAnnotationsInBucket.count > 1 {
             
             guard let annotationForGrid = self.calculatedAnnotationInGrid(mapView, gridMapRect: gridMapRect, allAnnotations: filteredAllAnnotationsInBucket, visableAnnotations: visableAnnotationsInBucket) else {
                 return
