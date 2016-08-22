@@ -27,21 +27,15 @@ public class Annotation: NSObject, MKAnnotation {
     }
     /// The name of the address.
     public var title: String? {
-        if let containdedAnnotations = self.containdedAnnotations where containdedAnnotations.count > 0 {
-            let tense: String
-            if containdedAnnotations.count == 1 {
-                tense = FKLocalizedString("ITEM", comment: "Item")
-            } else {
-                tense = FKLocalizedString("ITEMS", comment: "Items")
-            }
-            return "\(containdedAnnotations.count) \(tense)"
+        if let containdedAnnotations = self.containdedAnnotations where containdedAnnotations.count > 1 {
+            return "\(containdedAnnotations.count) \(FKLocalizedString("ITEMS", comment: "Items"))"
         }
         return address?.name
     }
     /// The address string of the address.
     public var subtitle: String? {
         if let containdedAnnotations = self.containdedAnnotations where containdedAnnotations.count > 0 {
-            return ""
+            return " "
         }
         return address?.addressString
     }
