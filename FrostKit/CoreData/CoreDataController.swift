@@ -14,6 +14,7 @@ public class CoreDataController: NSObject {
     
     // MARK: - Properties
     
+    public var context: NSManagedObjectContext! { return CoreDataProxy.shared.managedObjectContextMain! }
     public var entityName: String! { return nil }
     public var sectionNameKeyPath: String? { return nil }
     public var cacheName: String? { return nil }
@@ -24,8 +25,6 @@ public class CoreDataController: NSObject {
         if _fetchedResultsController != nil {
             return _fetchedResultsController!
         }
-        
-        let context = CoreDataProxy.shared.managedObjectContextMain!
         
         let fetchRequest = NSFetchRequest()
         // Edit the entity name as appropriate.
