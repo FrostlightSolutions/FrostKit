@@ -92,6 +92,18 @@ extension CKDatabase {
         }
     }
     
+    public func fetchRecordsWithIDs(recordIDs: [CKRecordID], desiredKeys: [String]? = nil, perRecordHandler: ((CKRecord?, CKRecordID?, NSError?) -> Void)? = nil, completetionHandler: (([CKRecordID: CKRecord]?, NSError?) -> Void)? = nil) {
+        
+        let operation = CKFetchRecordsOperation(recordIDs: recordIDs)
+        operation.queuePriority = .VeryHigh
+        operation.qualityOfService = .UserInteractive
+        operation.desiredKeys = desiredKeys
+        operation.perRecordCompletionBlock = perRecordHandler
+        operation.fetchRecordsCompletionBlock = completetionHandler
+        
+        addOperation(operation)
+    }
+    
     public func saveRecord(record: CKRecord, progressHandler: ((Double) -> Void)?, completionHandler: (CKRecord?, NSError?) -> Void) {
         
         let operation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
