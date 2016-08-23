@@ -117,6 +117,15 @@
 		18C0067619DC00C000811755 /* FrostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18839B1719D9FA8C00760157 /* FrostKit.framework */; };
 		18CB51701A76454A005064C8 /* RequestStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* RequestStore.swift */; };
 		18CB517A1A7655ED005064C8 /* DeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB51791A7655ED005064C8 /* DeviceExtensions.swift */; };
+		18CF8C351D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CF8C331D6C839100DE9C37 /* CKContainerExtensions.swift */; };
+		18CF8C361D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CF8C331D6C839100DE9C37 /* CKContainerExtensions.swift */; };
+		18CF8C371D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CF8C331D6C839100DE9C37 /* CKContainerExtensions.swift */; };
+		18CF8C381D6C839100DE9C37 /* CKDatabaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CF8C341D6C839100DE9C37 /* CKDatabaseExtensions.swift */; };
+		18CF8C391D6C839100DE9C37 /* CKDatabaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CF8C341D6C839100DE9C37 /* CKDatabaseExtensions.swift */; };
+		18CF8C3A1D6C839100DE9C37 /* CKDatabaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CF8C341D6C839100DE9C37 /* CKDatabaseExtensions.swift */; };
+		18CF8C3C1D6C844600DE9C37 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CF8C3B1D6C844600DE9C37 /* CloudKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		18CF8C3E1D6C844E00DE9C37 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CF8C3D1D6C844E00DE9C37 /* CloudKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		18CF8C401D6C845700DE9C37 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CF8C3F1D6C845700DE9C37 /* CloudKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		18CFF9FE19DC45AB00DF6BB8 /* TimeZoneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFF9FD19DC45AB00DF6BB8 /* TimeZoneExtensions.swift */; };
 		18D54BEE1CE6439300D365C6 /* FrostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1826B0261BD9047900DA1669 /* FrostKit.framework */; };
 		18D54BF41CE6439F00D365C6 /* ErrorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E9FF911C80AA5700AC5230 /* ErrorExtensionsTests.swift */; };
@@ -287,6 +296,11 @@
 		18C0066F19DB7EDB00811755 /* ContentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentManager.swift; sourceTree = "<group>"; };
 		18CB516F1A76454A005064C8 /* RequestStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestStore.swift; sourceTree = "<group>"; };
 		18CB51791A7655ED005064C8 /* DeviceExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceExtensions.swift; sourceTree = "<group>"; };
+		18CF8C331D6C839100DE9C37 /* CKContainerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKContainerExtensions.swift; sourceTree = "<group>"; };
+		18CF8C341D6C839100DE9C37 /* CKDatabaseExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKDatabaseExtensions.swift; sourceTree = "<group>"; };
+		18CF8C3B1D6C844600DE9C37 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		18CF8C3D1D6C844E00DE9C37 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.2.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
+		18CF8C3F1D6C845700DE9C37 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
 		18CFF9FD19DC45AB00DF6BB8 /* TimeZoneExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZoneExtensions.swift; sourceTree = "<group>"; };
 		18D54BE91CE6439300D365C6 /* FrostKit tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FrostKit tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D54BED1CE6439300D365C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -316,6 +330,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18CF8C3E1D6C844E00DE9C37 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +345,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18CF8C3C1D6C844600DE9C37 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,6 +369,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18CF8C401D6C845700DE9C37 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +457,9 @@
 		186CFCE81A29F7BE002739A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18CF8C3F1D6C845700DE9C37 /* CloudKit.framework */,
+				18CF8C3D1D6C844E00DE9C37 /* CloudKit.framework */,
+				18CF8C3B1D6C844600DE9C37 /* CloudKit.framework */,
 				1811D76A1A0ACAED00E8B873 /* WebKit.framework */,
 			);
 			name = Frameworks;
@@ -606,6 +626,8 @@
 				18DC212A19DEA21000FEB57E /* ViewControllerExtensions.swift */,
 				18A786CC1A77B39A006EADB9 /* CollectionViewControllerExtensions.swift */,
 				183C7B6A1AD2F4A400CAE1A5 /* ScreenExtensions.swift */,
+				18CF8C331D6C839100DE9C37 /* CKContainerExtensions.swift */,
+				18CF8C341D6C839100DE9C37 /* CKDatabaseExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1057,6 +1079,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1826B0671BD906E200DA1669 /* DateExtensions.swift in Sources */,
+				18CF8C361D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */,
 				1826B0571BD9065B00DA1669 /* FrostKit.swift in Sources */,
 				1826B06C1BD906E200DA1669 /* FontExtensions.swift in Sources */,
 				1826B0701BD906F200DA1669 /* FontConstants.swift in Sources */,
@@ -1073,6 +1096,7 @@
 				1826B0601BD906AC00DA1669 /* View.swift in Sources */,
 				1826B0651BD906C500DA1669 /* KeychainHelper.swift in Sources */,
 				1826B0681BD906E200DA1669 /* CalendarExtensions.swift in Sources */,
+				18CF8C391D6C839100DE9C37 /* CKDatabaseExtensions.swift in Sources */,
 				1826B06D1BD906E200DA1669 /* ColorExtensions.swift in Sources */,
 				1826B06B1BD906E200DA1669 /* BundleExtensions.swift in Sources */,
 				1826B0691BD906E200DA1669 /* TimeZoneExtensions.swift in Sources */,
@@ -1126,6 +1150,7 @@
 				182884561CBEB18000331A54 /* Address.swift in Sources */,
 				1844D1D11D15F26E00E87EA8 /* CoreDataTableViewController.swift in Sources */,
 				183C7B6B1AD2F4A400CAE1A5 /* ScreenExtensions.swift in Sources */,
+				18CF8C351D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */,
 				18DC212B19DEA21000FEB57E /* ViewControllerExtensions.swift in Sources */,
 				18EA123F19DC79F100FD858D /* DataExtensions.swift in Sources */,
 				18839B4719DA27AE00760157 /* SocialHelper.swift in Sources */,
@@ -1142,6 +1167,7 @@
 				18CB517A1A7655ED005064C8 /* DeviceExtensions.swift in Sources */,
 				182884541CBEB14700331A54 /* Annotation.swift in Sources */,
 				18032B1B1A84F99400BEBB41 /* FontExtensions.swift in Sources */,
+				18CF8C381D6C839100DE9C37 /* CKDatabaseExtensions.swift in Sources */,
 				1844D1DF1D16034D00E87EA8 /* CoreDataProxy.swift in Sources */,
 				18C0066119DB5BF000811755 /* LocalStorage.swift in Sources */,
 				18C0067019DB7EDB00811755 /* ContentManager.swift in Sources */,
@@ -1191,7 +1217,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18CF8C3A1D6C839100DE9C37 /* CKDatabaseExtensions.swift in Sources */,
 				189D8C961C77E95C00261DF5 /* TimeZoneExtensions.swift in Sources */,
+				18CF8C371D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */,
 				189D8C951C77E95C00261DF5 /* CalendarExtensions.swift in Sources */,
 				18E545BD1C77E74D00637E85 /* FrostKit.swift in Sources */,
 				189D8C9F1C77EC5B00261DF5 /* ColorExtensions.swift in Sources */,
