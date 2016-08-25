@@ -31,12 +31,7 @@ public class CoreDataCollectionViewController: UICollectionViewController, NSFet
     override public func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        // Refresh data
-        do {
-            try fetchedResultsController.performFetch()
-        } catch let error as NSError {
-            NSLog("Fetch error: \(error.localizedDescription)\n\(error)")
-        }
+        fetchAndReloadData()
     }
     
     // MARK: Collection view
@@ -61,6 +56,17 @@ public class CoreDataCollectionViewController: UICollectionViewController, NSFet
     
     public func controllerDidChangeContent(controller: NSFetchedResultsController) {
         collectionView?.reloadData()
+    }
+    
+    public func fetchAndReloadData() {
+        
+        // Refresh and reload data
+        do {
+            try fetchedResultsController.performFetch()
+            collectionView?.reloadData()
+        } catch let error as NSError {
+            NSLog("Fetch error: \(error.localizedDescription)\n\(error)")
+        }
     }
     
 }

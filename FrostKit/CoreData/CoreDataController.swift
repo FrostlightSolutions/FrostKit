@@ -14,7 +14,7 @@ public class CoreDataController: NSObject {
     
     // MARK: - Properties
     
-    public var context: NSManagedObjectContext! { return CoreDataProxy.shared.managedObjectContextMain! }
+    public var context: NSManagedObjectContext { return CoreDataProxy.shared.managedObjectContextMain }
     public var entityName: String! { return nil }
     public var sectionNameKeyPath: String? { return nil }
     public var cacheName: String? { return nil }

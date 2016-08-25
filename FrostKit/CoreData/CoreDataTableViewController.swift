@@ -31,12 +31,7 @@ public class CoreDataTableViewController: UITableViewController, NSFetchedResult
     override public func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        // Refresh data
-        do {
-            try fetchedResultsController.performFetch()
-        } catch let error as NSError {
-            NSLog("Fetch error: \(error.localizedDescription)\n\(error)")
-        }
+        fetchAndReloadData()
     }
     
     // MARK: - Table view
@@ -62,5 +57,16 @@ public class CoreDataTableViewController: UITableViewController, NSFetchedResult
     public func controllerDidChangeContent(controller: NSFetchedResultsController) {
         tableView.reloadData()
     }
-
+    
+    public func fetchAndReloadData() {
+        
+        // Refresh and reload data
+        do {
+            try fetchedResultsController.performFetch()
+            tableView.reloadData()
+        } catch let error as NSError {
+            NSLog("Fetch error: \(error.localizedDescription)\n\(error)")
+        }
+    }
+    
 }

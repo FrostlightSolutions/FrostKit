@@ -50,57 +50,66 @@ public class CoreDataProxy {
         return coordinator
     }()
     
-    public lazy var managedObjectContextMain: NSManagedObjectContext? = {
+    private lazy var managedObjectContextBase: NSManagedObjectContext = {
         
         // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
         let coordinator = self.persistentStoreCoordinator
         if coordinator == nil {
-            return nil
+            fatalError()
         }
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        let managedObjectContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
-        managedObjectContext.mergePolicy = NSMergePolicy(mergeType: .MergeByPropertyStoreTrumpMergePolicyType)
+        //        managedObjectContext.mergePolicy = NSMergePolicy(mergeType: .MergeByPropertyObjectTrumpMergePolicyType)
         
         return managedObjectContext
     }()
     
-    public lazy var managedObjectContextPrivate: NSManagedObjectContext? = {
+    public lazy var managedObjectContextMain: NSManagedObjectContext = {
         
-        let context = self.managedObjectContextMain
-        if context == nil {
-            return nil
-        }
+        let context = self.managedObjectContextBase
         
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        let managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
         managedObjectContext.parentContext = context
-        managedObjectContext.mergePolicy = NSMergePolicy(mergeType: .MergeByPropertyStoreTrumpMergePolicyType)
+        //        managedObjectContext.mergePolicy = NSMergePolicy(mergeType: .MergeByPropertyObjectTrumpMergePolicyType)
         
         return managedObjectContext
     }()
+    
+    public class func temporaryManagedObjectContext() -> NSManagedObjectContext {
+        
+        let context = CoreDataProxy.shared.managedObjectContextMain
+        
+        let managedObjectContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        managedObjectContext.parentContext = context
+        //        managedObjectContext.mergePolicy = NSMergePolicy(mergeType: .MergeByPropertyObjectTrumpMergePolicyType)
+        
+        return managedObjectContext
+        
+    }
     
     // MARK: - Core Data Saving support
     
-    public func saveContextMain(complete: (() -> Void)?) {
-        saveContext(managedObjectContextMain, complete: complete)
+    private class func saveContextBase(complete: (() -> Void)?) {
+        CoreDataProxy.saveContext(CoreDataProxy.shared.managedObjectContextBase, complete: complete)
     }
     
-    public func saveContextPrivate(complete: (() -> Void)?) {
-        saveContext(managedObjectContextPrivate, complete: complete)
+    private class func saveContextMain(complete: (() -> Void)?) {
+        CoreDataProxy.saveContext(CoreDataProxy.shared.managedObjectContextMain, complete: complete)
     }
     
-    public func saveAllContexts(complete: (() -> Void)?) {
-        saveContextPrivate { () -> Void in
-            self.saveContextMain({ () -> Void in
+    public class func saveMainAndBaseContexts(complete: (() -> Void)? = nil) {
+        CoreDataProxy.saveContextMain({ () -> Void in
+            CoreDataProxy.saveContextBase({
                 complete?()
             })
-        }
+        })
     }
     
-    public func saveContext(context: NSManagedObjectContext?, complete: (() -> Void)?) {
-        context?.performBlock({ () -> Void in
-            if context!.hasChanges {
+    public class func saveContext(context: NSManagedObjectContext, complete: (() -> Void)? = nil) {
+        context.performBlock({ () -> Void in
+            if context.hasChanges {
                 do {
-                    try context!.save()
+                    try context.save()
                 } catch let error as NSError {
                     // Replace this implementation with code to handle the error appropriately.
                     // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
