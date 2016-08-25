@@ -164,10 +164,6 @@
 		18E545A71C77E54000637E85 /* FrostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E5459D1C77E53F00637E85 /* FrostKit.framework */; };
 		18E545BC1C77E72E00637E85 /* FrostKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 18E0282E1BA2D17300852022 /* FrostKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		18E545BD1C77E74D00637E85 /* FrostKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23119DE07670032ABB7 /* FrostKit.swift */; };
-		18E9F8461D6F0CB300553D55 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1D51D15F27D00E87EA8 /* CoreDataController.swift */; };
-		18E9F8481D6F0CBF00553D55 /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1D01D15F26E00E87EA8 /* CoreDataTableViewController.swift */; };
-		18E9F8491D6F0CC500553D55 /* CoreDataProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1DE1D16034D00E87EA8 /* CoreDataProxy.swift */; };
-		18E9F84A1D6F0CCC00553D55 /* CoreDataCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1DA1D15F31800E87EA8 /* CoreDataCollectionViewController.swift */; };
 		18E9FF931C80AA5700AC5230 /* ErrorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E9FF911C80AA5700AC5230 /* ErrorExtensionsTests.swift */; };
 		18E9FF941C80AC6F00AC5230 /* KeychainHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D8CAF1C77EEFC00261DF5 /* KeychainHelperTests.swift */; };
 		18E9FF951C80AC6F00AC5230 /* MapControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D8CB01C77EEFC00261DF5 /* MapControllerTests.swift */; };
@@ -1082,7 +1078,6 @@
 			files = (
 				1826B0671BD906E200DA1669 /* DateExtensions.swift in Sources */,
 				18CF8C361D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */,
-				18E9F8481D6F0CBF00553D55 /* CoreDataTableViewController.swift in Sources */,
 				1826B0571BD9065B00DA1669 /* FrostKit.swift in Sources */,
 				1826B06C1BD906E200DA1669 /* FontExtensions.swift in Sources */,
 				1826B0701BD906F200DA1669 /* FontConstants.swift in Sources */,
@@ -1090,9 +1085,7 @@
 				1826B06E1BD906E200DA1669 /* ImageExtensions.swift in Sources */,
 				1826B06A1BD906E200DA1669 /* DataExtensions.swift in Sources */,
 				1876617A1BEEA0C900C82769 /* AppStoreHelper.swift in Sources */,
-				18E9F8461D6F0CB300553D55 /* CoreDataController.swift in Sources */,
 				1826B06F1BD906F200DA1669 /* CustomFonts.swift in Sources */,
-				18E9F8491D6F0CC500553D55 /* CoreDataProxy.swift in Sources */,
 				1826B0631BD906B700DA1669 /* VisualEffectView.swift in Sources */,
 				1826B0591BD9066C00DA1669 /* RequestStore.swift in Sources */,
 				1826B0661BD906E200DA1669 /* ErrorExtensions.swift in Sources */,
@@ -1105,7 +1098,6 @@
 				1826B06D1BD906E200DA1669 /* ColorExtensions.swift in Sources */,
 				1826B06B1BD906E200DA1669 /* BundleExtensions.swift in Sources */,
 				1826B0691BD906E200DA1669 /* TimeZoneExtensions.swift in Sources */,
-				18E9F84A1D6F0CCC00553D55 /* CoreDataCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
