@@ -20,20 +20,14 @@ extension CKDatabase {
     public func performQuery(query query: CKQuery, inZoneWithID zoneID: CKRecordZoneID?, countCompletionHandler: (Int, NSError?) -> Void) {
         
         performQuery(query: query, cursor: nil, inZoneWithID: zoneID, desiredKeys: [], currentCount: 0, batchCompletionHandler: nil, countCompletionHandler: { (count, _, error) in
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                countCompletionHandler(count ?? 0, error)
-            })
+            countCompletionHandler(count ?? 0, error)
         })
     }
     
     public func performQuery(query query: CKQuery, inZoneWithID zoneID: CKRecordZoneID?, desiredKeys: [String]? = nil, batchCompletionHandler: (([CKRecord]?, NSError?) -> Void)?, compiledCompletionHandler: (([CKRecord]?, NSError?) -> Void)?) {
         
         performQuery(query: query, cursor: nil, inZoneWithID: zoneID, desiredKeys: desiredKeys, currentRecords: [], batchCompletionHandler: batchCompletionHandler) { (records, _, error) in
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                compiledCompletionHandler?(records, error)
-            })
+            compiledCompletionHandler?(records, error)
         }
     }
     
@@ -67,21 +61,14 @@ extension CKDatabase {
             
             if let curRecords = currentRecords, batchRecords = records {
                 records = curRecords + batchRecords
-                
-                dispatch_async(dispatch_get_main_queue(), {
-                    batchCompletionHandler?(batchRecords, error)
-                })
+                batchCompletionHandler?(batchRecords, error)
             }
             
             if let aCursor = cursor {
                 self.performQuery(query: nil, cursor: aCursor, inZoneWithID: zoneID, currentCount: count, currentRecords: records, desiredKeys: desiredKeys, batchCompletionHandler: batchCompletionHandler, countCompletionHandler: countCompletionHandler, compiledCompletionHandler: compiledCompletionHandler)
             } else {
-                
-                dispatch_async(dispatch_get_main_queue(), {
-                    
-                    countCompletionHandler?(count, cursor, error)
-                    compiledCompletionHandler?(records, cursor, error)
-                })
+                countCompletionHandler?(count, cursor, error)
+                compiledCompletionHandler?(records, cursor, error)
             }
         }
         
