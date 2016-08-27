@@ -175,6 +175,8 @@
 		18EA124119DC7D9000FD858D /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124019DC7D9000FD858D /* ViewExtensions.swift */; };
 		18EA124319DC8A8C00FD858D /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124219DC8A8C00FD858D /* KeychainHelper.swift */; };
 		18EA124519DC8B5E00FD858D /* BundleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124419DC8B5E00FD858D /* BundleExtensions.swift */; };
+		66AB893C1D71C21D0097ADAC /* CKReferenceExntensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB893B1D71C21D0097ADAC /* CKReferenceExntensions.swift */; };
+		66AB893D1D71C21D0097ADAC /* CKReferenceExntensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB893B1D71C21D0097ADAC /* CKReferenceExntensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -321,6 +323,7 @@
 		18EA124019DC7D9000FD858D /* ViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		18EA124219DC8A8C00FD858D /* KeychainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		18EA124419DC8B5E00FD858D /* BundleExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleExtensions.swift; sourceTree = "<group>"; };
+		66AB893B1D71C21D0097ADAC /* CKReferenceExntensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKReferenceExntensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -626,6 +629,7 @@
 				183C7B6A1AD2F4A400CAE1A5 /* ScreenExtensions.swift */,
 				18CF8C331D6C839100DE9C37 /* CKContainerExtensions.swift */,
 				18CF8C341D6C839100DE9C37 /* CKDatabaseExtensions.swift */,
+				66AB893B1D71C21D0097ADAC /* CKReferenceExntensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1087,6 +1091,7 @@
 				1876617A1BEEA0C900C82769 /* AppStoreHelper.swift in Sources */,
 				1826B06F1BD906F200DA1669 /* CustomFonts.swift in Sources */,
 				1826B0631BD906B700DA1669 /* VisualEffectView.swift in Sources */,
+				66AB893D1D71C21D0097ADAC /* CKReferenceExntensions.swift in Sources */,
 				1826B0591BD9066C00DA1669 /* RequestStore.swift in Sources */,
 				1826B0661BD906E200DA1669 /* ErrorExtensions.swift in Sources */,
 				1826B0641BD906BE00DA1669 /* InitialsImageView.swift in Sources */,
@@ -1154,6 +1159,7 @@
 				1844D1DB1D15F31800E87EA8 /* CoreDataCollectionViewController.swift in Sources */,
 				182884511CBEB12200331A54 /* MapSearchViewController.swift in Sources */,
 				1811D7BA1A0AD1CA00E8B873 /* WebViewController.swift in Sources */,
+				66AB893C1D71C21D0097ADAC /* CKReferenceExntensions.swift in Sources */,
 				18C0066819DB762600811755 /* ErrorExtensions.swift in Sources */,
 				18DD79091A8CA74E00379FB5 /* View.swift in Sources */,
 				182884521CBEB12200331A54 /* MapViewController.swift in Sources */,
