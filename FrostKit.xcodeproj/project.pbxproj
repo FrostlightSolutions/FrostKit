@@ -177,6 +177,8 @@
 		18EA124519DC8B5E00FD858D /* BundleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124419DC8B5E00FD858D /* BundleExtensions.swift */; };
 		66AB893C1D71C21D0097ADAC /* CKReferenceExntensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB893B1D71C21D0097ADAC /* CKReferenceExntensions.swift */; };
 		66AB893D1D71C21D0097ADAC /* CKReferenceExntensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB893B1D71C21D0097ADAC /* CKReferenceExntensions.swift */; };
+		66AB893F1D71CB3D0097ADAC /* CKRecordIDExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB893E1D71CB3D0097ADAC /* CKRecordIDExtensions.swift */; };
+		66AB89401D71CB3D0097ADAC /* CKRecordIDExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB893E1D71CB3D0097ADAC /* CKRecordIDExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -324,6 +326,7 @@
 		18EA124219DC8A8C00FD858D /* KeychainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		18EA124419DC8B5E00FD858D /* BundleExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleExtensions.swift; sourceTree = "<group>"; };
 		66AB893B1D71C21D0097ADAC /* CKReferenceExntensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKReferenceExntensions.swift; sourceTree = "<group>"; };
+		66AB893E1D71CB3D0097ADAC /* CKRecordIDExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKRecordIDExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -630,6 +633,7 @@
 				18CF8C331D6C839100DE9C37 /* CKContainerExtensions.swift */,
 				18CF8C341D6C839100DE9C37 /* CKDatabaseExtensions.swift */,
 				66AB893B1D71C21D0097ADAC /* CKReferenceExntensions.swift */,
+				66AB893E1D71CB3D0097ADAC /* CKRecordIDExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1087,6 +1091,7 @@
 				1826B0701BD906F200DA1669 /* FontConstants.swift in Sources */,
 				1826B0621BD906B400DA1669 /* ImageView.swift in Sources */,
 				1826B06E1BD906E200DA1669 /* ImageExtensions.swift in Sources */,
+				66AB89401D71CB3D0097ADAC /* CKRecordIDExtensions.swift in Sources */,
 				1826B06A1BD906E200DA1669 /* DataExtensions.swift in Sources */,
 				1876617A1BEEA0C900C82769 /* AppStoreHelper.swift in Sources */,
 				1826B06F1BD906F200DA1669 /* CustomFonts.swift in Sources */,
@@ -1163,6 +1168,7 @@
 				18C0066819DB762600811755 /* ErrorExtensions.swift in Sources */,
 				18DD79091A8CA74E00379FB5 /* View.swift in Sources */,
 				182884521CBEB12200331A54 /* MapViewController.swift in Sources */,
+				66AB893F1D71CB3D0097ADAC /* CKRecordIDExtensions.swift in Sources */,
 				18EA124519DC8B5E00FD858D /* BundleExtensions.swift in Sources */,
 				18C0066A19DB767A00811755 /* ColorExtensions.swift in Sources */,
 				18E3F23219DE07670032ABB7 /* FrostKit.swift in Sources */,
