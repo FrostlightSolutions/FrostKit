@@ -80,7 +80,7 @@ public class ActivityIndicatorManager: NSObject {
         decrementActivityCount()
     }
     
-    // MARK: -
+    // MARK: - Update Methods
     
     func updateNetworkActivityIndicatorVisibility() {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = networkActivityIndicatorVisible
