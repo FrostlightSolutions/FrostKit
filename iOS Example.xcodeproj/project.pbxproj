@@ -19,6 +19,7 @@
 		18772C2619DD67A900F67CE7 /* SocialHelperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772C2419DD67A900F67CE7 /* SocialHelperVC.swift */; };
 		18C3D38F1A8428990097878D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18C3D38D1A8428990097878D /* Settings.bundle */; };
 		18E3F21F19DDDBD00032ABB7 /* WebViewControllerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F21E19DDDBD00032ABB7 /* WebViewControllerVC.swift */; };
+		66E14D0B1D7320A70053596B /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E14D0A1D7320A70053596B /* CollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,27 @@
 			remoteGlobalIDString = 18839B1619D9FA8C00760157;
 			remoteInfo = "FrostKit iOS";
 		};
+		66E14D141D7320A80053596B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1838F1911C7612D400F1233D /* FrostKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 18E5459D1C77E53F00637E85;
+			remoteInfo = "FrostKit OS X";
+		};
+		66E14D161D7320A80053596B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1838F1911C7612D400F1233D /* FrostKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 18D54BE91CE6439300D365C6;
+			remoteInfo = "FrostKit tvOS Tests";
+		};
+		66E14D181D7320A80053596B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1838F1911C7612D400F1233D /* FrostKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 18E545A61C77E54000637E85;
+			remoteInfo = "FrostKit OS X Tests";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -87,6 +109,7 @@
 		18772C2419DD67A900F67CE7 /* SocialHelperVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialHelperVC.swift; sourceTree = "<group>"; };
 		18C3D38D1A8428990097878D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		18E3F21E19DDDBD00032ABB7 /* WebViewControllerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewControllerVC.swift; sourceTree = "<group>"; };
+		66E14D0A1D7320A70053596B /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +130,10 @@
 				1838F19B1C7612D400F1233D /* FrostKit.framework */,
 				1838F19D1C7612D400F1233D /* FrostKit.framework */,
 				1838F19F1C7612D400F1233D /* FrostKit.framework */,
+				66E14D151D7320A80053596B /* FrostKit.framework */,
 				1838F1A11C7612D400F1233D /* FrostKitTests.xctest */,
+				66E14D171D7320A80053596B /* FrostKit tvOS Tests.xctest */,
+				66E14D191D7320A80053596B /* FrostKit OS X Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -159,6 +185,7 @@
 				18772C2419DD67A900F67CE7 /* SocialHelperVC.swift */,
 				18E3F21E19DDDBD00032ABB7 /* WebViewControllerVC.swift */,
 				18270FA41A858565009A2390 /* ExampleMapViewController.swift */,
+				66E14D0A1D7320A70053596B /* CollectionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -249,8 +276,29 @@
 		1838F1A11C7612D400F1233D /* FrostKitTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = FrostKitTests.xctest;
+			path = "FrostKit iOS Tests.xctest";
 			remoteRef = 1838F1A01C7612D400F1233D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		66E14D151D7320A80053596B /* FrostKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FrostKit.framework;
+			remoteRef = 66E14D141D7320A80053596B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		66E14D171D7320A80053596B /* FrostKit tvOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "FrostKit tvOS Tests.xctest";
+			remoteRef = 66E14D161D7320A80053596B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		66E14D191D7320A80053596B /* FrostKit OS X Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "FrostKit OS X Tests.xctest";
+			remoteRef = 66E14D181D7320A80053596B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -278,6 +326,7 @@
 				18772BEF19DD61E200F67CE7 /* AppDelegate.swift in Sources */,
 				18772C2619DD67A900F67CE7 /* SocialHelperVC.swift in Sources */,
 				1828C5421B29909B004EFDA9 /* PlaceholderDetailVC.swift in Sources */,
+				66E14D0B1D7320A70053596B /* CollectionViewController.swift in Sources */,
 				18270FA51A858565009A2390 /* ExampleMapViewController.swift in Sources */,
 				18772C2519DD67A900F67CE7 /* MainMenuVC.swift in Sources */,
 			);
