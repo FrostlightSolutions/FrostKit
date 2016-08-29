@@ -54,4 +54,8 @@ public class CoreDataController: NSObject {
         return _fetchedResultsController!
     }
     
+    public func resetFetchedResultsController() {
+        _fetchedResultsController = nil
+    }
+    
 }
