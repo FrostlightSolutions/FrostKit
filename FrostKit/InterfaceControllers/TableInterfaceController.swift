@@ -41,16 +41,13 @@ public class TableInterfaceController: WKInterfaceController {
         if showReloadMenuItem == true {
             addMenuItemWithItemIcon(.Resume, title: FKLocalizedString("RELOAD", comment: "Reload"), action: #selector(updateData))
         }
-    }
-    
-    override public func willActivate() {
-        super.willActivate()
         
         updateData()
     }
     
     public func updateData() {
         // Used to override in subclasses
+        finishedUpdatingData([])
     }
     
     public func finishedUpdatingData(dataArray: [AnyObject]) {
