@@ -119,6 +119,15 @@ public class TableInterfaceController: WKInterfaceController {
         // Used to override in subclasses
     }
     
+    public func objectAtIndex(index: Int) -> AnyObject? {
+        
+        if index < dataArray.count {
+            return dataArray[index]
+        } else {
+            return nil
+        }
+    }
+    
     @IBAction public func moreButtonPressed() {
         
         skip += limit
