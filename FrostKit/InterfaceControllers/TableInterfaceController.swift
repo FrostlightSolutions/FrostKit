@@ -58,7 +58,7 @@ public class TableInterfaceController: WKInterfaceController {
         }
     }
     
-    private func updateTable() {
+    public func updateTable() {
         
         guard let table = self.table else {
             return
