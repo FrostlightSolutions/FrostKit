@@ -10,11 +10,11 @@ import WatchKit
 
 public class TableInterfaceController: WKInterfaceController {
     
-    @IBInspectable public var rowType: String! = nil
-    lazy var dataArray = [AnyObject]()
-    @IBInspectable public var limit: Int = 10
+    public var rowType: String! { return nil }
+    private lazy var dataArray = [AnyObject]()
+    public var limit: Int { return 10 }
     private var skip = 0
-    @IBInspectable public var resetLimitAndSkipOnReload: Bool = false
+    public var resetLimitAndSkipOnReload: Bool { return false }
     private var updateFromStart = false
     public var noDataString: String { return FKLocalizedString("NO_DATA", comment: "No Data") }
     @IBOutlet public weak var table: WKInterfaceTable!
@@ -22,7 +22,7 @@ public class TableInterfaceController: WKInterfaceController {
     @IBOutlet public weak var titleLabel: WKInterfaceLabel?
     @IBOutlet public weak var statusLabel: WKInterfaceLabel?
     @IBOutlet public weak var moreButton: WKInterfaceButton?
-    @IBInspectable public var showReloadMenuItem: Bool = true
+    public var showReloadMenuItem: Bool { return true }
     
     override public init() {
         super.init()
@@ -41,19 +41,24 @@ public class TableInterfaceController: WKInterfaceController {
         if showReloadMenuItem == true {
             addMenuItemWithItemIcon(.Resume, title: FKLocalizedString("RELOAD", comment: "Reload"), action: #selector(updateData))
         }
-    }
-    
-    override public func willActivate() {
-        super.willActivate()
         
         updateData()
     }
     
     public func updateData() {
         // Used to override in subclasses
+        finishedUpdatingData([])
     }
     
-    private func updateTable() {
+    public func finishedUpdatingData(dataArray: [AnyObject]) {
+        
+        dispatch_async(dispatch_get_main_queue()) { 
+            self.dataArray = dataArray
+            self.updateTable()
+        }
+    }
+    
+    public func updateTable() {
         
         guard let table = self.table else {
             return
@@ -109,6 +114,15 @@ public class TableInterfaceController: WKInterfaceController {
     
     public func updateRow(table: WKInterfaceTable, index: Int, data: AnyObject) {
         // Used to override in subclasses
+    }
+    
+    public func objectAtIndex(index: Int) -> AnyObject? {
+        
+        if index < dataArray.count {
+            return dataArray[index]
+        } else {
+            return nil
+        }
     }
     
     @IBAction public func moreButtonPressed() {

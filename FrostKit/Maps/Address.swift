@@ -35,7 +35,7 @@ public class Address: NSObject {
         }
     }
     /// The name of the address object.
-    public var name = ""
+    public var name = "N/A"
     /// The address string of the object.
     public var addressString = ""
     /// Returns a string that represents the contents of the receiving class.
@@ -44,6 +44,9 @@ public class Address: NSObject {
     }
     public override var hashValue: Int {
         return Int(latitude) ^ Int(longitude)
+    }
+    public var key: String {
+        return "\(latitude)-\(longitude)"
     }
     
     /**
