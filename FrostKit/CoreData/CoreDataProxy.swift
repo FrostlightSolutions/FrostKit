@@ -30,7 +30,7 @@ public class CoreDataProxy {
         
         let url: NSURL
         if let groupIdentifier = self.groupIdentifier, sharedContainerURL = LocalStorage.sharedContainerURL(groupIdentifier) {
-            url = sharedContainerURL.URLByAppendingPathComponent(self.storeName)
+            url = sharedContainerURL.URLByAppendingPathComponent(self.storeName)!
         } else {
             url = LocalStorage.documentsURL().URLByAppendingPathComponent(self.storeName)!
         }
