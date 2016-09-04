@@ -75,7 +75,7 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     // MARK: - KVO Methods
     
-    public override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [NSKeyValueChangeKey : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
+    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
         guard let aKeyPath = keyPath else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
@@ -107,7 +107,7 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     - parameter sender: The bar button item pressed.
     */
-    public override func refreshButtonPressed(sender: AnyObject?) {
+    public override func refreshButtonPressed(_ sender: AnyObject?) {
         
         if let webView = self.webView as? WKWebView {
             
@@ -123,7 +123,7 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     - parameter sender: The bar button item pressed.
     */
-    public override func backButtonPressed(sender: AnyObject?) {
+    public override func backButtonPressed(_ sender: AnyObject?) {
         
         if let webView = self.webView as? WKWebView {
             
@@ -140,7 +140,7 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     - parameter sender: The bar button item pressed.
     */
-    public override func forwardButtonPressed(sender: AnyObject?) {
+    public override func forwardButtonPressed(_ sender: AnyObject?) {
         
         if let webView = self.webView as? WKWebView {
             
@@ -154,7 +154,7 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     
     // MARK: - WKNavigationDelegate Methods
     
-    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
+    @nonobjc public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
         
         // Alows links in the WKWebView to be tappable
         decisionHandler(.allow)
@@ -170,11 +170,11 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     override func loadBaseURL() -> String {
         
         let urlString = super.loadBaseURL()
-        guard let url = URL(string: urlString), let webView = self.webView as? WKWebView else {
+        guard let url = NSURL(string: urlString), let webView = self.webView as? WKWebView else {
             return urlString
         }
         
-        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60)
+        let request = URLRequest(url: url as URL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60)
         webView.load(request)
         return urlString
     }

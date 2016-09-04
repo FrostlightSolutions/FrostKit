@@ -10,58 +10,58 @@ import CloudKit
 
 public extension CKContainer {
     
-    public func fetchUserRecord(desiredKeys: [String]? = nil, completionHandler: (CKRecord?, NSError?) -> Void) {
+    public func fetchUserRecord(desiredKeys: [String]? = nil, completionHandler: @escaping (CKRecord?, Error?) -> Void) {
         
-        fetchUserRecordIDWithCompletionHandler { (recordID, error) in
+        fetchUserRecordID { (recordID, error) in
             
             if let anError = error {
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async {
                     completionHandler(nil, anError)
-                })
+                }
                 
             } else if let userRecordID = recordID {
                 
                 let operation = CKFetchRecordsOperation(recordIDs: [userRecordID])
-                operation.qualityOfService = .UserInitiated
+                operation.qualityOfService = .userInitiated
                 operation.desiredKeys = desiredKeys
                 operation.fetchRecordsCompletionBlock = { (records, error) in
                     
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async {
                         completionHandler(records?[userRecordID], error)
-                    })
+                    }
                 }
                 
                 let database = self.publicCloudDatabase
-                database.addOperation(operation)
+                database.add(operation)
                 
             } else {
                 
-                dispatch_async(dispatch_get_main_queue(), {
-                    completionHandler(nil, NSError.errorWithMessage("Could not get user record with no record ID."))
-                })
+                DispatchQueue.main.async {
+                    completionHandler(nil, NSError.error(withMessage: "Could not get user record with no record ID.") as Error)
+                }
             }
         }
     }
     
-    public func update(userRecord: CKRecord, progressHandler: ((Double) -> Void)? = nil, completionHandler: (CKRecord?, NSError?) -> Void) {
-        publicCloudDatabase.saveRecord(userRecord, progressHandler: progressHandler, completionHandler: completionHandler)
+    public func update(userRecord: CKRecord, progressHandler: ((Double) -> Void)? = nil, completionHandler: @escaping (CKRecord?, Error?) -> Void) {
+        publicCloudDatabase.saveRecord(record: userRecord, progressHandler: progressHandler, completionHandler: completionHandler)
     }
     
-    public func update(userRecordWithObject object: CKRecordValue?, key: String, progressHandler: ((Double) -> Void)? = nil, completionHandler: (CKRecord?, NSError?) -> Void) {
+    public func update(userRecordWithObject object: CKRecordValue?, key: String, progressHandler: ((Double) -> Void)? = nil, completionHandler: @escaping (CKRecord?, Error?) -> Void) {
         
-        fetchUserRecord([]) { (record, error) in
+        fetchUserRecord(desiredKeys: []) { (record, error) in
             
             if let aRecord = record {
                 
                 aRecord.setObject(object, forKey: key)
-                self.update(aRecord, progressHandler: progressHandler, completionHandler: completionHandler)
+                self.update(userRecord: aRecord, progressHandler: progressHandler, completionHandler: completionHandler)
                 
             } else {
                 
-                dispatch_async(dispatch_get_main_queue(), {
-                    completionHandler(nil, NSError.errorWithMessage("No user record found!"))
-                })
+                DispatchQueue.main.async {
+                    completionHandler(nil, NSError.error(withMessage: "No user record found!"))
+                }
             }
         }
     }

@@ -28,14 +28,14 @@ public class Annotation: NSObject, MKAnnotation {
     }
     /// The name of the address.
     public var title: String? {
-        if clusterAnnotation == nil, let containdedAnnotations = self.containdedAnnotations where containdedAnnotations.count > 0 {
-            return "\(containdedAnnotations.count + 1) \(FKLocalizedString("ITEMS", comment: "Items"))"
+        if clusterAnnotation == nil, let containdedAnnotations = self.containdedAnnotations, containdedAnnotations.count > 0 {
+            return "\(containdedAnnotations.count + 1) \(FKLocalizedString(key: "ITEMS", comment: "Items"))"
         }
         return address?.name
     }
     /// The address string of the address.
     public var subtitle: String? {
-        if clusterAnnotation == nil, let containdedAnnotations = self.containdedAnnotations where containdedAnnotations.count > 0 {
+        if clusterAnnotation == nil, let containdedAnnotations = self.containdedAnnotations, containdedAnnotations.count > 0 {
             return ""
         }
         return address?.addressString
@@ -57,6 +57,10 @@ public class Annotation: NSObject, MKAnnotation {
                 containdedAnnotations = nil
             }
         }
+    }
+    
+    public override var hashValue: Int {
+        return address?.hashValue ?? 0
     }
     
     public override init() {

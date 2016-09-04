@@ -136,8 +136,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         
         cancelClusterCalculations = true
         
-        addressesDict.removeAll(keepCapacity: false)
-        annotations.removeAll(keepCapacity: false)
+        addressesDict.removeAll(keepingCapacity: false)
+        annotations.removeAll(keepingCapacity: false)
         
         removeAllAnnotations()
         removeAllPolylines()
@@ -186,7 +186,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      Plot an address to the map view.
      
      - parameter address:        An address to plot.
-     - parameter plottingAsBulk: Tells the controller if this is part of a bulk command. Leave to `false` for better performance.
+     - parameter asBulk: Tells the controller if this is part of a bulk command. Leave to `false` for better performance.
      */
     public func plot(address: Address, asBulk: Bool = false) {
         if address.isValid == false {
@@ -194,10 +194,10 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         }
         
         // Update or add the address
-        addressesDict[address.key] = address
+        addressesDict[address.key as NSObject] = address
         
         let annotation: Annotation
-        if let currentAnnotation = annotations[address.key] as? Annotation {
+        if let currentAnnotation = annotations[address.key as NSObject] as? Annotation {
             // Annotation already exists, update the address
             currentAnnotation.update(address: address)
             annotation = currentAnnotation
@@ -208,11 +208,11 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         }
         
         // Update annotation in cache
-        annotations[address.key] = annotation
+        annotations[address.key as NSObject] = annotation
         
         _mapView?.addAnnotation(annotation)
         
-        if plottingAsBulk == false {
+        if asBulk == false {
             updateVisableAnnotations()
         }
     }
@@ -237,8 +237,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     Clears all of the annotations from the map, including caced, and clears the addresses array.
     */
     public func clearData() {
-        removeAllAnnotations(true)
-        addressesDict.removeAll(keepCapacity: false)
+        removeAllAnnotations(includingCached: true)
+        addressesDict.removeAll(keepingCapacity: false)
     }
     
     // MARK: - Annotation Clustering
@@ -276,7 +276,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         }
     }
     
-    internal final func calculateAndUpdateClusterAnnotations(complete: () -> Void) {
+    internal final func calculateAndUpdateClusterAnnotations(complete: @escaping () -> Void) {
         
         guard let mapView = self.mapView else {
             complete()
@@ -346,8 +346,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         let semaphore = DispatchSemaphore(value: 0)    // Create semaphore
         var visableAnnotationsInBucket: Set<Annotation>!
         
-        DispatchQueue.main.async { 
-            visableAnnotationsInBucket = mapView.annotations(in: gridMapRect) as? Set<Annotation>
+        DispatchQueue.main.async {
+            visableAnnotationsInBucket = mapView.annotations(in: gridMapRect) as? Set<MKAnnotation>
             semaphore.signal()    // Signal that semaphore should complete
         }
         
@@ -373,14 +373,14 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         // If filteredAllAnnotationsInBucket just contains a single anntation, then plot that
         if filteredAllAnnotationsInBucket.count == 1, let annotation = filteredAllAnnotationsInBucket.first {
             
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async {
                 
                 // Give the annotationForGrid a reference to all the annotations it will represent
                 annotation.containdedAnnotations = nil
                 annotation.clusterAnnotation = nil
                 
                 mapView.addAnnotation(annotation)
-            })
+            }
             
         // If filteredAllAnnotationsInBucket contains more than 1 annotation, then get the annotation to show and set relevent details
         } else if filteredAllAnnotationsInBucket.count > 1 {
@@ -403,9 +403,9 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
             for annotation in filteredAllAnnotationsInBucket {
                 
                 // Give all the other annotations a reference to the one which is representing then.
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                DispatchQueue.main.async {
                     annotation.clusterAnnotation = annotationForGrid
-                })
+                }
                 
                 if visableAnnotationsInBucket.contains(annotation) {
                     
@@ -606,7 +606,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      - parameter transportType: The transportation type to create the route.
      - parameter complete:      Returns an optional route and error.
      */
-    public func routeBetween(sourceCoordinate source: CLLocationCoordinate2D, destinationCoordinate destination: CLLocationCoordinate2D, transportType: MKDirectionsTransportType = .automobile, complete: (route: MKRoute?, error: NSError?) -> Void) {
+    public func routeBetween(sourceCoordinate source: CLLocationCoordinate2D, destinationCoordinate destination: CLLocationCoordinate2D, transportType: MKDirectionsTransportType = .automobile, complete: @escaping (_ route: MKRoute?, _ error: Error?) -> Void) {
         
         let sourcePlacemark = MKPlacemark(coordinate: source, addressDictionary: nil)
         let sourceItem = MKMapItem(placemark: sourcePlacemark)
@@ -624,7 +624,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      - parameter transportType: The transportation type to create the route.
      - parameter complete:      Returns an optional route and error.
      */
-    public func routeBetween(sourceMapItem source: MKMapItem, destinationMapItem destination: MKMapItem, transportType: MKDirectionsTransportType = .automobile, complete: (route: MKRoute?, error: NSError?) -> Void) {
+    public func routeBetween(sourceMapItem source: MKMapItem, destinationMapItem destination: MKMapItem, transportType: MKDirectionsTransportType = .automobile, complete: @escaping (_ route: MKRoute?, _ error: Error?) -> Void) {
         
         let directionsRequest = MKDirectionsRequest()
         directionsRequest.source = source
@@ -636,7 +636,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: NetworkRequestDidBeginNotification), object: nil)
         directions.calculate { (directionsResponse, error) in
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: NetworkRequestDidCompleteNotification), object: nil)
-            complete(route: directionsResponse?.routes.first, error: error)
+            complete(directionsResponse?.routes.first, error)
         }
     }
     
@@ -751,8 +751,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                 pinView.canShowCallout = true
                 pinView.isDraggable = false
                 
-                if let anno = annotation as? Annotation {
-                    if anno.containdedAnnotations == nil || anno.containdedAnnotations?.count <= 0 {
+                if let anno = annotation as? Annotation, let containdedAnnotations = anno.containdedAnnotations {
+                    if anno.containdedAnnotations == nil || containdedAnnotations.count <= 0 {
                         pinView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
                     }
                 }

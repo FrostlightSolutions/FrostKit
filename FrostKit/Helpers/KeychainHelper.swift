@@ -18,12 +18,12 @@ public class KeychainHelper {
         let appName = Bundle.appName(Bundle(for: KeychainHelper.self))
         
         let secDict = NSMutableDictionary()
-        secDict.setObject(String(kSecClassGenericPassword), forKey: String(kSecClass))
-        secDict.setObject(appName, forKey: String(kSecAttrService))
+        secDict.setObject(kSecClassGenericPassword, forKey: kSecClass as! NSCopying)
+        secDict.setObject(appName, forKey: kSecAttrService as! NSCopying)
         
         if let encodedIdentifier = appName.data(using: String.Encoding.utf8) {
-            secDict.setObject(encodedIdentifier, forKey: String(kSecAttrGeneric))
-            secDict.setObject(encodedIdentifier, forKey: String(kSecAttrAccount))
+            secDict.setObject(encodedIdentifier, forKey: kSecAttrGeneric as! NSCopying)
+            secDict.setObject(encodedIdentifier, forKey: kSecAttrAccount as! NSCopying)
         }
         
         return secDict
@@ -32,8 +32,8 @@ public class KeychainHelper {
     private class func searchKeychainForMatchingData() -> Data? {
         
         let secDict = setupSearchDirectory()
-        secDict.setObject(String(kSecMatchLimitOne), forKey: String(kSecMatchLimit))
-        secDict.setObject(NSNumber(value: true), forKey: String(kSecReturnData))
+        secDict.setObject(kSecMatchLimitOne, forKey: kSecMatchLimit as! NSCopying)
+        secDict.setObject(NSNumber(value: true), forKey: kSecReturnData as! NSCopying)
         // kCFBooleanTrue
         
         var foundDict: AnyObject?
@@ -63,7 +63,7 @@ public class KeychainHelper {
             
             let valueDict = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSDictionary
             if let dict = valueDict {
-                return dict.object(forKey: username)
+                return dict.object(forKey: username) as AnyObject
             }
         }
         
@@ -82,16 +82,16 @@ public class KeychainHelper {
         
         let valueDict = [username: details]
         let secDict = setupSearchDirectory()
-        let valueData = NSKeyedArchiver.archivedData(withRootObject: valueDict)
-        secDict.setObject(valueData, forKey: String(kSecValueData))
-        secDict.setObject(String(kSecAttrAccessibleWhenUnlocked), forKey: String(kSecAttrAccessible))
+        let valueData = NSKeyedArchiver.archivedData(withRootObject: valueDict as AnyObject)
+        secDict.setObject(valueData, forKey: kSecValueData as! NSCopying)
+        secDict.setObject(kSecAttrAccessibleWhenUnlocked, forKey: kSecAttrAccessible as! NSCopying)
         
         let status = SecItemAdd(secDict, nil)
         if status == noErr {
             return true
         } else {
             if status == OSStatus(errSecDuplicateItem) {
-                return KeychainHelper.update(valueDict)
+                return KeychainHelper.update(valueDict as NSDictionary)
             } else {
                 let error = NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
                 NSLog("ERROR: Set Keychain Details: \(error.localizedDescription)")
@@ -106,7 +106,7 @@ public class KeychainHelper {
         let secDict = setupSearchDirectory()
         let updateDict = NSMutableDictionary()
         let valueData = NSKeyedArchiver.archivedData(withRootObject: valueDict)
-        updateDict.setObject(valueData, forKey: String(kSecValueData))
+        updateDict.setObject(valueData, forKey: kSecValueData as! NSCopying)
         
         let status = SecItemUpdate(secDict, updateDict)
         if status == OSStatus(errSecSuccess) {

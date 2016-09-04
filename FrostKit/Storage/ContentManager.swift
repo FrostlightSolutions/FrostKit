@@ -66,7 +66,7 @@ public class ContentManager {
                         DispatchQueue.main.async {
                             do {
                                 try LocalStorage.remove(absoluteURL: url)
-                            } catch let error as NSError {
+                            } catch let error {
                                 NSLog("Error: Unable to remove managed item at URL \(url)\nWith error: \(error.localizedDescription)\n\(error)")
                             }
                         }

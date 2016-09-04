@@ -57,15 +57,15 @@ public class CustomFonts {
     */
     public class func loadCustomFont(_ name: String, withExtension ext: String, bundle: Bundle = Bundle.main) {
         
-        var error: Unmanaged<CFErrorRef>?
-        guard let url = bundle.URLForResource(name, withExtension: ext),
-            fontData = NSData(contentsOfURL: url),
-            provider = CGDataProviderCreateWithCFData(fontData) else {
+        var error: Unmanaged<CFError>?
+        guard let url = bundle.url(forResource: name, withExtension: ext),
+            let fontData = NSData(contentsOf: url),
+            let provider = CGDataProvider(data: fontData) else {
                 NSLog("ERROR: Failed to get URL for \"\(name)\" font!")
                 return
         }
         
-        let font = CGFontCreateWithDataProvider(provider)
+        let font = CGFont(provider)
         guard CTFontManagerRegisterGraphicsFont(font, &error) == false else {
             NSLog("ERROR: Failed to get URL for \"\(name)\" font!")
             return
@@ -73,7 +73,7 @@ public class CustomFonts {
         
         if let anError = error {
             let errorCode = CFErrorGetCode(anError.takeRetainedValue())
-            if errorCode == CTFontManagerError.AlreadyRegistered.rawValue {
+            if errorCode == CTFontManagerError.alreadyRegistered.rawValue {
                 NSLog("Already loaded '\(name)'")
             } else {
                 let errorDescription = CFErrorCopyDescription(anError.takeRetainedValue())

@@ -26,7 +26,7 @@ public class CoreDataController: NSObject {
             return _fetchedResultsController!
         }
         
-        let fetchRequest = NSFetchRequest()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         
         // Edit the entity name as appropriate.
         let entity = NSEntityDescription.entity(forEntityName: entityName, in: context)
@@ -48,7 +48,7 @@ public class CoreDataController: NSObject {
         
         do {
             try aFetchedResultsController.performFetch()
-        } catch let error as NSError {
+        } catch let error {
             NSLog("Fetch error: \(error.localizedDescription)\n\(error)")
         }
         

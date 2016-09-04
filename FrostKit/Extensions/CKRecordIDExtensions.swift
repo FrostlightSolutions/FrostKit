@@ -11,7 +11,7 @@ import CloudKit
 
 public extension CKRecordID {
     
-    public class func recordIDsFromRecordNames(names: [String], zoneID: CKRecordZoneID? = nil, action: CKReferenceAction = .None) -> [CKRecordID] {
+    public class func recordIDsFromRecordNames(names: [String], zoneID: CKRecordZoneID? = nil, action: CKReferenceAction = .none) -> [CKRecordID] {
         return names.map({ (name) -> CKRecordID in
             let recordID: CKRecordID
             if let recordZoneID = zoneID {

@@ -60,13 +60,13 @@ public class AppStoreHelper {
     
     - parameter complete: Returned when to update request is complete and returns an error is it failed.
     */
-    public func updateAppStoreData(_ complete: ((NSError?) -> Void)? = nil) {
+    public func updateAppStoreData(_ complete: ((Error?) -> Void)? = nil) {
         
         guard let appStoreID = FrostKit.appStoreID else {
             
-            dispatch_async(dispatch_get_main_queue(), {
-                complete?(NSError.errorWithMessage("No app store ID set."))
-            })
+            DispatchQueue.main.async {
+                complete?(NSError.error(withMessage: "No app store ID set."))
+            }
             return
         }
         
@@ -78,9 +78,9 @@ public class AppStoreHelper {
         
         guard let url = NSURL(string: urlString) else {
             
-            dispatch_async(dispatch_get_main_queue(), {
-                complete?(NSError.errorWithMessage("URL could not be created from string: \(urlString)"))
-            })
+            DispatchQueue.main.async {
+                complete?(NSError.error(withMessage: "URL could not be created from string: \(urlString)"))
+            }
             return
         }
         
@@ -89,19 +89,19 @@ public class AppStoreHelper {
             
             if let anError = error {
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async {
                     complete?(anError)
-                })
+                }
                 
             } else if let jsonData = data {
                 
-                guard let json = try? NSJSONSerialization.JSONObjectWithData(jsonData, options: []) as? [String: AnyObject],
-                    results = json?["results"] as? [[String: AnyObject]],
-                    appDetails = results.first else {
+                guard let json = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: AnyObject],
+                    let results = json?["results"] as? [[String: AnyObject]],
+                    let appDetails = results.first else {
                         
-                    dispatch_async(dispatch_get_main_queue(), {
-                        complete?(NSError.errorWithMessage("Could not parse JSON from data."))
-                    })
+                    DispatchQueue.main.async {
+                        complete?(NSError.error(withMessage: "Could not parse JSON from data."))
+                    }
                     return
                 }
                 
@@ -122,15 +122,15 @@ public class AppStoreHelper {
                 
                 self.bundleId = appDetails["bundleId"] as? String
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async {
                     complete?(nil)
-                })
+                }
                 
             } else {
                 
-                dispatch_async(dispatch_get_main_queue(), {
-                    complete?(NSError.errorWithMessage("No data returned."))
-                })
+                DispatchQueue.main.async {
+                    complete?(NSError.error(withMessage: "No data returned."))
+                }
             }
         }
         task.resume()

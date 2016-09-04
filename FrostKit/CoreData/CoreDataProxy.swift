@@ -38,13 +38,11 @@ public class CoreDataProxy {
         let options = [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true]
         do {
             try coordinator!.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
-        } catch var error as NSError {
+        } catch var error {
             coordinator = nil
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog("Unresolved error \(error), \(error.userInfo)")
-        } catch {
-            fatalError()
+            NSLog("Unresolved error \(error), \(error._userInfo)")
         }
         
         return coordinator
@@ -58,7 +56,7 @@ public class CoreDataProxy {
             fatalError()
         }
         
-        let managedObjectContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        let managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
 //        managedObjectContext.mergePolicy = NSMergePolicy(mergeType: .MergeByPropertyObjectTrumpMergePolicyType)
         
@@ -69,8 +67,8 @@ public class CoreDataProxy {
         
         let context = self.managedObjectContextBase
         
-        let managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
-        managedObjectContext.parentContext = context
+        let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        managedObjectContext.parent = context
 //        managedObjectContext.mergePolicy = NSMergePolicy(mergeType: .MergeByPropertyObjectTrumpMergePolicyType)
         
         return managedObjectContext
@@ -80,8 +78,8 @@ public class CoreDataProxy {
         
         let context = CoreDataProxy.shared.managedObjectContextMain
         
-        let managedObjectContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
-        managedObjectContext.parentContext = context
+        let managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        managedObjectContext.parent = context
 //        managedObjectContext.mergePolicy = NSMergePolicy(mergeType: .MergeByPropertyObjectTrumpMergePolicyType)
         
         return managedObjectContext
@@ -90,32 +88,30 @@ public class CoreDataProxy {
     // MARK: - Core Data Saving support
     
     private class func saveContextBase(complete: (() -> Void)?) {
-        CoreDataProxy.saveContext(CoreDataProxy.shared.managedObjectContextBase, complete: complete)
+        CoreDataProxy.saveContext(context: CoreDataProxy.shared.managedObjectContextBase, complete: complete)
     }
     
     private class func saveContextMain(complete: (() -> Void)?) {
-        CoreDataProxy.saveContext(CoreDataProxy.shared.managedObjectContextMain, complete: complete)
+        CoreDataProxy.saveContext(context: CoreDataProxy.shared.managedObjectContextMain, complete: complete)
     }
     
     public class func saveMainAndBaseContexts(complete: (() -> Void)? = nil) {
-        CoreDataProxy.saveContextMain({ () -> Void in
-            CoreDataProxy.saveContextBase({
+        CoreDataProxy.saveContextMain(complete: { () -> Void in
+            CoreDataProxy.saveContextBase(complete: {
                 complete?()
             })
         })
     }
     
     public class func saveContext(context: NSManagedObjectContext, complete: (() -> Void)? = nil) {
-        context.performBlock({ () -> Void in
+        context.perform {
             if context.hasChanges {
                 do {
                     try context.save()
-                } catch let error as NSError {
+                } catch let error {
                     // Replace this implementation with code to handle the error appropriately.
                     // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                     NSLog("Unresolved error: \(error.localizedDescription)")
-                } catch {
-                    fatalError()
                 }
             }
             complete?()

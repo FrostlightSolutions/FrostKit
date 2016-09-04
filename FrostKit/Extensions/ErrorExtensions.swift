@@ -9,7 +9,7 @@
 import Foundation
 
 ///
-/// Extention functions for NSError
+/// Extention functions for Error
 ///
 extension NSError {
     
@@ -20,7 +20,7 @@ extension NSError {
      
      - returns: An error object with the message as a localized description.
      */
-    public class func error(withMessage message: String) -> NSError {
-        return NSError(domain: Bundle.main.bundleIdentifier ?? "", code: -1, userInfo: [NSLocalizedDescriptionKey: message])
+    public static func error(withMessage message: String) -> Error {
+        return NSError(domain: Bundle.main.bundleIdentifier ?? "", code: -1, userInfo: [NSLocalizedDescriptionKey: message]) as Error
     }
 }

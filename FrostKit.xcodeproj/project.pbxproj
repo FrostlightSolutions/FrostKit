@@ -1114,7 +1114,7 @@
 				1826B0631BD906B700DA1669 /* VisualEffectView.swift in Sources */,
 				1826B0591BD9066C00DA1669 /* TaskStore.swift in Sources */,
 				66AB893D1D71C21D0097ADAC /* CKReferenceExntensions.swift in Sources */,
-				1826B0591BD9066C00DA1669 /* RequestStore.swift in Sources */,
+				1826B0591BD9066C00DA1669 /* TaskStore.swift in Sources */,
 				1826B0661BD906E200DA1669 /* ErrorExtensions.swift in Sources */,
 				1826B0641BD906BE00DA1669 /* InitialsImageView.swift in Sources */,
 				1826B0611BD906B000DA1669 /* Button.swift in Sources */,

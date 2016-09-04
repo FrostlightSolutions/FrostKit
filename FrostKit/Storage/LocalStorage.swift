@@ -149,9 +149,9 @@ public class LocalStorage {
     
     - returns: A non-optional version of the public class function.
     */
-    private class func absoluteURL(baseURL baseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> NSURL? {
+    private class func absoluteURL(baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> URL? {
         
-        guard let name = fileName, ext = fileExtension else {
+        guard let name = fileName, let ext = fileExtension else {
             return nil
         }
     
@@ -169,7 +169,7 @@ public class LocalStorage {
         
         do {
             try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
-        } catch let error as NSError {
+        } catch let error {
             NSLog("Error: Directory not able to be created at URL \(url)\nWith error: \(error.localizedDescription)\n\(error)")
         }
     }
@@ -189,19 +189,18 @@ public class LocalStorage {
     */
     public class func save(data: AnyObject, baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
         
-        guard let dirURL = baseURL.URLByAppendingPathComponent(reletivePath) else {
+        let dirURL = baseURL.appendingPathComponent(reletivePath)
+        createDirectory(url: dirURL)
+        
+        guard let name = fileName, let ext = fileExtension else {
             return false
         }
         
-        createDirectory(url: dirURL)
-        
-        guard let name = fileName, ext = fileExtension,
-            url = dirURL.URLByAppendingPathComponent(name)?.URLByAppendingPathExtension(ext) else {
-                return false
-        }
+        let url = dirURL.appendingPathComponent(name).appendingPathExtension(ext)
+        let success = NSKeyedArchiver.archiveRootObject(data, toFile: url.path)
         
         if success == false {
-            NSLog("Error: Can't save object to file at path: \(path)")
+            NSLog("Error: Can't save object to file at path: \(url.path)")
         }
         
         return success
@@ -311,7 +310,7 @@ public class LocalStorage {
         guard let url = absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) else {
             return nil
         }
-        return NSKeyedUnarchiver.unarchiveObject(withFile: url.path)
+        return NSKeyedUnarchiver.unarchiveObject(withFile: url.path) as AnyObject
     }
     
     /**
