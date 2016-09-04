@@ -149,12 +149,12 @@ public class LocalStorage {
     
     - returns: A non-optional version of the public class function.
     */
-    private class func absoluteURL(baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> URL? {
+    private class func absoluteURL(baseURL baseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> NSURL? {
         
-        guard let name = fileName, let ext = fileExtension else {
+        guard let name = fileName, ext = fileExtension else {
             return nil
         }
-        
+    
         return baseURL.appendingPathComponent(reletivePath).appendingPathComponent(name).appendingPathExtension(ext)
     }
     
@@ -189,16 +189,16 @@ public class LocalStorage {
     */
     public class func save(data: AnyObject, baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
         
-        let dirURL = baseURL.appendingPathComponent(reletivePath)
-        createDirectory(url: dirURL)
-        
-        guard let name = fileName, let ext = fileExtension else {
+        guard let dirURL = baseURL.URLByAppendingPathComponent(reletivePath) else {
             return false
         }
         
-        let url = dirURL.appendingPathComponent(name).appendingPathExtension(ext)
-        let path = url.path
-        let success = NSKeyedArchiver.archiveRootObject(data, toFile: path)
+        createDirectory(url: dirURL)
+        
+        guard let name = fileName, ext = fileExtension,
+            url = dirURL.URLByAppendingPathComponent(name)?.URLByAppendingPathExtension(ext) else {
+                return false
+        }
         
         if success == false {
             NSLog("Error: Can't save object to file at path: \(path)")

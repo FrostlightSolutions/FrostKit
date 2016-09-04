@@ -309,7 +309,7 @@ extension Date {
         return compare(date, option: .after)
     }
     
-    // MARK: -
+    // MARK: - Date Changers
     
     /// Creates a new object which is a copy of the current date but with time stripped out (set to midnight)
     public var stripTime: Date {

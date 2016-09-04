@@ -14,6 +14,7 @@ public class CoreDataController: NSObject {
     
     // MARK: - Properties
     
+    public var context: NSManagedObjectContext { return CoreDataProxy.shared.managedObjectContextMain }
     public var entityName: String! { return nil }
     public var sectionNameKeyPath: String? { return nil }
     public var cacheName: String? { return nil }
@@ -25,9 +26,8 @@ public class CoreDataController: NSObject {
             return _fetchedResultsController!
         }
         
-        let context = CoreDataProxy.shared.managedObjectContextMain!
+        let fetchRequest = NSFetchRequest()
         
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         // Edit the entity name as appropriate.
         let entity = NSEntityDescription.entity(forEntityName: entityName, in: context)
         fetchRequest.entity = entity
@@ -53,6 +53,10 @@ public class CoreDataController: NSObject {
         }
         
         return _fetchedResultsController!
+    }
+    
+    public func resetFetchedResultsController() {
+        _fetchedResultsController = nil
     }
     
 }

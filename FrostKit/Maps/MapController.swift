@@ -24,7 +24,10 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     public var identifier: String {
         return "FrostKitAnnotation"
     }
-    private var hasPlottedInitUsersLocation = false
+    /// Dictates if the users location has been initially plotted.
+    public var hasPlottedInitUsersLocation = false
+    /// Dictates if the users location was not able to be plotted, due permissions issues, etc.
+    public var failedToPlotUsersLocation = false
     /// The view controller related to the map controller.
     @IBOutlet public weak var viewController: UIViewController!
     /// The map view related to the map controller.
@@ -108,9 +111,13 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     /// The location manager automatically created when assigning the map view to the map controller. It's only use if for getting the user's access to location services.
     private var locationManager: CLLocationManager?
     /// An array of addresses plotted on the map view.
-    public var addresses = [Address]()
+    public var addresses: [Address] {
+        return Array<Address>(addressesDict.values)
+    }
+    private var addressesDict = [NSObject: Address]()
+    
     /// A dictionary of annotations plotted to the map view with the address object as the key.
-    public var annotations = [Address: MKAnnotation]()
+    public var annotations = [NSObject: MKAnnotation]()
     /// When the map automatically zooms to show all, if this value is set to true, then the users annoation is automatically included in that.
     @IBInspectable public var zoomToShowAllIncludesUser: Bool = true
     private var regionSpanBeforeChange: MKCoordinateSpan?
@@ -129,8 +136,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         
         cancelClusterCalculations = true
         
-        addresses.removeAll(keepingCapacity: false)
-        annotations.removeAll(keepingCapacity: false)
+        addressesDict.removeAll(keepCapacity: false)
+        annotations.removeAll(keepCapacity: false)
         
         removeAllAnnotations()
         removeAllPolylines()
@@ -186,30 +193,27 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
             return
         }
         
-        if let index = addresses.index(of: address) {
-            addresses[index] = address
-        } else {
-            addresses.append(address)
-        }
+        // Update or add the address
+        addressesDict[address.key] = address
         
-        var annotation: Annotation?
-        if let currentAnnotation = annotations[address] as? Annotation {
+        let annotation: Annotation
+        if let currentAnnotation = annotations[address.key] as? Annotation {
             // Annotation already exists, update the address
             currentAnnotation.update(address: address)
             annotation = currentAnnotation
         } else {
             // No previous annotation for this addres, create one
             let newAnnotation = Annotation(address: address)
-            annotations[address] = newAnnotation
             annotation = newAnnotation
         }
         
-        if let currentAnnotation = annotation {
-            _mapView?.addAnnotation(currentAnnotation)
-            
-            if asBulk == false {
-                updateVisableAnnotations()
-            }
+        // Update annotation in cache
+        annotations[address.key] = annotation
+        
+        _mapView?.addAnnotation(annotation)
+        
+        if plottingAsBulk == false {
+            updateVisableAnnotations()
         }
     }
     
@@ -233,8 +237,8 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     Clears all of the annotations from the map, including caced, and clears the addresses array.
     */
     public func clearData() {
-        removeAllAnnotations(includingCached: true)
-        addresses.removeAll(keepingCapacity: false)
+        removeAllAnnotations(true)
+        addressesDict.removeAll(keepCapacity: false)
     }
     
     // MARK: - Annotation Clustering
@@ -262,6 +266,12 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                 if self.shouldTryToUpdateVisableAnnotationsAgain == true {
                     self.updateVisableAnnotations()
                 }
+            }
+        } else {
+            
+            currentlyUpdatingVisableAnnotations = false
+            if shouldTryToUpdateVisableAnnotationsAgain == true {
+                updateVisableAnnotations()
             }
         }
     }
@@ -360,7 +370,20 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
             }
         }
         
-        if filteredAllAnnotationsInBucket.count > 0 {
+        // If filteredAllAnnotationsInBucket just contains a single anntation, then plot that
+        if filteredAllAnnotationsInBucket.count == 1, let annotation = filteredAllAnnotationsInBucket.first {
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+                // Give the annotationForGrid a reference to all the annotations it will represent
+                annotation.containdedAnnotations = nil
+                annotation.clusterAnnotation = nil
+                
+                mapView.addAnnotation(annotation)
+            })
+            
+        // If filteredAllAnnotationsInBucket contains more than 1 annotation, then get the annotation to show and set relevent details
+        } else if filteredAllAnnotationsInBucket.count > 1 {
             
             guard let annotationForGrid = self.calculatedAnnotationInGrid(mapView: mapView, gridMapRect: gridMapRect, allAnnotations: filteredAllAnnotationsInBucket, visableAnnotations: visableAnnotationsInBucket) else {
                 return
@@ -368,10 +391,11 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
             
             filteredAllAnnotationsInBucket.remove(annotationForGrid)
             
-            // Give the annotationForGrid a reference to all the annotations it will represent
-            annotationForGrid.containdedAnnotations = Array<Annotation>(filteredAllAnnotationsInBucket)
-            
             DispatchQueue.main.async {
+                
+                // Give the annotationForGrid a reference to all the annotations it will represent
+                annotationForGrid.containdedAnnotations = Array<Annotation>(filteredAllAnnotationsInBucket)
+                
                 mapView.addAnnotation(annotationForGrid)
             }
             
@@ -379,7 +403,9 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
             for annotation in filteredAllAnnotationsInBucket {
                 
                 // Give all the other annotations a reference to the one which is representing then.
-                annotation.clusterAnnotation = annotationForGrid
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    annotation.clusterAnnotation = annotationForGrid
+                })
                 
                 if visableAnnotationsInBucket.contains(annotation) {
                     
@@ -823,6 +849,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         
         if hasPlottedInitUsersLocation == false {
             hasPlottedInitUsersLocation = true
+            failedToPlotUsersLocation = false
             zoomToShowAll()
         }
     }
@@ -840,6 +867,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     public func mapView(_ mapView: MKMapView, didFailToLocateUserWithError error: Error) {
         
         hasPlottedInitUsersLocation = false
+        failedToPlotUsersLocation = true
         zoomToShowAll()
     }
     

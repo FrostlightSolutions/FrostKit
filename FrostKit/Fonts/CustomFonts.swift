@@ -57,30 +57,28 @@ public class CustomFonts {
     */
     public class func loadCustomFont(_ name: String, withExtension ext: String, bundle: Bundle = Bundle.main) {
         
-        var error: Unmanaged<CFError>?
-        guard let url = bundle.url(forResource: name, withExtension: ext), let fontData = try? Data(contentsOf: url), let provider = CGDataProvider(data: fontData) else {
-            NSLog("ERROR: Failed to get URL for \"\(name)\" font!")
-            return
+        var error: Unmanaged<CFErrorRef>?
+        guard let url = bundle.URLForResource(name, withExtension: ext),
+            fontData = NSData(contentsOfURL: url),
+            provider = CGDataProviderCreateWithCFData(fontData) else {
+                NSLog("ERROR: Failed to get URL for \"\(name)\" font!")
+                return
         }
         
-        let font = CGFont(provider)
+        let font = CGFontCreateWithDataProvider(provider)
         guard CTFontManagerRegisterGraphicsFont(font, &error) == false else {
             NSLog("ERROR: Failed to get URL for \"\(name)\" font!")
             return
         }
         
-        if let _ = error {
-            NSLog("Already loaded or failed to load '\(name)'")
-            
-            // TODO: Re-enable once CFFont bridgable error is fixed!
-//        if let anError = error {
-//            let errorCode = CFErrorGetCode(anError.takeRetainedValue())
-//            if errorCode == CTFontManagerError.alreadyRegistered.rawValue {
-//                NSLog("Already loaded '\(name)'")
-//            } else {
-//                let errorDescription = CFErrorCopyDescription(anError.takeRetainedValue())
-//                NSLog("ERROR: Failed to load '\(name)' font with error: \(errorDescription)!")
-//            }
+        if let anError = error {
+            let errorCode = CFErrorGetCode(anError.takeRetainedValue())
+            if errorCode == CTFontManagerError.AlreadyRegistered.rawValue {
+                NSLog("Already loaded '\(name)'")
+            } else {
+                let errorDescription = CFErrorCopyDescription(anError.takeRetainedValue())
+                NSLog("ERROR: Failed to load '\(name)' font with error: \(errorDescription)!")
+            }
         } else {
             NSLog("Loaded '\(name)' successfully")
         }

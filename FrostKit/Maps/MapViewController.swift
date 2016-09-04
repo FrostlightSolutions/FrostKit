@@ -110,9 +110,9 @@ public class MapViewController: UIViewController {
                 
                 let title: String
                 if mapController.trackingUser == true {
-                    title = IonIcons.ios_navigate
+                    title = IonIcons.iosNavigate
                 } else {
-                    title = IonIcons.ios_navigate_outline
+                    title = IonIcons.iosNavigateOutline
                 }
                 
                 locationButton = UIBarButtonItem(title: title, font: .ionicons(size: 24), verticalOffset: -1, target: self, action: #selector(MapViewController.locationButtonPressed(sender:)))

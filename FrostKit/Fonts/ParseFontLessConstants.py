@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 '''
   ParseFontLessConstants.py
@@ -41,6 +42,13 @@ def parseFontConsatnts(inputPath, outputPath):
       line = line.replace(';', '')
 
       components = line.split(':')
+      
+      sub_components = components[0].split('_')
+      for index in range(len(sub_components)):
+        if index > 0:
+          word = sub_components[index]
+          sub_components[index] = word.capitalize()
+      components[0] = ''.join(sub_components)
 
       # Fix Pre-Swift 2.2 phrases
       if components[0] in ['repeat', 'subscript', 'try']:
