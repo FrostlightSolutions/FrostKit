@@ -344,18 +344,14 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         
         // Limited to only the use Annotation classes or subclasses
         let semaphore = DispatchSemaphore(value: 0)    // Create semaphore
-        var visableAnnotationsInBucket: Set<Annotation>!
+        var visableAnnotationsInBucket: Set<Annotation>
         
         DispatchQueue.main.async {
-            visableAnnotationsInBucket = mapView.annotations(in: gridMapRect) as? Set<MKAnnotation>
+            visableAnnotationsInBucket = mapView.annotations(in: gridMapRect) as! Set<Annotation>
             semaphore.signal()    // Signal that semaphore should complete
         }
         
         _ = semaphore.wait(timeout: DispatchTime.distantFuture)   // Wait for semaphore
-        
-        if visableAnnotationsInBucket == nil {
-            return
-        }
         
         let allAnnotationsInBucket = offscreenMapView.annotations(in: gridMapRect)
         var filteredAllAnnotationsInBucket = Set<Annotation>()

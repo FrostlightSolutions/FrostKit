@@ -59,12 +59,17 @@ public class Annotation: NSObject, MKAnnotation {
         }
     }
     
-    public override var hashValue: Int {
-        return address?.hashValue ?? 0
+    public override func isEqual(_ object: Any?) -> Bool {
+        
+        if let annotation = object as? Annotation {
+            return self.hash == annotation.hash
+        } else {
+            return false
+        }
     }
     
-    public override init() {
-        super.init()
+    public override var hash: Int {
+        return address?.hashValue ?? 0
     }
     
     /**
