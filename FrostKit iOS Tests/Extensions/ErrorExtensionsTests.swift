@@ -26,7 +26,7 @@ class ErrorExtensionsTests: XCTestCase {
         measure {
             
             let message = "This is a test error!"
-            let error = Error.error(withMessage: message)
+            let error = NSError.error(withMessage: message)
             XCTAssert(error.localizedDescription == message)
         }
     }

@@ -23,18 +23,18 @@ class MapClusterTests: XCTestCase {
         mapController.mapView = mapView
         mapController.viewController = mapVC
         
-        let randomAddressDictionaries = [
-            ["latitude": 59.31444600, "longitude": 18.07437500],
-            ["latitude": 59.31896678, "longitude": 18.04416434],
-            ["latitude": 59.29050261, "longitude": 18.07619457],
-            ["latitude": 59.29147627, "longitude": 18.07859017],
-            ["latitude": 59.30587091, "longitude": 18.02888337],
-            ["latitude": 59.32710860, "longitude": 18.06120245],
-            ["latitude": 59.30327769, "longitude": 18.05254242],
-            ["latitude": 59.31181011, "longitude": 18.07480798],
-            ["latitude": 59.34258002, "longitude": 18.08315992],
-            ["latitude": 59.30417451, "longitude": 18.09245279],
-            ["latitude": 59.28905485, "longitude": 18.07463282]
+        let randomAddressDictionaries: [[String: AnyObject]] = [
+            ["latitude": 59.31444600 as AnyObject, "longitude": 18.07437500 as AnyObject],
+            ["latitude": 59.31896678 as AnyObject, "longitude": 18.04416434 as AnyObject],
+            ["latitude": 59.29050261 as AnyObject, "longitude": 18.07619457 as AnyObject],
+            ["latitude": 59.29147627 as AnyObject, "longitude": 18.07859017 as AnyObject],
+            ["latitude": 59.30587091 as AnyObject, "longitude": 18.02888337 as AnyObject],
+            ["latitude": 59.32710860 as AnyObject, "longitude": 18.06120245 as AnyObject],
+            ["latitude": 59.30327769 as AnyObject, "longitude": 18.05254242 as AnyObject],
+            ["latitude": 59.31181011 as AnyObject, "longitude": 18.07480798 as AnyObject],
+            ["latitude": 59.34258002 as AnyObject, "longitude": 18.08315992 as AnyObject],
+            ["latitude": 59.30417451 as AnyObject, "longitude": 18.09245279 as AnyObject],
+            ["latitude": 59.28905485 as AnyObject, "longitude": 18.07463282 as AnyObject]
         ]
         
         var addresses = [Address]()
