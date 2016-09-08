@@ -43,7 +43,6 @@
 		182290531BA2E66C00C1CF1D /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066019DB5BF000811755 /* LocalStorage.swift */; };
 		182290541BA2E66F00C1CF1D /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066F19DB7EDB00811755 /* ContentManager.swift */; };
 		1826B0571BD9065B00DA1669 /* FrostKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23119DE07670032ABB7 /* FrostKit.swift */; };
-		1826B0591BD9066C00DA1669 /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* TaskStore.swift */; };
 		1826B0601BD906AC00DA1669 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DD79081A8CA74E00379FB5 /* View.swift */; };
 		1826B0611BD906B000DA1669 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DD78FD1A8CA70F00379FB5 /* Button.swift */; };
 		1826B0621BD906B400DA1669 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1818F6D91A8CF39B000255A2 /* ImageView.swift */; };
@@ -86,6 +85,7 @@
 		184625091C84D1A00098E969 /* FrostKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 18E5459D1C77E53F00637E85 /* FrostKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1846250A1C84D2FC0098E969 /* FrostKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 18839B1719D9FA8C00760157 /* FrostKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18497BE41D15BA28009A717F /* TaskStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18497BE31D15BA28009A717F /* TaskStoreTests.swift */; };
+		185652861D81746E002E5C99 /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* TaskStore.swift */; };
 		18748B2219DF5661003942A3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18748B2019DF5661003942A3 /* Localizable.strings */; };
 		187661791BEEA0C900C82769 /* AppStoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187661781BEEA0C900C82769 /* AppStoreHelper.swift */; };
 		1876617A1BEEA0C900C82769 /* AppStoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187661781BEEA0C900C82769 /* AppStoreHelper.swift */; };
@@ -1103,6 +1103,7 @@
 			files = (
 				1826B0671BD906E200DA1669 /* DateExtensions.swift in Sources */,
 				18CF8C361D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */,
+				185652861D81746E002E5C99 /* TaskStore.swift in Sources */,
 				1826B0571BD9065B00DA1669 /* FrostKit.swift in Sources */,
 				1826B06C1BD906E200DA1669 /* FontExtensions.swift in Sources */,
 				1826B0701BD906F200DA1669 /* FontConstants.swift in Sources */,
@@ -1113,9 +1114,7 @@
 				1876617A1BEEA0C900C82769 /* AppStoreHelper.swift in Sources */,
 				1826B06F1BD906F200DA1669 /* CustomFonts.swift in Sources */,
 				1826B0631BD906B700DA1669 /* VisualEffectView.swift in Sources */,
-				1826B0591BD9066C00DA1669 /* TaskStore.swift in Sources */,
 				66AB893D1D71C21D0097ADAC /* CKReferenceExntensions.swift in Sources */,
-				1826B0591BD9066C00DA1669 /* TaskStore.swift in Sources */,
 				1826B0661BD906E200DA1669 /* ErrorExtensions.swift in Sources */,
 				1826B0641BD906BE00DA1669 /* InitialsImageView.swift in Sources */,
 				1826B0611BD906B000DA1669 /* Button.swift in Sources */,
