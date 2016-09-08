@@ -29,7 +29,9 @@ public class RequestStore: NSObject {
     - parameter router:  The router to determine the key.
     */
     public func addRequest(request: Request, router: Router) {
-        addRequest(request, urlString: router.URLRequest.URL!.absoluteString)
+        if let url = router.URLRequest.URL, let absoluteString = url.absoluteString {
+            addRequest(request, urlString: absoluteString)
+        }
     }
 #endif
     
@@ -58,7 +60,9 @@ public class RequestStore: NSObject {
     - parameter router: The router to determine the key of the request to remove.
     */
     public func removeRequestFor(router router: Router) {
-        removeRequestFor(urlString: router.URLRequest.URL!.absoluteString)
+        if let url = router.URLRequest.URL, let absoluteString = url.absoluteString {
+            removeRequestFor(urlString: absoluteString)
+        }
     }
 #endif
     
@@ -96,7 +100,11 @@ public class RequestStore: NSObject {
     - returns: If a matching request is found then `true` is returned, otherwise `false` is returned.
     */
     public func containsRequestWithRouter(router: Router) -> Bool {
-        return containsRequestWithURL(router.URLRequest.URL!.absoluteString)
+        if let url = router.URLRequest.URL, let absoluteString = url.absoluteString {
+            return containsRequestWithURL(absoluteString)
+        }
+    
+        return false
     }
 #endif
     

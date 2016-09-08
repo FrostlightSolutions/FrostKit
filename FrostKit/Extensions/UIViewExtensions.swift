@@ -18,7 +18,7 @@ extension UIView {
     
     - returns: A screen shot of the view.
     */
-    public func screenshot() -> UIImage {
+    public func screenshot() -> UIImage? {
         
         var scale: CGFloat = 2.0
         if let window = self.window {

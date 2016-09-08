@@ -87,7 +87,7 @@ public enum Router: URLRequestConvertible {
             return NSURL(string: urlString)!
         } else {
             let URL = NSURL(string: Router.baseURLString)!
-            return URL.URLByAppendingPathComponent(urlString)
+            return URL.URLByAppendingPathComponent(urlString)!
         }
     }
     
@@ -101,7 +101,7 @@ public enum Router: URLRequestConvertible {
     
     private func resizeURL() -> NSURL {
         let URL = NSURL(string: Router.baseURLString)!
-        return URL.URLByAppendingPathComponent("resize")
+        return URL.URLByAppendingPathComponent("resize")!
     }
     
     /// The absolute URL of the case.
@@ -130,9 +130,9 @@ public enum Router: URLRequestConvertible {
     var absoluteString: String {
         switch self {
         case .ImageGET(let urlString, _):
-            return absoluteURLFromString(urlString).absoluteString
+            return absoluteURLFromString(urlString).absoluteString!
         default:
-            return URL.absoluteString
+            return URL.absoluteString!
         }
     }
     

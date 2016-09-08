@@ -286,21 +286,19 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     
     public func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         
-        switch result.rawValue {
-        case MFMailComposeResultCancelled.rawValue:
+        switch result {
+        case .Cancelled:
             NSLog("Email cancelled")
-        case MFMailComposeResultSaved.rawValue:
+        case .Saved:
             NSLog("Email saved")
-        case MFMailComposeResultSent.rawValue:
+        case .Sent:
             NSLog("Email sent")
-        case MFMailComposeResultFailed.rawValue:
+        case .Failed:
             if let anError = error {
                 NSLog("Email send failed: \(anError.localizedDescription)\n\(error)")
             } else {
                 NSLog("Email send failed!")
             }
-        default:
-            break
         }
         
         clear()
@@ -311,15 +309,13 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     
     public func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
         
-        switch result.rawValue {
-        case MessageComposeResultCancelled.rawValue:
+        switch result {
+        case .Cancelled:
             NSLog("Message cancelled")
-        case MessageComposeResultSent.rawValue:
+        case .Sent:
             NSLog("Message sent")
-        case MessageComposeResultFailed.rawValue:
+        case .Failed:
             NSLog("Message failed")
-        default:
-            break
         }
         
         clear()
