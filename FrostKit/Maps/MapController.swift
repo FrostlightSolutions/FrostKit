@@ -344,7 +344,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         
         // Limited to only the use Annotation classes or subclasses
         let semaphore = DispatchSemaphore(value: 0)    // Create semaphore
-        var visableAnnotationsInBucket: Set<Annotation>
+        var visableAnnotationsInBucket: Set<Annotation>!
         
         DispatchQueue.main.async {
             visableAnnotationsInBucket = mapView.annotations(in: gridMapRect) as! Set<Annotation>
