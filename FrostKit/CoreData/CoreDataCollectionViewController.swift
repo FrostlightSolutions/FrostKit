@@ -16,7 +16,7 @@ public class CoreDataCollectionViewController: UICollectionViewController, NSFet
     @IBOutlet public weak var dataController: CoreDataController! {
         didSet { dataController.fetchedResultsController.delegate = self }
     }
-    public var fetchedResultsController: NSFetchedResultsController {
+    public var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> {
         return dataController.fetchedResultsController
     }
     
@@ -28,7 +28,7 @@ public class CoreDataCollectionViewController: UICollectionViewController, NSFet
         clearsSelectionOnViewWillAppear = false
     }
     
-    override public func viewDidAppear(animated: Bool) {
+    override public func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         fetchAndReloadData()
@@ -36,13 +36,13 @@ public class CoreDataCollectionViewController: UICollectionViewController, NSFet
     
     // MARK: Collection view
     
-    override public func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    public override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return fetchedResultsController.sections?.count ?? 0
     }
     
-    override public func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if let sections = fetchedResultsController.sections where sections.count > section {
+        if let sections = fetchedResultsController.sections, sections.count > section {
             
             let sectionInfo = sections[section]
             return sectionInfo.numberOfObjects
@@ -54,7 +54,7 @@ public class CoreDataCollectionViewController: UICollectionViewController, NSFet
     
     // MARK: - Fetched results controller
     
-    public func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         collectionView?.reloadData()
     }
     
@@ -64,7 +64,7 @@ public class CoreDataCollectionViewController: UICollectionViewController, NSFet
         do {
             try fetchedResultsController.performFetch()
             collectionView?.reloadData()
-        } catch let error as NSError {
+        } catch let error {
             NSLog("Fetch error: \(error.localizedDescription)\n\(error)")
         }
     }

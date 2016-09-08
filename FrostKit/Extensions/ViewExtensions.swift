@@ -14,17 +14,17 @@ import UIKit
 extension UIView {
     
     /// Returns a screen shot of the view.
-    public var screenshot: UIImage {
+    public var screenshot: UIImage? {
         
         var scale: CGFloat = 2.0
         if let window = self.window {
             scale = window.screen.scale
         } else {
-            scale = UIScreen.mainScreen().scale
+            scale = UIScreen.main.scale
         }
         
         UIGraphicsBeginImageContextWithOptions(bounds.size, false, scale)
-        drawViewHierarchyInRect(bounds, afterScreenUpdates: true)
+        drawHierarchy(in: bounds, afterScreenUpdates: true)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
@@ -38,7 +38,7 @@ extension UIView {
     
     - returns: The parent view of the type passed in.
     */
-    public func parentViewOfType<T>(type: T.Type) -> T? {
+    public func parentView<T>(ofType type: T.Type) -> T? {
         var currentView = self
         while currentView.superview != nil {
             if currentView is T {

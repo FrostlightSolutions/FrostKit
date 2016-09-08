@@ -11,90 +11,96 @@ import Foundation
 ///  Different ways to compare date
 public enum DateCompareType {
     /// Date A is before Date B
-    case Before
+    case before
     /// Date A is after Date B
-    case After
+    case after
     /// Both dates are equal
-    case EqualTo
+    case equalTo
     /// Date A is before or equal to Date B
-    case BeforeOrEqualTo
+    case beforeOrEqualTo
     /// Date A is after or equal to Date B
-    case AfterOrEqualTo
+    case afterOrEqualTo
 }
 
 /// Most common component flags
-private let componentFlags: NSCalendarUnit = ([.Year, .Month, .Day, .WeekOfMonth, .Hour, .Minute, .Second, .Weekday, .WeekdayOrdinal])
+private let componentFlags: Set<Calendar.Component> = [.year, .month, .day, .weekOfMonth, .hour, .minute, .second, .weekday, .weekdayOrdinal]
 
 ///
-/// Extention functions for NSDate
+/// Extention functions for Date
 ///
-extension NSDate {
+extension Date {
     
-    // MARK: - NSDate Creation
+    // MARK: - Date Creation
     
     /**
-    Creates an NSDate from the FUS standard date format.
+    Creates an Date from the FUS standard date format.
     
-    - parameter fusDateString: The date string to make into an NSDate in the format of `yyyy-MM-dd` or `yyyy-MM-ddTHH:mm:ss.SSSSSSZ`.
+    - parameter fusDateString: The date string to make into an Date in the format of `yyyy-MM-dd` or `yyyy-MM-ddTHH:mm:ss.SSSSSSZ`.
     
-    - returns: The NSDate created from the passed in string or `nil` if it could not be created.
+    - returns: The Date created from the passed in string or `nil` if it could not be created.
     */
-    public class func fusDate(fusDateString: String) -> NSDate? {
+    public static func fusDate(from fusDateString: String) -> Date? {
         var format = "yyyy'-'MM'-'dd"
         if fusDateString.characters.count > 10 {
             format += "'T'HH':'mm':'ss'.'SSSSSS'Z'"
         }
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
-        dateFormatter.timeZone = NSTimeZone.utc()
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        return dateFormatter.dateFromString(fusDateString)
+        dateFormatter.timeZone = TimeZone.utc()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        return dateFormatter.date(from: fusDateString)
     }
     
     /**
-     Creates an NSDate from the iso8601 standard date format.
+     Creates an Date from the iso8601 standard date format.
      
-     - parameter iso8601String: The date string to make into an NSDate in the format of `yyyy-MM-ddTHH:mm:ssZ`.
+     - parameter iso8601String: The date string to make into an Date in the format of `yyyy-MM-ddTHH:mm:ssZ`.
      
-     - returns: The NSDate created from the passed in string or `nil` if it could not be created.
+     - returns: The Date created from the passed in string or `nil` if it could not be created.
      */
-    public class func iso8601Date(iso8601String: String) -> NSDate? {
+    public static func iso8601Date(from iso8601String: String) -> Date? {
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
-        dateFormatter.timeZone = NSTimeZone.utc()
-        dateFormatter.locale = NSLocale.autoupdatingCurrentLocale()
-        return dateFormatter.dateFromString(iso8601String)
+        if #available(iOSApplicationExtension 10.0, watchOSApplicationExtension 3.0, tvOSApplicationExtension 10.0, OSXApplicationExtension 10.12, *) {
+            let dateFormatter = ISO8601DateFormatter()
+            dateFormatter.timeZone = TimeZone.utc()
+            return dateFormatter.date(from: iso8601String)
+        } else {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
+            dateFormatter.timeZone = TimeZone.utc()
+            dateFormatter.locale = Locale.autoupdatingCurrent
+            return dateFormatter.date(from: iso8601String)
+        }
     }
     
     // MARK: - Date Checks
     
     /// `true` if the date is yesterday, `false` if it isn't.
     public var isYesterday: Bool {
-        let date = NSDate().dateByAddingDays(-1)
-        return compareToDate(date, option: DateCompareType.EqualTo)
+        let date = Date().dateByAdding(-1)
+        return compare(date, option: .equalTo)
     }
     
     /// `true` if the date is today, `false` if it isn't.
     public var isToday: Bool {
-        return compareToDate(NSDate(), option: DateCompareType.EqualTo)
+        return compare(Date(), option: .equalTo)
     }
     
     /// `true` if the date is tomorrow, `false` if it isn't.
     public var isTomorrow: Bool {
-        let date = NSDate().dateByAddingDays(1)
-        return compareToDate(date, option: DateCompareType.EqualTo)
+        let date = Date().dateByAdding(1)
+        return compare(date, option: .equalTo)
     }
     
     /// `true` if the date is a weekday, `false` if it isn't.
     public var isWeekday: Bool {
         
-        let calendar = NSCalendar.iso8601Calendar()
-        let components = calendar.components(.Weekday, fromDate: self)
-        let range = calendar.maximumRangeOfUnit(.Weekday)
+        let calendar = Calendar.iso8601Calendar()
+        let components = calendar.dateComponents([.weekday], from: self)
+        let range = calendar.maximumRange(of: .weekday)!
         
-        if components.weekday == range.location || components.weekday == range.length {
+        if components.weekday == range.lowerBound || components.weekday == range.count {
             return false
         }
         return true
@@ -103,84 +109,89 @@ extension NSDate {
     /// `true` if the date is the begining of the week, `false` if it isn't. Begining of week is Monday.
     public var isBeginingOfWeek: Bool {
         
-        let calendar = NSCalendar.iso8601Calendar()
-        let components = calendar.components(.Weekday, fromDate: self)
+        let calendar = Calendar.iso8601Calendar()
+        let components = calendar.dateComponents([.weekday], from: self)
         return components.weekday == 2 // Begining of week is Monday == 2
     }
     
     /// `true` if the date is the end of the week, `false` if it isn't. End of week is Sunday.
     public var isEndOfWeek: Bool {
         
-        let calendar = NSCalendar.iso8601Calendar()
-        let components = calendar.components(.Weekday, fromDate: self)
+        let calendar = Calendar.iso8601Calendar()
+        let components = calendar.dateComponents([.weekday], from: self)
         return components.weekday == 1 // End of week is Sunday == 1
     }
     
     /// `true` if the date is the begining of the month, `false` if it isn't.
     public var isBeginingOfMonth: Bool {
         
-        let calendar = NSCalendar.iso8601Calendar()
-        let components = calendar.components(.Day, fromDate: self)
+        let calendar = Calendar.iso8601Calendar()
+        let components = calendar.dateComponents([.day], from: self)
         return components.day == 1
     }
     
     /// `true` if the date is the end of the month, `false` if it isn't.
     public var isEndOfMonth: Bool {
         
-        let calendar = NSCalendar.iso8601Calendar()
-        let components = calendar.components(.Day, fromDate: self)
-        let range = calendar.rangeOfUnit(.Day, inUnit: .Month, forDate: self)
-        return components.day == range.length
+        let calendar = Calendar.iso8601Calendar()
+        let components = calendar.dateComponents([.day], from: self)
+        let range = calendar.range(of: .day, in: .month, for: self)!
+        return components.day == range.count
     }
     
     // MARK: - Duration
     
     /// Returns the day of the date
-    public var day: Int {
+    public var day: Int? {
         
-        let calendar = NSCalendar.iso8601Calendar()
-        let components = calendar.components(.Day, fromDate: self)
+        let calendar = Calendar.iso8601Calendar()
+        let components = calendar.dateComponents([.day], from: self)
         return components.day
     }
     
     /// Returns the hour of the date
-    public var hour: Int {
+    public var hour: Int? {
         
-        let calendar = NSCalendar.iso8601Calendar()
-        let components = calendar.components(.Hour, fromDate: self)
+        let calendar = Calendar.iso8601Calendar()
+        let components = calendar.dateComponents([.hour], from: self)
         return components.hour
     }
     
     /// Returns the minute of the date
-    public var minute: Int {
+    public var minute: Int? {
         
-        let calendar = NSCalendar.iso8601Calendar()
-        let components = calendar.components(.Minute, fromDate: self)
+        let calendar = Calendar.iso8601Calendar()
+        let components = calendar.dateComponents([.minute], from: self)
         return components.minute
     }
     
     /// Returns the time of the date in hours
-    public var timeInHours: NSTimeInterval {
-        return NSTimeInterval(hour) + (NSTimeInterval(minute) / 60)
+    public var timeInHours: TimeInterval? {
+        
+        guard let minute = self.minute, let hour = self.hour else {
+            return nil
+        }
+        
+        return TimeInterval(hour) + (TimeInterval(minute) / 60)
     }
     
     /// Returns 1 minute in seconds `60`
-    public class func minuteInSeconds() -> NSTimeInterval {
+    public static func minuteInSeconds() -> TimeInterval {
         return 60
     }
     
     /// Returns 1 hour in seconds `3600`
-    public class func hourInSeconds() -> NSTimeInterval {
+    public static func hourInSeconds() -> TimeInterval {
         return minuteInSeconds() * 60
     }
     
     /// Returns 1 day in seconds `86400`
-    public class func dayInSeconds() -> NSTimeInterval {
+    public static func dayInSeconds() -> TimeInterval {
         return hourInSeconds() * 24
     }
     
     /// Returns 1 week in seconds `604800`
-    public class func weekInSeconds() -> NSTimeInterval {
+    public static func weekInSeconds() -> TimeInterval {
         return dayInSeconds() * 7
     }
     
@@ -192,25 +203,25 @@ extension NSDate {
     
     - returns: The number of days beteen `fromDate` and `toDate`
     */
-    public class func daysBetweenDates(fromDate: NSDate, toDate: NSDate) -> Int {
+    public static func daysBetween(from fromDate: Date, to toDate: Date) -> Int? {
         
-        var dateFrom: NSDate?
-        var dateTo: NSDate?
+        let calendar = Calendar.iso8601Calendar()
         
-        let calendar = NSCalendar.iso8601Calendar()
-        calendar.rangeOfUnit(.Day, startDate: &dateTo, interval: nil, forDate: toDate)
-        calendar.rangeOfUnit(.Day, startDate: &dateFrom, interval: nil, forDate: fromDate)
+        let dateTo = calendar.startOfDay(for: toDate)
+        let dateFrom = calendar.startOfDay(for: fromDate)
         
-        let components = calendar.components(.Day, fromDate: dateFrom!, toDate: dateTo!, options: .WrapComponents)
+        let components = calendar.dateComponents([.day], from: dateFrom, to: dateTo)
         return components.day
     }
     
     /// Returns the number of days left in the current week assuming Monday is the start of the week and inclusive of today
-    public var daysRemainingInWeek: Int {
+    public var daysRemainingInWeek: Int? {
         
-        let calendar = NSCalendar.iso8601Calendar()
-        let components = calendar.components(.Weekday, fromDate: self)
-        var weekdayOfDate = components.weekday
+        let calendar = Calendar.iso8601Calendar()
+        let components = calendar.dateComponents([.weekday], from: self)
+        guard var weekdayOfDate = components.weekday else {
+            return nil
+        }
         // To make Monday == 1
         weekdayOfDate -= 1
         if weekdayOfDate < 1 {
@@ -222,17 +233,22 @@ extension NSDate {
     /// Returns the number of days in the current month
     public var daysInMonth: Int {
         
-        let calendar = NSCalendar.iso8601Calendar()
-        let range = calendar.rangeOfUnit(.Day, inUnit: .Month, forDate: self)
-        return range.length
+        let calendar = Calendar.iso8601Calendar()
+        let range = calendar.range(of: .day, in: .month, for: self)!
+        return range.count
     }
     
     /// Returns the number of days left in the month, inclusive of today
-    public var daysRemainingInMonth: Int {
+    public var daysRemainingInMonth: Int? {
         
-        let calendar = NSCalendar.iso8601Calendar()
-        let components = calendar.components(.Day, fromDate: self)
-        return (daysInMonth - components.day)
+        let calendar = Calendar.iso8601Calendar()
+        let components = calendar.dateComponents([.day], from: self)
+        
+        guard let day = components.day else {
+            return nil
+        }
+        
+        return (daysInMonth - day)
     }
     
     // MARK: - Date Comparison
@@ -248,28 +264,28 @@ extension NSDate {
     
     - returns: `true` if the dates conform with the date comparison type check, `false` if not
     */
-    public func compareToDate(date: NSDate, option: DateCompareType, stripTime: Bool = true) -> Bool {
+    public func compare(_ date: Date, option: DateCompareType, stripTime: Bool = true) -> Bool {
         
-        var compare: NSComparisonResult = .OrderedSame
+        var compare: ComparisonResult = .orderedSame
         if stripTime == true {
             compare = self.stripTime.compare(date.stripTime)
         } else {
             compare = self.compare(date)
         }
         
-        if compare == NSComparisonResult.OrderedAscending {
+        if compare == .orderedAscending {
             
-            if option == .Before || option == .BeforeOrEqualTo {
+            if option == .before || option == .beforeOrEqualTo {
                 return true
             }
-        } else if compare == NSComparisonResult.OrderedDescending {
+        } else if compare == .orderedDescending {
             
-            if option == .After || option == .AfterOrEqualTo {
+            if option == .after || option == .afterOrEqualTo {
                 return true
             }
         } else {
             
-            if option == .EqualTo || option == .BeforeOrEqualTo || option == .AfterOrEqualTo {
+            if option == .equalTo || option == .beforeOrEqualTo || option == .afterOrEqualTo {
                 return true
             }
         }
@@ -284,8 +300,8 @@ extension NSDate {
     
     - returns: `true` if the comparison date is before date, `false` if not
     */
-    public func isBefore(date: NSDate) -> Bool {
-        return compareToDate(date, option: .Before)
+    public func isBefore(_ date: Date) -> Bool {
+        return compare(date, option: .before)
     }
     
     /**
@@ -295,19 +311,19 @@ extension NSDate {
     
     - returns: `true` if the comparison date is after date, `false` if not
     */
-    public func isAfter(date: NSDate) -> Bool {
-        return compareToDate(date, option: .After)
+    public func isAfter(_ date: Date) -> Bool {
+        return compare(date, option: .after)
     }
     
     // MARK: - Date Changers
     
     /// Creates a new object which is a copy of the current date but with time stripped out (set to midnight)
-    public var stripTime: NSDate {
+    public var stripTime: Date {
         
-        let calendar = NSCalendar.iso8601Calendar()
-        let components = calendar.components(([.Day, .Month, .Year]), fromDate: self)
-        components.timeZone = NSTimeZone.utc()
-        return calendar.dateFromComponents(components)!
+        let calendar = Calendar.iso8601Calendar()
+        var components = calendar.dateComponents(([.day, .month, .year]), from: self)
+        components.timeZone = TimeZone.utc()
+        return calendar.date(from: components)!
     }
     
     /**
@@ -317,79 +333,80 @@ extension NSDate {
     
     - returns: A copy of the current date `days` added to it
     */
-    public func dateByAddingDays(days: Int) -> NSDate {
+    public func dateByAdding(_ days: Int) -> Date {
         
         if days == 0 {
             return self
         }
         
-        let components = NSDateComponents()
+        var components = DateComponents()
         components.day = days
         
-        let calendar = NSCalendar.iso8601Calendar()
-        return calendar.dateByAddingComponents(components, toDate: self, options: .SearchBackwards)!
+        let calendar = Calendar.iso8601Calendar()
+        return calendar.date(byAdding: components, to: self, wrappingComponents: true)!
+//        return calendar.date(byAdding: components, to: self, options: .searchBackwards)!
     }
     
     /// Returns a date with the time at the start of the day, while preserving the time zone.
-    public var dateAtStartOfDay: NSDate {
+    public var dateAtStartOfDay: Date {
         
-        let calendar = NSCalendar.iso8601Calendar()
-        let components = calendar.components(componentFlags, fromDate: self)
-        components.timeZone = NSTimeZone.utc()
+        let calendar = Calendar.iso8601Calendar()
+        var components = calendar.dateComponents(componentFlags, from: self)
+        components.timeZone = TimeZone.utc()
         components.hour = 0
         components.minute = 0
         components.second = 0
-        return calendar.dateFromComponents(components)!
+        return calendar.date(from: components)!
     }
     
     /// Returns a date with the time at the end of the day, while preserving the time zone.
-    public var dateAtEndOfDay: NSDate {
+    public var dateAtEndOfDay: Date {
         
-        let calendar = NSCalendar.iso8601Calendar()
-        let components = calendar.components(componentFlags, fromDate: self)
-        components.timeZone = NSTimeZone.utc()
+        let calendar = Calendar.iso8601Calendar()
+        var components = calendar.dateComponents(componentFlags, from: self)
+        components.timeZone = TimeZone.utc()
         components.hour = 23
         components.minute = 59
         components.second = 59
-        return calendar.dateFromComponents(components)!
+        return calendar.date(from: components)!
     }
     
     // MARK: - Date Strings
     
     /// A helper method for getting a formatted string of the date and time in `ShortStyle`
     public var dateTimeShortString: String {
-        return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
+        return  DateFormatter.localizedString(from: self, dateStyle: .short, timeStyle: .short)
     }
     
     /// A helper method for getting a formatted string of the date in `ShortStyle`
     public var dateShortString: String {
-        return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .ShortStyle, timeStyle: .NoStyle)
+        return  DateFormatter.localizedString(from: self, dateStyle: .short, timeStyle: .none)
     }
     
     /// A helper method for getting a formatted string of the date in `MediumStyle`
     public var dateMediumString: String {
-        return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .MediumStyle, timeStyle: .NoStyle)
+        return  DateFormatter.localizedString(from: self, dateStyle: .medium, timeStyle: .none)
     }
     
     /// A helper method for getting a formatted string of the date in `FullStyle`
     public var dateFullString: String {
-        return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .FullStyle, timeStyle: .NoStyle)
+        return  DateFormatter.localizedString(from: self, dateStyle: .full, timeStyle: .none)
     }
     
     /// A helper method for getting a formatted string of the time in `ShortStyle`
     public var timeShortString: String {
-        return  NSDateFormatter.localizedStringFromDate(self, dateStyle: .NoStyle, timeStyle: .ShortStyle)
+        return  DateFormatter.localizedString(from: self, dateStyle: .none, timeStyle: .short)
     }
     
     /// A helpter method for getting a formatted string of the date in the FUS set format.
     public var fusDateString: String {
-        return dateStringFromFormat("yyyy'-'MM'-'dd")
+        return dateString(fromFormat: "yyyy'-'MM'-'dd")
     }
     
     /// A helpter method for getting a formatted string of the date and time in the FUS set format.
     public var fusDateTimeString: String {
-        let locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        return dateStringFromFormat("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSSSSS'Z'", locale: locale)
+        let locale = Locale(identifier: "en_US_POSIX")
+        return dateString(fromFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSSSSS'Z'", locale: locale)
     }
     
     /**
@@ -400,36 +417,36 @@ extension NSDate {
     
     - returns: The formatted date string.
     */
-    public func dateStringFromFormat(format: String, locale: NSLocale? = nil) -> String {
-        let formatter = NSDateFormatter()
+    public func dateString(fromFormat format: String, locale: Locale? = nil) -> String {
+        let formatter = DateFormatter()
         formatter.dateFormat = format
         formatter.locale = locale
-        return formatter.stringFromDate(self)
+        return formatter.string(from: self)
     }
     
     /// Returns the date's day of the week string. i.e. Monday
     public var dayString: String {
-        return dateStringFromFormat("EEEE")
+        return dateString(fromFormat: "EEEE")
     }
     
     /// Returns the date's day of the week as a short string. i.e. Mon
     public var dayShortString: String {
-        return dateStringFromFormat("EEE")
+        return dateString(fromFormat: "EEE")
     }
     
     /// Returns the date's month string. i.e. September
     public var monthString: String {
-        return dateStringFromFormat("MMMM")
+        return dateString(fromFormat: "MMMM")
     }
     
     /// Returns the date's month short string. i.e. Sept
     public var monthShortString: String {
-        return dateStringFromFormat("MMM")
+        return dateString(fromFormat: "MMM")
     }
     
     /// Returns the date's year string. i.e. 2015
     public var yearString: String {
-        return dateStringFromFormat("Y")
+        return dateString(fromFormat: "Y")
     }
     
 }

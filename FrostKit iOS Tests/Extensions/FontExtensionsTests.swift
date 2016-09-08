@@ -23,12 +23,12 @@ class FontExtensionsTests: XCTestCase {
 
     func testCustomFonts() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let fontAwesome = Font.fontAwesome(size: 12)
+            let fontAwesome = Font.fontAwesome(ofSize: 12)
             let fontAwesomeName = fontAwesome.fontName
             XCTAssert(fontAwesomeName == "FontAwesome", "Font name is: \(fontAwesomeName)")
-            let ionicons = Font.ionicons(size: 12)
+            let ionicons = Font.ionicons(ofSize: 12)
             let ioniconsName = ionicons.fontName
             XCTAssert(ioniconsName == "Ionicons", "Font name is: \(ioniconsName)")
         }

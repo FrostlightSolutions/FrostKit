@@ -19,11 +19,6 @@ import MessageUI
 ///
 public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate {
     
-    private enum AlertViewTags: Int {
-        case EmailPrompt
-        case MessagePrompt
-    }
-    
     // MARK: - Singleton & Init
     
     // For use with delegate methods only, hence private NOT public
@@ -47,26 +42,28 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     
     - returns: Returns `false` if there is an issue or the service is unavailable, otherwise `true`.
     */
-    public class func presentComposeViewController(serviceType: String, initialText: String? = nil, urls: [NSURL]? = nil, images: [UIImage]? = nil, inViewController viewController: UIViewController, animated: Bool = true) -> Bool {
+    public class func presentComposeViewController(serviceType: String, initialText: String? = nil, urls: [URL]? = nil, images: [UIImage]? = nil, inViewController viewController: UIViewController, animated: Bool = true) -> Bool {
         
-        if SLComposeViewController.isAvailableForServiceType(serviceType) {
+        if SLComposeViewController.isAvailable(forServiceType: serviceType) {
             
-            let composeViewController = SLComposeViewController(forServiceType: serviceType)
+            guard let composeViewController = SLComposeViewController(forServiceType: serviceType) else {
+                return false
+            }
             composeViewController.setInitialText(initialText)
             
             if let urlsArray = urls {
                 for url in urlsArray {
-                    composeViewController.addURL(url)
+                    composeViewController.add(url)
                 }
             }
             
             if let imagesArray = images {
                 for image in imagesArray {
-                    composeViewController.addImage(image)
+                    composeViewController.add(image)
                 }
             }
             
-            viewController.presentViewController(composeViewController, animated: animated, completion: nil)
+            viewController.present(composeViewController, animated: animated, completion: nil)
             
         } else {
             // TODO: Handle social service unavailability
@@ -80,7 +77,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     // MARK: - Prompt Methods
     
     /**
-    Returns a NSURL to call with `openURL(_:)` in `UIApplication` parsed from a number string.
+    Returns a URL to call with `openURL(_:)` in `UIApplication` parsed from a number string.
     
     Note: `openURL(_:)` can not be called directly within a Framework so that has to be done manually inside the main application.
     
@@ -88,18 +85,19 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     
     - returns: The URL of the parsed phone number, prefixed with `telprompt://`.
     */
-    public class func phonePromptFormattedURL(number number: String) -> NSURL? {
-        let hasPlusPrefix = number.rangeOfString("+")
+    public class func phonePrompt(_ number: String) -> URL? {
         
-        let characterSet = NSCharacterSet.decimalDigitCharacterSet().invertedSet
-        let componentsArray = number.componentsSeparatedByCharactersInSet(characterSet)
-        var parsedNumber = componentsArray.joinWithSeparator("")
+        let hasPlusPrefix = number.range(of: "+")
+        
+        let characterSet = NSCharacterSet.decimalDigits.inverted
+        let componentsArray = number.components(separatedBy: characterSet)
+        var parsedNumber = componentsArray.joined(separator: "")
         
         if hasPlusPrefix != nil {
-            parsedNumber = "+".stringByAppendingString(parsedNumber)
+            parsedNumber = "+" + parsedNumber
         }
         
-        return NSURL(string: "telprompt://\(parsedNumber)")
+        return URL(string: "telprompt://\(parsedNumber)")
     }
     
     /**
@@ -115,25 +113,25 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     - parameter viewController: The view controller to present the `MFMailComposeViewController` in.
     - parameter animated:       If the presentation should be animated or not.
     */
-    public class func emailPrompt(toRecipients toRecipients: [String], ccRecipients: [String]? = nil, bccRecipients: [String]? = nil, subject: String = "", messageBody: String = "", isBodyHTML: Bool = false, attachments: [(data: NSData, mimeType: String, fileName: String)]? = nil, viewController: UIViewController, animated: Bool = true) {
+    public class func emailPrompt(toRecipients: [String], ccRecipients: [String]? = nil, bccRecipients: [String]? = nil, subject: String = "", messageBody: String = "", isBodyHTML: Bool = false, attachments: [(data: Data, mimeType: String, fileName: String)]? = nil, viewController: UIViewController, animated: Bool = true) {
         
         if MFMailComposeViewController.canSendMail() {
             
-            let emailsString = toRecipients.joinWithSeparator(", ")
+            let emailsString = toRecipients.joined(separator: ", ")
             
-            let alertController = UIAlertController(title: emailsString, message: nil, preferredStyle: .Alert)
+            let alertController = UIAlertController(title: emailsString, message: nil, preferredStyle: .alert)
             alertController.view.tintColor = FrostKit.tintColor
-            let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL"), style: .Cancel) { (action) -> Void in
-                alertController.dismissViewControllerAnimated(true, completion: nil)
+            let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL"), style: .cancel) { (action) -> Void in
+                alertController.dismiss(animated: true, completion: nil)
             }
             alertController.addAction(cancelAlertAction)
-            let openAlertAction = UIAlertAction(title: FKLocalizedString("EMAIL"), style: .Default) { (action) -> Void in
+            let openAlertAction = UIAlertAction(title: FKLocalizedString("EMAIL"), style: .default) { (action) -> Void in
                 
                 SocialHelper.presentMailComposeViewController(toRecipients: toRecipients, ccRecipients: ccRecipients, bccRecipients: bccRecipients, subject: subject, messageBody: messageBody, isBodyHTML: isBodyHTML, attachments: attachments, viewController: viewController, animated: animated)
             }
             
             alertController.addAction(openAlertAction)
-            viewController.presentViewController(alertController, animated: true, completion: nil)
+            viewController.present(alertController, animated: true, completion: nil)
             
         } else {
             // TODO: Handle eamil service unavailability
@@ -141,7 +139,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         }
     }
     
-    public class func presentMailComposeViewController(toRecipients toRecipients: [String]? = nil, ccRecipients: [String]? = nil, bccRecipients: [String]? = nil, subject: String = "", messageBody: String = "", isBodyHTML: Bool = false, attachments: [(data: NSData, mimeType: String, fileName: String)]? = nil, viewController: UIViewController, animated: Bool) {
+    public class func presentMailComposeViewController(toRecipients: [String]? = nil, ccRecipients: [String]? = nil, bccRecipients: [String]? = nil, subject: String = "", messageBody: String = "", isBodyHTML: Bool = false, attachments: [(data: Data, mimeType: String, fileName: String)]? = nil, viewController: UIViewController, animated: Bool) {
         
         let mailVC = MFMailComposeViewController()
         mailVC.view.tintColor = FrostKit.tintColor
@@ -158,7 +156,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             }
         }
         
-        viewController.presentViewController(mailVC, animated: animated, completion: nil)
+        viewController.present(mailVC, animated: animated, completion: nil)
     }
     
     /**
@@ -171,25 +169,25 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     - parameter viewController: The view controller to present the `MFMailComposeViewController` in.
     - parameter animated:       If the presentation should be animated or not.
     */
-    public class func messagePrompt(recipients recipients: [String], subject: String = "", body: String = "", attachments: [(attachmentURL: NSURL, alternateFilename: String)] = [], viewController: UIViewController, animated: Bool = true) {
+    public class func messagePrompt(recipients: [String], subject: String = "", body: String = "", attachments: [(attachmentURL: URL, alternateFilename: String)] = [], viewController: UIViewController, animated: Bool = true) {
         
         if MFMessageComposeViewController.canSendText() {
             
-            let recipientsString = recipients.joinWithSeparator(", ")
+            let recipientsString = recipients.joined(separator: ", ")
             
-            let alertController = UIAlertController(title: recipientsString, message: nil, preferredStyle: .Alert)
+            let alertController = UIAlertController(title: recipientsString, message: nil, preferredStyle: .alert)
             alertController.view.tintColor = FrostKit.tintColor
-            let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL"), style: .Cancel) { (action) -> Void in
-                alertController.dismissViewControllerAnimated(true, completion: nil)
+            let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL"), style: .cancel) { (action) -> Void in
+                alertController.dismiss(animated: true, completion: nil)
             }
             alertController.addAction(cancelAlertAction)
-            let openAlertAction = UIAlertAction(title: FKLocalizedString("MESSAGE"), style: .Default) { (action) -> Void in
+            let openAlertAction = UIAlertAction(title: FKLocalizedString("MESSAGE"), style: .default) { (action) -> Void in
                 
                 SocialHelper.presentMessageComposeViewController(recipients: recipients, subject: subject, body: body, attachments: attachments, viewController: viewController, animated: animated)
             }
             
             alertController.addAction(openAlertAction)
-            viewController.presentViewController(alertController, animated: true, completion: nil)
+            viewController.present(alertController, animated: true, completion: nil)
             
         } else {
             // TODO: Handle message service unavailability
@@ -197,7 +195,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         }
     }
     
-    private class func presentMessageComposeViewController(recipients recipients: [String]? = nil, subject: String? = nil, body: String? = nil, attachments: [(attachmentURL: NSURL, alternateFilename: String)]? = nil, viewController: UIViewController, animated: Bool) {
+    private class func presentMessageComposeViewController(recipients: [String]? = nil, subject: String? = nil, body: String? = nil, attachments: [(attachmentURL: URL, alternateFilename: String)]? = nil, viewController: UIViewController, animated: Bool) {
         
         let messageVC = MFMessageComposeViewController()
         messageVC.messageComposeDelegate = SocialHelper.shared
@@ -215,49 +213,45 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         
         messageVC.body = body
         
-        viewController.presentViewController(messageVC, animated: animated, completion: nil)
+        viewController.present(messageVC, animated: animated, completion: nil)
     }
     
     // MARK: - MFMailComposeViewControllerDelegate Methods
     
-    public func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+    public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         
-        switch result.rawValue {
-        case MFMailComposeResultCancelled.rawValue:
+        switch result {
+        case .cancelled:
             NSLog("Email cancelled")
-        case MFMailComposeResultSaved.rawValue:
+        case .saved:
             NSLog("Email saved")
-        case MFMailComposeResultSent.rawValue:
+        case .sent:
             NSLog("Email sent")
-        case MFMailComposeResultFailed.rawValue:
+        case .failed:
             if let anError = error {
                 NSLog("Email send failed: \(anError.localizedDescription)\n\(error)")
             } else {
                 NSLog("Email send failed!")
             }
-        default:
-            break
         }
         
-        controller.dismissViewControllerAnimated(true, completion: nil)
+        controller.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - MFMessageComposeViewControllerDelegate Methods
     
-    public func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
+    public func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         
-        switch result.rawValue {
-        case MessageComposeResultCancelled.rawValue:
+        switch result {
+        case .cancelled:
             NSLog("Message cancelled")
-        case MessageComposeResultSent.rawValue:
+        case .sent:
             NSLog("Message sent")
-        case MessageComposeResultFailed.rawValue:
+        case .failed:
             NSLog("Message failed")
-        default:
-            break
         }
         
-        controller.dismissViewControllerAnimated(true, completion: nil)
+        controller.dismiss(animated: true, completion: nil)
     }
     
 }

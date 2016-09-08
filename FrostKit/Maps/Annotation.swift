@@ -28,14 +28,14 @@ public class Annotation: NSObject, MKAnnotation {
     }
     /// The name of the address.
     public var title: String? {
-        if clusterAnnotation == nil, let containdedAnnotations = self.containdedAnnotations where containdedAnnotations.count > 0 {
+        if clusterAnnotation == nil, let containdedAnnotations = self.containdedAnnotations, containdedAnnotations.count > 0 {
             return "\(containdedAnnotations.count + 1) \(FKLocalizedString("ITEMS", comment: "Items"))"
         }
         return address?.name
     }
     /// The address string of the address.
     public var subtitle: String? {
-        if clusterAnnotation == nil, let containdedAnnotations = self.containdedAnnotations where containdedAnnotations.count > 0 {
+        if clusterAnnotation == nil, let containdedAnnotations = self.containdedAnnotations, containdedAnnotations.count > 0 {
             return ""
         }
         return address?.addressString
@@ -59,8 +59,17 @@ public class Annotation: NSObject, MKAnnotation {
         }
     }
     
-    public override init() {
-        super.init()
+    public override func isEqual(_ object: Any?) -> Bool {
+        
+        if let annotation = object as? Annotation {
+            return self.hash == annotation.hash
+        } else {
+            return false
+        }
+    }
+    
+    public override var hash: Int {
+        return address?.hashValue ?? 0
     }
     
     /**
@@ -79,7 +88,7 @@ public class Annotation: NSObject, MKAnnotation {
      
      - parameter address: The address to update the annotation with.
      */
-    public func updateAddress(address: Address) {
+    public func update(address: Address) {
         if self.address != address {
             self.address = address
         }

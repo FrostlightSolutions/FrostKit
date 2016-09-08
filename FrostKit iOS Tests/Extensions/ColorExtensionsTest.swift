@@ -23,41 +23,41 @@ class ColorExtensionsTest: XCTestCase {
     
     func testSimpleHexColors() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            XCTAssert(Color.colorWithHex("#ffffff") == Color(red: 1, green: 1, blue: 1, alpha: 1), "Pass")
-            XCTAssert(Color.colorWithHex("#123456") == Color(red: 18.0/255, green: 52.0/255, blue: 86.0/255, alpha: 1), "Pass")
+            XCTAssert(Color.color(hexString: "#ffffff") == Color(red: 1, green: 1, blue: 1, alpha: 1), "Pass")
+            XCTAssert(Color.color(hexString: "#123456") == Color(red: 18.0/255, green: 52.0/255, blue: 86.0/255, alpha: 1), "Pass")
         }
     }
     
     func testHexHashtag() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
             // With or without #
-            XCTAssert(Color.colorWithHex("#479123") == Color.colorWithHex("479123"), "Pass")
+            XCTAssert(Color.color(hexString: "#479123") == Color.color(hexString: "479123"), "Pass")
         }
     }
     
     func testShortHex() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
             // 3 chars work as well as 6
-            XCTAssert(Color.colorWithHex("#123") == Color.colorWithHex("#112233"), "Pass")
+            XCTAssert(Color.color(hexString: "#123") == Color.color(hexString: "#112233"), "Pass")
             // Regardless of #
-            XCTAssert(Color.colorWithHex("123") == Color.colorWithHex("#112233"), "Pass")
+            XCTAssert(Color.color(hexString: "123") == Color.color(hexString: "#112233"), "Pass")
         }
     }
     
     func testUnsuposedHexFormat() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
             // 4 char hex should not parse and return default clearColor()
-            XCTAssert(Color.colorWithHex("#1234") == Color.clearColor(), "Pass")
+            XCTAssert(Color.color(hexString: "#1234") == Color.clear, "Pass")
             // Regardless of #
-            XCTAssert(Color.colorWithHex("1234") == Color.clearColor(), "Pass")
+            XCTAssert(Color.color(hexString: "1234") == Color.clear, "Pass")
         }
     }
     

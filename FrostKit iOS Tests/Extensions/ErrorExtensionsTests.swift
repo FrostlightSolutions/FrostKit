@@ -23,10 +23,10 @@ class ErrorExtensionsTests: XCTestCase {
 
     func testErrorWithMessage() {
         
-        measureBlock {
+        measure {
             
             let message = "This is a test error!"
-            let error = NSError.errorWithMessage(message)
+            let error = NSError.error(withMessage: message)
             XCTAssert(error.localizedDescription == message)
         }
     }

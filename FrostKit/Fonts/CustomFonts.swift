@@ -25,23 +25,23 @@ public class CustomFonts {
     
     /// Loads custom fonts imbedded in the Framework.
     public class func loadCustomFonts() {
-        loadCustomFont("fontawesome-webfont", withExtension: "ttf", bundle: NSBundle(forClass: CustomFonts.self))
-        loadCustomFont("ionicons", withExtension: "ttf", bundle: NSBundle(forClass: CustomFonts.self))
+        loadCustomFont(name: "fontawesome-webfont", withExtension: "ttf", bundle: Bundle(for: CustomFonts.self))
+        loadCustomFont(name: "ionicons", withExtension: "ttf", bundle: Bundle(for: CustomFonts.self))
     }
     
     /**
     Load custom fonts with names including the file name and extension.
     
-    - parameter fontNames: An array of strings of the font file names.
+    - parameter names: An array of strings of the font file names.
     - parameter bundle:    The bundle to look for the file names in. By default this uses the main app bundle.
     */
-    public class func loadCustomFonts(fontNames: [NSString], bundle: NSBundle = NSBundle.mainBundle()) {
-        for fontName in fontNames {
-            let filename = fontName.componentsSeparatedByString(".").first
+    public class func loadCustomFonts(names: [NSString], bundle: Bundle = Bundle.main) {
+        for fontName in names {
+            let filename = fontName.components(separatedBy: ".").first
             let ext = fontName.pathExtension
             
-            if let name = filename where name.characters.count > 0 && ext.characters.count > 0 {
-                loadCustomFont(name, withExtension: ext, bundle: bundle)
+            if let name = filename, name.characters.count > 0 && ext.characters.count > 0 {
+                loadCustomFont(name: name, withExtension: ext, bundle: bundle)
             } else {
                 NSLog("ERROR: Failed to load '\(fontName)' font as the name or extension are invalid!")
             }
@@ -55,27 +55,32 @@ public class CustomFonts {
         - parameter ext:     The extention of the file.
         - parameter bundle:  The bundle the files are located in. By default this uses the main app bundle.
     */
-    public class func loadCustomFont(name: String, withExtension ext: String, bundle: NSBundle = NSBundle.mainBundle()) {
+    public class func loadCustomFont(name: String, withExtension ext: String, bundle: Bundle = Bundle.main) {
         
-        if let url = bundle.URLForResource(name, withExtension: ext) {
-            let fontData = NSData(contentsOfURL: url)
-            var error: Unmanaged<CFErrorRef>?
-            let provider = CGDataProviderCreateWithCFData(fontData)
-            if let font = CGFontCreateWithDataProvider(provider) where CTFontManagerRegisterGraphicsFont(font, &error) == false {
-                if let anError = error {
-                    let errorCode = CFErrorGetCode(anError.takeRetainedValue())
-                    if errorCode == CTFontManagerError.AlreadyRegistered.rawValue {
-                        NSLog("Already loaded '\(name)'")
-                    } else {
-                        let errorDescription = CFErrorCopyDescription(anError.takeRetainedValue()) as NSString
-                        NSLog("ERROR: Failed to load '\(name)' font with error: \(errorDescription)!")
-                    }
-                }
+        var error: Unmanaged<CFError>?
+        guard let url = bundle.url(forResource: name, withExtension: ext),
+            let fontData = NSData(contentsOf: url),
+            let provider = CGDataProvider(data: fontData) else {
+                NSLog("ERROR: Failed to get URL for \"\(name)\" font!")
+                return
+        }
+        
+        let font = CGFont(provider)
+        guard CTFontManagerRegisterGraphicsFont(font, &error) == false else {
+            NSLog("ERROR: Failed to get URL for \"\(name)\" font!")
+            return
+        }
+        
+        if let anError = error {
+            let errorCode = CFErrorGetCode(anError.takeRetainedValue())
+            if errorCode == CTFontManagerError.alreadyRegistered.rawValue {
+                NSLog("Already loaded '\(name)'")
             } else {
-                NSLog("Loaded '\(name)' successfully")
+                let errorDescription = CFErrorCopyDescription(anError.takeRetainedValue())
+                NSLog("ERROR: Failed to load '\(name)' font with error: \(errorDescription)!")
             }
         } else {
-            NSLog("ERROR: Failed to get URL for \"\(name)\" font!")
+            NSLog("Loaded '\(name)' successfully")
         }
     }
     
@@ -83,9 +88,8 @@ public class CustomFonts {
     /// Loops though all the fonts families loaded onto the device and prints them to the console.
     public class func printAllFontFamilies() {
         
-        for fontFamily in UIFont.familyNames() {
-            let name = fontFamily as String
-            NSLog("\(name): \(UIFont.fontNamesForFamilyName(name))")
+        for fontFamily in UIFont.familyNames {
+            NSLog("\(fontFamily): \(UIFont.fontNames(forFamilyName: fontFamily))")
         }
     }
 #endif

@@ -11,7 +11,7 @@ import FrostKit
 import Parse
 
 ///
-/// Extention functions for NSError
+/// Extention functions for Address
 /// 
 /// This is an external extension. That means it is for a 3rd party framework not included by default in FrostKit.
 /// This file is to be included directly into any projec that uses the Parse SDK.

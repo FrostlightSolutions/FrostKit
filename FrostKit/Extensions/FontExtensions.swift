@@ -13,7 +13,7 @@ import UIKit
 #endif
 
 ///
-/// Extention functions for UIFont
+/// Extention functions for UIFont & NSFont
 ///
 extension Font {
     
@@ -24,12 +24,12 @@ extension Font {
     
     - returns: The font object for font awesome.
     */
-    public class func fontAwesome(size size: CGFloat) -> Font {
+    public class func fontAwesome(ofSize size: CGFloat) -> Font {
         if let font = Font(name: "FontAwesome", size: size) {
             return font
         } else {
             NSLog("ERROR: Unable to load FontAwesome font.")
-            return Font.systemFontOfSize(size)
+            return Font.systemFont(ofSize: size)
         }
     }
     
@@ -40,12 +40,12 @@ extension Font {
     
     - returns: The font object for ionicons.
     */
-    public class func ionicons(size size: CGFloat) -> Font {
+    public class func ionicons(ofSize size: CGFloat) -> Font {
         if let font = Font(name: "Ionicons", size: size) {
             return font
         } else {
             NSLog("ERROR: Unable to load Ionicons font.")
-            return Font.systemFontOfSize(size)
+            return Font.systemFont(ofSize: size)
         }
     }
     

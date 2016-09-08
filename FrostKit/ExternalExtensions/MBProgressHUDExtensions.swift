@@ -11,7 +11,7 @@ import UIKit
 extension MBProgressHUD {
     
     public class func progressHUDinMainWindow() -> MBProgressHUD {
-        var hud: MBProgressHUD?
+        let hud: MBProgressHUD
         var window: UIWindow?
         if let mainWindow = UIApplication.sharedApplication().delegate?.window {
             window = mainWindow
@@ -20,14 +20,12 @@ extension MBProgressHUD {
             hud = MBProgressHUD()
         }
         
-        if let mainHUD = hud {
-            mainHUD.mode = .Text
-            mainHUD.animationType = .Fade
-            mainHUD.removeFromSuperViewOnHide = true
-            window?.addSubview(mainHUD)
-        }
+        hud.mode = .Text
+        hud.animationType = .Fade
+        hud.removeFromSuperViewOnHide = true
+        window?.addSubview(hud)
         
-        return hud!
+        return hud
     }
     
 }

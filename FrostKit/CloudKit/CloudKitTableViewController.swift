@@ -21,7 +21,7 @@ public class CloudKitTableViewController: UITableViewController {
     @IBInspectable public var recordType: String = ""
     
     public var container: CKContainer {
-        return CKContainer.defaultContainer()
+        return CKContainer.default()
     }
     public var database: CKDatabase {
         return container.publicCloudDatabase
@@ -58,7 +58,7 @@ public class CloudKitTableViewController: UITableViewController {
     }
     
     public convenience init(recordType: String) {
-        self.init(recordType: recordType, style: .Plain)
+        self.init(recordType: recordType, style: .plain)
     }
     
     // MARK: - View Lifecycle
@@ -67,7 +67,7 @@ public class CloudKitTableViewController: UITableViewController {
         super.loadView()
         
         if let refreshControl = self.refreshControl {
-            refreshControl.addTarget(self, action: #selector(refreshControlValueChanged(_:)), forControlEvents: .ValueChanged)
+            refreshControl.addTarget(self, action: #selector(refreshControlValueChanged(_:)), for: .valueChanged)
         }
     }
     
@@ -87,7 +87,7 @@ public class CloudKitTableViewController: UITableViewController {
         }
     }
     
-    public func recordsDidLoad(error: NSError?) {
+    public func recordsDidLoad(error: Error?) {
         
         tableView.tableFooterView = nil
         
@@ -109,17 +109,17 @@ public class CloudKitTableViewController: UITableViewController {
         recordsWillLoad()
         
         let operation = queryOperation
-        operation.qualityOfService = .UserInteractive
+        operation.qualityOfService = .userInteractive
         
         operation.recordFetchedBlock = { (record: CKRecord) in
             self.records.append(record)
         }
         
-        operation.queryCompletionBlock = { (cursor: CKQueryCursor?, error: NSError?) in
+        operation.queryCompletionBlock = { (cursor: CKQueryCursor?, error: Error?) in
             
             self.loading = false
             
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
                 
                 if let anError = error {
                     NSLog("Query Operation Error: \(anError.localizedDescription)")
@@ -129,14 +129,14 @@ public class CloudKitTableViewController: UITableViewController {
                     self.tableView.reloadData()
                 }
                 
-                self.recordsDidLoad(error)
-                if let refreshControl = self.refreshControl where refreshControl.refreshing == true {
+                self.recordsDidLoad(error: error)
+                if let refreshControl = self.refreshControl, refreshControl.isRefreshing == true {
                     refreshControl.endRefreshing()
                 }
             }
         }
         
-        database.addOperation(operation)
+        database.add(operation)
     }
     
     private func loadNextPage() {
@@ -148,23 +148,23 @@ public class CloudKitTableViewController: UITableViewController {
     
     // MARK: - Actions
     
-    internal func refreshControlValueChanged(sender: UIRefreshControl) {
+    internal func refreshControlValueChanged(_ sender: UIRefreshControl) {
         loadRecords()
     }
     
     // MARK: - Table View
     
-    public override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    public override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    public override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return records.count
     }
     
-    public override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("CellIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CellIdentifier", for: indexPath as IndexPath)
         
         let record = records[indexPath.row]
         cell.textLabel?.text = record.recordID.recordName
@@ -174,7 +174,7 @@ public class CloudKitTableViewController: UITableViewController {
     
     // MARK: - Table View
     
-    public override func scrollViewDidScroll(scrollView: UIScrollView) {
+    public override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         if (firstLoad == true || queryCursor != nil) && loading == false &&
             tableView.contentOffset.y >= tableView.contentSize.height - tableView.frame.size.height {

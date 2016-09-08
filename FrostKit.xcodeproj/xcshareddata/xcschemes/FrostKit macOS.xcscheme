@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0720"
+   LastUpgradeVersion = "0800"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "18E5459C1C77E53F00637E85"
                BuildableName = "FrostKit.framework"
-               BlueprintName = "FrostKit OS X"
+               BlueprintName = "FrostKit macOS"
                ReferencedContainer = "container:FrostKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,8 +34,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "18E545A51C77E54000637E85"
-               BuildableName = "FrostKit OS X Tests.xctest"
-               BlueprintName = "FrostKit OS X Tests"
+               BuildableName = "FrostKit macOS Tests.xctest"
+               BlueprintName = "FrostKit macOS Tests"
                ReferencedContainer = "container:FrostKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -45,7 +45,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18E5459C1C77E53F00637E85"
             BuildableName = "FrostKit.framework"
-            BlueprintName = "FrostKit OS X"
+            BlueprintName = "FrostKit macOS"
             ReferencedContainer = "container:FrostKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -67,7 +67,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18E5459C1C77E53F00637E85"
             BuildableName = "FrostKit.framework"
-            BlueprintName = "FrostKit OS X"
+            BlueprintName = "FrostKit macOS"
             ReferencedContainer = "container:FrostKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -85,7 +85,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18E5459C1C77E53F00637E85"
             BuildableName = "FrostKit.framework"
-            BlueprintName = "FrostKit OS X"
+            BlueprintName = "FrostKit macOS"
             ReferencedContainer = "container:FrostKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

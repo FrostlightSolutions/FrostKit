@@ -24,12 +24,12 @@ extension UIBarButtonItem {
     */
     public convenience init(title: String?, font: UIFont, verticalOffset: CGFloat = 0, target: AnyObject?, action: Selector) {
 
-        let button = UIButton(type: .System)
+        let button = UIButton(type: .system)
         button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         button.titleLabel?.font = font
-        button.setTitle(title, forState: .Normal)
+        button.setTitle(title, for: [])
         button.titleEdgeInsets.top = verticalOffset
-        button.addTarget(target, action: action, forControlEvents: .TouchUpInside)
+        button.addTarget(target, action: action, for: .touchUpInside)
         self.init(customView: button)
     }
     

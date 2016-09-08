@@ -17,11 +17,11 @@ import WatchKit
 /// Describes the location of the directory for saving files.
 public enum DirectoryLocation: UInt {
     /// User Data directory.
-    case UserData
+    case userData
     /// Document directory.
-    static let DocumentDirectory = NSSearchPathDirectory.DocumentDirectory
+    static let documentDirectory = FileManager.SearchPathDirectory.documentDirectory
     /// Caches Directory.
-    static let CachesDirectory = NSSearchPathDirectory.CachesDirectory
+    static let cachesDirectory = FileManager.SearchPathDirectory.cachesDirectory
 }
 
 ///
@@ -77,8 +77,8 @@ public class LocalStorage {
     
     - returns: Documents directory URL.
     */
-    public class func documentsURL() -> NSURL {
-        return NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0] as NSURL
+    public class func documentsURL() -> URL {
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     }
     
     /**
@@ -86,8 +86,8 @@ public class LocalStorage {
     
     - returns: Caches directory URL.
     */
-    public class func cachesURL() -> NSURL {
-        return NSFileManager.defaultManager().URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask)[0] as NSURL
+    public class func cachesURL() -> URL {
+        return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
     }
     
     /**
@@ -97,8 +97,8 @@ public class LocalStorage {
      
      - returns: Shared container URL, or `nil` if not available.
      */
-    public class func sharedContainerURL(groupIdentifier: String) -> NSURL? {
-        return NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(groupIdentifier)
+    public class func sharedContainerURL(groupIdentifier: String) -> URL? {
+        return FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupIdentifier)
     }
     
     /**
@@ -108,12 +108,12 @@ public class LocalStorage {
     
     - returns: The correct URL for the seatch path directory.
     */
-    class func baseURL(directory directory: NSSearchPathDirectory) -> NSURL? {
+    class func baseURL(directory: FileManager.SearchPathDirectory) -> URL? {
         
         switch directory {
-        case .DocumentDirectory:
+        case .documentDirectory:
             return documentsURL()
-        case .CachesDirectory:
+        case .cachesDirectory:
             return cachesURL()
         default:
             NSLog("Error: Base URL for directory \"\(directory)\" requested is not supported!")
@@ -131,7 +131,7 @@ public class LocalStorage {
     
     - returns: A URL comprised of the passed in parameters
     */
-    class func absoluteURL(directory directory: NSSearchPathDirectory, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> NSURL? {
+    class func absoluteURL(directory: FileManager.SearchPathDirectory, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> URL? {
         
         if let baseURL = baseURL(directory: directory) {
             return absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
@@ -149,19 +149,13 @@ public class LocalStorage {
     
     - returns: A non-optional version of the public class function.
     */
-    private class func absoluteURL(baseURL baseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> NSURL {
+    private class func absoluteURL(baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> URL? {
         
-        var url = baseURL.URLByAppendingPathComponent(reletivePath)
-        
-        if let name = fileName {
-            url = url.URLByAppendingPathComponent(name)
+        guard let name = fileName, let ext = fileExtension else {
+            return nil
         }
-        
-        if let anExtension = fileExtension {
-            url = url.URLByAppendingPathExtension(anExtension)
-        }
-        
-        return url
+    
+        return baseURL.appendingPathComponent(reletivePath).appendingPathComponent(name).appendingPathExtension(ext)
     }
     
     // MARK: - Directory Creation Methods
@@ -171,11 +165,11 @@ public class LocalStorage {
     
     - parameter url: The url of the directory to be created.
     */
-    internal class func createDirectory(url url: NSURL) {
+    internal class func createDirectory(url: URL) {
         
         do {
-            try NSFileManager.defaultManager().createDirectoryAtURL(url, withIntermediateDirectories: true, attributes: nil)
-        } catch let error as NSError {
+            try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+        } catch let error {
             NSLog("Error: Directory not able to be created at URL \(url)\nWith error: \(error.localizedDescription)\n\(error)")
         }
     }
@@ -193,31 +187,23 @@ public class LocalStorage {
     
     - returns: `true` if the data saves correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func save(data data: AnyObject, baseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
+    public class func save(data: AnyObject, baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
         
-        var url = baseURL.URLByAppendingPathComponent(reletivePath)
-        createDirectory(url: url)
+        let dirURL = baseURL.appendingPathComponent(reletivePath)
+        createDirectory(url: dirURL)
         
-        if let aFileName = fileName {
-            url = url.URLByAppendingPathComponent(aFileName)
+        guard let name = fileName, let ext = fileExtension else {
+            return false
         }
         
-        if let aFileExtension = fileExtension {
-            url = url.URLByAppendingPathExtension(aFileExtension)
+        let url = dirURL.appendingPathComponent(name).appendingPathExtension(ext)
+        let success = NSKeyedArchiver.archiveRootObject(data, toFile: url.path)
+        
+        if success == false {
+            NSLog("Error: Can't save object to file at path: \(url.path)")
         }
         
-        if let path = url.path {
-            
-            let success = NSKeyedArchiver.archiveRootObject(data, toFile: path)
-            
-            if success == false {
-                NSLog("Error: Can't save object to file at path: \(path)")
-            }
-            
-            return success
-        }
-        
-        return false
+        return success
     }
     
     /**
@@ -230,7 +216,7 @@ public class LocalStorage {
     
     - returns: `true` if the data saves correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func saveToDocuments(data data: AnyObject, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
+    public class func save(toDocuments data: AnyObject, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
         return save(data: data, baseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
     }
     
@@ -244,7 +230,7 @@ public class LocalStorage {
     
     - returns: `true` if the data saves correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func saveToCaches(data data: AnyObject, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
+    public class func save(toCaches data: AnyObject, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
         return save(data: data, baseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
     }
     
@@ -255,7 +241,7 @@ public class LocalStorage {
     
     - returns: `true` if the data saves correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func saveUserData(data: AnyObject) -> Bool {
+    public class func save(userData data: AnyObject) -> Bool {
         return save(data: data, baseURL: documentsURL(), reletivePath: "", fileName: userDataFilename())
     }
     
@@ -272,11 +258,13 @@ public class LocalStorage {
     
     - throws: `true` if the data is moved correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    private class func move(fromBaseURL fromBaseURL: NSURL, toBaseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
+    private class func move(fromBaseURL: URL, toBaseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
         
-        let fromURL = absoluteURL(baseURL: fromBaseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
-        let toURL = absoluteURL(baseURL: toBaseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
-        try NSFileManager.defaultManager().moveItemAtURL(fromURL, toURL: toURL)
+        guard let fromURL = absoluteURL(baseURL: fromBaseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension),
+            let toURL = absoluteURL(baseURL: toBaseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) else {
+            return
+        }
+        try FileManager.default.moveItem(at: fromURL, to: toURL)
     }
     
     /**
@@ -288,7 +276,7 @@ public class LocalStorage {
     
     - throws: `true` if the data is moved correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func moveFromCachesToDocuments(reletivePath reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
+    public class func move(fromCachesToDocuments reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
         try move(fromBaseURL: cachesURL(), toBaseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
     }
     
@@ -301,7 +289,7 @@ public class LocalStorage {
     
     - throws: `true` if the data is moved correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func moveFromDocumentsToCaches(reletivePath reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
+    public class func move(fromDocumentsToCaches reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
         try move(fromBaseURL: documentsURL(), toBaseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
     }
     
@@ -317,15 +305,12 @@ public class LocalStorage {
     
     - returns: The object to be loaded or `nil` if it isn't found.
     */
-    public class func load(baseURL baseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> AnyObject? {
+    public class func load(baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> AnyObject? {
         
-        let url = absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
-        
-        if let path = url.path {
-            return NSKeyedUnarchiver.unarchiveObjectWithFile(path)
+        guard let url = absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) else {
+            return nil
         }
-        
-        return nil
+        return NSKeyedUnarchiver.unarchiveObject(withFile: url.path) as AnyObject
     }
     
     /**
@@ -337,7 +322,7 @@ public class LocalStorage {
     
     - returns: The file requested to be loaded or `nil` if it isn't found.
     */
-    public class func loadFromDocuments(reletivePath reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> AnyObject? {
+    public class func load(fromDocuments reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> AnyObject? {
         return load(baseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
     }
     
@@ -350,7 +335,7 @@ public class LocalStorage {
     
     - returns: The file requested to be loaded or `nil` if it isn't found.
     */
-    public class func loadFromCaches(reletivePath reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> AnyObject? {
+    public class func load(fromCaches reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> AnyObject? {
         return load(baseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
     }
     
@@ -363,8 +348,8 @@ public class LocalStorage {
     
     - returns: The image requested to be loaded or `nil` if it isn't found.
     */
-    public class func loadImageFromDocuments(reletivePath reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> UIImage? {
-        return loadFromDocuments(reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) as? UIImage
+    public class func loadImage(fromDocuments reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> UIImage? {
+        return load(fromDocuments: reletivePath, fileName: fileName, fileExtension: fileExtension) as? UIImage
     }
     
     /**
@@ -376,8 +361,8 @@ public class LocalStorage {
     
     - returns: The image requested to be loaded or `nil` if it isn't found.
     */
-    public class func loadImageFromCaches(reletivePath reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> UIImage? {
-        return loadFromCaches(reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) as? UIImage
+    public class func loadImage(fromCaches reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> UIImage? {
+        return load(fromCaches: reletivePath, fileName: fileName, fileExtension: fileExtension) as? UIImage
     }
     
     /**
@@ -398,10 +383,10 @@ public class LocalStorage {
     
     - throws: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    class func remove(absoluteURL absoluteURL: NSURL) throws {
+    class func remove(absoluteURL: URL) throws {
         
-        try NSFileManager.defaultManager().removeItemAtURL(absoluteURL)
-        ContentManager.removeContentMetadata(absoluteURL: absoluteURL)
+        try FileManager.default.removeItem(at: absoluteURL)
+        ContentManager.remove(url: absoluteURL)
     }
     
     /**
@@ -414,8 +399,13 @@ public class LocalStorage {
     
     - throws: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    private class func remove(baseURL baseURL: NSURL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
-        try remove(absoluteURL: absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension))
+    private class func remove(baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
+        
+        guard let url = absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) else {
+            return
+        }
+        
+        try remove(absoluteURL: url)
     }
     
     /**
@@ -463,7 +453,7 @@ public class LocalStorage {
     
     - throws: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func removeDocumentsObject(reletivePath reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
+    public class func remove(documentsObject reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
         try remove(baseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
     }
     
@@ -476,7 +466,7 @@ public class LocalStorage {
     
     - throws: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func removeCachesObject(reletivePath reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
+    public class func remove(cachesObject reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
         try remove(baseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
     }
     

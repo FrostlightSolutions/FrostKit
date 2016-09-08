@@ -11,17 +11,15 @@ import Foundation
 ///
 /// Extention functions for NSData
 ///
-extension NSData {
+extension Data {
     
     /// Returns a string of the hex data object.
     public var hexString: String {
         
         var string = ""
-        var byte: UInt8 = 0
         
-        for index in 0 ..< length {
-            getBytes(&byte, range: NSRange(location: index, length: 1))
-            string += String(format: "%02hhx", byte)
+        for byte in enumerated() {
+            string += String(format: "%02hhx", byte.element)
         }
         
         return string
@@ -36,7 +34,7 @@ extension NSData {
     */
     
     // TODO: Change to using generics rahter than just `Int64`.
-    public class func sizeFormattedString(size: Int64) -> String {
+    public static func sizeFormattedString(_ size: Int64) -> String {
         
         let sUnits = ["", "K", "M", "G", "T", "P", "E"]
         let sMaxUnits = sUnits.count - 1
@@ -51,15 +49,15 @@ extension NSData {
             exponent += 1
         }
         
-        let numberFormatter = NSNumberFormatter()
+        let numberFormatter = NumberFormatter()
         numberFormatter.maximumFractionDigits = 2
-        let stringSize = numberFormatter.stringFromNumber(NSNumber(double: bytes))!
+        let stringSize = numberFormatter.string(from: NSNumber(value: bytes))!
         return "\(stringSize) \(sUnits[exponent])B"
     }
     
     /// Created a formatted string from the objects length value
     public var lengthFormattedString: String {
-        return NSData.sizeFormattedString(Int64(self.length))
+        return Data.sizeFormattedString(Int64(count))
     }
     
 }

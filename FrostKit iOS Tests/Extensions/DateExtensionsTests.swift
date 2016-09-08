@@ -23,14 +23,14 @@ class DateExtensionsTests: XCTestCase {
     
     func testFusDate() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
             let dateString = "2016-02-26"
-            let date = NSDate.fusDate(dateString)
+            let date = Date.fusDate(from: dateString)
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
-            components.timeZone = NSTimeZone.utc()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
+            components.timeZone = TimeZone.utc()
             components.year = 2016
             components.month = 2
             components.day = 26
@@ -41,14 +41,14 @@ class DateExtensionsTests: XCTestCase {
     
     func testFusDateAndTime() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
             let dateString = "2016-02-26T15:24:48.000000Z"
-            let date = NSDate.fusDate(dateString)
+            let date = Date.fusDate(from: dateString)
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
-            components.timeZone = NSTimeZone.utc()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
+            components.timeZone = TimeZone.utc()
             components.year = 2016
             components.month = 2
             components.day = 26
@@ -62,37 +62,37 @@ class DateExtensionsTests: XCTestCase {
     
     func testIsYesterday() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let date = NSDate(timeIntervalSinceNow: -24*60*60)
+            let date = Date(timeIntervalSinceNow: -24*60*60)
             XCTAssert(date.isYesterday, "Pass")
         }
     }
     
     func testIsToday() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let date = NSDate()
+            let date = Date()
             XCTAssert(date.isToday, "Pass")
         }
     }
     
     func testIsTomorrow() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let date = NSDate(timeIntervalSinceNow: 24*60*60)
+            let date = Date(timeIntervalSinceNow: 24*60*60)
             XCTAssert(date.isTomorrow, "Pass")
         }
     }
     
     func testIsWeekday() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             
@@ -115,10 +115,10 @@ class DateExtensionsTests: XCTestCase {
     
     func testIsBeginingOfWeek () {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             
@@ -141,10 +141,10 @@ class DateExtensionsTests: XCTestCase {
     
     func testIsEndOfWeek () {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             
@@ -167,10 +167,10 @@ class DateExtensionsTests: XCTestCase {
     
     func testIsBeginingOfMonth () {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             
@@ -186,10 +186,10 @@ class DateExtensionsTests: XCTestCase {
     
     func testIsEndOfMonth () {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             
@@ -205,10 +205,10 @@ class DateExtensionsTests: XCTestCase {
     
     func testDay() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.day = 26
             
             XCTAssert(components.date?.day == 26)
@@ -217,11 +217,11 @@ class DateExtensionsTests: XCTestCase {
     
     func testHour() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
             let hour = 19
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.hour = hour
             
             XCTAssert(components.date?.hour == hour)
@@ -230,11 +230,11 @@ class DateExtensionsTests: XCTestCase {
     
     func testMinute() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
             let minute = 47
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.minute = minute
             
             XCTAssert(components.date?.minute == minute)
@@ -243,10 +243,10 @@ class DateExtensionsTests: XCTestCase {
     
     func testTimeInHours() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.hour = 15
             components.minute = 45
             
@@ -256,41 +256,46 @@ class DateExtensionsTests: XCTestCase {
     
     func testSecondsComponents() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            XCTAssert(NSDate.minuteInSeconds() == 60)
-            XCTAssert(NSDate.hourInSeconds() == 3600)
-            XCTAssert(NSDate.dayInSeconds() == 86400)
-            XCTAssert(NSDate.weekInSeconds() == 604800)
+            XCTAssert(Date.minuteInSeconds() == 60)
+            XCTAssert(Date.hourInSeconds() == 3600)
+            XCTAssert(Date.dayInSeconds() == 86400)
+            XCTAssert(Date.weekInSeconds() == 604800)
         }
     }
     
     func testDaysBetweenDates() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
             let daysBetween = 3
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             components.day = 26
             
             let fromDate = components.date
-            components.day += daysBetween
+            if let day = components.day {
+                components.day = day + daysBetween
+            } else {
+                components.day = daysBetween
+            }
             let toDate = components.date
             
-            XCTAssert(NSDate.daysBetweenDates(fromDate!, toDate: toDate!) == daysBetween)
+            let calculatedDaysBetween = Date.daysBetween(from: fromDate!, to: toDate!)
+            XCTAssert(calculatedDaysBetween == daysBetween, "Expected: \(daysBetween) but got: \(calculatedDaysBetween)")
         }
     }
     
     func testDaysRemainingInWeek() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             components.day = 26
@@ -303,38 +308,42 @@ class DateExtensionsTests: XCTestCase {
     
     func testDaysInMonth() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             components.day = 26
             
-            XCTAssert(components.date?.daysInMonth == 29)
+            let daysInMonth = 29
+            let calculatedDaysInMonth = components.date?.daysInMonth
+            XCTAssert(calculatedDaysInMonth == daysInMonth, "Expected: \(daysInMonth) but got: \(calculatedDaysInMonth)")
         }
     }
     
     func testDaysRemainingInMonth() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             components.day = 26
             
-            XCTAssert(components.date?.daysRemainingInMonth == 3)
+            let daysRemainingInMonth = 3
+            let calculatedDaysRemainingInMonth = components.date?.daysRemainingInMonth
+            XCTAssert(calculatedDaysRemainingInMonth == daysRemainingInMonth, "Expected: \(daysRemainingInMonth) but got: \(calculatedDaysRemainingInMonth)")
         }
     }
     
     func testCompareDatesWithinMonth() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             components.day = 26
@@ -344,35 +353,35 @@ class DateExtensionsTests: XCTestCase {
             XCTAssert(date.isBefore(components.date!) == true)
             XCTAssert(date.isAfter(components.date!) == false)
             
-            XCTAssert(date.compareToDate(components.date!, option: .Before, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .After, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .EqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .BeforeOrEqualTo, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .AfterOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .before, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .after, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .equalTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, stripTime: false) == false)
             
             components.day = 26
-            XCTAssert(date.compareToDate(components.date!, option: .EqualTo, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .BeforeOrEqualTo, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .AfterOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .equalTo, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, stripTime: false) == true)
             
             components.day = 11
             XCTAssert(date.isBefore(components.date!) == false)
             XCTAssert(date.isAfter(components.date!) == true)
             
-            XCTAssert(date.compareToDate(components.date!, option: .Before, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .After, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .EqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .BeforeOrEqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .AfterOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .before, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .after, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .equalTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, stripTime: false) == true)
         }
     }
     
     func testCompareDatesBetweenMonth() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             components.day = 26
@@ -383,40 +392,40 @@ class DateExtensionsTests: XCTestCase {
             XCTAssert(date.isBefore(components.date!) == true)
             XCTAssert(date.isAfter(components.date!) == false)
             
-            XCTAssert(date.compareToDate(components.date!, option: .Before, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .After, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .EqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .BeforeOrEqualTo, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .AfterOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .before, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .after, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .equalTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, stripTime: false) == false)
             
             components.day = 26
-            XCTAssert(date.compareToDate(components.date!, option: .EqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .BeforeOrEqualTo, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .AfterOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .equalTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, stripTime: false) == false)
             
             components.month = 1
-            XCTAssert(date.compareToDate(components.date!, option: .EqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .BeforeOrEqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .AfterOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .equalTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, stripTime: false) == true)
             
             components.day = 11
             XCTAssert(date.isBefore(components.date!) == false)
             XCTAssert(date.isAfter(components.date!) == true)
             
-            XCTAssert(date.compareToDate(components.date!, option: .Before, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .After, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .EqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .BeforeOrEqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .AfterOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .before, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .after, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .equalTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, stripTime: false) == true)
         }
     }
     
     func testCompareDatesBetweenYears() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             components.day = 26
@@ -427,40 +436,40 @@ class DateExtensionsTests: XCTestCase {
             XCTAssert(date.isBefore(components.date!) == true)
             XCTAssert(date.isAfter(components.date!) == false)
             
-            XCTAssert(date.compareToDate(components.date!, option: .Before, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .After, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .EqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .BeforeOrEqualTo, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .AfterOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .before, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .after, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .equalTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, stripTime: false) == false)
             
             components.day = 26
-            XCTAssert(date.compareToDate(components.date!, option: .EqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .BeforeOrEqualTo, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .AfterOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .equalTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, stripTime: false) == false)
             
             components.year = 2015
-            XCTAssert(date.compareToDate(components.date!, option: .EqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .BeforeOrEqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .AfterOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .equalTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, stripTime: false) == true)
             
             components.day = 11
             XCTAssert(date.isBefore(components.date!) == false)
             XCTAssert(date.isAfter(components.date!) == true)
             
-            XCTAssert(date.compareToDate(components.date!, option: .Before, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .After, stripTime: false) == true)
-            XCTAssert(date.compareToDate(components.date!, option: .EqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .BeforeOrEqualTo, stripTime: false) == false)
-            XCTAssert(date.compareToDate(components.date!, option: .AfterOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .before, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .after, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .equalTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, stripTime: false) == true)
         }
     }
     
     func testStripTime() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             components.day = 26
@@ -470,7 +479,7 @@ class DateExtensionsTests: XCTestCase {
             
             let date = components.date!
             let strippedDate = date.stripTime
-            components.timeZone = NSTimeZone.utc()
+            components.timeZone = TimeZone.utc()
             components.hour = 0
             components.minute = 0
             components.second = 0
@@ -480,29 +489,29 @@ class DateExtensionsTests: XCTestCase {
     
     func testDateByAddingDays() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             components.day = 26
             let date = components.date!
             
-            XCTAssert(date.dateByAddingDays(0) == date)
-            components.day += 3
-            XCTAssert(date.dateByAddingDays(3) == components.date)
-            components.day -= 5
-            XCTAssert(date.dateByAddingDays(-2) == components.date)
+            XCTAssert(date.dateByAdding(0) == date)
+            components.day! += 3
+            XCTAssert(date.dateByAdding(3) == components.date)
+            components.day! -= 5
+            XCTAssert(date.dateByAdding(-2) == components.date)
         }
     }
     
     func testDateAt() {
         
-        measureBlock { () -> Void in
+        measure { () -> Void in
             
-            let components = NSDateComponents()
-            components.calendar = NSCalendar.iso8601Calendar()
+            var components = DateComponents()
+            components.calendar = Calendar.iso8601Calendar()
             components.year = 2016
             components.month = 2
             components.day = 26
@@ -511,7 +520,7 @@ class DateExtensionsTests: XCTestCase {
             components.second = 43
             let date = components.date!
             
-            components.timeZone = NSTimeZone.utc()
+            components.timeZone = TimeZone.utc()
             components.hour = 0
             components.minute = 0
             components.second = 0
@@ -526,9 +535,9 @@ class DateExtensionsTests: XCTestCase {
     
     func testDateStrings() {
         
-        let components = NSDateComponents()
-        components.calendar = NSCalendar.iso8601Calendar()
-        components.timeZone = NSTimeZone.utc()
+        var components = DateComponents()
+        components.calendar = Calendar.iso8601Calendar()
+        components.timeZone = TimeZone.utc()
         components.year = 2016
         components.month = 2
         components.day = 26
@@ -537,11 +546,11 @@ class DateExtensionsTests: XCTestCase {
         components.second = 43
         let date = components.date!
         
-        XCTAssert(date.dateTimeShortString == NSDateFormatter.localizedStringFromDate(date, dateStyle: .ShortStyle, timeStyle: .ShortStyle))
-        XCTAssert(date.dateShortString == NSDateFormatter.localizedStringFromDate(date, dateStyle: .ShortStyle, timeStyle: .NoStyle))
-        XCTAssert(date.dateMediumString == NSDateFormatter.localizedStringFromDate(date, dateStyle: .MediumStyle, timeStyle: .NoStyle))
-        XCTAssert(date.dateFullString == NSDateFormatter.localizedStringFromDate(date, dateStyle: .FullStyle, timeStyle: .NoStyle))
-        XCTAssert(date.timeShortString == NSDateFormatter.localizedStringFromDate(date, dateStyle: .NoStyle, timeStyle: .ShortStyle))
+        XCTAssert(date.dateTimeShortString == DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .short))
+        XCTAssert(date.dateShortString == DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none))
+        XCTAssert(date.dateMediumString == DateFormatter.localizedString(from: date, dateStyle: .medium, timeStyle: .none))
+        XCTAssert(date.dateFullString == DateFormatter.localizedString(from: date, dateStyle: .full, timeStyle: .none))
+        XCTAssert(date.timeShortString == DateFormatter.localizedString(from: date, dateStyle: .none, timeStyle: .short))
         XCTAssert(date.fusDateString == "2016-02-26")
         XCTAssert(date.fusDateTimeString == "2016-02-26T20:12:43.000000Z")
         XCTAssert(date.dayString == "Friday")

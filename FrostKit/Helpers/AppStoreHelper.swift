@@ -15,9 +15,9 @@ import UIKit
 public class AppStoreHelper {
     
     public enum UpdateStatus: Int {
-        case Unknown = -1
-        case UpdateNeeded
-        case UpToDate
+        case unknown = -1
+        case updateNeeded
+        case upToDate
     }
     
     public static let shared = AppStoreHelper()
@@ -37,7 +37,7 @@ public class AppStoreHelper {
             if let fileSize = self.fileSize {
                 
                 if let byteCount = Int64(fileSize) {
-                    formattedFileSize = NSByteCountFormatter.stringFromByteCount(byteCount, countStyle: .Binary)
+                    formattedFileSize = ByteCountFormatter.string(fromByteCount: byteCount, countStyle: .binary)
                 } else {
                     formattedFileSize = nil
                 }
@@ -48,7 +48,7 @@ public class AppStoreHelper {
         }
     }
     public var formattedFileSize: String?
-    public var releaseDate: NSDate?
+    public var releaseDate: Date?
     private var bundleId: String?
     
     // MARK: - Updates
@@ -60,48 +60,48 @@ public class AppStoreHelper {
     
     - parameter complete: Returned when to update request is complete and returns an error is it failed.
     */
-    public func updateAppStoreData(complete: ((NSError?) -> Void)? = nil) {
+    public func updateAppStoreData(_ complete: ((Error?) -> Void)? = nil) {
         
         guard let appStoreID = FrostKit.appStoreID else {
             
-            dispatch_async(dispatch_get_main_queue(), {
-                complete?(NSError.errorWithMessage("No app store ID set."))
-            })
+            DispatchQueue.main.async {
+                complete?(NSError.error(withMessage: "No app store ID set."))
+            }
             return
         }
         
         var urlString = "https://itunes.apple.com"
-        if let code = NSLocale.autoupdatingCurrentLocale().objectForKey(NSLocaleCountryCode) as? String {
-            urlString += "/\(code.lowercaseString)"
+        if let code = Locale.autoupdatingCurrent.regionCode {   // Should this be `regionCode` or `languageCode`?
+            urlString += "/\(code.lowercased())"
         }
         urlString += "/lookup?id=\(appStoreID)"
         
         guard let url = NSURL(string: urlString) else {
             
-            dispatch_async(dispatch_get_main_queue(), {
-                complete?(NSError.errorWithMessage("URL could not be created from string: \(urlString)"))
-            })
+            DispatchQueue.main.async {
+                complete?(NSError.error(withMessage: "URL could not be created from string: \(urlString)"))
+            }
             return
         }
         
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithURL(url) { (data, _, error) in
+        let session = URLSession.shared
+        let task = session.dataTask(with: url as URL) { (data, _, error) in
             
             if let anError = error {
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async {
                     complete?(anError)
-                })
+                }
                 
             } else if let jsonData = data {
                 
-                guard let json = try? NSJSONSerialization.JSONObjectWithData(jsonData, options: []) as? [String: AnyObject],
-                    results = json?["results"] as? [[String: AnyObject]],
-                    appDetails = results.first else {
+                guard let json = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: AnyObject],
+                    let results = json?["results"] as? [[String: AnyObject]],
+                    let appDetails = results.first else {
                         
-                    dispatch_async(dispatch_get_main_queue(), {
-                        complete?(NSError.errorWithMessage("Could not parse JSON from data."))
-                    })
+                    DispatchQueue.main.async {
+                        complete?(NSError.error(withMessage: "Could not parse JSON from data."))
+                    }
                     return
                 }
                 
@@ -115,22 +115,22 @@ public class AppStoreHelper {
                 self.fileSize = appDetails["fileSizeBytes"] as? String
                 
                 if let releaseDateString = appDetails["releaseDate"] as? String {
-                    self.releaseDate = NSDate.iso8601Date(releaseDateString)
+                    self.releaseDate = Date.iso8601Date(from: releaseDateString)
                 } else {
                     self.releaseDate = nil
                 }
                 
                 self.bundleId = appDetails["bundleId"] as? String
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async {
                     complete?(nil)
-                })
+                }
                 
             } else {
                 
-                dispatch_async(dispatch_get_main_queue(), {
-                    complete?(NSError.errorWithMessage("No data returned."))
-                })
+                DispatchQueue.main.async {
+                    complete?(NSError.error(withMessage: "No data returned."))
+                }
             }
         }
         task.resume()
@@ -145,18 +145,18 @@ public class AppStoreHelper {
      */
     public func appUpdateNeeded() -> UpdateStatus {
         
-        if let appStoreVersion = self.version, bundleId = self.bundleId, bundle = NSBundle(identifier: bundleId) {
+        if let appStoreVersion = self.version, let bundleId = self.bundleId, let bundle = Bundle(identifier: bundleId) {
             
-            let localVersion = NSBundle.appVersion(bundle)
-            let comparisonResult = localVersion.compare(appStoreVersion, options: .NumericSearch)
-            if comparisonResult == .OrderedAscending {
-                return .UpdateNeeded
+            let localVersion = Bundle.appVersion(bundle)
+            let comparisonResult = localVersion.compare(appStoreVersion, options: .numeric)
+            if comparisonResult == .orderedAscending {
+                return .updateNeeded
             } else {
-                return .UpToDate
+                return .upToDate
             }
         }
         
-        return .Unknown
+        return .unknown
     }
     
 }

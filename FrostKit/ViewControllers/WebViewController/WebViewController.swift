@@ -11,7 +11,7 @@ import UIKit
 /// Descrbes the type of web view.
 public enum WebViewType {
     /// Automatically selects the relevent web view.
-    case Automatic
+    case automatic
     /// UIWebView.
     case UIWebView
     /// WKWebView.
@@ -25,8 +25,8 @@ Returns a WebViewController dependant on the variable or automatically
 
 - returns: A base web view controller with the designated web view.
 */
-@available(iOS, deprecated=9.0, message="This is no longer needed as of iOS 9. Use SFSafariViewController instead.")
-public func WebViewController(viewType viewType: WebViewType = .Automatic) -> BaseWebViewController {
+@available(iOS, deprecated: 9.0, message: "This is no longer needed as of iOS 9. Use SFSafariViewController instead.")
+public func WebViewController(viewType: WebViewType = .automatic) -> BaseWebViewController {
     
     switch viewType {
     case .UIWebView:

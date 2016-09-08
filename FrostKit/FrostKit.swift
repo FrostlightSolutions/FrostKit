@@ -35,8 +35,8 @@ public let NetworkRequestDidBeginNotification = "com.FrostKit.activityIndicator.
 public let NetworkRequestDidCompleteNotification = "com.FrostKit.activityIndicator.request.complete"
 // swiftlint:enable variable_name
 
-internal func FKLocalizedString(key: String, comment: String = "") -> String {
-    return NSLocalizedString(key, bundle: NSBundle(forClass: FrostKit.self), comment: comment)
+internal func FKLocalizedString(_ key: String, comment: String = "") -> String {
+    return NSLocalizedString(key, bundle: Bundle(for: FrostKit.self), comment: comment)
 }
 
 public class FrostKit {
@@ -53,8 +53,8 @@ public class FrostKit {
     public class var tintColor: Color? {
         return FrostKit.shared.tintColor
     }
-    public class func tintColor(alpha alpha: CGFloat) -> Color? {
-        return tintColor?.colorWithAlpha(alpha)
+    public class func tintColor(alpha: CGFloat) -> Color? {
+        return tintColor?.color(alpha: alpha)
     }
     
 #if os(iOS) || os(tvOS) || os(OSX)
@@ -76,7 +76,7 @@ public class FrostKit {
     // MARK: - Setup Methods
     
     public class func setup() {
-        FrostKit.shared
+        _ = FrostKit.shared
     }
     
     public class func setup(tintColor: Color) {
@@ -84,7 +84,7 @@ public class FrostKit {
     }
     
 #if os(iOS) || os(tvOS) || os(OSX)
-    public class func setupAppStoreID(appStoreID: String) {
+    public class func setup(appStoreID: String) {
         FrostKit.shared.appStoreID = appStoreID
         AppStoreHelper.shared.updateAppStoreData()
     }

@@ -39,11 +39,10 @@
 		1811D7BA1A0AD1CA00E8B873 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B61A0AD1CA00E8B873 /* WebViewController.swift */; };
 		1811D7BB1A0AD1CA00E8B873 /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B71A0AD1CA00E8B873 /* WKWebViewController.swift */; };
 		1818F6DA1A8CF39B000255A2 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1818F6D91A8CF39B000255A2 /* ImageView.swift */; };
-		182290521BA2E60200C1CF1D /* RequestStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* RequestStore.swift */; };
+		182290521BA2E60200C1CF1D /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* TaskStore.swift */; };
 		182290531BA2E66C00C1CF1D /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066019DB5BF000811755 /* LocalStorage.swift */; };
 		182290541BA2E66F00C1CF1D /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066F19DB7EDB00811755 /* ContentManager.swift */; };
 		1826B0571BD9065B00DA1669 /* FrostKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23119DE07670032ABB7 /* FrostKit.swift */; };
-		1826B0591BD9066C00DA1669 /* RequestStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* RequestStore.swift */; };
 		1826B0601BD906AC00DA1669 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DD79081A8CA74E00379FB5 /* View.swift */; };
 		1826B0611BD906B000DA1669 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DD78FD1A8CA70F00379FB5 /* Button.swift */; };
 		1826B0621BD906B400DA1669 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1818F6D91A8CF39B000255A2 /* ImageView.swift */; };
@@ -85,14 +84,15 @@
 		184625071C84D1390098E969 /* ColorExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AC87E81C77F48200426776 /* ColorExtensionsTest.swift */; };
 		184625091C84D1A00098E969 /* FrostKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 18E5459D1C77E53F00637E85 /* FrostKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1846250A1C84D2FC0098E969 /* FrostKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 18839B1719D9FA8C00760157 /* FrostKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		18497BE41D15BA28009A717F /* RequestStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18497BE31D15BA28009A717F /* RequestStoreTests.swift */; };
+		18497BE41D15BA28009A717F /* TaskStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18497BE31D15BA28009A717F /* TaskStoreTests.swift */; };
+		185652861D81746E002E5C99 /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* TaskStore.swift */; };
 		18748B2219DF5661003942A3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18748B2019DF5661003942A3 /* Localizable.strings */; };
 		187661791BEEA0C900C82769 /* AppStoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187661781BEEA0C900C82769 /* AppStoreHelper.swift */; };
 		1876617A1BEEA0C900C82769 /* AppStoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187661781BEEA0C900C82769 /* AppStoreHelper.swift */; };
 		18839B4719DA27AE00760157 /* SocialHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B4519DA27AE00760157 /* SocialHelper.swift */; };
 		188D62981A8D56FE0098D976 /* InitialsImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188D62971A8D56FE0098D976 /* InitialsImageView.swift */; };
 		189D8C8A1C77E8F100261DF5 /* AppStoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187661781BEEA0C900C82769 /* AppStoreHelper.swift */; };
-		189D8C8D1C77E93300261DF5 /* RequestStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* RequestStore.swift */; };
+		189D8C8D1C77E93300261DF5 /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* TaskStore.swift */; };
 		189D8C8F1C77E94B00261DF5 /* ErrorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066719DB762600811755 /* ErrorExtensions.swift */; };
 		189D8C941C77E95C00261DF5 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066B19DB769B00811755 /* DateExtensions.swift */; };
 		189D8C951C77E95C00261DF5 /* CalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BB7C7419DC383900F21A64 /* CalendarExtensions.swift */; };
@@ -113,7 +113,7 @@
 		18C0066E19DB76C900811755 /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066D19DB76C900811755 /* ImageExtensions.swift */; };
 		18C0067019DB7EDB00811755 /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066F19DB7EDB00811755 /* ContentManager.swift */; };
 		18C0067619DC00C000811755 /* FrostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18839B1719D9FA8C00760157 /* FrostKit.framework */; };
-		18CB51701A76454A005064C8 /* RequestStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* RequestStore.swift */; };
+		18CB51701A76454A005064C8 /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* TaskStore.swift */; };
 		18CB517A1A7655ED005064C8 /* DeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB51791A7655ED005064C8 /* DeviceExtensions.swift */; };
 		18CF8C351D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CF8C331D6C839100DE9C37 /* CKContainerExtensions.swift */; };
 		18CF8C361D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CF8C331D6C839100DE9C37 /* CKContainerExtensions.swift */; };
@@ -272,7 +272,7 @@
 		1844D1D51D15F27D00E87EA8 /* CoreDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		1844D1DA1D15F31800E87EA8 /* CoreDataCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataCollectionViewController.swift; sourceTree = "<group>"; };
 		1844D1DE1D16034D00E87EA8 /* CoreDataProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataProxy.swift; sourceTree = "<group>"; };
-		18497BE31D15BA28009A717F /* RequestStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestStoreTests.swift; sourceTree = "<group>"; };
+		18497BE31D15BA28009A717F /* TaskStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskStoreTests.swift; sourceTree = "<group>"; };
 		184E07921A8901A10074FD25 /* MBProgressHUDExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBProgressHUDExtensions.swift; sourceTree = "<group>"; };
 		184E07931A8901A10074FD25 /* ParseAddressExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseAddressExtensions.swift; sourceTree = "<group>"; };
 		18748B2119DF5661003942A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -296,7 +296,7 @@
 		18C0066B19DB769B00811755 /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		18C0066D19DB76C900811755 /* ImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
 		18C0066F19DB7EDB00811755 /* ContentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentManager.swift; sourceTree = "<group>"; };
-		18CB516F1A76454A005064C8 /* RequestStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestStore.swift; sourceTree = "<group>"; };
+		18CB516F1A76454A005064C8 /* TaskStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskStore.swift; sourceTree = "<group>"; };
 		18CB51791A7655ED005064C8 /* DeviceExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceExtensions.swift; sourceTree = "<group>"; };
 		18CF8C331D6C839100DE9C37 /* CKContainerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKContainerExtensions.swift; sourceTree = "<group>"; };
 		18CF8C341D6C839100DE9C37 /* CKDatabaseExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKDatabaseExtensions.swift; sourceTree = "<group>"; };
@@ -318,7 +318,7 @@
 		18E3F23119DE07670032ABB7 /* FrostKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrostKit.swift; sourceTree = "<group>"; };
 		18E3F23919DE15600032ABB7 /* BarButtonItemExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarButtonItemExtensions.swift; sourceTree = "<group>"; };
 		18E5459D1C77E53F00637E85 /* FrostKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FrostKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		18E545A61C77E54000637E85 /* FrostKit OS X Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FrostKit OS X Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		18E545A61C77E54000637E85 /* FrostKit macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FrostKit macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18E545BA1C77E6C700637E85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18E9FF911C80AA5700AC5230 /* ErrorExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorExtensionsTests.swift; sourceTree = "<group>"; };
 		18EA123E19DC79F100FD858D /* DataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
@@ -475,7 +475,7 @@
 				18839B1919D9FA8C00760157 /* FrostKit */,
 				189D8CA81C77EEFC00261DF5 /* FrostKit iOS Tests */,
 				18D54BEA1CE6439300D365C6 /* FrostKit tvOS Tests */,
-				18E545B81C77E6C700637E85 /* FrostKit OS X Tests */,
+				18E545B81C77E6C700637E85 /* FrostKit macOS Tests */,
 				186CFCE81A29F7BE002739A5 /* Frameworks */,
 				18839B1819D9FA8C00760157 /* Products */,
 			);
@@ -489,7 +489,7 @@
 				1829A80C1BA2CD380017E4EE /* FrostKit.framework */,
 				1826B0261BD9047900DA1669 /* FrostKit.framework */,
 				18E5459D1C77E53F00637E85 /* FrostKit.framework */,
-				18E545A61C77E54000637E85 /* FrostKit OS X Tests.xctest */,
+				18E545A61C77E54000637E85 /* FrostKit macOS Tests.xctest */,
 				18D54BE91CE6439300D365C6 /* FrostKit tvOS Tests.xctest */,
 			);
 			name = Products;
@@ -539,7 +539,7 @@
 		1899C4F91A6D151A001638CF /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				18CB516F1A76454A005064C8 /* RequestStore.swift */,
+				18CB516F1A76454A005064C8 /* TaskStore.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -583,7 +583,7 @@
 		189D8CB21C77EEFC00261DF5 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				18497BE31D15BA28009A717F /* RequestStoreTests.swift */,
+				18497BE31D15BA28009A717F /* TaskStoreTests.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -687,12 +687,12 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		18E545B81C77E6C700637E85 /* FrostKit OS X Tests */ = {
+		18E545B81C77E6C700637E85 /* FrostKit macOS Tests */ = {
 			isa = PBXGroup;
 			children = (
 				18E545BA1C77E6C700637E85 /* Info.plist */,
 			);
-			path = "FrostKit OS X Tests";
+			path = "FrostKit macOS Tests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -828,9 +828,9 @@
 			productReference = 18D54BE91CE6439300D365C6 /* FrostKit tvOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		18E5459C1C77E53F00637E85 /* FrostKit OS X */ = {
+		18E5459C1C77E53F00637E85 /* FrostKit macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 18E545B21C77E54000637E85 /* Build configuration list for PBXNativeTarget "FrostKit OS X" */;
+			buildConfigurationList = 18E545B21C77E54000637E85 /* Build configuration list for PBXNativeTarget "FrostKit macOS" */;
 			buildPhases = (
 				18E545981C77E53F00637E85 /* Sources */,
 				18E545991C77E53F00637E85 /* Frameworks */,
@@ -842,14 +842,14 @@
 			);
 			dependencies = (
 			);
-			name = "FrostKit OS X";
+			name = "FrostKit macOS";
 			productName = "FrostKit OSX";
 			productReference = 18E5459D1C77E53F00637E85 /* FrostKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		18E545A51C77E54000637E85 /* FrostKit OS X Tests */ = {
+		18E545A51C77E54000637E85 /* FrostKit macOS Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 18E545B31C77E54000637E85 /* Build configuration list for PBXNativeTarget "FrostKit OS X Tests" */;
+			buildConfigurationList = 18E545B31C77E54000637E85 /* Build configuration list for PBXNativeTarget "FrostKit macOS Tests" */;
 			buildPhases = (
 				18E545A21C77E54000637E85 /* Sources */,
 				18E545A31C77E54000637E85 /* Frameworks */,
@@ -861,9 +861,9 @@
 			dependencies = (
 				18E545A91C77E54000637E85 /* PBXTargetDependency */,
 			);
-			name = "FrostKit OS X Tests";
+			name = "FrostKit macOS Tests";
 			productName = "FrostKit OSXTests";
-			productReference = 18E545A61C77E54000637E85 /* FrostKit OS X Tests.xctest */;
+			productReference = 18E545A61C77E54000637E85 /* FrostKit macOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -874,14 +874,17 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "James Barrow - Frostlight Solutions";
 				TargetAttributes = {
 					1826B0251BD9047900DA1669 = {
 						CreatedOnToolsVersion = 7.1;
+						LastSwiftMigration = 0800;
 					};
 					1829A80B1BA2CD380017E4EE = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 					1836A20B1A84414D00E57F86 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -891,18 +894,25 @@
 					};
 					18839B1619D9FA8C00760157 = {
 						CreatedOnToolsVersion = 6.0.1;
+						LastSwiftMigration = 0800;
 					};
 					18839B2119D9FA8C00760157 = {
 						CreatedOnToolsVersion = 6.0.1;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 					18D54BE81CE6439300D365C6 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 					18E5459C1C77E53F00637E85 = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 					18E545A51C77E54000637E85 = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -921,10 +931,10 @@
 				18839B1619D9FA8C00760157 /* FrostKit iOS */,
 				1829A80B1BA2CD380017E4EE /* FrostKit watchOS */,
 				1826B0251BD9047900DA1669 /* FrostKit tvOS */,
-				18E5459C1C77E53F00637E85 /* FrostKit OS X */,
+				18E5459C1C77E53F00637E85 /* FrostKit macOS */,
 				18839B2119D9FA8C00760157 /* FrostKit iOS Tests */,
 				18D54BE81CE6439300D365C6 /* FrostKit tvOS Tests */,
-				18E545A51C77E54000637E85 /* FrostKit OS X Tests */,
+				18E545A51C77E54000637E85 /* FrostKit macOS Tests */,
 				1845E6F61A66DA03005B377D /* FrostKitDocs */,
 				1836A20B1A84414D00E57F86 /* FontConstantsBuilder */,
 			);
@@ -1006,7 +1016,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"$USER\" != \"_xcsbuildd\" ]; then\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\nfi\n";
+			shellScript = "#if [ \"$USER\" != \"_xcsbuildd\" ]; then\n#if which swiftlint >/dev/null; then\n#swiftlint\n#else\n#echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n#fi\n#fi\n";
 		};
 		1836A20F1A84415900E57F86 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1047,7 +1057,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"$USER\" != \"_xcsbuildd\" ]; then\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\nfi\n";
+			shellScript = "#if [ \"$USER\" != \"_xcsbuildd\" ]; then\n#if which swiftlint >/dev/null; then\n#swiftlint\n#else\n#echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n#fi\n#fi\n";
 		};
 		18E5457B1C77E2B900637E85 /* SwiftLint Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1061,7 +1071,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"$USER\" != \"_xcsbuildd\" ]; then\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\nfi\n";
+			shellScript = "#if [ \"$USER\" != \"_xcsbuildd\" ]; then\n#if which swiftlint >/dev/null; then\n#swiftlint\n#else\n#echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n#fi\n#fi\n";
 		};
 		18E545B71C77E5E800637E85 /* SwiftLint Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1075,7 +1085,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"$USER\" != \"_xcsbuildd\" ]; then\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\nfi\n";
+			shellScript = "#if [ \"$USER\" != \"_xcsbuildd\" ]; then\n#if which swiftlint >/dev/null; then\n#swiftlint\n#else\n#echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n#fi\n#fi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1086,6 +1096,7 @@
 			files = (
 				1826B0671BD906E200DA1669 /* DateExtensions.swift in Sources */,
 				18CF8C361D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */,
+				185652861D81746E002E5C99 /* TaskStore.swift in Sources */,
 				1826B0571BD9065B00DA1669 /* FrostKit.swift in Sources */,
 				1826B06C1BD906E200DA1669 /* FontExtensions.swift in Sources */,
 				1826B0701BD906F200DA1669 /* FontConstants.swift in Sources */,
@@ -1097,7 +1108,6 @@
 				1826B06F1BD906F200DA1669 /* CustomFonts.swift in Sources */,
 				1826B0631BD906B700DA1669 /* VisualEffectView.swift in Sources */,
 				66AB893D1D71C21D0097ADAC /* CKReferenceExntensions.swift in Sources */,
-				1826B0591BD9066C00DA1669 /* RequestStore.swift in Sources */,
 				1826B0661BD906E200DA1669 /* ErrorExtensions.swift in Sources */,
 				1826B0641BD906BE00DA1669 /* InitialsImageView.swift in Sources */,
 				1826B0611BD906B000DA1669 /* Button.swift in Sources */,
@@ -1124,7 +1134,7 @@
 				18E0283E1BA2D2D900852022 /* DateExtensions.swift in Sources */,
 				182290531BA2E66C00C1CF1D /* LocalStorage.swift in Sources */,
 				18E028431BA2D2E900852022 /* KeychainHelper.swift in Sources */,
-				182290521BA2E60200C1CF1D /* RequestStore.swift in Sources */,
+				182290521BA2E60200C1CF1D /* TaskStore.swift in Sources */,
 				18E028421BA2D2E400852022 /* BundleExtensions.swift in Sources */,
 				18E028471BA2D30100852022 /* ImageExtensions.swift in Sources */,
 				18E028731BA2DA2A00852022 /* FrostKit.swift in Sources */,
@@ -1150,7 +1160,7 @@
 				18DE01EF19DCBC28008A1506 /* CustomFonts.swift in Sources */,
 				18EA124119DC7D9000FD858D /* ViewExtensions.swift in Sources */,
 				187661791BEEA0C900C82769 /* AppStoreHelper.swift in Sources */,
-				18CB51701A76454A005064C8 /* RequestStore.swift in Sources */,
+				18CB51701A76454A005064C8 /* TaskStore.swift in Sources */,
 				1818F6DA1A8CF39B000255A2 /* ImageView.swift in Sources */,
 				1811D7B81A0AD1CA00E8B873 /* BaseWebViewController.swift in Sources */,
 				182884561CBEB18000331A54 /* Address.swift in Sources */,
@@ -1197,7 +1207,7 @@
 				18D58EA91D0CC151009BE4E5 /* MapClusterTests.swift in Sources */,
 				18E9FF971C80AC6F00AC5230 /* DateExtensionsTests.swift in Sources */,
 				18410C301C810A6900D2B308 /* BundleExtensionsTests.swift in Sources */,
-				18497BE41D15BA28009A717F /* RequestStoreTests.swift in Sources */,
+				18497BE41D15BA28009A717F /* TaskStoreTests.swift in Sources */,
 				18410C321C810EB300D2B308 /* DataExtensionsTests.swift in Sources */,
 				18E9FF991C80AC6F00AC5230 /* ErrorExtensionsTests.swift in Sources */,
 				18E9FF981C80AC6F00AC5230 /* ColorExtensionsTest.swift in Sources */,
@@ -1239,7 +1249,7 @@
 				189D8C8A1C77E8F100261DF5 /* AppStoreHelper.swift in Sources */,
 				189D8C9C1C77E9AB00261DF5 /* CustomFonts.swift in Sources */,
 				189D8C941C77E95C00261DF5 /* DateExtensions.swift in Sources */,
-				189D8C8D1C77E93300261DF5 /* RequestStore.swift in Sources */,
+				189D8C8D1C77E93300261DF5 /* TaskStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1263,7 +1273,7 @@
 		};
 		18E545A91C77E54000637E85 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 18E5459C1C77E53F00637E85 /* FrostKit OS X */;
+			target = 18E5459C1C77E53F00637E85 /* FrostKit macOS */;
 			targetProxy = 18E545A81C77E54000637E85 /* PBXContainerItemProxy */;
 		};
 		18FD62071BC7FC8C001CDA32 /* PBXTargetDependency */ = {
@@ -1293,6 +1303,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1305,6 +1316,7 @@
 				PRODUCT_NAME = FrostKit;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -1317,6 +1329,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1330,6 +1343,7 @@
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -1339,8 +1353,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1353,6 +1369,7 @@
 				PRODUCT_NAME = FrostKit;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
@@ -1362,9 +1379,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1378,6 +1396,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
@@ -1435,6 +1454,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1482,6 +1502,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -1507,6 +1528,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1519,6 +1541,7 @@
 				PRODUCT_NAME = FrostKit;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1529,6 +1552,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1542,12 +1566,15 @@
 				PRODUCT_NAME = FrostKit;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		18839B2E19D9FA8C00760157 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1557,17 +1584,22 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Frostlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		18839B2F19D9FA8C00760157 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "FrostKit iOS Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Frostlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1583,6 +1615,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.PigonaHill.FrostKit-tvOS-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				SWIFT_VERSION = 3.0;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
 			name = Debug;
@@ -1600,6 +1633,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.PigonaHill.FrostKit-tvOS-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
 			name = Release;
@@ -1608,10 +1643,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1626,6 +1662,7 @@
 				PRODUCT_NAME = FrostKit;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1633,11 +1670,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1653,6 +1691,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1664,12 +1703,13 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "FrostKit OS X Tests/Info.plist";
+				INFOPLIST_FILE = "FrostKit macOS Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.PigonaHill.FrostKit-OS-X-Tests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.PigonaHill.FrostKit-macOS-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1682,12 +1722,14 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "FrostKit OS X Tests/Info.plist";
+				INFOPLIST_FILE = "FrostKit macOS Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.PigonaHill.FrostKit-OS-X-Tests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.PigonaHill.FrostKit-macOS-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1766,7 +1808,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		18E545B21C77E54000637E85 /* Build configuration list for PBXNativeTarget "FrostKit OS X" */ = {
+		18E545B21C77E54000637E85 /* Build configuration list for PBXNativeTarget "FrostKit macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18E545AE1C77E54000637E85 /* Debug */,
@@ -1775,7 +1817,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		18E545B31C77E54000637E85 /* Build configuration list for PBXNativeTarget "FrostKit OS X Tests" */ = {
+		18E545B31C77E54000637E85 /* Build configuration list for PBXNativeTarget "FrostKit macOS Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18E545B01C77E54000637E85 /* Debug */,

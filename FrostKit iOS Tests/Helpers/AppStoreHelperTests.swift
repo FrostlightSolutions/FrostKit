@@ -3,11 +3,11 @@
 //  FrostKit
 //
 //  Created by James Barrow on 07/11/2015.
-//  Copyright © 2015-Current James Barrow - Frostlight Solutions. All rights reserved.
+//  Copyright © 2015 James Barrow - Frostlight Solutions. All rights reserved.
 //
 
 import XCTest
-@testable import FrostKit
+import FrostKit
 
 class AppStoreHelperTests: XCTestCase {
     
@@ -23,9 +23,9 @@ class AppStoreHelperTests: XCTestCase {
     
     func testAppStoreUpdate() {
         
-        let expectation = expectationWithDescription("Test App Store Update")
+        let expectation = self.expectation(description: "Test App Store Update")
         
-        FrostKit.setupAppStoreID("571254467")
+        FrostKit.setup(appStoreID: "571254467")
         
         AppStoreHelper.shared.updateAppStoreData { (error) -> Void in
             
@@ -37,7 +37,7 @@ class AppStoreHelperTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(120, handler: { (completionHandler) -> Void in })
+        waitForExpectations(timeout: 120, handler: { (completionHandler) -> Void in })
     }
     
 }
