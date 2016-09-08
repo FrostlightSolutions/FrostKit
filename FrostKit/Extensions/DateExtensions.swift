@@ -61,11 +61,17 @@ extension Date {
      */
     public static func iso8601Date(from iso8601String: String) -> Date? {
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
-        dateFormatter.timeZone = TimeZone.utc()
-        dateFormatter.locale = Locale.autoupdatingCurrent
-        return dateFormatter.date(from: iso8601String)
+        if #available(iOSApplicationExtension 10.0, watchOSApplicationExtension 3.0, tvOSApplicationExtension 10.0, OSXApplicationExtension 10.12, *) {
+            let dateFormatter = ISO8601DateFormatter()
+            dateFormatter.timeZone = TimeZone.utc()
+            return dateFormatter.date(from: iso8601String)
+        } else {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
+            dateFormatter.timeZone = TimeZone.utc()
+            dateFormatter.locale = Locale.autoupdatingCurrent
+            return dateFormatter.date(from: iso8601String)
+        }
     }
     
     // MARK: - Date Checks

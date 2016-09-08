@@ -24,7 +24,7 @@ extension Font {
     
     - returns: The font object for font awesome.
     */
-    public class func fontAwesome(size: CGFloat) -> Font {
+    public class func fontAwesome(ofSize size: CGFloat) -> Font {
         if let font = Font(name: "FontAwesome", size: size) {
             return font
         } else {
@@ -40,7 +40,7 @@ extension Font {
     
     - returns: The font object for ionicons.
     */
-    public class func ionicons(size: CGFloat) -> Font {
+    public class func ionicons(ofSize size: CGFloat) -> Font {
         if let font = Font(name: "Ionicons", size: size) {
             return font
         } else {

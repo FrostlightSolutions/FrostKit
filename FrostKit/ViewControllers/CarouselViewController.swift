@@ -42,7 +42,7 @@ public class CarouselViewController: UIViewController, UICollectionViewDataSourc
         didSet {
             
             pageControl?.numberOfPages = numberOfPages
-            pageControl?.addTarget(self, action: #selector(CarouselViewController.pageControlDidChange(sender:)), for: UIControlEvents.valueChanged)
+            pageControl?.addTarget(self, action: #selector(CarouselViewController.pageControlDidChange(_:)), for: UIControlEvents.valueChanged)
         }
     }
     public var numberOfPages: Int {
@@ -68,7 +68,7 @@ public class CarouselViewController: UIViewController, UICollectionViewDataSourc
         if let pageControl = self.pageControl {
             
             collectionView?.performBatchUpdates(nil, completion: { (completed) -> Void in
-                self.pageControlDidChange(sender: pageControl)
+                self.pageControlDidChange(pageControl)
             })
         }
     }
@@ -99,7 +99,7 @@ public class CarouselViewController: UIViewController, UICollectionViewDataSourc
     
     // MARK: - UIPageControl Methods
     
-    final public func pageControlDidChange(sender: UIPageControl) {
+    final public func pageControlDidChange(_ sender: UIPageControl) {
         collectionView?.scrollToItem(at: IndexPath(row: sender.currentPage, section: 0), at: [], animated: true)
     }
     

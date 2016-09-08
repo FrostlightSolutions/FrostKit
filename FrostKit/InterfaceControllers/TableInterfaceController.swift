@@ -16,7 +16,7 @@ public class TableInterfaceController: WKInterfaceController {
     private var skip = 0
     public var resetLimitAndSkipOnReload: Bool { return false }
     private var updateFromStart = false
-    public var noDataString: String { return FKLocalizedString(key: "NO_DATA", comment: "No Data") }
+    public var noDataString: String { return FKLocalizedString("NO_DATA", comment: "No Data") }
     @IBOutlet public weak var table: WKInterfaceTable!
     @IBOutlet public weak var titleGroup: WKInterfaceGroup?
     @IBOutlet public weak var titleLabel: WKInterfaceLabel?
@@ -27,19 +27,19 @@ public class TableInterfaceController: WKInterfaceController {
     public override init() {
         super.init()
         
-        moreButton?.setTitle(FKLocalizedString(key: "MORE_", comment: "More..."))
-        statusLabel?.setText(FKLocalizedString(key: "LOADING_", comment: "Loading..."))
+        moreButton?.setTitle(FKLocalizedString("MORE_", comment: "More..."))
+        statusLabel?.setText(FKLocalizedString("LOADING_", comment: "Loading..."))
         
         DispatchQueue.main.async() {
             self.updateTable()
         }
     }
     
-    public override func awake(withContext context: AnyObject?) {
+    public override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
         if showReloadMenuItem == true {
-            addMenuItem(with: .resume, title: FKLocalizedString(key: "RELOAD", comment: "Reload"), action: #selector(updateData))
+            addMenuItem(with: .resume, title: FKLocalizedString("RELOAD", comment: "Reload"), action: #selector(updateData))
         }
         
         updateData()
@@ -47,12 +47,12 @@ public class TableInterfaceController: WKInterfaceController {
     
     public func updateData() {
         // Used to override in subclasses
-        finishedUpdatingData([])
+        finishedUpdatingData(dataArray: [])
     }
     
     public func finishedUpdatingData(dataArray: [AnyObject]) {
         
-        dispatch_async(dispatch_get_main_queue()) { 
+        DispatchQueue.main.async {
             self.dataArray = dataArray
             self.updateTable()
         }
@@ -116,7 +116,7 @@ public class TableInterfaceController: WKInterfaceController {
         // Used to override in subclasses
     }
     
-    public func objectAtIndex(index: Int) -> AnyObject? {
+    public func object(atIndex index: Int) -> AnyObject? {
         
         if index < dataArray.count {
             return dataArray[index]

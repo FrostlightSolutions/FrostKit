@@ -36,7 +36,7 @@ public class MapViewController: UIViewController {
     @IBInspectable public var shouldZoomToShowAllOnViewDidAppear: Bool = true
     /// Overridden by a subclass to define actual scope titles for the search bar. If an empty array is returned then the scope selector is not shown. By default this is set to `Markers` and `Locations`.
     public var searchScopeButtonTitles: [String] {
-        return [FKLocalizedString(key: "MARKERS", comment: "Markers"), FKLocalizedString(key: "LOCATIONS", comment: "Locations")]
+        return [FKLocalizedString("MARKERS", comment: "Markers"), FKLocalizedString("LOCATIONS", comment: "Locations")]
     }
     // Defines if the search scope should show.
     @IBInspectable public var showsSearchScopeBar: Bool = true
@@ -46,7 +46,7 @@ public class MapViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = FKLocalizedString(key: "MAP", comment: "Map")
+        navigationItem.title = FKLocalizedString("MAP", comment: "Map")
         updateNavigationButtons(animated: false)
         
         let searchTableViewController: MapSearchViewController
@@ -104,7 +104,7 @@ public class MapViewController: UIViewController {
                     icon = inactiveLocationIcon
                 }
                 
-                locationButton = UIBarButtonItem(image: icon, style: .plain, target: self, action: #selector(MapViewController.locationButtonPressed(sender:)))
+                locationButton = UIBarButtonItem(image: icon, style: .plain, target: self, action: #selector(MapViewController.locationButtonPressed(_:)))
                 
             } else {
                 
@@ -115,7 +115,7 @@ public class MapViewController: UIViewController {
                     title = IonIcons.iosNavigateOutline
                 }
                 
-                locationButton = UIBarButtonItem(title: title, font: .ionicons(size: 24), verticalOffset: -1, target: self, action: #selector(MapViewController.locationButtonPressed(sender:)))
+                locationButton = UIBarButtonItem(title: title, font: .ionicons(ofSize: 24), verticalOffset: -1, target: self, action: #selector(MapViewController.locationButtonPressed(_:)))
             }
             
             barButtonItems.append(locationButton)
@@ -124,7 +124,7 @@ public class MapViewController: UIViewController {
         // TODO: Reactivate for iOS 7 when UISearchDisplayController is implimented.
         if UIDevice.SystemVersion.majorVersion >= 8 {
             if searchButton == true {
-                let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(MapViewController.searchButtonPressed(sender:)))
+                let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(MapViewController.searchButtonPressed(_:)))
                 barButtonItems.append(searchButton)
             }
         }
@@ -145,22 +145,22 @@ public class MapViewController: UIViewController {
     
     - parameter sender: The location button pressed.
     */
-    @IBAction public func locationButtonPressed(sender: UIBarButtonItem) {
+    @IBAction public func locationButtonPressed(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let currentLocationAlertAction = UIAlertAction(title: FKLocalizedString(key: "CURRENT_LOCATION", comment: "Current Location"), style: .default, handler: { (action) -> Void in
+        let currentLocationAlertAction = UIAlertAction(title: FKLocalizedString("CURRENT_LOCATION", comment: "Current Location"), style: .default, handler: { (action) -> Void in
             self.mapController.zoomToCurrentLocation()
             self.updateNavigationButtons()
         })
         alertController.addAction(currentLocationAlertAction)
-        let allLocationsAlertAction = UIAlertAction(title: FKLocalizedString(key: "ALL_LOCATIONS", comment: "All Locations"), style: .default, handler: { (action) -> Void in
+        let allLocationsAlertAction = UIAlertAction(title: FKLocalizedString("ALL_LOCATIONS", comment: "All Locations"), style: .default, handler: { (action) -> Void in
             self.mapController.zoomToShowAll()
         })
         alertController.addAction(allLocationsAlertAction)
-        let clearDirectionsAlertAction = UIAlertAction(title: FKLocalizedString(key: "CLEAR_DIRECTIONS", comment: "Clear Directions"), style: .default, handler: { (action) -> Void in
+        let clearDirectionsAlertAction = UIAlertAction(title: FKLocalizedString("CLEAR_DIRECTIONS", comment: "Clear Directions"), style: .default, handler: { (action) -> Void in
             self.mapController.removeAllPolylines()
         })
         alertController.addAction(clearDirectionsAlertAction)
-        let cancelAlertAction = UIAlertAction(title: FKLocalizedString(key: "CANCEL", comment: "Cancel"), style: .cancel, handler: { (action) -> Void in
+        let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL", comment: "Cancel"), style: .cancel, handler: { (action) -> Void in
             alertController.dismiss(animated: true, completion: nil)
         })
         alertController.addAction(cancelAlertAction)
@@ -172,7 +172,7 @@ public class MapViewController: UIViewController {
     
     - parameter sender: The search button pressed.
     */
-    @IBAction public func searchButtonPressed(sender: UIBarButtonItem) {
+    @IBAction public func searchButtonPressed(_ sender: UIBarButtonItem) {
         if let searchController = self.searchController {
             present(searchController, animated: true, completion: nil)
         }

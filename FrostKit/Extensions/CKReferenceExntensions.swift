@@ -11,13 +11,13 @@ import CloudKit
 
 public extension CKReference {
     
-    public class func referencesFromRecordIDs(recordIDs: [CKRecordID], action: CKReferenceAction = .none) -> [CKReference] {
+    public class func references(fromRecordIDs recordIDs: [CKRecordID], action: CKReferenceAction = .none) -> [CKReference] {
         return recordIDs.map({ (recordID) -> CKReference in
             return CKReference(recordID: recordID, action: action)
         })
     }
     
-    public class func referencesFromRecordNames(names: [String], zoneID: CKRecordZoneID? = nil, action: CKReferenceAction = .none) -> [CKReference] {
+    public class func references(fromRecordNames names: [String], zoneID: CKRecordZoneID? = nil, action: CKReferenceAction = .none) -> [CKReference] {
         return names.map({ (name) -> CKReference in
             let recordID: CKRecordID
             if let recordZoneID = zoneID {

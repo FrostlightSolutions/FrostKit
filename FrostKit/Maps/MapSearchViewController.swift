@@ -41,17 +41,8 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-         self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
-
-    override public func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        self.clearsSelectionOnViewWillAppear = false
     }
     
     // MARK: - Custom Getter / Setter Methods
@@ -166,7 +157,7 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
         case 0:
             // Search address points plotted on the map
             if let mapController = self.mapController {
-                plottedSearchResults = mapController.searchAddresses(searchString: searchText)
+                plottedSearchResults = mapController.searchAddresses(searchText)
                 tableView.reloadData()
             }
         case 1:

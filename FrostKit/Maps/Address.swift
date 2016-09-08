@@ -91,7 +91,7 @@ public class Address: NSObject {
      
      - returns: An array of address objects.
      */
-    public class func addressesFromArrayOfDictionaries(array: [NSDictionary]) -> [Address] {
+    public class func addresses(fromArrayOfDictionaries array: [NSDictionary]) -> [Address] {
         var adresses = [Address]()
         for dictionary in array {
             adresses.append(Address(dictionary: dictionary))

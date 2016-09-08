@@ -46,7 +46,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
                     locationManager?.delegate = self
                 }
                 
-                MapController.requestAccessToLocationServices(locationManager: locationManager!)
+                MapController.requestAccessToLocationServices(locationManager!)
             }
         }
     }
@@ -156,7 +156,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     
     // MARK: - Location Services
     
-    public class func requestAccessToLocationServices(locationManager: CLLocationManager) {
+    public class func requestAccessToLocationServices(_ locationManager: CLLocationManager) {
         
         if let infoDictionary = Bundle.main.infoDictionary {
             
@@ -276,7 +276,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         }
     }
     
-    internal final func calculateAndUpdateClusterAnnotations(complete: @escaping () -> Void) {
+    internal final func calculateAndUpdateClusterAnnotations(_ complete: @escaping () -> Void) {
         
         guard let mapView = self.mapView else {
             complete()
@@ -777,19 +777,19 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
         if let annotation = view.annotation as? Annotation {
             
             let alertController = UIAlertController(title: annotation.title, message: annotation.subtitle, preferredStyle: .actionSheet)
-            let zoomToAlertAction = UIAlertAction(title: FKLocalizedString(key: "ZOOM_TO_", comment: "Zoom to..."), style: .default, handler: { (action) -> Void in
+            let zoomToAlertAction = UIAlertAction(title: FKLocalizedString("ZOOM_TO_", comment: "Zoom to..."), style: .default, handler: { (action) -> Void in
                 self.zoom(toAnnotation: annotation)
             })
             alertController.addAction(zoomToAlertAction)
-            let directionsAlertAction = UIAlertAction(title: FKLocalizedString(key: "DIRECTIONS", comment: "Directions"), style: .default, handler: { (action) -> Void in
+            let directionsAlertAction = UIAlertAction(title: FKLocalizedString("DIRECTIONS", comment: "Directions"), style: .default, handler: { (action) -> Void in
                 self.directionsToCurrentLocation(fromCoordinate: annotation.coordinate)
             })
             alertController.addAction(directionsAlertAction)
-            let openInMapsAlertAction = UIAlertAction(title: FKLocalizedString(key: "OPEN_IN_MAPS", comment: "Open in Maps"), style: .default, handler: { (action) -> Void in
+            let openInMapsAlertAction = UIAlertAction(title: FKLocalizedString("OPEN_IN_MAPS", comment: "Open in Maps"), style: .default, handler: { (action) -> Void in
                 self.directionsToCurrentLocation(fromCoordinate: annotation.coordinate, inApp: false)
             })
             alertController.addAction(openInMapsAlertAction)
-            let cancelAlertAction = UIAlertAction(title: FKLocalizedString(key: "CANCEL", comment: "Cancel"), style: .cancel, handler: { (action) -> Void in
+            let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL", comment: "Cancel"), style: .cancel, handler: { (action) -> Void in
                 alertController.dismiss(animated: true, completion: nil)
             })
             alertController.addAction(cancelAlertAction)
@@ -886,7 +886,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      
      - returns: An array of addresses that meet the predicate search criteria.
      */
-    public func searchAddresses(searchString: String) -> [Address] {
+    public func searchAddresses(_ searchString: String) -> [Address] {
         return addresses.filter { (address) -> Bool in
             
             let options: NSString.CompareOptions = [.caseInsensitive, .diacriticInsensitive]

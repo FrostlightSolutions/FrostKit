@@ -29,7 +29,7 @@ public class Annotation: NSObject, MKAnnotation {
     /// The name of the address.
     public var title: String? {
         if clusterAnnotation == nil, let containdedAnnotations = self.containdedAnnotations, containdedAnnotations.count > 0 {
-            return "\(containdedAnnotations.count + 1) \(FKLocalizedString(key: "ITEMS", comment: "Items"))"
+            return "\(containdedAnnotations.count + 1) \(FKLocalizedString("ITEMS", comment: "Items"))"
         }
         return address?.name
     }

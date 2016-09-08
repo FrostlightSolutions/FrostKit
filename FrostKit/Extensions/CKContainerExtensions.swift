@@ -45,7 +45,7 @@ public extension CKContainer {
     }
     
     public func update(userRecord: CKRecord, progressHandler: ((Double) -> Void)? = nil, completionHandler: @escaping (CKRecord?, Error?) -> Void) {
-        publicCloudDatabase.saveRecord(record: userRecord, progressHandler: progressHandler, completionHandler: completionHandler)
+        publicCloudDatabase.save(record: userRecord, progressHandler: progressHandler, completionHandler: completionHandler)
     }
     
     public func update(userRecordWithObject object: CKRecordValue?, key: String, progressHandler: ((Double) -> Void)? = nil, completionHandler: @escaping (CKRecord?, Error?) -> Void) {

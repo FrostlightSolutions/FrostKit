@@ -87,20 +87,20 @@ public class CoreDataProxy {
     
     // MARK: - Core Data Saving support
     
-    private class func saveContextBase(complete: (() -> Void)?) {
+    private class func saveContextBase(_ complete: (() -> Void)?) {
         CoreDataProxy.saveContext(context: CoreDataProxy.shared.managedObjectContextBase, complete: complete)
     }
     
-    private class func saveContextMain(complete: (() -> Void)?) {
+    private class func saveContextMain(_ complete: (() -> Void)?) {
         CoreDataProxy.saveContext(context: CoreDataProxy.shared.managedObjectContextMain, complete: complete)
     }
     
-    public class func saveMainAndBaseContexts(complete: (() -> Void)? = nil) {
-        CoreDataProxy.saveContextMain(complete: { () -> Void in
-            CoreDataProxy.saveContextBase(complete: {
+    public class func saveMainAndBaseContexts(_ complete: (() -> Void)? = nil) {
+        CoreDataProxy.saveContextMain {
+            CoreDataProxy.saveContextBase {
                 complete?()
-            })
-        })
+            }
+        }
     }
     
     public class func saveContext(context: NSManagedObjectContext, complete: (() -> Void)? = nil) {
