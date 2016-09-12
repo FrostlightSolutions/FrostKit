@@ -19,25 +19,25 @@ class SocialHelperVC: UITableViewController {
     }
 
     // MARK: - Table view data source
-
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
         switch indexPath {
-        case NSIndexPath(forRow: 0, inSection: 0):
-            SocialHelper.presentComposeViewController(SLServiceTypeTwitter, inViewController: self)
-        case NSIndexPath(forRow: 1, inSection: 0):
-            SocialHelper.presentComposeViewController(SLServiceTypeFacebook, inViewController: self)
-        case NSIndexPath(forRow: 0, inSection: 1):
-            if let phoneURL = SocialHelper.phonePromptFormattedURL(number: "(+46) 70 857 01 80") {
-                UIApplication.sharedApplication().openURL(phoneURL)
+        case IndexPath(row: 0, section: 0):
+            _ = SocialHelper.presentComposeViewController(serviceType: SLServiceTypeTwitter, inViewController: self)
+        case IndexPath(row: 1, section: 0):
+            _ = SocialHelper.presentComposeViewController(serviceType: SLServiceTypeFacebook, inViewController: self)
+        case IndexPath(row: 0, section: 1):
+            if let phoneURL = SocialHelper.phonePrompt("(+46) 70 857 01 80") {
+                UIApplication.shared.openURL(phoneURL)
             } else {
                 NSLog("Error: Could not create URL to prompt phone.")
             }
-        case NSIndexPath(forRow: 1, inSection: 1):
+        case IndexPath(row: 1, section: 1):
             SocialHelper.emailPrompt(toRecipients: ["info@frostlight.se"], viewController: self)
-        case NSIndexPath(forRow: 2, inSection: 1):
+        case IndexPath(row: 2, section: 1):
             SocialHelper.messagePrompt(recipients: ["(+46) 70 857 01 80"], viewController: self)
         default:
             break

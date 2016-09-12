@@ -17,23 +17,23 @@ class CollectionViewController: UICollectionViewController {
         clearsSelectionOnViewWillAppear = true
         
         let refreshControl = UIRefreshControl()
-        refreshControl.tintColor = UIColor.lightGrayColor()
+        refreshControl.tintColor = UIColor.lightGray
         self.refreshControl = refreshControl
     }
     
     // MARK: - Collection View
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 40
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("TestCollectionCell", forIndexPath: indexPath)
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TestCollectionCell", for: indexPath as IndexPath)
     
         // Configure the cell
     

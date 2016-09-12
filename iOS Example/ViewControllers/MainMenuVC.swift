@@ -19,17 +19,16 @@ class MainMenuVC: UITableViewController {
     
     // MARK: - Segues
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let controller = (segue.destinationViewController as! UINavigationController).topViewController
-        controller?.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let controller = (segue.destination as! UINavigationController).topViewController
+        controller?.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         controller?.navigationItem.leftItemsSupplementBackButton = true
     }
     
     // MARK: - Table view data source
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }

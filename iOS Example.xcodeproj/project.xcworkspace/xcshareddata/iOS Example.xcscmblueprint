@@ -11,7 +11,7 @@
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "2DF10664-DF23-4609-82EB-63413EF48636",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "D2AD29AE1B693121D0EDBB4855C96B75ECBB0D86" : "FrostKit\/AlamofireImage\/",
-    "ABE320C52EBAFEA333AE1C7CD0B7ED96508F5D03" : "FrostKit",
+    "ABE320C52EBAFEA333AE1C7CD0B7ED96508F5D03" : "FrostKit\/",
     "67620B5EFA902936DF04070AF595B76AB0333747" : "FrostKit\/Alamofire"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "iOS Example",

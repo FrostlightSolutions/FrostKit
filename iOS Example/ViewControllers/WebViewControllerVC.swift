@@ -19,48 +19,48 @@ class WebViewControllerVC: UITableViewController {
     }
 
     // MARK: - Table view data source
-
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
         switch indexPath {
-        case NSIndexPath(forRow: 0, inSection: 0):
+        case IndexPath(row: 0, section: 0):
             if #available(iOS 9, *) {
-                let url = NSURL(string: "http://frostlight.se")!
-                let safariVC = SFSafariViewController(URL: url)
-                presentViewController(UINavigationController(rootViewController: safariVC), animated: true, completion: nil)
+                let url = URL(string: "http://frostlight.se")!
+                let safariVC = SFSafariViewController(url: url)
+                present(UINavigationController(rootViewController: safariVC), animated: true, completion: nil)
             } else {
                 let webVC = WebViewController()
                 webVC.urlString = "frostlight.se"
-                presentViewController(UINavigationController(rootViewController: webVC), animated: true, completion: nil)
+                present(UINavigationController(rootViewController: webVC), animated: true, completion: nil)
             }
-        case NSIndexPath(forRow: 1, inSection: 0):
+        case IndexPath(row: 1, section: 0):
             let webVC = WebViewController(viewType: .UIWebView)
             webVC.urlString = "frostlight.se"
             webVC.titleOverride = "WKWebViewController"
-            presentViewController(UINavigationController(rootViewController: webVC), animated: true, completion: nil)
-        case NSIndexPath(forRow: 2, inSection: 0):
+            present(UINavigationController(rootViewController: webVC), animated: true, completion: nil)
+        case IndexPath(row: 2, section: 0):
             let webVC = WebViewController(viewType: .WKWebView)
             webVC.urlString = "frostlight.se"
             webVC.titleOverride = "UIWebViewController"
-            presentViewController(UINavigationController(rootViewController: webVC), animated: true, completion: nil)
-        case NSIndexPath(forRow: 0, inSection: 1):
+            present(UINavigationController(rootViewController: webVC), animated: true, completion: nil)
+        case IndexPath(row: 0, section: 1):
             if #available(iOS 9, *) {
-                let url = NSURL(string: "http://frostlight.se")!
-                let safariVC = SFSafariViewController(URL: url)
+                let url = URL(string: "http://frostlight.se")!
+                let safariVC = SFSafariViewController(url: url)
                 navigationController?.pushViewController(safariVC, animated: true)
             } else {
                 let webVC = WebViewController()
                 webVC.urlString = "frostlight.se"
                 navigationController?.pushViewController(webVC, animated: true)
             }
-        case NSIndexPath(forRow: 1, inSection: 1):
+        case IndexPath(row: 1, section: 1):
             let webVC = WebViewController(viewType: .UIWebView)
             webVC.urlString = "frostlight.se"
             webVC.titleOverride = "WKWebViewController"
             navigationController?.pushViewController(webVC, animated: true)
-        case NSIndexPath(forRow: 2, inSection: 1):
+        case IndexPath(row: 2, section: 1):
             let webVC = WebViewController(viewType: .WKWebView)
             webVC.urlString = "frostlight.se"
             webVC.titleOverride = "UIWebViewController"

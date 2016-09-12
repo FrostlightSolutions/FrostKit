@@ -36,7 +36,7 @@ class ExampleMapViewController: MapViewController {
             addresses.append(address)
         }
         
-        mapController.plotAddresses(addresses)
+        mapController.plot(addresses: addresses)
     }
     
 }
