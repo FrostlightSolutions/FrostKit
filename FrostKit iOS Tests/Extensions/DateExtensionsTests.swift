@@ -498,11 +498,19 @@ class DateExtensionsTests: XCTestCase {
             components.day = 26
             let date = components.date!
             
-            XCTAssert(date.dateByAdding(0) == date)
+            XCTAssert(date.dateByAdding(days: 0) == date)
             components.day! += 3
-            XCTAssert(date.dateByAdding(3) == components.date)
+            XCTAssert(date.dateByAdding(days: 3) == components.date)
             components.day! -= 5
-            XCTAssert(date.dateByAdding(-2) == components.date)
+            XCTAssert(date.dateByAdding(days: -2) == components.date)
+            components.day! += 92
+            XCTAssert(date.dateByAdding(days: 90) == components.date)
+            components.day! -= 180
+            XCTAssert(date.dateByAdding(days: -90) == components.date)
+            components.day! -= 390
+            XCTAssert(date.dateByAdding(days: -480) == components.date)
+            components.day! += 960
+            XCTAssert(date.dateByAdding(days: 480) == components.date)
         }
     }
     

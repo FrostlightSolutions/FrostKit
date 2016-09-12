@@ -78,7 +78,7 @@ extension Date {
     
     /// `true` if the date is yesterday, `false` if it isn't.
     public var isYesterday: Bool {
-        let date = Date().dateByAdding(-1)
+        let date = Date().dateByAdding(days: -1)
         return compare(date, option: .equalTo)
     }
     
@@ -89,7 +89,7 @@ extension Date {
     
     /// `true` if the date is tomorrow, `false` if it isn't.
     public var isTomorrow: Bool {
-        let date = Date().dateByAdding(1)
+        let date = Date().dateByAdding(days: 1)
         return compare(date, option: .equalTo)
     }
     
@@ -333,7 +333,7 @@ extension Date {
     
     - returns: A copy of the current date `days` added to it
     */
-    public func dateByAdding(_ days: Int) -> Date {
+    public func dateByAdding(days: Int) -> Date {
         
         if days == 0 {
             return self
@@ -343,8 +343,7 @@ extension Date {
         components.day = days
         
         let calendar = Calendar.iso8601Calendar()
-        return calendar.date(byAdding: components, to: self, wrappingComponents: true)!
-//        return calendar.date(byAdding: components, to: self, options: .searchBackwards)!
+        return calendar.date(byAdding: components, to: self, wrappingComponents: false)!
     }
     
     /// Returns a date with the time at the start of the day, while preserving the time zone.
