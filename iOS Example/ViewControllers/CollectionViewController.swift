@@ -11,6 +11,8 @@ import FrostKit
 
 class CollectionViewController: UICollectionViewController {
     
+    // MARK: - View Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,7 +20,21 @@ class CollectionViewController: UICollectionViewController {
         
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = UIColor.lightGray
+        refreshControl.addTarget(self, action: #selector(refreshControlTriggered(_:)), for: .valueChanged)
         self.refreshControl = refreshControl
+    }
+    
+    // MARK: - Actions
+    
+    func refreshControlTriggered(_ sender: AnyObject) {
+        _ = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(endRefreshing), userInfo: nil, repeats: false)
+    }
+    
+    func endRefreshing() {
+        
+        if let refreshControl = self.refreshControl, refreshControl.isRefreshing == true {
+            refreshControl.endRefreshing()
+        }
     }
     
     // MARK: - Collection View
@@ -26,7 +42,6 @@ class CollectionViewController: UICollectionViewController {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 40
@@ -36,6 +51,7 @@ class CollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TestCollectionCell", for: indexPath as IndexPath)
     
         // Configure the cell
+        cell.backgroundColor = .orange
     
         return cell
     }
