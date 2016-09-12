@@ -15,13 +15,13 @@ import CoreLocation
 ///
 /// This class is designed to be subclassed if more specific actions, such a refining the standard search or customising the annotations plotted.
 ///
-public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
+open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
     
     private let minimumZoomArc = 0.007  //approximately 1/2 mile (1 degree of arc ~= 69 miles)
     private let maximumDegreesArc: Double = 360
     private let annotationRegionPadFactor: Double = 1.15
     /// The reuse identifier for the annotations for the map view. This should be overriden when subclassing.
-    public var identifier: String {
+    open var identifier: String {
         return "FrostKitAnnotation"
     }
     /// Dictates if the users location has been initially plotted.
@@ -457,7 +457,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      
      - parameter coordinare: The coordinate to zoom to.
      */
-    public func zoom(toCoordinate coordinare: CLLocationCoordinate2D) {
+    open func zoom(toCoordinate coordinare: CLLocationCoordinate2D) {
         let point = MKMapPointForCoordinate(coordinare)
         zoom(toMapPoints: [point])
     }
@@ -467,7 +467,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      
      - parameter annotation: The annotation to zoom to.
      */
-    public func zoom(toAnnotation annotation: MKAnnotation) {
+    open func zoom(toAnnotation annotation: MKAnnotation) {
         zoom(toAnnotations: [annotation])
     }
     
@@ -476,7 +476,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      
      - parameter annotations: The annotations to zoom to.
      */
-    public func zoom(toAnnotations annotations: [MKAnnotation]) {
+    open func zoom(toAnnotations annotations: [MKAnnotation]) {
         let count = annotations.count
         if count > 0 {
             var points = [MKMapPoint]()
@@ -492,7 +492,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      
      - parameter points: Swift array of `MKMapPoints` to zoom to.
      */
-    public func zoom(toMapPoints points: [MKMapPoint]) {
+    open func zoom(toMapPoints points: [MKMapPoint]) {
         let count = points.count
         let cPoints = UnsafeMutablePointer<MKMapPoint>.allocate(capacity: count)
         cPoints.initialize(from: points)
@@ -506,7 +506,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      - parameter points: C array array of `MKMapPoints` to zoom to.
      - parameter count:  The number of points in the C array.
      */
-    public func zoom(toMapPoints points: UnsafeMutablePointer<MKMapPoint>, count: Int) {
+    open func zoom(toMapPoints points: UnsafeMutablePointer<MKMapPoint>, count: Int) {
         let mapRect = MKPolygon(points: points, count: count).boundingMapRect
         var region: MKCoordinateRegion = MKCoordinateRegionForMapRect(mapRect)
         
@@ -522,7 +522,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      
      - parameter region: The region to zoom the map to.
      */
-    public func zoom(toRegion region: MKCoordinateRegion) {
+    open func zoom(toRegion region: MKCoordinateRegion) {
         
         var zoomRegion = region
         zoomRegion.span = normalize(regionSpan: region.span)
@@ -532,7 +532,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     /**
      Zoom the map to show the users current location.
      */
-    public func zoomToCurrentLocation() {
+    open func zoomToCurrentLocation() {
         trackingUser = true
         if let mapView = self.mapView {
             zoom(toCoordinate: mapView.userLocation.coordinate)
@@ -544,7 +544,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      
      - parameter includingUser: If `true` then the users annotation is also included in the points. If `false` then only plotted points are zoomed to.
      */
-    public func zoomToShowAll(includingUser: Bool = true) {
+    open func zoomToShowAll(includingUser: Bool = true) {
         
         if includingUser == false || zoomToShowAllIncludesUser == false {
             let annotations = Array(self.annotations.values)
@@ -559,7 +559,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      
      - parameter address: The address object to zoom to.
      */
-    public func zoom(toAddress address: Address) {
+    open func zoom(toAddress address: Address) {
         plot(address: address)
         
         if let annotation = annotations[address] {
@@ -572,7 +572,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      
      - parameter polyline: The polyline to zoom to.
      */
-    public func zoom(toPolyline polyline: MKPolyline) {
+    open func zoom(toPolyline polyline: MKPolyline) {
         zoom(toMapPoints: polyline.points(), count: polyline.pointCount)
     }
     
@@ -728,7 +728,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      
      - returns: The annotation view to display for the specified annotation or nil if you want to display a standard annotation view.
      */
-    public func configureAnnotationView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    open func configureAnnotationView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         var annotationPinView: MKPinAnnotationView?
         if let myAnnotation = annotation as? Annotation {
             if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView {
@@ -773,7 +773,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      - parameter view:    The annotation view whose button was tapped.
      - parameter control: The control that was tapped.
      */
-    public func calloutAccessoryControlTapped(mapView: MKMapView, annotationView view: MKAnnotationView, controlTapped control: UIControl) {
+    open func calloutAccessoryControlTapped(mapView: MKMapView, annotationView view: MKAnnotationView, controlTapped control: UIControl) {
         if let annotation = view.annotation as? Annotation {
             
             let alertController = UIAlertController(title: annotation.title, message: annotation.subtitle, preferredStyle: .actionSheet)
@@ -811,7 +811,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      
      - returns: The renderer to use when presenting the specified overlay on the map. If you return `nil`, no content is drawn for the specified overlay object.
      */
-    public func configureOverlayRenderer(mapView: MKMapView, overlay: MKOverlay) -> MKOverlayRenderer {
+    open func configureOverlayRenderer(mapView: MKMapView, overlay: MKOverlay) -> MKOverlayRenderer {
         if let polyline = overlay as? MKPolyline {
             let polylineRenderer = MKPolylineRenderer(polyline: polyline)
             polylineRenderer.strokeColor = UIColor.blue
@@ -869,7 +869,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
     
     // MARL: - CLLocationManagerDelegate Methods
     
-    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    open func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         
         // Set the location manager to nil if not `NotDetermined`. If `NotDetermined` then it is possible the delegate was called before the user has answered.
         if status != .notDetermined {
@@ -886,7 +886,7 @@ public class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelega
      
      - returns: An array of addresses that meet the predicate search criteria.
      */
-    public func searchAddresses(_ searchString: String) -> [Address] {
+    open func searchAddresses(_ searchString: String) -> [Address] {
         return addresses.filter { (address) -> Bool in
             
             let options: NSString.CompareOptions = [.caseInsensitive, .diacriticInsensitive]

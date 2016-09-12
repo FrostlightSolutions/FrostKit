@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class VisualEffectView: UIVisualEffectView {
+open class VisualEffectView: UIVisualEffectView {
 
     @IBInspectable public var cornerRadius: CGFloat {
         get {

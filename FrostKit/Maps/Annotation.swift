@@ -12,7 +12,7 @@ import MapKit
 ///
 /// An annotation object that is to be used with an address object.
 ///
-public class Annotation: NSObject, MKAnnotation {
+open class Annotation: NSObject, MKAnnotation {
     
     /// The address object for the annotation.
     // Whenever the address is set, make sure to clear/reset the `containdedAnnotations`
@@ -59,7 +59,7 @@ public class Annotation: NSObject, MKAnnotation {
         }
     }
     
-    public override func isEqual(_ object: Any?) -> Bool {
+    open override func isEqual(_ object: Any?) -> Bool {
         
         if let annotation = object as? Annotation {
             return self.hash == annotation.hash
@@ -68,7 +68,7 @@ public class Annotation: NSObject, MKAnnotation {
         }
     }
     
-    public override var hash: Int {
+    open override var hash: Int {
         return address?.hashValue ?? 0
     }
     

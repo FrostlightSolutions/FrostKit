@@ -12,7 +12,7 @@ import MapKit
 ///
 /// The map search view controller is used with the search control in a map view controller. It allows searching of points plotted on the map view as well a locations.
 ///
-public class MapSearchViewController: UITableViewController, UISearchControllerDelegate, UISearchBarDelegate {
+open class MapSearchViewController: UITableViewController, UISearchControllerDelegate, UISearchBarDelegate {
     
     /// The reuse identifier for the cell for the table view. This should be overriden when subclassing.
     public let identifier = "FrostKitMapSearchCell"
@@ -39,7 +39,7 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
         }
     }
     
-    override public func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         self.clearsSelectionOnViewWillAppear = false
@@ -54,7 +54,7 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
     
     - returns: The object at the index path.
     */
-    public func objectAt(_ indexPath: IndexPath) -> AnyObject? {
+    open func objectAt(_ indexPath: IndexPath) -> AnyObject? {
         if let searchBar = self.searchBar {
             switch searchBar.selectedScopeButtonIndex {
             case 0:
@@ -74,11 +74,11 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
     
     // MARK: - Table view data source
     
-    public override func numberOfSections(in tableView: UITableView) -> Int {
+    open override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let searchBar = self.searchBar {
             switch searchBar.selectedScopeButtonIndex {
             case 0:
@@ -96,7 +96,7 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
         return 0
     }
 
-    override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: identifier)
         if cell == nil {
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: identifier)
@@ -130,7 +130,7 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
         return cell!
     }
     
-    public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let searchBar = self.searchBar {
             switch searchBar.selectedScopeButtonIndex {
@@ -152,7 +152,7 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
     
     // MARK: - UISearchBarDelegate Methods
     
-    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    open func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         switch searchBar.selectedScopeButtonIndex {
         case 0:
             // Search address points plotted on the map
@@ -168,7 +168,7 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
         }
     }
     
-    public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    open func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         switch searchBar.selectedScopeButtonIndex {
         case 0:
             // Search address points plotted on the map
@@ -198,7 +198,7 @@ public class MapSearchViewController: UITableViewController, UISearchControllerD
         }
     }
     
-    public func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+    open func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         if selectedScope == 0 {
             refreshControl?.endRefreshing()
             refreshControl = nil

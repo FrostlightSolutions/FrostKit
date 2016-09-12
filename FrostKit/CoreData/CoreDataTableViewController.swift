@@ -9,26 +9,26 @@
 import UIKit
 import CoreData
 
-public class CoreDataTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+open class CoreDataTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Properties
     
     @IBOutlet public weak var dataController: CoreDataController! {
         didSet { dataController.fetchedResultsController.delegate = self }
     }
-    public var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> {
+    open var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> {
         return dataController.fetchedResultsController
     }
     
     // MARK: - View lifecycle
     
-    override public func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         clearsSelectionOnViewWillAppear = true
     }
     
-    override public func viewDidAppear(_ animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         fetchAndReloadData()
@@ -36,11 +36,11 @@ public class CoreDataTableViewController: UITableViewController, NSFetchedResult
     
     // MARK: - Table view
     
-    override public func numberOfSections(in tableView: UITableView) -> Int {
+    open override func numberOfSections(in tableView: UITableView) -> Int {
         return fetchedResultsController.sections?.count ?? 0
     }
     
-    override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if let sections = fetchedResultsController.sections, sections.count > section {
             
@@ -54,11 +54,11 @@ public class CoreDataTableViewController: UITableViewController, NSFetchedResult
     
     // MARK: - Fetched results controller
     
-    public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    open func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.reloadData()
     }
     
-    public func fetchAndReloadData() {
+    open func fetchAndReloadData() {
         
         // Refresh and reload data
         do {

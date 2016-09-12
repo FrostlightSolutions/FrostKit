@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class InitialsImageView: ImageView {
+open class InitialsImageView: ImageView {
     
     @IBInspectable public var name: String? = "" {
         didSet {
@@ -36,7 +36,7 @@ public class InitialsImageView: ImageView {
             }
         }
     }
-    override public var image: UIImage? {
+    open override var image: UIImage? {
         didSet {
             if image == nil {
                 initialsLabel.isHidden = false
@@ -47,13 +47,13 @@ public class InitialsImageView: ImageView {
             }
         }
     }
-    override public var tintColor: UIColor? {
+    open override var tintColor: UIColor? {
         didSet {
             layer.borderColor = tintColor?.cgColor
             initialsLabel.textColor = tintColor
         }
     }
-    @IBOutlet public  weak var initialsLabel: UILabel! {
+    @IBOutlet public weak var initialsLabel: UILabel! {
         didSet {
             initialsLabel.backgroundColor = .clear
         }

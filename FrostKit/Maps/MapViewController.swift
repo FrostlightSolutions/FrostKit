@@ -13,7 +13,7 @@ import UIKit
 ///
 /// This class is designed to be subclassed if more specific actions, such a updating the addresses or objects to plot.
 ///
-public class MapViewController: UIViewController {
+open class MapViewController: UIViewController {
     
     /// The map controller related to the map view controller.
     @IBOutlet public weak var mapController: MapController!
@@ -24,18 +24,18 @@ public class MapViewController: UIViewController {
     /// The search controller for using in iOS 8+ projects.
     public var searchController: UISearchController!
     /// Overridden by a subclass to define the icon to use in thenavgation bar button item when the `locationButton` is active. Both this and the `inactiveLocationIcon` need to be overriden for the default icon to be overridden.
-    public var activeLocationIcon: UIImage? {
+    open var activeLocationIcon: UIImage? {
         return nil
     }
     /// Overridden by a subclass to define the icon to use in thenavgation bar button item when the `locationButton` is inactive. Both this and the `activeLocationIcon` need to be overriden for the default icon to be overridden.
-    public var inactiveLocationIcon: UIImage? {
+    open var inactiveLocationIcon: UIImage? {
         return nil
     }
     private var zoomedToShowAll = false
     /// Ditermines if the map view should zoom to show all on the first view did appear.
     @IBInspectable public var shouldZoomToShowAllOnViewDidAppear: Bool = true
     /// Overridden by a subclass to define actual scope titles for the search bar. If an empty array is returned then the scope selector is not shown. By default this is set to `Markers` and `Locations`.
-    public var searchScopeButtonTitles: [String] {
+    open var searchScopeButtonTitles: [String] {
         return [FKLocalizedString("MARKERS", comment: "Markers"), FKLocalizedString("LOCATIONS", comment: "Locations")]
     }
     // Defines if the search scope should show.
@@ -43,7 +43,7 @@ public class MapViewController: UIViewController {
     // Defines the search search view controller for the search controller to use. If `nil` is found on setup then a default `MapSearchViewController` is used.
     public var searchTableViewController: MapSearchViewController?
     
-    override public func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = FKLocalizedString("MAP", comment: "Map")
@@ -68,18 +68,13 @@ public class MapViewController: UIViewController {
         updateAddresses()
     }
     
-    override public func viewDidAppear(_ animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if shouldZoomToShowAllOnViewDidAppear == true && zoomedToShowAll == false {
             zoomedToShowAll = true
             mapController.zoomToShowAll()
         }
-    }
-    
-    override public func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - Update Methods
@@ -134,7 +129,7 @@ public class MapViewController: UIViewController {
     /**
     Update objects to be plotted on the map. This method is to be overriden by a subclass to specify the specific methods to call new objects from the server.
     */
-    public func updateAddresses() {
+    open func updateAddresses() {
         // Used to be overriden by a subclass depending on the data service model
     }
     
@@ -145,7 +140,7 @@ public class MapViewController: UIViewController {
     
     - parameter sender: The location button pressed.
     */
-    @IBAction public func locationButtonPressed(_ sender: UIBarButtonItem) {
+    @IBAction open func locationButtonPressed(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let currentLocationAlertAction = UIAlertAction(title: FKLocalizedString("CURRENT_LOCATION", comment: "Current Location"), style: .default, handler: { (action) -> Void in
             self.mapController.zoomToCurrentLocation()
@@ -172,7 +167,7 @@ public class MapViewController: UIViewController {
     
     - parameter sender: The search button pressed.
     */
-    @IBAction public func searchButtonPressed(_ sender: UIBarButtonItem) {
+    @IBAction open func searchButtonPressed(_ sender: UIBarButtonItem) {
         if let searchController = self.searchController {
             present(searchController, animated: true, completion: nil)
         }

@@ -10,18 +10,18 @@ import Foundation
 import CoreData
 
 // Needs to be a subclass of NSObject to allow it to be used with @IBOutlet
-public class CoreDataController: NSObject {
+open class CoreDataController: NSObject {
     
     // MARK: - Properties
     
-    public var context: NSManagedObjectContext { return CoreDataProxy.shared.managedObjectContextMain }
-    public var entityName: String! { return nil }
-    public var sectionNameKeyPath: String? { return nil }
-    public var cacheName: String? { return nil }
-    public var sortDescriptors: [NSSortDescriptor] { return [NSSortDescriptor]() }
-    public var predicate: NSPredicate? { return nil }
+    open var context: NSManagedObjectContext { return CoreDataProxy.shared.managedObjectContextMain }
+    open var entityName: String! { return nil }
+    open var sectionNameKeyPath: String? { return nil }
+    open var cacheName: String? { return nil }
+    open var sortDescriptors: [NSSortDescriptor] { return [NSSortDescriptor]() }
+    open var predicate: NSPredicate? { return nil }
     private var _fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
-    public var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> {
+    open var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> {
         if _fetchedResultsController != nil {
             return _fetchedResultsController!
         }

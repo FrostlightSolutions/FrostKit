@@ -8,21 +8,21 @@
 
 import WatchKit
 
-public class TableInterfaceController: WKInterfaceController {
+open class TableInterfaceController: WKInterfaceController {
     
-    public var rowType: String! { return nil }
+    open var rowType: String! { return nil }
     private lazy var dataArray = [AnyObject]()
-    public var limit: Int { return 10 }
+    open var limit: Int { return 10 }
     private var skip = 0
-    public var resetLimitAndSkipOnReload: Bool { return false }
+    open var resetLimitAndSkipOnReload: Bool { return false }
     private var updateFromStart = false
-    public var noDataString: String { return FKLocalizedString("NO_DATA", comment: "No Data") }
+    open var noDataString: String { return FKLocalizedString("NO_DATA", comment: "No Data") }
     @IBOutlet public weak var table: WKInterfaceTable!
     @IBOutlet public weak var titleGroup: WKInterfaceGroup?
     @IBOutlet public weak var titleLabel: WKInterfaceLabel?
     @IBOutlet public weak var statusLabel: WKInterfaceLabel?
     @IBOutlet public weak var moreButton: WKInterfaceButton?
-    public var showReloadMenuItem: Bool { return true }
+    open var showReloadMenuItem: Bool { return true }
     
     public override init() {
         super.init()
@@ -35,7 +35,7 @@ public class TableInterfaceController: WKInterfaceController {
         }
     }
     
-    public override func awake(withContext context: Any?) {
+    open override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
         if showReloadMenuItem == true {
@@ -45,7 +45,7 @@ public class TableInterfaceController: WKInterfaceController {
         updateData()
     }
     
-    public func updateData() {
+    open func updateData() {
         // Used to override in subclasses
         finishedUpdatingData(dataArray: [])
     }
@@ -112,7 +112,7 @@ public class TableInterfaceController: WKInterfaceController {
         }
     }
     
-    public func update(rowIn table: WKInterfaceTable, index: Int, data: AnyObject) {
+    open func update(rowIn table: WKInterfaceTable, index: Int, data: AnyObject) {
         // Used to override in subclasses
     }
     

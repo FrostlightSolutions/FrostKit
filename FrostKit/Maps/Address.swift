@@ -12,7 +12,7 @@ import MapKit
 ///
 /// An object that contains details on a address to the plot on the map view, along with other data such as name and addressString.
 ///
-public class Address: NSObject {
+open class Address: NSObject {
     
     /// The ID of the addres object.
     public var objectID: String?
@@ -39,13 +39,13 @@ public class Address: NSObject {
     /// The address string of the object.
     public var addressString = ""
     /// Returns a string that represents the contents of the receiving class.
-    public override var description: String {
+    open override var description: String {
         return "<Latitude: \(latitude) Longitude: \(longitude) Address: \(addressString)>"
     }
-    public override var hashValue: Int {
+    open override var hashValue: Int {
         return Int(latitude) ^ Int(longitude)
     }
-    public var key: String {
+    open var key: String {
         return "\(latitude)-\(longitude)"
     }
     

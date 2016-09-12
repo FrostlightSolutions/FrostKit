@@ -9,7 +9,7 @@
 import UIKit
 import CloudKit
 
-public class CloudKitTableViewController: UITableViewController {
+open class CloudKitTableViewController: UITableViewController {
     
     // MARK: - Properties
     
@@ -20,13 +20,13 @@ public class CloudKitTableViewController: UITableViewController {
     @IBInspectable public var recordsPerPage: Int = 25
     @IBInspectable public var recordType: String = ""
     
-    public var container: CKContainer {
+    open var container: CKContainer {
         return CKContainer.default()
     }
-    public var database: CKDatabase {
+    open var database: CKDatabase {
         return container.publicCloudDatabase
     }
-    public var query: CKQuery {
+    open var query: CKQuery {
         
         let predicate = NSPredicate(value: true)
         let _query = CKQuery(recordType: recordType, predicate: predicate)
@@ -63,7 +63,7 @@ public class CloudKitTableViewController: UITableViewController {
     
     // MARK: - View Lifecycle
     
-    public override func loadView() {
+    open override func loadView() {
         super.loadView()
         
         if let refreshControl = self.refreshControl {
@@ -71,7 +71,7 @@ public class CloudKitTableViewController: UITableViewController {
         }
     }
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         clearsSelectionOnViewWillAppear = true
@@ -80,14 +80,14 @@ public class CloudKitTableViewController: UITableViewController {
     
     // MARK: - Data
     
-    public func recordsWillLoad() {
+    open func recordsWillLoad() {
         
         if tableView.tableFooterView == nil {
             tableView.tableFooterView = tableFooterView
         }
     }
     
-    public func recordsDidLoad(error: Error?) {
+    open func recordsDidLoad(error: Error?) {
         
         tableView.tableFooterView = nil
         
@@ -96,7 +96,7 @@ public class CloudKitTableViewController: UITableViewController {
         }
     }
     
-    public func clear() {
+    open func clear() {
         
         records.removeAll()
         tableView.reloadData()
@@ -154,15 +154,15 @@ public class CloudKitTableViewController: UITableViewController {
     
     // MARK: - Table View
     
-    public override func numberOfSections(in tableView: UITableView) -> Int {
+    open override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return records.count
     }
     
-    public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellIdentifier", for: indexPath as IndexPath)
         
@@ -174,7 +174,7 @@ public class CloudKitTableViewController: UITableViewController {
     
     // MARK: - Table View
     
-    public override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    open override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         if (firstLoad == true || queryCursor != nil) && loading == false &&
             tableView.contentOffset.y >= tableView.contentSize.height - tableView.frame.size.height {
