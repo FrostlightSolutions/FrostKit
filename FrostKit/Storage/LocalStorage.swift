@@ -187,7 +187,7 @@ public class LocalStorage {
     
     - returns: `true` if the data saves correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func save(data: AnyObject, baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
+    public class func save(data: Any, baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
         
         let dirURL = baseURL.appendingPathComponent(reletivePath)
         createDirectory(url: dirURL)
@@ -216,7 +216,7 @@ public class LocalStorage {
     
     - returns: `true` if the data saves correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func save(toDocuments data: AnyObject, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
+    public class func save(toDocuments data: Any, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
         return save(data: data, baseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
     }
     
@@ -230,7 +230,7 @@ public class LocalStorage {
     
     - returns: `true` if the data saves correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func save(toCaches data: AnyObject, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
+    public class func save(toCaches data: Any, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
         return save(data: data, baseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
     }
     
@@ -241,7 +241,7 @@ public class LocalStorage {
     
     - returns: `true` if the data saves correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
-    public class func save(userData data: AnyObject) -> Bool {
+    public class func save(userData data: Any) -> Bool {
         return save(data: data, baseURL: documentsURL(), reletivePath: "", fileName: userDataFilename())
     }
     
@@ -305,12 +305,12 @@ public class LocalStorage {
     
     - returns: The object to be loaded or `nil` if it isn't found.
     */
-    public class func load(baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> AnyObject? {
+    public class func load(baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Any? {
         
         guard let url = absoluteURL(baseURL: baseURL, reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension) else {
             return nil
         }
-        return NSKeyedUnarchiver.unarchiveObject(withFile: url.path) as AnyObject
+        return NSKeyedUnarchiver.unarchiveObject(withFile: url.path)
     }
     
     /**
@@ -322,7 +322,7 @@ public class LocalStorage {
     
     - returns: The file requested to be loaded or `nil` if it isn't found.
     */
-    public class func load(fromDocuments reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> AnyObject? {
+    public class func load(fromDocuments reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Any? {
         return load(baseURL: documentsURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
     }
     
@@ -335,7 +335,7 @@ public class LocalStorage {
     
     - returns: The file requested to be loaded or `nil` if it isn't found.
     */
-    public class func load(fromCaches reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> AnyObject? {
+    public class func load(fromCaches reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Any? {
         return load(baseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
     }
     
@@ -370,7 +370,7 @@ public class LocalStorage {
     
     - returns: The user data object requested to be loaded or `nil` if it isn't found.
     */
-    public class func loadUserData() -> AnyObject? {
+    public class func loadUserData() -> Any? {
         return load(baseURL: documentsURL(), reletivePath: "", fileName: userDataFilename())
     }
     

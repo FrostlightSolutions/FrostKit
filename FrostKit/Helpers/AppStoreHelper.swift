@@ -95,8 +95,8 @@ public class AppStoreHelper {
                 
             } else if let jsonData = data {
                 
-                guard let json = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: AnyObject],
-                    let results = json?["results"] as? [[String: AnyObject]],
+                guard let json = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any],
+                    let results = json?["results"] as? [[String: Any]],
                     let appDetails = results.first else {
                         
                     DispatchQueue.main.async {

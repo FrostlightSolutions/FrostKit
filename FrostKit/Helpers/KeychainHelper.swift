@@ -36,7 +36,7 @@ public class KeychainHelper {
         secDict.setObject(NSNumber(value: true), forKey: kSecReturnData as! NSCopying)
         // kCFBooleanTrue
         
-        var foundDict: AnyObject?
+        var foundDict: CFTypeRef?
         let status = SecItemCopyMatching(secDict, &foundDict)
         
         if status == noErr {
@@ -56,14 +56,14 @@ public class KeychainHelper {
     
     - returns: The details saved with the username if found, otherwise `nil`.
     */
-    public class func details(username: String) -> AnyObject? {
+    public class func details(username: String) -> Any? {
         
         let valueData = searchKeychainForMatchingData()
         if let data = valueData {
             
             let valueDict = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSDictionary
             if let dict = valueDict {
-                return dict.object(forKey: username) as AnyObject
+                return dict.object(forKey: username)
             }
         }
         
@@ -78,11 +78,11 @@ public class KeychainHelper {
     
     - returns: Returns `true` if the details were successfully saved, `false` if not.
     */
-    public class func set(details: AnyObject, username: String) -> Bool {
+    public class func set(details: Any, username: String) -> Bool {
         
         let valueDict = [username: details]
         let secDict = setupSearchDirectory()
-        let valueData = NSKeyedArchiver.archivedData(withRootObject: valueDict as AnyObject)
+        let valueData = NSKeyedArchiver.archivedData(withRootObject: valueDict)
         secDict.setObject(valueData, forKey: kSecValueData as! NSCopying)
         secDict.setObject(kSecAttrAccessibleWhenUnlocked, forKey: kSecAttrAccessible as! NSCopying)
         

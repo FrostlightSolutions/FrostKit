@@ -54,7 +54,7 @@ open class Address: NSObject {
      
      - parameter dictionary: The dictionary to parse the information from.
      */
-    public convenience init(dictionary: [String: AnyObject]) {
+    public convenience init(dictionary: [String: Any]) {
         self.init()
         
         objectID = dictionary["id"] as? String
@@ -91,7 +91,7 @@ open class Address: NSObject {
      
      - returns: An array of address objects.
      */
-    public class func addresses(fromArrayOfDictionaries array: [[String: AnyObject]]) -> [Address] {
+    public class func addresses(fromArrayOfDictionaries array: [[String: Any]]) -> [Address] {
         var adresses = [Address]()
         for dictionary in array {
             adresses.append(Address(dictionary: dictionary))

@@ -22,7 +22,7 @@ extension UIBarButtonItem {
     - parameter target:         The object that receives the `action` message.
     - parameter action:         The action to send to `target` when this item is selected.
     */
-    public convenience init(title: String?, font: UIFont, verticalOffset: CGFloat = 0, target: AnyObject?, action: Selector) {
+    public convenience init(title: String?, font: UIFont, verticalOffset: CGFloat = 0, target: Any?, action: Selector) {
 
         let button = UIButton(type: .system)
         button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)

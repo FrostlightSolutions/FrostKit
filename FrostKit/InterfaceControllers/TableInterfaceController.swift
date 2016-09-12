@@ -11,7 +11,7 @@ import WatchKit
 open class TableInterfaceController: WKInterfaceController {
     
     open var rowType: String! { return nil }
-    private lazy var dataArray = [AnyObject]()
+    private lazy var dataArray = [Any]()
     open var limit: Int { return 10 }
     private var skip = 0
     open var resetLimitAndSkipOnReload: Bool { return false }
@@ -50,7 +50,7 @@ open class TableInterfaceController: WKInterfaceController {
         finishedUpdatingData(dataArray: [])
     }
     
-    public func finishedUpdatingData(dataArray: [AnyObject]) {
+    public func finishedUpdatingData(dataArray: [Any]) {
         
         DispatchQueue.main.async {
             self.dataArray = dataArray
@@ -112,11 +112,11 @@ open class TableInterfaceController: WKInterfaceController {
         }
     }
     
-    open func update(rowIn table: WKInterfaceTable, index: Int, data: AnyObject) {
+    open func update(rowIn table: WKInterfaceTable, index: Int, data: Any) {
         // Used to override in subclasses
     }
     
-    public func object(atIndex index: Int) -> AnyObject? {
+    public func object(atIndex index: Int) -> Any? {
         
         if index < dataArray.count {
             return dataArray[index]

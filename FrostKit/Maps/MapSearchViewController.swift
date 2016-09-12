@@ -54,7 +54,7 @@ open class MapSearchViewController: UITableViewController, UISearchControllerDel
     
     - returns: The object at the index path.
     */
-    open func objectAt(_ indexPath: IndexPath) -> AnyObject? {
+    open func objectAt(_ indexPath: IndexPath) -> Any? {
         if let searchBar = self.searchBar {
             switch searchBar.selectedScopeButtonIndex {
             case 0:

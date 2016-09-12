@@ -15,7 +15,7 @@ class MapControllerTests: XCTestCase {
     let coordinate = CLLocationCoordinate2DMake(59.314446, 18.074375)
     let addressName = "Frostlight Solutions AB"
     let addressString = "Folkungagatan 49, 11622 Stockholm, SWEDEN"
-    lazy var addressDictionary = [String: AnyObject]()
+    lazy var addressDictionary = [String: Any]()
     lazy var address = Address()
     lazy var annotation = Annotation()
     
@@ -24,10 +24,10 @@ class MapControllerTests: XCTestCase {
         
         // Put setup code here. This method is called before the invocation of each test method in the class.§
         addressDictionary = [
-            "latitude": coordinate.latitude as AnyObject,
-            "longitude": coordinate.longitude as AnyObject,
-            "name": addressName as AnyObject,
-            "addressString": addressString as AnyObject
+            "latitude": coordinate.latitude,
+            "longitude": coordinate.longitude,
+            "name": addressName,
+            "addressString": addressString
         ]
         address = Address(dictionary: addressDictionary)
         annotation = Annotation(address: address)
