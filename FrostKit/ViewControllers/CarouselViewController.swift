@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class CarouselViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
+open class CarouselViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
     
     enum Direction: Int {
         case none = 0
@@ -54,7 +54,7 @@ public class CarouselViewController: UIViewController, UICollectionViewDataSourc
         }
     }
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         let pageControlHeight: CGFloat = 20
@@ -63,7 +63,7 @@ public class CarouselViewController: UIViewController, UICollectionViewDataSourc
         
     }
     
-    public override func willAnimateRotation(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
+    open override func willAnimateRotation(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
         
         if let pageControl = self.pageControl {
             
@@ -75,37 +75,37 @@ public class CarouselViewController: UIViewController, UICollectionViewDataSourc
     
     // MARK: - UICollectionViewDataSource and UICollectionViewDelegate
     
-    public func numberOfSections(in collectionView: UICollectionView) -> Int {
+    open func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 0
     }
     
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return collectionView.dequeueReusableCell(withReuseIdentifier: "CarouselCell", for: indexPath)
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
     
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return collectionView.frame.size
     }
     
-    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         collectionView?.collectionViewLayout.invalidateLayout()
     }
     
     // MARK: - UIPageControl Methods
     
-    final public func pageControlDidChange(_ sender: UIPageControl) {
+    public final func pageControlDidChange(_ sender: UIPageControl) {
         collectionView?.scrollToItem(at: IndexPath(row: sender.currentPage, section: 0), at: [], animated: true)
     }
     
     // MARK: - UIScrollViewDelegate Methods
     
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         // Update Page number
         let pageNumber = Int((scrollView.contentOffset.x / scrollView.bounds.width) + 0.5)
@@ -138,7 +138,7 @@ public class CarouselViewController: UIViewController, UICollectionViewDataSourc
         }
     }
     
-    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    open func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
         // Update Page number
         if let pageControl = self.pageControl {
