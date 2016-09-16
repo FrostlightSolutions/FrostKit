@@ -1,135 +1,267 @@
 //
-//  ActivityIndicatorManager.swift
-//  FrostKit
+//  NetworkActivityIndicatorManager.swift
 //
-//  Created by James Barrow on 17/02/2015.
-//  Copyright © 2015-Current James Barrow - Frostlight Solutions. All rights reserved.
+//  Copyright (c) 2016 Alamofire Software Foundation (http://alamofire.org/)
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
 //
 
 import UIKit
-import FrostKit
 
+/// The `NetworkActivityIndicatorManager` manages the state of the network activity indicator in the status bar. When
+/// enabled, it will listen for notifications indicating that a URL session task has started or completed and start
+/// animating the indicator accordingly. The indicator will continue to animate while the internal activity count is
+/// greater than zero.
 ///
-/// NOTE: If the project is using Alamofire, use AlamofireNetworkActivityIndicator. https://github.com/Alamofire/AlamofireNetworkActivityIndicator
+/// To use the `NetworkActivityIndicatorManager`, the `shared` instance should be enabled in the
+/// `application:didFinishLaunchingWithOptions:` method in the `AppDelegate`. This can be done with the following:
 ///
-/// Tracks the network requests using NSNotificationCenter to work out if the activity indicator should be showing.
+///     NetworkActivityIndicatorManager.shared.isEnabled = true
 ///
-/// Based off of AFNetworkActivityIndicatorManager, this has been genrallised to work with any network request in FrostKit.
-/// https://github.com/AFNetworking/AFNetworking/blob/master/UIKit%2BAFNetworking/AFNetworkActivityIndicatorManager.m
-///
-/// To enable the activity indicator manager use the follwoing code.
-/// `ActivityIndicatorManager.shared.enabled = true`
-///
-/// To increment or decrement the curent activitys count, use the following calls respectively.
-/// `NotificationCenter.default.post(name: NSNotification.Name(rawValue: NetworkRequestDidBeginNotification), object: nil)`
-/// `NotificationCenter.default.post(name: NSNotification.Name(rawValue: NetworkRequestDidCompleteNotification), object: nil)`
-///
-public class ActivityIndicatorManager: NSObject {
+/// By setting the `isEnabled` property to `true` for the `shared` instance, the network activity indicator will show
+/// and hide automatically as Alamofire requests start and complete. You should not ever need to call
+/// `incrementActivityCount` and `decrementActivityCount` yourself.
+public class NetworkActivityIndicatorManager {
     
-    /// Determins if the activity indicator manager should be enabled or not.
-    public var enabled = false
-    /// Returns `true` if the activity count is more than 0, and so visible, or `false` if not.
-    public var isNetworkActivityIndicatorVisible: Bool { return activityCount > 0 }
-    private var _activityCount: Int = 0
-    private var activityCount: Int {
-        get { return _activityCount }
+    private enum ActivityIndicatorState {
+        case notActive, delayingStart, active, delayingCompletion
+    }
+    
+    // MARK: - Properties
+    
+    /// The shared network activity indicator manager for the system.
+    public static let shared = NetworkActivityIndicatorManager()
+    
+    /// A boolean value indicating whether the manager is enabled. Defaults to `false`.
+    public var isEnabled: Bool {
+        get {
+            lock.lock() ; defer { lock.unlock() }
+            return enabled
+        }
         set {
-            lockQueue.sync {
-                self._activityCount = newValue
-            }
+            lock.lock() ; defer { lock.unlock() }
+            enabled = newValue
+        }
+    }
+    
+    /// A boolean value indicating whether the network activity indicator is currently visible.
+    public private(set) var isNetworkActivityIndicatorVisible: Bool = false {
+        didSet {
+            guard isNetworkActivityIndicatorVisible != oldValue else { return }
             
             DispatchQueue.main.async {
-                self.updateNetworkActivityIndicatorVisibilityDelayed()
+                UIApplication.shared.isNetworkActivityIndicatorVisible = self.isNetworkActivityIndicatorVisible
+                self.networkActivityIndicatorVisibilityChanged?(self.isNetworkActivityIndicatorVisible)
             }
         }
     }
-    private lazy var activityIndicatorVisibilityTimer = Timer()
-    private let activityIndicatorInvisibilityDelay = 0.17
-    private let lockQueue = DispatchQueue(label: "com.FrostKit.activityIndicator.lockQueue")
     
-    // MARK: - Singleton & Init
+    /// A closure executed when the network activity indicator visibility changes.
+    public var networkActivityIndicatorVisibilityChanged: ((Bool) -> Void)?
     
-    /// The shared manager object.
-    public static let shared = ActivityIndicatorManager()
+    /// A time interval indicating the minimum duration of networking activity that should occur before the activity
+    /// indicator is displayed. Defaults to `1.0` second.
+    public var startDelay: TimeInterval = 1.0
     
-    private override init() {
-        super.init()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(networkRequest(didBegin:)), name: NSNotification.Name(rawValue: NetworkRequestDidBeginNotification), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(networkRequest(didFinish:)), name: NSNotification.Name(rawValue: NetworkRequestDidCompleteNotification), object: nil)
+    /// A time interval indicating the duration of time that no networking activity should be observed before dismissing
+    /// the activity indicator. This allows the activity indicator to be continuously displayed between multiple network
+    /// requests. Without this delay, the activity indicator tends to flicker. Defaults to `0.2` seconds.
+    public var completionDelay: TimeInterval = 0.2
+    
+    private var activityIndicatorState: ActivityIndicatorState = .notActive {
+        didSet {
+            switch activityIndicatorState {
+            case .notActive:
+                isNetworkActivityIndicatorVisible = false
+                invalidateStartDelayTimer()
+                invalidateCompletionDelayTimer()
+            case .delayingStart:
+                scheduleStartDelayTimer()
+            case .active:
+                invalidateCompletionDelayTimer()
+                isNetworkActivityIndicatorVisible = true
+            case .delayingCompletion:
+                scheduleCompletionDelayTimer()
+            }
+        }
+    }
+    
+    private var activityCount: Int = 0
+    private var enabled: Bool = true
+    
+    private var startDelayTimer: Timer?
+    private var completionDelayTimer: Timer?
+    
+    private let lock = NSLock()
+    
+    // MARK: - Internal - Initialization
+    
+    init() {
+        registerForNotifications()
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
-        activityIndicatorVisibilityTimer.invalidate()
+        unregisterForNotifications()
+        
+        invalidateStartDelayTimer()
+        invalidateCompletionDelayTimer()
     }
     
-    // MARK: - Notification Methods
+    // MARK: - Activity Count
     
-    func networkRequest(didBegin notification: NSNotification) {
+    /// Increments the number of active network requests.
+    ///
+    /// If this number was zero before incrementing, the network activity indicator will start spinning after
+    /// the `startDelay`.
+    ///
+    /// Generally, this method should not need to be used directly.
+    public func incrementActivityCount() {
+        lock.lock() ; defer { lock.unlock() }
+        
+        activityCount += 1
+        updateActivityIndicatorStateForNetworkActivityChange()
+    }
+    
+    /// Decrements the number of active network requests.
+    ///
+    /// If the number of active requests is zero after calling this method, the network activity indicator will stop
+    /// spinning after the `completionDelay`.
+    ///
+    /// Generally, this method should not need to be used directly.
+    public func decrementActivityCount() {
+        lock.lock() ; defer { lock.unlock() }
+        guard activityCount > 0 else { return }
+        
+        activityCount -= 1
+        updateActivityIndicatorStateForNetworkActivityChange()
+    }
+    
+    // MARK: - Private - Activity Indicator State
+    
+    private func updateActivityIndicatorStateForNetworkActivityChange() {
+        guard enabled else { return }
+        
+        switch activityIndicatorState {
+        case .notActive:
+            if activityCount > 0 { activityIndicatorState = .delayingStart }
+        case .delayingStart:
+            // No-op - let the delay timer finish
+            break
+        case .active:
+            if activityCount == 0 { activityIndicatorState = .delayingCompletion }
+        case .delayingCompletion:
+            if activityCount > 0 { activityIndicatorState = .active }
+        }
+    }
+    
+    // MARK: - Private - Notification Registration
+    
+    private func registerForNotifications() {
+        let notificationCenter = NotificationCenter.default
+        
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(NetworkActivityIndicatorManager.networkRequestDidStart),
+            name: Notification.Name(rawValue: "org.alamofire.notification.name.task.didResume"),
+            object: nil
+        )
+        
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(NetworkActivityIndicatorManager.networkRequestDidComplete),
+            name: Notification.Name(rawValue: "org.alamofire.notification.name.task.didSuspend"),
+            object: nil
+        )
+        
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(NetworkActivityIndicatorManager.networkRequestDidComplete),
+            name: Notification.Name(rawValue: "org.alamofire.notification.name.task.didComplete"),
+            object: nil
+        )
+    }
+    
+    private func unregisterForNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    // MARK: - Private - Notifications
+    
+    @objc private func networkRequestDidStart() {
         incrementActivityCount()
     }
     
-    func networkRequest(didFinish notification: NSNotification) {
+    @objc private func networkRequestDidComplete() {
         decrementActivityCount()
     }
     
-    // MARK: - Update Methods
+    // MARK: - Private - Timers
     
-    func updateNetworkActivityIndicatorVisibility() {
-        DispatchQueue.main.async {
-            UIApplication.shared.isNetworkActivityIndicatorVisible = self.isNetworkActivityIndicatorVisible
-        }
-    }
-    
-    private func updateNetworkActivityIndicatorVisibilityDelayed() {
-        if enabled == true {
-            if isNetworkActivityIndicatorVisible == false {
-                activityIndicatorVisibilityTimer.invalidate()
-                activityIndicatorVisibilityTimer = Timer(timeInterval: activityIndicatorInvisibilityDelay, target: self, selector: #selector(updateNetworkActivityIndicatorVisibility), userInfo: nil, repeats: false)
-                RunLoop.main.add(activityIndicatorVisibilityTimer, forMode: .commonModes)
-            } else {
-                DispatchQueue.main.async {
-                    self.updateNetworkActivityIndicatorVisibility()
-                }
-            }
-        }
-    }
-    
-    /**
-     Increments the activity count by 1.
-     
-     This method should not be called directly, but called with a NotificationCenter post.
-     `NotificationCenter.default.post(name: NSNotification.Name(rawValue: NetworkRequestDidBeginNotification), object: nil)`
-     */
-    public func incrementActivityCount() {
-        willChangeValue(forKey: "activityCount")
-        lockQueue.sync {
-            self.activityCount += 1
-        }
-        didChangeValue(forKey: "activityCount")
+    private func scheduleStartDelayTimer() {
+        startDelayTimer = Timer(
+            timeInterval: startDelay,
+            target: self,
+            selector: #selector(NetworkActivityIndicatorManager.startDelayTimerFired),
+            userInfo: nil,
+            repeats: false
+        )
         
-        DispatchQueue.main.async {
-            self.updateNetworkActivityIndicatorVisibilityDelayed()
+        RunLoop.main.add(startDelayTimer!, forMode: .commonModes)
+        RunLoop.main.add(startDelayTimer!, forMode: .UITrackingRunLoopMode)
+    }
+    
+    private func scheduleCompletionDelayTimer() {
+        completionDelayTimer = Timer(
+            timeInterval: completionDelay,
+            target: self,
+            selector: #selector(NetworkActivityIndicatorManager.completionDelayTimerFired),
+            userInfo: nil,
+            repeats: false
+        )
+        
+        RunLoop.main.add(completionDelayTimer!, forMode: .commonModes)
+        RunLoop.main.add(completionDelayTimer!, forMode: .UITrackingRunLoopMode)
+    }
+    
+    @objc private func startDelayTimerFired() {
+        lock.lock() ; defer { lock.unlock() }
+        
+        if activityCount > 0 {
+            activityIndicatorState = .active
+        } else {
+            activityIndicatorState = .notActive
         }
     }
     
-    /**
-     Decrements the activity count by 1.
-     
-     This method should not be called directly, but called with a NotificationCenter post.
-     `NotificationCenter.default.post(name: NSNotification.Name(rawValue: NetworkRequestDidCompleteNotification), object: nil)`
-     */
-    public func decrementActivityCount() {
-        willChangeValue(forKey: "activityCount")
-        lockQueue.sync {
-            self.activityCount = max(self.activityCount - 1, 0)
-        }
-        didChangeValue(forKey: "activityCount")
-        
-        DispatchQueue.main.async {
-            self.updateNetworkActivityIndicatorVisibilityDelayed()
-        }
+    @objc private func completionDelayTimerFired() {
+        lock.lock() ; defer { lock.unlock() }
+        activityIndicatorState = .notActive
+    }
+    
+    private func invalidateStartDelayTimer() {
+        startDelayTimer?.invalidate()
+        startDelayTimer = nil
+    }
+    
+    private func invalidateCompletionDelayTimer() {
+        completionDelayTimer?.invalidate()
+        completionDelayTimer = nil
     }
     
 }
