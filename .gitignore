@@ -51,3 +51,6 @@ fastlane/screenshots
 
 # scan temporary files
 fastlane/test_output
+
+# Swift performance report
+culprits.txt
