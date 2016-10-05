@@ -19,7 +19,7 @@ public class ContentManager {
     // A dictioary holding the metadata for all managed objects, where the key is an absolute path and the value is the date.
     private lazy var contentMetadata = [String: Date]()
     
-    private class func maxSavedTimeInSeconds() -> TimeInterval {
+    private static var maxSavedTimeInSeconds: TimeInterval {
         return Date.weekInSeconds() * 2
     }
     
@@ -37,53 +37,51 @@ public class ContentManager {
     */
     public class func checkContentMetadata() {
         
+        guard shared.contentMetadata.count > 0 else {
+#if DEBUG
+            NSLog("Check of content metadata items not needed, as there are no items managed.")
+#endif
+            return
+        }
+        
         DispatchQueue.global().async(group: nil, qos: .default, flags: []) {
             
-            if shared.contentMetadata.count > 0 {
+#if DEBUG
+            let start = NSDate.timeIntervalSinceReferenceDate
+#endif
+            
+            var metadataToRemove = [String]()
+            
+            for (key, refDate) in shared.contentMetadata {
                 
-                #if DEBUG
-                    let start = NSDate.timeIntervalSinceReferenceDate
-                #endif
+                let refTimeInterval = refDate.timeIntervalSinceReferenceDate
+                let timeInterval = NSDate.timeIntervalSinceReferenceDate
                 
-                var metadataToRemove = [String]()
-                
-                for (key, refDate) in shared.contentMetadata {
-                    
-                    let refTimeInterval = refDate.timeIntervalSinceReferenceDate
-                    let timeInterval = NSDate().timeIntervalSinceReferenceDate
-                    
-                    if (timeInterval - refTimeInterval) > maxSavedTimeInSeconds() {
-                        metadataToRemove.append(key)
-                    }
+                if (timeInterval - refTimeInterval) > maxSavedTimeInSeconds {
+                    metadataToRemove.append(key)
                 }
+            }
+            
+            if metadataToRemove.count > 0 {
                 
-                if metadataToRemove.count > 0 {
+                for path in metadataToRemove {
                     
-                    for path in metadataToRemove {
-                        
-                        let url = URL(fileURLWithPath: path)
-                        
-                        DispatchQueue.main.async {
-                            do {
-                                try LocalStorage.remove(absoluteURL: url)
-                            } catch let error {
-                                NSLog("Error: Unable to remove managed item at URL \(url)\nWith error: \(error.localizedDescription)\n\(error)")
-                            }
+                    let url = URL(fileURLWithPath: path)
+                    
+                    DispatchQueue.main.async {
+                        do {
+                            try LocalStorage.remove(absoluteURL: url)
+                        } catch let error {
+                            NSLog("Error: Unable to remove managed item at URL \(url)\nWith error: \(error.localizedDescription)\n\(error)")
                         }
                     }
                 }
-                
-                #if DEBUG
-                    let finish = NSDate.timeIntervalSinceReferenceDate
-                    NSLog("Check of \(shared.contentMetadata.count) content metadata items complete in \(finish-start) seconds. Removed \(metadataToRemove.count) items.")
-                #endif
-                
-            } else {
-                
-                #if DEBUG
-                    NSLog("Check of content metadata items not needed, as there are no items managed.")
-                #endif
             }
+            
+#if DEBUG
+            let finish = NSDate.timeIntervalSinceReferenceDate
+            NSLog("Check of \(shared.contentMetadata.count) content metadata items complete in \(finish-start) seconds. Removed \(metadataToRemove.count) items.")
+#endif
         }
     }
     

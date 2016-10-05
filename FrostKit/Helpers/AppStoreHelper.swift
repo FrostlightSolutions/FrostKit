@@ -60,7 +60,7 @@ public class AppStoreHelper {
     
     - parameter complete: Returned when to update request is complete and returns an error is it failed.
     */
-    public func updateAppStoreData(_ complete: ((Error?) -> Void)? = nil) {
+    public func updateAppStoreData(_ complete: ((_ error: Error?) -> Void)? = nil) {
         
         guard let appStoreID = FrostKit.appStoreID else {
             

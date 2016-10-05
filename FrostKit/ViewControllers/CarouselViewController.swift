@@ -109,11 +109,9 @@ open class CarouselViewController: UIViewController, UICollectionViewDataSource,
         
         // Update Page number
         let pageNumber = Int((scrollView.contentOffset.x / scrollView.bounds.width) + 0.5)
-        if let pageControl = self.pageControl {
-            
-            if pageNumber != pageControl.currentPage && pageNumber >= 0 && scrollView.isDragging == true {
-                pageControl.currentPage = pageNumber
-            }
+        if let pageControl = self.pageControl,
+            pageNumber != pageControl.currentPage && pageNumber >= 0 && scrollView.isDragging == true {
+            pageControl.currentPage = pageNumber
         }
         
         let xOffset = scrollView.contentOffset.x - (CGFloat(pageNumber) * scrollView.frame.width)
