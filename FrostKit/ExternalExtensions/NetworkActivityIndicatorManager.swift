@@ -73,7 +73,9 @@ public class NetworkActivityIndicatorManager {
     }
     
     /// A closure executed when the network activity indicator visibility changes.
+    // swiftlint:disable variable_name
     public var networkActivityIndicatorVisibilityChanged: ((Bool) -> Void)?
+    // swiftlint:enable variable_name
     
     /// A time interval indicating the minimum duration of networking activity that should occur before the activity
     /// indicator is displayed. Defaults to `1.0` second.
