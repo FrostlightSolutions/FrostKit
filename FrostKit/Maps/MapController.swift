@@ -114,10 +114,10 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
     public var addresses: [Address] {
         return Array<Address>(addressesDict.values)
     }
-    private var addressesDict = [NSObject: Address]()
+    private var addressesDict = [AnyHashable: Address]()
     
     /// A dictionary of annotations plotted to the map view with the address object as the key.
-    public var annotations = [NSObject: MKAnnotation]()
+    public var annotations = [AnyHashable: MKAnnotation]()
     /// When the map automatically zooms to show all, if this value is set to true, then the users annoation is automatically included in that.
     @IBInspectable public var zoomToShowAllIncludesUser: Bool = true
     private var regionSpanBeforeChange: MKCoordinateSpan?
@@ -194,10 +194,10 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
         }
         
         // Update or add the address
-        addressesDict[address.key as NSObject] = address
+        addressesDict[address.key] = address
         
         let annotation: Annotation
-        if let currentAnnotation = annotations[address.key as NSObject] as? Annotation {
+        if let currentAnnotation = annotations[address.key] as? Annotation {
             // Annotation already exists, update the address
             currentAnnotation.update(address: address)
             annotation = currentAnnotation
@@ -208,7 +208,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
         }
         
         // Update annotation in cache
-        annotations[address.key as NSObject] = annotation
+        annotations[address.key] = annotation
         
         _mapView?.addAnnotation(annotation)
         
