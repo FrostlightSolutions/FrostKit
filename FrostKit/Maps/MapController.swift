@@ -824,11 +824,11 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
         return MKOverlayRenderer()
     }
     
-    public func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+    open func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         regionSpanBeforeChange = mapView.region.span
     }
     
-    public func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+    open func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         
         if let regionSpanBeforeChange = self.regionSpanBeforeChange {
             
@@ -841,7 +841,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
         updateVisableAnnotations()
     }
     
-    public func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+    open func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         
         if hasPlottedInitUsersLocation == false {
             hasPlottedInitUsersLocation = true
@@ -850,7 +850,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
         }
     }
     
-    public func mapView(_ mapView: MKMapView, didChange mode: MKUserTrackingMode, animated: Bool) {
+    open func mapView(_ mapView: MKMapView, didChange mode: MKUserTrackingMode, animated: Bool) {
         
         switch mode {
         case .none:
@@ -860,7 +860,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
         }
     }
     
-    public func mapView(_ mapView: MKMapView, didFailToLocateUserWithError error: Error) {
+    open func mapView(_ mapView: MKMapView, didFailToLocateUserWithError error: Error) {
         
         hasPlottedInitUsersLocation = false
         failedToPlotUsersLocation = true
