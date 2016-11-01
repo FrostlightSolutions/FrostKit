@@ -117,7 +117,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
     private var addressesDict = [AnyHashable: Address]()
     
     /// A dictionary of annotations plotted to the map view with the address object as the key.
-    public var annotations = [AnyHashable: MKAnnotation]()
+    public var annotations = [AnyHashable: Any]()
     /// When the map automatically zooms to show all, if this value is set to true, then the users annoation is automatically included in that.
     @IBInspectable public var zoomToShowAllIncludesUser: Bool = true
     private var regionSpanBeforeChange: MKCoordinateSpan?
@@ -223,7 +223,10 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
     - parameter includingCached: If `true` then the cached annotations dictionary is also cleared.
     */
     public func removeAllAnnotations(includingCached: Bool = false) {
-        let annotations = Array(self.annotations.values)
+        
+        guard let annotations = Array(self.annotations.values) as? [MKAnnotation] else {
+            return
+        }
         _mapView?.removeAnnotations(annotations)
         
         if includingCached == true {
@@ -546,8 +549,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
      */
     open func zoomToShowAll(includingUser: Bool = true) {
         
-        if includingUser == false || zoomToShowAllIncludesUser == false {
-            let annotations = Array(self.annotations.values)
+        if includingUser == false || zoomToShowAllIncludesUser == false, let annotations = Array(self.annotations.values) as? [MKAnnotation] {
             zoom(toAnnotations: annotations)
         } else if let mapView = _mapView {
             zoom(toAnnotations: mapView.annotations)
@@ -562,7 +564,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
     open func zoom(toAddress address: Address) {
         plot(address: address)
         
-        if let annotation = annotations[address] {
+        if let annotation = annotations[address] as? MKAnnotation {
             zoom(toAnnotations: [annotation])
         }
     }
