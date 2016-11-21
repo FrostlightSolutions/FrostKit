@@ -69,9 +69,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
      
      A smaller number means fewer annotations, more chance of seeing annotation views pop in, but better performance.
     */
-    @IBInspectable public var marginFactor: Double {
-        return 2
-    }
+    @IBInspectable public var marginFactor: Double = 2
     /**
      Adjust this based on the deimensions of your annotation views.
      
@@ -79,9 +77,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
      
      Numbers too small result in overlapping annotation views and too many annotations on screen.
     */
-    @IBInspectable public var bucketSize: Double {
-        return 60
-    }
+    @IBInspectable public var bucketSize: Double = 60
     private var currentlyUpdatingVisableAnnotations = false
     private var shouldTryToUpdateVisableAnnotationsAgain = false
     /// Refers to if the map controller should auto assign itself to the map view as a delegate.
