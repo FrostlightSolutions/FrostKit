@@ -70,6 +70,20 @@ open class CoreDataController: NSObject {
         return _fetchedResultsController!
     }
     
+    public func object<T: NSManagedObject>(at indexPath: IndexPath) -> T? {
+        
+        guard let sections = fetchedResultsController.sections, indexPath.section < sections.count else {
+            return nil
+        }
+        
+        let section = sections[indexPath.section]
+        guard indexPath.row < section.numberOfObjects else {
+            return nil
+        }
+        
+        return fetchedResultsController.object(at: indexPath) as? T
+    }
+    
     public func resetFetchedResultsController() {
         _fetchedResultsController = nil
     }
