@@ -59,4 +59,9 @@ open class CoreDataController: NSObject {
         _fetchedResultsController = nil
     }
     
+    open func updateDateIfNeeded() {
+        // Use mainly in subclasses, otherwise this will just reset
+        resetFetchedResultsController()
+    }
+    
 }
