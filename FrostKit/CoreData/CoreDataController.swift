@@ -20,6 +20,9 @@ open class CoreDataController: NSObject {
     open var cacheName: String? { return nil }
     open var sortDescriptors: [NSSortDescriptor] { return [NSSortDescriptor]() }
     open var predicate: NSPredicate? { return nil }
+    open var filterPredicate: NSPredicate? {
+        didSet { resetFetchedResultsController() }
+    }
     private var _fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
     open var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> {
         if _fetchedResultsController != nil {
@@ -39,7 +42,19 @@ open class CoreDataController: NSObject {
         fetchRequest.sortDescriptors = sortDescriptors
         
         // Set the predicate
-        fetchRequest.predicate = predicate
+        if let filterPredicate = self.filterPredicate {
+            
+            var predicates = [NSPredicate]()
+            if let predicate = self.predicate {
+                predicates.append(predicate)
+            }
+            predicates.append(filterPredicate)
+            
+            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+            
+        } else {
+            fetchRequest.predicate = predicate
+        }
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
