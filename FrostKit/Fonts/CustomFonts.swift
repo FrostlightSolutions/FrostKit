@@ -35,10 +35,10 @@ public class CustomFonts {
     - parameter names: An array of strings of the font file names.
     - parameter bundle:    The bundle to look for the file names in. By default this uses the main app bundle.
     */
-    public class func loadCustomFonts(names: [NSString], bundle: Bundle = Bundle.main) {
+    public class func loadCustomFonts(names: [String], bundle: Bundle = Bundle.main) {
         for fontName in names {
             let filename = fontName.components(separatedBy: ".").first
-            let ext = fontName.pathExtension
+            let ext = (fontName as NSString).pathExtension
             
             if let name = filename, name.characters.count > 0 && ext.characters.count > 0 {
                 loadCustomFont(name: name, withExtension: ext, bundle: bundle)
