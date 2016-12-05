@@ -160,7 +160,7 @@ public class BaseWebViewController: UIViewController {
     - parameter sender: The bar button item pressed.
     */
     func actionButtonPressed(_ sender: AnyObject?) {
-        var activityItems = Array<Any>()
+        var activityItems = [Any]()
         if let urlString = url?.absoluteString {
             activityItems.append(urlString)
         }

@@ -108,7 +108,7 @@ open class MapSearchViewController: UITableViewController, UISearchControllerDel
         } else if let item = objectAt(indexPath) as? MKMapItem {
             cell?.textLabel?.text = item.name
             
-            var addressComponents = Array<String>()
+            var addressComponents = [String]()
             if let thoroughfare = item.placemark.thoroughfare {
                 addressComponents.append(thoroughfare)
             }

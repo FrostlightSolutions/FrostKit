@@ -81,6 +81,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
     private var currentlyUpdatingVisableAnnotations = false
     private var shouldTryToUpdateVisableAnnotationsAgain = false
     /// Refers to if the map controller should auto assign itself to the map view as a delegate.
+    // swiftlint:disable weak_delegate
     @IBInspectable var autoAssingDelegate: Bool = true {
         didSet {
             if autoAssingDelegate == true {
@@ -88,6 +89,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
             }
         }
     }
+    // swiftlint:enable weak_delegate
     /// `true` if the user is currently being tracked in the map view or `false` if not.
     public var trackingUser: Bool = false {
         didSet {
@@ -108,7 +110,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
     private var locationManager: CLLocationManager?
     /// An array of addresses plotted on the map view.
     public var addresses: [Address] {
-        return Array<Address>(addressesDict.values)
+        return [Address](addressesDict.values)
     }
     private var addressesDict = [AnyHashable: Address]()
     
@@ -389,7 +391,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
             DispatchQueue.main.async {
                 
                 // Give the annotationForGrid a reference to all the annotations it will represent
-                annotationForGrid.containdedAnnotations = Array<Annotation>(filteredAllAnnotationsInBucket)
+                annotationForGrid.containdedAnnotations = [Annotation](filteredAllAnnotationsInBucket)
                 
                 mapView.addAnnotation(annotationForGrid)
             }

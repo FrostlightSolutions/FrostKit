@@ -86,7 +86,7 @@ open class MapViewController: UIViewController {
     */
     public func updateNavigationButtons(animated: Bool = true) {
         
-        var barButtonItems = Array<UIBarButtonItem>()
+        var barButtonItems = [UIBarButtonItem]()
         if locationButton == true {
             
             let locationButton: UIBarButtonItem

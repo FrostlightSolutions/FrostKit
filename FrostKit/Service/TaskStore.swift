@@ -16,7 +16,7 @@ import Foundation
 public class TaskStore {
     
     /// The store to hold references to the tasks being managed.
-    private lazy var store = Dictionary<String, URLSessionTask>()
+    private lazy var store = [String: URLSessionTask]()
     /// Describes if the store is locked `true` or not `false`. This is set to `false` by default and is only locked when canceling all tasks.
     private var locked = false
     
