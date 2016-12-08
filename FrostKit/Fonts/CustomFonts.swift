@@ -59,22 +59,21 @@ public class CustomFonts {
         
         var error: Unmanaged<CFError>?
         guard let url = bundle.url(forResource: name, withExtension: ext),
-            let fontData = NSData(contentsOf: url),
-            let provider = CGDataProvider(data: fontData) else {
-                NSLog("ERROR: Failed to get URL for \"\(name)\" font!")
+            let provider = CGDataProvider(url: url as CFURL) else {
+                NSLog("ERROR: Failed to get data provider for \"\(name)\" font!")
                 return
         }
         
         let font = CGFont(provider)
-        guard CTFontManagerRegisterGraphicsFont(font, &error) == false else {
-            NSLog("ERROR: Failed to get URL for \"\(name)\" font!")
+        guard CTFontManagerRegisterGraphicsFont(font, &error) == true else {
+            NSLog("ERROR: Failed to register \"\(name)\" font!")
             return
         }
         
         if let anError = error {
             let errorCode = CFErrorGetCode(anError.takeRetainedValue())
             if errorCode == CTFontManagerError.alreadyRegistered.rawValue {
-                NSLog("Already loaded '\(name)'")
+                NSLog("Already loaded '\(name)' font!")
             } else {
                 let errorDescription = CFErrorCopyDescription(anError.takeRetainedValue())
                 NSLog("ERROR: Failed to load '\(name)' font with error: \(errorDescription)!")
