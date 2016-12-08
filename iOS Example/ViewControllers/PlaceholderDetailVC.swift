@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FrostKit
 
 class PlaceholderDetailVC: UIViewController {
     
@@ -14,6 +15,13 @@ class PlaceholderDetailVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 21))
+        label.font = UIFont.fontAwesome(ofSize: 16)
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.text = FontAwesome.longArrowLeft
+        navigationItem.titleView = label
     }
     
     override func didReceiveMemoryWarning() {
