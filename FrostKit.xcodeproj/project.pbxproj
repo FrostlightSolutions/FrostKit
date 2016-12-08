@@ -898,12 +898,15 @@
 					};
 					18839B2119D9FA8C00760157 = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = 6WJM49JAZT;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 					18D54BE81CE6439300D365C6 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 6WJM49JAZT;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 					18E5459C1C77E53F00637E85 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -1583,7 +1586,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6WJM49JAZT;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1601,7 +1604,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6WJM49JAZT;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "FrostKit iOS Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1616,7 +1619,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 6WJM49JAZT;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "FrostKit tvOS Tests/Info.plist";
@@ -1633,8 +1638,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 6WJM49JAZT;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "FrostKit tvOS Tests/Info.plist";
