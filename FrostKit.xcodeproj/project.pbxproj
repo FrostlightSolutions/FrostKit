@@ -894,12 +894,12 @@
 					};
 					18839B1619D9FA8C00760157 = {
 						CreatedOnToolsVersion = 6.0.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 					};
 					18839B2119D9FA8C00760157 = {
 						CreatedOnToolsVersion = 6.0.1;
 						DevelopmentTeam = 6WJM49JAZT;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					18D54BE81CE6439300D365C6 = {
