@@ -27,13 +27,10 @@ class TaskStoreTests: XCTestCase {
         
         let urlString = "https://httpbin.org/get"
         let task = URLSession.shared.dataTask(with: URL(string: urlString)!)
-        store.add(task, urlString: urlString)
+        _ = store.add(task, urlString: urlString)
         
-        if store.contains(taskWithURL: urlString) {
-            XCTAssert(true, "Task added to the store.")
-        } else {
-            XCTAssert(false, "Task not added to the store.")
-        }
+        let status = store.contains(taskWithURL: urlString)
+        XCTAssert(status, "Task not added to the store, but should have been.")
     }
     
     func testRequestStoreRemove() {
@@ -47,15 +44,85 @@ class TaskStoreTests: XCTestCase {
             
             store.remove(taskWithURL: urlString)
             
-            if store.contains(taskWithURL: urlString) {
-                XCTAssert(false, "Task not removed after completion.")
-            } else {
-                XCTAssert(true, "Task removed after completion.")
-            }
+            let status = store.contains(taskWithURL: urlString)
+            XCTAssert(status == false, "Task not removed after completion, but should have been.")
+            
             expectation.fulfill()
         }
-        store.add(task, urlString: urlString)
+        _ = store.add(task, urlString: urlString)
         task.resume()
+        
+        waitForExpectations(timeout: 120, handler: { (completionHandler) -> Void in })
+    }
+    
+    func testTaskStoreDoubleAdd() {
+        
+        let store = TaskStore()
+        
+        let urlString = "https://httpbin.org/get"
+        let task = URLSession.shared.dataTask(with: URL(string: urlString)!)
+        _ = store.add(task, urlString: urlString)
+        _ = store.add(task, urlString: urlString)
+        
+        let statusAdd = store.contains(taskWithURL: urlString)
+        XCTAssert(statusAdd, "Task not added to the store, but should have been.")
+    }
+    
+    func testTaskStoreDoubleAddRemove() {
+        
+        let store = TaskStore()
+        
+        let urlString = "https://httpbin.org/get"
+        let task = URLSession.shared.dataTask(with: URL(string: urlString)!)
+        _ = store.add(task, urlString: urlString)
+        _ = store.add(task, urlString: urlString)
+        
+        store.remove(taskWithURL: urlString)
+        
+        let statusRemove = store.contains(taskWithURL: urlString)
+        XCTAssert(statusRemove == false, "Task not removed after completion, but should have been.")
+    }
+    
+    func testTaskStoreLock() {
+        
+        let store = TaskStore()
+        
+        let urlString = "https://httpbin.org/get"
+        let task = URLSession.shared.dataTask(with: URL(string: urlString)!)
+        
+        _ = store.add(task, urlString: urlString)
+        
+        DispatchQueue.global(qos: .default).async {
+            store.cancelAllTasks()
+        }
+        
+        var status = false
+        DispatchQueue.global(qos: .default).async {
+            status = store.add(task, urlString: urlString)
+        }
+        
+        XCTAssert(status == false, "Task added, but it shouldn't have been when locked.")
+    }
+    
+    func testRequestStoreCancalAll() {
+        
+        let expectation = self.expectation(description: "Test Request Store")
+        
+        let store = TaskStore()
+        
+        let urlString = "https://httpbin.org/get"
+        let task = URLSession.shared.dataTask(with: URL(string: urlString)!) { (_, _, _) in
+            
+            store.remove(taskWithURL: urlString)
+            
+            let status = store.contains(taskWithURL: urlString)
+            XCTAssert(status == false, "Task not removed after completion, but should have been.")
+            
+            expectation.fulfill()
+        }
+        _ = store.add(task, urlString: urlString)
+        task.resume()
+        store.cancelAllTasks()
         
         waitForExpectations(timeout: 120, handler: { (completionHandler) -> Void in })
     }

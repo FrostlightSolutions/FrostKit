@@ -20,22 +20,21 @@ public class TaskStore {
     /// Describes if the store is locked `true` or not `false`. This is set to `false` by default and is only locked when canceling all tasks.
     private var locked = false
     
-    /**
-    Add a rquest to the store with a url string (normally absolute is sugested) to use as the key to store the task under in the store.
-    
-    - parameter task: The task to store and manage.
-    - parameter urlString: The url string to use as the key.
-    */
-    public func add(_ task: URLSessionTask, urlString: String) {
-        if locked == true {
-            return
+    /// Add a rquest to the store with a url string (normally absolute is sugested) to use as the key to store the task under in the store.
+    ///
+    /// - Parameters:
+    ///   - task: The task to store and manage.
+    ///   - urlString: The url string to use as the key.
+    /// - Returns: `true` if added or `false` if not.
+    public func add(_ task: URLSessionTask, urlString: String) -> Bool {
+        
+        if locked == true || store[urlString] != nil {
+            task.cancel()
+            return false
         }
         
-        if store[urlString] != nil {
-            task.cancel()
-        } else {
-            store[urlString] = task
-        }
+        store[urlString] = task
+        return true
     }
     
     /**
@@ -69,8 +68,7 @@ public class TaskStore {
     - returns: If a matching task is found then `true` is returned, otherwise `false` is returned.
     */
     public func contains(taskWithURL urlString: String) -> Bool {
-        let containsTask = store[urlString] != nil
-        return containsTask
+        return store[urlString] != nil
     }
     
 }
