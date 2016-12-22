@@ -33,6 +33,18 @@ class TaskStoreTests: XCTestCase {
         XCTAssert(status, "Task not added to the store, but should have been.")
     }
     
+    func testTaskStoreOperationAdd() {
+        
+        let store = TaskStore()
+        
+        let urlString = "https://httpbin.org/get"
+        let operation = Operation()
+        _ = store.add(operation, urlString: urlString)
+        
+        let status = store.contains(taskWithURL: urlString)
+        XCTAssert(status, "OPeration not added to the store, but should have been.")
+    }
+    
     func testRequestStoreRemove() {
         
         let expectation = self.expectation(description: "Test Request Store")
@@ -55,6 +67,28 @@ class TaskStoreTests: XCTestCase {
         waitForExpectations(timeout: 120, handler: { (completionHandler) -> Void in })
     }
     
+    func testRequestStoreOperationRemove() {
+        
+        let expectation = self.expectation(description: "Test Request Store")
+        
+        let store = TaskStore()
+        
+        let urlString = "https://httpbin.org/get"
+        let operation = BlockOperation { 
+            
+            store.remove(taskWithURL: urlString)
+            
+            let status = store.contains(taskWithURL: urlString)
+            XCTAssert(status == false, "Operation not removed after completion, but should have been.")
+            
+            expectation.fulfill()
+        }
+        _ = store.add(operation, urlString: urlString)
+        operation.start()
+        
+        waitForExpectations(timeout: 120, handler: { (completionHandler) -> Void in })
+    }
+    
     func testTaskStoreDoubleAdd() {
         
         let store = TaskStore()
@@ -66,6 +100,19 @@ class TaskStoreTests: XCTestCase {
         
         let statusAdd = store.contains(taskWithURL: urlString)
         XCTAssert(statusAdd, "Task not added to the store, but should have been.")
+    }
+    
+    func testTaskStoreOperationDoubleAdd() {
+        
+        let store = TaskStore()
+        
+        let urlString = "https://httpbin.org/get"
+        let operation = Operation()
+        _ = store.add(operation, urlString: urlString)
+        _ = store.add(operation, urlString: urlString)
+        
+        let statusAdd = store.contains(taskWithURL: urlString)
+        XCTAssert(statusAdd, "Operation not added to the store, but should have been.")
     }
     
     func testTaskStoreDoubleAddRemove() {
@@ -81,6 +128,21 @@ class TaskStoreTests: XCTestCase {
         
         let statusRemove = store.contains(taskWithURL: urlString)
         XCTAssert(statusRemove == false, "Task not removed after completion, but should have been.")
+    }
+    
+    func testTaskStoreOperationDoubleAddRemove() {
+        
+        let store = TaskStore()
+        
+        let urlString = "https://httpbin.org/get"
+        let operation = Operation()
+        _ = store.add(operation, urlString: urlString)
+        _ = store.add(operation, urlString: urlString)
+        
+        store.remove(taskWithURL: urlString)
+        
+        let statusRemove = store.contains(taskWithURL: urlString)
+        XCTAssert(statusRemove == false, "Operation not removed after completion, but should have been.")
     }
     
     func testTaskStoreLock() {
@@ -104,6 +166,27 @@ class TaskStoreTests: XCTestCase {
         XCTAssert(status == false, "Task added, but it shouldn't have been when locked.")
     }
     
+    func testTaskStoreOperationLock() {
+        
+        let store = TaskStore()
+        
+        let urlString = "https://httpbin.org/get"
+        let operation = Operation()
+        
+        _ = store.add(operation, urlString: urlString)
+        
+        DispatchQueue.global(qos: .default).async {
+            store.cancelAllTasks()
+        }
+        
+        var status = false
+        DispatchQueue.global(qos: .default).async {
+            status = store.add(operation, urlString: urlString)
+        }
+        
+        XCTAssert(status == false, "Operation added, but it shouldn't have been when locked.")
+    }
+    
     func testRequestStoreCancalAll() {
         
         let expectation = self.expectation(description: "Test Request Store")
@@ -122,6 +205,29 @@ class TaskStoreTests: XCTestCase {
         }
         _ = store.add(task, urlString: urlString)
         task.resume()
+        store.cancelAllTasks()
+        
+        waitForExpectations(timeout: 120, handler: { (completionHandler) -> Void in })
+    }
+    
+    func testRequestStoreOperationCancalAll() {
+        
+        let expectation = self.expectation(description: "Test Request Store")
+        
+        let store = TaskStore()
+        
+        let urlString = "https://httpbin.org/get"
+        let operation = BlockOperation {
+            
+            store.remove(taskWithURL: urlString)
+            
+            let status = store.contains(taskWithURL: urlString)
+            XCTAssert(status == false, "Operation not removed after completion, but should have been.")
+            
+            expectation.fulfill()
+        }
+        _ = store.add(operation, urlString: urlString)
+        operation.start()
         store.cancelAllTasks()
         
         waitForExpectations(timeout: 120, handler: { (completionHandler) -> Void in })
