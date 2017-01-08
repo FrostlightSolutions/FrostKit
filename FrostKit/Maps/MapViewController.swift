@@ -142,20 +142,20 @@ open class MapViewController: UIViewController {
     */
     @IBAction open func locationButtonPressed(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let currentLocationAlertAction = UIAlertAction(title: FKLocalizedString("CURRENT_LOCATION", comment: "Current Location"), style: .default, handler: { (action) -> Void in
+        let currentLocationAlertAction = UIAlertAction(title: FKLocalizedString("CURRENT_LOCATION", comment: "Current Location"), style: .default, handler: { (_) -> Void in
             self.mapController.zoomToCurrentLocation()
             self.updateNavigationButtons()
         })
         alertController.addAction(currentLocationAlertAction)
-        let allLocationsAlertAction = UIAlertAction(title: FKLocalizedString("ALL_LOCATIONS", comment: "All Locations"), style: .default, handler: { (action) -> Void in
+        let allLocationsAlertAction = UIAlertAction(title: FKLocalizedString("ALL_LOCATIONS", comment: "All Locations"), style: .default, handler: { (_) -> Void in
             self.mapController.zoomToShowAll()
         })
         alertController.addAction(allLocationsAlertAction)
-        let clearDirectionsAlertAction = UIAlertAction(title: FKLocalizedString("CLEAR_DIRECTIONS", comment: "Clear Directions"), style: .default, handler: { (action) -> Void in
+        let clearDirectionsAlertAction = UIAlertAction(title: FKLocalizedString("CLEAR_DIRECTIONS", comment: "Clear Directions"), style: .default, handler: { (_) -> Void in
             self.mapController.removeAllPolylines()
         })
         alertController.addAction(clearDirectionsAlertAction)
-        let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL", comment: "Cancel"), style: .cancel, handler: { (action) -> Void in
+        let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL", comment: "Cancel"), style: .cancel, handler: { (_) -> Void in
             alertController.dismiss(animated: true, completion: nil)
         })
         alertController.addAction(cancelAlertAction)

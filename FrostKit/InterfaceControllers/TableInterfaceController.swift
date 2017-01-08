@@ -30,7 +30,7 @@ open class TableInterfaceController: WKInterfaceController {
         moreButton?.setTitle(FKLocalizedString("MORE_", comment: "More..."))
         statusLabel?.setText(FKLocalizedString("LOADING_", comment: "Loading..."))
         
-        DispatchQueue.main.async() {
+        DispatchQueue.main.async {
             self.updateTable()
         }
     }

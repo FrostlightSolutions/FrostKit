@@ -121,11 +121,11 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             
             let alertController = UIAlertController(title: emailsString, message: nil, preferredStyle: .alert)
             alertController.view.tintColor = FrostKit.tintColor
-            let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL"), style: .cancel) { (action) -> Void in
+            let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL"), style: .cancel) { (_) -> Void in
                 alertController.dismiss(animated: true, completion: nil)
             }
             alertController.addAction(cancelAlertAction)
-            let openAlertAction = UIAlertAction(title: FKLocalizedString("EMAIL"), style: .default) { (action) -> Void in
+            let openAlertAction = UIAlertAction(title: FKLocalizedString("EMAIL"), style: .default) { (_) -> Void in
                 
                 SocialHelper.presentMailComposeViewController(toRecipients: toRecipients, ccRecipients: ccRecipients, bccRecipients: bccRecipients, subject: subject, messageBody: messageBody, isBodyHTML: isBodyHTML, attachments: attachments, viewController: viewController, animated: animated)
             }
@@ -177,11 +177,11 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             
             let alertController = UIAlertController(title: recipientsString, message: nil, preferredStyle: .alert)
             alertController.view.tintColor = FrostKit.tintColor
-            let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL"), style: .cancel) { (action) -> Void in
+            let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL"), style: .cancel) { (_) -> Void in
                 alertController.dismiss(animated: true, completion: nil)
             }
             alertController.addAction(cancelAlertAction)
-            let openAlertAction = UIAlertAction(title: FKLocalizedString("MESSAGE"), style: .default) { (action) -> Void in
+            let openAlertAction = UIAlertAction(title: FKLocalizedString("MESSAGE"), style: .default) { (_) -> Void in
                 
                 SocialHelper.presentMessageComposeViewController(recipients: recipients, subject: subject, body: body, attachments: attachments, viewController: viewController, animated: animated)
             }

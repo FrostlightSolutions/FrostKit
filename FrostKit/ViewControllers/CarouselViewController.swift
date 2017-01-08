@@ -67,7 +67,7 @@ open class CarouselViewController: UIViewController, UICollectionViewDataSource,
         
         if let pageControl = self.pageControl {
             
-            collectionView?.performBatchUpdates(nil, completion: { (completed) -> Void in
+            collectionView?.performBatchUpdates(nil, completion: { (_) -> Void in
                 self.pageControlDidChange(pageControl)
             })
         }

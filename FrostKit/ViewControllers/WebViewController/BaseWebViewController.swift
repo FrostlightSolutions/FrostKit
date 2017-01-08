@@ -106,7 +106,7 @@ public class BaseWebViewController: UIViewController {
             
             self.progrssView.alpha = 0.5
             
-            }, completion: { (completed) -> Void in
+            }, completion: { (_) -> Void in
                 
                 self.progrssView.removeFromSuperview()
         })
@@ -207,7 +207,7 @@ public class BaseWebViewController: UIViewController {
                 
                 self.progrssView.alpha = 0
                 
-                }, completion: { (completed) -> Void in
+                }, completion: { (_) -> Void in
                     
                     self.progrssView.isHidden = true
                     self.progrssView.progress = 0.0

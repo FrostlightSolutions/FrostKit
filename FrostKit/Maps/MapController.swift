@@ -657,7 +657,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
                 }
             })
         } else {
-            let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
+            let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
             MKMapItem.openMaps(with: [currentLocationItem, destinationItem], launchOptions: launchOptions)
         }
     }
@@ -777,19 +777,19 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
         if let annotation = view.annotation as? Annotation {
             
             let alertController = UIAlertController(title: annotation.title, message: annotation.subtitle, preferredStyle: .actionSheet)
-            let zoomToAlertAction = UIAlertAction(title: FKLocalizedString("ZOOM_TO_", comment: "Zoom to..."), style: .default, handler: { (action) -> Void in
+            let zoomToAlertAction = UIAlertAction(title: FKLocalizedString("ZOOM_TO_", comment: "Zoom to..."), style: .default, handler: { (_) -> Void in
                 self.zoom(toAnnotation: annotation)
             })
             alertController.addAction(zoomToAlertAction)
-            let directionsAlertAction = UIAlertAction(title: FKLocalizedString("DIRECTIONS", comment: "Directions"), style: .default, handler: { (action) -> Void in
+            let directionsAlertAction = UIAlertAction(title: FKLocalizedString("DIRECTIONS", comment: "Directions"), style: .default, handler: { (_) -> Void in
                 self.directionsToCurrentLocation(fromCoordinate: annotation.coordinate)
             })
             alertController.addAction(directionsAlertAction)
-            let openInMapsAlertAction = UIAlertAction(title: FKLocalizedString("OPEN_IN_MAPS", comment: "Open in Maps"), style: .default, handler: { (action) -> Void in
+            let openInMapsAlertAction = UIAlertAction(title: FKLocalizedString("OPEN_IN_MAPS", comment: "Open in Maps"), style: .default, handler: { (_) -> Void in
                 self.directionsToCurrentLocation(fromCoordinate: annotation.coordinate, inApp: false)
             })
             alertController.addAction(openInMapsAlertAction)
-            let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL", comment: "Cancel"), style: .cancel, handler: { (action) -> Void in
+            let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL", comment: "Cancel"), style: .cancel, handler: { (_) -> Void in
                 alertController.dismiss(animated: true, completion: nil)
             })
             alertController.addAction(cancelAlertAction)
