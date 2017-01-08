@@ -3,7 +3,7 @@
 //  FrostKit
 //
 //  Created by James Barrow on 27/08/16.
-//  Copyright © 2016 James Barrow - Frostlight Solutions. All rights reserved.
+//  Copyright © 2016 - 2017 James Barrow - Frostlight Solutions. All rights reserved.
 //
 
 import Foundation

@@ -2,7 +2,7 @@
 //  CKContainerExtensions.swift
 //
 //  Created by James Barrow on 06/06/2016.
-//  Copyright © 2016 James Barrow. All rights reserved.
+//  Copyright © 2016 - 2017 James Barrow. All rights reserved.
 //
 
 import Foundation
