@@ -67,7 +67,7 @@ public class FrostKit {
     
     internal static let shared = FrostKit()
     
-    init() {
+    internal init() {
 #if os(iOS) || os(tvOS) || os(OSX)
         CustomFonts.loadCustomFonts()
 #endif
@@ -75,19 +75,18 @@ public class FrostKit {
     
     // MARK: - Setup Methods
     
-    public class func setup() {
-        _ = FrostKit.shared
+    public class func setup(tintColor: Color? = nil, appStoreID: String? = nil) {
+        
+        let frostKit = FrostKit.shared
+        
+        if let tintColor = tintColor {
+            frostKit.tintColor = tintColor
+        }
+        
+        if let appStoreID = appStoreID {
+            frostKit.appStoreID = appStoreID
+            AppStoreHelper.shared.updateAppStoreData()
+        }
     }
-    
-    public class func setup(tintColor: Color) {
-        FrostKit.shared.tintColor = tintColor
-    }
-    
-#if os(iOS) || os(tvOS) || os(OSX)
-    public class func setup(appStoreID: String) {
-        FrostKit.shared.appStoreID = appStoreID
-        AppStoreHelper.shared.updateAppStoreData()
-    }
-#endif
     
 }
