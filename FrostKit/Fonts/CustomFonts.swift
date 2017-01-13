@@ -57,7 +57,6 @@ public class CustomFonts {
     */
     public class func loadCustomFont(name: String, withExtension ext: String, bundle: Bundle = Bundle.main) {
         
-        var error: Unmanaged<CFError>?
         guard let url = bundle.url(forResource: name, withExtension: ext),
             let provider = CGDataProvider(url: url as CFURL) else {
                 NSLog("ERROR: Failed to get data provider for \"\(name)\" font!")
@@ -65,6 +64,7 @@ public class CustomFonts {
         }
         
         let font = CGFont(provider)
+        var error: Unmanaged<CFError>?
         guard CTFontManagerRegisterGraphicsFont(font, &error) == true else {
             NSLog("ERROR: Failed to register \"\(name)\" font!")
             return
