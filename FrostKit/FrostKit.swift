@@ -85,7 +85,6 @@ public class FrostKit {
         
         if let appStoreID = appStoreID {
             frostKit.appStoreID = appStoreID
-            AppStoreHelper.shared.updateAppStoreData()
         }
     }
     
