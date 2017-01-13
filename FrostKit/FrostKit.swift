@@ -83,9 +83,11 @@ public class FrostKit {
             frostKit.tintColor = tintColor
         }
         
+#if os(iOS) || os(tvOS) || os(OSX)
         if let appStoreID = appStoreID {
             frostKit.appStoreID = appStoreID
         }
+#endif
     }
     
 }
