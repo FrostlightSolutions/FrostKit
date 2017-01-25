@@ -152,7 +152,7 @@ open class CarouselViewController: UIViewController, UICollectionViewDataSource,
     // MARK: - Animation Methods
     
     private func degreesToRadians(angle: CGFloat) -> CGFloat {
-        return (angle/180)*CGFloat(M_PI)
+        return (angle / 180) * CGFloat.pi
     }
     
     private func animate(view: UIView, percent: CGFloat, pageNumber: Int) {
