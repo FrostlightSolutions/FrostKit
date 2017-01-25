@@ -63,6 +63,15 @@ public class CustomFonts {
                 return
         }
         
+        // Fix for issue where creating a font could cause a deadlock and crash
+        // Source: http://stackoverflow.com/questions/40242370/app-hangs-in-simulator#40256390
+        // OpenRadar: http://www.openradar.me/18778790
+#if os(OSX)
+        _ = NSFont()
+#else
+        _ = UIFont()
+#endif
+        
         let font = CGFont(provider)
         var error: Unmanaged<CFError>?
         guard CTFontManagerRegisterGraphicsFont(font, &error) == true else {
