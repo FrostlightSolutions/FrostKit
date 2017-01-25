@@ -16,3 +16,7 @@ type_body_length:
 function_body_length:
   warning: 80
   error: 120
+large_tuple:
+  warning: 5
+  error: 6
+
