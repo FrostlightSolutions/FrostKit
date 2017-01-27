@@ -72,7 +72,7 @@ public class ContentManager {
                         do {
                             try LocalStorage.remove(absoluteURL: url)
                         } catch let error {
-                            NSLog("Error: Unable to remove managed item at URL \(url)\nWith error: \(error.localizedDescription)\n\(error)")
+                            NSLog("Error: Unable to remove managed item at URL \(url)\nWith error: \(error.localizedDescription)")
                         }
                     }
                 }

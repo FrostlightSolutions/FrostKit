@@ -42,7 +42,7 @@ public class CoreDataProxy {
             coordinator = nil
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog("Unresolved error \(error), \(error._userInfo)")
+            NSLog("Unresolved error: \(error.localizedDescription)")
         }
         
         return coordinator

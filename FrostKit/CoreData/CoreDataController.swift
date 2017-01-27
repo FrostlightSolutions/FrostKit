@@ -64,7 +64,7 @@ open class CoreDataController: NSObject {
         do {
             try aFetchedResultsController.performFetch()
         } catch let error {
-            NSLog("Fetch error: \(error.localizedDescription)\n\(error)")
+            NSLog("Fetch error: \(error.localizedDescription)")
         }
         
         return _fetchedResultsController!

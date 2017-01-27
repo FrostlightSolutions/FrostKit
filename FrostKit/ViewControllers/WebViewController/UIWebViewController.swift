@@ -17,7 +17,7 @@ public class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     /// The URL of the current page.
     public override var url: URL? {
         if let urlString = self.urlString {
-            return  NSURL(string: urlString) as? URL
+            return  NSURL(string: urlString) as URL?
         }
         return nil
     }

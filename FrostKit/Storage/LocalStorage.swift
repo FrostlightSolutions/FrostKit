@@ -170,7 +170,7 @@ public class LocalStorage {
         do {
             try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
         } catch let error {
-            NSLog("Error: Directory not able to be created at URL \(url)\nWith error: \(error.localizedDescription)\n\(error)")
+            NSLog("Error: Directory not able to be created at URL \(url)\nWith error: \(error.localizedDescription)")
         }
     }
     
