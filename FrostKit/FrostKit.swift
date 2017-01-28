@@ -53,6 +53,7 @@ public class FrostKit {
     public class var tintColor: Color? {
         return FrostKit.shared.tintColor
     }
+    
     public class func tintColor(alpha: CGFloat) -> Color? {
         return tintColor?.color(alpha: alpha)
     }
@@ -89,5 +90,4 @@ public class FrostKit {
         }
 #endif
     }
-    
 }

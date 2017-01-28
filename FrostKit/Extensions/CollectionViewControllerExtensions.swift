@@ -19,7 +19,7 @@ public extension UICollectionViewController {
             if #available(iOS 10, *) {
                 return collectionView?.refreshControl
             } else {
-                return collectionView?.viewWithTag(1404120146) as? UIRefreshControl
+                return collectionView?.viewWithTag(1_404_120_146) as? UIRefreshControl
             }
         }
         set {
@@ -32,13 +32,13 @@ public extension UICollectionViewController {
                     return
                 }
                 
-                if let oldRefreshControl = collectionView.viewWithTag(1404120146) as? UIRefreshControl {
+                if let oldRefreshControl = collectionView.viewWithTag(1_404_120_146) as? UIRefreshControl {
                     oldRefreshControl.removeFromSuperview()
                     collectionView.alwaysBounceVertical = false
                 }
                 
                 if let refreshControl = newValue {
-                    refreshControl.tag = 1404120146
+                    refreshControl.tag = 1_404_120_146
                     
                     if collectionView.backgroundView == nil {
                         

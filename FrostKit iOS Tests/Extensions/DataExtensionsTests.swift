@@ -22,10 +22,10 @@ class DataExtensionTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-
+    
     func testHexString() {
         
-        measure { () -> Void in
+        measure { () in
             
             let convertedHexString = self.data?.hexString
             XCTAssert(convertedHexString == "46726f73744b6974")
@@ -34,11 +34,11 @@ class DataExtensionTests: XCTestCase {
     
     func testSizeFormattedString() {
         
-        measure { () -> Void in
+        measure { () in
             
             XCTAssert(Data.sizeFormattedString(0) == "0 B")
             XCTAssert(Data.sizeFormattedString(1) == "1 B")
-            XCTAssert(Data.sizeFormattedString(1_024) == "1 KB")
+            XCTAssert(Data.sizeFormattedString(1024) == "1 KB")
             XCTAssert(Data.sizeFormattedString(1_048_576) == "1 MB")
             XCTAssert(Data.sizeFormattedString(1_073_741_824) == "1 GB")
             XCTAssert(Data.sizeFormattedString(1_099_511_627_776) == "1 TB")
@@ -47,5 +47,4 @@ class DataExtensionTests: XCTestCase {
             XCTAssert(self.data?.lengthFormattedString == "8 B")
         }
     }
-    
 }

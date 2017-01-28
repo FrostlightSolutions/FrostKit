@@ -45,5 +45,4 @@ extension Bundle {
     public class func appName(_ bundle: Bundle = Bundle.main) -> String {
         return bundle.object(forInfoDictionaryKey: "CFBundleName") as! String
     }
-    
 }

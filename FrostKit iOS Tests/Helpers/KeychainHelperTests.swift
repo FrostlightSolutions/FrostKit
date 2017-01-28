@@ -23,7 +23,7 @@ class KeychainHelperTests: XCTestCase {
     
     func testKeychainWorkflow() {
         
-        measure { () -> Void in
+        measure { () in
             
             let username = "myName"
             let password = "qwerty1234567890!_<>,.!@#$%^&*()_+-=/?"
@@ -39,5 +39,4 @@ class KeychainHelperTests: XCTestCase {
             XCTAssert(deleteDetailsComplete, "Pass")
         }
     }
-    
 }

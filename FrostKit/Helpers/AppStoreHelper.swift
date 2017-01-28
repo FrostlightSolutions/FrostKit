@@ -47,6 +47,7 @@ public class AppStoreHelper {
             }
         }
     }
+    
     public var formattedFileSize: String?
     public var releaseDate: Date?
     private var bundleId: String?
@@ -55,9 +56,9 @@ public class AppStoreHelper {
     
     /**
     Updates data from the app store and parses into local files.
-    
+     
     This is called automaticaly by FrostKit on setup if the app store ID is set.
-    
+     
     - parameter complete: Returned when to update request is complete and returns an error is it failed.
     */
     public func updateAppStoreData(_ complete: ((_ error: Error?) -> Void)? = nil) {
@@ -98,7 +99,7 @@ public class AppStoreHelper {
                 guard let json = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any],
                     let results = json?["results"] as? [[String: Any]],
                     let appDetails = results.first else {
-                        
+                    
                     DispatchQueue.main.async {
                         complete?(NSError.error(withMessage: "Could not parse JSON from data."))
                     }
@@ -158,5 +159,4 @@ public class AppStoreHelper {
         
         return .unknown
     }
-    
 }

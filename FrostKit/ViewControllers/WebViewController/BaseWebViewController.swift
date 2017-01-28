@@ -31,17 +31,20 @@ public class BaseWebViewController: UIViewController {
             }
         }
     }
+    
     /// The URL of the current page.
     public var url: URL? {
         // Functionality overriden in subclasses
         return nil
     }
+    
     /// The title to show in the navigation bar if something other than the loaded page's title is required.
     public var titleOverride: String? {
         didSet {
             navigationItem.title = titleOverride
         }
     }
+    
     /// Returns `true` if the web view is currently loading, `false` if not.
     public var loading: Bool {
         // Functionality overriden in subclasses
@@ -102,13 +105,13 @@ public class BaseWebViewController: UIViewController {
     
     public override func viewDidDisappear(_ animated: Bool) {
         
-        UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseInOut, animations: { () -> Void in
+        UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseInOut, animations: { () in
             
             self.progrssView.alpha = 0.5
             
-            }, completion: { (_) -> Void in
-                
-                self.progrssView.removeFromSuperview()
+        }, completion: { (_) in
+            
+            self.progrssView.removeFromSuperview()
         })
     }
     
@@ -120,7 +123,7 @@ public class BaseWebViewController: UIViewController {
     
     /**
     Dismissed the current view if presented modally.
-    
+     
     - parameter sender: The bar button item pressed.
     */
     func doneButtonPressed(_ sender: AnyObject?) {
@@ -129,7 +132,7 @@ public class BaseWebViewController: UIViewController {
     
     /**
     Refrshes the web view when the refresh button is pressed in the toolbar.
-    
+     
     - parameter sender: The bar button item pressed.
     */
     func refreshButtonPressed(_ sender: AnyObject?) {
@@ -138,7 +141,7 @@ public class BaseWebViewController: UIViewController {
     
     /**
     Requests the web view go back a page.
-    
+     
     - parameter sender: The bar button item pressed.
     */
     func backButtonPressed(_ sender: AnyObject?) {
@@ -147,7 +150,7 @@ public class BaseWebViewController: UIViewController {
     
     /**
     Requests the web view go forward a page.
-    
+     
     - parameter sender: The bar button item pressed.
     */
     func forwardButtonPressed(_ sender: AnyObject?) {
@@ -156,7 +159,7 @@ public class BaseWebViewController: UIViewController {
     
     /**
     Calls and presents a UIActivityViewController.
-    
+     
     - parameter sender: The bar button item pressed.
     */
     func actionButtonPressed(_ sender: AnyObject?) {
@@ -203,27 +206,26 @@ public class BaseWebViewController: UIViewController {
         
         if progrssView.progress >= 1.0 || progrssView.progress <= 0.0 {
             
-            UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseInOut, animations: { () -> Void in
+            UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseInOut, animations: { () in
                 
                 self.progrssView.alpha = 0
                 
-                }, completion: { (_) -> Void in
-                    
-                    self.progrssView.isHidden = true
-                    self.progrssView.progress = 0.0
-                    
-                    self.updateActivityViewVisability()
+            }, completion: { (_) in
+                
+                self.progrssView.isHidden = true
+                self.progrssView.progress = 0.0
+                
+                self.updateActivityViewVisability()
             })
             
         } else {
             
             self.progrssView.isHidden = false
-            UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseInOut, animations: { () -> Void in
+            UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseInOut, animations: { () in
                 
                 self.progrssView.alpha = 1
                 
-                }, completion: nil)
-            
+            }, completion: nil)
         }
     }
     
@@ -237,20 +239,20 @@ public class BaseWebViewController: UIViewController {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: NetworkRequestDidBeginNotification), object: nil)
             activityIndicatorView.startAnimating()
             
-            UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseInOut, animations: { () -> Void in
+            UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseInOut, animations: { () in
                 
                 let loadingView = UIBarButtonItem(customView: self.activityIndicatorView)
                 self.navigationItem.setRightBarButton(loadingView, animated: true)
                 
-                }, completion: nil)
+            }, completion: nil)
         } else {
             
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: NetworkRequestDidCompleteNotification), object: nil)
-            UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseInOut, animations: { () -> Void in
+            UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseInOut, animations: { () in
                 
                 self.navigationItem.setRightBarButton(nil, animated: true)
                 
-                }, completion: nil)
+            }, completion: nil)
         }
     }
     
@@ -287,7 +289,7 @@ public class BaseWebViewController: UIViewController {
     
     /**
     Creates a URL string, appending `http://` if the URL string does not already have it as a prefix.
-    
+     
     - returns: The base URL string.
     */
     func loadBaseURL() -> String {
@@ -302,5 +304,4 @@ public class BaseWebViewController: UIViewController {
         
         return ""
     }
-    
 }

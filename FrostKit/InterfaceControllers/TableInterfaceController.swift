@@ -64,7 +64,7 @@ open class TableInterfaceController: WKInterfaceController {
             return
         }
         
-        var topCount = skip+limit
+        var topCount = skip + limit
         var count = dataArray.count
         
         if moreButton == nil {
@@ -92,7 +92,7 @@ open class TableInterfaceController: WKInterfaceController {
             updateFromStart = false
         }
         
-        for index in 0..<rowCount {
+        for index in 0 ..< rowCount {
             let dataDict = dataArray[index]
             update(rowIn: table, index: index, data: dataDict)
         }
@@ -134,5 +134,4 @@ open class TableInterfaceController: WKInterfaceController {
         
         updateTable()
     }
-    
 }

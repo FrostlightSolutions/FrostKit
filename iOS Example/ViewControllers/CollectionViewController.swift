@@ -38,21 +38,21 @@ class CollectionViewController: UICollectionViewController {
     }
     
     // MARK: - Collection View
-
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 40
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TestCollectionCell", for: indexPath as IndexPath)
-    
+        
         // Configure the cell
         cell.backgroundColor = .orange
-    
+        
         return cell
     }
     
@@ -61,5 +61,4 @@ class CollectionViewController: UICollectionViewController {
         let width = (view.frame.width - collectionViewLayout.sectionInset.left - collectionViewLayout.sectionInset.right)
         return CGSize(width: width, height: 120)
     }
-    
 }

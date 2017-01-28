@@ -10,7 +10,7 @@ import XCTest
 @testable import FrostKit
 
 class FontExtensionsTests: XCTestCase {
-
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -20,10 +20,10 @@ class FontExtensionsTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-
+    
     func testCustomFonts() {
         
-        measure { () -> Void in
+        measure { () in
             
             let fontAwesome = Font.fontAwesome(ofSize: 12)
             let fontAwesomeName = fontAwesome.fontName
@@ -33,5 +33,4 @@ class FontExtensionsTests: XCTestCase {
             XCTAssert(ioniconsName == "Ionicons", "Font name is: \(ioniconsName)")
         }
     }
-    
 }

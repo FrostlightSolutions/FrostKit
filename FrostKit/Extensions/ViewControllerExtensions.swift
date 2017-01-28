@@ -27,5 +27,4 @@ extension UIViewController {
     public var isVisible: Bool {
         return isViewLoaded && view.window != nil
     }
-    
 }

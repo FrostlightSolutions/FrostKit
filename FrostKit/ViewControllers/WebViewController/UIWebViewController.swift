@@ -21,6 +21,7 @@ public class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
         }
         return nil
     }
+    
     /// Returns `true` if the web view is currently loading, `false` if not.
     public override var loading: Bool {
         if let webView = self.webView as? UIWebView {
@@ -48,7 +49,7 @@ public class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     
     /**
     Refrshes the web view when the refresh button is pressed in the toolbar.
-    
+     
     - parameter sender: The bar button item pressed.
     */
     override func refreshButtonPressed(_ sender: AnyObject?) {
@@ -64,7 +65,7 @@ public class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     
     /**
     Requests the web view go back a page.
-    
+     
     - parameter sender: The bar button item pressed.
     */
     override func backButtonPressed(_ sender: AnyObject?) {
@@ -81,7 +82,7 @@ public class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     
     /**
     Requests the web view go forward a page.
-    
+     
     - parameter sender: The bar button item pressed.
     */
     override func forwardButtonPressed(_ sender: AnyObject?) {
@@ -120,7 +121,7 @@ public class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     
     /**
     Creates a URL string, appending `http://` if the URL string does not already have it as a prefix and then loads the page in the web view.
-    
+     
     - returns: The base URL string.
     */
     override func loadBaseURL() -> String {
@@ -134,5 +135,4 @@ public class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
         
         return urlString
     }
-    
 }

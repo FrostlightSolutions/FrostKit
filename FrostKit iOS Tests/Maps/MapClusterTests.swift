@@ -67,5 +67,4 @@ class MapClusterTests: XCTestCase {
             }
         }
     }
-    
 }

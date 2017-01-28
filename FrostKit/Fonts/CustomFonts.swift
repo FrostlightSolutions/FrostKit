@@ -31,7 +31,7 @@ public class CustomFonts {
     
     /**
     Load custom fonts with names including the file name and extension.
-    
+     
     - parameter names: An array of strings of the font file names.
     - parameter bundle:    The bundle to look for the file names in. By default this uses the main app bundle.
     */
@@ -50,7 +50,7 @@ public class CustomFonts {
     
     /**
         Load a custom font from it's name and extention from within the bundle without having to declare it in the `Info.plist`.
-        
+     
         - parameter name:    The name of the font file name.
         - parameter ext:     The extention of the file.
         - parameter bundle:  The bundle the files are located in. By default this uses the main app bundle.
@@ -59,8 +59,8 @@ public class CustomFonts {
         
         guard let url = bundle.url(forResource: name, withExtension: ext),
             let provider = CGDataProvider(url: url as CFURL) else {
-                NSLog("ERROR: Failed to get data provider for \"\(name)\" font!")
-                return
+            NSLog("ERROR: Failed to get data provider for \"\(name)\" font!")
+            return
         }
         
         // Fix for issue where creating a font could cause a deadlock and crash
@@ -101,5 +101,4 @@ public class CustomFonts {
         }
     }
 #endif
-    
 }

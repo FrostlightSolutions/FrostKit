@@ -16,6 +16,7 @@ open class CoreDataCollectionViewController: UICollectionViewController, NSFetch
     @IBOutlet public weak var dataController: CoreDataController! {
         didSet { dataController.fetchedResultsController.delegate = self }
     }
+    
     open var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> {
         return dataController.fetchedResultsController
     }
@@ -68,5 +69,4 @@ open class CoreDataCollectionViewController: UICollectionViewController, NSFetch
             NSLog("Fetch error: \(error.localizedDescription)\n\(error)")
         }
     }
-    
 }

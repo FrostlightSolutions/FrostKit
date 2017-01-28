@@ -24,6 +24,7 @@ open class MapSearchViewController: UITableViewController, UISearchControllerDel
     public var searchBar: UISearchBar? {
         return searchController?.searchBar
     }
+    
     /// The refresh control for the table view controller when searching locations.
     private var refreshControlHolder = UIRefreshControl()
     /// An array of addresses returned after searching, or `nil` if no results are found.
@@ -49,9 +50,9 @@ open class MapSearchViewController: UITableViewController, UISearchControllerDel
     
     /**
     The object at an index path of the selected array (plotted if segment 0 or location if segment 1).
-    
+     
     - parameter indexPath: The index path of the object.
-    
+     
     - returns: The object at the index path.
     */
     open func objectAt(_ indexPath: IndexPath) -> Any? {
@@ -95,7 +96,7 @@ open class MapSearchViewController: UITableViewController, UISearchControllerDel
         }
         return 0
     }
-
+    
     open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: identifier)
         if cell == nil {
@@ -207,5 +208,4 @@ open class MapSearchViewController: UITableViewController, UISearchControllerDel
         }
         tableView.reloadData()
     }
-    
 }

@@ -22,5 +22,4 @@ public extension CKRecordID {
             return recordID
         })
     }
-    
 }

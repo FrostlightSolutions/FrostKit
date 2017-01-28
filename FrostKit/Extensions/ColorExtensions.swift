@@ -20,7 +20,7 @@ extension Color {
 #if os(iOS) || os(watchOS) || os(tvOS)
     /**
     A convenience init for creating a color object from a hex string.
-    
+     
     - parameter hexString:  A hex string to turn into a color object.
     - parameter alpha:      The alpha value of the color.
     */
@@ -32,10 +32,10 @@ extension Color {
     
     /**
     Creates a color object from a hex string.
-    
+     
     - parameter hexString:  A hex string to turn into a color object.
     - parameter alpha:      The alpha value of the color.
-    
+     
     - returns: A color object from the hex string.
     */
     public class func color(hexString: String, alpha: CGFloat = 1) -> Color {

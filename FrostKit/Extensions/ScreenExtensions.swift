@@ -17,5 +17,4 @@ extension UIScreen {
         }
         return 1
     }
-    
 }

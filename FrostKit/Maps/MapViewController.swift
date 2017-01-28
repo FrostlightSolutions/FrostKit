@@ -27,10 +27,12 @@ open class MapViewController: UIViewController {
     open var activeLocationIcon: UIImage? {
         return nil
     }
+    
     /// Overridden by a subclass to define the icon to use in thenavgation bar button item when the `locationButton` is inactive. Both this and the `activeLocationIcon` need to be overriden for the default icon to be overridden.
     open var inactiveLocationIcon: UIImage? {
         return nil
     }
+    
     private var zoomedToShowAll = false
     /// Ditermines if the map view should zoom to show all on the first view did appear.
     @IBInspectable public var shouldZoomToShowAllOnViewDidAppear: Bool = true
@@ -38,6 +40,7 @@ open class MapViewController: UIViewController {
     open var searchScopeButtonTitles: [String] {
         return [FKLocalizedString("MARKERS", comment: "Markers"), FKLocalizedString("LOCATIONS", comment: "Locations")]
     }
+    
     // Defines if the search scope should show.
     @IBInspectable public var showsSearchScopeBar: Bool = true
     // Defines the search search view controller for the search controller to use. If `nil` is found on setup then a default `MapSearchViewController` is used.
@@ -81,7 +84,7 @@ open class MapViewController: UIViewController {
     
     /**
     Updates the navigation bar buttons.
-    
+     
     - parameter animated: If the buttons should animate when they update.
     */
     public func updateNavigationButtons(animated: Bool = true) {
@@ -137,25 +140,25 @@ open class MapViewController: UIViewController {
     
     /**
     Show the options for the map view controller when the location button is pressed.
-    
+     
     - parameter sender: The location button pressed.
     */
     @IBAction open func locationButtonPressed(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let currentLocationAlertAction = UIAlertAction(title: FKLocalizedString("CURRENT_LOCATION", comment: "Current Location"), style: .default, handler: { (_) -> Void in
+        let currentLocationAlertAction = UIAlertAction(title: FKLocalizedString("CURRENT_LOCATION", comment: "Current Location"), style: .default, handler: { (_) in
             self.mapController.zoomToCurrentLocation()
             self.updateNavigationButtons()
         })
         alertController.addAction(currentLocationAlertAction)
-        let allLocationsAlertAction = UIAlertAction(title: FKLocalizedString("ALL_LOCATIONS", comment: "All Locations"), style: .default, handler: { (_) -> Void in
+        let allLocationsAlertAction = UIAlertAction(title: FKLocalizedString("ALL_LOCATIONS", comment: "All Locations"), style: .default, handler: { (_) in
             self.mapController.zoomToShowAll()
         })
         alertController.addAction(allLocationsAlertAction)
-        let clearDirectionsAlertAction = UIAlertAction(title: FKLocalizedString("CLEAR_DIRECTIONS", comment: "Clear Directions"), style: .default, handler: { (_) -> Void in
+        let clearDirectionsAlertAction = UIAlertAction(title: FKLocalizedString("CLEAR_DIRECTIONS", comment: "Clear Directions"), style: .default, handler: { (_) in
             self.mapController.removeAllPolylines()
         })
         alertController.addAction(clearDirectionsAlertAction)
-        let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL", comment: "Cancel"), style: .cancel, handler: { (_) -> Void in
+        let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL", comment: "Cancel"), style: .cancel, handler: { (_) in
             alertController.dismiss(animated: true, completion: nil)
         })
         alertController.addAction(cancelAlertAction)
@@ -164,7 +167,7 @@ open class MapViewController: UIViewController {
     
     /**
     Shows the map search view controller.
-    
+     
     - parameter sender: The search button pressed.
     */
     @IBAction open func searchButtonPressed(_ sender: UIBarButtonItem) {
@@ -172,5 +175,4 @@ open class MapViewController: UIViewController {
             present(searchController, animated: true, completion: nil)
         }
     }
-    
 }

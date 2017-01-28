@@ -23,16 +23,16 @@ class ColorExtensionsTest: XCTestCase {
     
     func testSimpleHexColors() {
         
-        measure { () -> Void in
+        measure { () in
             
             XCTAssert(Color.color(hexString: "#ffffff") == Color(red: 1, green: 1, blue: 1, alpha: 1), "Pass")
-            XCTAssert(Color.color(hexString: "#123456") == Color(red: 18.0/255, green: 52.0/255, blue: 86.0/255, alpha: 1), "Pass")
+            XCTAssert(Color.color(hexString: "#123456") == Color(red: 18.0 / 255, green: 52.0 / 255, blue: 86.0 / 255, alpha: 1), "Pass")
         }
     }
     
     func testHexHashtag() {
         
-        measure { () -> Void in
+        measure { () in
             
             // With or without #
             XCTAssert(Color.color(hexString: "#479123") == Color.color(hexString: "479123"), "Pass")
@@ -41,7 +41,7 @@ class ColorExtensionsTest: XCTestCase {
     
     func testShortHex() {
         
-        measure { () -> Void in
+        measure { () in
             
             // 3 chars work as well as 6
             XCTAssert(Color.color(hexString: "#123") == Color.color(hexString: "#112233"), "Pass")
@@ -52,7 +52,7 @@ class ColorExtensionsTest: XCTestCase {
     
     func testUnsuposedHexFormat() {
         
-        measure { () -> Void in
+        measure { () in
             
             // 4 char hex should not parse and return default clearColor()
             XCTAssert(Color.color(hexString: "#1234") == Color.clear, "Pass")
@@ -60,5 +60,4 @@ class ColorExtensionsTest: XCTestCase {
             XCTAssert(Color.color(hexString: "1234") == Color.clear, "Pass")
         }
     }
-    
 }

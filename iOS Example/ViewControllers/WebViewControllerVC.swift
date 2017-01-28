@@ -11,13 +11,13 @@ import SafariServices
 import FrostKit
 
 class WebViewControllerVC: UITableViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.clearsSelectionOnViewWillAppear = true
     }
-
+    
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -69,5 +69,4 @@ class WebViewControllerVC: UITableViewController {
             break
         }
     }
-
 }

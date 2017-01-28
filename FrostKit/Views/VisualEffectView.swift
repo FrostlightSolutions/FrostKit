@@ -9,7 +9,7 @@
 import UIKit
 
 open class VisualEffectView: UIVisualEffectView {
-
+    
     @IBInspectable public var cornerRadius: CGFloat {
         get {
             return layer.cornerRadius
@@ -19,5 +19,4 @@ open class VisualEffectView: UIVisualEffectView {
             layer.masksToBounds = true
         }
     }
-
 }
