@@ -23,9 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         // Override point for customization after application launch.
         if let splitViewController = self.window?.rootViewController as? UISplitViewController {
             
-//            if let navigationController = splitViewController.viewControllers.last as? UINavigationController {
-//                navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
-//            }
+            //            if let navigationController = splitViewController.viewControllers.last as? UINavigationController {
+            //                navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
+            //            }
             splitViewController.delegate = self
         }
         
@@ -63,5 +63,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         }
         return false
     }
-    
 }

@@ -28,5 +28,4 @@ public extension CKReference {
             return CKReference(recordID: recordID, action: action)
         })
     }
-    
 }

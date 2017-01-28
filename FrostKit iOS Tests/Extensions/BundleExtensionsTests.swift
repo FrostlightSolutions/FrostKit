@@ -22,11 +22,11 @@ class BundleExtensionsTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-
+    
     func testBundleAppVersion() {
         
         let version = bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
-        measure { () -> Void in
+        measure { () in
             XCTAssert(Bundle.appVersion(self.bundle) == version)
         }
     }
@@ -34,16 +34,15 @@ class BundleExtensionsTests: XCTestCase {
     func testBundleAppBuildNumber() {
         
         let buildNumber = bundle.object(forInfoDictionaryKey: "CFBundleVersion") as! String
-        measure { () -> Void in
+        measure { () in
             XCTAssert(Bundle.appBuildNumber(self.bundle) == buildNumber)
         }
     }
     
     func testBundleAppName() {
         
-        measure { () -> Void in
+        measure { () in
             XCTAssert(Bundle.appName(self.bundle) == "FrostKit")
         }
     }
-    
 }

@@ -22,10 +22,12 @@ open class Annotation: NSObject, MKAnnotation {
             clusterAnnotation = nil
         }
     }
+    
     /// The coordinate of the address.
     public var coordinate: CLLocationCoordinate2D {
         return address?.coordinate ?? CLLocationCoordinate2D()
     }
+    
     /// The name of the address.
     public var title: String? {
         if clusterAnnotation == nil, let containdedAnnotations = self.containdedAnnotations, containdedAnnotations.count > 0 {
@@ -33,6 +35,7 @@ open class Annotation: NSObject, MKAnnotation {
         }
         return address?.name
     }
+    
     /// The address string of the address.
     public var subtitle: String? {
         if clusterAnnotation == nil, let containdedAnnotations = self.containdedAnnotations, containdedAnnotations.count > 0 {
@@ -40,6 +43,7 @@ open class Annotation: NSObject, MKAnnotation {
         }
         return address?.addressString
     }
+    
     // If the annotation is a clustered annotation, this value holds all the annotations it represents.
     // If `containdedAnnotations` is not nil and has more then 0 count, then it is probably being shown
     public var containdedAnnotations: [Annotation]? {
@@ -49,6 +53,7 @@ open class Annotation: NSObject, MKAnnotation {
             }
         }
     }
+    
     // If the annotation is part of a clustered annotation, this represent the visable annotation.
     // If `clusterAnnotation` is not nil, it's probably not being shown
     public var clusterAnnotation: Annotation? {
@@ -93,5 +98,4 @@ open class Annotation: NSObject, MKAnnotation {
             self.address = address
         }
     }
-    
 }

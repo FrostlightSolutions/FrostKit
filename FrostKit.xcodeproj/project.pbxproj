@@ -780,6 +780,7 @@
 				18839B1419D9FA8C00760157 /* Headers */,
 				18839B1519D9FA8C00760157 /* Resources */,
 				1807E5D81C77CD5A00BEBAFE /* SwiftLint Run Script */,
+				188834131E3C116D00D2921E /* SwiftFormat Run Script */,
 			);
 			buildRules = (
 			);
@@ -1047,6 +1048,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "cd \"${SRCROOT}\"\njazzy \\\n--clean \\\n--author \"James Barrow\" \\\n--github_url \"https://github.com/FrostlightSolutions/FrostKit\" \\\n--xcodebuild-arguments -project,\"FrostKit.xcodeproj\",-scheme,\"FrostKit iOS\" \\\n--module \"FrostKit\" \\\n--output \"../FrostKitDocs\" \\\n";
+		};
+		188834131E3C116D00D2921E /* SwiftFormat Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftFormat Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"$USER\" != \"xcodeserver\" ]; then\nif which swiftlint >/dev/null; then\nswiftformat --disable trailingSpace,consecutiveSpaces,trailingCommas,unusedArguments,redundantParens --trimwhitespace nonblank-lines --comments ignore --ifdef outdent .\nelse\necho \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\nfi\n";
 		};
 		18E5457A1C77E28600637E85 /* SwiftLint Run Script */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -10,7 +10,7 @@ import UIKit
 
 @IBDesignable
 open class Button: UIButton {
-
+    
     @IBInspectable public var cornerRadius: CGFloat {
         get {
             return layer.cornerRadius
@@ -20,5 +20,4 @@ open class Button: UIButton {
             layer.masksToBounds = true
         }
     }
-    
 }

@@ -13,7 +13,7 @@ class PlaceholderDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 21))
@@ -28,5 +28,4 @@ class PlaceholderDetailVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 }

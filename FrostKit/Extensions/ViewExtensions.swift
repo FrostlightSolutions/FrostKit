@@ -33,9 +33,9 @@ extension UIView {
     
     /**
     Returns the parent view of a certain tpye.
-    
+     
     - parameter type: The type of parent view to match against.
-    
+     
     - returns: The parent view of the type passed in.
     */
     public func parentView<T>(ofType type: T.Type) -> T? {
@@ -48,5 +48,4 @@ extension UIView {
         }
         return nil
     }
-    
 }

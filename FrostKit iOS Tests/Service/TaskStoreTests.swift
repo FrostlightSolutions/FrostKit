@@ -64,7 +64,7 @@ class TaskStoreTests: XCTestCase {
         _ = store.add(task, urlString: urlString)
         task.resume()
         
-        waitForExpectations(timeout: 120, handler: { (_) -> Void in })
+        waitForExpectations(timeout: 120, handler: { (_) in })
     }
     
     func testRequestStoreOperationRemove() {
@@ -86,7 +86,7 @@ class TaskStoreTests: XCTestCase {
         _ = store.add(operation, urlString: urlString)
         operation.start()
         
-        waitForExpectations(timeout: 120, handler: { (_) -> Void in })
+        waitForExpectations(timeout: 120, handler: { (_) in })
     }
     
     func testTaskStoreDoubleAdd() {
@@ -207,7 +207,7 @@ class TaskStoreTests: XCTestCase {
         task.resume()
         store.cancelAllTasks()
         
-        waitForExpectations(timeout: 120, handler: { (_) -> Void in })
+        waitForExpectations(timeout: 120, handler: { (_) in })
     }
     
     func testRequestStoreOperationCancalAll() {
@@ -230,7 +230,6 @@ class TaskStoreTests: XCTestCase {
         operation.start()
         store.cancelAllTasks()
         
-        waitForExpectations(timeout: 120, handler: { (_) -> Void in })
+        waitForExpectations(timeout: 120, handler: { (_) in })
     }
-    
 }

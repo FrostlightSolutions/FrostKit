@@ -20,7 +20,7 @@ extension Address {
     
     /**
     A convenience method that allows creating an address object using PFGeoPoint and PFObject as reference.
-    
+     
     - parameter geoPoint:         The PFGeoPoint to get the locational data from.
     - parameter object:           The PFObject to get the main data from.
     - parameter nameKey:          The key for the name string in the PFObject.
@@ -44,5 +44,4 @@ extension Address {
             }
         }
     }
-    
 }

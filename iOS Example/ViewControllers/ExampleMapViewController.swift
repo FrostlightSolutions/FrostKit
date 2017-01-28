@@ -28,7 +28,7 @@ class ExampleMapViewController: MapViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         var addresses = [Address]()
         for addressDictionary in randomAddressDictionaries {
             
@@ -38,5 +38,4 @@ class ExampleMapViewController: MapViewController {
         
         mapController.plot(addresses: addresses)
     }
-    
 }

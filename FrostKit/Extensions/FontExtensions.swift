@@ -19,9 +19,9 @@ extension Font {
     
     /**
     Helper method for getting font awesome font of a size.
-    
+     
     - parameter size:    The size of the font to return.
-    
+     
     - returns: The font object for font awesome.
     */
     public class func fontAwesome(ofSize size: CGFloat) -> Font {
@@ -35,9 +35,9 @@ extension Font {
     
     /**
     Helper method for getting font ionicons of a size.
-    
+     
     - parameter size:    The size of the font to return.
-    
+     
     - returns: The font object for ionicons.
     */
     public class func ionicons(ofSize size: CGFloat) -> Font {
@@ -48,5 +48,4 @@ extension Font {
             return Font.systemFont(ofSize: size)
         }
     }
-    
 }

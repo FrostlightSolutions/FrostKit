@@ -20,9 +20,9 @@ public enum WebViewType {
 
 /**
 Returns a WebViewController dependant on the variable or automatically
-
+ 
 - parameter viewType:    The type of view to use in the controller. By default this is done automatically.
-
+ 
 - returns: A base web view controller with the designated web view.
 */
 @available(iOS, deprecated: 9.0, message: "This is no longer needed as of iOS 9. Use SFSafariViewController instead.")

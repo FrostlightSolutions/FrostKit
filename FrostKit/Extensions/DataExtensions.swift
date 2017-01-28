@@ -27,9 +27,9 @@ extension Data {
     
     /**
     Creates a formatted string from the `size` passed in in bytes.
-    
+     
     - parameter size: The size of the item in bytes.
-    
+     
     - returns: A formatted string of the size passed in. E.g. 1024 bytes returns 1MB.
     */
     
@@ -59,5 +59,4 @@ extension Data {
     public var lengthFormattedString: String {
         return Data.sizeFormattedString(Int64(count))
     }
-    
 }

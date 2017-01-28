@@ -38,6 +38,7 @@ open class CarouselViewController: UIViewController, UICollectionViewDataSource,
             collectionView.reloadData()
         }
     }
+    
     @IBOutlet public weak var pageControl: UIPageControl? {
         didSet {
             
@@ -45,6 +46,7 @@ open class CarouselViewController: UIViewController, UICollectionViewDataSource,
             pageControl?.addTarget(self, action: #selector(CarouselViewController.pageControlDidChange(_:)), for: UIControlEvents.valueChanged)
         }
     }
+    
     public var numberOfPages: Int {
         
         if collectionView.numberOfSections > 0 {
@@ -60,14 +62,13 @@ open class CarouselViewController: UIViewController, UICollectionViewDataSource,
         let pageControlHeight: CGFloat = 20
         let pageControl = UIPageControl(frame: CGRect(x: 0, y: view.bounds.height - pageControlHeight, width: view.bounds.width, height: pageControlHeight))
         pageControl.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
-        
     }
     
     open override func willAnimateRotation(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
         
         if let pageControl = self.pageControl {
             
-            collectionView?.performBatchUpdates(nil, completion: { (_) -> Void in
+            collectionView?.performBatchUpdates(nil, completion: { (_) in
                 self.pageControlDidChange(pageControl)
             })
         }
