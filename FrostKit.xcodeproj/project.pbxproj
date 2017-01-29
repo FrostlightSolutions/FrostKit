@@ -22,7 +22,8 @@
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 1845E6F71A66DA03005B377D /* Build configuration list for PBXAggregateTarget "FrostKitDocs" */;
 			buildPhases = (
-				1845E6FA1A66DA0F005B377D /* ShellScript */,
+				1845E6FA1A66DA0F005B377D /* Jazzy Run Script */,
+				18E4EF691E3E98BD003A883B /* LHDocs Run Script */,
 			);
 			dependencies = (
 			);
@@ -1039,18 +1040,19 @@
 			shellPath = /bin/sh;
 			shellScript = "# cd into the Fonts directory\ncd \"${SRCROOT}/${PROJECT_NAME}/Fonts/\"\n\n# cd into the directory with the less constants files\ncd \"LessConstantsFiles\"\n\n# A list of file names\nFILE_NAMES=\nINDEX=0\nfor FILE in * ; do\n    if [ -e \"${FILE}\" ] ; then\n        FILE_NAMES[\"${INDEX}\"]=\"${FILE}\"\n    fi\n    let \"INDEX++\"\ndone\n\n# cd back to the Fonts directory\ncd ../\n\n# Run Python script to parse less file into a single Swift constants file\n./ParseFontLessConstants.py \"${FILE_NAMES[*]}\"\n";
 		};
-		1845E6FA1A66DA0F005B377D /* ShellScript */ = {
+		1845E6FA1A66DA0F005B377D /* Jazzy Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Jazzy Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"${SRCROOT}\"\njazzy \\\n--clean \\\n--author \"James Barrow\" \\\n--github_url \"https://github.com/FrostlightSolutions/FrostKit\" \\\n--xcodebuild-arguments -project,\"FrostKit.xcodeproj\",-scheme,\"FrostKit iOS\" \\\n--module \"FrostKit\" \\\n--output \"../FrostKitDocs\" \\\n";
+			shellScript = "cd \"${SRCROOT}\"\njazzy \\\n--clean \\\n--author \"James Barrow\" \\\n—auther_url \"https://github.com/baza207\" \\\n--github_url \"https://github.com/FrostlightSolutions/FrostKit\" \\\n--xcodebuild-arguments -project,\"FrostKit.xcodeproj\",-scheme,\"FrostKit iOS\" \\\n--module \"FrostKit\" \\\n--output \"../FrostKitDocs\" \\\n";
 		};
 		188834131E3C116D00D2921E /* SwiftFormat Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1107,6 +1109,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ \"$USER\" != \"xcodeserver\" ]; then\nif which swiftlint >/dev/null; then\nswiftformat --disable trailingSpace,consecutiveSpaces,trailingCommas,unusedArguments,redundantParens --trimwhitespace nonblank-lines --comments ignore --ifdef outdent .\nelse\necho \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\nfi\n";
+		};
+		18E4EF691E3E98BD003A883B /* LHDocs Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "LHDocs Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"${SRCROOT}\"\nlhdocs -project FrostKit.xcodeproj -module-name FrostKit -output ../\n";
 		};
 		18E5457A1C77E28600637E85 /* SwiftLint Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
