@@ -109,5 +109,4 @@ extension CKDatabase {
         }
         add(operation)
     }
-    
 }

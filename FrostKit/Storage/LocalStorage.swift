@@ -47,7 +47,7 @@ public class LocalStorage {
     
     /**
     Reletive path for images.
-    
+     
     - returns: "Images/" string.
     */
     public class func imagesReletivePath() -> String {
@@ -56,7 +56,7 @@ public class LocalStorage {
     
     /**
     Reletive path for data.
-    
+     
     - returns: "Data/" string.
     */
     public class func dataReletivePath() -> String {
@@ -65,7 +65,7 @@ public class LocalStorage {
     
     /**
     User data filename.
-    
+     
     - returns: "User.data" string filename.
     */
     private class func userDataFilename() -> String {
@@ -74,7 +74,7 @@ public class LocalStorage {
     
     /**
     URL for the documents directory.
-    
+     
     - returns: Documents directory URL.
     */
     public class func documentsURL() -> URL {
@@ -83,7 +83,7 @@ public class LocalStorage {
     
     /**
     URL for the caches directory.
-    
+     
     - returns: Caches directory URL.
     */
     public class func cachesURL() -> URL {
@@ -103,9 +103,9 @@ public class LocalStorage {
     
     /**
     Returns the URL the correct directory passed in. Only the Document and Caches directorys are parsed. Any other value will return `nil` and print an error warning to the console.
-    
+     
     - parameter directory:   The search path directory to use.
-    
+     
     - returns: The correct URL for the seatch path directory.
     */
     class func baseURL(directory: FileManager.SearchPathDirectory) -> URL? {
@@ -123,12 +123,12 @@ public class LocalStorage {
     
     /**
     Returns the absolute URL for a specific seatch path directory, reletive path and file name.
-    
+     
     - parameter directory:      The search path directory to use.
     - parameter reletivePath:   The reletive path to of the file or directory.
     - parameter fileName:       The name of the file with a default of `nil` if a directory is being requested.
     - parameter fileExtension:  The name of the file extension.
-    
+     
     - returns: A URL comprised of the passed in parameters
     */
     class func absoluteURL(directory: FileManager.SearchPathDirectory, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> URL? {
@@ -141,12 +141,12 @@ public class LocalStorage {
     
     /**
     A private class for the public class function.
-    
+     
     - parameter baseURL:        The base URL of the absolute to be created.
     - parameter reletivePath:   The reletive path to of the file or directory.
     - parameter fileName:       The name of the file with a default of `nil` if a directory is being requested.
     - parameter fileExtension:  The name of the file extension.
-    
+     
     - returns: A non-optional version of the public class function.
     */
     private class func absoluteURL(baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> URL? {
@@ -154,7 +154,7 @@ public class LocalStorage {
         guard let name = fileName, let ext = fileExtension else {
             return nil
         }
-    
+        
         return baseURL.appendingPathComponent(reletivePath).appendingPathComponent(name).appendingPathExtension(ext)
     }
     
@@ -162,7 +162,7 @@ public class LocalStorage {
     
     /**
     Creates a directory at a paticular URL.
-    
+     
     - parameter url: The url of the directory to be created.
     */
     internal class func createDirectory(url: URL) {
@@ -178,13 +178,13 @@ public class LocalStorage {
     
     /**
     Saved data to the base URL, reletive path and filename.
-    
+     
     - parameter data:           The data to be saved.
     - parameter baseURL:        The search path directory to use.
     - parameter reletivePath:   The reletive path to of the file or directory.
     - parameter fileName:       The name of the file.
     - parameter fileExtension:  The name of the file extension.
-    
+     
     - returns: `true` if the data saves correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     public class func save(data: Any, baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
@@ -208,12 +208,12 @@ public class LocalStorage {
     
     /**
     Saves data to the documents directory.
-    
+     
     - parameter data:           The data to be saved.
     - parameter reletivePath:   The reletive path to of the file or directory.
     - parameter fileName:       The name of the file.
     - parameter fileExtension:  The name of the file extension.
-    
+     
     - returns: `true` if the data saves correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     public class func save(toDocuments data: Any, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
@@ -222,12 +222,12 @@ public class LocalStorage {
     
     /**
     Saves data to the caches directory.
-    
+     
     - parameter data:           The data to be saved.
     - parameter reletivePath:   The reletive path to of the file or directory.
     - parameter fileName:       The name of the file.
     - parameter fileExtension:  The name of the file extension.
-    
+     
     - returns: `true` if the data saves correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     public class func save(toCaches data: Any, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Bool {
@@ -236,9 +236,9 @@ public class LocalStorage {
     
     /**
     Saves user data.
-    
+     
     - parameter data:    The data to be saved.
-    
+     
     - returns: `true` if the data saves correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     public class func save(userData data: Any) -> Bool {
@@ -249,13 +249,13 @@ public class LocalStorage {
     
     /**
     Moves files from a base URL to anouther with the same reletive path and file name. This is to be mainly used to move items from documents to the caches directories and vice versa.
-    
+     
     - parameter fromBaseURL:   The original search path directory.
     - parameter toBaseURL:     The new search path directory.
     - parameter reletivePath:  The reletive path to of the file or directory.
     - parameter fileName:      The name of the file.
     - parameter fileExtension: The name of the file extension.
-    
+     
     - throws: `true` if the data is moved correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     private class func move(fromBaseURL: URL, toBaseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
@@ -269,11 +269,11 @@ public class LocalStorage {
     
     /**
     Moves files from cache to the documents directory in relation to the reletive path and file name.
-    
+     
     - parameter reletivePath:   The reletive path to of the file or directory.
     - parameter fileName:       The name of the file.
     - parameter fileExtension:  The name of the file extension.
-    
+     
     - throws: `true` if the data is moved correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     public class func move(fromCachesToDocuments reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
@@ -282,11 +282,11 @@ public class LocalStorage {
     
     /**
     Moves files from documents to the caches directory in relation to the reletive path and file name.
-    
+     
     - parameter reletivePath:   The reletive path to of the file or directory.
     - parameter fileName:       The name of the file.
     - parameter fileExtension:  The name of the file extension.
-    
+     
     - throws: `true` if the data is moved correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     public class func move(fromDocumentsToCaches reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
@@ -297,12 +297,12 @@ public class LocalStorage {
     
     /**
     Loads files from a base URL to anouther with the same reletive path and file name.
-    
+     
     - parameter baseURL:        The search path directory to use.
     - parameter reletivePath:   The reletive path to of the file or directory.
     - parameter fileName:       The name of the file.
     - parameter fileExtension:  The name of the file extension.
-    
+     
     - returns: The object to be loaded or `nil` if it isn't found.
     */
     public class func load(baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Any? {
@@ -315,11 +315,11 @@ public class LocalStorage {
     
     /**
     Loads files based in the documents directory.
-    
+     
     - parameter reletivePath:   The reletive path to of the file or directory.
     - parameter fileName:       The name of the file.
     - parameter fileExtension:  The name of the file extension.
-    
+     
     - returns: The file requested to be loaded or `nil` if it isn't found.
     */
     public class func load(fromDocuments reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Any? {
@@ -328,11 +328,11 @@ public class LocalStorage {
     
     /**
     Loads files based in the caches directory.
-    
+     
     - parameter reletivePath:   The reletive path to of the file or directory.
     - parameter fileName:       The name of the file.
     - parameter fileExtension:  The name of the file extension.
-    
+     
     - returns: The file requested to be loaded or `nil` if it isn't found.
     */
     public class func load(fromCaches reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> Any? {
@@ -341,11 +341,11 @@ public class LocalStorage {
     
     /**
     Loads images based in the documents directory.
-    
+     
     - parameter reletivePath:   The reletive path to of the file or directory.
     - parameter fileName:       The name of the file.
     - parameter fileExtension:  The name of the file extension.
-    
+     
     - returns: The image requested to be loaded or `nil` if it isn't found.
     */
     public class func loadImage(fromDocuments reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> UIImage? {
@@ -354,11 +354,11 @@ public class LocalStorage {
     
     /**
     Loads images based in the caches directory.
-    
+     
     - parameter reletivePath:   The reletive path to of the file or directory.
     - parameter fileName:       The name of the file.
     - parameter fileExtension:  The name of the file extension.
-    
+     
     - returns: The image requested to be loaded or `nil` if it isn't found.
     */
     public class func loadImage(fromCaches reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) -> UIImage? {
@@ -367,7 +367,7 @@ public class LocalStorage {
     
     /**
     Loads the user data object.
-    
+     
     - returns: The user data object requested to be loaded or `nil` if it isn't found.
     */
     public class func loadUserData() -> Any? {
@@ -378,9 +378,9 @@ public class LocalStorage {
     
     /**
     Removes an object at an absolute path. On success this method will remove the item from the Content Manager.
-    
+     
     - parameter absoluteURL:     Absolute path of the item to remove.
-    
+     
     - throws: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     class func remove(absoluteURL: URL) throws {
@@ -391,12 +391,12 @@ public class LocalStorage {
     
     /**
     Removes the file or directory from the base url in relation to the reletive path and file name. On success this method will remove the item from the Content Manager.
-    
+     
     - parameter baseURL:        The search path directory to use.
     - parameter reletivePath:   The reletive path to of the file or directory.
     - parameter fileName:       The name of the file.
     - parameter fileExtension:  The name of the file extension.
-    
+     
     - throws: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     private class func remove(baseURL: URL, reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
@@ -410,7 +410,7 @@ public class LocalStorage {
     
     /**
     Removes the images directory in the documents root directory.
-    
+     
     - throws: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     public class func removeDocumentsImagesDirectory() throws {
@@ -419,7 +419,7 @@ public class LocalStorage {
     
     /**
     Removes the data directory in the documents root directory.
-    
+     
     - throws: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     public class func removeDocumentsDataDirectory() throws {
@@ -428,7 +428,7 @@ public class LocalStorage {
     
     /**
     Removes the images directory in the caches root directory.
-    
+     
     - throws: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     public class func removeCachesImagesDirectory() throws {
@@ -437,7 +437,7 @@ public class LocalStorage {
     
     /**
     Removes the data directory in the caches root directory.
-    
+     
     - throws: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     public class func removeCachesDataDirectory() throws {
@@ -446,11 +446,11 @@ public class LocalStorage {
     
     /**
     Removes a file or directory in the documents root directory in relation to the reletive path and file name.
-    
+     
     - parameter reletivePath:   The reletive path to of the file or directory.
     - parameter fileName:       The name of the file.
     - parameter fileExtension:  The name of the file extension.
-    
+     
     - throws: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     public class func remove(documentsObject reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
@@ -459,15 +459,14 @@ public class LocalStorage {
     
     /**
     Removes a file or directory in the caches root directory in relation to the reletive path and file name.
-    
+     
     - parameter reletivePath:   The reletive path to of the file or directory.
     - parameter fileName:       The name of the file.
     - parameter fileExtension:  The name of the file extension.
-    
+     
     - throws: `true` if the data is removed correctly. `false` if it fails and an error will be printed regarding the nature of the nature of the error.
     */
     public class func remove(cachesObject reletivePath: String, fileName: String? = nil, fileExtension: String? = nil) throws {
         try remove(baseURL: cachesURL(), reletivePath: reletivePath, fileName: fileName, fileExtension: fileExtension)
     }
-    
 }

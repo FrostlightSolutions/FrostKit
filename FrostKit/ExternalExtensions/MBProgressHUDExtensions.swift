@@ -27,5 +27,4 @@ extension MBProgressHUD {
         
         return hud
     }
-    
 }

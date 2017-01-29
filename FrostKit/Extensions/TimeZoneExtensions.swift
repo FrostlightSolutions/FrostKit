@@ -15,11 +15,10 @@ extension TimeZone {
     
     /**
     A helper method to get the UTC time zone.
-    
+     
     - returns: A UTC time zone object.
     */
     public static func utc() -> TimeZone {
         return TimeZone(identifier: "UTC")!
     }
-    
 }

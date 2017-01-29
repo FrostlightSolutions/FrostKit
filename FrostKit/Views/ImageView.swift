@@ -19,5 +19,4 @@ open class ImageView: UIImageView {
             layer.masksToBounds = true
         }
     }
-    
 }

@@ -92,5 +92,4 @@ public class TaskStore {
     public func contains(taskWithURL urlString: String) -> Bool {
         return store[urlString] != nil
     }
-    
 }

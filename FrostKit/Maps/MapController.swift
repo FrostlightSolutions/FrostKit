@@ -24,6 +24,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
     open var identifier: String {
         return "FrostKitAnnotation"
     }
+    
     /// Dictates if the users location has been initially plotted.
     public var hasPlottedInitUsersLocation = false
     /// Dictates if the users location was not able to be plotted, due permissions issues, etc.
@@ -50,6 +51,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
             }
         }
     }
+    
     /// Used for plotting all annotations to ditermine annotation clustering.
     public let offscreenMapView = MKMapView(frame: CGRect())
     /// Private instance of map view, that returns the offscreen map view only if clustering is on.
@@ -60,6 +62,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
             return mapView
         }
     }
+    
     /// Determins if the map controller should cluster the annotations on the map, or plot them all directly. THe default is `true`.
     @IBInspectable public var shouldUseAnnotationClustering: Bool = true
     /**
@@ -89,6 +92,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
             }
         }
     }
+    
     // swiftlint:enable weak_delegate
     /// `true` if the user is currently being tracked in the map view or `false` if not.
     public var trackingUser: Bool = false {
@@ -104,6 +108,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
             }
         }
     }
+    
     /// Determins if the location manager should request access to location services on setup. By default this is set to `false`.
     @IBInspectable public var shouldRequestLocationServices: Bool = false
     /// The location manager automatically created when assigning the map view to the map controller. It's only use if for getting the user's access to location services.
@@ -112,6 +117,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
     public var addresses: [Address] {
         return [Address](addressesDict.values)
     }
+    
     private var addressesDict = [AnyHashable: Address]()
     
     /// A dictionary of annotations plotted to the map view with the address object as the key.
@@ -170,7 +176,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
     
     /**
     Plot an array of addresses to the map view.
-    
+     
     - parameter addresses: An array of addresses to plot.
     */
     public func plot(addresses: [Address]) {
@@ -217,7 +223,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
     
     /**
     Remove all annotations plotted to the map.
-    
+     
     - parameter includingCached: If `true` then the cached annotations dictionary is also cleared.
     */
     public func removeAllAnnotations(includingCached: Bool = false) {
@@ -379,7 +385,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
                 mapView.addAnnotation(annotation)
             }
             
-        // If filteredAllAnnotationsInBucket contains more than 1 annotation, then get the annotation to show and set relevent details
+            // If filteredAllAnnotationsInBucket contains more than 1 annotation, then get the annotation to show and set relevent details
         } else if filteredAllAnnotationsInBucket.count > 1 {
             
             guard let annotationForGrid = self.calculatedAnnotationInGrid(mapView: mapView, gridMapRect: gridMapRect, allAnnotations: filteredAllAnnotationsInBucket, visableAnnotations: visableAnnotationsInBucket) else {
@@ -777,19 +783,19 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
         if let annotation = view.annotation as? Annotation {
             
             let alertController = UIAlertController(title: annotation.title, message: annotation.subtitle, preferredStyle: .actionSheet)
-            let zoomToAlertAction = UIAlertAction(title: FKLocalizedString("ZOOM_TO_", comment: "Zoom to..."), style: .default, handler: { (_) -> Void in
+            let zoomToAlertAction = UIAlertAction(title: FKLocalizedString("ZOOM_TO_", comment: "Zoom to..."), style: .default, handler: { (_) in
                 self.zoom(toAnnotation: annotation)
             })
             alertController.addAction(zoomToAlertAction)
-            let directionsAlertAction = UIAlertAction(title: FKLocalizedString("DIRECTIONS", comment: "Directions"), style: .default, handler: { (_) -> Void in
+            let directionsAlertAction = UIAlertAction(title: FKLocalizedString("DIRECTIONS", comment: "Directions"), style: .default, handler: { (_) in
                 self.directionsToCurrentLocation(fromCoordinate: annotation.coordinate)
             })
             alertController.addAction(directionsAlertAction)
-            let openInMapsAlertAction = UIAlertAction(title: FKLocalizedString("OPEN_IN_MAPS", comment: "Open in Maps"), style: .default, handler: { (_) -> Void in
+            let openInMapsAlertAction = UIAlertAction(title: FKLocalizedString("OPEN_IN_MAPS", comment: "Open in Maps"), style: .default, handler: { (_) in
                 self.directionsToCurrentLocation(fromCoordinate: annotation.coordinate, inApp: false)
             })
             alertController.addAction(openInMapsAlertAction)
-            let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL", comment: "Cancel"), style: .cancel, handler: { (_) -> Void in
+            let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL", comment: "Cancel"), style: .cancel, handler: { (_) in
                 alertController.dismiss(animated: true, completion: nil)
             })
             alertController.addAction(cancelAlertAction)
@@ -897,5 +903,4 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
             return nameRange != nil || addressStringRange != nil
         }
     }
-    
 }

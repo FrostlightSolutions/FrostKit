@@ -80,14 +80,14 @@ public class ContentManager {
             
 #if DEBUG
             let finish = NSDate.timeIntervalSinceReferenceDate
-            NSLog("Check of \(shared.contentMetadata.count) content metadata items complete in \(finish-start) seconds. Removed \(metadataToRemove.count) items.")
+            NSLog("Check of \(shared.contentMetadata.count) content metadata items complete in \(finish - start) seconds. Removed \(metadataToRemove.count) items.")
 #endif
         }
     }
     
     /**
     Creates or updates metadata for an object at an absolute URL.
-    
+     
     - parameter url:    The absolute URL of the item.
     */
     public class func save(url: URL) {
@@ -96,7 +96,7 @@ public class ContentManager {
     
     /**
     Creates or updates metadata for an object at an absolute path.
-    
+     
     - parameter path:    The absolute path of the item.
     */
     public class func save(path: String) {
@@ -105,7 +105,7 @@ public class ContentManager {
     
     /**
     Removed metadata for an object at an absolute URL.
-    
+     
     - parameter url:    The absolute URL of the item.
     */
     public class func remove(url: URL) {
@@ -114,11 +114,10 @@ public class ContentManager {
     
     /**
     Removed metadata for an object at an absolute path.
-    
+     
     - parameter path:    The absolute path of the item.
     */
     public class func remove(path: String) {
         shared.contentMetadata.removeValue(forKey: path)
     }
-    
 }

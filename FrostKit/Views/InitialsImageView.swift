@@ -22,6 +22,7 @@ open class InitialsImageView: ImageView {
             self.initials = initials
         }
     }
+    
     private var initials: String = "" {
         didSet {
             layer.borderColor = tintColor?.cgColor
@@ -29,6 +30,7 @@ open class InitialsImageView: ImageView {
             initialsLabel?.text = initials
         }
     }
+    
     @IBInspectable public var borderWidth: CGFloat = 1 {
         didSet {
             if image == nil {
@@ -36,6 +38,7 @@ open class InitialsImageView: ImageView {
             }
         }
     }
+    
     open override var image: UIImage? {
         didSet {
             if image == nil {
@@ -47,16 +50,17 @@ open class InitialsImageView: ImageView {
             }
         }
     }
+    
     open override var tintColor: UIColor? {
         didSet {
             layer.borderColor = tintColor?.cgColor
             initialsLabel.textColor = tintColor
         }
     }
+    
     @IBOutlet public weak var initialsLabel: UILabel! {
         didSet {
             initialsLabel.backgroundColor = .clear
         }
     }
-    
 }

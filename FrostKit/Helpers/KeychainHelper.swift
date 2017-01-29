@@ -51,9 +51,9 @@ public class KeychainHelper {
     
     /**
     Gets the details saved for a paticular username.
-    
+     
     - parameter username: The username of the details to return.
-    
+     
     - returns: The details saved with the username if found, otherwise `nil`.
     */
     public class func details(username: String) -> Any? {
@@ -72,10 +72,10 @@ public class KeychainHelper {
     
     /**
     Set details for a username to the keychain.
-    
+     
     - parameter details:  The details to save.
     - parameter username: The username to reference the details with.
-    
+     
     - returns: Returns `true` if the details were successfully saved, `false` if not.
     */
     public class func set(details: Any, username: String) -> Bool {
@@ -121,7 +121,7 @@ public class KeychainHelper {
     
     /**
     Deletes the currently saved keychain.
-    
+     
     - returns: Returns `true` if deletion has succeeded or `false` if it failed.
     */
     public class func deleteKeychain() -> Bool {
@@ -138,5 +138,4 @@ public class KeychainHelper {
         
         return false
     }
-    
 }

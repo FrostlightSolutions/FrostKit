@@ -24,7 +24,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     // For use with delegate methods only, hence private NOT public
     private static let shared = SocialHelper()
     
-    override private init() {
+    private override init() {
         super.init()
     }
     
@@ -32,14 +32,14 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     
     /**
     Presents a compose view controller with the details passed in.
-    
+     
     - parameter serviceType:    The type of service type to present. For a list of possible values, see Service Type Constants.
     - parameter initialText:    The initial text to show in the `SLComposeViewController`.
     - parameter urls:           The URLs to attach to the `SLComposeViewController`.
     - parameter images:         The images to attach to the `SLComposeViewController`.
     - parameter viewController: The view controller to present the `SLComposeViewController` in.
     - parameter animated:       If the presentation should be animated or not.
-    
+     
     - returns: Returns `false` if there is an issue or the service is unavailable, otherwise `true`.
     */
     public class func presentComposeViewController(serviceType: String, initialText: String? = nil, urls: [URL]? = nil, images: [UIImage]? = nil, inViewController viewController: UIViewController, animated: Bool = true) -> Bool {
@@ -78,11 +78,11 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     
     /**
     Returns a URL to call with `openURL(_:)` in `UIApplication` parsed from a number string.
-    
+     
     Note: `openURL(_:)` can not be called directly within a Framework so that has to be done manually inside the main application.
-    
+     
     - parameter number: The number to parse in to create the URL.
-    
+     
     - returns: The URL of the parsed phone number, prefixed with `telprompt://`.
     */
     public class func phonePrompt(_ number: String) -> URL? {
@@ -102,7 +102,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     
     /**
     Creates a prompt for an email with the following parameters to pass into the `MFMailComposeViewController`.
-    
+     
     - parameter toRecipients:   The email addresses of the recipients of the email.
     - parameter ccRecipients:   The email addresses of the CC recipients of the email.
     - parameter bccRecipients:  The email addresses of the BCC recipients of the email.
@@ -121,11 +121,11 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             
             let alertController = UIAlertController(title: emailsString, message: nil, preferredStyle: .alert)
             alertController.view.tintColor = FrostKit.tintColor
-            let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL"), style: .cancel) { (_) -> Void in
+            let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL"), style: .cancel) { (_) in
                 alertController.dismiss(animated: true, completion: nil)
             }
             alertController.addAction(cancelAlertAction)
-            let openAlertAction = UIAlertAction(title: FKLocalizedString("EMAIL"), style: .default) { (_) -> Void in
+            let openAlertAction = UIAlertAction(title: FKLocalizedString("EMAIL"), style: .default) { (_) in
                 
                 SocialHelper.presentMailComposeViewController(toRecipients: toRecipients, ccRecipients: ccRecipients, bccRecipients: bccRecipients, subject: subject, messageBody: messageBody, isBodyHTML: isBodyHTML, attachments: attachments, viewController: viewController, animated: animated)
             }
@@ -161,7 +161,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
     
     /**
     Creates a prompt for a message with the following parameters to pass into the `MFMessageComposeViewController`.
-    
+     
     - parameter recipients:     The recipients of the message.
     - parameter subject:        The subject of the message.
     - parameter body:           The main body of the message.
@@ -177,11 +177,11 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             
             let alertController = UIAlertController(title: recipientsString, message: nil, preferredStyle: .alert)
             alertController.view.tintColor = FrostKit.tintColor
-            let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL"), style: .cancel) { (_) -> Void in
+            let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL"), style: .cancel) { (_) in
                 alertController.dismiss(animated: true, completion: nil)
             }
             alertController.addAction(cancelAlertAction)
-            let openAlertAction = UIAlertAction(title: FKLocalizedString("MESSAGE"), style: .default) { (_) -> Void in
+            let openAlertAction = UIAlertAction(title: FKLocalizedString("MESSAGE"), style: .default) { (_) in
                 
                 SocialHelper.presentMessageComposeViewController(recipients: recipients, subject: subject, body: body, attachments: attachments, viewController: viewController, animated: animated)
             }
@@ -253,5 +253,4 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         
         controller.dismiss(animated: true, completion: nil)
     }
-    
 }

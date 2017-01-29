@@ -51,17 +51,17 @@ public class NetworkActivityIndicatorManager {
     /// A boolean value indicating whether the manager is enabled. Defaults to `false`.
     public var isEnabled: Bool {
         get {
-            lock.lock() ; defer { lock.unlock() }
+            lock.lock(); defer { lock.unlock() }
             return enabled
         }
         set {
-            lock.lock() ; defer { lock.unlock() }
+            lock.lock(); defer { lock.unlock() }
             enabled = newValue
         }
     }
     
     /// A boolean value indicating whether the network activity indicator is currently visible.
-    public private(set) var isNetworkActivityIndicatorVisible: Bool = false {
+    private(set) public var isNetworkActivityIndicatorVisible: Bool = false {
         didSet {
             guard isNetworkActivityIndicatorVisible != oldValue else { return }
             
@@ -134,7 +134,7 @@ public class NetworkActivityIndicatorManager {
     ///
     /// Generally, this method should not need to be used directly.
     public func incrementActivityCount() {
-        lock.lock() ; defer { lock.unlock() }
+        lock.lock(); defer { lock.unlock() }
         
         activityCount += 1
         updateActivityIndicatorStateForNetworkActivityChange()
@@ -147,7 +147,7 @@ public class NetworkActivityIndicatorManager {
     ///
     /// Generally, this method should not need to be used directly.
     public func decrementActivityCount() {
-        lock.lock() ; defer { lock.unlock() }
+        lock.lock(); defer { lock.unlock() }
         guard activityCount > 0 else { return }
         
         activityCount -= 1
@@ -242,7 +242,7 @@ public class NetworkActivityIndicatorManager {
     }
     
     @objc private func startDelayTimerFired() {
-        lock.lock() ; defer { lock.unlock() }
+        lock.lock(); defer { lock.unlock() }
         
         if activityCount > 0 {
             activityIndicatorState = .active
@@ -252,7 +252,7 @@ public class NetworkActivityIndicatorManager {
     }
     
     @objc private func completionDelayTimerFired() {
-        lock.lock() ; defer { lock.unlock() }
+        lock.lock(); defer { lock.unlock() }
         activityIndicatorState = .notActive
     }
     
@@ -265,5 +265,4 @@ public class NetworkActivityIndicatorManager {
         completionDelayTimer?.invalidate()
         completionDelayTimer = nil
     }
-    
 }

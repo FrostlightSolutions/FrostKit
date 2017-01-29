@@ -23,15 +23,18 @@ open class CloudKitTableViewController: UITableViewController {
     open var container: CKContainer {
         return CKContainer.default()
     }
+    
     open var database: CKDatabase {
         return container.publicCloudDatabase
     }
+    
     open var query: CKQuery {
         
         let predicate = NSPredicate(value: true)
         let _query = CKQuery(recordType: recordType, predicate: predicate)
         return _query
     }
+    
     private var queryOperation: CKQueryOperation {
         
         let _queryOperation: CKQueryOperation
@@ -45,6 +48,7 @@ open class CloudKitTableViewController: UITableViewController {
         
         return _queryOperation
     }
+    
     private var queryCursor: CKQueryCursor?
     
     @IBOutlet public var tableFooterView: UIView?
@@ -181,5 +185,4 @@ open class CloudKitTableViewController: UITableViewController {
             loadRecords()
         }
     }
-    
 }

@@ -22,10 +22,12 @@ open class Address: NSObject {
     public var latitude: CLLocationDegrees {
         return coordinate.latitude
     }
+    
     /// The longitude of the address.
     public var longitude: CLLocationDegrees {
         return coordinate.longitude
     }
+    
     /// If the address is valid then `true`, otherwise return `false`.
     public var isValid: Bool {
         if latitude == 0 && longitude == 0 {
@@ -34,6 +36,7 @@ open class Address: NSObject {
             return true
         }
     }
+    
     /// The name of the address object.
     public var name = "N/A"
     /// The address string of the object.
@@ -42,9 +45,11 @@ open class Address: NSObject {
     open override var description: String {
         return "<Latitude: \(latitude) Longitude: \(longitude) Address: \(addressString)>"
     }
+    
     open override var hashValue: Int {
         return Int(latitude) ^ Int(longitude)
     }
+    
     open var key: String {
         return "\(latitude)-\(longitude)"
     }
@@ -98,7 +103,6 @@ open class Address: NSObject {
         }
         return adresses
     }
-    
 }
 
 public func == (lhs: Address, rhs: Address) -> Bool {

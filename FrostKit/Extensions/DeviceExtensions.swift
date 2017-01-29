@@ -24,10 +24,12 @@ extension UIDevice {
         static var majorVersion: Int {
             return UIDevice.systemVersion(atIndex: .major, components: versionComponents)
         }
+        
         /// The minor system version.
         static var minorVersion: Int {
             return UIDevice.systemVersion(atIndex: .minor, components: versionComponents)
         }
+        
         /// The minor path version.
         static var bugFixVersion: Int {
             return UIDevice.systemVersion(atIndex: .bugFix, components: versionComponents)
@@ -46,5 +48,4 @@ extension UIDevice {
         }
         return NSNotFound
     }
-    
 }

@@ -10,7 +10,7 @@ import XCTest
 @testable import FrostKit
 
 class DateExtensionsTests: XCTestCase {
-   
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -23,7 +23,7 @@ class DateExtensionsTests: XCTestCase {
     
     func testFusDate() {
         
-        measure { () -> Void in
+        measure { () in
             
             let dateString = "2016-02-26"
             let date = Date.fusDate(from: dateString)
@@ -41,7 +41,7 @@ class DateExtensionsTests: XCTestCase {
     
     func testFusDateAndTime() {
         
-        measure { () -> Void in
+        measure { () in
             
             let dateString = "2016-02-26T15:24:48.000000Z"
             let date = Date.fusDate(from: dateString)
@@ -62,16 +62,16 @@ class DateExtensionsTests: XCTestCase {
     
     func testIsYesterday() {
         
-        measure { () -> Void in
+        measure { () in
             
-            let date = Date(timeIntervalSinceNow: -24*60*60)
+            let date = Date(timeIntervalSinceNow: -24 * 60 * 60)
             XCTAssert(date.isYesterday, "Pass")
         }
     }
     
     func testIsToday() {
         
-        measure { () -> Void in
+        measure { () in
             
             let date = Date()
             XCTAssert(date.isToday, "Pass")
@@ -80,16 +80,16 @@ class DateExtensionsTests: XCTestCase {
     
     func testIsTomorrow() {
         
-        measure { () -> Void in
+        measure { () in
             
-            let date = Date(timeIntervalSinceNow: 24*60*60)
+            let date = Date(timeIntervalSinceNow: 24 * 60 * 60)
             XCTAssert(date.isTomorrow, "Pass")
         }
     }
     
     func testIsWeekday() {
         
-        measure { () -> Void in
+        measure { () in
             
             var components = DateComponents()
             components.calendar = Calendar.iso8601Calendar()
@@ -113,9 +113,9 @@ class DateExtensionsTests: XCTestCase {
         }
     }
     
-    func testIsBeginingOfWeek () {
+    func testIsBeginingOfWeek() {
         
-        measure { () -> Void in
+        measure { () in
             
             var components = DateComponents()
             components.calendar = Calendar.iso8601Calendar()
@@ -139,9 +139,9 @@ class DateExtensionsTests: XCTestCase {
         }
     }
     
-    func testIsEndOfWeek () {
+    func testIsEndOfWeek() {
         
-        measure { () -> Void in
+        measure { () in
             
             var components = DateComponents()
             components.calendar = Calendar.iso8601Calendar()
@@ -165,9 +165,9 @@ class DateExtensionsTests: XCTestCase {
         }
     }
     
-    func testIsBeginingOfMonth () {
+    func testIsBeginingOfMonth() {
         
-        measure { () -> Void in
+        measure { () in
             
             var components = DateComponents()
             components.calendar = Calendar.iso8601Calendar()
@@ -184,9 +184,9 @@ class DateExtensionsTests: XCTestCase {
         }
     }
     
-    func testIsEndOfMonth () {
+    func testIsEndOfMonth() {
         
-        measure { () -> Void in
+        measure { () in
             
             var components = DateComponents()
             components.calendar = Calendar.iso8601Calendar()
@@ -205,7 +205,7 @@ class DateExtensionsTests: XCTestCase {
     
     func testDay() {
         
-        measure { () -> Void in
+        measure { () in
             
             var components = DateComponents()
             components.calendar = Calendar.iso8601Calendar()
@@ -217,7 +217,7 @@ class DateExtensionsTests: XCTestCase {
     
     func testHour() {
         
-        measure { () -> Void in
+        measure { () in
             
             let hour = 19
             var components = DateComponents()
@@ -230,7 +230,7 @@ class DateExtensionsTests: XCTestCase {
     
     func testMinute() {
         
-        measure { () -> Void in
+        measure { () in
             
             let minute = 47
             var components = DateComponents()
@@ -243,7 +243,7 @@ class DateExtensionsTests: XCTestCase {
     
     func testTimeInHours() {
         
-        measure { () -> Void in
+        measure { () in
             
             var components = DateComponents()
             components.calendar = Calendar.iso8601Calendar()
@@ -256,18 +256,18 @@ class DateExtensionsTests: XCTestCase {
     
     func testSecondsComponents() {
         
-        measure { () -> Void in
+        measure { () in
             
             XCTAssert(Date.minuteInSeconds() == 60)
             XCTAssert(Date.hourInSeconds() == 3600)
             XCTAssert(Date.dayInSeconds() == 86400)
-            XCTAssert(Date.weekInSeconds() == 604800)
+            XCTAssert(Date.weekInSeconds() == 604_800)
         }
     }
     
     func testDaysBetweenDates() {
         
-        measure { () -> Void in
+        measure { () in
             
             let daysBetween = 3
             
@@ -292,7 +292,7 @@ class DateExtensionsTests: XCTestCase {
     
     func testDaysRemainingInWeek() {
         
-        measure { () -> Void in
+        measure { () in
             
             var components = DateComponents()
             components.calendar = Calendar.iso8601Calendar()
@@ -308,7 +308,7 @@ class DateExtensionsTests: XCTestCase {
     
     func testDaysInMonth() {
         
-        measure { () -> Void in
+        measure { () in
             
             var components = DateComponents()
             components.calendar = Calendar.iso8601Calendar()
@@ -324,7 +324,7 @@ class DateExtensionsTests: XCTestCase {
     
     func testDaysRemainingInMonth() {
         
-        measure { () -> Void in
+        measure { () in
             
             var components = DateComponents()
             components.calendar = Calendar.iso8601Calendar()
@@ -340,7 +340,7 @@ class DateExtensionsTests: XCTestCase {
     
     func testCompareDatesWithinMonth() {
         
-        measure { () -> Void in
+        measure { () in
             
             var components = DateComponents()
             components.calendar = Calendar.iso8601Calendar()
@@ -378,7 +378,7 @@ class DateExtensionsTests: XCTestCase {
     
     func testCompareDatesBetweenMonth() {
         
-        measure { () -> Void in
+        measure { () in
             
             var components = DateComponents()
             components.calendar = Calendar.iso8601Calendar()
@@ -422,7 +422,7 @@ class DateExtensionsTests: XCTestCase {
     
     func testCompareDatesBetweenYears() {
         
-        measure { () -> Void in
+        measure { () in
             
             var components = DateComponents()
             components.calendar = Calendar.iso8601Calendar()
@@ -466,7 +466,7 @@ class DateExtensionsTests: XCTestCase {
     
     func testStripTime() {
         
-        measure { () -> Void in
+        measure { () in
             
             var components = DateComponents()
             components.calendar = Calendar.iso8601Calendar()
@@ -489,7 +489,7 @@ class DateExtensionsTests: XCTestCase {
     
     func testDateByAddingDays() {
         
-        measure { () -> Void in
+        measure { () in
             
             var components = DateComponents()
             components.calendar = Calendar.iso8601Calendar()
@@ -516,7 +516,7 @@ class DateExtensionsTests: XCTestCase {
     
     func testDateAt() {
         
-        measure { () -> Void in
+        measure { () in
             
             var components = DateComponents()
             components.calendar = Calendar.iso8601Calendar()
@@ -567,5 +567,4 @@ class DateExtensionsTests: XCTestCase {
         XCTAssert(date.monthShortString == "Feb")
         XCTAssert(date.yearString == "2016")
     }
-    
 }

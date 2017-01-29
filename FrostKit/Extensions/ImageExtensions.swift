@@ -15,9 +15,9 @@ extension UIImage {
     
     /**
     Scales down an image and returns a new image scaled to that max size.
-    
+     
     - parameter size:    The maximum size of the scaled image.
-    
+     
     - returns: A scaled image.
     */
     public func image(maxSize size: CGSize) -> UIImage? {
@@ -29,13 +29,13 @@ extension UIImage {
         if size.width > size.height {
             
             // Landscape
-            let scale = size.height/size.width
+            let scale = size.height / size.width
             scaledSize.height *= scale
             
         } else if size.height > size.width {
             
             // Portrait
-            let scale = size.width/size.height
+            let scale = size.width / size.height
             scaledSize.width *= scale
         }
         
@@ -46,5 +46,4 @@ extension UIImage {
         
         return scaledImage
     }
-
 }

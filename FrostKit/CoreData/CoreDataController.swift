@@ -92,5 +92,4 @@ open class CoreDataController: NSObject {
         // Use mainly in subclasses, otherwise this will just reset
         resetFetchedResultsController()
     }
-    
 }
