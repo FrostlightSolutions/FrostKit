@@ -87,6 +87,7 @@ public class FrostKit {
 #if os(iOS) || os(tvOS) || os(OSX)
         if let appStoreID = appStoreID {
             frostKit.appStoreID = appStoreID
+            AppStoreHelper.shared.updateAppStoreData()
         }
 #endif
     }
