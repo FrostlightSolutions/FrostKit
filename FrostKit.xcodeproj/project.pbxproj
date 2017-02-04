@@ -30,6 +30,17 @@
 			name = FrostKitDocs;
 			productName = FrostKitDocs;
 		};
+		18F3194D1E45F7B80055E647 /* SwiftFormat */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 18F319501E45F7B80055E647 /* Build configuration list for PBXAggregateTarget "SwiftFormat" */;
+			buildPhases = (
+				18F319511E45F7BB0055E647 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = SwiftFormat;
+			productName = SwiftFormat;
+		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
@@ -743,7 +754,6 @@
 				1826B0231BD9047900DA1669 /* Headers */,
 				1826B0241BD9047900DA1669 /* Resources */,
 				18E5457B1C77E2B900637E85 /* SwiftLint Run Script */,
-				188834201E3C1FBC00D2921E /* SwiftFormat Run Script */,
 			);
 			buildRules = (
 			);
@@ -763,7 +773,6 @@
 				1829A8091BA2CD380017E4EE /* Headers */,
 				1829A80A1BA2CD380017E4EE /* Resources */,
 				18E5457A1C77E28600637E85 /* SwiftLint Run Script */,
-				1888341F1E3C1FB100D2921E /* SwiftFormat Run Script */,
 			);
 			buildRules = (
 			);
@@ -783,7 +792,6 @@
 				18839B1419D9FA8C00760157 /* Headers */,
 				18839B1519D9FA8C00760157 /* Resources */,
 				1807E5D81C77CD5A00BEBAFE /* SwiftLint Run Script */,
-				188834131E3C116D00D2921E /* SwiftFormat Run Script */,
 			);
 			buildRules = (
 			);
@@ -841,7 +849,6 @@
 				18E5459A1C77E53F00637E85 /* Headers */,
 				18E5459B1C77E53F00637E85 /* Resources */,
 				18E545B71C77E5E800637E85 /* SwiftLint Run Script */,
-				188834211E3C1FC700D2921E /* SwiftFormat Run Script */,
 			);
 			buildRules = (
 			);
@@ -922,6 +929,11 @@
 						CreatedOnToolsVersion = 7.2.1;
 						LastSwiftMigration = 0800;
 					};
+					18F3194D1E45F7B80055E647 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 6WJM49JAZT;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 18839B1119D9FA8C00760157 /* Build configuration list for PBXProject "FrostKit" */;
@@ -945,6 +957,7 @@
 				18E545A51C77E54000637E85 /* FrostKit macOS Tests */,
 				1845E6F61A66DA03005B377D /* FrostKitDocs */,
 				1836A20B1A84414D00E57F86 /* FontConstantsBuilder */,
+				18F3194D1E45F7B80055E647 /* SwiftFormat */,
 			);
 		};
 /* End PBXProject section */
@@ -1054,62 +1067,6 @@
 			shellPath = /bin/sh;
 			shellScript = "cd \"${SRCROOT}\"\njazzy \\\n--clean \\\n--author \"James Barrow\" \\\n—auther_url \"https://github.com/baza207\" \\\n--github_url \"https://github.com/FrostlightSolutions/FrostKit\" \\\n--xcodebuild-arguments -project,\"FrostKit.xcodeproj\",-scheme,\"FrostKit iOS\" \\\n--module \"FrostKit\" \\\n--output \"../FrostKitDocs\" \\\n";
 		};
-		188834131E3C116D00D2921E /* SwiftFormat Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "SwiftFormat Run Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"$USER\" != \"xcodeserver\" ]; then\nif which swiftlint >/dev/null; then\nswiftformat --disable trailingSpace,consecutiveSpaces,trailingCommas,unusedArguments,redundantParens --trimwhitespace nonblank-lines --comments ignore --ifdef outdent .\nelse\necho \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\nfi\n";
-		};
-		1888341F1E3C1FB100D2921E /* SwiftFormat Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "SwiftFormat Run Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"$USER\" != \"xcodeserver\" ]; then\nif which swiftlint >/dev/null; then\nswiftformat --disable trailingSpace,consecutiveSpaces,trailingCommas,unusedArguments,redundantParens --trimwhitespace nonblank-lines --comments ignore --ifdef outdent .\nelse\necho \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\nfi\n";
-		};
-		188834201E3C1FBC00D2921E /* SwiftFormat Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "SwiftFormat Run Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"$USER\" != \"xcodeserver\" ]; then\nif which swiftlint >/dev/null; then\nswiftformat --disable trailingSpace,consecutiveSpaces,trailingCommas,unusedArguments,redundantParens --trimwhitespace nonblank-lines --comments ignore --ifdef outdent .\nelse\necho \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\nfi\n";
-		};
-		188834211E3C1FC700D2921E /* SwiftFormat Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "SwiftFormat Run Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"$USER\" != \"xcodeserver\" ]; then\nif which swiftlint >/dev/null; then\nswiftformat --disable trailingSpace,consecutiveSpaces,trailingCommas,unusedArguments,redundantParens --trimwhitespace nonblank-lines --comments ignore --ifdef outdent .\nelse\necho \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\nfi\n";
-		};
 		18E4EF691E3E98BD003A883B /* LHDocs Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1165,6 +1122,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ \"$USER\" != \"xcodeserver\" ]; then\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\nfi\n";
+		};
+		18F319511E45F7BB0055E647 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"$USER\" != \"xcodeserver\" ]; then\nif which swiftlint >/dev/null; then\nswiftformat --disable trailingSpace,consecutiveSpaces,trailingCommas,unusedArguments,redundantParens --trimwhitespace nonblank-lines --comments ignore --ifdef outdent .\nelse\necho \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1825,6 +1795,22 @@
 			};
 			name = Release;
 		};
+		18F3194E1E45F7B80055E647 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 6WJM49JAZT;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		18F3194F1E45F7B80055E647 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 6WJM49JAZT;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1917,6 +1903,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		18F319501E45F7B80055E647 /* Build configuration list for PBXAggregateTarget "SwiftFormat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18F3194E1E45F7B80055E647 /* Debug */,
+				18F3194F1E45F7B80055E647 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
