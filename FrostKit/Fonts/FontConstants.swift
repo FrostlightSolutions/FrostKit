@@ -812,7 +812,7 @@ Ionicons
 ------------------------------
 */
 
-public struct Ionicons {
+public struct IonIcons {
     public static let alert = "\u{f101}"
     public static let alertCircled = "\u{f100}"
     public static let androidAdd = "\u{f2c7}"
