@@ -51,7 +51,6 @@ FrostKit
 
 #### Helpers
 - [x] `SocialHelper` - Helpers to create, present and deal with social prompts for email, phone, message and social services.
-- [x] `KeychainHelper` - Not currently maintained. Use other options such as [UICKeyChainStore](https://github.com/kishikawakatsumi/UICKeyChainStore).
 - [x] `AppStoreHelper` - Helper for getting information about the current app from the App Store (requires the App ID set in `setup()`).
 
 #### Maps
