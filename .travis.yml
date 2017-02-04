@@ -27,6 +27,11 @@ env:
 
     - DESTINATION="arch=x86_64"                    SCHEME="$MACOS_FRAMEWORK_SCHEME"   SDK="$MACOS_SDK"   RUN_TESTS="YES" BUILD_EXAMPLE="NO"
 before_install:
+  - brew update
+  - brew outdated carthage || brew upgrade carthage
+before_script:
+  # bootstrap the dependencies for the project
+  # you can remove if you don't have dependencies
   - carthage bootstrap
 script:
   - set -o pipefail
