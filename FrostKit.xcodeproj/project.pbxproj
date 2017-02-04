@@ -174,7 +174,6 @@
 		18E545BC1C77E72E00637E85 /* FrostKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 18E0282E1BA2D17300852022 /* FrostKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		18E545BD1C77E74D00637E85 /* FrostKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23119DE07670032ABB7 /* FrostKit.swift */; };
 		18E9FF931C80AA5700AC5230 /* ErrorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E9FF911C80AA5700AC5230 /* ErrorExtensionsTests.swift */; };
-		18E9FF951C80AC6F00AC5230 /* MapControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D8CB01C77EEFC00261DF5 /* MapControllerTests.swift */; };
 		18E9FF961C80AC6F00AC5230 /* AppStoreHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D8CAE1C77EEFC00261DF5 /* AppStoreHelperTests.swift */; };
 		18E9FF971C80AC6F00AC5230 /* DateExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AC87E91C77F48200426776 /* DateExtensionsTests.swift */; };
 		18E9FF981C80AC6F00AC5230 /* ColorExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AC87E81C77F48200426776 /* ColorExtensionsTest.swift */; };
@@ -182,6 +181,7 @@
 		18EA123F19DC79F100FD858D /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA123E19DC79F100FD858D /* DataExtensions.swift */; };
 		18EA124119DC7D9000FD858D /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124019DC7D9000FD858D /* ViewExtensions.swift */; };
 		18EA124519DC8B5E00FD858D /* BundleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124419DC8B5E00FD858D /* BundleExtensions.swift */; };
+		18F319531E45FA310055E647 /* MapControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F319521E45FA310055E647 /* MapControllerTests.swift */; };
 		66AB893C1D71C21D0097ADAC /* CKReferenceExntensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB893B1D71C21D0097ADAC /* CKReferenceExntensions.swift */; };
 		66AB893D1D71C21D0097ADAC /* CKReferenceExntensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB893B1D71C21D0097ADAC /* CKReferenceExntensions.swift */; };
 		66AB893F1D71CB3D0097ADAC /* CKRecordIDExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB893E1D71CB3D0097ADAC /* CKRecordIDExtensions.swift */; };
@@ -289,7 +289,6 @@
 		18839B4519DA27AE00760157 /* SocialHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SocialHelper.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		188D62971A8D56FE0098D976 /* InitialsImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = InitialsImageView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		189D8CAE1C77EEFC00261DF5 /* AppStoreHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreHelperTests.swift; sourceTree = "<group>"; };
-		189D8CB01C77EEFC00261DF5 /* MapControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MapControllerTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		189D8CB11C77EEFC00261DF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18A786CC1A77B39A006EADB9 /* CollectionViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CollectionViewControllerExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18AC87E81C77F48200426776 /* ColorExtensionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ColorExtensionsTest.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -330,6 +329,7 @@
 		18EA123E19DC79F100FD858D /* DataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DataExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18EA124019DC7D9000FD858D /* ViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ViewExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18EA124419DC8B5E00FD858D /* BundleExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BundleExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		18F319521E45FA310055E647 /* MapControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapControllerTests.swift; sourceTree = "<group>"; };
 		66AB893B1D71C21D0097ADAC /* CKReferenceExntensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKReferenceExntensions.swift; sourceTree = "<group>"; };
 		66AB893E1D71CB3D0097ADAC /* CKRecordIDExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKRecordIDExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -577,7 +577,6 @@
 		189D8CAD1C77EEFC00261DF5 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				189D8CB01C77EEFC00261DF5 /* MapControllerTests.swift */,
 				189D8CAE1C77EEFC00261DF5 /* AppStoreHelperTests.swift */,
 			);
 			path = Helpers;
@@ -652,6 +651,7 @@
 		18D58EA71D0CC122009BE4E5 /* Maps */ = {
 			isa = PBXGroup;
 			children = (
+				18F319521E45FA310055E647 /* MapControllerTests.swift */,
 				18D58EA81D0CC151009BE4E5 /* MapClusterTests.swift */,
 			);
 			path = Maps;
@@ -1239,8 +1239,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18E9FF951C80AC6F00AC5230 /* MapControllerTests.swift in Sources */,
 				18410C2E1C81092500D2B308 /* FontExtensionsTests.swift in Sources */,
+				18F319531E45FA310055E647 /* MapControllerTests.swift in Sources */,
 				18D58EA91D0CC151009BE4E5 /* MapClusterTests.swift in Sources */,
 				18E9FF971C80AC6F00AC5230 /* DateExtensionsTests.swift in Sources */,
 				18410C301C810A6900D2B308 /* BundleExtensionsTests.swift in Sources */,
