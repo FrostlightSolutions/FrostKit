@@ -25,11 +25,6 @@ env:
     - DESTINATION="OS=9.0,name=Apple TV 1080p"     SCHEME="$TVOS_FRAMEWORK_SCHEME"    SDK="$TVOS_SDK"    RUN_TESTS="YES"
 
     - DESTINATION="arch=x86_64"                    SCHEME="$MACOS_FRAMEWORK_SCHEME"   SDK="$MACOS_SDK"   RUN_TESTS="YES"
-before_install:
-  - brew update
-  - brew outdated carthage || brew upgrade carthage
-before_script:
-  - carthage bootstrap
 script:
   - set -o pipefail
   - xcodebuild -version
