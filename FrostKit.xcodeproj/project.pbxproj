@@ -946,9 +946,9 @@
 				18839B2119D9FA8C00760157 /* FrostKit iOS Tests */,
 				18D54BE81CE6439300D365C6 /* FrostKit tvOS Tests */,
 				18E545A51C77E54000637E85 /* FrostKit macOS Tests */,
+				18F3194D1E45F7B80055E647 /* SwiftFormat */,
 				1845E6F61A66DA03005B377D /* FrostKitDocs */,
 				1836A20B1A84414D00E57F86 /* FontConstantsBuilder */,
-				18F3194D1E45F7B80055E647 /* SwiftFormat */,
 			);
 		};
 /* End PBXProject section */
@@ -1070,7 +1070,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"${SRCROOT}\"\nlhdocs -project FrostKit.xcodeproj -module-name FrostKit -output ../\n";
+			shellScript = "cd \"${SRCROOT}\"\ncp -r ../FrostKit.wiki ../FrostKit_backup.wiki\ncd ../FrostKit.wiki\nmv Home.md Home\nrm -rf *.md\nmv Home Home.md\ncd \"${SRCROOT}\"\nlhdocs -project FrostKit.xcodeproj -module-name FrostKit -output ../\n";
 		};
 		18E5457A1C77E28600637E85 /* SwiftLint Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1897,6 +1897,7 @@
 				18F3194F1E45F7B80055E647 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
