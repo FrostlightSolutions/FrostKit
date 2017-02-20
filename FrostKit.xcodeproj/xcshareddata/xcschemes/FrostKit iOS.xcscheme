@@ -40,7 +40,7 @@
             </BuildableReference>
             <SkippedTests>
                <Test
-                  Identifier = "KeychainHelperTests">
+                  Identifier = "DateExtensionsTests/testDateStrings()">
                </Test>
             </SkippedTests>
          </TestableReference>

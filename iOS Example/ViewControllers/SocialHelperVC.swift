@@ -30,7 +30,7 @@ class SocialHelperVC: UITableViewController {
         case IndexPath(row: 1, section: 0):
             _ = SocialHelper.presentComposeViewController(serviceType: SLServiceTypeFacebook, inViewController: self)
         case IndexPath(row: 0, section: 1):
-            if let phoneURL = SocialHelper.phonePrompt("(+46) 70 857 01 80") {
+            if let phoneURL = SocialHelper.phonePrompt("(+46) 12 345 67 89") {
                 UIApplication.shared.openURL(phoneURL)
             } else {
                 NSLog("Error: Could not create URL to prompt phone.")
@@ -38,7 +38,7 @@ class SocialHelperVC: UITableViewController {
         case IndexPath(row: 1, section: 1):
             SocialHelper.emailPrompt(toRecipients: ["info@frostlight.se"], viewController: self)
         case IndexPath(row: 2, section: 1):
-            SocialHelper.messagePrompt(recipients: ["(+46) 70 857 01 80"], viewController: self)
+            SocialHelper.messagePrompt(recipients: ["(+46) 12 345 67 89"], viewController: self)
         default:
             break
         }
