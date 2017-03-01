@@ -408,6 +408,21 @@ extension Date {
         return dateString(fromFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSSSSS'Z'", locale: locale)
     }
     
+    /// A helper method for getting am ISO8601 formatted string from the current date
+    public var iso8601String: String {
+        if #available(iOSApplicationExtension 10.0, watchOSApplicationExtension 3.0, tvOSApplicationExtension 10.0, OSXApplicationExtension 10.12, *) {
+            let dateFormatter = ISO8601DateFormatter()
+            dateFormatter.timeZone = TimeZone.utc()
+            return dateFormatter.string(from: self)
+        } else {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
+            dateFormatter.timeZone = TimeZone.utc()
+            dateFormatter.locale = Locale.autoupdatingCurrent
+            return dateFormatter.string(from: self)
+        }
+    }
+    
     /**
     Takes the format of a date and returns a formatted string of the date.
      
