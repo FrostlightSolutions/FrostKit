@@ -115,13 +115,14 @@ extension Date {
     public var isWeekday: Bool {
         
         let calendar = Calendar.iso8601
-        let components = calendar.dateComponents([.weekday], from: self)
-        let range = calendar.maximumRange(of: .weekday)!
+        return calendar.isDateInWeekend(self) == false
+    }
+    
+    /// `true` if the date is a weekend, `false` if it isn't.
+    public var isWeekend: Bool {
         
-        if components.weekday == range.lowerBound || components.weekday == range.count {
-            return false
-        }
-        return true
+        let calendar = Calendar.iso8601
+        return calendar.isDateInWeekend(self)
     }
     
     /// `true` if the date is the begining of the week, `false` if it isn't. Begining of week is Monday.
@@ -367,12 +368,7 @@ extension Date {
     public var dateAtStartOfDay: Date {
         
         let calendar = Calendar.iso8601
-        var components = calendar.dateComponents(componentFlags, from: self)
-        components.timeZone = TimeZone.utc
-        components.hour = 0
-        components.minute = 0
-        components.second = 0
-        return calendar.date(from: components)!
+        return calendar.startOfDay(for: self)
     }
     
     /// Returns a date with the time at the end of the day, while preserving the time zone.
