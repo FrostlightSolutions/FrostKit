@@ -13,12 +13,6 @@ import Foundation
 ///
 extension Calendar {
     
-    /**
-    A helper method to get the iso8601 calendar.
-     
-    - returns: A iso8601 calendar object.
-    */
-    public static func iso8601Calendar() -> Calendar {
-        return Calendar(identifier: .iso8601)
-    }
+    /// A`Calendar` using the `iso8601` identifier.
+    public static let iso8601: Calendar = Calendar(identifier: .iso8601)
 }
