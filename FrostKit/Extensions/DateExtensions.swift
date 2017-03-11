@@ -176,24 +176,20 @@ extension Date {
     }
     
     /// Returns 1 minute in seconds `60`
-    public static func minuteInSeconds() -> TimeInterval {
-        return 60
-    }
+    /// NOTE: This is just an aproximation, and should be used for quick, simple calculations ONLY!
+    public static let minuteInSeconds: TimeInterval = 60
     
     /// Returns 1 hour in seconds `3600`
-    public static func hourInSeconds() -> TimeInterval {
-        return minuteInSeconds() * 60
-    }
+    /// NOTE: This is just an aproximation, and should be used for quick, simple calculations ONLY!
+    public static let hourInSeconds: TimeInterval = minuteInSeconds * 60
     
     /// Returns 1 day in seconds `86400`
-    public static func dayInSeconds() -> TimeInterval {
-        return hourInSeconds() * 24
-    }
+    /// NOTE: This is just an aproximation, and should be used for quick, simple calculations ONLY!
+    public static let dayInSeconds: TimeInterval = hourInSeconds * 24
     
     /// Returns 1 week in seconds `604800`
-    public static func weekInSeconds() -> TimeInterval {
-        return dayInSeconds() * 7
-    }
+    /// NOTE: This is just an aproximation, and should be used for quick, simple calculations ONLY!
+    public static let weekInSeconds: TimeInterval = dayInSeconds * 7
     
     /**
     Returns the number of days between two dates

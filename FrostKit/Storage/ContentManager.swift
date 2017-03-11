@@ -20,7 +20,7 @@ public class ContentManager {
     private lazy var contentMetadata = [String: Date]()
     
     private static var maxSavedTimeInSeconds: TimeInterval {
-        return Date.weekInSeconds() * 2
+        return Date.weekInSeconds * 2
     }
     
     // MARK: - Singleton
