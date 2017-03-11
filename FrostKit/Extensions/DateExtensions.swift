@@ -96,7 +96,7 @@ extension Date {
     /// `true` if the date is a weekday, `false` if it isn't.
     public var isWeekday: Bool {
         
-        let calendar = Calendar.iso8601Calendar()
+        let calendar = Calendar.iso8601
         let components = calendar.dateComponents([.weekday], from: self)
         let range = calendar.maximumRange(of: .weekday)!
         
@@ -109,7 +109,7 @@ extension Date {
     /// `true` if the date is the begining of the week, `false` if it isn't. Begining of week is Monday.
     public var isBeginingOfWeek: Bool {
         
-        let calendar = Calendar.iso8601Calendar()
+        let calendar = Calendar.iso8601
         let components = calendar.dateComponents([.weekday], from: self)
         return components.weekday == 2 // Begining of week is Monday == 2
     }
@@ -117,7 +117,7 @@ extension Date {
     /// `true` if the date is the end of the week, `false` if it isn't. End of week is Sunday.
     public var isEndOfWeek: Bool {
         
-        let calendar = Calendar.iso8601Calendar()
+        let calendar = Calendar.iso8601
         let components = calendar.dateComponents([.weekday], from: self)
         return components.weekday == 1 // End of week is Sunday == 1
     }
@@ -125,7 +125,7 @@ extension Date {
     /// `true` if the date is the begining of the month, `false` if it isn't.
     public var isBeginingOfMonth: Bool {
         
-        let calendar = Calendar.iso8601Calendar()
+        let calendar = Calendar.iso8601
         let components = calendar.dateComponents([.day], from: self)
         return components.day == 1
     }
@@ -133,7 +133,7 @@ extension Date {
     /// `true` if the date is the end of the month, `false` if it isn't.
     public var isEndOfMonth: Bool {
         
-        let calendar = Calendar.iso8601Calendar()
+        let calendar = Calendar.iso8601
         let components = calendar.dateComponents([.day], from: self)
         let range = calendar.range(of: .day, in: .month, for: self)!
         return components.day == range.count
@@ -144,7 +144,7 @@ extension Date {
     /// Returns the day of the date
     public var day: Int? {
         
-        let calendar = Calendar.iso8601Calendar()
+        let calendar = Calendar.iso8601
         let components = calendar.dateComponents([.day], from: self)
         return components.day
     }
@@ -152,7 +152,7 @@ extension Date {
     /// Returns the hour of the date
     public var hour: Int? {
         
-        let calendar = Calendar.iso8601Calendar()
+        let calendar = Calendar.iso8601
         let components = calendar.dateComponents([.hour], from: self)
         return components.hour
     }
@@ -160,7 +160,7 @@ extension Date {
     /// Returns the minute of the date
     public var minute: Int? {
         
-        let calendar = Calendar.iso8601Calendar()
+        let calendar = Calendar.iso8601
         let components = calendar.dateComponents([.minute], from: self)
         return components.minute
     }
@@ -205,7 +205,7 @@ extension Date {
     */
     public static func daysBetween(from fromDate: Date, to toDate: Date) -> Int? {
         
-        let calendar = Calendar.iso8601Calendar()
+        let calendar = Calendar.iso8601
         
         let dateTo = calendar.startOfDay(for: toDate)
         let dateFrom = calendar.startOfDay(for: fromDate)
@@ -217,7 +217,7 @@ extension Date {
     /// Returns the number of days left in the current week assuming Monday is the start of the week and inclusive of today
     public var daysRemainingInWeek: Int? {
         
-        let calendar = Calendar.iso8601Calendar()
+        let calendar = Calendar.iso8601
         let components = calendar.dateComponents([.weekday], from: self)
         guard var weekdayOfDate = components.weekday else {
             return nil
@@ -233,7 +233,7 @@ extension Date {
     /// Returns the number of days in the current month
     public var daysInMonth: Int {
         
-        let calendar = Calendar.iso8601Calendar()
+        let calendar = Calendar.iso8601
         let range = calendar.range(of: .day, in: .month, for: self)!
         return range.count
     }
@@ -241,7 +241,7 @@ extension Date {
     /// Returns the number of days left in the month, inclusive of today
     public var daysRemainingInMonth: Int? {
         
-        let calendar = Calendar.iso8601Calendar()
+        let calendar = Calendar.iso8601
         let components = calendar.dateComponents([.day], from: self)
         
         guard let day = components.day else {
@@ -320,7 +320,7 @@ extension Date {
     /// Creates a new object which is a copy of the current date but with time stripped out (set to midnight)
     public var stripTime: Date {
         
-        let calendar = Calendar.iso8601Calendar()
+        let calendar = Calendar.iso8601
         var components = calendar.dateComponents(([.day, .month, .year]), from: self)
         components.timeZone = TimeZone.utc()
         return calendar.date(from: components)!
@@ -342,14 +342,14 @@ extension Date {
         var components = DateComponents()
         components.day = days
         
-        let calendar = Calendar.iso8601Calendar()
+        let calendar = Calendar.iso8601
         return calendar.date(byAdding: components, to: self, wrappingComponents: false)!
     }
     
     /// Returns a date with the time at the start of the day, while preserving the time zone.
     public var dateAtStartOfDay: Date {
         
-        let calendar = Calendar.iso8601Calendar()
+        let calendar = Calendar.iso8601
         var components = calendar.dateComponents(componentFlags, from: self)
         components.timeZone = TimeZone.utc()
         components.hour = 0
@@ -361,7 +361,7 @@ extension Date {
     /// Returns a date with the time at the end of the day, while preserving the time zone.
     public var dateAtEndOfDay: Date {
         
-        let calendar = Calendar.iso8601Calendar()
+        let calendar = Calendar.iso8601
         var components = calendar.dateComponents(componentFlags, from: self)
         components.timeZone = TimeZone.utc()
         components.hour = 23

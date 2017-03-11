@@ -29,7 +29,7 @@ class DateExtensionsTests: XCTestCase {
             let date = Date.fusDate(from: dateString)
             
             var components = DateComponents()
-            components.calendar = Calendar.iso8601Calendar()
+            components.calendar = Calendar.iso8601
             components.timeZone = TimeZone.utc()
             components.year = 2016
             components.month = 2
@@ -47,7 +47,7 @@ class DateExtensionsTests: XCTestCase {
             let date = Date.fusDate(from: dateString)
             
             var components = DateComponents()
-            components.calendar = Calendar.iso8601Calendar()
+            components.calendar = Calendar.iso8601
             components.timeZone = TimeZone.utc()
             components.year = 2016
             components.month = 2
@@ -92,7 +92,7 @@ class DateExtensionsTests: XCTestCase {
         measure { () in
             
             var components = DateComponents()
-            components.calendar = Calendar.iso8601Calendar()
+            components.calendar = Calendar.iso8601
             components.year = 2016
             components.month = 2
             
@@ -118,7 +118,7 @@ class DateExtensionsTests: XCTestCase {
         measure { () in
             
             var components = DateComponents()
-            components.calendar = Calendar.iso8601Calendar()
+            components.calendar = Calendar.iso8601
             components.year = 2016
             components.month = 2
             
@@ -144,7 +144,7 @@ class DateExtensionsTests: XCTestCase {
         measure { () in
             
             var components = DateComponents()
-            components.calendar = Calendar.iso8601Calendar()
+            components.calendar = Calendar.iso8601
             components.year = 2016
             components.month = 2
             
@@ -170,7 +170,7 @@ class DateExtensionsTests: XCTestCase {
         measure { () in
             
             var components = DateComponents()
-            components.calendar = Calendar.iso8601Calendar()
+            components.calendar = Calendar.iso8601
             components.year = 2016
             components.month = 2
             
@@ -189,7 +189,7 @@ class DateExtensionsTests: XCTestCase {
         measure { () in
             
             var components = DateComponents()
-            components.calendar = Calendar.iso8601Calendar()
+            components.calendar = Calendar.iso8601
             components.year = 2016
             components.month = 2
             
@@ -208,7 +208,7 @@ class DateExtensionsTests: XCTestCase {
         measure { () in
             
             var components = DateComponents()
-            components.calendar = Calendar.iso8601Calendar()
+            components.calendar = Calendar.iso8601
             components.day = 26
             
             XCTAssert(components.date?.day == 26)
@@ -221,7 +221,7 @@ class DateExtensionsTests: XCTestCase {
             
             let hour = 19
             var components = DateComponents()
-            components.calendar = Calendar.iso8601Calendar()
+            components.calendar = Calendar.iso8601
             components.hour = hour
             
             XCTAssert(components.date?.hour == hour)
@@ -234,7 +234,7 @@ class DateExtensionsTests: XCTestCase {
             
             let minute = 47
             var components = DateComponents()
-            components.calendar = Calendar.iso8601Calendar()
+            components.calendar = Calendar.iso8601
             components.minute = minute
             
             XCTAssert(components.date?.minute == minute)
@@ -246,7 +246,7 @@ class DateExtensionsTests: XCTestCase {
         measure { () in
             
             var components = DateComponents()
-            components.calendar = Calendar.iso8601Calendar()
+            components.calendar = Calendar.iso8601
             components.hour = 15
             components.minute = 45
             
@@ -272,7 +272,7 @@ class DateExtensionsTests: XCTestCase {
             let daysBetween = 3
             
             var components = DateComponents()
-            components.calendar = Calendar.iso8601Calendar()
+            components.calendar = Calendar.iso8601
             components.year = 2016
             components.month = 2
             components.day = 26
@@ -295,7 +295,7 @@ class DateExtensionsTests: XCTestCase {
         measure { () in
             
             var components = DateComponents()
-            components.calendar = Calendar.iso8601Calendar()
+            components.calendar = Calendar.iso8601
             components.year = 2016
             components.month = 2
             components.day = 26
@@ -311,7 +311,7 @@ class DateExtensionsTests: XCTestCase {
         measure { () in
             
             var components = DateComponents()
-            components.calendar = Calendar.iso8601Calendar()
+            components.calendar = Calendar.iso8601
             components.year = 2016
             components.month = 2
             components.day = 26
@@ -327,7 +327,7 @@ class DateExtensionsTests: XCTestCase {
         measure { () in
             
             var components = DateComponents()
-            components.calendar = Calendar.iso8601Calendar()
+            components.calendar = Calendar.iso8601
             components.year = 2016
             components.month = 2
             components.day = 26
@@ -343,7 +343,7 @@ class DateExtensionsTests: XCTestCase {
         measure { () in
             
             var components = DateComponents()
-            components.calendar = Calendar.iso8601Calendar()
+            components.calendar = Calendar.iso8601
             components.year = 2016
             components.month = 2
             components.day = 26
@@ -381,7 +381,7 @@ class DateExtensionsTests: XCTestCase {
         measure { () in
             
             var components = DateComponents()
-            components.calendar = Calendar.iso8601Calendar()
+            components.calendar = Calendar.iso8601
             components.year = 2016
             components.month = 2
             components.day = 26
@@ -425,7 +425,7 @@ class DateExtensionsTests: XCTestCase {
         measure { () in
             
             var components = DateComponents()
-            components.calendar = Calendar.iso8601Calendar()
+            components.calendar = Calendar.iso8601
             components.year = 2016
             components.month = 2
             components.day = 26
@@ -469,7 +469,7 @@ class DateExtensionsTests: XCTestCase {
         measure { () in
             
             var components = DateComponents()
-            components.calendar = Calendar.iso8601Calendar()
+            components.calendar = Calendar.iso8601
             components.year = 2016
             components.month = 2
             components.day = 26
@@ -492,7 +492,7 @@ class DateExtensionsTests: XCTestCase {
         measure { () in
             
             var components = DateComponents()
-            components.calendar = Calendar.iso8601Calendar()
+            components.calendar = Calendar.iso8601
             components.year = 2016
             components.month = 2
             components.day = 26
@@ -519,7 +519,7 @@ class DateExtensionsTests: XCTestCase {
         measure { () in
             
             var components = DateComponents()
-            components.calendar = Calendar.iso8601Calendar()
+            components.calendar = Calendar.iso8601
             components.year = 2016
             components.month = 2
             components.day = 26
@@ -544,7 +544,7 @@ class DateExtensionsTests: XCTestCase {
     func testDateStrings() {
         
         var components = DateComponents()
-        components.calendar = Calendar.iso8601Calendar()
+        components.calendar = Calendar.iso8601
         components.timeZone = TimeZone.utc()
         components.year = 2016
         components.month = 2
