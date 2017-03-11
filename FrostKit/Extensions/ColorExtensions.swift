@@ -74,7 +74,7 @@ extension Color {
      
      - returns: The new UIColor/NSColor object created with the passed in alpha value.
      */
-    public func color(alpha: CGFloat) -> Color {
+    public func color(with alpha: CGFloat) -> Color {
         
         var red: CGFloat = 0
         var green: CGFloat = 0
