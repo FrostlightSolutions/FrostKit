@@ -92,19 +92,23 @@ extension Date {
     
     /// `true` if the date is yesterday, `false` if it isn't.
     public var isYesterday: Bool {
-        let date = Date().dateByAdding(days: -1)
-        return compare(date, option: .equalTo)
+        
+        let calendar = Calendar.iso8601
+        return calendar.isDateInYesterday(self)
     }
     
     /// `true` if the date is today, `false` if it isn't.
     public var isToday: Bool {
-        return compare(Date(), option: .equalTo)
+        
+        let calendar = Calendar.iso8601
+        return calendar.isDateInToday(self)
     }
     
     /// `true` if the date is tomorrow, `false` if it isn't.
     public var isTomorrow: Bool {
-        let date = Date().dateByAdding(days: 1)
-        return compare(date, option: .equalTo)
+        
+        let calendar = Calendar.iso8601
+        return calendar.isDateInTomorrow(self)
     }
     
     /// `true` if the date is a weekday, `false` if it isn't.
