@@ -353,8 +353,9 @@ extension Date {
     ///   - hours: The number of hours to add, or `0` by default
     ///   - minutes: The number of minutes to add, or `0` by default
     ///   - seconds: The number of seconds to add, or `0` by default
+    ///   - timeZone: The time zone that should be set to the calendar when creating the new date.
     /// - Returns: A copy of the current date with the number of years, months, days, hours, minutes and/or seconds added to it.
-    public func dateByAdding(years: Int = 0, months: Int = 0, days: Int = 0, hours: Int = 0, minutes: Int = 0, seconds: Int = 0) -> Date {
+    public func dateByAdding(years: Int = 0, months: Int = 0, days: Int = 0, hours: Int = 0, minutes: Int = 0, seconds: Int = 0, with timeZone: TimeZone? = nil) -> Date {
         
         if years == 0 && months == 0 && days == 0 && hours == 0 && minutes == 0 {
             return self
@@ -368,7 +369,10 @@ extension Date {
         components.minute = minutes
         components.second = seconds
         
-        let calendar = Calendar.iso8601
+        var calendar = Calendar.iso8601
+        if let timeZone = timeZone {
+            calendar.timeZone = timeZone
+        }
         return calendar.date(byAdding: components, to: self, wrappingComponents: false)!
     }
     
