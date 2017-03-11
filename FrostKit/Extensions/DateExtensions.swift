@@ -387,13 +387,8 @@ extension Date {
     /// Returns a date with the time at the end of the day, while preserving the time zone.
     public var dateAtEndOfDay: Date {
         
-        let calendar = Calendar.iso8601
-        var components = calendar.dateComponents(componentFlags, from: self)
-        components.timeZone = TimeZone.utc
-        components.hour = 23
-        components.minute = 59
-        components.second = 59
-        return calendar.date(from: components)!
+        let timeZone = TimeZone.utc
+        return dateAtStartOfDay.dateByAdding(days: 1, seconds: -1, with: timeZone)
     }
     
     // MARK: - Date Strings
