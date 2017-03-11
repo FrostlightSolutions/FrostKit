@@ -30,7 +30,7 @@ class DateExtensionsTests: XCTestCase {
             
             var components = DateComponents()
             components.calendar = Calendar.iso8601
-            components.timeZone = TimeZone.utc()
+            components.timeZone = TimeZone.utc
             components.year = 2016
             components.month = 2
             components.day = 26
@@ -48,7 +48,7 @@ class DateExtensionsTests: XCTestCase {
             
             var components = DateComponents()
             components.calendar = Calendar.iso8601
-            components.timeZone = TimeZone.utc()
+            components.timeZone = TimeZone.utc
             components.year = 2016
             components.month = 2
             components.day = 26
@@ -479,7 +479,7 @@ class DateExtensionsTests: XCTestCase {
             
             let date = components.date!
             let strippedDate = date.stripTime
-            components.timeZone = TimeZone.utc()
+            components.timeZone = TimeZone.utc
             components.hour = 0
             components.minute = 0
             components.second = 0
@@ -528,7 +528,7 @@ class DateExtensionsTests: XCTestCase {
             components.second = 43
             let date = components.date!
             
-            components.timeZone = TimeZone.utc()
+            components.timeZone = TimeZone.utc
             components.hour = 0
             components.minute = 0
             components.second = 0
@@ -545,7 +545,7 @@ class DateExtensionsTests: XCTestCase {
         
         var components = DateComponents()
         components.calendar = Calendar.iso8601
-        components.timeZone = TimeZone.utc()
+        components.timeZone = TimeZone.utc
         components.year = 2016
         components.month = 2
         components.day = 26

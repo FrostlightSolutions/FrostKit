@@ -47,7 +47,7 @@ extension Date {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
-        dateFormatter.timeZone = TimeZone.utc()
+        dateFormatter.timeZone = TimeZone.utc
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         return dateFormatter.date(from: fusDateString)
     }
@@ -63,12 +63,12 @@ extension Date {
         
         if #available(iOSApplicationExtension 10.0, watchOSApplicationExtension 3.0, tvOSApplicationExtension 10.0, OSXApplicationExtension 10.12, *) {
             let dateFormatter = ISO8601DateFormatter()
-            dateFormatter.timeZone = TimeZone.utc()
+            dateFormatter.timeZone = TimeZone.utc
             return dateFormatter.date(from: iso8601String)
         } else {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
-            dateFormatter.timeZone = TimeZone.utc()
+            dateFormatter.timeZone = TimeZone.utc
             dateFormatter.locale = Locale.autoupdatingCurrent
             return dateFormatter.date(from: iso8601String)
         }
@@ -322,7 +322,7 @@ extension Date {
         
         let calendar = Calendar.iso8601
         var components = calendar.dateComponents(([.day, .month, .year]), from: self)
-        components.timeZone = TimeZone.utc()
+        components.timeZone = TimeZone.utc
         return calendar.date(from: components)!
     }
     
@@ -351,7 +351,7 @@ extension Date {
         
         let calendar = Calendar.iso8601
         var components = calendar.dateComponents(componentFlags, from: self)
-        components.timeZone = TimeZone.utc()
+        components.timeZone = TimeZone.utc
         components.hour = 0
         components.minute = 0
         components.second = 0
@@ -363,7 +363,7 @@ extension Date {
         
         let calendar = Calendar.iso8601
         var components = calendar.dateComponents(componentFlags, from: self)
-        components.timeZone = TimeZone.utc()
+        components.timeZone = TimeZone.utc
         components.hour = 23
         components.minute = 59
         components.second = 59
@@ -412,12 +412,12 @@ extension Date {
     public var iso8601String: String {
         if #available(iOSApplicationExtension 10.0, watchOSApplicationExtension 3.0, tvOSApplicationExtension 10.0, OSXApplicationExtension 10.12, *) {
             let dateFormatter = ISO8601DateFormatter()
-            dateFormatter.timeZone = TimeZone.utc()
+            dateFormatter.timeZone = TimeZone.utc
             return dateFormatter.string(from: self)
         } else {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
-            dateFormatter.timeZone = TimeZone.utc()
+            dateFormatter.timeZone = TimeZone.utc
             dateFormatter.locale = Locale.autoupdatingCurrent
             return dateFormatter.string(from: self)
         }
