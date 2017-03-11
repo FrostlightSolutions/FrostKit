@@ -137,11 +137,14 @@ extension Date {
     }
     
     /// `true` if the date is the end of the month, `false` if it isn't.
+    /// NOTE: If a range can not be calculated to work out how many days are in the month, `false` will be returned.
     public var isEndOfMonth: Bool {
         
         let calendar = Calendar.iso8601
         let components = calendar.dateComponents([.day], from: self)
-        let range = calendar.range(of: .day, in: .month, for: self)!
+        guard let range = calendar.range(of: .day, in: .month, for: self) else {
+            return false
+        }
         return components.day == range.count
     }
     
@@ -236,10 +239,13 @@ extension Date {
     }
     
     /// Returns the number of days in the current month
+    /// NOTE: If a range can not be calculated to work out how many days are in the month, `NSNotFound` will be returned.
     public var daysInMonth: Int {
         
         let calendar = Calendar.iso8601
-        let range = calendar.range(of: .day, in: .month, for: self)!
+        guard let range = calendar.range(of: .day, in: .month, for: self) else {
+            return NSNotFound
+        }
         return range.count
     }
     
@@ -269,11 +275,27 @@ extension Date {
      
     - returns: `true` if the dates conform with the date comparison type check, `false` if not
     */
-    public func compare(_ date: Date, option: DateCompareType, stripTime: Bool = true) -> Bool {
+    public func compare(_ date: Date, option: DateCompareType, shouldStripTime: Bool = true) -> Bool {
         
         var compare: ComparisonResult = .orderedSame
-        if stripTime == true {
-            compare = self.stripTime.compare(date.stripTime)
+        if shouldStripTime == true {
+            
+            let strippedDate: Date
+            if let stripTimeDate = stripTime {
+                strippedDate = stripTimeDate
+            } else {
+                strippedDate = self
+            }
+            
+            let strippedCompareDate: Date
+            if let stripTimeDate = date.stripTime {
+                strippedCompareDate = stripTimeDate
+            } else {
+                strippedCompareDate = date
+            }
+            
+            compare = strippedDate.compare(strippedCompareDate)
+            
         } else {
             compare = self.compare(date)
         }
@@ -283,11 +305,13 @@ extension Date {
             if option == .before || option == .beforeOrEqualTo {
                 return true
             }
+            
         } else if compare == .orderedDescending {
             
             if option == .after || option == .afterOrEqualTo {
                 return true
             }
+            
         } else {
             
             if option == .equalTo || option == .beforeOrEqualTo || option == .afterOrEqualTo {
@@ -323,12 +347,12 @@ extension Date {
     // MARK: - Date Changers
     
     /// Creates a new object which is a copy of the current date but with time stripped out (set to midnight)
-    public var stripTime: Date {
+    public var stripTime: Date? {
         
         var calendar = Calendar.iso8601
         calendar.timeZone = TimeZone.utc
         let components = calendar.dateComponents(([.day, .month, .year]), from: self)
-        return calendar.date(from: components)!
+        return calendar.date(from: components)
     }
     
     /// Creates a new object which is a copy of the current date but with a certain number of years, months, days, hours, minutes and/or seconds added to it.
@@ -342,7 +366,7 @@ extension Date {
     ///   - seconds: The number of seconds to add, or `0` by default
     ///   - timeZone: The time zone that should be set to the calendar when creating the new date.
     /// - Returns: A copy of the current date with the number of years, months, days, hours, minutes and/or seconds added to it.
-    public func dateByAdding(years: Int = 0, months: Int = 0, days: Int = 0, hours: Int = 0, minutes: Int = 0, seconds: Int = 0, with timeZone: TimeZone? = nil) -> Date {
+    public func dateByAdding(years: Int = 0, months: Int = 0, days: Int = 0, hours: Int = 0, minutes: Int = 0, seconds: Int = 0, with timeZone: TimeZone? = nil) -> Date? {
         
         if years == 0 && months == 0 && days == 0 && hours == 0 && minutes == 0 {
             return self
@@ -360,7 +384,7 @@ extension Date {
         if let timeZone = timeZone {
             calendar.timeZone = timeZone
         }
-        return calendar.date(byAdding: components, to: self, wrappingComponents: false)!
+        return calendar.date(byAdding: components, to: self, wrappingComponents: false)
     }
     
     /// Returns a date with the time at the start of the day, while preserving the time zone.
@@ -372,7 +396,8 @@ extension Date {
     }
     
     /// Returns a date with the time at the end of the day, while preserving the time zone.
-    public var dateAtEndOfDay: Date {
+    /// NOTE: This will return `nil` if the calculation of date components returns `nil` in `dateByAdding(_:)`.
+    public var dateAtEndOfDay: Date? {
         
         let timeZone = TimeZone.utc
         return dateAtStartOfDay.dateByAdding(days: 1, seconds: -1, with: timeZone)

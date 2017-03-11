@@ -353,26 +353,26 @@ class DateExtensionsTests: XCTestCase {
             XCTAssert(date.isBefore(components.date!) == true)
             XCTAssert(date.isAfter(components.date!) == false)
             
-            XCTAssert(date.compare(components.date!, option: .before, stripTime: false) == true)
-            XCTAssert(date.compare(components.date!, option: .after, stripTime: false) == false)
-            XCTAssert(date.compare(components.date!, option: .equalTo, stripTime: false) == false)
-            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, stripTime: false) == true)
-            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .before, shouldStripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .after, shouldStripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .equalTo, shouldStripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, shouldStripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, shouldStripTime: false) == false)
             
             components.day = 26
-            XCTAssert(date.compare(components.date!, option: .equalTo, stripTime: false) == true)
-            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, stripTime: false) == true)
-            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .equalTo, shouldStripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, shouldStripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, shouldStripTime: false) == true)
             
             components.day = 11
             XCTAssert(date.isBefore(components.date!) == false)
             XCTAssert(date.isAfter(components.date!) == true)
             
-            XCTAssert(date.compare(components.date!, option: .before, stripTime: false) == false)
-            XCTAssert(date.compare(components.date!, option: .after, stripTime: false) == true)
-            XCTAssert(date.compare(components.date!, option: .equalTo, stripTime: false) == false)
-            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, stripTime: false) == false)
-            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .before, shouldStripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .after, shouldStripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .equalTo, shouldStripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, shouldStripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, shouldStripTime: false) == true)
         }
     }
     
@@ -392,31 +392,31 @@ class DateExtensionsTests: XCTestCase {
             XCTAssert(date.isBefore(components.date!) == true)
             XCTAssert(date.isAfter(components.date!) == false)
             
-            XCTAssert(date.compare(components.date!, option: .before, stripTime: false) == true)
-            XCTAssert(date.compare(components.date!, option: .after, stripTime: false) == false)
-            XCTAssert(date.compare(components.date!, option: .equalTo, stripTime: false) == false)
-            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, stripTime: false) == true)
-            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .before, shouldStripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .after, shouldStripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .equalTo, shouldStripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, shouldStripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, shouldStripTime: false) == false)
             
             components.day = 26
-            XCTAssert(date.compare(components.date!, option: .equalTo, stripTime: false) == false)
-            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, stripTime: false) == true)
-            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .equalTo, shouldStripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, shouldStripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, shouldStripTime: false) == false)
             
             components.month = 1
-            XCTAssert(date.compare(components.date!, option: .equalTo, stripTime: false) == false)
-            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, stripTime: false) == false)
-            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .equalTo, shouldStripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, shouldStripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, shouldStripTime: false) == true)
             
             components.day = 11
             XCTAssert(date.isBefore(components.date!) == false)
             XCTAssert(date.isAfter(components.date!) == true)
             
-            XCTAssert(date.compare(components.date!, option: .before, stripTime: false) == false)
-            XCTAssert(date.compare(components.date!, option: .after, stripTime: false) == true)
-            XCTAssert(date.compare(components.date!, option: .equalTo, stripTime: false) == false)
-            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, stripTime: false) == false)
-            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .before, shouldStripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .after, shouldStripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .equalTo, shouldStripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, shouldStripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, shouldStripTime: false) == true)
         }
     }
     
@@ -436,31 +436,31 @@ class DateExtensionsTests: XCTestCase {
             XCTAssert(date.isBefore(components.date!) == true)
             XCTAssert(date.isAfter(components.date!) == false)
             
-            XCTAssert(date.compare(components.date!, option: .before, stripTime: false) == true)
-            XCTAssert(date.compare(components.date!, option: .after, stripTime: false) == false)
-            XCTAssert(date.compare(components.date!, option: .equalTo, stripTime: false) == false)
-            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, stripTime: false) == true)
-            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .before, shouldStripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .after, shouldStripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .equalTo, shouldStripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, shouldStripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, shouldStripTime: false) == false)
             
             components.day = 26
-            XCTAssert(date.compare(components.date!, option: .equalTo, stripTime: false) == false)
-            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, stripTime: false) == true)
-            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, stripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .equalTo, shouldStripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, shouldStripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, shouldStripTime: false) == false)
             
             components.year = 2015
-            XCTAssert(date.compare(components.date!, option: .equalTo, stripTime: false) == false)
-            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, stripTime: false) == false)
-            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .equalTo, shouldStripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, shouldStripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, shouldStripTime: false) == true)
             
             components.day = 11
             XCTAssert(date.isBefore(components.date!) == false)
             XCTAssert(date.isAfter(components.date!) == true)
             
-            XCTAssert(date.compare(components.date!, option: .before, stripTime: false) == false)
-            XCTAssert(date.compare(components.date!, option: .after, stripTime: false) == true)
-            XCTAssert(date.compare(components.date!, option: .equalTo, stripTime: false) == false)
-            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, stripTime: false) == false)
-            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, stripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .before, shouldStripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .after, shouldStripTime: false) == true)
+            XCTAssert(date.compare(components.date!, option: .equalTo, shouldStripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .beforeOrEqualTo, shouldStripTime: false) == false)
+            XCTAssert(date.compare(components.date!, option: .afterOrEqualTo, shouldStripTime: false) == true)
         }
     }
     
