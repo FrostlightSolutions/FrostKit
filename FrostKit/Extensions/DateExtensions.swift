@@ -23,7 +23,17 @@ public enum DateCompareType {
 }
 
 /// Most common component flags
-private let componentFlags: Set<Calendar.Component> = [.year, .month, .day, .weekOfMonth, .hour, .minute, .second, .weekday, .weekdayOrdinal]
+private let componentFlags: Set<Calendar.Component> = [
+    .year,
+    .month,
+    .day,
+    .weekOfMonth,
+    .hour,
+    .minute,
+    .second,
+    .weekday,
+    .weekdayOrdinal
+]
 
 ///
 /// Extention functions for Date
@@ -40,6 +50,7 @@ extension Date {
     - returns: The Date created from the passed in string or `nil` if it could not be created.
     */
     public static func fusDate(from fusDateString: String) -> Date? {
+        
         var format = "yyyy'-'MM'-'dd"
         if fusDateString.characters.count > 10 {
             format += "'T'HH':'mm':'ss'.'SSSSSS'Z'"
@@ -62,10 +73,13 @@ extension Date {
     public static func iso8601Date(from iso8601String: String) -> Date? {
         
         if #available(iOSApplicationExtension 10.0, watchOSApplicationExtension 3.0, tvOSApplicationExtension 10.0, OSXApplicationExtension 10.12, *) {
+            
             let dateFormatter = ISO8601DateFormatter()
             dateFormatter.timeZone = TimeZone.utc
             return dateFormatter.date(from: iso8601String)
+            
         } else {
+            
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
             dateFormatter.timeZone = TimeZone.utc
@@ -199,7 +213,7 @@ extension Date {
      
     - returns: The number of days beteen `fromDate` and `toDate`
     */
-    public static func daysBetween(from fromDate: Date, to toDate: Date) -> Int? {
+    public static func daysBetween(_ fromDate: Date, to toDate: Date) -> Int? {
         
         let calendar = Calendar.iso8601
         
@@ -400,17 +414,22 @@ extension Date {
     
     /// A helpter method for getting a formatted string of the date and time in the FUS set format.
     public var fusDateTimeString: String {
+        
         let locale = Locale(identifier: "en_US_POSIX")
         return dateString(fromFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSSSSS'Z'", locale: locale)
     }
     
     /// A helper method for getting am ISO8601 formatted string from the current date
     public var iso8601String: String {
+        
         if #available(iOSApplicationExtension 10.0, watchOSApplicationExtension 3.0, tvOSApplicationExtension 10.0, OSXApplicationExtension 10.12, *) {
+            
             let dateFormatter = ISO8601DateFormatter()
             dateFormatter.timeZone = TimeZone.utc
             return dateFormatter.string(from: self)
+            
         } else {
+            
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
             dateFormatter.timeZone = TimeZone.utc
@@ -428,6 +447,7 @@ extension Date {
     - returns: The formatted date string.
     */
     public func dateString(fromFormat format: String, locale: Locale? = nil) -> String {
+        
         let formatter = DateFormatter()
         formatter.dateFormat = format
         formatter.locale = locale
