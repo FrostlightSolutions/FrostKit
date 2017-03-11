@@ -182,7 +182,10 @@ extension Date {
     /// Returns the time of the date in hours
     public var timeInHours: TimeInterval? {
         
-        guard let minute = self.minute, let hour = self.hour else {
+        let calendar = Calendar.iso8601
+        let components = calendar.dateComponents([.minute, .hour], from: self)
+        
+        guard let minute = components.minute, let hour = components.hour else {
             return nil
         }
         
