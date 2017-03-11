@@ -22,19 +22,6 @@ public enum DateCompareType {
     case afterOrEqualTo
 }
 
-/// Most common component flags
-private let componentFlags: Set<Calendar.Component> = [
-    .year,
-    .month,
-    .day,
-    .weekOfMonth,
-    .hour,
-    .minute,
-    .second,
-    .weekday,
-    .weekdayOrdinal
-]
-
 ///
 /// Extention functions for Date
 ///
