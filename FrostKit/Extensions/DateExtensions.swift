@@ -344,21 +344,29 @@ extension Date {
         return calendar.date(from: components)!
     }
     
-    /**
-    Creates a new object which is a copy of the current date but with a certain number of dats added to it
-     
-    - parameter days:        The number of days to add to the new date
-     
-    - returns: A copy of the current date `days` added to it
-    */
-    public func dateByAdding(days: Int) -> Date {
+    /// Creates a new object which is a copy of the current date but with a certain number of years, months, days, hours, minutes and/or seconds added to it.
+    ///
+    /// - Parameters:
+    ///   - years: The number of years to add, or `0` by default
+    ///   - months: The number of months to add, or `0` by default
+    ///   - days: The number of days to add, or `0` by default
+    ///   - hours: The number of hours to add, or `0` by default
+    ///   - minutes: The number of minutes to add, or `0` by default
+    ///   - seconds: The number of seconds to add, or `0` by default
+    /// - Returns: A copy of the current date with the number of years, months, days, hours, minutes and/or seconds added to it.
+    public func dateByAdding(years: Int = 0, months: Int = 0, days: Int = 0, hours: Int = 0, minutes: Int = 0, seconds: Int = 0) -> Date {
         
-        if days == 0 {
+        if years == 0 && months == 0 && days == 0 && hours == 0 && minutes == 0 {
             return self
         }
         
         var components = DateComponents()
+        components.year = years
+        components.month = months
         components.day = days
+        components.hour = hours
+        components.minute = minutes
+        components.second = seconds
         
         let calendar = Calendar.iso8601
         return calendar.date(byAdding: components, to: self, wrappingComponents: false)!
