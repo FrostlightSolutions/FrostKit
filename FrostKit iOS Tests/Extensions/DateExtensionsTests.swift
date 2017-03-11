@@ -258,10 +258,10 @@ class DateExtensionsTests: XCTestCase {
         
         measure { () in
             
-            XCTAssert(Date.minuteInSeconds() == 60)
-            XCTAssert(Date.hourInSeconds() == 3600)
-            XCTAssert(Date.dayInSeconds() == 86400)
-            XCTAssert(Date.weekInSeconds() == 604_800)
+            XCTAssert(Date.minuteInSeconds == 60)
+            XCTAssert(Date.hourInSeconds == 3600)
+            XCTAssert(Date.dayInSeconds == 86400)
+            XCTAssert(Date.weekInSeconds == 604_800)
         }
     }
     
@@ -285,7 +285,7 @@ class DateExtensionsTests: XCTestCase {
             }
             let toDate = components.date
             
-            let calculatedDaysBetween = Date.daysBetween(from: fromDate!, to: toDate!)
+            let calculatedDaysBetween = Date.daysBetween(fromDate!, to: toDate!)
             XCTAssert(calculatedDaysBetween == daysBetween, "Expected: \(daysBetween) but got: \(calculatedDaysBetween)")
         }
     }
