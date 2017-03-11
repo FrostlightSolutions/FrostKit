@@ -338,9 +338,9 @@ extension Date {
     /// Creates a new object which is a copy of the current date but with time stripped out (set to midnight)
     public var stripTime: Date {
         
-        let calendar = Calendar.iso8601
-        var components = calendar.dateComponents(([.day, .month, .year]), from: self)
-        components.timeZone = TimeZone.utc
+        var calendar = Calendar.iso8601
+        calendar.timeZone = TimeZone.utc
+        let components = calendar.dateComponents(([.day, .month, .year]), from: self)
         return calendar.date(from: components)!
     }
     
@@ -367,7 +367,8 @@ extension Date {
     /// Returns a date with the time at the start of the day, while preserving the time zone.
     public var dateAtStartOfDay: Date {
         
-        let calendar = Calendar.iso8601
+        var calendar = Calendar.iso8601
+        calendar.timeZone = TimeZone.utc
         return calendar.startOfDay(for: self)
     }
     
