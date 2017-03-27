@@ -363,7 +363,6 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
                 visableAnnotationsInBucket = annotations
             } else {
                 visableAnnotationsInBucket = Set<Annotation>()
-                NSLog("No annotations found of type `Annoation`/n\(mapView.annotations(in: gridMapRect))")
             }
             
             semaphore.signal()    // Signal that semaphore should complete
