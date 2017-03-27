@@ -354,7 +354,14 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
         var visableAnnotationsInBucket: Set<Annotation>!
         
         DispatchQueue.main.async {
-            visableAnnotationsInBucket = mapView.annotations(in: gridMapRect) as! Set<Annotation>
+            
+            if let annotations = mapView.annotations(in: gridMapRect) as? Set<Annotation> {
+                visableAnnotationsInBucket = annotations
+            } else {
+                visableAnnotationsInBucket = Set<Annotation>()
+                NSLog("No annotations found of type `Annoation`/n\(mapView.annotations(in: gridMapRect))")
+            }
+            
             semaphore.signal()    // Signal that semaphore should complete
         }
         
