@@ -591,10 +591,13 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
      - parameter address: The address object to zoom to.
      */
     open func zoom(toAddress address: Address) {
-        plot(address: address)
         
-        if let annotation = annotations[address] as? MKAnnotation {
-            zoom(toAnnotations: [annotation])
+        if #available(iOS 9.0, *) {
+            let camera = MKMapCamera(lookingAtCenter: address.coordinate, fromDistance: 200, pitch: 0, heading: 0)
+            mapView?.setCamera(camera, animated: true)
+        } else {
+            let camera = MKMapCamera(lookingAtCenter: address.coordinate, fromEyeCoordinate: address.coordinate, eyeAltitude: 200)
+            mapView?.setCamera(camera, animated: true)
         }
     }
     
