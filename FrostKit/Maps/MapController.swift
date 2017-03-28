@@ -570,6 +570,21 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
         }
     }
     
+    /// Zooms the map to an array of address objects.
+    ///
+    /// - Parameter addresses: The address objects to zoom to.
+    func zoom(toAddresses addresses: [Address]) {
+        
+        let count = addresses.count
+        if count > 0 {
+            var points = [MKMapPoint]()
+            for address in addresses {
+                points.append(MKMapPointForCoordinate(address.coordinate))
+            }
+            zoom(toMapPoints: points)
+        }
+    }
+    
     /**
      Zooms the map to an address object.
      
