@@ -285,7 +285,7 @@ class DateExtensionsTests: XCTestCase {
             }
             let toDate = components.date
             
-            let calculatedDaysBetween = Date.daysBetween(fromDate!, to: toDate!)
+            let calculatedDaysBetween = Date.daysBetween(fromDate!, to: toDate!)!
             XCTAssert(calculatedDaysBetween == daysBetween, "Expected: \(daysBetween) but got: \(calculatedDaysBetween)")
         }
     }
@@ -317,7 +317,7 @@ class DateExtensionsTests: XCTestCase {
             components.day = 26
             
             let daysInMonth = 29
-            let calculatedDaysInMonth = components.date?.daysInMonth
+            let calculatedDaysInMonth = components.date!.daysInMonth
             XCTAssert(calculatedDaysInMonth == daysInMonth, "Expected: \(daysInMonth) but got: \(calculatedDaysInMonth)")
         }
     }
@@ -333,7 +333,7 @@ class DateExtensionsTests: XCTestCase {
             components.day = 26
             
             let daysRemainingInMonth = 3
-            let calculatedDaysRemainingInMonth = components.date?.daysRemainingInMonth
+            let calculatedDaysRemainingInMonth = components.date!.daysRemainingInMonth!
             XCTAssert(calculatedDaysRemainingInMonth == daysRemainingInMonth, "Expected: \(daysRemainingInMonth) but got: \(calculatedDaysRemainingInMonth)")
         }
     }
