@@ -114,7 +114,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
     /// The location manager automatically created when assigning the map view to the map controller. It's only use if for getting the user's access to location services.
     private var locationManager: CLLocationManager?
     /// An array of addresses plotted on the map view.
-    public var addresses: [Address] {
+    open var addresses: [Address] {
         return [Address](addressesDict.values)
     }
     
@@ -354,7 +354,17 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
         var visableAnnotationsInBucket: Set<Annotation>!
         
         DispatchQueue.main.async {
-            visableAnnotationsInBucket = mapView.annotations(in: gridMapRect) as! Set<Annotation>
+            
+            let userLocation = mapView.userLocation
+            var mapAnnotations = mapView.annotations(in: gridMapRect)
+            mapAnnotations.remove(userLocation)
+            
+            if let annotations = mapAnnotations as? Set<Annotation> {
+                visableAnnotationsInBucket = annotations
+            } else {
+                visableAnnotationsInBucket = Set<Annotation>()
+            }
+            
             semaphore.signal()    // Signal that semaphore should complete
         }
         
