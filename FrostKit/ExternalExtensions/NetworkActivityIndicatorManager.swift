@@ -115,11 +115,32 @@ public class NetworkActivityIndicatorManager {
     // MARK: - Internal - Initialization
     
     init() {
-        registerForNotifications()
+        let notificationCenter = NotificationCenter.default
+        
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(NetworkActivityIndicatorManager.networkRequestDidStart),
+            name: Notification.Name(rawValue: "org.alamofire.notification.name.task.didResume"),
+            object: nil
+        )
+        
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(NetworkActivityIndicatorManager.networkRequestDidComplete),
+            name: Notification.Name(rawValue: "org.alamofire.notification.name.task.didSuspend"),
+            object: nil
+        )
+        
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(NetworkActivityIndicatorManager.networkRequestDidComplete),
+            name: Notification.Name(rawValue: "org.alamofire.notification.name.task.didComplete"),
+            object: nil
+        )
     }
     
     deinit {
-        unregisterForNotifications()
+        NotificationCenter.default.removeObserver(self)
         
         invalidateStartDelayTimer()
         invalidateCompletionDelayTimer()
@@ -170,37 +191,6 @@ public class NetworkActivityIndicatorManager {
         case .delayingCompletion:
             if activityCount > 0 { activityIndicatorState = .active }
         }
-    }
-    
-    // MARK: - Private - Notification Registration
-    
-    private func registerForNotifications() {
-        let notificationCenter = NotificationCenter.default
-        
-        notificationCenter.addObserver(
-            self,
-            selector: #selector(NetworkActivityIndicatorManager.networkRequestDidStart),
-            name: Notification.Name(rawValue: "org.alamofire.notification.name.task.didResume"),
-            object: nil
-        )
-        
-        notificationCenter.addObserver(
-            self,
-            selector: #selector(NetworkActivityIndicatorManager.networkRequestDidComplete),
-            name: Notification.Name(rawValue: "org.alamofire.notification.name.task.didSuspend"),
-            object: nil
-        )
-        
-        notificationCenter.addObserver(
-            self,
-            selector: #selector(NetworkActivityIndicatorManager.networkRequestDidComplete),
-            name: Notification.Name(rawValue: "org.alamofire.notification.name.task.didComplete"),
-            object: nil
-        )
-    }
-    
-    private func unregisterForNotifications() {
-        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - Private - Notifications
