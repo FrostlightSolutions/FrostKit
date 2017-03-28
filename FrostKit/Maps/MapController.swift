@@ -797,24 +797,28 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
             self.zoom(toAnnotation: annotation)
         })
         alertController.addAction(zoomToAlertAction)
+        
         let directionsAlertAction = UIAlertAction(title: FKLocalizedString("DIRECTIONS", comment: "Directions"), style: .default, handler: { (_) in
             self.directionsToCurrentLocation(fromCoordinate: annotation.coordinate)
         })
         alertController.addAction(directionsAlertAction)
+        
         let openInMapsAlertAction = UIAlertAction(title: FKLocalizedString("OPEN_IN_MAPS", comment: "Open in Maps"), style: .default, handler: { (_) in
             self.directionsToCurrentLocation(fromCoordinate: annotation.coordinate, inApp: false)
         })
         alertController.addAction(openInMapsAlertAction)
+        
         let cancelAlertAction = UIAlertAction(title: FKLocalizedString("CANCEL", comment: "Cancel"), style: .cancel, handler: { (_) in
             alertController.dismiss(animated: true, completion: nil)
         })
         alertController.addAction(cancelAlertAction)
+        
         viewController.present(alertController, animated: true, completion: nil)
     }
     
     open func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         
-        guard let polyline = overlay as? MKPolyline else{
+        guard let polyline = overlay as? MKPolyline else {
             return MKOverlayRenderer()
         }
         
