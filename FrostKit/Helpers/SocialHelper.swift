@@ -229,7 +229,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             NSLog("Email sent")
         case .failed:
             if let anError = error {
-                NSLog("Email send failed: \(anError.localizedDescription)\n\(error)")
+                NSLog("Email send failed: \(anError.localizedDescription)")
             } else {
                 NSLog("Email send failed!")
             }

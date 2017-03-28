@@ -83,9 +83,10 @@ public class CustomFonts {
             let errorCode = CFErrorGetCode(anError.takeRetainedValue())
             if errorCode == CTFontManagerError.alreadyRegistered.rawValue {
                 NSLog("Already loaded '\(name)' font!")
-            } else {
-                let errorDescription = CFErrorCopyDescription(anError.takeRetainedValue())
+            } else if let errorDescription = CFErrorCopyDescription(anError.takeRetainedValue()) {
                 NSLog("ERROR: Failed to load '\(name)' font with error: \(errorDescription)!")
+            } else {
+                NSLog("ERROR: Failed to load '\(name)' font!")
             }
         } else {
             NSLog("Loaded '\(name)' successfully")

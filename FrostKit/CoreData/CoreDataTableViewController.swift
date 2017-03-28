@@ -66,7 +66,7 @@ open class CoreDataTableViewController: UITableViewController, NSFetchedResultsC
             try fetchedResultsController.performFetch()
             tableView.reloadData()
         } catch let error {
-            NSLog("Fetch error: \(error.localizedDescription)\n\(error)")
+            NSLog("Fetch error: \(error.localizedDescription)")
         }
     }
 }

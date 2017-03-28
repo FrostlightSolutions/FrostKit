@@ -26,7 +26,9 @@ Returns a WebViewController dependant on the variable or automatically
 - returns: A base web view controller with the designated web view.
 */
 @available(iOS, deprecated: 9.0, message: "This is no longer needed as of iOS 9. Use SFSafariViewController instead.")
+// swiftlint:disable identifier_name
 public func WebViewController(viewType: WebViewType = .automatic) -> BaseWebViewController {
+// swiftlint:enable identifier_name
     
     switch viewType {
     case .UIWebView:

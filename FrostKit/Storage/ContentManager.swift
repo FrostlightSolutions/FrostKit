@@ -52,14 +52,9 @@ public class ContentManager {
             
             var metadataToRemove = [String]()
             
-            for (key, refDate) in shared.contentMetadata {
-                
-                let refTimeInterval = refDate.timeIntervalSinceReferenceDate
-                let timeInterval = NSDate.timeIntervalSinceReferenceDate
-                
-                if (timeInterval - refTimeInterval) > maxSavedTimeInSeconds {
-                    metadataToRemove.append(key)
-                }
+            let timeInterval = NSDate.timeIntervalSinceReferenceDate
+            for (key, refDate) in shared.contentMetadata where (timeInterval - refDate.timeIntervalSinceReferenceDate) > maxSavedTimeInSeconds {
+                metadataToRemove.append(key)
             }
             
             if metadataToRemove.count > 0 {
@@ -72,7 +67,7 @@ public class ContentManager {
                         do {
                             try LocalStorage.remove(absoluteURL: url)
                         } catch let error {
-                            NSLog("Error: Unable to remove managed item at URL \(url)\nWith error: \(error.localizedDescription)\n\(error)")
+                            NSLog("Error: Unable to remove managed item at URL \(url)\nWith error: \(error.localizedDescription)")
                         }
                     }
                 }
