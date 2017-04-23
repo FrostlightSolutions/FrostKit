@@ -52,35 +52,6 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
         }
     }
     
-    /// Used for plotting all annotations to ditermine annotation clustering.
-    public let offscreenMapView = MKMapView(frame: CGRect())
-    /// Private instance of map view, that returns the offscreen map view only if clustering is on.
-    private var _mapView: MKMapView? {
-        if shouldUseAnnotationClustering {
-            return offscreenMapView
-        } else {
-            return mapView
-        }
-    }
-    
-    /// Determins if the map controller should cluster the annotations on the map, or plot them all directly. THe default is `true`.
-    @IBInspectable open var shouldUseAnnotationClustering: Bool = true
-    /**
-     This value controls the number of off screen annotations displayed.
-     
-     A bigger number means more annotations, less change of seeing annotation views pop in, but decreaced performance.
-     
-     A smaller number means fewer annotations, more chance of seeing annotation views pop in, but better performance.
-    */
-    @IBInspectable open var marginFactor: Double = 2
-    /**
-     Adjust this based on the deimensions of your annotation views.
-     
-     Bigger number more aggressively coalesce annotations (fewer annotations displayed, but better performance).
-     
-     Numbers too small result in overlapping annotation views and too many annotations on screen.
-    */
-    @IBInspectable open var bucketSize: Double = 60
     private var currentlyUpdatingVisableAnnotations = false
     private var shouldTryToUpdateVisableAnnotationsAgain = false
     /// Refers to if the map controller should auto assign itself to the map view as a delegate.
@@ -125,8 +96,6 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
     /// When the map automatically zooms to show all, if this value is set to true, then the users annoation is automatically included in that.
     @IBInspectable open var zoomToShowAllIncludesUser: Bool = true
     private var regionSpanBeforeChange: MKCoordinateSpan?
-    let clusterCalculationsQueue = DispatchQueue.global(qos: .userInitiated)
-    var cancelClusterCalculations = false
     
     deinit {
         resetMap()
@@ -137,8 +106,6 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
     Resets the map controller, clearing the addresses, annotations and removing all annotations and polylines on the map view.
     */
     open func resetMap() {
-        
-        cancelClusterCalculations = true
         
         addressesDict.removeAll(keepingCapacity: false)
         annotations.removeAll(keepingCapacity: false)
@@ -214,7 +181,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
         // Update annotation in cache
         annotations[address.key] = annotation
         
-        _mapView?.addAnnotation(annotation)
+        mapView?.addAnnotation(annotation)
         
         if asBulk == false {
             updateVisableAnnotations()
@@ -231,7 +198,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
         guard let annotations = Array(self.annotations.values) as? [MKAnnotation] else {
             return
         }
-        _mapView?.removeAnnotations(annotations)
+        mapView?.removeAnnotations(annotations)
         
         if includingCached == true {
             self.annotations.removeAll(keepingCapacity: false)
@@ -265,206 +232,10 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
         currentlyUpdatingVisableAnnotations = true
         shouldTryToUpdateVisableAnnotationsAgain = false
         
-        if shouldUseAnnotationClustering {
-            
-            calculateAndUpdateClusterAnnotations {
-                
-                self.currentlyUpdatingVisableAnnotations = false
-                if self.shouldTryToUpdateVisableAnnotationsAgain == true {
-                    self.updateVisableAnnotations()
-                }
-            }
-        } else {
-            
-            currentlyUpdatingVisableAnnotations = false
-            if shouldTryToUpdateVisableAnnotationsAgain == true {
-                updateVisableAnnotations()
-            }
+        currentlyUpdatingVisableAnnotations = false
+        if shouldTryToUpdateVisableAnnotationsAgain == true {
+            updateVisableAnnotations()
         }
-    }
-    
-    internal final func calculateAndUpdateClusterAnnotations(_ complete: @escaping () -> Void) {
-        
-        guard let mapView = self.mapView else {
-            complete()
-            return
-        }
-        
-        let marginFactor = self.marginFactor
-        let bucketSize = self.bucketSize
-        
-        // Fill all the annotations in the viaable area + a wide margin to avoid poppoing annotation views ina dn out while panning the map.
-        let visableMapRect = mapView.visibleMapRect
-        let adjustedVisableMapRect = MKMapRectInset(visableMapRect, -marginFactor * visableMapRect.size.width, -marginFactor * visableMapRect.size.height)
-        
-        // Determine how wide each bucket will be, as a MKMapRect square
-        guard let viewController = self.viewController else {
-            complete()
-            return
-        }
-        let leftCoordinate = mapView.convert(CGPoint(), toCoordinateFrom: viewController.view)
-        let rightCoordinate = mapView.convert(CGPoint(x: bucketSize, y: 0), toCoordinateFrom: viewController.view)
-        let gridSize = MKMapPointForCoordinate(rightCoordinate).x - MKMapPointForCoordinate(leftCoordinate).x
-        var gridMapRect = MKMapRect(origin: MKMapPoint(x: 0, y: 0), size: MKMapSize(width: gridSize, height: gridSize))
-        
-        // Condense annotations. with a padding of two squares, around the viableMapRect
-        let startX = floor(MKMapRectGetMinX(adjustedVisableMapRect) / gridSize) * gridSize
-        let startY = floor(MKMapRectGetMinY(adjustedVisableMapRect) / gridSize) * gridSize
-        let endX = floor(MKMapRectGetMaxX(adjustedVisableMapRect) / gridSize) * gridSize
-        let endY = floor(MKMapRectGetMaxY(adjustedVisableMapRect) / gridSize) * gridSize
-        
-        // For each square in the grid, pick one annotation to show
-        let offscreenMapView = self.offscreenMapView
-        gridMapRect.origin.y = startY
-        clusterCalculationsQueue.async {
-            
-            while MKMapRectGetMinY(gridMapRect) <= endY {
-                
-                gridMapRect.origin.x = startX
-                while MKMapRectGetMinX(gridMapRect) <= endX {
-                    
-                    self.calculateClusterInGrid(mapView: mapView, offscreenMapView: offscreenMapView, gridMapRect: gridMapRect)
-                    
-                    if self.cancelClusterCalculations == true {
-                        break
-                    }
-                    
-                    gridMapRect.origin.x += gridSize
-                }
-                
-                if self.cancelClusterCalculations == true {
-                    break
-                }
-                
-                gridMapRect.origin.y += gridSize
-            }
-            
-            DispatchQueue.main.async {
-                self.cancelClusterCalculations = false
-                complete()
-                return
-            }
-        }
-    }
-    
-    private final func calculateClusterInGrid(mapView: MKMapView, offscreenMapView: MKMapView, gridMapRect: MKMapRect) {
-        
-        // Limited to only the use Annotation classes or subclasses
-        let semaphore = DispatchSemaphore(value: 0)    // Create semaphore
-        var visableAnnotationsInBucket: Set<Annotation>!
-        
-        DispatchQueue.main.async {
-            
-            let userLocation = mapView.userLocation
-            var mapAnnotations = mapView.annotations(in: gridMapRect)
-            mapAnnotations.remove(userLocation)
-            
-            if let annotations = mapAnnotations as? Set<Annotation> {
-                visableAnnotationsInBucket = annotations
-            } else {
-                visableAnnotationsInBucket = Set<Annotation>()
-            }
-            
-            semaphore.signal()    // Signal that semaphore should complete
-        }
-        
-        _ = semaphore.wait(timeout: DispatchTime.distantFuture)   // Wait for semaphore
-        
-        let allAnnotationsInBucket = offscreenMapView.annotations(in: gridMapRect)
-        var filteredAllAnnotationsInBucket = Set<Annotation>()
-        for object in allAnnotationsInBucket {
-            
-            if let annotation = object as? Annotation {
-                filteredAllAnnotationsInBucket.insert(annotation)
-            }
-            
-            if self.cancelClusterCalculations == true {
-                return
-            }
-        }
-        
-        // If filteredAllAnnotationsInBucket just contains a single anntation, then plot that
-        if filteredAllAnnotationsInBucket.count == 1, let annotation = filteredAllAnnotationsInBucket.first {
-            
-            DispatchQueue.main.async {
-                
-                // Give the annotationForGrid a reference to all the annotations it will represent
-                annotation.containdedAnnotations = nil
-                annotation.clusterAnnotation = nil
-                
-                mapView.addAnnotation(annotation)
-            }
-            
-            // If filteredAllAnnotationsInBucket contains more than 1 annotation, then get the annotation to show and set relevent details
-        } else if filteredAllAnnotationsInBucket.count > 1 {
-            
-            guard let annotationForGrid = self.calculatedAnnotationInGrid(mapView: mapView, gridMapRect: gridMapRect, allAnnotations: filteredAllAnnotationsInBucket, visableAnnotations: visableAnnotationsInBucket) else {
-                return
-            }
-            
-            filteredAllAnnotationsInBucket.remove(annotationForGrid)
-            
-            DispatchQueue.main.async {
-                
-                // Give the annotationForGrid a reference to all the annotations it will represent
-                annotationForGrid.containdedAnnotations = [Annotation](filteredAllAnnotationsInBucket)
-                
-                mapView.addAnnotation(annotationForGrid)
-            }
-            
-            // Cleanup other annotations that might be being viewed
-            for annotation in filteredAllAnnotationsInBucket {
-                
-                // Give all the other annotations a reference to the one which is representing then.
-                DispatchQueue.main.async {
-                    annotation.clusterAnnotation = annotationForGrid
-                }
-                
-                if visableAnnotationsInBucket.contains(annotation) {
-                    
-                    DispatchQueue.main.async {
-                        mapView.removeAnnotation(annotation)
-                    }
-                }
-                
-                if self.cancelClusterCalculations == true {
-                    return
-                }
-            }
-        }
-    }
-    
-    private final func calculatedAnnotationInGrid(mapView: MKMapView, gridMapRect: MKMapRect, allAnnotations: Set<Annotation>, visableAnnotations: Set<Annotation>) -> Annotation? {
-        
-        // First, see if one of the annotations we were already showing is in this mapRect
-        var annotationForGridSet: Annotation?
-        for annotation in visableAnnotations {
-            
-            if visableAnnotations.contains(annotation) {
-                annotationForGridSet = annotation
-                break
-            }
-        }
-        
-        if annotationForGridSet != nil {
-            return annotationForGridSet
-        }
-        
-        // Otherwise, sort the annotations based on their  distance from the center of the grid square,
-        // then choose the one closest to the center to show.
-        let centerMapPoint = MKMapPoint(x: MKMapRectGetMidX(gridMapRect), y: MKMapRectGetMidY(gridMapRect))
-        let sortedAnnotations = allAnnotations.sorted { (object1, object2) -> Bool in
-            
-            let mapPoint1 = MKMapPointForCoordinate(object1.coordinate)
-            let mapPoint2 = MKMapPointForCoordinate(object2.coordinate)
-            
-            let distance1 = MKMetersBetweenMapPoints(mapPoint1, centerMapPoint)
-            let distance2 = MKMetersBetweenMapPoints(mapPoint2, centerMapPoint)
-            
-            return distance1 < distance2
-        }
-        
-        return sortedAnnotations.first
     }
     
     // MARK: - Zoom Map Methods
@@ -565,7 +336,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
         
         if includingUser == false || zoomToShowAllIncludesUser == false, let annotations = Array(self.annotations.values) as? [MKAnnotation] {
             zoom(toAnnotations: annotations)
-        } else if let mapView = _mapView {
+        } else if let mapView = self.mapView {
             zoom(toAnnotations: mapView.annotations)
         }
     }
