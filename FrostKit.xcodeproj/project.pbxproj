@@ -147,7 +147,6 @@
 		18D54C021CE6452700D365C6 /* FrostKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 1826B0261BD9047900DA1669 /* FrostKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18D54C041CE64BA900D365C6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18748B2019DF5661003942A3 /* Localizable.strings */; };
 		18D54C051CE64BB000D365C6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18748B2019DF5661003942A3 /* Localizable.strings */; };
-		18D58EA91D0CC151009BE4E5 /* MapClusterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D58EA81D0CC151009BE4E5 /* MapClusterTests.swift */; };
 		18DC212B19DEA21000FEB57E /* ViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC212A19DEA21000FEB57E /* ViewControllerExtensions.swift */; };
 		18DD78FF1A8CA70F00379FB5 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DD78FD1A8CA70F00379FB5 /* Button.swift */; };
 		18DD79011A8CA70F00379FB5 /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DD78FE1A8CA70F00379FB5 /* VisualEffectView.swift */; };
@@ -311,7 +310,6 @@
 		18CFF9FD19DC45AB00DF6BB8 /* TimeZoneExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TimeZoneExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18D54BE91CE6439300D365C6 /* FrostKit tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FrostKit tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D54BED1CE6439300D365C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		18D58EA81D0CC151009BE4E5 /* MapClusterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = MapClusterTests.swift; path = "FrostKit iOS Tests/Maps/MapClusterTests.swift"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18DC212A19DEA21000FEB57E /* ViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ViewControllerExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18DD78FD1A8CA70F00379FB5 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Button.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18DD78FE1A8CA70F00379FB5 /* VisualEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = VisualEffectView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -652,7 +650,6 @@
 			isa = PBXGroup;
 			children = (
 				18F319521E45FA310055E647 /* MapControllerTests.swift */,
-				18D58EA81D0CC151009BE4E5 /* MapClusterTests.swift */,
 			);
 			path = Maps;
 			sourceTree = "<group>";
@@ -1243,7 +1240,6 @@
 			files = (
 				18410C2E1C81092500D2B308 /* FontExtensionsTests.swift in Sources */,
 				18F319531E45FA310055E647 /* MapControllerTests.swift in Sources */,
-				18D58EA91D0CC151009BE4E5 /* MapClusterTests.swift in Sources */,
 				18E9FF971C80AC6F00AC5230 /* DateExtensionsTests.swift in Sources */,
 				18410C301C810A6900D2B308 /* BundleExtensionsTests.swift in Sources */,
 				18497BE41D15BA28009A717F /* TaskStoreTests.swift in Sources */,
