@@ -350,7 +350,7 @@ extension Date {
     public var stripTime: Date? {
         
         var calendar = Calendar.iso8601
-        calendar.timeZone = TimeZone.utc
+        calendar.timeZone = TimeZone.current
         let components = calendar.dateComponents(([.day, .month, .year]), from: self)
         return calendar.date(from: components)
     }
@@ -391,7 +391,7 @@ extension Date {
     public var dateAtStartOfDay: Date {
         
         var calendar = Calendar.iso8601
-        calendar.timeZone = TimeZone.utc
+        calendar.timeZone = TimeZone.current
         return calendar.startOfDay(for: self)
     }
     
@@ -399,7 +399,7 @@ extension Date {
     /// NOTE: This will return `nil` if the calculation of date components returns `nil` in `dateByAdding(_:)`.
     public var dateAtEndOfDay: Date? {
         
-        let timeZone = TimeZone.utc
+        let timeZone = TimeZone.current
         return dateAtStartOfDay.dateByAdding(days: 1, seconds: -1, with: timeZone)
     }
     
