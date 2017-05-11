@@ -387,7 +387,26 @@ extension Date {
         return calendar.date(byAdding: components, to: self, wrappingComponents: false)
     }
     
-    /// Returns a date with the time at the start of the day, while preserving the time zone.
+    /// Returns a date of the current weeks from a weekday. Valid input numbers are `0` to `6`, and the time will always be midnight UTC.
+    ///
+    /// - Parameter day: The day of the week, starting at `0` and ending at `6`.
+    /// - Returns: The date corisponding to the weekday for the current dates week.
+    func weekdayInCurrentWeek(day: Int) -> Date? {
+        
+        var calendar = Calendar.iso8601
+        calendar.timeZone = TimeZone.current
+        let omponents = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self)
+        
+        guard
+            let beginningOfWeek = calendar.date(from: omponents),
+            let nextDate = calendar.date(byAdding: .day, value: day, to: beginningOfWeek) else {
+                return nil
+        }
+        
+        return nextDate
+    }
+    
+    /// Returns a date with the time at the start of the day, using the `current` time zone.
     public var dateAtStartOfDay: Date {
         
         var calendar = Calendar.iso8601
@@ -395,7 +414,7 @@ extension Date {
         return calendar.startOfDay(for: self)
     }
     
-    /// Returns a date with the time at the end of the day, while preserving the time zone.
+    /// Returns a date with the time at the end of the day, using the `current` time zone.
     /// NOTE: This will return `nil` if the calculation of date components returns `nil` in `dateByAdding(_:)`.
     public var dateAtEndOfDay: Date? {
         
@@ -403,29 +422,113 @@ extension Date {
         return dateAtStartOfDay.dateByAdding(days: 1, seconds: -1, with: timeZone)
     }
     
+    /// Returns a date with the date-time at the begining of the day of the current week, using the `current` time zone.
+    /// NOTE: This will return `nil` if the calculation of date components returns `nil` in `weekdayInCurrentWeek(_:)`.
+    public var dateAtStartOfWeek: Date? {
+        return weekdayInCurrentWeek(day: 0)
+    }
+    
+    /// Returns a date with the date-time at the end of the day of the current week, using the `current` time zone.
+    /// NOTE: This will return `nil` if the calculation of date components returns `nil` in `weekdayInCurrentWeek(_:)`.
+    public var dateAtEndOfWeek: Date? {
+        
+        guard let date = weekdayInCurrentWeek(day: 7) else {
+            return nil
+        }
+        
+        return date - 1
+    }
+    
+    /// Returns a date with the date-time at the begining of the day of the current month, using the `current` time zone.
+    /// NOTE: This will return `nil` if the calculation of date components returns `nil` in `weekdayInCurrentWeek(_:)`.
+    public var dateAtStartOfMonth: Date? {
+        
+        let calendar = Calendar.iso8601
+        var components = calendar.dateComponents(in: TimeZone.current, from: self)
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        components.day = 1
+        
+        return components.date
+    }
+    
+    /// Returns a date with the date-time at the end of the day of the current month, using the `current` time zone.
+    /// NOTE: This will return `nil` if the calculation of date components returns `nil` in `weekdayInCurrentWeek(_:)`.
+    public var dateAtEndOfMonth: Date? {
+        
+        let calendar = Calendar.iso8601
+        var components = calendar.dateComponents(in: TimeZone.current, from: self)
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        
+        guard daysInMonth != NSNotFound else {
+            return nil
+        }
+        components.day = daysInMonth
+        
+        return components.date
+    }
+    
+    /// Returns a date with the date-time at the begining of the day of the current year, using the `current` time zone.
+    /// NOTE: This will return `nil` if the calculation of date components returns `nil` in `weekdayInCurrentWeek(_:)`.
+    public var dateAtStartOfYear: Date? {
+        
+        let calendar = Calendar.iso8601
+        var components = calendar.dateComponents(in: TimeZone.current, from: self)
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        components.month = 1
+        components.day = 1
+        
+        return components.date
+    }
+    
+    /// Returns a date with the date-time at the end of the day of the current year, using the `current` time zone.
+    /// NOTE: This will return `nil` if the calculation of date components returns `nil` in `weekdayInCurrentWeek(_:)`.
+    public var dateAtEndOfYear: Date? {
+        
+        let calendar = Calendar.iso8601
+        var components = calendar.dateComponents(in: TimeZone.current, from: self)
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        components.month = 12
+        components.day = 31
+        
+        return components.date
+    }
+    
     // MARK: - Date Strings
     
-    /// A helper method for getting a formatted string of the date and time in `ShortStyle`
+    /// A helper method for getting a formatted string of the date and time in `short`
     public var dateTimeShortString: String {
         return  DateFormatter.localizedString(from: self, dateStyle: .short, timeStyle: .short)
     }
     
-    /// A helper method for getting a formatted string of the date in `ShortStyle`
+    /// A helper method for getting a formatted string of the date in `short`
     public var dateShortString: String {
         return  DateFormatter.localizedString(from: self, dateStyle: .short, timeStyle: .none)
     }
     
-    /// A helper method for getting a formatted string of the date in `MediumStyle`
+    /// A helper method for getting a formatted string of the date and time in `short`
+    public var dateTimeMediumString: String {
+        return  DateFormatter.localizedString(from: self, dateStyle: .medium, timeStyle: .short)
+    }
+    
+    /// A helper method for getting a formatted string of the date in `short`
     public var dateMediumString: String {
         return  DateFormatter.localizedString(from: self, dateStyle: .medium, timeStyle: .none)
     }
     
-    /// A helper method for getting a formatted string of the date in `FullStyle`
+    /// A helper method for getting a formatted string of the date in `full`
     public var dateFullString: String {
         return  DateFormatter.localizedString(from: self, dateStyle: .full, timeStyle: .none)
     }
     
-    /// A helper method for getting a formatted string of the time in `ShortStyle`
+    /// A helper method for getting a formatted string of the time in `short`
     public var timeShortString: String {
         return  DateFormatter.localizedString(from: self, dateStyle: .none, timeStyle: .short)
     }
