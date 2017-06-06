@@ -100,7 +100,7 @@ open class CarouselViewController: UIViewController, UICollectionViewDataSource,
     
     // MARK: - UIPageControl Methods
     
-    public final func pageControlDidChange(_ sender: UIPageControl) {
+    @objc public final func pageControlDidChange(_ sender: UIPageControl) {
         collectionView?.scrollToItem(at: IndexPath(row: sender.currentPage, section: 0), at: [], animated: true)
     }
     

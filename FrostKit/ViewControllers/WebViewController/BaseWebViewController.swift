@@ -126,7 +126,7 @@ public class BaseWebViewController: UIViewController {
      
     - parameter sender: The bar button item pressed.
     */
-    func doneButtonPressed(_ sender: AnyObject?) {
+    @objc func doneButtonPressed(_ sender: AnyObject?) {
         dismiss(animated: true, completion: nil)
     }
     
@@ -135,7 +135,7 @@ public class BaseWebViewController: UIViewController {
      
     - parameter sender: The bar button item pressed.
     */
-    func refreshButtonPressed(_ sender: AnyObject?) {
+    @objc func refreshButtonPressed(_ sender: AnyObject?) {
         // Functionality overriden in subclasses
     }
     
@@ -144,7 +144,7 @@ public class BaseWebViewController: UIViewController {
      
     - parameter sender: The bar button item pressed.
     */
-    func backButtonPressed(_ sender: AnyObject?) {
+    @objc func backButtonPressed(_ sender: AnyObject?) {
         // Functionality overriden in subclasses
     }
     
@@ -153,7 +153,7 @@ public class BaseWebViewController: UIViewController {
      
     - parameter sender: The bar button item pressed.
     */
-    func forwardButtonPressed(_ sender: AnyObject?) {
+    @objc func forwardButtonPressed(_ sender: AnyObject?) {
         // Functionality overriden in subclasses
     }
     
@@ -162,7 +162,7 @@ public class BaseWebViewController: UIViewController {
      
     - parameter sender: The bar button item pressed.
     */
-    func actionButtonPressed(_ sender: AnyObject?) {
+    @objc func actionButtonPressed(_ sender: AnyObject?) {
         var activityItems = [Any]()
         if let urlString = url?.absoluteString {
             activityItems.append(urlString)
