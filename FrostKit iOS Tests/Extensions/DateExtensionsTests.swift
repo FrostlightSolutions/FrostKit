@@ -479,11 +479,10 @@ class DateExtensionsTests: XCTestCase {
             
             let date = components.date!
             let strippedDate = date.stripTime
-            components.timeZone = TimeZone.utc
             components.hour = 0
             components.minute = 0
             components.second = 0
-            XCTAssert(strippedDate == components.date)
+            XCTAssert(strippedDate == components.date, "Should be \"\(components.date!)\" but was \"\(strippedDate!)\"")
         }
     }
     
@@ -528,16 +527,15 @@ class DateExtensionsTests: XCTestCase {
             components.second = 43
             let date = components.date!
             
-            components.timeZone = TimeZone.utc
             components.hour = 0
             components.minute = 0
             components.second = 0
-            XCTAssert(date.dateAtStartOfDay == components.date)
+            XCTAssert(date.dateAtStartOfDay == components.date, "Should be \"\(components.date!)\" but was \"\(date.dateAtStartOfDay)\"")
             
             components.hour = 23
             components.minute = 59
             components.second = 59
-            XCTAssert(date.dateAtEndOfDay == components.date)
+            XCTAssert(date.dateAtEndOfDay == components.date, "Should be \"\(components.date!)\" but was \"\(date.dateAtEndOfDay!)\"")
         }
     }
     
