@@ -152,7 +152,7 @@ open class CloudKitTableViewController: UITableViewController {
     
     // MARK: - Actions
     
-    internal func refreshControlValueChanged(_ sender: UIRefreshControl) {
+    @objc internal func refreshControlValueChanged(_ sender: UIRefreshControl) {
         loadRecords()
     }
     
