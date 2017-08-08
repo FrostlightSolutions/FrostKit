@@ -45,7 +45,7 @@ open class TableInterfaceController: WKInterfaceController {
         updateData()
     }
     
-    open func updateData() {
+    @objc open func updateData() {
         // Used to override in subclasses
         finishedUpdatingData(dataArray: [])
     }
