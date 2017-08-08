@@ -42,6 +42,8 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
         return false
     }
     
+    private lazy var observers = [NSKeyValueObservation]()
+    
     /**
     Stops the web view from being loaded any more.
     */
@@ -57,48 +59,40 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
             
             webView.allowsBackForwardNavigationGestures = true
             
-            webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: [], context: nil)
-            webView.addObserver(self, forKeyPath: #keyPath(WKWebView.title), options: [], context: nil)
-            webView.addObserver(self, forKeyPath: #keyPath(WKWebView.canGoBack), options: [], context: nil)
-            webView.addObserver(self, forKeyPath: #keyPath(WKWebView.canGoForward), options: [], context: nil)
+            let progressObserver = webView.observe(\.estimatedProgress, changeHandler: { (webView, _) in
+                
+                self.progrssView.setProgress(Float(webView.estimatedProgress), animated: true)
+                self.updateProgrssViewVisability()
+                self.updateActivityViewVisability()
+            })
+            observers.append(progressObserver)
+            
+            let titleObserver = webView.observe(\.title, changeHandler: { (webView, _) in
+                
+                if self.titleOverride == nil {
+                    self.navigationItem.title = webView.title
+                }
+            })
+            observers.append(titleObserver)
+            
+            let canGoBackObserver = webView.observe(\.canGoBack, changeHandler: { (_, _) in
+                self.updateBackButton()
+            })
+            observers.append(canGoBackObserver)
+            
+            let canGoForwardObserver = webView.observe(\.canGoForward, changeHandler: { (_, _) in
+                self.updateForwardButton()
+            })
+            observers.append(canGoForwardObserver)
         }
         
         super.viewDidLoad()
     }
     
     deinit {
-        if let webView = self.webView as? WKWebView {
-            webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress))
-            webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.title))
-            webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.canGoBack))
-            webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.canGoForward))
-        }
-    }
-    
-    // MARK: - KVO Methods
-    
-    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         
-        guard let aKeyPath = keyPath else {
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-            return
-        }
-        
-        switch aKeyPath {
-        case #keyPath(WKWebView.estimatedProgress):
-            self.progrssView.setProgress(Float(webView!.estimatedProgress), animated: true)
-            updateProgrssViewVisability()
-            updateActivityViewVisability()
-        case #keyPath(WKWebView.title):
-            if let webView = self.webView as? WKWebView, titleOverride == nil {
-                navigationItem.title = webView.title
-            }
-        case #keyPath(WKWebView.canGoBack):
-            updateBackButton()
-        case #keyPath(WKWebView.canGoForward):
-            updateForwardButton()
-        default:
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+        for observer in observers {
+            webView?.removeObserver(observer)
         }
     }
     
