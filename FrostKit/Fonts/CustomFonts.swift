@@ -72,7 +72,10 @@ public class CustomFonts {
         _ = UIFont()
 #endif
         
-        let font = CGFont(provider)
+        guard let font = CGFont(provider) else {
+            NSLog("ERROR: Failed to get data provider for \"\(name)\" font!")
+            return
+        }
         var error: Unmanaged<CFError>?
         guard CTFontManagerRegisterGraphicsFont(font, &error) == true else {
             NSLog("ERROR: Failed to register \"\(name)\" font!")
