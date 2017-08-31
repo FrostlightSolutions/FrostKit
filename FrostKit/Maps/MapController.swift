@@ -55,7 +55,6 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
     private var currentlyUpdatingVisableAnnotations = false
     private var shouldTryToUpdateVisableAnnotationsAgain = false
     /// Refers to if the map controller should auto assign itself to the map view as a delegate.
-    // swiftlint:disable weak_delegate
     @IBInspectable open var autoAssingDelegate: Bool = true {
         didSet {
             if autoAssingDelegate == true {
@@ -64,7 +63,6 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
         }
     }
     
-    // swiftlint:enable weak_delegate
     /// `true` if the user is currently being tracked in the map view or `false` if not.
     open var trackingUser: Bool = false {
         didSet {
