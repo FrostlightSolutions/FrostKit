@@ -16,7 +16,7 @@ open class InitialsImageView: ImageView {
             if let name = self.name {
                 for word in name.components(separatedBy: " ") {
                     let index = word.index(word.startIndex, offsetBy: 1)
-                    initials += word.substring(to: index).uppercased()
+                    initials += word[..<index].uppercased()
                 }
             }
             self.initials = initials
