@@ -41,13 +41,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
             }
             
             if shouldRequestLocationServices {
-                
-                if locationManager == nil {
-                    locationManager = CLLocationManager()
-                    locationManager?.delegate = self
-                }
-                
-                MapController.requestAccessToLocationServices(locationManager!)
+                requestAccessToLocationServices()
             }
         }
     }
@@ -135,6 +129,16 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
                 locationManager.requestWhenInUseAuthorization()
             }
         }
+    }
+    
+    open func requestAccessToLocationServices() {
+        
+        if locationManager == nil {
+            locationManager = CLLocationManager()
+            locationManager?.delegate = self
+        }
+        
+        MapController.requestAccessToLocationServices(locationManager!)
     }
     
     // MARK: - Plot/Remove Annotations Methods
