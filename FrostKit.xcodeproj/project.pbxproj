@@ -95,6 +95,12 @@
 		184625071C84D1390098E969 /* ColorExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AC87E81C77F48200426776 /* ColorExtensionsTest.swift */; };
 		184625091C84D1A00098E969 /* FrostKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 18E5459D1C77E53F00637E85 /* FrostKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1846250A1C84D2FC0098E969 /* FrostKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 18839B1719D9FA8C00760157 /* FrostKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1846956A1F8632CE006A445F /* CKContainerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CF8C331D6C839100DE9C37 /* CKContainerExtensions.swift */; };
+		1846956B1F8632CE006A445F /* CKDatabaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CF8C341D6C839100DE9C37 /* CKDatabaseExtensions.swift */; };
+		1846956C1F8632CE006A445F /* CKReferenceExntensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB893B1D71C21D0097ADAC /* CKReferenceExntensions.swift */; };
+		1846956D1F8632CE006A445F /* CKRecordIDExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB893E1D71CB3D0097ADAC /* CKRecordIDExtensions.swift */; };
+		1846956E1F8632D3006A445F /* CKRecordIDExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB893E1D71CB3D0097ADAC /* CKRecordIDExtensions.swift */; };
+		1846956F1F8632D9006A445F /* CKReferenceExntensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB893B1D71C21D0097ADAC /* CKReferenceExntensions.swift */; };
 		18497BE41D15BA28009A717F /* TaskStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18497BE31D15BA28009A717F /* TaskStoreTests.swift */; };
 		185652861D81746E002E5C99 /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* TaskStore.swift */; };
 		18748B2219DF5661003942A3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18748B2019DF5661003942A3 /* Localizable.strings */; };
@@ -1164,12 +1170,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				18B0A5D31D15D2BF00C6985E /* TableInterfaceController.swift in Sources */,
+				1846956D1F8632CE006A445F /* CKRecordIDExtensions.swift in Sources */,
 				18E028451BA2D2F600852022 /* ColorExtensions.swift in Sources */,
 				182290541BA2E66F00C1CF1D /* ContentManager.swift in Sources */,
 				18E0283F1BA2D2DF00852022 /* CalendarExtensions.swift in Sources */,
+				1846956A1F8632CE006A445F /* CKContainerExtensions.swift in Sources */,
+				1846956C1F8632CE006A445F /* CKReferenceExntensions.swift in Sources */,
 				18E028411BA2D2DF00852022 /* DataExtensions.swift in Sources */,
 				18E028401BA2D2DF00852022 /* TimeZoneExtensions.swift in Sources */,
 				18E0283E1BA2D2D900852022 /* DateExtensions.swift in Sources */,
+				1846956B1F8632CE006A445F /* CKDatabaseExtensions.swift in Sources */,
 				182290531BA2E66C00C1CF1D /* LocalStorage.swift in Sources */,
 				182290521BA2E60200C1CF1D /* TaskStore.swift in Sources */,
 				18E028421BA2D2E400852022 /* BundleExtensions.swift in Sources */,
@@ -1273,6 +1283,7 @@
 				18CF8C371D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */,
 				189D8C951C77E95C00261DF5 /* CalendarExtensions.swift in Sources */,
 				18E545BD1C77E74D00637E85 /* FrostKit.swift in Sources */,
+				1846956F1F8632D9006A445F /* CKReferenceExntensions.swift in Sources */,
 				189D8C9F1C77EC5B00261DF5 /* ColorExtensions.swift in Sources */,
 				189D8C8F1C77E94B00261DF5 /* ErrorExtensions.swift in Sources */,
 				189D8C981C77E96200261DF5 /* BundleExtensions.swift in Sources */,
@@ -1283,6 +1294,7 @@
 				189D8C9C1C77E9AB00261DF5 /* CustomFonts.swift in Sources */,
 				189D8C941C77E95C00261DF5 /* DateExtensions.swift in Sources */,
 				189D8C8D1C77E93300261DF5 /* TaskStore.swift in Sources */,
+				1846956E1F8632D3006A445F /* CKRecordIDExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

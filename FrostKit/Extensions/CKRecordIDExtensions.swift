@@ -9,6 +9,7 @@
 import Foundation
 import CloudKit
 
+@available(watchOSApplicationExtension 3.0, *)
 public extension CKRecordID {
     
     public class func recordIDs(fromRecordNames names: [String], zoneID: CKRecordZoneID? = nil, action: CKReferenceAction = .none) -> [CKRecordID] {
