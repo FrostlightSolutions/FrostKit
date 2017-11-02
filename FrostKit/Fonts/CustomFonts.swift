@@ -40,7 +40,7 @@ public class CustomFonts {
             let filename = fontName.components(separatedBy: ".").first
             let ext = (fontName as NSString).pathExtension
             
-            if let name = filename, name.characters.count > 0 && ext.characters.count > 0 {
+            if let name = filename, name.count > 0 && ext.count > 0 {
                 loadCustomFont(name: name, withExtension: ext, bundle: bundle)
             } else {
                 NSLog("ERROR: Failed to load '\(fontName)' font as the name or extension are invalid!")

@@ -50,7 +50,7 @@ extension Color {
         scanner.scanLocation = scanLocation
         scanner.scanHexInt32(&rgbValue)
         
-        switch hexString.characters.count - scanLocation {
+        switch hexString.count - scanLocation {
         case 3:
             // Normalize
             rgbValue = (rgbValue << 8) & 0x0F0000 | (rgbValue << 4) & 0x000F00 | rgbValue & 0x00000F

@@ -39,7 +39,7 @@ extension Date {
     public static func fusDate(from fusDateString: String) -> Date? {
         
         var format = "yyyy'-'MM'-'dd"
-        if fusDateString.characters.count > 10 {
+        if fusDateString.count > 10 {
             format += "'T'HH':'mm':'ss'.'SSSSSS'Z'"
         }
         
