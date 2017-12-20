@@ -195,7 +195,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         }
     }
     
-    private class func presentMessageComposeViewController(recipients: [String]? = nil, subject: String? = nil, body: String? = nil, attachments: [(attachmentURL: URL, alternateFilename: String)]? = nil, viewController: UIViewController, animated: Bool) {
+    public class func presentMessageComposeViewController(recipients: [String]? = nil, subject: String? = nil, body: String? = nil, attachments: [(attachmentURL: URL, alternateFilename: String)]? = nil, viewController: UIViewController, animated: Bool) {
         
         let messageVC = MFMessageComposeViewController()
         messageVC.messageComposeDelegate = SocialHelper.shared
