@@ -67,7 +67,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             
         } else {
             // TODO: Handle social service unavailability
-            NSLog("Error: Social Service Unavailable!")
+            DLog("Error: Social Service Unavailable!")
             return false
         }
         
@@ -135,7 +135,7 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             
         } else {
             // TODO: Handle eamil service unavailability
-            NSLog("Error: Email Service Unavailable!")
+            DLog("Error: Email Service Unavailable!")
         }
     }
     
@@ -191,11 +191,11 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             
         } else {
             // TODO: Handle message service unavailability
-            NSLog("Error: Message Service Unavailable!")
+            DLog("Error: Message Service Unavailable!")
         }
     }
     
-    private class func presentMessageComposeViewController(recipients: [String]? = nil, subject: String? = nil, body: String? = nil, attachments: [(attachmentURL: URL, alternateFilename: String)]? = nil, viewController: UIViewController, animated: Bool) {
+    public class func presentMessageComposeViewController(recipients: [String]? = nil, subject: String? = nil, body: String? = nil, attachments: [(attachmentURL: URL, alternateFilename: String)]? = nil, viewController: UIViewController, animated: Bool) {
         
         let messageVC = MFMessageComposeViewController()
         messageVC.messageComposeDelegate = SocialHelper.shared
@@ -222,16 +222,16 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         
         switch result {
         case .cancelled:
-            NSLog("Email cancelled")
+            DLog("Email cancelled")
         case .saved:
-            NSLog("Email saved")
+            DLog("Email saved")
         case .sent:
-            NSLog("Email sent")
+            DLog("Email sent")
         case .failed:
             if let anError = error {
-                NSLog("Email send failed: \(anError.localizedDescription)")
+                DLog("Email send failed: \(anError.localizedDescription)")
             } else {
-                NSLog("Email send failed!")
+                DLog("Email send failed!")
             }
         }
         
@@ -244,11 +244,11 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
         
         switch result {
         case .cancelled:
-            NSLog("Message cancelled")
+            DLog("Message cancelled")
         case .sent:
-            NSLog("Message sent")
+            DLog("Message sent")
         case .failed:
-            NSLog("Message failed")
+            DLog("Message failed")
         }
         
         controller.dismiss(animated: true, completion: nil)

@@ -39,7 +39,7 @@ public class ContentManager {
         
         guard shared.contentMetadata.count > 0 else {
 #if DEBUG
-            NSLog("Check of content metadata items not needed, as there are no items managed.")
+            DLog("Check of content metadata items not needed, as there are no items managed.")
 #endif
             return
         }
@@ -67,7 +67,7 @@ public class ContentManager {
                         do {
                             try LocalStorage.remove(absoluteURL: url)
                         } catch let error {
-                            NSLog("Error: Unable to remove managed item at URL \(url)\nWith error: \(error.localizedDescription)")
+                            DLog("Error: Unable to remove managed item at URL \(url)\nWith error: \(error.localizedDescription)")
                         }
                     }
                 }
@@ -75,7 +75,7 @@ public class ContentManager {
             
 #if DEBUG
             let finish = NSDate.timeIntervalSinceReferenceDate
-            NSLog("Check of \(shared.contentMetadata.count) content metadata items complete in \(finish - start) seconds. Removed \(metadataToRemove.count) items.")
+            DLog("Check of \(shared.contentMetadata.count) content metadata items complete in \(finish - start) seconds. Removed \(metadataToRemove.count) items.")
 #endif
         }
     }
