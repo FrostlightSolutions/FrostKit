@@ -43,7 +43,7 @@ public class CustomFonts {
             if let name = filename, name.count > 0 && ext.count > 0 {
                 loadCustomFont(name: name, withExtension: ext, bundle: bundle)
             } else {
-                NSLog("ERROR: Failed to load '\(fontName)' font as the name or extension are invalid!")
+                DLog("ERROR: Failed to load '\(fontName)' font as the name or extension are invalid!")
             }
         }
     }
@@ -59,7 +59,7 @@ public class CustomFonts {
         
         guard let url = bundle.url(forResource: name, withExtension: ext),
             let provider = CGDataProvider(url: url as CFURL) else {
-            NSLog("ERROR: Failed to get data provider for \"\(name)\" font!")
+            DLog("ERROR: Failed to get data provider for \"\(name)\" font!")
             return
         }
         
@@ -73,26 +73,26 @@ public class CustomFonts {
 #endif
         
         guard let font = CGFont(provider) else {
-            NSLog("ERROR: Failed to get data provider for \"\(name)\" font!")
+            DLog("ERROR: Failed to get data provider for \"\(name)\" font!")
             return
         }
         var error: Unmanaged<CFError>?
         guard CTFontManagerRegisterGraphicsFont(font, &error) == true else {
-            NSLog("ERROR: Failed to register \"\(name)\" font!")
+            DLog("ERROR: Failed to register \"\(name)\" font!")
             return
         }
         
         if let anError = error {
             let errorCode = CFErrorGetCode(anError.takeRetainedValue())
             if errorCode == CTFontManagerError.alreadyRegistered.rawValue {
-                NSLog("Already loaded '\(name)' font!")
+                DLog("Already loaded '\(name)' font!")
             } else if let errorDescription = CFErrorCopyDescription(anError.takeRetainedValue()) {
-                NSLog("ERROR: Failed to load '\(name)' font with error: \(errorDescription)!")
+                DLog("ERROR: Failed to load '\(name)' font with error: \(errorDescription)!")
             } else {
-                NSLog("ERROR: Failed to load '\(name)' font!")
+                DLog("ERROR: Failed to load '\(name)' font!")
             }
         } else {
-            NSLog("Loaded '\(name)' successfully")
+            DLog("Loaded '\(name)' successfully")
         }
     }
     
@@ -101,7 +101,7 @@ public class CustomFonts {
     public class func printAllFontFamilies() {
         
         for fontFamily in UIFont.familyNames {
-            NSLog("\(fontFamily): \(UIFont.fontNames(forFamilyName: fontFamily))")
+            DLog("\(fontFamily): \(UIFont.fontNames(forFamilyName: fontFamily))")
         }
     }
 #endif

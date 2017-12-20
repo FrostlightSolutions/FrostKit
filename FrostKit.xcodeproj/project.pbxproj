@@ -44,6 +44,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		180128A11FEAB2B9000A7A17 /* DLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180128A01FEAB2B9000A7A17 /* DLog.swift */; };
+		180128A21FEAB2B9000A7A17 /* DLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180128A01FEAB2B9000A7A17 /* DLog.swift */; };
+		180128A31FEAB2B9000A7A17 /* DLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180128A01FEAB2B9000A7A17 /* DLog.swift */; };
+		180128A41FEAB2B9000A7A17 /* DLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180128A01FEAB2B9000A7A17 /* DLog.swift */; };
 		18032B1B1A84F99400BEBB41 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EC19DCBB5B008A1506 /* FontExtensions.swift */; };
 		1806BD2D1D625FE800434A5D /* CloudKitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1806BD2C1D625FE800434A5D /* CloudKitTableViewController.swift */; };
 		1811D7B81A0AD1CA00E8B873 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B41A0AD1CA00E8B873 /* BaseWebViewController.swift */; };
@@ -254,6 +258,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		180128A01FEAB2B9000A7A17 /* DLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DLog.swift; sourceTree = "<group>"; };
 		180664F91A93737200887B9D /* NetworkActivityIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkActivityIndicatorManager.swift; sourceTree = "<group>"; };
 		1806BD2C1D625FE800434A5D /* CloudKitTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CloudKitTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1811D76A1A0ACAED00E8B873 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -540,6 +545,7 @@
 			children = (
 				18839B4519DA27AE00760157 /* SocialHelper.swift */,
 				187661781BEEA0C900C82769 /* AppStoreHelper.swift */,
+				180128A01FEAB2B9000A7A17 /* DLog.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1142,6 +1148,7 @@
 				1826B0671BD906E200DA1669 /* DateExtensions.swift in Sources */,
 				18CF8C361D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */,
 				185652861D81746E002E5C99 /* TaskStore.swift in Sources */,
+				180128A31FEAB2B9000A7A17 /* DLog.swift in Sources */,
 				1826B0571BD9065B00DA1669 /* FrostKit.swift in Sources */,
 				1826B06C1BD906E200DA1669 /* FontExtensions.swift in Sources */,
 				1826B0701BD906F200DA1669 /* FontConstants.swift in Sources */,
@@ -1181,6 +1188,7 @@
 				18E0283E1BA2D2D900852022 /* DateExtensions.swift in Sources */,
 				1846956B1F8632CE006A445F /* CKDatabaseExtensions.swift in Sources */,
 				182290531BA2E66C00C1CF1D /* LocalStorage.swift in Sources */,
+				180128A21FEAB2B9000A7A17 /* DLog.swift in Sources */,
 				182290521BA2E60200C1CF1D /* TaskStore.swift in Sources */,
 				18E028421BA2D2E400852022 /* BundleExtensions.swift in Sources */,
 				18E028471BA2D30100852022 /* ImageExtensions.swift in Sources */,
@@ -1221,6 +1229,7 @@
 				1844D1DB1D15F31800E87EA8 /* CoreDataCollectionViewController.swift in Sources */,
 				182884511CBEB12200331A54 /* MapSearchViewController.swift in Sources */,
 				1811D7BA1A0AD1CA00E8B873 /* WebViewController.swift in Sources */,
+				180128A11FEAB2B9000A7A17 /* DLog.swift in Sources */,
 				66AB893C1D71C21D0097ADAC /* CKReferenceExntensions.swift in Sources */,
 				18C0066819DB762600811755 /* ErrorExtensions.swift in Sources */,
 				18DD79091A8CA74E00379FB5 /* View.swift in Sources */,
@@ -1281,6 +1290,7 @@
 				18CF8C3A1D6C839100DE9C37 /* CKDatabaseExtensions.swift in Sources */,
 				189D8C961C77E95C00261DF5 /* TimeZoneExtensions.swift in Sources */,
 				18CF8C371D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */,
+				180128A41FEAB2B9000A7A17 /* DLog.swift in Sources */,
 				189D8C951C77E95C00261DF5 /* CalendarExtensions.swift in Sources */,
 				18E545BD1C77E74D00637E85 /* FrostKit.swift in Sources */,
 				1846956F1F8632D9006A445F /* CKReferenceExntensions.swift in Sources */,

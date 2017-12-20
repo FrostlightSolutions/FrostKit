@@ -458,7 +458,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
         if inApp == true {
             routeBetween(sourceMapItem: currentLocationItem, destinationMapItem: destinationItem, complete: { (route, error) in
                 if let anError = error {
-                    NSLog("Error getting directions: \(anError.localizedDescription)")
+                    DLog("Error getting directions: \(anError.localizedDescription)")
                 } else if let aRoute = route {
                     self.plot(route: aRoute)
                 }

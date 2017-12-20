@@ -126,7 +126,7 @@ open class CloudKitTableViewController: UITableViewController {
             DispatchQueue.main.async {
                 
                 if let anError = error {
-                    NSLog("Query Operation Error: \(anError.localizedDescription)")
+                    DLog("Query Operation Error: \(anError.localizedDescription)")
                 } else {
                     
                     self.queryCursor = cursor

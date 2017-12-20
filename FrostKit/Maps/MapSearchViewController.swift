@@ -186,7 +186,7 @@ open class MapSearchViewController: UITableViewController, UISearchControllerDel
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: NetworkRequestDidBeginNotification), object: nil)
             localSearch.start(completionHandler: { (searchResponse, error) in
                 if let anError = error {
-                    NSLog("Error performing local search: \(anError.localizedDescription)")
+                    DLog("Error performing local search: \(anError.localizedDescription)")
                 } else {
                     self.locationSeatchResponse = searchResponse
                 }

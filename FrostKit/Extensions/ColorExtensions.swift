@@ -60,7 +60,7 @@ extension Color {
             // Default parsed value
             break
         default:
-            NSLog("Error: Can't parse color with hex: \(hexString)")
+            DLog("Error: Can't parse color with hex: \(hexString)")
             return Color.clear
         }
         

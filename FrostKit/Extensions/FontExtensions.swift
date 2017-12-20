@@ -28,7 +28,7 @@ extension Font {
         if let font = Font(name: "FontAwesome", size: size) {
             return font
         } else {
-            NSLog("ERROR: Unable to load FontAwesome font.")
+            DLog("ERROR: Unable to load FontAwesome font.")
             return Font.systemFont(ofSize: size)
         }
     }
@@ -44,7 +44,7 @@ extension Font {
         if let font = Font(name: "Ionicons", size: size) {
             return font
         } else {
-            NSLog("ERROR: Unable to load Ionicons font.")
+            DLog("ERROR: Unable to load Ionicons font.")
             return Font.systemFont(ofSize: size)
         }
     }

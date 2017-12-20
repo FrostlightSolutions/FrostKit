@@ -66,7 +66,7 @@ open class CoreDataCollectionViewController: UICollectionViewController, NSFetch
             try fetchedResultsController.performFetch()
             collectionView?.reloadData()
         } catch let error {
-            NSLog("Fetch error: \(error.localizedDescription)")
+            DLog("Fetch error: \(error.localizedDescription)")
         }
     }
 }

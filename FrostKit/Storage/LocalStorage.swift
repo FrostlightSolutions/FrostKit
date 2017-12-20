@@ -116,7 +116,7 @@ public class LocalStorage {
         case .cachesDirectory:
             return cachesURL()
         default:
-            NSLog("Error: Base URL for directory \"\(directory)\" requested is not supported!")
+            DLog("Error: Base URL for directory \"\(directory)\" requested is not supported!")
             return nil
         }
     }
@@ -170,7 +170,7 @@ public class LocalStorage {
         do {
             try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
         } catch let error {
-            NSLog("Error: Directory not able to be created at URL \(url)\nWith error: \(error.localizedDescription)")
+            DLog("Error: Directory not able to be created at URL \(url)\nWith error: \(error.localizedDescription)")
         }
     }
     
@@ -200,7 +200,7 @@ public class LocalStorage {
         let success = NSKeyedArchiver.archiveRootObject(data, toFile: url.path)
         
         if success == false {
-            NSLog("Error: Can't save object to file at path: \(url.path)")
+            DLog("Error: Can't save object to file at path: \(url.path)")
         }
         
         return success

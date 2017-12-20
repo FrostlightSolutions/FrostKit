@@ -76,7 +76,7 @@ extension CKDatabase {
         if let operation = queryOperation {
             add(operation)
         } else {
-            NSLog("Not able to create query operation")
+            DLog("Not able to create query operation")
         }
     }
     
