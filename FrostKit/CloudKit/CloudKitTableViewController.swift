@@ -31,22 +31,21 @@ open class CloudKitTableViewController: UITableViewController {
     open var query: CKQuery {
         
         let predicate = NSPredicate(value: true)
-        let _query = CKQuery(recordType: recordType, predicate: predicate)
-        return _query
+        return CKQuery(recordType: recordType, predicate: predicate)
     }
     
     private var queryOperation: CKQueryOperation {
         
-        let _queryOperation: CKQueryOperation
+        let operation: CKQueryOperation
         if let cursor = queryCursor {
-            _queryOperation = CKQueryOperation(cursor: cursor)
+            operation = CKQueryOperation(cursor: cursor)
         } else {
-            _queryOperation = CKQueryOperation(query: query)
+            operation = CKQueryOperation(query: query)
         }
         
-        _queryOperation.resultsLimit = recordsPerPage
+        operation.resultsLimit = recordsPerPage
         
-        return _queryOperation
+        return operation
     }
     
     private var queryCursor: CKQueryCursor?
