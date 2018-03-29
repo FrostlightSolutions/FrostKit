@@ -92,7 +92,7 @@ public class WKWebViewController: BaseWebViewController, WKNavigationDelegate {
     deinit {
         
         for observer in observers {
-            webView?.removeObserver(observer)
+            observer.invalidate()
         }
     }
     
