@@ -287,7 +287,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
         let cPoints = UnsafeMutablePointer<MKMapPoint>.allocate(capacity: count)
         cPoints.initialize(from: points, count: count)
         zoom(toMapPoints: cPoints, count: count)
-        cPoints.deinitialize()
+        cPoints.deinitialize(count: count)
     }
     
     /**
