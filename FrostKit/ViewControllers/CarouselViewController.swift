@@ -29,7 +29,7 @@ open class CarouselViewController: UIViewController, UICollectionViewDataSource,
             
             if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
                 
-                flowLayout.scrollDirection = UICollectionViewScrollDirection.horizontal
+                flowLayout.scrollDirection = .horizontal
                 flowLayout.minimumInteritemSpacing = 0
                 flowLayout.minimumLineSpacing = 0
                 flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -43,7 +43,7 @@ open class CarouselViewController: UIViewController, UICollectionViewDataSource,
         didSet {
             
             pageControl?.numberOfPages = numberOfPages
-            pageControl?.addTarget(self, action: #selector(CarouselViewController.pageControlDidChange(_:)), for: UIControlEvents.valueChanged)
+            pageControl?.addTarget(self, action: #selector(CarouselViewController.pageControlDidChange(_:)), for: .valueChanged)
         }
     }
     

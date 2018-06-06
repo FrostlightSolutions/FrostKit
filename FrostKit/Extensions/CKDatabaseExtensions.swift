@@ -18,21 +18,21 @@ extension CKDatabase {
      - parameter zoneID:                 The ID of the zone to search. Search results are limited to records in the specified zone. Specify `nil` to search the default zone of the database.
      - parameter countCompletionHandler: The block to execute with the count results.
      */
-    public func perform(query: CKQuery, inZoneWithID zoneID: CKRecordZoneID?, countCompletionHandler: @escaping (Int, Error?) -> Void) {
+    public func perform(query: CKQuery, inZoneWithID zoneID: CKRecordZone.ID?, countCompletionHandler: @escaping (Int, Error?) -> Void) {
         
         perform(query: query, cursor: nil, inZoneWithID: zoneID, desiredKeys: [], currentCount: 0, batchCompletionHandler: nil, countCompletionHandler: { (count, _, error) in
             countCompletionHandler(count ?? 0, error)
         })
     }
     
-    public func perform(query: CKQuery, inZoneWithID zoneID: CKRecordZoneID?, desiredKeys: [String]? = nil, batchCompletionHandler: (([CKRecord]?, Error?) -> Void)?, compiledCompletionHandler: (([CKRecord]?, Error?) -> Void)?) {
+    public func perform(query: CKQuery, inZoneWithID zoneID: CKRecordZone.ID?, desiredKeys: [String]? = nil, batchCompletionHandler: (([CKRecord]?, Error?) -> Void)?, compiledCompletionHandler: (([CKRecord]?, Error?) -> Void)?) {
         
         perform(query: query, cursor: nil, inZoneWithID: zoneID, desiredKeys: desiredKeys, currentRecords: [], batchCompletionHandler: batchCompletionHandler) { (records, _, error) in
             compiledCompletionHandler?(records, error)
         }
     }
     
-    private func perform(query: CKQuery?, cursor: CKQueryCursor?, inZoneWithID zoneID: CKRecordZoneID?, desiredKeys: [String]? = nil, currentCount: Int? = nil, currentRecords: [CKRecord]? = nil, batchCompletionHandler: (([CKRecord]?, Error?) -> Void)?, countCompletionHandler: ((Int?, CKQueryCursor?, Error?) -> Void)? = nil, compiledCompletionHandler: (([CKRecord]?, CKQueryCursor?, Error?) -> Void)? = nil) {
+    private func perform(query: CKQuery?, cursor: CKQueryOperation.Cursor?, inZoneWithID zoneID: CKRecordZone.ID?, desiredKeys: [String]? = nil, currentCount: Int? = nil, currentRecords: [CKRecord]? = nil, batchCompletionHandler: (([CKRecord]?, Error?) -> Void)?, countCompletionHandler: ((Int?, CKQueryOperation.Cursor?, Error?) -> Void)? = nil, compiledCompletionHandler: (([CKRecord]?, CKQueryOperation.Cursor?, Error?) -> Void)? = nil) {
         
         var count = currentCount
         var records: [CKRecord]?
@@ -51,14 +51,14 @@ extension CKDatabase {
         queryOperation?.queuePriority = .veryHigh
         queryOperation?.qualityOfService = .userInteractive
         queryOperation?.zoneID = zoneID
-        queryOperation?.resultsLimit = CKQueryOperationMaximumResults
+        queryOperation?.resultsLimit = CKQueryOperation.maximumResults
         queryOperation?.desiredKeys = desiredKeys
         queryOperation?.recordFetchedBlock = { (record: CKRecord) in
             
             count? += 1
             records?.append(record)
         }
-        queryOperation?.queryCompletionBlock = { (cursor: CKQueryCursor?, error: Error?) in
+        queryOperation?.queryCompletionBlock = { (cursor: CKQueryOperation.Cursor?, error: Error?) in
             
             if let curRecords = currentRecords, let batchRecords = records {
                 records = curRecords + batchRecords
@@ -80,7 +80,7 @@ extension CKDatabase {
         }
     }
     
-    public func fetchRecords(withRecordIDs recordIDs: [CKRecordID], desiredKeys: [String]? = nil, perRecordHandler: ((CKRecord?, CKRecordID?, Error?) -> Void)? = nil, completetionHandler: (([CKRecordID: CKRecord]?, Error?) -> Void)? = nil) {
+    public func fetchRecords(withRecordIDs recordIDs: [CKRecord.ID], desiredKeys: [String]? = nil, perRecordHandler: ((CKRecord?, CKRecord.ID?, Error?) -> Void)? = nil, completetionHandler: (([CKRecord.ID: CKRecord]?, Error?) -> Void)? = nil) {
         
         let operation = CKFetchRecordsOperation(recordIDs: recordIDs)
         operation.queuePriority = .veryHigh

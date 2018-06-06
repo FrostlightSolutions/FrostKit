@@ -48,13 +48,13 @@ open class CloudKitTableViewController: UITableViewController {
         return operation
     }
     
-    private var queryCursor: CKQueryCursor?
+    private var queryCursor: CKQueryOperation.Cursor?
     
     @IBOutlet public var tableFooterView: UIView?
     
     // MARK: - Init
     
-    public convenience init(recordType: String, style: UITableViewStyle) {
+    public convenience init(recordType: String, style: UITableView.Style) {
         self.init(style: style)
         
         self.recordType = recordType
@@ -118,7 +118,7 @@ open class CloudKitTableViewController: UITableViewController {
             self.records.append(record)
         }
         
-        operation.queryCompletionBlock = { (cursor: CKQueryCursor?, error: Error?) in
+        operation.queryCompletionBlock = { (cursor: CKQueryOperation.Cursor?, error: Error?) in
             
             self.loading = false
             
