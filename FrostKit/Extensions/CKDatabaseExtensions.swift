@@ -18,21 +18,21 @@ extension CKDatabase {
      - parameter zoneID:                 The ID of the zone to search. Search results are limited to records in the specified zone. Specify `nil` to search the default zone of the database.
      - parameter countCompletionHandler: The block to execute with the count results.
      */
-    public func perform(query: CKQuery, inZoneWithID zoneID: CKRecordZone.ID?, countCompletionHandler: @escaping (Int, Error?) -> Void) {
+    public func perform(_ query: CKQuery, inZoneWithID zoneID: CKRecordZone.ID?, countCompletionHandler: @escaping (Int, Error?) -> Void) {
         
-        perform(query: query, cursor: nil, inZoneWithID: zoneID, desiredKeys: [], currentCount: 0, batchCompletionHandler: nil, countCompletionHandler: { (count, _, error) in
+        perform(query, cursor: nil, inZoneWithID: zoneID, desiredKeys: [], currentCount: 0, batchCompletionHandler: nil, countCompletionHandler: { (count, _, error) in
             countCompletionHandler(count ?? 0, error)
         })
     }
     
-    public func perform(query: CKQuery, inZoneWithID zoneID: CKRecordZone.ID?, desiredKeys: [String]? = nil, batchCompletionHandler: (([CKRecord]?, Error?) -> Void)?, compiledCompletionHandler: (([CKRecord]?, Error?) -> Void)?) {
+    public func perform(_ query: CKQuery, inZoneWithID zoneID: CKRecordZone.ID?, desiredKeys: [String]? = nil, batchCompletionHandler: (([CKRecord]?, Error?) -> Void)?, compiledCompletionHandler: (([CKRecord]?, Error?) -> Void)?) {
         
-        perform(query: query, cursor: nil, inZoneWithID: zoneID, desiredKeys: desiredKeys, currentRecords: [], batchCompletionHandler: batchCompletionHandler) { (records, _, error) in
+        perform(query, cursor: nil, inZoneWithID: zoneID, desiredKeys: desiredKeys, currentRecords: [], batchCompletionHandler: batchCompletionHandler) { (records, _, error) in
             compiledCompletionHandler?(records, error)
         }
     }
     
-    private func perform(query: CKQuery?, cursor: CKQueryOperation.Cursor?, inZoneWithID zoneID: CKRecordZone.ID?, desiredKeys: [String]? = nil, currentCount: Int? = nil, currentRecords: [CKRecord]? = nil, batchCompletionHandler: (([CKRecord]?, Error?) -> Void)?, countCompletionHandler: ((Int?, CKQueryOperation.Cursor?, Error?) -> Void)? = nil, compiledCompletionHandler: (([CKRecord]?, CKQueryOperation.Cursor?, Error?) -> Void)? = nil) {
+    private func perform(_ query: CKQuery?, cursor: CKQueryOperation.Cursor?, inZoneWithID zoneID: CKRecordZone.ID?, desiredKeys: [String]? = nil, currentCount: Int? = nil, currentRecords: [CKRecord]? = nil, batchCompletionHandler: (([CKRecord]?, Error?) -> Void)?, countCompletionHandler: ((Int?, CKQueryOperation.Cursor?, Error?) -> Void)? = nil, compiledCompletionHandler: (([CKRecord]?, CKQueryOperation.Cursor?, Error?) -> Void)? = nil) {
         
         var count = currentCount
         var records: [CKRecord]?
@@ -66,7 +66,7 @@ extension CKDatabase {
             }
             
             if let aCursor = cursor {
-                self.perform(query: nil, cursor: aCursor, inZoneWithID: zoneID, desiredKeys: desiredKeys, currentCount: count, currentRecords: records, batchCompletionHandler: batchCompletionHandler, countCompletionHandler: countCompletionHandler, compiledCompletionHandler: compiledCompletionHandler)
+                self.perform(nil, cursor: aCursor, inZoneWithID: zoneID, desiredKeys: desiredKeys, currentCount: count, currentRecords: records, batchCompletionHandler: batchCompletionHandler, countCompletionHandler: countCompletionHandler, compiledCompletionHandler: compiledCompletionHandler)
             } else {
                 countCompletionHandler?(count, cursor, error)
                 compiledCompletionHandler?(records, cursor, error)
@@ -80,7 +80,7 @@ extension CKDatabase {
         }
     }
     
-    public func fetchRecords(withRecordIDs recordIDs: [CKRecord.ID], desiredKeys: [String]? = nil, perRecordHandler: ((CKRecord?, CKRecord.ID?, Error?) -> Void)? = nil, completetionHandler: (([CKRecord.ID: CKRecord]?, Error?) -> Void)? = nil) {
+    public func fetch(withRecordIDs recordIDs: [CKRecord.ID], desiredKeys: [String]? = nil, perRecordHandler: ((CKRecord?, CKRecord.ID?, Error?) -> Void)? = nil, completetionHandler: (([CKRecord.ID: CKRecord]?, Error?) -> Void)? = nil) {
         
         let operation = CKFetchRecordsOperation(recordIDs: recordIDs)
         operation.queuePriority = .veryHigh
@@ -92,7 +92,7 @@ extension CKDatabase {
         add(operation)
     }
     
-    public func save(record: CKRecord, progressHandler: ((Double) -> Void)?, completionHandler: @escaping (CKRecord?, Error?) -> Void) {
+    public func save(_ record: CKRecord, progressHandler: ((Double) -> Void)?, completionHandler: @escaping (CKRecord?, Error?) -> Void) {
         
         let operation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
         operation.qualityOfService = .userInitiated
