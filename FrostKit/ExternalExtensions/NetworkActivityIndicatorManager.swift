@@ -214,8 +214,8 @@ public class NetworkActivityIndicatorManager {
             repeats: false
         )
         
-        RunLoop.main.add(startDelayTimer!, forMode: .commonModes)
-        RunLoop.main.add(startDelayTimer!, forMode: .UITrackingRunLoopMode)
+        RunLoop.main.add(startDelayTimer!, forMode: .common)
+        RunLoop.main.add(startDelayTimer!, forMode: .tracking)
     }
     
     private func scheduleCompletionDelayTimer() {
@@ -227,8 +227,8 @@ public class NetworkActivityIndicatorManager {
             repeats: false
         )
         
-        RunLoop.main.add(completionDelayTimer!, forMode: .commonModes)
-        RunLoop.main.add(completionDelayTimer!, forMode: .UITrackingRunLoopMode)
+        RunLoop.main.add(completionDelayTimer!, forMode: .common)
+        RunLoop.main.add(completionDelayTimer!, forMode: .tracking)
     }
     
     @objc private func startDelayTimerFired() {

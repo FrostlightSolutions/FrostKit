@@ -13,11 +13,11 @@
 		1838F1AD1C76137100F1233D /* FrostKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1838F19B1C7612D400F1233D /* FrostKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18772BEF19DD61E200F67CE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772BEE19DD61E200F67CE7 /* AppDelegate.swift */; };
 		18772BF419DD61E200F67CE7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18772BF219DD61E200F67CE7 /* Main.storyboard */; };
-		18772BF619DD61E200F67CE7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18772BF519DD61E200F67CE7 /* Images.xcassets */; };
 		18772BF919DD61E200F67CE7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18772BF719DD61E200F67CE7 /* LaunchScreen.xib */; };
 		18772C2519DD67A900F67CE7 /* MainMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772C2319DD67A900F67CE7 /* MainMenuVC.swift */; };
 		18772C2619DD67A900F67CE7 /* SocialHelperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18772C2419DD67A900F67CE7 /* SocialHelperVC.swift */; };
 		18C3D38F1A8428990097878D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18C3D38D1A8428990097878D /* Settings.bundle */; };
+		18D2FD25214D554400A50C8E /* NetworkActivityIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2FD22214D554400A50C8E /* NetworkActivityIndicatorManager.swift */; };
 		18E3F21F19DDDBD00032ABB7 /* WebViewControllerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F21E19DDDBD00032ABB7 /* WebViewControllerVC.swift */; };
 		66E14D0B1D7320A70053596B /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E14D0A1D7320A70053596B /* CollectionViewController.swift */; };
 /* End PBXBuildFile section */
@@ -108,6 +108,7 @@
 		18772C2319DD67A900F67CE7 /* MainMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuVC.swift; sourceTree = "<group>"; };
 		18772C2419DD67A900F67CE7 /* SocialHelperVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialHelperVC.swift; sourceTree = "<group>"; };
 		18C3D38D1A8428990097878D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		18D2FD22214D554400A50C8E /* NetworkActivityIndicatorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkActivityIndicatorManager.swift; path = FrostKit/ExternalExtensions/NetworkActivityIndicatorManager.swift; sourceTree = SOURCE_ROOT; };
 		18E3F21E19DDDBD00032ABB7 /* WebViewControllerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewControllerVC.swift; sourceTree = "<group>"; };
 		66E14D0A1D7320A70053596B /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,6 +163,7 @@
 				18772BEE19DD61E200F67CE7 /* AppDelegate.swift */,
 				18772BF219DD61E200F67CE7 /* Main.storyboard */,
 				18772C2219DD67A900F67CE7 /* ViewControllers */,
+				18D2FD20214D553100A50C8E /* External Extensions */,
 				18772BF719DD61E200F67CE7 /* LaunchScreen.xib */,
 				18772BF519DD61E200F67CE7 /* Images.xcassets */,
 				18772BEC19DD61E200F67CE7 /* Supporting Files */,
@@ -188,6 +190,14 @@
 				66E14D0A1D7320A70053596B /* CollectionViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		18D2FD20214D553100A50C8E /* External Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				18D2FD22214D554400A50C8E /* NetworkActivityIndicatorManager.swift */,
+			);
+			name = "External Extensions";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,13 +229,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "James Barrow - Frostlight Solutions";
 				TargetAttributes = {
 					18772BE819DD61E200F67CE7 = {
 						CreatedOnToolsVersion = 6.0.1;
 						DevelopmentTeam = 6WJM49JAZT;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -314,7 +324,6 @@
 				18772BF419DD61E200F67CE7 /* Main.storyboard in Resources */,
 				18C3D38F1A8428990097878D /* Settings.bundle in Resources */,
 				18772BF919DD61E200F67CE7 /* LaunchScreen.xib in Resources */,
-				18772BF619DD61E200F67CE7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +339,7 @@
 				18772C2619DD67A900F67CE7 /* SocialHelperVC.swift in Sources */,
 				1828C5421B29909B004EFDA9 /* PlaceholderDetailVC.swift in Sources */,
 				66E14D0B1D7320A70053596B /* CollectionViewController.swift in Sources */,
+				18D2FD25214D554400A50C8E /* NetworkActivityIndicatorManager.swift in Sources */,
 				18270FA51A858565009A2390 /* ExampleMapViewController.swift in Sources */,
 				18772C2519DD67A900F67CE7 /* MainMenuVC.swift in Sources */,
 			);
@@ -377,12 +387,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -429,12 +441,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -473,7 +487,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Frostlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -489,7 +503,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Frostlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

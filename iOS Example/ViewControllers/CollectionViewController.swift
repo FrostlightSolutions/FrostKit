@@ -26,11 +26,11 @@ class CollectionViewController: UICollectionViewController {
     
     // MARK: - Actions
     
-    func refreshControlTriggered(_ sender: AnyObject) {
+    @objc func refreshControlTriggered(_ sender: AnyObject) {
         _ = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(endRefreshing), userInfo: nil, repeats: false)
     }
     
-    func endRefreshing() {
+    @objc func endRefreshing() {
         
         if let refreshControl = self.refreshControl, refreshControl.isRefreshing == true {
             refreshControl.endRefreshing()
