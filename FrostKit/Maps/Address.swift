@@ -46,10 +46,6 @@ open class Address: NSObject {
         return "<Latitude: \(latitude) Longitude: \(longitude) Address: \(addressString)>"
     }
     
-    open override var hashValue: Int {
-        return Int(latitude) ^ Int(longitude)
-    }
-    
     open var key: String {
         return "\(latitude)-\(longitude)"
     }

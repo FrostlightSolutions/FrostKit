@@ -248,7 +248,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
      - parameter coordinare: The coordinate to zoom to.
      */
     open func zoom(toCoordinate coordinare: CLLocationCoordinate2D) {
-        let point = MKMapPointForCoordinate(coordinare)
+        let point = MKMapPoint(coordinare)
         zoom(toMapPoints: [point])
     }
     
@@ -271,7 +271,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
         if count > 0 {
             var points = [MKMapPoint]()
             for annotation in annotations {
-                points.append(MKMapPointForCoordinate(annotation.coordinate))
+                points.append(MKMapPoint(annotation.coordinate))
             }
             zoom(toMapPoints: points)
         }
@@ -298,10 +298,10 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
      */
     open func zoom(toMapPoints points: UnsafeMutablePointer<MKMapPoint>, count: Int) {
         let mapRect = MKPolygon(points: points, count: count).boundingMapRect
-        var region: MKCoordinateRegion = MKCoordinateRegionForMapRect(mapRect)
+        var region: MKCoordinateRegion = MKCoordinateRegion(mapRect)
         
         if count <= 1 {
-            region.span = MKCoordinateSpanMake(minimumZoomArc, minimumZoomArc)
+            region.span = MKCoordinateSpan(latitudeDelta: minimumZoomArc, longitudeDelta: minimumZoomArc)
         }
         
         zoom(toRegion: region)
@@ -352,7 +352,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
         if count > 0 {
             var points = [MKMapPoint]()
             for address in addresses {
-                points.append(MKMapPointForCoordinate(address.coordinate))
+                points.append(MKMapPoint(address.coordinate))
             }
             zoom(toMapPoints: points)
         }
@@ -396,7 +396,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
         
         for overlay in mapView.overlays {
             if let polyline = overlay as? MKPolyline {
-                mapView.remove(polyline)
+                mapView.removeOverlay(polyline)
             }
         }
     }
@@ -429,7 +429,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
      */
     open func routeBetween(sourceMapItem source: MKMapItem, destinationMapItem destination: MKMapItem, transportType: MKDirectionsTransportType = .automobile, complete: @escaping (_ route: MKRoute?, _ error: Error?) -> Void) {
         
-        let directionsRequest = MKDirectionsRequest()
+        let directionsRequest = MKDirections.Request()
         directionsRequest.source = source
         directionsRequest.destination = destination
         directionsRequest.transportType = transportType
@@ -475,7 +475,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
      - parameter route: The route to plot.
      */
     open func plot(route: MKRoute) {
-        mapView?.add(route.polyline, level: .aboveRoads)
+        mapView?.addOverlay(route.polyline, level: .aboveRoads)
     }
     
     // MARK: - Helper Methods
@@ -489,7 +489,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
      */
     open func normalize(regionSpan span: MKCoordinateSpan) -> MKCoordinateSpan {
         
-        var normalizedSpan = MKCoordinateSpanMake(span.latitudeDelta * annotationRegionPadFactor, span.longitudeDelta * annotationRegionPadFactor)
+        var normalizedSpan = MKCoordinateSpan(latitudeDelta: span.latitudeDelta * annotationRegionPadFactor, longitudeDelta: span.longitudeDelta * annotationRegionPadFactor)
         if normalizedSpan.latitudeDelta > maximumDegreesArc {
             normalizedSpan.latitudeDelta = maximumDegreesArc
         } else if normalizedSpan.latitudeDelta < minimumZoomArc {

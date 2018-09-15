@@ -73,10 +73,6 @@ open class Annotation: NSObject, MKAnnotation {
         }
     }
     
-    open override var hash: Int {
-        return address?.hashValue ?? 0
-    }
-    
     /**
      A convenience method for making an annotation object from an address object.
      
