@@ -16,7 +16,7 @@ public class BaseWebViewController: UIViewController {
     /// The web view. This will either be UIWebView or WKWebView depending on the requested type.
     var webView: AnyObject?
     /// The activity indicator view showing if the web view is loading or not.
-    let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    let activityIndicatorView = UIActivityIndicatorView(style: .gray)
     /// The progress view to show the percent a web view has loaded. This will only be used in a WKWebView based controller.
     let progrssView = UIProgressView(progressViewStyle: .bar)
     /// The back button for the toolbar.

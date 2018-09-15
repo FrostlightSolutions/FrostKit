@@ -10,23 +10,23 @@ import Foundation
 import CloudKit
 
 @available(watchOSApplicationExtension 3.0, *)
-public extension CKReference {
+public extension CKRecord.Reference {
     
-    public class func references(fromRecordIDs recordIDs: [CKRecordID], action: CKReferenceAction = .none) -> [CKReference] {
-        return recordIDs.map({ (recordID) -> CKReference in
-            return CKReference(recordID: recordID, action: action)
+    public class func references(fromRecordIDs recordIDs: [CKRecord.ID], action: CKRecord.Reference.Action = .none) -> [CKRecord.Reference] {
+        return recordIDs.map({ (recordID) -> CKRecord.Reference in
+            return CKRecord.Reference(recordID: recordID, action: action)
         })
     }
     
-    public class func references(fromRecordNames names: [String], zoneID: CKRecordZoneID? = nil, action: CKReferenceAction = .none) -> [CKReference] {
-        return names.map({ (name) -> CKReference in
-            let recordID: CKRecordID
+    public class func references(fromRecordNames names: [String], zoneID: CKRecordZone.ID? = nil, action: CKRecord.Reference.Action = .none) -> [CKRecord.Reference] {
+        return names.map({ (name) -> CKRecord.Reference in
+            let recordID: CKRecord.ID
             if let recordZoneID = zoneID {
-                recordID = CKRecordID(recordName: name, zoneID: recordZoneID)
+                recordID = CKRecord.ID(recordName: name, zoneID: recordZoneID)
             } else {
-                recordID = CKRecordID(recordName: name)
+                recordID = CKRecord.ID(recordName: name)
             }
-            return CKReference(recordID: recordID, action: action)
+            return CKRecord.Reference(recordID: recordID, action: action)
         })
     }
 }

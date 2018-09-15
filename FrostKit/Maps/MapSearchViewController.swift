@@ -30,7 +30,7 @@ open class MapSearchViewController: UITableViewController, UISearchControllerDel
     /// An array of addresses returned after searching, or `nil` if no results are found.
     private var plottedSearchResults: [Address]?
     /// The local search response from a locations search.
-    private var locationSeatchResponse: MKLocalSearchResponse?
+    private var locationSeatchResponse: MKLocalSearch.Response?
     /// A helper to access the results array from a local search response.
     private var locationSearchResults: [MKMapItem]? {
         if let locationSeatchResponse = self.locationSeatchResponse {
@@ -177,7 +177,7 @@ open class MapSearchViewController: UITableViewController, UISearchControllerDel
         case 1:
             // Search location on the map (not plotted points)
             refreshControl?.beginRefreshing()
-            let searchRequest = MKLocalSearchRequest()
+            let searchRequest = MKLocalSearch.Request()
             searchRequest.naturalLanguageQuery = searchBar.text
             if let mapController = self.mapController, let mapView = mapController.mapView {
                 searchRequest.region = mapView.region
