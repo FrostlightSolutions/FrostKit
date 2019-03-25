@@ -12,7 +12,7 @@ import CloudKit
 @available(watchOSApplicationExtension 3.0, *)
 public extension CKRecord.ID {
     
-    public class func recordIDs(fromRecordNames names: [String], zoneID: CKRecordZone.ID? = nil) -> [CKRecord.ID] {
+    class func recordIDs(fromRecordNames names: [String], zoneID: CKRecordZone.ID? = nil) -> [CKRecord.ID] {
         return names.map({ (name) -> CKRecord.ID in
             let recordID: CKRecord.ID
             if let recordZoneID = zoneID {

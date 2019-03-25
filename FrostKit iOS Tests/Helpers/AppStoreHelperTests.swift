@@ -25,7 +25,7 @@ class AppStoreHelperTests: XCTestCase {
         
         let expectation = self.expectation(description: "Test App Store Update")
         
-        FrostKit.setup(appStoreID: "571254467")
+        FrostKit.setup(appStoreID: "538357667")
         
         AppStoreHelper.shared.updateAppStoreData { (error) in
             

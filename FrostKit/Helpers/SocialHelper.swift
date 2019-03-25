@@ -233,6 +233,8 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             } else {
                 DLog("Email send failed!")
             }
+        @unknown default:
+            break
         }
         
         controller.dismiss(animated: true, completion: nil)
@@ -249,6 +251,8 @@ public class SocialHelper: NSObject, UINavigationControllerDelegate, MFMailCompo
             DLog("Message sent")
         case .failed:
             DLog("Message failed")
+        @unknown default:
+            break
         }
         
         controller.dismiss(animated: true, completion: nil)
