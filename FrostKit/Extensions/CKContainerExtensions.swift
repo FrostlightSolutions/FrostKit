@@ -11,7 +11,7 @@ import CloudKit
 @available(watchOSApplicationExtension 3.0, *)
 public extension CKContainer {
     
-    public func fetchUserRecord(desiredKeys: [String]? = nil, completionHandler: @escaping (CKRecord?, Error?) -> Void) {
+    func fetchUserRecord(desiredKeys: [String]? = nil, completionHandler: @escaping (CKRecord?, Error?) -> Void) {
         
         fetchUserRecordID { (recordID, error) in
             
@@ -45,11 +45,11 @@ public extension CKContainer {
         }
     }
     
-    public func update(userRecord: CKRecord, progressHandler: ((Double) -> Void)? = nil, completionHandler: @escaping (CKRecord?, Error?) -> Void) {
+    func update(userRecord: CKRecord, progressHandler: ((Double) -> Void)? = nil, completionHandler: @escaping (CKRecord?, Error?) -> Void) {
         publicCloudDatabase.save(userRecord, progressHandler: progressHandler, completionHandler: completionHandler)
     }
     
-    public func update(userRecordWithObject object: CKRecordValue?, key: String, progressHandler: ((Double) -> Void)? = nil, completionHandler: @escaping (CKRecord?, Error?) -> Void) {
+    func update(userRecordWithObject object: CKRecordValue?, key: String, progressHandler: ((Double) -> Void)? = nil, completionHandler: @escaping (CKRecord?, Error?) -> Void) {
         
         fetchUserRecord(desiredKeys: []) { (record, error) in
             
