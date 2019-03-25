@@ -637,6 +637,8 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
             trackingUser = false
         case .follow, .followWithHeading:
             trackingUser = true
+        @unknown default:
+            break
         }
     }
     

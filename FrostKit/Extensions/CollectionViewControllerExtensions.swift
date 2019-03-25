@@ -14,7 +14,7 @@ import UIKit
 public extension UICollectionViewController {
     
     /// Allows easy access to a collection view controller's refrsh control the same way as in a table view controller.
-    public var refreshControl: UIRefreshControl? {
+    var refreshControl: UIRefreshControl? {
         get {
             if #available(iOS 10, *) {
                 return collectionView?.refreshControl
