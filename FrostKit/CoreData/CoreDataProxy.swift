@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+@available(iOS, deprecated: 10.0, message: "This is no longer needed as of iOS 10. Use NSPersistentContainer instead.")
 public class CoreDataProxy {
     
     public var storeName: String! { return nil }

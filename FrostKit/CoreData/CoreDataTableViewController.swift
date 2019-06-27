@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 
+@available(iOS, deprecated: 13.0, message: "This is no longer needed as of iOS 13. Use diffable data sources instead.")
 open class CoreDataTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Properties
