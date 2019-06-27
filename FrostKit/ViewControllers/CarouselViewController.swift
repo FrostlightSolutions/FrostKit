@@ -19,7 +19,6 @@ open class CarouselViewController: UIViewController, UICollectionViewDataSource,
     @IBOutlet public weak var collectionView: UICollectionView! {
         didSet {
             
-            collectionView.backgroundColor = .white
             collectionView.showsHorizontalScrollIndicator = false
             collectionView.showsVerticalScrollIndicator = false
             collectionView.isPagingEnabled = true
