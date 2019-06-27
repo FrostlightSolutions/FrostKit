@@ -11,7 +11,7 @@ import Foundation
 ///
 /// Extention functions for Error
 ///
-extension NSError {
+extension Error {
     
     /**
      A helper method for creating error objects from a message string.
