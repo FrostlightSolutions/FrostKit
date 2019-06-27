@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(iOS, deprecated: 13.0, message: "MBProgressHUD no longer uses windows to present HUDs.")
 extension MBProgressHUD {
     
     public class func progressHUDinMainWindow() -> MBProgressHUD {
