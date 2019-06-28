@@ -134,6 +134,9 @@
 		18C0066E19DB76C900811755 /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066D19DB76C900811755 /* ImageExtensions.swift */; };
 		18C0067019DB7EDB00811755 /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066F19DB7EDB00811755 /* ContentManager.swift */; };
 		18C0067619DC00C000811755 /* FrostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18839B1719D9FA8C00760157 /* FrostKit.framework */; };
+		18CAC39F22C65B60008A74E7 /* MKMapViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAC39E22C65B60008A74E7 /* MKMapViewExtensions.swift */; };
+		18CAC3A022C65B60008A74E7 /* MKMapViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAC39E22C65B60008A74E7 /* MKMapViewExtensions.swift */; };
+		18CAC3A122C65B60008A74E7 /* MKMapViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAC39E22C65B60008A74E7 /* MKMapViewExtensions.swift */; };
 		18CB51701A76454A005064C8 /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* TaskStore.swift */; };
 		18CB517A1A7655ED005064C8 /* DeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB51791A7655ED005064C8 /* DeviceExtensions.swift */; };
 		18CF8C351D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CF8C331D6C839100DE9C37 /* CKContainerExtensions.swift */; };
@@ -312,6 +315,7 @@
 		18C0066B19DB769B00811755 /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DateExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18C0066D19DB76C900811755 /* ImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ImageExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18C0066F19DB7EDB00811755 /* ContentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ContentManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		18CAC39E22C65B60008A74E7 /* MKMapViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMapViewExtensions.swift; sourceTree = "<group>"; };
 		18CB516F1A76454A005064C8 /* TaskStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TaskStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18CB51791A7655ED005064C8 /* DeviceExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DeviceExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18CF8C331D6C839100DE9C37 /* CKContainerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKContainerExtensions.swift; sourceTree = "<group>"; };
@@ -648,6 +652,7 @@
 				18CF8C341D6C839100DE9C37 /* CKDatabaseExtensions.swift */,
 				66AB893B1D71C21D0097ADAC /* CKReferenceExntensions.swift */,
 				66AB893E1D71CB3D0097ADAC /* CKRecordIDExtensions.swift */,
+				18CAC39E22C65B60008A74E7 /* MKMapViewExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1162,6 +1167,7 @@
 				1876617A1BEEA0C900C82769 /* AppStoreHelper.swift in Sources */,
 				1826B06F1BD906F200DA1669 /* CustomFonts.swift in Sources */,
 				1826B0631BD906B700DA1669 /* VisualEffectView.swift in Sources */,
+				18CAC3A022C65B60008A74E7 /* MKMapViewExtensions.swift in Sources */,
 				66AB893D1D71C21D0097ADAC /* CKReferenceExntensions.swift in Sources */,
 				1826B0661BD906E200DA1669 /* ErrorExtensions.swift in Sources */,
 				1826B0641BD906BE00DA1669 /* InitialsImageView.swift in Sources */,
@@ -1214,6 +1220,7 @@
 				18CFF9FE19DC45AB00DF6BB8 /* TimeZoneExtensions.swift in Sources */,
 				188D62981A8D56FE0098D976 /* InitialsImageView.swift in Sources */,
 				18DD79011A8CA70F00379FB5 /* VisualEffectView.swift in Sources */,
+				18CAC39F22C65B60008A74E7 /* MKMapViewExtensions.swift in Sources */,
 				182884501CBEB12200331A54 /* MapController.swift in Sources */,
 				18DE01EF19DCBC28008A1506 /* CustomFonts.swift in Sources */,
 				18EA124119DC7D9000FD858D /* ViewExtensions.swift in Sources */,
@@ -1304,6 +1311,7 @@
 				184625051C84CFB00098E969 /* FontExtensions.swift in Sources */,
 				189D8C9B1C77E99C00261DF5 /* FontConstants.swift in Sources */,
 				189D8C8A1C77E8F100261DF5 /* AppStoreHelper.swift in Sources */,
+				18CAC3A122C65B60008A74E7 /* MKMapViewExtensions.swift in Sources */,
 				189D8C9C1C77E9AB00261DF5 /* CustomFonts.swift in Sources */,
 				189D8C941C77E95C00261DF5 /* DateExtensions.swift in Sources */,
 				189D8C8D1C77E93300261DF5 /* TaskStore.swift in Sources */,
