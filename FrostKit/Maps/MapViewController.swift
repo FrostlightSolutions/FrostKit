@@ -13,6 +13,7 @@ import UIKit
 ///
 /// This class is designed to be subclassed if more specific actions, such a updating the addresses or objects to plot.
 ///
+@available(iOS, deprecated: 11.0, message: "This is no longer needed as of iOS 11. This class will be removed in v2.0.0 of FrostKit.")
 open class MapViewController: UIViewController {
     
     /// The map controller related to the map view controller.

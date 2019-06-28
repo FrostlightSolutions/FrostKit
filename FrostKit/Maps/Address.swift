@@ -12,6 +12,7 @@ import MapKit
 ///
 /// An object that contains details on a address to the plot on the map view, along with other data such as name and addressString.
 ///
+@available(iOS, deprecated: 11.0, message: "This is no longer needed as of iOS 11. This class will be removed in v2.0.0 of FrostKit.")
 open class Address: NSObject {
     
     /// The ID of the addres object.

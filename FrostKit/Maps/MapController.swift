@@ -15,6 +15,7 @@ import CoreLocation
 ///
 /// This class is designed to be subclassed if more specific actions, such a refining the standard search or customising the annotations plotted.
 ///
+@available(iOS, deprecated: 11.0, message: "This is no longer needed as of iOS 11. Use MKMapViewExtensions instead. This class will be removed in v2.0.0 of FrostKit.")
 open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
     
     private let minimumZoomArc = 0.007  //approximately 1/2 mile (1 degree of arc ~= 69 miles)

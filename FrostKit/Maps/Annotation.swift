@@ -12,6 +12,7 @@ import MapKit
 ///
 /// An annotation object that is to be used with an address object.
 ///
+@available(iOS, deprecated: 11.0, message: "This is no longer needed as of iOS 11. This class will be removed in v2.0.0 of FrostKit.")
 open class Annotation: NSObject, MKAnnotation {
     
     /// The address object for the annotation.
