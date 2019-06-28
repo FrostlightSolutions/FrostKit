@@ -37,7 +37,7 @@ import UIKit
 /// By setting the `isEnabled` property to `true` for the `shared` instance, the network activity indicator will show
 /// and hide automatically as Alamofire requests start and complete. You should not ever need to call
 /// `incrementActivityCount` and `decrementActivityCount` yourself.
-@available(iOS, deprecated: 13.0, message: "This is no longer needed as of iOS 13 as the network indicator has been deprecated.")
+@available(iOS, deprecated: 13.0, message: "This is no longer needed as of iOS 13 as the network indicator has been deprecated. This class will be removed in v2.0.0 of FrostKit.")
 public class NetworkActivityIndicatorManager {
     
     private enum ActivityIndicatorState {

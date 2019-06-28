@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-@available(iOS, deprecated: 13.0, message: "This is no longer needed as of iOS 13. Use diffable data sources instead.")
+@available(iOS, deprecated: 13.0, message: "This is no longer needed as of iOS 13. Use diffable data sources instead. This class will be removed in v2.0.0 of FrostKit.")
 open class CoreDataCollectionViewController: UICollectionViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Properties

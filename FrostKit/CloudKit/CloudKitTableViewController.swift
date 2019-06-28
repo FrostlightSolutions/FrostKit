@@ -9,7 +9,7 @@
 import UIKit
 import CloudKit
 
-@available(iOS, deprecated: 13.0, message: "This is no longer needed as of iOS 13.")
+@available(iOS, deprecated: 13.0, message: "This is no longer needed as of iOS 13. This class will be removed in v2.0.0 of FrostKit.")
 open class CloudKitTableViewController: UITableViewController {
     
     // MARK: - Properties

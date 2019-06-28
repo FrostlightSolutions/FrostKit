@@ -8,7 +8,7 @@
 
 import UIKit
 
-@available(iOS, deprecated: 13.0, message: "MBProgressHUD no longer uses windows to present HUDs.")
+@available(iOS, deprecated: 13.0, message: "MBProgressHUD no longer uses windows to present HUDs. This class will be removed in v2.0.0 of FrostKit.")
 extension MBProgressHUD {
     
     public class func progressHUDinMainWindow() -> MBProgressHUD {
