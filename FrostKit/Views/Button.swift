@@ -19,7 +19,7 @@ open class Button: UIButton {
         }
     }
     
-    @available(iOSApplicationExtension 13.0, *)
+    @available(iOSApplicationExtension 13.0, tvOSApplicationExtension 13.0, *)
     public var cornerCurve: CALayerCornerCurve {
         get { layer.cornerCurve }
         set { layer.cornerCurve = newValue }
