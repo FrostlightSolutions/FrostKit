@@ -31,7 +31,7 @@ class SocialHelperVC: UITableViewController {
             _ = SocialHelper.presentComposeViewController(serviceType: SLServiceTypeFacebook, inViewController: self)
         case IndexPath(row: 0, section: 1):
             if let phoneURL = SocialHelper.phonePrompt("(+46) 12 345 67 89") {
-                UIApplication.shared.openURL(phoneURL)
+                UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
             } else {
                 NSLog("Error: Could not create URL to prompt phone.")
             }
