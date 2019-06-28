@@ -32,7 +32,7 @@ class AppStoreHelperTests: XCTestCase {
             switch result {
             case .failure(let error):
                 XCTAssert(false, "App Store Detail Update Error: \(error.localizedDescription)")
-            case .success(_):
+            case .success:
                 XCTAssert(true, "App Store Details Updated")
             }
             expectation.fulfill()
