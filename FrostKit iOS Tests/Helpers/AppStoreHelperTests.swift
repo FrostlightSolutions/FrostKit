@@ -27,11 +27,12 @@ class AppStoreHelperTests: XCTestCase {
         
         FrostKit.setup(appStoreID: "538357667")
         
-        AppStoreHelper.shared.updateAppStoreData { (error) in
+        AppStoreHelper.shared.updateAppStoreData { result in
             
-            if let anError = error {
-                XCTAssert(false, "App Store Detail Update Error: \(anError.localizedDescription)")
-            } else {
+            switch result {
+            case .failure(let error):
+                XCTAssert(false, "App Store Detail Update Error: \(error.localizedDescription)")
+            case .success(_):
                 XCTAssert(true, "App Store Details Updated")
             }
             expectation.fulfill()
