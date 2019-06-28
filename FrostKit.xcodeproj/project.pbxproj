@@ -573,7 +573,6 @@
 			isa = PBXGroup;
 			children = (
 				189D8CB21C77EEFC00261DF5 /* Service */,
-				189D8CB41C77EEFC00261DF5 /* Storage */,
 				189D8CAD1C77EEFC00261DF5 /* Helpers */,
 				18D58EA71D0CC122009BE4E5 /* Maps */,
 				189D8CA91C77EEFC00261DF5 /* Extensions */,
@@ -609,13 +608,6 @@
 				18497BE31D15BA28009A717F /* TaskStoreTests.swift */,
 			);
 			path = Service;
-			sourceTree = "<group>";
-		};
-		189D8CB41C77EEFC00261DF5 /* Storage */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Storage;
 			sourceTree = "<group>";
 		};
 		18B0A5D11D15D2BF00C6985E /* InterfaceControllers */ = {
