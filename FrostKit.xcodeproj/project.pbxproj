@@ -137,6 +137,10 @@
 		18CAC39F22C65B60008A74E7 /* MKMapViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAC39E22C65B60008A74E7 /* MKMapViewExtensions.swift */; };
 		18CAC3A022C65B60008A74E7 /* MKMapViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAC39E22C65B60008A74E7 /* MKMapViewExtensions.swift */; };
 		18CAC3A122C65B60008A74E7 /* MKMapViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAC39E22C65B60008A74E7 /* MKMapViewExtensions.swift */; };
+		18CAC3A322C69E5B008A74E7 /* FileManagerExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAC3A222C69E5B008A74E7 /* FileManagerExtentions.swift */; };
+		18CAC3A422C69E5B008A74E7 /* FileManagerExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAC3A222C69E5B008A74E7 /* FileManagerExtentions.swift */; };
+		18CAC3A522C69E5B008A74E7 /* FileManagerExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAC3A222C69E5B008A74E7 /* FileManagerExtentions.swift */; };
+		18CAC3A622C69E5B008A74E7 /* FileManagerExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAC3A222C69E5B008A74E7 /* FileManagerExtentions.swift */; };
 		18CB51701A76454A005064C8 /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* TaskStore.swift */; };
 		18CB517A1A7655ED005064C8 /* DeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB51791A7655ED005064C8 /* DeviceExtensions.swift */; };
 		18CF8C351D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CF8C331D6C839100DE9C37 /* CKContainerExtensions.swift */; };
@@ -316,6 +320,7 @@
 		18C0066D19DB76C900811755 /* ImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ImageExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18C0066F19DB7EDB00811755 /* ContentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ContentManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18CAC39E22C65B60008A74E7 /* MKMapViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMapViewExtensions.swift; sourceTree = "<group>"; };
+		18CAC3A222C69E5B008A74E7 /* FileManagerExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtentions.swift; sourceTree = "<group>"; };
 		18CB516F1A76454A005064C8 /* TaskStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TaskStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18CB51791A7655ED005064C8 /* DeviceExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DeviceExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18CF8C331D6C839100DE9C37 /* CKContainerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKContainerExtensions.swift; sourceTree = "<group>"; };
@@ -653,6 +658,7 @@
 				66AB893B1D71C21D0097ADAC /* CKReferenceExntensions.swift */,
 				66AB893E1D71CB3D0097ADAC /* CKRecordIDExtensions.swift */,
 				18CAC39E22C65B60008A74E7 /* MKMapViewExtensions.swift */,
+				18CAC3A222C69E5B008A74E7 /* FileManagerExtentions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1153,6 +1159,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18CAC3A522C69E5B008A74E7 /* FileManagerExtentions.swift in Sources */,
 				1826B0671BD906E200DA1669 /* DateExtensions.swift in Sources */,
 				18CF8C361D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */,
 				185652861D81746E002E5C99 /* TaskStore.swift in Sources */,
@@ -1187,6 +1194,7 @@
 			files = (
 				18B0A5D31D15D2BF00C6985E /* TableInterfaceController.swift in Sources */,
 				1846956D1F8632CE006A445F /* CKRecordIDExtensions.swift in Sources */,
+				18CAC3A422C69E5B008A74E7 /* FileManagerExtentions.swift in Sources */,
 				18E028451BA2D2F600852022 /* ColorExtensions.swift in Sources */,
 				182290541BA2E66F00C1CF1D /* ContentManager.swift in Sources */,
 				18E0283F1BA2D2DF00852022 /* CalendarExtensions.swift in Sources */,
@@ -1253,6 +1261,7 @@
 				18032B1B1A84F99400BEBB41 /* FontExtensions.swift in Sources */,
 				18CF8C381D6C839100DE9C37 /* CKDatabaseExtensions.swift in Sources */,
 				1844D1DF1D16034D00E87EA8 /* CoreDataProxy.swift in Sources */,
+				18CAC3A322C69E5B008A74E7 /* FileManagerExtentions.swift in Sources */,
 				18C0066119DB5BF000811755 /* LocalStorage.swift in Sources */,
 				18C0067019DB7EDB00811755 /* ContentManager.swift in Sources */,
 				18E3F23A19DE15600032ABB7 /* BarButtonItemExtensions.swift in Sources */,
@@ -1299,6 +1308,7 @@
 			files = (
 				18CF8C3A1D6C839100DE9C37 /* CKDatabaseExtensions.swift in Sources */,
 				189D8C961C77E95C00261DF5 /* TimeZoneExtensions.swift in Sources */,
+				18CAC3A622C69E5B008A74E7 /* FileManagerExtentions.swift in Sources */,
 				18CF8C371D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */,
 				180128A41FEAB2B9000A7A17 /* DLog.swift in Sources */,
 				189D8C951C77E95C00261DF5 /* CalendarExtensions.swift in Sources */,
