@@ -539,30 +539,4 @@ class DateExtensionsTests: XCTestCase {
         }
     }
     
-    func testDateStrings() {
-        
-        var components = DateComponents()
-        components.calendar = Calendar.iso8601
-        components.timeZone = TimeZone.utc
-        components.year = 2016
-        components.month = 2
-        components.day = 26
-        components.hour = 19
-        components.minute = 12
-        components.second = 43
-        let date = components.date!
-        
-        XCTAssert(date.dateTimeShortString == DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .short))
-        XCTAssert(date.dateShortString == DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none))
-        XCTAssert(date.dateMediumString == DateFormatter.localizedString(from: date, dateStyle: .medium, timeStyle: .none))
-        XCTAssert(date.dateFullString == DateFormatter.localizedString(from: date, dateStyle: .full, timeStyle: .none))
-        XCTAssert(date.timeShortString == DateFormatter.localizedString(from: date, dateStyle: .none, timeStyle: .short))
-        XCTAssert(date.fusDateString == "2016-02-26")
-        XCTAssert(date.fusDateTimeString == "2016-02-26T20:12:43.000000Z")
-        XCTAssert(date.dayString == "Friday")
-        XCTAssert(date.dayShortString == "Fri")
-        XCTAssert(date.monthString == "February")
-        XCTAssert(date.monthShortString == "Feb")
-        XCTAssert(date.yearString == "2016")
-    }
 }
