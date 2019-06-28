@@ -23,6 +23,7 @@ open class TableInterfaceController: WKInterfaceController {
     @IBOutlet public weak var statusLabel: WKInterfaceLabel?
     @IBOutlet public weak var moreButton: WKInterfaceButton?
     open var showReloadMenuItem: Bool { return true }
+    private var updatingTable = false
     
     public override init() {
         super.init()
@@ -60,9 +61,11 @@ open class TableInterfaceController: WKInterfaceController {
     
     public func updateTable() {
         
-        guard let table = self.table else {
+        guard let table = self.table, updatingTable == false else {
             return
         }
+        
+        updatingTable = true
         
         var topCount = skip + limit
         var count = dataArray.count
@@ -76,13 +79,13 @@ open class TableInterfaceController: WKInterfaceController {
         var rowCount = table.numberOfRows
         
         // Configure the table object and get the row controllers.
-        if rowCount < count {
-            let indexSet = IndexSet(integersIn: rowCount ..< count - rowCount)
+        if rowCount > 0 && min(topCount, count) > rowCount {
+            let indexSet = IndexSet(integersIn: rowCount ..< min(topCount, count))
             table.insertRows(at: indexSet, withRowType: rowType)
-        } else if rowCount > count {
-            let indexSet = IndexSet(integersIn: rowCount ..< count - rowCount)
+        } else if rowCount > 0 && topCount < rowCount {
+            let indexSet = IndexSet(integersIn: topCount ..< rowCount)
             table.removeRows(at: indexSet)
-        } else {
+        } else if rowCount != count {
             table.setNumberOfRows(count, withRowType: rowType)
         }
         rowCount = count
@@ -110,6 +113,8 @@ open class TableInterfaceController: WKInterfaceController {
                 moreButton?.setHidden(false)
             }
         }
+        
+        updatingTable = false
     }
     
     open func update(rowIn table: WKInterfaceTable, index: Int, data: Any) {
