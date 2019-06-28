@@ -61,12 +61,14 @@ public class AppStoreHelper {
      
     - parameter complete: Returned when to update request is complete and returns an error is it failed.
     */
-    public func updateAppStoreData(_ complete: ((_ error: Error?) -> Void)? = nil) {
+    public func updateAppStoreData(_ complete: ((_ result: Result<UpdateStatus, Error>) -> Void)? = nil) {
         
         guard let appStoreID = FrostKit.appStoreID else {
             
             DispatchQueue.main.async {
-                complete?(NSError.error(withMessage: "No app store ID set."))
+                
+                let error = NSError.error(withMessage: "No app store ID set.")
+                complete?(Result.failure(error))
             }
             return
         }
@@ -80,18 +82,20 @@ public class AppStoreHelper {
         guard let url = NSURL(string: urlString) else {
             
             DispatchQueue.main.async {
-                complete?(NSError.error(withMessage: "URL could not be created from string: \(urlString)"))
+                
+                let error = NSError.error(withMessage: "URL could not be created from string: \(urlString)")
+                complete?(Result.failure(error))
             }
             return
         }
         
         let session = URLSession.shared
-        let task = session.dataTask(with: url as URL) { (data, _, error) in
+        let task = session.dataTask(with: url as URL) { [weak self] (data, _, error) in
             
-            if let anError = error {
+            if let error = error {
                 
                 DispatchQueue.main.async {
-                    complete?(anError)
+                    complete?(Result.failure(error))
                 }
                 
             } else if let jsonData = data {
@@ -101,8 +105,14 @@ public class AppStoreHelper {
                     let appDetails = results.first else {
                     
                     DispatchQueue.main.async {
-                        complete?(NSError.error(withMessage: "Could not parse JSON from data."))
+                        
+                        let error = NSError.error(withMessage: "Could not parse JSON from data.")
+                        complete?(Result.failure(error))
                     }
+                    return
+                }
+                
+                guard let self = self else {
                     return
                 }
                 
@@ -123,14 +133,18 @@ public class AppStoreHelper {
                 
                 self.bundleId = appDetails["bundleId"] as? String
                 
-                DispatchQueue.main.async {
-                    complete?(nil)
+                DispatchQueue.main.async { [weak self] in
+                    
+                    let updateStatus = self?.appUpdateNeeded() ?? .unknown
+                    complete?(Result.success(updateStatus))
                 }
                 
             } else {
                 
                 DispatchQueue.main.async {
-                    complete?(NSError.error(withMessage: "No data returned."))
+                    
+                    let error = NSError.error(withMessage: "No data returned.")
+                    complete?(Result.failure(error))
                 }
             }
         }
