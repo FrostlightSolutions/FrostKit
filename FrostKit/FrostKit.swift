@@ -28,13 +28,6 @@ public typealias Font = NSFont
 public typealias Font = UIFont
 #endif
 
-// swiftlint:disable variable_name
-@available(iOS, deprecated: 13.0, message: "This is no longer needed as of iOS 13 as the network indicator has been deprecated. This class will be removed in v2.0.0 of FrostKit.")
-public let NetworkRequestDidBeginNotification = "com.FrostKit.activityIndicator.request.begin"
-@available(iOS, deprecated: 13.0, message: "This is no longer needed as of iOS 13 as the network indicator has been deprecated. This class will be removed in v2.0.0 of FrostKit.")
-public let NetworkRequestDidCompleteNotification = "com.FrostKit.activityIndicator.request.complete"
-// swiftlint:enable variable_name
-
 internal func FKLocalizedString(_ key: String, comment: String = "") -> String {
     return NSLocalizedString(key, bundle: Bundle(for: FrostKit.self), comment: comment)
 }

@@ -145,9 +145,7 @@ public extension MKMapView {
         directionsRequest.requestsAlternateRoutes = false
         
         let directions = MKDirections(request: directionsRequest)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NetworkRequestDidBeginNotification), object: nil)
         directions.calculate { (directionsResponse, error) in
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NetworkRequestDidCompleteNotification), object: nil)
             
             if let error = error {
                 complete(Result.failure(error))
