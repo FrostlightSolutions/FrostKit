@@ -30,17 +30,6 @@
 			name = FrostKitDocs;
 			productName = FrostKitDocs;
 		};
-		18F3194D1E45F7B80055E647 /* SwiftFormat */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 18F319501E45F7B80055E647 /* Build configuration list for PBXAggregateTarget "SwiftFormat" */;
-			buildPhases = (
-				18F319511E45F7BB0055E647 /* ShellScript */,
-			);
-			dependencies = (
-			);
-			name = SwiftFormat;
-			productName = SwiftFormat;
-		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
@@ -796,11 +785,6 @@
 						CreatedOnToolsVersion = 7.2.1;
 						LastSwiftMigration = 1020;
 					};
-					18F3194D1E45F7B80055E647 = {
-						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 6WJM49JAZT;
-						ProvisioningStyle = Automatic;
-					};
 				};
 			};
 			buildConfigurationList = 18839B1119D9FA8C00760157 /* Build configuration list for PBXProject "FrostKit" */;
@@ -823,7 +807,6 @@
 				18839B2119D9FA8C00760157 /* FrostKit iOS Tests */,
 				18D54BE81CE6439300D365C6 /* FrostKit tvOS Tests */,
 				18E545A51C77E54000637E85 /* FrostKit macOS Tests */,
-				18F3194D1E45F7B80055E647 /* SwiftFormat */,
 				1845E6F61A66DA03005B377D /* FrostKitDocs */,
 				1836A20B1A84414D00E57F86 /* FontConstantsBuilder */,
 			);
@@ -990,19 +973,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ \"$USER\" != \"xcodeserver\" ]; then\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\nfi\n";
-		};
-		18F319511E45F7BB0055E647 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"$USER\" != \"xcodeserver\" ]; then\nif which swiftlint >/dev/null; then\nswiftformat --disable trailingSpace,consecutiveSpaces,trailingCommas,unusedArguments,redundantParens --trimwhitespace nonblank-lines --comments ignore --ifdef outdent .\nelse\necho \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1681,22 +1651,6 @@
 			};
 			name = Release;
 		};
-		18F3194E1E45F7B80055E647 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = 6WJM49JAZT;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		18F3194F1E45F7B80055E647 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = 6WJM49JAZT;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1786,15 +1740,6 @@
 			buildConfigurations = (
 				18E545B01C77E54000637E85 /* Debug */,
 				18E545B11C77E54000637E85 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		18F319501E45F7B80055E647 /* Build configuration list for PBXAggregateTarget "SwiftFormat" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				18F3194E1E45F7B80055E647 /* Debug */,
-				18F3194F1E45F7B80055E647 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
