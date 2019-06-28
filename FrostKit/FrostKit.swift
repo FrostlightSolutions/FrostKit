@@ -29,9 +29,10 @@ public typealias Font = UIFont
 #endif
 
 // swiftlint:disable variable_name
+@available(iOS, deprecated: 13.0, message: "This class will be removed in v2.0.0 of FrostKit.")
 public let FUSServiceClientUpdateSections = "com.FrostKit.FUSServiceClient.updateSections"
+@available(iOS, deprecated: 13.0, message: "This class will be removed in v2.0.0 of FrostKit.")
 public let UserStoreLogoutClearData = "com.FrostKit.UserStore.logout.clearData"
-
 @available(iOS, deprecated: 13.0, message: "This is no longer needed as of iOS 13 as the network indicator has been deprecated. This class will be removed in v2.0.0 of FrostKit.")
 public let NetworkRequestDidBeginNotification = "com.FrostKit.activityIndicator.request.begin"
 @available(iOS, deprecated: 13.0, message: "This is no longer needed as of iOS 13 as the network indicator has been deprecated. This class will be removed in v2.0.0 of FrostKit.")
