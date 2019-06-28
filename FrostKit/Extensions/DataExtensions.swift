@@ -32,8 +32,7 @@ extension Data {
      
     - returns: A formatted string of the size passed in. E.g. 1024 bytes returns 1MB.
     */
-    
-    // TODO: Change to using generics rahter than just `Int64`.
+    @available(iOS, deprecated: 6.0, message: "Use ByteCountFormatter instead. This class will be removed in v2.0.0 of FrostKit.")
     public static func sizeFormattedString(_ size: Int64) -> String {
         
         let sUnits = ["", "K", "M", "G", "T", "P", "E"]
@@ -56,6 +55,7 @@ extension Data {
     }
     
     /// Created a formatted string from the objects length value
+    @available(iOS, deprecated: 6.0, message: "Use ByteCountFormatter instead. This class will be removed in v2.0.0 of FrostKit.")
     public var lengthFormattedString: String {
         return Data.sizeFormattedString(Int64(count))
     }
