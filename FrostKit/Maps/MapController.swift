@@ -365,14 +365,8 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
      - parameter address: The address object to zoom to.
      */
     open func zoom(toAddress address: Address) {
-        
-        if #available(iOS 9.0, *) {
-            let camera = MKMapCamera(lookingAtCenter: address.coordinate, fromDistance: 200, pitch: 0, heading: 0)
-            mapView?.setCamera(camera, animated: true)
-        } else {
-            let camera = MKMapCamera(lookingAtCenter: address.coordinate, fromEyeCoordinate: address.coordinate, eyeAltitude: 200)
-            mapView?.setCamera(camera, animated: true)
-        }
+        let camera = MKMapCamera(lookingAtCenter: address.coordinate, fromDistance: 200, pitch: 0, heading: 0)
+        mapView?.setCamera(camera, animated: true)
     }
     
     /**
@@ -537,11 +531,7 @@ open class MapController: NSObject, MKMapViewDelegate, CLLocationManagerDelegate
         } else {
             
             let pinView = MKPinAnnotationView(annotation: myAnnotation, reuseIdentifier: identifier)
-            if #available(iOSApplicationExtension 9.0, *) {
-                pinView.pinTintColor = MKPinAnnotationView.redPinColor()
-            } else {
-                pinView.pinColor = .red
-            }
+            pinView.pinTintColor = MKPinAnnotationView.redPinColor()
             pinView.animatesDrop = false
             pinView.isHidden = false
             pinView.isEnabled = true
