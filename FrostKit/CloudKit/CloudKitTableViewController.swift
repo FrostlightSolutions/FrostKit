@@ -9,6 +9,7 @@
 import UIKit
 import CloudKit
 
+@available(iOS, deprecated: 13.0, message: "This is no longer needed as of iOS 13.")
 open class CloudKitTableViewController: UITableViewController {
     
     // MARK: - Properties
