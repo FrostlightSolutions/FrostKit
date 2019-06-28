@@ -58,7 +58,7 @@ public class FrostKit {
     }
     
     public class func tintColor(with alpha: CGFloat) -> Color? {
-        return tintColor?.color(with: alpha)
+        return tintColor?.withAlphaComponent(alpha)
     }
     
 #if os(iOS) || os(tvOS) || os(OSX)
