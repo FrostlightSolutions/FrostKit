@@ -11,30 +11,26 @@ import Foundation
 ///
 /// The Content Manager is a class that checks all content saved into local storage. It tracks when they were added/accessed from LocalStorage or ImageCache.
 /// If an item has not been accessed in 2 weeks (by default) they will be automatically deleted on launch.
-/// 
+///
 /// To activate this class, call `checkContentMetadata()` in `-application:willFinishLaunchingWithOptions:` to check all the managed files.
 ///
 public class ContentManager {
     
-    // A dictioary holding the metadata for all managed objects, where the key is an absolute path and the value is the date.
+    /// A dictioary holding the metadata for all managed objects, where the key is an absolute path and the value is the date.
     private lazy var contentMetadata = [String: Date]()
-    
-    private static var maxSavedTimeInSeconds: TimeInterval {
-        return Date.weekInSeconds * 2
-    }
+    /// The maximum amount of time an item should be kept in seconds before being removed.
+    private static var maxSavedTimeInSeconds: TimeInterval { Date.weekInSeconds * 2 }
+    /// A queue that processes each task of saving, removingor checking metadata in a concurrent manner.
+    private let queue = DispatchQueue(label: "com.Frostlight.FrostKit.ContentManager.Queue", attributes: .concurrent)
     
     // MARK: - Singleton
     
-    /**
-    The shared content manager object.
-    */
+    /// The shared content manager object.
     public static let shared = ContentManager()
     
     // MARK: - Content Management Methods
     
-    /**
-    Checks though all of the managed content metadata. If an item has not been accessed for more than 2 weeks then it is removed from the local storage.
-    */
+    /// Checks though all of the managed content metadata. If an item has not been accessed for more than 2 weeks then it is removed from the local storage.
     public class func checkContentMetadata() {
         
         guard shared.contentMetadata.count > 0 else {
@@ -44,7 +40,7 @@ public class ContentManager {
             return
         }
         
-        DispatchQueue.global().async(group: nil, qos: .default, flags: []) {
+        shared.queue.sync(flags: .barrier) {
             
 #if DEBUG
             let start = NSDate.timeIntervalSinceReferenceDate
@@ -95,7 +91,10 @@ public class ContentManager {
     - parameter path:    The absolute path of the item.
     */
     public class func save(path: String) {
-        shared.contentMetadata[path] = Date()
+        
+        shared.queue.async(flags: .barrier) {
+            shared.contentMetadata[path] = Date()
+        }
     }
     
     /**
@@ -113,6 +112,9 @@ public class ContentManager {
     - parameter path:    The absolute path of the item.
     */
     public class func remove(path: String) {
-        shared.contentMetadata.removeValue(forKey: path)
+        
+        shared.queue.async(flags: .barrier) {
+            shared.contentMetadata.removeValue(forKey: path)
+        }
     }
 }
