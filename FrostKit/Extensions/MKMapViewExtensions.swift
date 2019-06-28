@@ -98,20 +98,6 @@ public extension MKMapView {
         }
     }
     
-    /// Zooms the map to an array of address objects.
-    /// - Parameter addresses: The address objects to zoom to.
-    func zoom(toAddresses addresses: [Address]) {
-        
-        let count = addresses.count
-        if count > 0 {
-            var points = [MKMapPoint]()
-            for address in addresses {
-                points.append(MKMapPoint(address.coordinate))
-            }
-            zoom(toMapPoints: points)
-        }
-    }
-    
     /// Zooms the map to a polyline.
     /// - Parameter polyline: The polyline to zoom to.
     func zoom(toPolyline polyline: MKPolyline) {
