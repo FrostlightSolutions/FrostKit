@@ -13,6 +13,7 @@ import Foundation
 /// 
 /// It will however be able to differentuate between different page tasks, and so not cancel a page `n` task if page `n+1` is also added.
 ///
+@available(iOS, deprecated: 13.0, message: "This class will be removed in v2.0.0 of FrostKit.")
 public class TaskStore {
     
     /// The store to hold references to the tasks being managed.

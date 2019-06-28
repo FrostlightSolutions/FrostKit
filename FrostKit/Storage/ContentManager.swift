@@ -14,6 +14,7 @@ import Foundation
 ///
 /// To activate this class, call `checkContentMetadata()` in `-application:willFinishLaunchingWithOptions:` to check all the managed files.
 ///
+@available(iOS, deprecated: 13.0, message: "This class will be removed in v2.0.0 of FrostKit.")
 public class ContentManager {
     
     /// A dictioary holding the metadata for all managed objects, where the key is an absolute path and the value is the date.
