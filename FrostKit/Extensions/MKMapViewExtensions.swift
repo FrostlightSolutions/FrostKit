@@ -179,8 +179,10 @@ public extension MKMapView {
                 }
             })
         } else {
+#if os(iOS) || os(OSX)
             let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
             MKMapItem.openMaps(with: [currentLocationItem, destinationItem], launchOptions: launchOptions)
+#endif
         }
     }
     
