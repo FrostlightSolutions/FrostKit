@@ -30,27 +30,6 @@ extension Date {
     // MARK: - Date Creation
     
     /**
-    Creates an Date from the FUS standard date format.
-     
-    - parameter fusDateString: The date string to make into an Date in the format of `yyyy-MM-dd` or `yyyy-MM-ddTHH:mm:ss.SSSSSSZ`.
-     
-    - returns: The Date created from the passed in string or `nil` if it could not be created.
-    */
-    public static func fusDate(from fusDateString: String) -> Date? {
-        
-        var format = "yyyy'-'MM'-'dd"
-        if fusDateString.count > 10 {
-            format += "'T'HH':'mm':'ss'.'SSSSSS'Z'"
-        }
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        dateFormatter.timeZone = TimeZone.utc
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        return dateFormatter.date(from: fusDateString)
-    }
-    
-    /**
      Creates an Date from the iso8601 standard date format.
      
      - parameter iso8601String: The date string to make into an Date in the format of `yyyy-MM-ddTHH:mm:ssZ`.
@@ -531,18 +510,6 @@ extension Date {
     /// A helper method for getting a formatted string of the time in `short`
     public var timeShortString: String {
         return  DateFormatter.localizedString(from: self, dateStyle: .none, timeStyle: .short)
-    }
-    
-    /// A helpter method for getting a formatted string of the date in the FUS set format.
-    public var fusDateString: String {
-        return dateString(fromFormat: "yyyy'-'MM'-'dd")
-    }
-    
-    /// A helpter method for getting a formatted string of the date and time in the FUS set format.
-    public var fusDateTimeString: String {
-        
-        let locale = Locale(identifier: "en_US_POSIX")
-        return dateString(fromFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSSSSS'Z'", locale: locale)
     }
     
     /// A helper method for getting am ISO8601 formatted string from the current date
