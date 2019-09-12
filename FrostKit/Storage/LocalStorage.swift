@@ -15,6 +15,7 @@ import WatchKit
 #endif
 
 /// Describes the location of the directory for saving files.
+@available(iOS, deprecated: 13.0, message: "This class will be removed in v2.0.0 of FrostKit.")
 public enum DirectoryLocation: UInt {
     /// User Data directory.
     case userData

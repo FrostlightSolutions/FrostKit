@@ -11,6 +11,7 @@ import UIKit
 ///
 /// This class acts as a base view controller class for `UIWebViewController` and `WKWebViewController`. It defines the base values and functions used in subclesses of it. This class should not be used on it's own, always use it as a subclass such as though `UIWebViewController` or `WKWebViewController`.
 ///
+@available(iOS, deprecated: 9.0, message: "This is no longer needed as of iOS 9. Use SFSafariViewController instead. This class will be removed in v2.0.0 of FrostKit.")
 public class BaseWebViewController: UIViewController {
     
     /// The web view. This will either be UIWebView or WKWebView depending on the requested type.

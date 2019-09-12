@@ -16,6 +16,7 @@ import Parse
 /// This is an external extension. That means it is for a 3rd party framework not included by default in FrostKit.
 /// This file is to be included directly into any projec that uses the Parse SDK.
 ///
+@available(iOS, deprecated: 13.0, message: "Parse is no longer a external dependency used. This class will be removed in v2.0.0 of FrostKit.")
 extension Address {
     
     /**

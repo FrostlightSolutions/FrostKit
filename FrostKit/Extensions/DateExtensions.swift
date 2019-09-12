@@ -36,6 +36,7 @@ extension Date {
      
     - returns: The Date created from the passed in string or `nil` if it could not be created.
     */
+    @available(iOS, deprecated: 13.0, message: "This class will be removed in v2.0.0 of FrostKit.")
     public static func fusDate(from fusDateString: String) -> Date? {
         
         var format = "yyyy'-'MM'-'dd"
@@ -534,11 +535,13 @@ extension Date {
     }
     
     /// A helpter method for getting a formatted string of the date in the FUS set format.
+    @available(iOS, deprecated: 13.0, message: "This class will be removed in v2.0.0 of FrostKit.")
     public var fusDateString: String {
         return dateString(fromFormat: "yyyy'-'MM'-'dd")
     }
     
     /// A helpter method for getting a formatted string of the date and time in the FUS set format.
+    @available(iOS, deprecated: 13.0, message: "This class will be removed in v2.0.0 of FrostKit.")
     public var fusDateTimeString: String {
         
         let locale = Locale(identifier: "en_US_POSIX")
