@@ -134,6 +134,13 @@
 		18C0066E19DB76C900811755 /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066D19DB76C900811755 /* ImageExtensions.swift */; };
 		18C0067019DB7EDB00811755 /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066F19DB7EDB00811755 /* ContentManager.swift */; };
 		18C0067619DC00C000811755 /* FrostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18839B1719D9FA8C00760157 /* FrostKit.framework */; };
+		18CAC39F22C65B60008A74E7 /* MKMapViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAC39E22C65B60008A74E7 /* MKMapViewExtensions.swift */; };
+		18CAC3A022C65B60008A74E7 /* MKMapViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAC39E22C65B60008A74E7 /* MKMapViewExtensions.swift */; };
+		18CAC3A122C65B60008A74E7 /* MKMapViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAC39E22C65B60008A74E7 /* MKMapViewExtensions.swift */; };
+		18CAC3A322C69E5B008A74E7 /* FileManagerExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAC3A222C69E5B008A74E7 /* FileManagerExtentions.swift */; };
+		18CAC3A422C69E5B008A74E7 /* FileManagerExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAC3A222C69E5B008A74E7 /* FileManagerExtentions.swift */; };
+		18CAC3A522C69E5B008A74E7 /* FileManagerExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAC3A222C69E5B008A74E7 /* FileManagerExtentions.swift */; };
+		18CAC3A622C69E5B008A74E7 /* FileManagerExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAC3A222C69E5B008A74E7 /* FileManagerExtentions.swift */; };
 		18CB51701A76454A005064C8 /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* TaskStore.swift */; };
 		18CB517A1A7655ED005064C8 /* DeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB51791A7655ED005064C8 /* DeviceExtensions.swift */; };
 		18CF8C351D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CF8C331D6C839100DE9C37 /* CKContainerExtensions.swift */; };
@@ -292,6 +299,7 @@
 		18497BE31D15BA28009A717F /* TaskStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TaskStoreTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		184E07921A8901A10074FD25 /* MBProgressHUDExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MBProgressHUDExtensions.swift; sourceTree = "<group>"; };
 		184E07931A8901A10074FD25 /* ParseAddressExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ParseAddressExtensions.swift; sourceTree = "<group>"; };
+		187321EB22C5006F00734A5E /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		18748B2119DF5661003942A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		187661781BEEA0C900C82769 /* AppStoreHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppStoreHelper.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18839B1719D9FA8C00760157 /* FrostKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FrostKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -311,6 +319,8 @@
 		18C0066B19DB769B00811755 /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DateExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18C0066D19DB76C900811755 /* ImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ImageExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18C0066F19DB7EDB00811755 /* ContentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ContentManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		18CAC39E22C65B60008A74E7 /* MKMapViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMapViewExtensions.swift; sourceTree = "<group>"; };
+		18CAC3A222C69E5B008A74E7 /* FileManagerExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtentions.swift; sourceTree = "<group>"; };
 		18CB516F1A76454A005064C8 /* TaskStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TaskStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18CB51791A7655ED005064C8 /* DeviceExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DeviceExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18CF8C331D6C839100DE9C37 /* CKContainerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKContainerExtensions.swift; sourceTree = "<group>"; };
@@ -486,6 +496,7 @@
 		18839B0D19D9FA8C00760157 = {
 			isa = PBXGroup;
 			children = (
+				187321EB22C5006F00734A5E /* Package.swift */,
 				18839B1919D9FA8C00760157 /* FrostKit */,
 				189D8CA81C77EEFC00261DF5 /* FrostKit iOS Tests */,
 				18D54BEA1CE6439300D365C6 /* FrostKit tvOS Tests */,
@@ -562,7 +573,6 @@
 			isa = PBXGroup;
 			children = (
 				189D8CB21C77EEFC00261DF5 /* Service */,
-				189D8CB41C77EEFC00261DF5 /* Storage */,
 				189D8CAD1C77EEFC00261DF5 /* Helpers */,
 				18D58EA71D0CC122009BE4E5 /* Maps */,
 				189D8CA91C77EEFC00261DF5 /* Extensions */,
@@ -598,13 +608,6 @@
 				18497BE31D15BA28009A717F /* TaskStoreTests.swift */,
 			);
 			path = Service;
-			sourceTree = "<group>";
-		};
-		189D8CB41C77EEFC00261DF5 /* Storage */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Storage;
 			sourceTree = "<group>";
 		};
 		18B0A5D11D15D2BF00C6985E /* InterfaceControllers */ = {
@@ -646,6 +649,8 @@
 				18CF8C341D6C839100DE9C37 /* CKDatabaseExtensions.swift */,
 				66AB893B1D71C21D0097ADAC /* CKReferenceExntensions.swift */,
 				66AB893E1D71CB3D0097ADAC /* CKRecordIDExtensions.swift */,
+				18CAC39E22C65B60008A74E7 /* MKMapViewExtensions.swift */,
+				18CAC3A222C69E5B008A74E7 /* FileManagerExtentions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -886,7 +891,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "James Barrow - Frostlight Solutions";
 				TargetAttributes = {
 					1826B0251BD9047900DA1669 = {
@@ -1146,6 +1151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18CAC3A522C69E5B008A74E7 /* FileManagerExtentions.swift in Sources */,
 				1826B0671BD906E200DA1669 /* DateExtensions.swift in Sources */,
 				18CF8C361D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */,
 				185652861D81746E002E5C99 /* TaskStore.swift in Sources */,
@@ -1160,6 +1166,7 @@
 				1876617A1BEEA0C900C82769 /* AppStoreHelper.swift in Sources */,
 				1826B06F1BD906F200DA1669 /* CustomFonts.swift in Sources */,
 				1826B0631BD906B700DA1669 /* VisualEffectView.swift in Sources */,
+				18CAC3A022C65B60008A74E7 /* MKMapViewExtensions.swift in Sources */,
 				66AB893D1D71C21D0097ADAC /* CKReferenceExntensions.swift in Sources */,
 				1826B0661BD906E200DA1669 /* ErrorExtensions.swift in Sources */,
 				1826B0641BD906BE00DA1669 /* InitialsImageView.swift in Sources */,
@@ -1179,6 +1186,7 @@
 			files = (
 				18B0A5D31D15D2BF00C6985E /* TableInterfaceController.swift in Sources */,
 				1846956D1F8632CE006A445F /* CKRecordIDExtensions.swift in Sources */,
+				18CAC3A422C69E5B008A74E7 /* FileManagerExtentions.swift in Sources */,
 				18E028451BA2D2F600852022 /* ColorExtensions.swift in Sources */,
 				182290541BA2E66F00C1CF1D /* ContentManager.swift in Sources */,
 				18E0283F1BA2D2DF00852022 /* CalendarExtensions.swift in Sources */,
@@ -1212,6 +1220,7 @@
 				18CFF9FE19DC45AB00DF6BB8 /* TimeZoneExtensions.swift in Sources */,
 				188D62981A8D56FE0098D976 /* InitialsImageView.swift in Sources */,
 				18DD79011A8CA70F00379FB5 /* VisualEffectView.swift in Sources */,
+				18CAC39F22C65B60008A74E7 /* MKMapViewExtensions.swift in Sources */,
 				182884501CBEB12200331A54 /* MapController.swift in Sources */,
 				18DE01EF19DCBC28008A1506 /* CustomFonts.swift in Sources */,
 				18EA124119DC7D9000FD858D /* ViewExtensions.swift in Sources */,
@@ -1244,6 +1253,7 @@
 				18032B1B1A84F99400BEBB41 /* FontExtensions.swift in Sources */,
 				18CF8C381D6C839100DE9C37 /* CKDatabaseExtensions.swift in Sources */,
 				1844D1DF1D16034D00E87EA8 /* CoreDataProxy.swift in Sources */,
+				18CAC3A322C69E5B008A74E7 /* FileManagerExtentions.swift in Sources */,
 				18C0066119DB5BF000811755 /* LocalStorage.swift in Sources */,
 				18C0067019DB7EDB00811755 /* ContentManager.swift in Sources */,
 				18E3F23A19DE15600032ABB7 /* BarButtonItemExtensions.swift in Sources */,
@@ -1290,6 +1300,7 @@
 			files = (
 				18CF8C3A1D6C839100DE9C37 /* CKDatabaseExtensions.swift in Sources */,
 				189D8C961C77E95C00261DF5 /* TimeZoneExtensions.swift in Sources */,
+				18CAC3A622C69E5B008A74E7 /* FileManagerExtentions.swift in Sources */,
 				18CF8C371D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */,
 				180128A41FEAB2B9000A7A17 /* DLog.swift in Sources */,
 				189D8C951C77E95C00261DF5 /* CalendarExtensions.swift in Sources */,
@@ -1302,6 +1313,7 @@
 				184625051C84CFB00098E969 /* FontExtensions.swift in Sources */,
 				189D8C9B1C77E99C00261DF5 /* FontConstants.swift in Sources */,
 				189D8C8A1C77E8F100261DF5 /* AppStoreHelper.swift in Sources */,
+				18CAC3A122C65B60008A74E7 /* MKMapViewExtensions.swift in Sources */,
 				189D8C9C1C77E9AB00261DF5 /* CustomFonts.swift in Sources */,
 				189D8C941C77E95C00261DF5 /* DateExtensions.swift in Sources */,
 				189D8C8D1C77E93300261DF5 /* TaskStore.swift in Sources */,
@@ -1357,7 +1369,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_CODE_COVERAGE = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
@@ -1370,6 +1382,7 @@
 				INFOPLIST_FILE = FrostKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 1.5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Frostlight.FrostKit;
 				PRODUCT_NAME = FrostKit;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1377,7 +1390,6 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
 		};
@@ -1386,7 +1398,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_CODE_COVERAGE = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
@@ -1399,6 +1411,7 @@
 				INFOPLIST_FILE = FrostKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 1.5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Frostlight.FrostKit;
 				PRODUCT_NAME = FrostKit;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1407,7 +1420,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
 		};
@@ -1428,13 +1440,13 @@
 				INFOPLIST_FILE = FrostKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 1.5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Frostlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = FrostKit;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Debug;
 		};
@@ -1455,6 +1467,7 @@
 				INFOPLIST_FILE = FrostKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 1.5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Frostlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = FrostKit;
 				SDKROOT = watchos;
@@ -1462,7 +1475,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Release;
 		};
@@ -1525,6 +1537,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.0;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1542,15 +1555,18 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 10.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Debug;
 		};
@@ -1585,6 +1601,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.0;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1595,16 +1612,19 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Osize";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 10.0;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Release;
 		};
@@ -1614,7 +1634,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_CODE_COVERAGE = NO;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
@@ -1626,6 +1646,7 @@
 				INFOPLIST_FILE = FrostKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 1.5.1;
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Frostlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = FrostKit;
@@ -1642,7 +1663,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_CODE_COVERAGE = NO;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -1654,6 +1675,7 @@
 				INFOPLIST_FILE = FrostKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 1.5.1;
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Frostlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = FrostKit;
@@ -1714,7 +1736,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 5.0;
-				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
 			name = Debug;
 		};
@@ -1735,7 +1756,6 @@
 				SDKROOT = appletvos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 5.0;
-				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
 			name = Release;
 		};
@@ -1758,7 +1778,7 @@
 				INFOPLIST_FILE = FrostKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MARKETING_VERSION = 1.5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Frostlight.FrostKit;
 				PRODUCT_NAME = FrostKit;
 				SDKROOT = macosx;
@@ -1787,7 +1807,7 @@
 				INFOPLIST_FILE = FrostKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MARKETING_VERSION = 1.5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Frostlight.FrostKit;
 				PRODUCT_NAME = FrostKit;
 				SDKROOT = macosx;
@@ -1807,7 +1827,6 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "FrostKit macOS Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.PigonaHill.FrostKit-macOS-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1826,7 +1845,6 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "FrostKit macOS Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.PigonaHill.FrostKit-macOS-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;

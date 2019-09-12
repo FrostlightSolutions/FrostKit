@@ -11,7 +11,7 @@ import UIKit
 /// 
 /// A subclass of BaseWebViewController that wraps a UIWebView in a view controller.
 ///
-@available(iOS, deprecated: 9.0, message: "This is no longer needed as of iOS 9. Use SFSafariViewController instead.")
+@available(iOS, deprecated: 9.0, message: "This is no longer needed as of iOS 9. Use SFSafariViewController instead. This class will be removed in v2.0.0 of FrostKit.")
 public class UIWebViewController: BaseWebViewController, UIWebViewDelegate {
     
     /// The URL of the current page.

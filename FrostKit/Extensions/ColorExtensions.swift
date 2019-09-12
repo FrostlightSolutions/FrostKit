@@ -74,6 +74,7 @@ extension Color {
      
      - returns: The new UIColor/NSColor object created with the passed in alpha value.
      */
+    @available(iOS, deprecated: 2.0, message: "Use withAlphaComponent(_:) instead. This class will be removed in v2.0.0 of FrostKit.")
     public func color(with alpha: CGFloat) -> Color {
         
         var red: CGFloat = 0

@@ -12,6 +12,7 @@ import MapKit
 ///
 /// The map search view controller is used with the search control in a map view controller. It allows searching of points plotted on the map view as well a locations.
 ///
+@available(iOS, deprecated: 11.0, message: "This is no longer needed as of iOS 11. This class will be removed in v2.0.0 of FrostKit.")
 open class MapSearchViewController: UITableViewController, UISearchControllerDelegate, UISearchBarDelegate {
     
     /// The reuse identifier for the cell for the table view. This should be overriden when subclassing.

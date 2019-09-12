@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1020"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -27,6 +27,15 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "1826B0251BD9047900DA1669"
+            BuildableName = "FrostKit.framework"
+            BlueprintName = "FrostKit tvOS"
+            ReferencedContainer = "container:FrostKit.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -37,27 +46,8 @@
                BlueprintName = "FrostKit tvOS Tests"
                ReferencedContainer = "container:FrostKit.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "DateExtensionsTests/testDateStrings()">
-               </Test>
-               <Test
-                  Identifier = "KeychainHelperTests">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1826B0251BD9047900DA1669"
-            BuildableName = "FrostKit.framework"
-            BlueprintName = "FrostKit tvOS"
-            ReferencedContainer = "container:FrostKit.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -78,8 +68,6 @@
             ReferencedContainer = "container:FrostKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

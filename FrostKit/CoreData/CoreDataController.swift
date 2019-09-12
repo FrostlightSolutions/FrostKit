@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 
 // Needs to be a subclass of NSObject to allow it to be used with @IBOutlet
+@available(iOS, deprecated: 10.0, message: "This is no longer needed as of iOS 10. Use NSPersistentContainer instead. This class will be removed in v2.0.0 of FrostKit.")
 open class CoreDataController: NSObject {
     
     // MARK: - Properties

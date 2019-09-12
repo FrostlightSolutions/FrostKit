@@ -11,12 +11,17 @@ import UIKit
 open class ImageView: UIImageView {
     
     @IBInspectable public var cornerRadius: CGFloat {
-        get {
-            return layer.cornerRadius
-        }
+        get { layer.cornerRadius }
         set {
             layer.cornerRadius = newValue
             layer.masksToBounds = true
         }
     }
+    
+    @available(iOSApplicationExtension 13.0, tvOSApplicationExtension 13.0, *)
+    public var cornerCurve: CALayerCornerCurve {
+        get { layer.cornerCurve }
+        set { layer.cornerCurve = newValue }
+    }
+    
 }
