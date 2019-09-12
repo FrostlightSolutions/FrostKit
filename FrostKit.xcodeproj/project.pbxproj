@@ -115,9 +115,6 @@
 		18CF8C381D6C839100DE9C37 /* CKDatabaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CF8C341D6C839100DE9C37 /* CKDatabaseExtensions.swift */; };
 		18CF8C391D6C839100DE9C37 /* CKDatabaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CF8C341D6C839100DE9C37 /* CKDatabaseExtensions.swift */; };
 		18CF8C3A1D6C839100DE9C37 /* CKDatabaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CF8C341D6C839100DE9C37 /* CKDatabaseExtensions.swift */; };
-		18CF8C3C1D6C844600DE9C37 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CF8C3B1D6C844600DE9C37 /* CloudKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		18CF8C3E1D6C844E00DE9C37 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CF8C3D1D6C844E00DE9C37 /* CloudKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		18CF8C401D6C845700DE9C37 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CF8C3F1D6C845700DE9C37 /* CloudKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		18CFF9FE19DC45AB00DF6BB8 /* TimeZoneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFF9FD19DC45AB00DF6BB8 /* TimeZoneExtensions.swift */; };
 		18D54BEE1CE6439300D365C6 /* FrostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1826B0261BD9047900DA1669 /* FrostKit.framework */; };
 		18D54BF41CE6439F00D365C6 /* ErrorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E9FF911C80AA5700AC5230 /* ErrorExtensionsTests.swift */; };
@@ -301,7 +298,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18CF8C3E1D6C844E00DE9C37 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,7 +312,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18CF8C3C1D6C844600DE9C37 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,7 +335,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18CF8C401D6C845700DE9C37 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
