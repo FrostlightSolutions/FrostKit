@@ -38,7 +38,7 @@ extension Date {
      */
     public static func iso8601Date(from iso8601String: String) -> Date? {
         
-        if #available(iOSApplicationExtension 10.0, watchOSApplicationExtension 3.0, tvOSApplicationExtension 10.0, OSXApplicationExtension 10.12, *) {
+        if #available(iOS 10.0, iOSApplicationExtension 10.0, watchOS 3.0, watchOSApplicationExtension 3.0, tvOS 10.0, tvOSApplicationExtension 10.0, OSX 10.12, OSXApplicationExtension 10.12, *) {
             
             let dateFormatter = ISO8601DateFormatter()
             dateFormatter.timeZone = TimeZone.utc
@@ -515,7 +515,7 @@ extension Date {
     /// A helper method for getting am ISO8601 formatted string from the current date
     public var iso8601String: String {
         
-        if #available(iOSApplicationExtension 10.0, watchOSApplicationExtension 3.0, tvOSApplicationExtension 10.0, OSXApplicationExtension 10.12, *) {
+        if #available(iOS 10.0, iOSApplicationExtension 10.0, watchOS 3.0, watchOSApplicationExtension 3.0, tvOS 10.0, tvOSApplicationExtension 10.0, OSX 10.12, OSXApplicationExtension 10.12, *) {
             
             let dateFormatter = ISO8601DateFormatter()
             dateFormatter.timeZone = TimeZone.utc

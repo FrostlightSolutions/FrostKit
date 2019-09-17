@@ -8,7 +8,7 @@
 import Foundation
 import CloudKit
 
-@available(watchOSApplicationExtension 3.0, *)
+@available(watchOS 3.0, watchOSApplicationExtension 3.0, *)
 extension CKDatabase {
     
     /**
