@@ -6,6 +6,7 @@
 //  Copyright © 2016 - 2017 James Barrow - Frostlight Solutions. All rights reserved.
 //
 
+#if os(watchOS)
 import WatchKit
 
 open class TableInterfaceController: WKInterfaceController {
@@ -140,3 +141,4 @@ open class TableInterfaceController: WKInterfaceController {
         updateTable()
     }
 }
+#endif

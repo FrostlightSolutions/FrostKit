@@ -9,7 +9,7 @@
 import Foundation
 import CloudKit
 
-@available(watchOSApplicationExtension 3.0, *)
+@available(watchOS 3.0, watchOSApplicationExtension 3.0, *)
 public extension CKRecord.Reference {
     
     class func references(fromRecordIDs recordIDs: [CKRecord.ID], action: CKRecord.Reference.Action = .none) -> [CKRecord.Reference] {

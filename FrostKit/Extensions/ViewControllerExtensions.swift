@@ -34,7 +34,7 @@ extension UIViewController {
     /// - Parameter shouldPresent: If the alert controller should be automatically presented.
     /// - Parameter actionCompleted: A closure triggered when the default "OK" button is selected.
     @discardableResult
-    func present(_ error: Error, title: String, shouldPresent: Bool = true, actionCompleted: (() -> Void)?) -> UIAlertController {
+    public func present(_ error: Error, title: String, shouldPresent: Bool = true, actionCompleted: (() -> Void)?) -> UIAlertController {
         
         let alertController = UIAlertController(title: title, message: error.localizedDescription, preferredStyle: .alert)
         
