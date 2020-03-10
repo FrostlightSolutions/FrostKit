@@ -21,45 +21,6 @@ class DateExtensionsTests: XCTestCase {
         super.tearDown()
     }
     
-    func testFusDate() {
-        
-        measure { () in
-            
-            let dateString = "2016-02-26"
-            let date = Date.fusDate(from: dateString)
-            
-            var components = DateComponents()
-            components.calendar = Calendar.iso8601
-            components.timeZone = TimeZone.utc
-            components.year = 2016
-            components.month = 2
-            components.day = 26
-            
-            XCTAssert(components.date == date)
-        }
-    }
-    
-    func testFusDateAndTime() {
-        
-        measure { () in
-            
-            let dateString = "2016-02-26T15:24:48.000000Z"
-            let date = Date.fusDate(from: dateString)
-            
-            var components = DateComponents()
-            components.calendar = Calendar.iso8601
-            components.timeZone = TimeZone.utc
-            components.year = 2016
-            components.month = 2
-            components.day = 26
-            components.hour = 15
-            components.minute = 24
-            components.second = 48
-            
-            XCTAssert(components.date == date)
-        }
-    }
-    
     func testIsYesterday() {
         
         measure { () in

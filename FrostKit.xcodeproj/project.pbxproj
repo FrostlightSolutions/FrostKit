@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -30,17 +30,6 @@
 			name = FrostKitDocs;
 			productName = FrostKitDocs;
 		};
-		18F3194D1E45F7B80055E647 /* SwiftFormat */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 18F319501E45F7B80055E647 /* Build configuration list for PBXAggregateTarget "SwiftFormat" */;
-			buildPhases = (
-				18F319511E45F7BB0055E647 /* ShellScript */,
-			);
-			dependencies = (
-			);
-			name = SwiftFormat;
-			productName = SwiftFormat;
-		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
@@ -49,15 +38,7 @@
 		180128A31FEAB2B9000A7A17 /* DLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180128A01FEAB2B9000A7A17 /* DLog.swift */; };
 		180128A41FEAB2B9000A7A17 /* DLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180128A01FEAB2B9000A7A17 /* DLog.swift */; };
 		18032B1B1A84F99400BEBB41 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EC19DCBB5B008A1506 /* FontExtensions.swift */; };
-		1806BD2D1D625FE800434A5D /* CloudKitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1806BD2C1D625FE800434A5D /* CloudKitTableViewController.swift */; };
-		1811D7B81A0AD1CA00E8B873 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B41A0AD1CA00E8B873 /* BaseWebViewController.swift */; };
-		1811D7B91A0AD1CA00E8B873 /* UIWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B51A0AD1CA00E8B873 /* UIWebViewController.swift */; };
-		1811D7BA1A0AD1CA00E8B873 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B61A0AD1CA00E8B873 /* WebViewController.swift */; };
-		1811D7BB1A0AD1CA00E8B873 /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D7B71A0AD1CA00E8B873 /* WKWebViewController.swift */; };
 		1818F6DA1A8CF39B000255A2 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1818F6D91A8CF39B000255A2 /* ImageView.swift */; };
-		182290521BA2E60200C1CF1D /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* TaskStore.swift */; };
-		182290531BA2E66C00C1CF1D /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066019DB5BF000811755 /* LocalStorage.swift */; };
-		182290541BA2E66F00C1CF1D /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066F19DB7EDB00811755 /* ContentManager.swift */; };
 		1826B0571BD9065B00DA1669 /* FrostKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23119DE07670032ABB7 /* FrostKit.swift */; };
 		1826B0601BD906AC00DA1669 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DD79081A8CA74E00379FB5 /* View.swift */; };
 		1826B0611BD906B000DA1669 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DD78FD1A8CA70F00379FB5 /* Button.swift */; };
@@ -78,11 +59,6 @@
 		1826B0711BD906F700DA1669 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1836A21F1A84F3BE00E57F86 /* fontawesome-webfont.ttf */; };
 		1826B0721BD906F700DA1669 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1836A2201A84F3BE00E57F86 /* ionicons.ttf */; };
 		1826B0731BD9073700DA1669 /* FrostKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 18E0282E1BA2D17300852022 /* FrostKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		182884501CBEB12200331A54 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1828844D1CBEB12200331A54 /* MapController.swift */; };
-		182884511CBEB12200331A54 /* MapSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1828844E1CBEB12200331A54 /* MapSearchViewController.swift */; };
-		182884521CBEB12200331A54 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1828844F1CBEB12200331A54 /* MapViewController.swift */; };
-		182884541CBEB14700331A54 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182884531CBEB14700331A54 /* Annotation.swift */; };
-		182884561CBEB18000331A54 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182884551CBEB18000331A54 /* Address.swift */; };
 		183291591A8EECAB000BAE49 /* CarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183291581A8EECAB000BAE49 /* CarouselViewController.swift */; };
 		1836A21C1A84F38A00E57F86 /* FontConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1836A21B1A84F38A00E57F86 /* FontConstants.swift */; };
 		1836A2211A84F3BE00E57F86 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1836A21F1A84F3BE00E57F86 /* fontawesome-webfont.ttf */; };
@@ -91,10 +67,6 @@
 		18410C2E1C81092500D2B308 /* FontExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C2D1C81092500D2B308 /* FontExtensionsTests.swift */; };
 		18410C301C810A6900D2B308 /* BundleExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C2F1C810A6900D2B308 /* BundleExtensionsTests.swift */; };
 		18410C321C810EB300D2B308 /* DataExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C311C810EB300D2B308 /* DataExtensionsTests.swift */; };
-		1844D1D11D15F26E00E87EA8 /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1D01D15F26E00E87EA8 /* CoreDataTableViewController.swift */; };
-		1844D1D61D15F27D00E87EA8 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1D51D15F27D00E87EA8 /* CoreDataController.swift */; };
-		1844D1DB1D15F31800E87EA8 /* CoreDataCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1DA1D15F31800E87EA8 /* CoreDataCollectionViewController.swift */; };
-		1844D1DF1D16034D00E87EA8 /* CoreDataProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D1DE1D16034D00E87EA8 /* CoreDataProxy.swift */; };
 		184625051C84CFB00098E969 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EC19DCBB5B008A1506 /* FontExtensions.swift */; };
 		184625071C84D1390098E969 /* ColorExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AC87E81C77F48200426776 /* ColorExtensionsTest.swift */; };
 		184625091C84D1A00098E969 /* FrostKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 18E5459D1C77E53F00637E85 /* FrostKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -105,15 +77,12 @@
 		1846956D1F8632CE006A445F /* CKRecordIDExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB893E1D71CB3D0097ADAC /* CKRecordIDExtensions.swift */; };
 		1846956E1F8632D3006A445F /* CKRecordIDExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB893E1D71CB3D0097ADAC /* CKRecordIDExtensions.swift */; };
 		1846956F1F8632D9006A445F /* CKReferenceExntensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB893B1D71C21D0097ADAC /* CKReferenceExntensions.swift */; };
-		18497BE41D15BA28009A717F /* TaskStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18497BE31D15BA28009A717F /* TaskStoreTests.swift */; };
-		185652861D81746E002E5C99 /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* TaskStore.swift */; };
 		18748B2219DF5661003942A3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18748B2019DF5661003942A3 /* Localizable.strings */; };
 		187661791BEEA0C900C82769 /* AppStoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187661781BEEA0C900C82769 /* AppStoreHelper.swift */; };
 		1876617A1BEEA0C900C82769 /* AppStoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187661781BEEA0C900C82769 /* AppStoreHelper.swift */; };
 		18839B4719DA27AE00760157 /* SocialHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B4519DA27AE00760157 /* SocialHelper.swift */; };
 		188D62981A8D56FE0098D976 /* InitialsImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188D62971A8D56FE0098D976 /* InitialsImageView.swift */; };
 		189D8C8A1C77E8F100261DF5 /* AppStoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187661781BEEA0C900C82769 /* AppStoreHelper.swift */; };
-		189D8C8D1C77E93300261DF5 /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* TaskStore.swift */; };
 		189D8C8F1C77E94B00261DF5 /* ErrorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066719DB762600811755 /* ErrorExtensions.swift */; };
 		189D8C941C77E95C00261DF5 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066B19DB769B00811755 /* DateExtensions.swift */; };
 		189D8C951C77E95C00261DF5 /* CalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BB7C7419DC383900F21A64 /* CalendarExtensions.swift */; };
@@ -127,12 +96,10 @@
 		18B01EF01C80A8CE00914FF5 /* DateExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AC87E91C77F48200426776 /* DateExtensionsTests.swift */; };
 		18B0A5D31D15D2BF00C6985E /* TableInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B0A5D21D15D2BF00C6985E /* TableInterfaceController.swift */; };
 		18BB7C7519DC383900F21A64 /* CalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BB7C7419DC383900F21A64 /* CalendarExtensions.swift */; };
-		18C0066119DB5BF000811755 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066019DB5BF000811755 /* LocalStorage.swift */; };
 		18C0066819DB762600811755 /* ErrorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066719DB762600811755 /* ErrorExtensions.swift */; };
 		18C0066A19DB767A00811755 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066919DB767A00811755 /* ColorExtensions.swift */; };
 		18C0066C19DB769B00811755 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066B19DB769B00811755 /* DateExtensions.swift */; };
 		18C0066E19DB76C900811755 /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066D19DB76C900811755 /* ImageExtensions.swift */; };
-		18C0067019DB7EDB00811755 /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066F19DB7EDB00811755 /* ContentManager.swift */; };
 		18C0067619DC00C000811755 /* FrostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18839B1719D9FA8C00760157 /* FrostKit.framework */; };
 		18CAC39F22C65B60008A74E7 /* MKMapViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAC39E22C65B60008A74E7 /* MKMapViewExtensions.swift */; };
 		18CAC3A022C65B60008A74E7 /* MKMapViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAC39E22C65B60008A74E7 /* MKMapViewExtensions.swift */; };
@@ -141,7 +108,6 @@
 		18CAC3A422C69E5B008A74E7 /* FileManagerExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAC3A222C69E5B008A74E7 /* FileManagerExtentions.swift */; };
 		18CAC3A522C69E5B008A74E7 /* FileManagerExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAC3A222C69E5B008A74E7 /* FileManagerExtentions.swift */; };
 		18CAC3A622C69E5B008A74E7 /* FileManagerExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAC3A222C69E5B008A74E7 /* FileManagerExtentions.swift */; };
-		18CB51701A76454A005064C8 /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB516F1A76454A005064C8 /* TaskStore.swift */; };
 		18CB517A1A7655ED005064C8 /* DeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB51791A7655ED005064C8 /* DeviceExtensions.swift */; };
 		18CF8C351D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CF8C331D6C839100DE9C37 /* CKContainerExtensions.swift */; };
 		18CF8C361D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CF8C331D6C839100DE9C37 /* CKContainerExtensions.swift */; };
@@ -149,10 +115,16 @@
 		18CF8C381D6C839100DE9C37 /* CKDatabaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CF8C341D6C839100DE9C37 /* CKDatabaseExtensions.swift */; };
 		18CF8C391D6C839100DE9C37 /* CKDatabaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CF8C341D6C839100DE9C37 /* CKDatabaseExtensions.swift */; };
 		18CF8C3A1D6C839100DE9C37 /* CKDatabaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CF8C341D6C839100DE9C37 /* CKDatabaseExtensions.swift */; };
-		18CF8C3C1D6C844600DE9C37 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CF8C3B1D6C844600DE9C37 /* CloudKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		18CF8C3E1D6C844E00DE9C37 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CF8C3D1D6C844E00DE9C37 /* CloudKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		18CF8C401D6C845700DE9C37 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CF8C3F1D6C845700DE9C37 /* CloudKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		18CFF9FE19DC45AB00DF6BB8 /* TimeZoneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFF9FD19DC45AB00DF6BB8 /* TimeZoneExtensions.swift */; };
+		18D19A572417821800C25232 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D19A562417821800C25232 /* Social.framework */; };
+		18D19A592417821E00C25232 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D19A582417821E00C25232 /* MessageUI.framework */; platformFilter = ios; };
+		18D19A5B2417828600C25232 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D19A5A2417828600C25232 /* CloudKit.framework */; };
+		18D19A5D2417828F00C25232 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D19A5C2417828F00C25232 /* MapKit.framework */; };
+		18D19A5F241782A000C25232 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D19A5E241782A000C25232 /* MapKit.framework */; };
+		18D19A60241782A700C25232 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D19A5C2417828F00C25232 /* MapKit.framework */; };
+		18D19A61241782B700C25232 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D19A5A2417828600C25232 /* CloudKit.framework */; };
+		18D19A63241782BE00C25232 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D19A62241782BE00C25232 /* CloudKit.framework */; };
+		18D19A65241782C400C25232 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D19A64241782C400C25232 /* CloudKit.framework */; };
 		18D54BEE1CE6439300D365C6 /* FrostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1826B0261BD9047900DA1669 /* FrostKit.framework */; };
 		18D54BF41CE6439F00D365C6 /* ErrorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E9FF911C80AA5700AC5230 /* ErrorExtensionsTests.swift */; };
 		18D54BF51CE643AB00D365C6 /* DataExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C311C810EB300D2B308 /* DataExtensionsTests.swift */; };
@@ -197,7 +169,6 @@
 		18EA123F19DC79F100FD858D /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA123E19DC79F100FD858D /* DataExtensions.swift */; };
 		18EA124119DC7D9000FD858D /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124019DC7D9000FD858D /* ViewExtensions.swift */; };
 		18EA124519DC8B5E00FD858D /* BundleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124419DC8B5E00FD858D /* BundleExtensions.swift */; };
-		18F319531E45FA310055E647 /* MapControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F319521E45FA310055E647 /* MapControllerTests.swift */; };
 		66AB893C1D71C21D0097ADAC /* CKReferenceExntensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB893B1D71C21D0097ADAC /* CKReferenceExntensions.swift */; };
 		66AB893D1D71C21D0097ADAC /* CKReferenceExntensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB893B1D71C21D0097ADAC /* CKReferenceExntensions.swift */; };
 		66AB893F1D71CB3D0097ADAC /* CKRecordIDExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB893E1D71CB3D0097ADAC /* CKRecordIDExtensions.swift */; };
@@ -266,20 +237,9 @@
 
 /* Begin PBXFileReference section */
 		180128A01FEAB2B9000A7A17 /* DLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DLog.swift; sourceTree = "<group>"; };
-		180664F91A93737200887B9D /* NetworkActivityIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkActivityIndicatorManager.swift; sourceTree = "<group>"; };
-		1806BD2C1D625FE800434A5D /* CloudKitTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CloudKitTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1811D76A1A0ACAED00E8B873 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		1811D7B41A0AD1CA00E8B873 /* BaseWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BaseWebViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		1811D7B51A0AD1CA00E8B873 /* UIWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIWebViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		1811D7B61A0AD1CA00E8B873 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = WebViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		1811D7B71A0AD1CA00E8B873 /* WKWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = WKWebViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1818F6D91A8CF39B000255A2 /* ImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ImageView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1826B0261BD9047900DA1669 /* FrostKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FrostKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1828844D1CBEB12200331A54 /* MapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		1828844E1CBEB12200331A54 /* MapSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MapSearchViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		1828844F1CBEB12200331A54 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MapViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		182884531CBEB14700331A54 /* Annotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Annotation.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		182884551CBEB18000331A54 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Address.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1829A80C1BA2CD380017E4EE /* FrostKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FrostKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		183291581A8EECAB000BAE49 /* CarouselViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CarouselViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1836A2171A84E7D300E57F86 /* ParseFontLessConstants.py */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text.script.python; lineEnding = 0; path = ParseFontLessConstants.py; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.python; };
@@ -292,13 +252,6 @@
 		18410C2D1C81092500D2B308 /* FontExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FontExtensionsTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18410C2F1C810A6900D2B308 /* BundleExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BundleExtensionsTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18410C311C810EB300D2B308 /* DataExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DataExtensionsTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		1844D1D01D15F26E00E87EA8 /* CoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CoreDataTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		1844D1D51D15F27D00E87EA8 /* CoreDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CoreDataController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		1844D1DA1D15F31800E87EA8 /* CoreDataCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CoreDataCollectionViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		1844D1DE1D16034D00E87EA8 /* CoreDataProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CoreDataProxy.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		18497BE31D15BA28009A717F /* TaskStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TaskStoreTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		184E07921A8901A10074FD25 /* MBProgressHUDExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MBProgressHUDExtensions.swift; sourceTree = "<group>"; };
-		184E07931A8901A10074FD25 /* ParseAddressExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ParseAddressExtensions.swift; sourceTree = "<group>"; };
 		187321EB22C5006F00734A5E /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		18748B2119DF5661003942A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		187661781BEEA0C900C82769 /* AppStoreHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppStoreHelper.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -313,15 +266,12 @@
 		18AC87E91C77F48200426776 /* DateExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DateExtensionsTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18B0A5D21D15D2BF00C6985E /* TableInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TableInterfaceController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18BB7C7419DC383900F21A64 /* CalendarExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CalendarExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		18C0066019DB5BF000811755 /* LocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LocalStorage.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18C0066719DB762600811755 /* ErrorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ErrorExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18C0066919DB767A00811755 /* ColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ColorExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18C0066B19DB769B00811755 /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DateExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18C0066D19DB76C900811755 /* ImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ImageExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		18C0066F19DB7EDB00811755 /* ContentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ContentManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18CAC39E22C65B60008A74E7 /* MKMapViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMapViewExtensions.swift; sourceTree = "<group>"; };
 		18CAC3A222C69E5B008A74E7 /* FileManagerExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtentions.swift; sourceTree = "<group>"; };
-		18CB516F1A76454A005064C8 /* TaskStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TaskStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18CB51791A7655ED005064C8 /* DeviceExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DeviceExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18CF8C331D6C839100DE9C37 /* CKContainerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKContainerExtensions.swift; sourceTree = "<group>"; };
 		18CF8C341D6C839100DE9C37 /* CKDatabaseExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKDatabaseExtensions.swift; sourceTree = "<group>"; };
@@ -329,6 +279,13 @@
 		18CF8C3D1D6C844E00DE9C37 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.2.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
 		18CF8C3F1D6C845700DE9C37 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
 		18CFF9FD19DC45AB00DF6BB8 /* TimeZoneExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TimeZoneExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		18D19A562417821800C25232 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Social.framework; sourceTree = DEVELOPER_DIR; };
+		18D19A582417821E00C25232 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		18D19A5A2417828600C25232 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
+		18D19A5C2417828F00C25232 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
+		18D19A5E241782A000C25232 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS13.2.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
+		18D19A62241782BE00C25232 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS13.2.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
+		18D19A64241782C400C25232 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS6.1.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
 		18D54BE91CE6439300D365C6 /* FrostKit tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FrostKit tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D54BED1CE6439300D365C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18DC212A19DEA21000FEB57E /* ViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ViewControllerExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -348,7 +305,6 @@
 		18EA123E19DC79F100FD858D /* DataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DataExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18EA124019DC7D9000FD858D /* ViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ViewExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18EA124419DC8B5E00FD858D /* BundleExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BundleExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		18F319521E45FA310055E647 /* MapControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapControllerTests.swift; sourceTree = "<group>"; };
 		66AB893B1D71C21D0097ADAC /* CKReferenceExntensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKReferenceExntensions.swift; sourceTree = "<group>"; };
 		66AB893E1D71CB3D0097ADAC /* CKRecordIDExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKRecordIDExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -358,7 +314,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18CF8C3E1D6C844E00DE9C37 /* CloudKit.framework in Frameworks */,
+				18D19A5F241782A000C25232 /* MapKit.framework in Frameworks */,
+				18D19A63241782BE00C25232 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +323,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18D19A65241782C400C25232 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,7 +331,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18CF8C3C1D6C844600DE9C37 /* CloudKit.framework in Frameworks */,
+				18D19A5B2417828600C25232 /* CloudKit.framework in Frameworks */,
+				18D19A592417821E00C25232 /* MessageUI.framework in Frameworks */,
+				18D19A5D2417828F00C25232 /* MapKit.framework in Frameworks */,
+				18D19A572417821800C25232 /* Social.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,7 +358,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18CF8C401D6C845700DE9C37 /* CloudKit.framework in Frameworks */,
+				18D19A60241782A700C25232 /* MapKit.framework in Frameworks */,
+				18D19A61241782B700C25232 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,25 +374,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1806BD2B1D625FE800434A5D /* CloudKit */ = {
-			isa = PBXGroup;
-			children = (
-				1806BD2C1D625FE800434A5D /* CloudKitTableViewController.swift */,
-			);
-			path = CloudKit;
-			sourceTree = "<group>";
-		};
-		1811D7B31A0AD1CA00E8B873 /* WebViewController */ = {
-			isa = PBXGroup;
-			children = (
-				1811D7B61A0AD1CA00E8B873 /* WebViewController.swift */,
-				1811D7B41A0AD1CA00E8B873 /* BaseWebViewController.swift */,
-				1811D7B51A0AD1CA00E8B873 /* UIWebViewController.swift */,
-				1811D7B71A0AD1CA00E8B873 /* WKWebViewController.swift */,
-			);
-			path = WebViewController;
-			sourceTree = "<group>";
-		};
 		1836A2181A84E9A000E57F86 /* LessConstantsFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -449,42 +392,16 @@
 			path = FontFiles;
 			sourceTree = "<group>";
 		};
-		1838A5991CBEAD840040A796 /* Maps */ = {
-			isa = PBXGroup;
-			children = (
-				1828844D1CBEB12200331A54 /* MapController.swift */,
-				182884551CBEB18000331A54 /* Address.swift */,
-				182884531CBEB14700331A54 /* Annotation.swift */,
-				1828844F1CBEB12200331A54 /* MapViewController.swift */,
-				1828844E1CBEB12200331A54 /* MapSearchViewController.swift */,
-			);
-			path = Maps;
-			sourceTree = "<group>";
-		};
-		1844D1CF1D15F25A00E87EA8 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				1844D1DE1D16034D00E87EA8 /* CoreDataProxy.swift */,
-				1844D1D51D15F27D00E87EA8 /* CoreDataController.swift */,
-				1844D1D01D15F26E00E87EA8 /* CoreDataTableViewController.swift */,
-				1844D1DA1D15F31800E87EA8 /* CoreDataCollectionViewController.swift */,
-			);
-			path = CoreData;
-			sourceTree = "<group>";
-		};
-		1857BE9D1A859FAA00903910 /* ExternalExtensions */ = {
-			isa = PBXGroup;
-			children = (
-				180664F91A93737200887B9D /* NetworkActivityIndicatorManager.swift */,
-				184E07931A8901A10074FD25 /* ParseAddressExtensions.swift */,
-				184E07921A8901A10074FD25 /* MBProgressHUDExtensions.swift */,
-			);
-			path = ExternalExtensions;
-			sourceTree = "<group>";
-		};
 		186CFCE81A29F7BE002739A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18D19A62241782BE00C25232 /* CloudKit.framework */,
+				18D19A64241782C400C25232 /* CloudKit.framework */,
+				18D19A5C2417828F00C25232 /* MapKit.framework */,
+				18D19A5E241782A000C25232 /* MapKit.framework */,
+				18D19A5A2417828600C25232 /* CloudKit.framework */,
+				18D19A582417821E00C25232 /* MessageUI.framework */,
+				18D19A562417821800C25232 /* Social.framework */,
 				18CF8C3F1D6C845700DE9C37 /* CloudKit.framework */,
 				18CF8C3D1D6C844E00DE9C37 /* CloudKit.framework */,
 				18CF8C3B1D6C844600DE9C37 /* CloudKit.framework */,
@@ -525,17 +442,11 @@
 			children = (
 				18748B2019DF5661003942A3 /* Localizable.strings */,
 				18E3F23119DE07670032ABB7 /* FrostKit.swift */,
-				1899C4F91A6D151A001638CF /* Service */,
-				18C0065F19DB5BDD00811755 /* Storage */,
-				1844D1CF1D15F25A00E87EA8 /* CoreData */,
-				1806BD2B1D625FE800434A5D /* CloudKit */,
 				18839B4119DA27A800760157 /* ViewControllers */,
 				18B0A5D11D15D2BF00C6985E /* InterfaceControllers */,
 				18DD78F81A8CA6DF00379FB5 /* Views */,
 				18839B4419DA27AE00760157 /* Helpers */,
-				1838A5991CBEAD840040A796 /* Maps */,
 				18C0066619DB761800811755 /* Extensions */,
-				1857BE9D1A859FAA00903910 /* ExternalExtensions */,
 				18DE01EB19DCBB18008A1506 /* Fonts */,
 				18E028301BA2D17D00852022 /* Supporting Files */,
 			);
@@ -545,7 +456,6 @@
 		18839B4119DA27A800760157 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				1811D7B31A0AD1CA00E8B873 /* WebViewController */,
 				183291581A8EECAB000BAE49 /* CarouselViewController.swift */,
 			);
 			path = ViewControllers;
@@ -561,20 +471,10 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		1899C4F91A6D151A001638CF /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				18CB516F1A76454A005064C8 /* TaskStore.swift */,
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
 		189D8CA81C77EEFC00261DF5 /* FrostKit iOS Tests */ = {
 			isa = PBXGroup;
 			children = (
-				189D8CB21C77EEFC00261DF5 /* Service */,
 				189D8CAD1C77EEFC00261DF5 /* Helpers */,
-				18D58EA71D0CC122009BE4E5 /* Maps */,
 				189D8CA91C77EEFC00261DF5 /* Extensions */,
 				189D8CB11C77EEFC00261DF5 /* Info.plist */,
 			);
@@ -602,29 +502,12 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		189D8CB21C77EEFC00261DF5 /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				18497BE31D15BA28009A717F /* TaskStoreTests.swift */,
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
 		18B0A5D11D15D2BF00C6985E /* InterfaceControllers */ = {
 			isa = PBXGroup;
 			children = (
 				18B0A5D21D15D2BF00C6985E /* TableInterfaceController.swift */,
 			);
 			path = InterfaceControllers;
-			sourceTree = "<group>";
-		};
-		18C0065F19DB5BDD00811755 /* Storage */ = {
-			isa = PBXGroup;
-			children = (
-				18C0066019DB5BF000811755 /* LocalStorage.swift */,
-				18C0066F19DB7EDB00811755 /* ContentManager.swift */,
-			);
-			path = Storage;
 			sourceTree = "<group>";
 		};
 		18C0066619DB761800811755 /* Extensions */ = {
@@ -661,14 +544,6 @@
 				18D54BED1CE6439300D365C6 /* Info.plist */,
 			);
 			path = "FrostKit tvOS Tests";
-			sourceTree = "<group>";
-		};
-		18D58EA71D0CC122009BE4E5 /* Maps */ = {
-			isa = PBXGroup;
-			children = (
-				18F319521E45FA310055E647 /* MapControllerTests.swift */,
-			);
-			path = Maps;
 			sourceTree = "<group>";
 		};
 		18DD78F81A8CA6DF00379FB5 /* Views */ = {
@@ -936,11 +811,6 @@
 						CreatedOnToolsVersion = 7.2.1;
 						LastSwiftMigration = 1020;
 					};
-					18F3194D1E45F7B80055E647 = {
-						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 6WJM49JAZT;
-						ProvisioningStyle = Automatic;
-					};
 				};
 			};
 			buildConfigurationList = 18839B1119D9FA8C00760157 /* Build configuration list for PBXProject "FrostKit" */;
@@ -963,7 +833,6 @@
 				18839B2119D9FA8C00760157 /* FrostKit iOS Tests */,
 				18D54BE81CE6439300D365C6 /* FrostKit tvOS Tests */,
 				18E545A51C77E54000637E85 /* FrostKit macOS Tests */,
-				18F3194D1E45F7B80055E647 /* SwiftFormat */,
 				1845E6F61A66DA03005B377D /* FrostKitDocs */,
 				1836A20B1A84414D00E57F86 /* FontConstantsBuilder */,
 			);
@@ -1131,19 +1000,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if [ \"$USER\" != \"xcodeserver\" ]; then\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\nfi\n";
 		};
-		18F319511E45F7BB0055E647 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"$USER\" != \"xcodeserver\" ]; then\nif which swiftlint >/dev/null; then\nswiftformat --disable trailingSpace,consecutiveSpaces,trailingCommas,unusedArguments,redundantParens --trimwhitespace nonblank-lines --comments ignore --ifdef outdent .\nelse\necho \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\nfi\n";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1154,7 +1010,6 @@
 				18CAC3A522C69E5B008A74E7 /* FileManagerExtentions.swift in Sources */,
 				1826B0671BD906E200DA1669 /* DateExtensions.swift in Sources */,
 				18CF8C361D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */,
-				185652861D81746E002E5C99 /* TaskStore.swift in Sources */,
 				180128A31FEAB2B9000A7A17 /* DLog.swift in Sources */,
 				1826B0571BD9065B00DA1669 /* FrostKit.swift in Sources */,
 				1826B06C1BD906E200DA1669 /* FontExtensions.swift in Sources */,
@@ -1188,7 +1043,6 @@
 				1846956D1F8632CE006A445F /* CKRecordIDExtensions.swift in Sources */,
 				18CAC3A422C69E5B008A74E7 /* FileManagerExtentions.swift in Sources */,
 				18E028451BA2D2F600852022 /* ColorExtensions.swift in Sources */,
-				182290541BA2E66F00C1CF1D /* ContentManager.swift in Sources */,
 				18E0283F1BA2D2DF00852022 /* CalendarExtensions.swift in Sources */,
 				1846956A1F8632CE006A445F /* CKContainerExtensions.swift in Sources */,
 				1846956C1F8632CE006A445F /* CKReferenceExntensions.swift in Sources */,
@@ -1196,9 +1050,7 @@
 				18E028401BA2D2DF00852022 /* TimeZoneExtensions.swift in Sources */,
 				18E0283E1BA2D2D900852022 /* DateExtensions.swift in Sources */,
 				1846956B1F8632CE006A445F /* CKDatabaseExtensions.swift in Sources */,
-				182290531BA2E66C00C1CF1D /* LocalStorage.swift in Sources */,
 				180128A21FEAB2B9000A7A17 /* DLog.swift in Sources */,
-				182290521BA2E60200C1CF1D /* TaskStore.swift in Sources */,
 				18E028421BA2D2E400852022 /* BundleExtensions.swift in Sources */,
 				18E028471BA2D30100852022 /* ImageExtensions.swift in Sources */,
 				18E028731BA2DA2A00852022 /* FrostKit.swift in Sources */,
@@ -1212,50 +1064,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				183291591A8EECAB000BAE49 /* CarouselViewController.swift in Sources */,
-				1811D7B91A0AD1CA00E8B873 /* UIWebViewController.swift in Sources */,
 				1836A21C1A84F38A00E57F86 /* FontConstants.swift in Sources */,
 				18C0066C19DB769B00811755 /* DateExtensions.swift in Sources */,
-				1811D7BB1A0AD1CA00E8B873 /* WKWebViewController.swift in Sources */,
-				1844D1D61D15F27D00E87EA8 /* CoreDataController.swift in Sources */,
 				18CFF9FE19DC45AB00DF6BB8 /* TimeZoneExtensions.swift in Sources */,
 				188D62981A8D56FE0098D976 /* InitialsImageView.swift in Sources */,
 				18DD79011A8CA70F00379FB5 /* VisualEffectView.swift in Sources */,
 				18CAC39F22C65B60008A74E7 /* MKMapViewExtensions.swift in Sources */,
-				182884501CBEB12200331A54 /* MapController.swift in Sources */,
 				18DE01EF19DCBC28008A1506 /* CustomFonts.swift in Sources */,
 				18EA124119DC7D9000FD858D /* ViewExtensions.swift in Sources */,
 				187661791BEEA0C900C82769 /* AppStoreHelper.swift in Sources */,
-				18CB51701A76454A005064C8 /* TaskStore.swift in Sources */,
 				1818F6DA1A8CF39B000255A2 /* ImageView.swift in Sources */,
-				1811D7B81A0AD1CA00E8B873 /* BaseWebViewController.swift in Sources */,
-				182884561CBEB18000331A54 /* Address.swift in Sources */,
-				1844D1D11D15F26E00E87EA8 /* CoreDataTableViewController.swift in Sources */,
 				183C7B6B1AD2F4A400CAE1A5 /* ScreenExtensions.swift in Sources */,
 				18CF8C351D6C839100DE9C37 /* CKContainerExtensions.swift in Sources */,
 				18DC212B19DEA21000FEB57E /* ViewControllerExtensions.swift in Sources */,
 				18EA123F19DC79F100FD858D /* DataExtensions.swift in Sources */,
 				18839B4719DA27AE00760157 /* SocialHelper.swift in Sources */,
-				1806BD2D1D625FE800434A5D /* CloudKitTableViewController.swift in Sources */,
-				1844D1DB1D15F31800E87EA8 /* CoreDataCollectionViewController.swift in Sources */,
-				182884511CBEB12200331A54 /* MapSearchViewController.swift in Sources */,
-				1811D7BA1A0AD1CA00E8B873 /* WebViewController.swift in Sources */,
 				180128A11FEAB2B9000A7A17 /* DLog.swift in Sources */,
 				66AB893C1D71C21D0097ADAC /* CKReferenceExntensions.swift in Sources */,
 				18C0066819DB762600811755 /* ErrorExtensions.swift in Sources */,
 				18DD79091A8CA74E00379FB5 /* View.swift in Sources */,
-				182884521CBEB12200331A54 /* MapViewController.swift in Sources */,
 				66AB893F1D71CB3D0097ADAC /* CKRecordIDExtensions.swift in Sources */,
 				18EA124519DC8B5E00FD858D /* BundleExtensions.swift in Sources */,
 				18C0066A19DB767A00811755 /* ColorExtensions.swift in Sources */,
 				18E3F23219DE07670032ABB7 /* FrostKit.swift in Sources */,
 				18CB517A1A7655ED005064C8 /* DeviceExtensions.swift in Sources */,
-				182884541CBEB14700331A54 /* Annotation.swift in Sources */,
 				18032B1B1A84F99400BEBB41 /* FontExtensions.swift in Sources */,
 				18CF8C381D6C839100DE9C37 /* CKDatabaseExtensions.swift in Sources */,
-				1844D1DF1D16034D00E87EA8 /* CoreDataProxy.swift in Sources */,
 				18CAC3A322C69E5B008A74E7 /* FileManagerExtentions.swift in Sources */,
-				18C0066119DB5BF000811755 /* LocalStorage.swift in Sources */,
-				18C0067019DB7EDB00811755 /* ContentManager.swift in Sources */,
 				18E3F23A19DE15600032ABB7 /* BarButtonItemExtensions.swift in Sources */,
 				18BB7C7519DC383900F21A64 /* CalendarExtensions.swift in Sources */,
 				18C0066E19DB76C900811755 /* ImageExtensions.swift in Sources */,
@@ -1269,10 +1104,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				18410C2E1C81092500D2B308 /* FontExtensionsTests.swift in Sources */,
-				18F319531E45FA310055E647 /* MapControllerTests.swift in Sources */,
 				18E9FF971C80AC6F00AC5230 /* DateExtensionsTests.swift in Sources */,
 				18410C301C810A6900D2B308 /* BundleExtensionsTests.swift in Sources */,
-				18497BE41D15BA28009A717F /* TaskStoreTests.swift in Sources */,
 				18410C321C810EB300D2B308 /* DataExtensionsTests.swift in Sources */,
 				18E9FF991C80AC6F00AC5230 /* ErrorExtensionsTests.swift in Sources */,
 				18E9FF981C80AC6F00AC5230 /* ColorExtensionsTest.swift in Sources */,
@@ -1316,7 +1149,6 @@
 				18CAC3A122C65B60008A74E7 /* MKMapViewExtensions.swift in Sources */,
 				189D8C9C1C77E9AB00261DF5 /* CustomFonts.swift in Sources */,
 				189D8C941C77E95C00261DF5 /* DateExtensions.swift in Sources */,
-				189D8C8D1C77E93300261DF5 /* TaskStore.swift in Sources */,
 				1846956E1F8632D3006A445F /* CKRecordIDExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1381,7 +1213,12 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = FrostKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Frostlight.FrostKit;
 				PRODUCT_NAME = FrostKit;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1409,7 +1246,12 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = FrostKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Frostlight.FrostKit;
 				PRODUCT_NAME = FrostKit;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1437,7 +1279,12 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = FrostKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Frostlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = FrostKit;
 				SDKROOT = watchos;
@@ -1463,7 +1310,12 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = FrostKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Frostlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = FrostKit;
 				SDKROOT = watchos;
@@ -1641,7 +1493,12 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FrostKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.0.0;
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Frostlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = FrostKit;
@@ -1669,7 +1526,12 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FrostKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.0.0;
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Frostlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = FrostKit;
@@ -1691,7 +1553,11 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "FrostKit iOS Tests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Frostlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1706,7 +1572,11 @@
 				DEVELOPMENT_TEAM = 6WJM49JAZT;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "FrostKit iOS Tests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Frostlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1725,7 +1595,11 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "FrostKit tvOS Tests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.PigonaHill.FrostKit-tvOS-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1744,7 +1618,11 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "FrostKit tvOS Tests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.PigonaHill.FrostKit-tvOS-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1771,7 +1649,12 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = FrostKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Frostlight.FrostKit;
 				PRODUCT_NAME = FrostKit;
 				SDKROOT = macosx;
@@ -1799,7 +1682,12 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = FrostKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Frostlight.FrostKit;
 				PRODUCT_NAME = FrostKit;
 				SDKROOT = macosx;
@@ -1818,7 +1706,11 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "FrostKit macOS Tests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.PigonaHill.FrostKit-macOS-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1836,28 +1728,16 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "FrostKit macOS Tests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.PigonaHill.FrostKit-macOS-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		18F3194E1E45F7B80055E647 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = 6WJM49JAZT;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		18F3194F1E45F7B80055E647 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = 6WJM49JAZT;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -1950,15 +1830,6 @@
 			buildConfigurations = (
 				18E545B01C77E54000637E85 /* Debug */,
 				18E545B11C77E54000637E85 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		18F319501E45F7B80055E647 /* Build configuration list for PBXAggregateTarget "SwiftFormat" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				18F3194E1E45F7B80055E647 /* Debug */,
-				18F3194F1E45F7B80055E647 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

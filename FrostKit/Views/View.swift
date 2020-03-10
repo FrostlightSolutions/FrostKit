@@ -18,7 +18,7 @@ open class View: UIView {
         }
     }
     
-    @available(iOSApplicationExtension 13.0, tvOSApplicationExtension 13.0, *)
+    @available(iOS 13.0, iOSApplicationExtension 13.0, tvOS 13.0, tvOSApplicationExtension 13.0, *)
     public var cornerCurve: CALayerCornerCurve {
         get { layer.cornerCurve }
         set { layer.cornerCurve = newValue }

@@ -11,9 +11,6 @@
 "CANCEL" = "Cancel";
 "OK" = "OK";
 
-/* DataUpdater */
-"NO_CONTENT_FOUND" = "No Content Found";
-
 /* TableInterfaceController */
 
 "NO_DATA" = "No Data";
@@ -21,30 +18,7 @@
 "LOADING_" = "Loading...";
 "RELOAD" = "Reload";
 
-/* WebViewController */
-
-"OPEN_IN_SAFARI" = "Open in Safari";
-"SHARE_ON_TWITTER" = "Share on Twitter";
-"SHARE_ON_FACEBOOK" = "Share on Facebook";
-
 /* SocialHelper */
 
 "EMAIL" = "Email";
 "MESSAGE" = "Message";
-
-/* MapController */
-
-"ZOOM_TO_" = "Zoom to...";
-"DIRECTIONS" = "Directions";
-"OPEN_IN_MAPS" = "Open in Maps";
-"ITEM" = "Item";        // Singular
-"ITEMS" = "Items";      // Plural
-
-/* MapViewController */
-
-"MAP" = "Map";
-"CURRENT_LOCATION" = "Current Location";
-"ALL_LOCATIONS" = "All Locations";
-"CLEAR_DIRECTIONS" = "Clear Directions";
-"MARKERS" = "Markers";
-"LOCATIONS" = "Locations";
