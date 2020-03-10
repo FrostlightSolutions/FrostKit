@@ -67,21 +67,4 @@ extension Color {
         return Color(red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0, green: CGFloat((rgbValue & 0x00FF00) >> 8)  / 255.0, blue: CGFloat(rgbValue & 0x0000FF) / 255.0, alpha: alpha)
     }
     
-    /**
-     Created a new UIColor/NSColor object from the object called from with a new alpha value.
-     
-     - parameter alpha: The alpha value of the new UIColor/NSColor object created.
-     
-     - returns: The new UIColor/NSColor object created with the passed in alpha value.
-     */
-    @available(iOS, deprecated: 2.0, message: "Use withAlphaComponent(_:) instead. This class will be removed in v2.0.0 of FrostKit.")
-    public func color(with alpha: CGFloat) -> Color {
-        
-        var red: CGFloat = 0
-        var green: CGFloat = 0
-        var blue: CGFloat = 0
-        getRed(&red, green: &green, blue: &blue, alpha: nil)
-        
-        return Color(red: red, green: green, blue: blue, alpha: alpha)
-    }
 }

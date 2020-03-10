@@ -8,7 +8,7 @@
 import Foundation
 import CloudKit
 
-@available(watchOSApplicationExtension 3.0, *)
+@available(watchOS 3.0, watchOSApplicationExtension 3.0, *)
 public extension CKContainer {
     
     func fetchUserRecord(desiredKeys: [String]? = nil, completionHandler: @escaping (CKRecord?, Error?) -> Void) {
