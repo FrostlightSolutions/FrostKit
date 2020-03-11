@@ -27,5 +27,11 @@ let package = Package(
             name: "FrostKit",
             path: "FrostKit")
     ],
+    linkerSettings: [
+        .linkedFramework("Social"),
+        .linkedFramework("MessageUI"),
+        .linkedFramework("MapKit"),
+        .linkedFramework("CloudKit")
+    ],
     swiftLanguageVersions: [.v5]
 )
