@@ -55,16 +55,9 @@
 		1826B06D1BD906E200DA1669 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066919DB767A00811755 /* ColorExtensions.swift */; };
 		1826B06E1BD906E200DA1669 /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066D19DB76C900811755 /* ImageExtensions.swift */; };
 		1826B06F1BD906F200DA1669 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EE19DCBC28008A1506 /* CustomFonts.swift */; };
-		1826B0701BD906F200DA1669 /* FontConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1836A21B1A84F38A00E57F86 /* FontConstants.swift */; };
-		1826B0711BD906F700DA1669 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1836A21F1A84F3BE00E57F86 /* fontawesome-webfont.ttf */; };
-		1826B0721BD906F700DA1669 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1836A2201A84F3BE00E57F86 /* ionicons.ttf */; };
 		1826B0731BD9073700DA1669 /* FrostKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 18E0282E1BA2D17300852022 /* FrostKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		183291591A8EECAB000BAE49 /* CarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183291581A8EECAB000BAE49 /* CarouselViewController.swift */; };
-		1836A21C1A84F38A00E57F86 /* FontConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1836A21B1A84F38A00E57F86 /* FontConstants.swift */; };
-		1836A2211A84F3BE00E57F86 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1836A21F1A84F3BE00E57F86 /* fontawesome-webfont.ttf */; };
-		1836A2231A84F3BE00E57F86 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1836A2201A84F3BE00E57F86 /* ionicons.ttf */; };
 		183C7B6B1AD2F4A400CAE1A5 /* ScreenExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C7B6A1AD2F4A400CAE1A5 /* ScreenExtensions.swift */; };
-		18410C2E1C81092500D2B308 /* FontExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C2D1C81092500D2B308 /* FontExtensionsTests.swift */; };
 		18410C301C810A6900D2B308 /* BundleExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C2F1C810A6900D2B308 /* BundleExtensionsTests.swift */; };
 		18410C321C810EB300D2B308 /* DataExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C311C810EB300D2B308 /* DataExtensionsTests.swift */; };
 		184625051C84CFB00098E969 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EC19DCBB5B008A1506 /* FontExtensions.swift */; };
@@ -89,7 +82,6 @@
 		189D8C961C77E95C00261DF5 /* TimeZoneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFF9FD19DC45AB00DF6BB8 /* TimeZoneExtensions.swift */; };
 		189D8C971C77E95C00261DF5 /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA123E19DC79F100FD858D /* DataExtensions.swift */; };
 		189D8C981C77E96200261DF5 /* BundleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA124419DC8B5E00FD858D /* BundleExtensions.swift */; };
-		189D8C9B1C77E99C00261DF5 /* FontConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1836A21B1A84F38A00E57F86 /* FontConstants.swift */; };
 		189D8C9C1C77E9AB00261DF5 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE01EE19DCBC28008A1506 /* CustomFonts.swift */; };
 		189D8C9F1C77EC5B00261DF5 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066919DB767A00811755 /* ColorExtensions.swift */; };
 		18A786CD1A77B39A006EADB9 /* CollectionViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A786CC1A77B39A006EADB9 /* CollectionViewControllerExtensions.swift */; };
@@ -130,7 +122,6 @@
 		18D54BF51CE643AB00D365C6 /* DataExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C311C810EB300D2B308 /* DataExtensionsTests.swift */; };
 		18D54BF61CE643AE00D365C6 /* DateExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AC87E91C77F48200426776 /* DateExtensionsTests.swift */; };
 		18D54BF71CE643B100D365C6 /* BundleExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C2F1C810A6900D2B308 /* BundleExtensionsTests.swift */; };
-		18D54BF81CE643B400D365C6 /* FontExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18410C2D1C81092500D2B308 /* FontExtensionsTests.swift */; };
 		18D54BF91CE643B700D365C6 /* ColorExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AC87E81C77F48200426776 /* ColorExtensionsTest.swift */; };
 		18D54BFC1CE643D200D365C6 /* AppStoreHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D8CAE1C77EEFC00261DF5 /* AppStoreHelperTests.swift */; };
 		18D54C021CE6452700D365C6 /* FrostKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 1826B0261BD9047900DA1669 /* FrostKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -154,8 +145,6 @@
 		18E028471BA2D30100852022 /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0066D19DB76C900811755 /* ImageExtensions.swift */; };
 		18E0284B1BA2D33700852022 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18748B2019DF5661003942A3 /* Localizable.strings */; };
 		18E028731BA2DA2A00852022 /* FrostKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23119DE07670032ABB7 /* FrostKit.swift */; };
-		18E211A01CE6420F00B3DA89 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1836A21F1A84F3BE00E57F86 /* fontawesome-webfont.ttf */; };
-		18E211A11CE6420F00B3DA89 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1836A2201A84F3BE00E57F86 /* ionicons.ttf */; };
 		18E3F23219DE07670032ABB7 /* FrostKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23119DE07670032ABB7 /* FrostKit.swift */; };
 		18E3F23A19DE15600032ABB7 /* BarButtonItemExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3F23919DE15600032ABB7 /* BarButtonItemExtensions.swift */; };
 		18E545A71C77E54000637E85 /* FrostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E5459D1C77E53F00637E85 /* FrostKit.framework */; };
@@ -242,14 +231,7 @@
 		1826B0261BD9047900DA1669 /* FrostKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FrostKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1829A80C1BA2CD380017E4EE /* FrostKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FrostKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		183291581A8EECAB000BAE49 /* CarouselViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CarouselViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		1836A2171A84E7D300E57F86 /* ParseFontLessConstants.py */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text.script.python; lineEnding = 0; path = ParseFontLessConstants.py; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.python; };
-		1836A2191A84E9A000E57F86 /* FontAwesome.less */ = {isa = PBXFileReference; lastKnownFileType = text; path = FontAwesome.less; sourceTree = "<group>"; };
-		1836A21A1A84E9A000E57F86 /* Ionicons.less */ = {isa = PBXFileReference; lastKnownFileType = text; path = Ionicons.less; sourceTree = "<group>"; };
-		1836A21B1A84F38A00E57F86 /* FontConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FontConstants.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		1836A21F1A84F3BE00E57F86 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
-		1836A2201A84F3BE00E57F86 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
 		183C7B6A1AD2F4A400CAE1A5 /* ScreenExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ScreenExtensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		18410C2D1C81092500D2B308 /* FontExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FontExtensionsTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18410C2F1C810A6900D2B308 /* BundleExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BundleExtensionsTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18410C311C810EB300D2B308 /* DataExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DataExtensionsTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		187321EB22C5006F00734A5E /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
@@ -374,24 +356,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1836A2181A84E9A000E57F86 /* LessConstantsFiles */ = {
-			isa = PBXGroup;
-			children = (
-				1836A2191A84E9A000E57F86 /* FontAwesome.less */,
-				1836A21A1A84E9A000E57F86 /* Ionicons.less */,
-			);
-			path = LessConstantsFiles;
-			sourceTree = "<group>";
-		};
-		1836A21E1A84F3BE00E57F86 /* FontFiles */ = {
-			isa = PBXGroup;
-			children = (
-				1836A21F1A84F3BE00E57F86 /* fontawesome-webfont.ttf */,
-				1836A2201A84F3BE00E57F86 /* ionicons.ttf */,
-			);
-			path = FontFiles;
-			sourceTree = "<group>";
-		};
 		186CFCE81A29F7BE002739A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -488,7 +452,6 @@
 				18AC87E91C77F48200426776 /* DateExtensionsTests.swift */,
 				18410C311C810EB300D2B308 /* DataExtensionsTests.swift */,
 				18410C2F1C810A6900D2B308 /* BundleExtensionsTests.swift */,
-				18410C2D1C81092500D2B308 /* FontExtensionsTests.swift */,
 				18AC87E81C77F48200426776 /* ColorExtensionsTest.swift */,
 			);
 			path = Extensions;
@@ -561,11 +524,7 @@
 		18DE01EB19DCBB18008A1506 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				1836A2181A84E9A000E57F86 /* LessConstantsFiles */,
-				1836A21E1A84F3BE00E57F86 /* FontFiles */,
 				18DE01EE19DCBC28008A1506 /* CustomFonts.swift */,
-				1836A21B1A84F38A00E57F86 /* FontConstants.swift */,
-				1836A2171A84E7D300E57F86 /* ParseFontLessConstants.py */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -845,8 +804,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				18D54C041CE64BA900D365C6 /* Localizable.strings in Resources */,
-				1826B0721BD906F700DA1669 /* ionicons.ttf in Resources */,
-				1826B0711BD906F700DA1669 /* fontawesome-webfont.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -862,8 +819,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				18748B2219DF5661003942A3 /* Localizable.strings in Resources */,
-				1836A2211A84F3BE00E57F86 /* fontawesome-webfont.ttf in Resources */,
-				1836A2231A84F3BE00E57F86 /* ionicons.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -887,8 +842,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				18D54C051CE64BB000D365C6 /* Localizable.strings in Resources */,
-				18E211A11CE6420F00B3DA89 /* ionicons.ttf in Resources */,
-				18E211A01CE6420F00B3DA89 /* fontawesome-webfont.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1013,7 +966,6 @@
 				180128A31FEAB2B9000A7A17 /* DLog.swift in Sources */,
 				1826B0571BD9065B00DA1669 /* FrostKit.swift in Sources */,
 				1826B06C1BD906E200DA1669 /* FontExtensions.swift in Sources */,
-				1826B0701BD906F200DA1669 /* FontConstants.swift in Sources */,
 				1826B0621BD906B400DA1669 /* ImageView.swift in Sources */,
 				1826B06E1BD906E200DA1669 /* ImageExtensions.swift in Sources */,
 				66AB89401D71CB3D0097ADAC /* CKRecordIDExtensions.swift in Sources */,
@@ -1064,7 +1016,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				183291591A8EECAB000BAE49 /* CarouselViewController.swift in Sources */,
-				1836A21C1A84F38A00E57F86 /* FontConstants.swift in Sources */,
 				18C0066C19DB769B00811755 /* DateExtensions.swift in Sources */,
 				18CFF9FE19DC45AB00DF6BB8 /* TimeZoneExtensions.swift in Sources */,
 				188D62981A8D56FE0098D976 /* InitialsImageView.swift in Sources */,
@@ -1103,7 +1054,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18410C2E1C81092500D2B308 /* FontExtensionsTests.swift in Sources */,
 				18E9FF971C80AC6F00AC5230 /* DateExtensionsTests.swift in Sources */,
 				18410C301C810A6900D2B308 /* BundleExtensionsTests.swift in Sources */,
 				18410C321C810EB300D2B308 /* DataExtensionsTests.swift in Sources */,
@@ -1122,7 +1072,6 @@
 				18D54BF61CE643AE00D365C6 /* DateExtensionsTests.swift in Sources */,
 				18D54BF71CE643B100D365C6 /* BundleExtensionsTests.swift in Sources */,
 				18D54BF51CE643AB00D365C6 /* DataExtensionsTests.swift in Sources */,
-				18D54BF81CE643B400D365C6 /* FontExtensionsTests.swift in Sources */,
 				18D54BFC1CE643D200D365C6 /* AppStoreHelperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1144,7 +1093,6 @@
 				189D8C981C77E96200261DF5 /* BundleExtensions.swift in Sources */,
 				189D8C971C77E95C00261DF5 /* DataExtensions.swift in Sources */,
 				184625051C84CFB00098E969 /* FontExtensions.swift in Sources */,
-				189D8C9B1C77E99C00261DF5 /* FontConstants.swift in Sources */,
 				189D8C8A1C77E8F100261DF5 /* AppStoreHelper.swift in Sources */,
 				18CAC3A122C65B60008A74E7 /* MKMapViewExtensions.swift in Sources */,
 				189D8C9C1C77E9AB00261DF5 /* CustomFonts.swift in Sources */,
