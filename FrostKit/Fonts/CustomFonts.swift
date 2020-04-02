@@ -12,22 +12,7 @@ import AppKit
 import UIKit
 #endif
 
-///
-/// :FontAwesome Links:
-/// - https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/less/variables.less
-/// - https://github.com/FortAwesome/Font-Awesome/blob/master/fonts/fontawesome-webfont.ttf
-///
-/// :IonIcons Links:
-/// - https://raw.githubusercontent.com/driftyco/ionicons/master/less/_ionicons-variables.less
-/// - https://github.com/driftyco/ionicons/blob/master/fonts/ionicons.ttf
-///
 public class CustomFonts {
-    
-    /// Loads custom fonts imbedded in the Framework.
-    public class func loadCustomFonts() {
-        loadCustomFont(name: "fontawesome-webfont", withExtension: "ttf", bundle: Bundle(for: CustomFonts.self))
-        loadCustomFont(name: "ionicons", withExtension: "ttf", bundle: Bundle(for: CustomFonts.self))
-    }
     
     /**
     Load custom fonts with names including the file name and extension.
